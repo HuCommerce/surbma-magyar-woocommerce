@@ -28,7 +28,7 @@ add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
 
 add_action( 'woocommerce_checkout_process', function() {
 	// Nonce verification before doing anything
-	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce' );
+	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
 	$billing_tax_number = isset( $_POST['billing_tax_number'] ) ? sanitize_text_field( $_POST['billing_tax_number'] ) : '';
@@ -45,7 +45,7 @@ add_action( 'woocommerce_checkout_process', function() {
 
 add_action( 'woocommerce_checkout_update_user_meta', function( $customer_id ) {
 	// Nonce verification before doing anything
-	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce' );
+	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
 	$billing_tax_number = !empty( $_POST['billing_tax_number'] ) ? sanitize_text_field( $_POST['billing_tax_number'] ) : '';
 	update_user_meta( $customer_id, 'billing_tax_number', $billing_tax_number );

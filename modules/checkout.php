@@ -24,7 +24,7 @@ add_filter( 'woocommerce_billing_fields', function( $fields ) {
 
 add_action( 'woocommerce_checkout_process', function() {
 	// Nonce verification before doing anything
-	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce' );
+	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
 

@@ -7,7 +7,7 @@ add_action( 'woocommerce_register_form', function() {
 	$options = get_option( 'surbma_hc_fields' );
 	$regacceptppValue = isset( $options['regacceptpp'] ) ? wp_unslash( $options['regacceptpp'] ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
 
-	if ( $regacceptppValue ) {
+	if ( !is_checkout() && $regacceptppValue ) {
 		woocommerce_form_field( 'reg_accept_pp', array(
 			'type'          => 'checkbox',
 			'class'         => array('woocommerce-form-row woocommerce-form-row--wide form-row-wide privacy'),
@@ -19,7 +19,7 @@ add_action( 'woocommerce_register_form', function() {
 
 add_filter( 'woocommerce_registration_errors', function( $errors, $username, $email ) {
 	// Nonce verification before doing anything
-	check_ajax_referer( 'woocommerce-register', 'woocommerce-register-nonce' );
+	check_ajax_referer( 'woocommerce-register', 'woocommerce-register-nonce', false );
 
 	$options = get_option( 'surbma_hc_fields' );
 
@@ -32,7 +32,7 @@ add_filter( 'woocommerce_registration_errors', function( $errors, $username, $em
 // Extra user metas to save after registration.
 add_action( 'user_register', function( $user_id ) {
 	// Nonce verification before doing anything
-	check_ajax_referer( 'woocommerce-register', 'woocommerce-register-nonce' );
+	check_ajax_referer( 'woocommerce-register', 'woocommerce-register-nonce', false );
 
 	$options = get_option( 'surbma_hc_fields' );
 
@@ -178,14 +178,12 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 
 add_action( 'woocommerce_checkout_process', function() {
 	// Nonce verification before doing anything
-	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce' );
+	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
 	$options = get_option( 'surbma_hc_fields' );
 
 	if ( isset( $options['accepttos'] ) && $options['accepttos'] && empty( $_POST['accept_tos'] ) ) {
 		$accepttosError = __( 'Terms of Service', 'surbma-magyar-woocommerce' );
-		/* translators: %s: Field label */
-		$accepttosError = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $accepttosError );
 		/* translators: %s: Field label */
 		$accepttosError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $accepttosError ) . '</strong>' );
 		wc_add_notice( $accepttosError, 'error' );
@@ -193,8 +191,6 @@ add_action( 'woocommerce_checkout_process', function() {
 
 	if ( isset( $options['acceptpp'] ) && $options['acceptpp'] && empty( $_POST['accept_pp'] ) ) {
 		$acceptppError = __( 'Privacy Policy', 'surbma-magyar-woocommerce' );
-		/* translators: %s: Field label */
-		$acceptppError = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $acceptppError );
 		/* translators: %s: Field label */
 		$acceptppError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $acceptppError ) . '</strong>' );
 		wc_add_notice( $acceptppError, 'error' );
@@ -213,7 +209,7 @@ add_action( 'woocommerce_checkout_process', function() {
 
 add_action( 'woocommerce_checkout_update_order_meta', function( $order_id ) {
 	// Nonce verification before doing anything
-	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce' );
+	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
 	if ( !empty( $_POST['accept_tos'] ) ) {
 		update_post_meta( $order_id, 'accept_tos', true );
