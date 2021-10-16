@@ -292,76 +292,9 @@ add_action( 'admin_notices', function () {
 
 } );
 // * HUCOMMERCE START
-// New notice
-add_action( 'admin_notices', function () {
-    if ( PAnD::is_admin_notice_active( 'surbma-hc-notice-welcome-forever' ) ) {
-        return;
-    }
-    if ( !PAnD::is_admin_notice_active( 'surbma-hc-notice-v3000-forever' ) ) {
-        return;
-    }
-    if ( 'free' == SURBMA_HC_PLUGIN_VERSION ) {
-        wp_enqueue_script( 'freemius-checkout' );
-    }
-    global  $pagenow ;
-    
-    if ( 'index.php' == $pagenow || 'plugins.php' == $pagenow ) {
-        $home_url = get_option( 'home' );
-        $current_user = wp_get_current_user();
-        ?>
-		<div data-dismissible="surbma-hc-notice-v3000-forever" class="notice notice-info notice-alt notice-large is-dismissible">
-			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php 
-        echo  esc_url( SURBMA_HC_PLUGIN_URL ) ;
-        ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a>
-			<h3><?php 
-        esc_html_e( 'Thank you for updating HuCommerce to the latest version', 'surbma-magyar-woocommerce' );
-        ?>: <strong><?php 
-        echo  esc_html( SURBMA_HC_PLUGIN_VERSION_NUMBER ) ;
-        ?></strong></h3>
-			<p><strong>Új korszak kezdődik a HuCommerce életében. Az ingyenes verzió mellett megjelent a bővítmény fizetős verziója is: a HuCommerce Plusz további fantasztikus funkciókat ad az ingyenes HuCommerce Start bővítményhez.</strong></p>
-			<p>Első körben a Globális adatok, SMTP szolgáltatás beállítása, valamint a Termék extra beállítások kerültek a fizetős verzióba.</p>
-			<p>A mostani kiadás az ingyenes változathoz is hozott új funkciókat és fejlesztéseket: lényegében a teljes kódbázis át lett írva a legszigorúbb biztonsági és kódolási szabványok alapján. Az adószám már az admin felületen a megrendelésnél is módosítható. Új funkcióként pedig megjelent a Kosárba teszem gomb megjelenítési lehetősége a termék listaoldalakon. A pénztár oldalon a város és cím mezők validálása is belekerült az új verzióba.</p>
-			<p><a href="https://www.hucommerce.hu/hucommerce-changelog/" target="_blank">Minden változás megtekintése →</a></p>
-			<?php 
-        
-        if ( 'free' == SURBMA_HC_PLUGIN_VERSION ) {
-            ?>
-			<hr style="margin: 1em 0;">
-			<h4><?php 
-            esc_html_e( 'HuCommerce Plus', 'surbma-magyar-woocommerce' );
-            ?></h4>
-			<p><?php 
-            esc_html_e( 'Get access to all features of HuCommerce! The version of HuCommerce Plus will bring you even more awesome features for your webshop. By purchasing the premium version, you can support the development and maintenance of the plugin.', 'surbma-magyar-woocommerce' );
-            ?></p>
-			<p>
-				<a href="#" class="purchase button button-primary button-large"><span class="dashicons dashicons-cart" style="position: relative;top: 4px;left: -3px;"></span> <?php 
-            esc_html_e( 'Get HuCommerce Plus', 'surbma-magyar-woocommerce' );
-            ?></a>
-				<a href="https://www.hucommerce.hu/szolgaltatasok/bovitmenyek/hucommerce-plusz/" class="button button-large" target="_blank"><span class="dashicons dashicons-external" style="position: relative;top: 4px;left: -3px;"></span> <?php 
-            esc_html_e( 'More about HuCommerce Plus', 'surbma-magyar-woocommerce' );
-            ?></a>
-			</p>
-			<?php 
-        }
-        
-        ?>
-			<hr style="margin: 1em 0;">
-			<p style="text-align: center;"><strong><?php 
-        esc_html_e( 'IMPORTANT!', 'surbma-magyar-woocommerce' );
-        ?></strong> <?php 
-        esc_html_e( 'If you close this notification, it will show up again, when you update the plugin.', 'surbma-magyar-woocommerce' );
-        ?></p>
-		</div>
-		<?php 
-    }
-
-} );
 // HuCommerce Plus Promo notice
 add_action( 'admin_notices', function () {
     if ( PAnD::is_admin_notice_active( 'surbma-hc-notice-welcome-forever' ) ) {
-        return;
-    }
-    if ( PAnD::is_admin_notice_active( 'surbma-hc-notice-v3000-forever' ) ) {
         return;
     }
     if ( !PAnD::is_admin_notice_active( 'hucommerce-plus-promo-60' ) ) {

@@ -47,7 +47,7 @@ if ( is_admin() ) {
 $options = get_option( 'surbma_hc_fields' );
 // * HUCOMMERCE START
 // HU Modules
-$huformatfixValue = ( isset( $options['huformatfix'] ) ? $options['huformatfix'] : 1 );
+$huformatfixValue = ( isset( $options['huformatfix'] ) ? $options['huformatfix'] : 0 );
 $nocountyValue = ( isset( $options['nocounty'] ) ? $options['nocounty'] : 0 );
 $autofillcityValue = ( isset( $options['autofillcity'] ) ? $options['autofillcity'] : 0 );
 $maskcheckoutfieldsValue = ( isset( $options['maskcheckoutfields'] ) ? $options['maskcheckoutfields'] : 0 );

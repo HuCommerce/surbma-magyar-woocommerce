@@ -63,19 +63,19 @@ $legalconfirmationsposition_options = array(
 );
 
 $smtpport_options = array(
-	'port_25' => array(
+	'25' => array(
 		'value' => '25',
 		'label' => '25'
 	),
-	'port_465' => array(
+	'465' => array(
 		'value' => '465',
 		'label' => '465'
 	),
-	'port_587' => array(
+	'587' => array(
 		'value' => '587',
 		'label' => '587'
 	),
-	'port_2525' => array(
+	'2525' => array(
 		'value' => '2525',
 		'label' => '2525'
 	),
@@ -203,7 +203,7 @@ function surbma_hc_settings_page() {
 									<div class="uk-form-controls">
 										<p class="switch-wrap">
 											<label class="switch">
-												<?php $huformatfixValue = isset( $options['huformatfix'] ) ? $options['huformatfix'] : 1; ?>
+												<?php $huformatfixValue = isset( $options['huformatfix'] ) ? $options['huformatfix'] : 0; ?>
 												<input id="surbma_hc_fields[huformatfix]" name="surbma_hc_fields[huformatfix]" type="checkbox" value="1" <?php checked( '1', $huformatfixValue ); ?> />
 												<span class="slider round"></span>
 											</label>
@@ -218,7 +218,7 @@ function surbma_hc_settings_page() {
 									<div class="uk-form-controls">
 										<p class="switch-wrap">
 											<label class="switch">
-												<?php $nocountyValue = isset( $options['nocounty'] ) ? $options['nocounty'] : 1; ?>
+												<?php $nocountyValue = isset( $options['nocounty'] ) ? $options['nocounty'] : 0; ?>
 												<input id="surbma_hc_fields[nocounty]" name="surbma_hc_fields[nocounty]" type="checkbox" value="1" <?php checked( '1', $nocountyValue ); ?> />
 												<span class="slider round"></span>
 											</label>
@@ -278,7 +278,7 @@ function surbma_hc_settings_page() {
 									<div class="uk-form-controls">
 										<p class="switch-wrap">
 											<label class="switch">
-												<?php $translationsValue = isset( $options['translations'] ) ? $options['translations'] : 1; ?>
+												<?php $translationsValue = isset( $options['translations'] ) ? $options['translations'] : 0; ?>
 												<input id="surbma_hc_fields[translations]" name="surbma_hc_fields[translations]" type="checkbox" value="1" <?php checked( '1', $translationsValue ); ?> />
 												<span class="slider round"></span>
 											</label>

@@ -24,7 +24,10 @@ add_filter( 'woocommerce_registration_errors', function( $errors, $username, $em
 	$options = get_option( 'surbma_hc_fields' );
 
 	if ( !is_admin() && !is_checkout() && isset( $options['regacceptpp'] ) && $options['regacceptpp'] && empty( $_POST['reg_accept_pp'] ) ) {
-		$errors->add( 'reg_accept_pp_error', esc_html__( '<strong>Privacy Policy</strong> field is required.', 'surbma-magyar-woocommerce' ) );
+		$acceptregppError = __( 'Privacy Policy', 'surbma-magyar-woocommerce' );
+		/* translators: %s: Field label */
+		$acceptregppError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $acceptregppError ) . '</strong>' );
+		$errors->add( 'reg_accept_pp_error', $acceptregppError );
 	}
 	return $errors;
 }, 10, 3 );

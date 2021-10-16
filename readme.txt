@@ -1,9 +1,9 @@
 === HuCommerce | Magyar WooCommerce kiegészítések ===
-Contributors: Surbma, xnagyg
+Contributors: Surbma, xnagyg, freemius
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
-Tested up to: 5.7
-Stable tag: 30.0.1
+Tested up to: 5.8
+Stable tag: 30.1.0
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -232,6 +232,28 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+= 30.1.0 =
+
+Kiadás dátuma: 2021-10-17
+
+Ebben a verzióban semmi új funkció nincs, de sok fontos javítás történt. A frissítése biztonságos és mindenképpen ajánlott!
+
+JAVÍTÁSOK
+
+- Az Ingyenes szállítás értesítés modul javítása, hogy nettó árak megjelenítése esetén is jó összeget írjon ki.
+- A Jogi megfelelés modulnál az egyik hibaüzenet módosítása, hogy igazodjon a többi üzenet formátumához.
+- Adószám mező prioritásának a javítása, hogy az mindenképpen a Cégnév után jelenjen meg.
+- A Beállítások oldalon az alapértelmezett állapotok javítása, hogy minden ki legyen kapcsolva.
+- PRÉMIUM - SMTP Port beállítás javítása, hogy elmentse a választott értéket.
+- PRÉMIUM - Az uninstall funkciók ideiglenes törlése, hogy a HuCommerce Plusz verzióra váltásnál ne törölje a beállításokat.
+
+EGYÉB
+
+- Az új verziós értesítés végleges törlése.
+- A Magyar formátum javítások modul is ki van kapcsolva alapértelmezettként.
+- Kompatibilitás ellenőrzése a WordPress 5.8 verzióval.
+- Kompatibilitás ellenőrzése a WooCommerce 5.8 verzióval.
 
 = 30.0.1 =
 

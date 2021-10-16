@@ -10,7 +10,7 @@ add_filter( 'woocommerce_billing_fields', function( $fields ) {
 			'label' 		=> __( 'Tax number', 'surbma-magyar-woocommerce' ),
 			'required' 		=> false,
 			'class' 		=> array( 'form-row-wide' ),
-			'priority' 		=> 32,
+			'priority' 		=> 30,
 			'clear' 		=> true
 		);
 	}

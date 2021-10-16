@@ -40,8 +40,17 @@ add_action( 'woocommerce_before_cart', function() {
 	// Find lowest min_amount
 	$min_amount = min( $min_amounts );
 
-	// Get Cart Subtotal inc. Tax excl. Shipping
-	$current = WC()->cart->subtotal;
+	// Get "Display prices during cart and checkout" option: incl or excl
+	$taxdisplaycart = get_option( 'woocommerce_tax_display_cart' );
+
+	// Get Cart Subtotal without Shipping costs
+	if ( 'incl' == $taxdisplaycart ) {
+		// Tax included
+		$current = WC()->cart->subtotal;
+	} else {
+		// Tax excluded
+		$current = WC()->cart->subtotal_ex_tax;
+	}
 
 	// If Subtotal < Min Amount Echo Notice and add "Continue Shopping" button
 	if ( $current < $min_amount ) {
