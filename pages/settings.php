@@ -909,7 +909,7 @@ function surbma_hc_settings_page() {
 							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
 								<label class="uk-form-label" for="surbma_hc_fields[globalinfocompany]"><?php esc_html_e( 'Company', 'surbma-magyar-woocommerce' ); ?></label>
 								<div class="uk-form-controls">
-									<?php $globalinfocompanyValue = isset( $options['globalinfocompany'] ) && ( $options['globalinfoname'] ) ? $options['globalinfocompany'] : ''; ?>
+									<?php $globalinfocompanyValue = isset( $options['globalinfocompany'] ) && ( $options['globalinfocompany'] ) ? $options['globalinfocompany'] : ''; ?>
 									<input id="globalinfocompany" class="uk-input" type="text" name="surbma_hc_fields[globalinfocompany]" value="<?php echo esc_attr( wp_unslash( $globalinfocompanyValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
 									<p class="uk-text-meta"><?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-ceg]</code></p>
 								</div>

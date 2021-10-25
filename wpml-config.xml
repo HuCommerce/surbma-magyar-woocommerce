@@ -9,6 +9,23 @@
 			<key name="regacceptpp" />
 			<key name="accepttos" />
 			<key name="acceptpp" />
+			<key name="acceptcustom1label" />
+			<key name="acceptcustom1" />
+			<key name="acceptcustom2label" />
+			<key name="acceptcustom2" />
+			<key name="beforeorderbuttonmessage" />
+			<key name="afterorderbuttonmessage" />
+			<key name="globalinfoname" />
+			<key name="globalinfocompany" />
+			<key name="globalinfoheadquarters" />
+			<key name="globalinfotaxnumber" />
+			<key name="globalinforegnumber" />
+			<key name="globalinfoaddress" />
+			<key name="globalinfobankaccount" />
+			<key name="globalinfomobile" />
+			<key name="globalinfophone" />
+			<key name="globalinfoemail" />
+			<key name="globalinfoaboutus" />
 		</key>
 	</admin-texts>
 </wpml-config>

@@ -4,7 +4,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Code reference: https://businessbloomer.com/woocommerce-add-need-spend-x-get-free-shipping-cart-page/
-add_action( 'woocommerce_before_cart', function() {
+function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
 	$options = get_option( 'surbma_hc_fields' );
 	$freeshippingnoticemessageValue = isset( $options['freeshippingnoticemessage'] ) && ( $options['freeshippingnoticemessage'] ) ? $options['freeshippingnoticemessage'] : __( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
 	global $woocommerce;
@@ -52,16 +52,35 @@ add_action( 'woocommerce_before_cart', function() {
 		$current = WC()->cart->subtotal_ex_tax;
 	}
 
+	$notice = null;
+
 	// If Subtotal < Min Amount Echo Notice and add "Continue Shopping" button
 	if ( $current < $min_amount ) {
 		$message = $freeshippingnoticemessageValue . ': ' . wc_price( $min_amount - $current );
 		$returnurl = esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) );
-		$notice = sprintf( '%s <a href="%s" class="button wc-forward">%s</a>', $message, $returnurl, esc_html__( 'Return to shop', 'woocommerce' ) );
-		wc_print_notice( $notice, 'notice' );
-		// TODO: Checking if recommended product is added, it should not duplicate the notice!
-		// wc_clear_notices();
-		// wc_add_notice( $notice, 'notice' );
-		// wc_print_notices();
-		// woocommerce_output_all_notices();
+		if ( $returntoshop ) {
+			$notice = sprintf( '%s <a href="%s" class="button wc-forward">%s</a>', $message, $returnurl, esc_html__( 'Return to shop', 'woocommerce' ) );
+		} else {
+			$notice = $message;
+		}
 	}
+
+	return $notice;
+}
+
+add_action( 'woocommerce_before_cart', function() {
+	$notice = cps_hc_gems_free_shipping_notice();
+	wc_print_notice( $notice, 'notice' );
 } );
+
+/* FUTURE FEATURES
+add_action( 'woocommerce_before_checkout_form', function() {
+	$notice = cps_hc_gems_free_shipping_notice();
+	wc_print_notice( $notice, 'notice' );
+}, 0 );
+
+add_action( 'woocommerce_before_shop_loop', function() {
+	$notice = cps_hc_gems_free_shipping_notice( $returntoshop = false );
+	wc_print_notice( $notice, 'notice' );
+}, 0 );
+*/

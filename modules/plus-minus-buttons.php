@@ -57,8 +57,8 @@ jQuery( function( $ ) {
 			}
 		}
 
-		// Trigger change event
-		$qty.trigger( 'change' );
+		// Trigger input event
+		$qty.trigger( 'input' );
 	});
 });
 <?php

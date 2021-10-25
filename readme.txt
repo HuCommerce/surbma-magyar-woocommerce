@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg, freemius
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 5.8
-Stable tag: 30.1.0
+Stable tag: 30.2.0
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -24,7 +24,7 @@ Csatlakozzatok a HuCommerce hivatalos támogatói Facebook csoportjához, ahol l
 
 ### HuCommerce Start (ingyenes)
 
-Több, mint 6000 webáruház tulajdonos választása Magyarországon. Rengeteg hasznos funkció, kötelező választás minden magyar WooCommerce webáruházhoz. [Bővebben a HuCommerce Start bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce-start/)
+Több, mint 7000 webáruház tulajdonos választása Magyarországon. Rengeteg hasznos funkció, kötelező választás minden magyar WooCommerce webáruházhoz. [Bővebben a HuCommerce Start bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce-start/)
 
 **HuCommerce Start funkciói:**
 
@@ -232,6 +232,23 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+= 30.2.0 =
+
+Kiadás dátuma: 2021-10-25
+
+További apró finomítások és javítások a kódban. A frissítés biztonságos és ajánlott!
+
+EGYÉB
+
+- Kódok optimalizálása.
+- Kosár automatikus frissítése script optimalizálása.
+- Kosár automatikus frissítése kompatibilis a Blocksy sablonnal.
+
+JAVÍTÁSOK
+
+- Kisebb javítás a beállításoknál.
+- Mezők hozzáadása a WPML konfigurációhoz.
 
 = 30.1.0 =
 
