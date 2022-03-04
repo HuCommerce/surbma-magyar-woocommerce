@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 add_action( 'woocommerce_register_form', function() {
 	$options = get_option( 'surbma_hc_fields' );
-	$regacceptppValue = isset( $options['regacceptpp'] ) ? wp_unslash( $options['regacceptpp'] ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
+	$regacceptppValue = isset( $options['regacceptpp'] ) ? wp_kses_post( wp_unslash( $options['regacceptpp'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
 
 	if ( !is_checkout() && $regacceptppValue ) {
 		woocommerce_form_field( 'reg_accept_pp', array(
@@ -133,10 +133,10 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 			$legalcheckouttitleValue = '<h3>' . $legalcheckouttitleValue . '</h3>';
 		}
 	}
-	$accepttosValue = isset( $options['accepttos'] ) ? wp_unslash( $options['accepttos'] ) : esc_html__( 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'surbma-magyar-woocommerce' );
-	$acceptppValue = isset( $options['acceptpp'] ) ? wp_unslash( $options['acceptpp'] ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
-	$acceptcustom1Value = isset( $options['acceptcustom1'] ) ? wp_unslash( $options['acceptcustom1'] ) : '';
-	$acceptcustom2Value = isset( $options['acceptcustom2'] ) ? wp_unslash( $options['acceptcustom2'] ) : '';
+	$accepttosValue = isset( $options['accepttos'] ) ? wp_kses_post( wp_unslash( $options['accepttos'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'surbma-magyar-woocommerce' );
+	$acceptppValue = isset( $options['acceptpp'] ) ? wp_kses_post( wp_unslash( $options['acceptpp'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
+	$acceptcustom1Value = isset( $options['acceptcustom1'] ) ? wp_kses_post( wp_unslash( $options['acceptcustom1'] ) ) : '';
+	$acceptcustom2Value = isset( $options['acceptcustom2'] ) ? wp_kses_post( wp_unslash( $options['acceptcustom2'] ) ) : '';
 
 	echo '<div id="surbma_hc_gdpr_checkout">' . wp_kses_post( $legalcheckouttitleValue );
 
@@ -239,7 +239,7 @@ add_action( 'woocommerce_review_order_before_submit', function() {
 	$options = get_option( 'surbma_hc_fields' );
 	$beforeorderbuttonmessageValue = isset( $options['beforeorderbuttonmessage'] ) ? wp_unslash( $options['beforeorderbuttonmessage'] ) : null;
 	if ( $beforeorderbuttonmessageValue ) {
-		echo '<div class="surbma-hc-before-submit" style="margin: 0 0 1em;text-align: center;">' . esc_html( $beforeorderbuttonmessageValue ) . '</div>';
+		echo '<div class="surbma-hc-before-submit" style="margin: 0 0 1em;text-align: center;">' . wp_kses_post( $beforeorderbuttonmessageValue ) . '</div>';
 	}
 } );
 
@@ -247,6 +247,6 @@ add_action( 'woocommerce_review_order_after_submit', function() {
 	$options = get_option( 'surbma_hc_fields' );
 	$afterorderbuttonmessageValue = isset( $options['afterorderbuttonmessage'] ) ? wp_unslash( $options['afterorderbuttonmessage'] ) : null;
 	if ( $afterorderbuttonmessageValue ) {
-		echo '<div class="surbma-hc-before-submit" style="margin: 1em 0 0;text-align: center;">' . esc_html( $afterorderbuttonmessageValue ) . '</div>';
+		echo '<div class="surbma-hc-before-submit" style="margin: 1em 0 0;text-align: center;">' . wp_kses_post( $afterorderbuttonmessageValue ) . '</div>';
 	}
 } );

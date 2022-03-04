@@ -26,10 +26,10 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 	<!-- EXTRA CODE START -->
 	<?php
 		$options = get_option( 'surbma_hc_fields' );
-		$huformatfixValue = isset( $options['huformatfix'] ) ? $options['huformatfix'] : 1;
+		$huformatfixValue = isset( $options['huformatfix'] ) ? $options['huformatfix'] : 0;
 	?>
 
-	<?php if ( ( 'hu_HU' == get_locale() || 'hu' == get_locale() ) && 1 == $huformatfixValue ) { ?>
+	<?php if ( 1 == $huformatfixValue && ( 'hu_HU' == get_locale() || 'hu' == get_locale() ) ) { ?>
 	<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first">
 		<label for="account_last_name"><?php esc_html_e( 'Last name', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
 		<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="account_last_name" id="account_last_name" autocomplete="family-name" value="<?php echo esc_attr( $user->last_name ); ?>" />

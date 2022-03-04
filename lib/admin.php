@@ -22,6 +22,13 @@ add_action( 'admin_menu', function () {
         ) );
     }
 }, 999 );
+// * HUCOMMERCE START
+add_filter( 'plugin_action_links_' . plugin_basename( SURBMA_HC_PLUGIN_FILE ), function ( $actions ) {
+    $actions[] = '<a href="' . esc_url( get_admin_url( null, 'admin.php?page=surbma-hucommerce-menu' ) ) . '">' . esc_html__( 'Settings' ) . '</a>';
+    $actions[] = '<a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank" style="color: #e22c2f;font-weight: bold;">HuCommerce Pro</a>';
+    return $actions;
+} );
+// * HUCOMMERCE END
 // Custom styles and scripts for admin pages
 function surbma_hc_init( $hook )
 {
@@ -103,13 +110,13 @@ function surbma_hc_admin_sidebar()
     if ( 'free' == SURBMA_HC_PLUGIN_VERSION ) {
         ?>
 				<h4 class="uk-heading-divider"><?php 
-        esc_html_e( 'HuCommerce Plus', 'surbma-magyar-woocommerce' );
+        esc_html_e( 'HuCommerce Pro', 'surbma-magyar-woocommerce' );
         ?></h4>
 				<p><?php 
-        esc_html_e( 'Get access to all features of HuCommerce! The version of HuCommerce Plus will bring you even more awesome features for your webshop. By purchasing the premium version, you can support the development and maintenance of the plugin.', 'surbma-magyar-woocommerce' );
+        esc_html_e( 'Get access to all features of HuCommerce! The version of HuCommerce Pro will bring you even more awesome features for your webshop. By purchasing the premium version, you can support the development and maintenance of the plugin.', 'surbma-magyar-woocommerce' );
         ?></p>
-				<p><a href="#" class="purchase uk-button uk-button-default uk-button-danger uk-button-large uk-width-1-1"><span class="dashicons dashicons-cart" style="position: relative;top: 15px;left: -10px;"></span> <?php 
-        esc_html_e( 'HuCommerce Plus', 'surbma-magyar-woocommerce' );
+				<p><a href="https://www.hucommerce.hu/penztar/?add-to-cart=1135" class="uk-button uk-button-default uk-button-danger uk-button-large uk-width-1-1" target="_blank"><span class="dashicons dashicons-cart" style="position: relative;top: 15px;left: -10px;"></span> <?php 
+        esc_html_e( 'HuCommerce Pro', 'surbma-magyar-woocommerce' );
         ?></a></p>
 				<?php 
     }
@@ -209,13 +216,6 @@ function surbma_hc_admin_sidebar()
 					<strong>Tetszik a bővítmény? Kérlek értékeld 5 csillaggal:</strong>
 					 <a href="https://wordpress.org/support/plugin/surbma-magyar-woocommerce/reviews/#new-post" target="_blank">Új értékelés létrehozása</a>
 				</p>
-				<h4 class="uk-heading-divider">Ajánlott kiegészítők</h4>
-				<p>Olyan WooCommerce kiegészítők ajánlásait látod itt, amik biztosan kompatibilisek a HuCommerce bővítménnyel.</p>
-				<strong class="uk-text-uppercase">Számlázó kiegészítők:</strong>
-				<ul class="uk-list">
-					<li><a href="https://hu.wordpress.org/plugins/integration-for-szamlazzhu-woocommerce/" target="_blank">Integration for Szamlazz.hu & WooCommerce</a></li>
-					<li><a href="https://hu.wordpress.org/plugins/woo-billingo-plus/" target="_blank">Woo Billingo Plus</a></li>
-				</ul>
 				<h4 class="uk-heading-divider"><?php 
     esc_html_e( 'Coming features', 'surbma-magyar-woocommerce' );
     ?></h4>
@@ -292,7 +292,7 @@ add_action( 'admin_notices', function () {
 
 } );
 // * HUCOMMERCE START
-// HuCommerce Plus Promo notice
+// HuCommerce Pro Promo notice
 add_action( 'admin_notices', function () {
     if ( PAnD::is_admin_notice_active( 'surbma-hc-notice-welcome-forever' ) ) {
         return;
@@ -303,7 +303,6 @@ add_action( 'admin_notices', function () {
     if ( 'free' != SURBMA_HC_PLUGIN_VERSION ) {
         return;
     }
-    wp_enqueue_script( 'freemius-checkout' );
     global  $pagenow ;
     $options = get_option( 'surbma_hc_fields' );
     
@@ -315,17 +314,17 @@ add_action( 'admin_notices', function () {
         echo  esc_url( SURBMA_HC_PLUGIN_URL ) ;
         ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a>
 			<h3><?php 
-        esc_html_e( 'HuCommerce Plus', 'surbma-magyar-woocommerce' );
+        esc_html_e( 'HuCommerce Pro', 'surbma-magyar-woocommerce' );
         ?></h3>
 			<p><?php 
-        esc_html_e( 'Get access to all features of HuCommerce! The version of HuCommerce Plus will bring you even more awesome features for your webshop. By purchasing the premium version, you can support the development and maintenance of the plugin.', 'surbma-magyar-woocommerce' );
+        esc_html_e( 'Get access to all features of HuCommerce! The version of HuCommerce Pro will bring you even more awesome features for your webshop. By purchasing the premium version, you can support the development and maintenance of the plugin.', 'surbma-magyar-woocommerce' );
         ?></p>
 			<p>
-				<a href="#" class="purchase button button-primary button-large"><span class="dashicons dashicons-cart" style="position: relative;top: 4px;left: -3px;"></span> <?php 
-        esc_html_e( 'Get HuCommerce Plus', 'surbma-magyar-woocommerce' );
+				<a href="https://www.hucommerce.hu/penztar/?add-to-cart=1135" class="button button-primary button-large" target="_blank"><span class="dashicons dashicons-cart" style="position: relative;top: 4px;left: -3px;"></span> <?php 
+        esc_html_e( 'Get HuCommerce Pro', 'surbma-magyar-woocommerce' );
         ?></a>
-				<a href="https://www.hucommerce.hu/szolgaltatasok/bovitmenyek/hucommerce-plusz/" class="button button-large" target="_blank"><span class="dashicons dashicons-external" style="position: relative;top: 4px;left: -3px;"></span> <?php 
-        esc_html_e( 'More about HuCommerce Plus', 'surbma-magyar-woocommerce' );
+				<a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" class="button button-large" target="_blank"><span class="dashicons dashicons-external" style="position: relative;top: 4px;left: -3px;"></span> <?php 
+        esc_html_e( 'More about HuCommerce Pro', 'surbma-magyar-woocommerce' );
         ?></a>
 			</p>
 			<hr style="margin: 1em 0;">
@@ -340,7 +339,7 @@ add_action( 'admin_notices', function () {
 
 } );
 add_filter( 'wp_feed_cache_transient_lifetime', function ( $seconds ) {
-    return 60;
+    return 600;
 } );
 // Dashboard widget
 add_action( 'wp_dashboard_setup', function () {
@@ -394,16 +393,14 @@ function surbma_hc_dashboard()
     }
     
     echo  '<a href="https://www.hucommerce.hu" target="_blank"><img src="' . esc_url( SURBMA_HC_PLUGIN_URL ) . '/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright"></a>' ;
-    // HuCommerce Plus
+    // HuCommerce Pro
     
     if ( 'free' == SURBMA_HC_PLUGIN_VERSION ) {
-        wp_enqueue_script( 'freemius-checkout' );
-        echo  '<h3><strong>' . esc_html__( 'HuCommerce Plus', 'surbma-magyar-woocommerce' ) . '</strong></h3>' ;
-        echo  '<p>' . esc_html__( 'Get access to all features of HuCommerce! The version of HuCommerce Plus will bring you even more awesome features for your webshop. By purchasing the premium version, you can support the development and maintenance of the plugin.', 'surbma-magyar-woocommerce' ) . '</p>' ;
+        echo  '<h3><strong>' . esc_html__( 'HuCommerce Pro', 'surbma-magyar-woocommerce' ) . '</strong></h3>' ;
+        echo  '<p>' . esc_html__( 'Get access to all features of HuCommerce! The version of HuCommerce Pro will bring you even more awesome features for your webshop. By purchasing the premium version, you can support the development and maintenance of the plugin.', 'surbma-magyar-woocommerce' ) . '</p>' ;
+        echo  '<p><a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">' . esc_html__( 'More about HuCommerce Pro', 'surbma-magyar-woocommerce' ) . '</a></p>' ;
         echo  '<p>' ;
-        echo  '<a href="#" class="purchase button button-primary"><span class="dashicons dashicons-cart" style="position: relative;top: 4px;left: -3px;"></span> ' . esc_html__( 'Get HuCommerce Plus', 'surbma-magyar-woocommerce' ) . '</a>' ;
-        echo  ' ' ;
-        echo  '<a href="https://www.hucommerce.hu/szolgaltatasok/bovitmenyek/hucommerce-plusz/" class="button" target="_blank"><span class="dashicons dashicons-external" style="position: relative;top: 4px;left: -3px;"></span> ' . esc_html__( 'More about HuCommerce Plus', 'surbma-magyar-woocommerce' ) . '</a>' ;
+        echo  '<a href="https://www.hucommerce.hu/penztar/?add-to-cart=1135" class="button button-primary" target="_blank"><span class="dashicons dashicons-cart" style="position: relative;top: 4px;left: -3px;"></span> ' . esc_html__( 'Get HuCommerce Pro', 'surbma-magyar-woocommerce' ) . '</a>' ;
         echo  '</p>' ;
         echo  '<hr style="margin: 2em 0 1em;clear: both;">' ;
     }

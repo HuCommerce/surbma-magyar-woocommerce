@@ -2,8 +2,8 @@
 Contributors: Surbma, xnagyg, freemius
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
-Tested up to: 5.8
-Stable tag: 30.2.0
+Tested up to: 5.9
+Stable tag: 30.3.0
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -24,7 +24,7 @@ Csatlakozzatok a HuCommerce hivatalos támogatói Facebook csoportjához, ahol l
 
 ### HuCommerce Start (ingyenes)
 
-Több, mint 7000 webáruház tulajdonos választása Magyarországon. Rengeteg hasznos funkció, kötelező választás minden magyar WooCommerce webáruházhoz. [Bővebben a HuCommerce Start bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce-start/)
+Több, mint 8000 webáruház tulajdonos választása Magyarországon. Rengeteg hasznos funkció, kötelező választás minden magyar WooCommerce webáruházhoz. [Bővebben a HuCommerce Start bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
 
 **HuCommerce Start funkciói:**
 
@@ -45,11 +45,11 @@ Több, mint 7000 webáruház tulajdonos választása Magyarországon. Rengeteg h
 - WPML és Polylang kompatibilitás
 - További funkciók hamarosan...
 
-### HuCommerce Plusz (fizetős)
+### HuCommerce Pro (fizetős)
 
-A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő funkciókkal. Támogatói verzió, amivel te is hozzájárulsz a további fejlesztésekhez. [Bővebben a HuCommerce Plusz bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce-plusz/)
+A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő funkciókkal. Támogatói verzió, amivel te is hozzájárulsz a további fejlesztésekhez. [Bővebben a HuCommerce Pro bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
 
-**HuCommerce Plusz funkciói:**
+**HuCommerce Pro funkciói:**
 
 - Minden, amit a HuCommerce Start bővítményben találsz, plusz…
 - Globális adatok, amiket shortcode-dal lehet bárhol megjeleníteni
@@ -171,7 +171,7 @@ Ezek az adatok állíthatók be:
 
 Minden webáruházban fontos a kommunikáció az érdeklődővel és vásárlóval mind a vásárlás előtt, mind pedig a megrendelés leadása után. Ezért nagyon fontos, hogy a levelek kézbesítése biztonságos és megbízható legyen. Ezt a külső SMTP szolgáltatók tudják biztosítani, mint például a Mailgun vagy Sendgrid.
 
-A HuCommerce Plusz SMTP beállításával összekapcsolhatod a webáruházad levelezését az SMTP szolgáltatóval.
+A HuCommerce Pro SMTP beállításával összekapcsolhatod a webáruházad levelezését az SMTP szolgáltatóval.
 
 #### Termék extra beállítások
 
@@ -182,9 +182,9 @@ A HuCommerce Plusz SMTP beállításával összekapcsolhatod a webáruházad lev
 - Kosárba tesz gomb – A termék lista oldalakon az egyes termékekhez hozzá lehet adni a Kosárba tesz gombot.
 - Termék alcím hozzáadása – Egyedi alcímek adhatók a Termékekhez, melyek a listaoldalon és a Termék végoldalon is megjelennek. Az alcím a cím heading HTML kódjába lesz illesztve külön, szemantikus megjelöléssel. Ezt fontos figyelembe venni keresőoptimalizálási (SEO) szempontból is!
 
->Azon dolgozunk, hogy folyamatosan hasznos funkciókkal bővítsük ezt a nagyszerű WooCommerce kiegészítőt. Kérlek, támogasd a fejlesztést és a HuCommerce közösséget azzal, hogy megvásárolod a Plusz verziót! Ezzel fedezni tudjuk a fejlesztési költségeket és több időt tudunk arra fordítani, hogy a HuCommerce bővítmény még jobb legyen és még több hasznod legyen belőle.
+>Azon dolgozunk, hogy folyamatosan hasznos funkciókkal bővítsük ezt a nagyszerű WooCommerce kiegészítőt. Kérlek, támogasd a fejlesztést és a HuCommerce közösséget azzal, hogy megvásárolod a Pro verziót! Ezzel fedezni tudjuk a fejlesztési költségeket és több időt tudunk arra fordítani, hogy a HuCommerce bővítmény még jobb legyen és még több hasznod legyen belőle.
 
-#### Szeretnél többet tudni rólunk és a szolgáltatásainkról?
+### Szeretnél többet tudni rólunk és a szolgáltatásainkról?
 
 Nézd meg a weboldalunkat: [HuCommerce.hu →](https://www.hucommerce.hu/)
 
@@ -195,7 +195,7 @@ Nézd meg a weboldalunkat: [HuCommerce.hu →](https://www.hucommerce.hu/)
 1. A "Bővítmények -> Új hozzáadása" menüpont alatt keress rá a *HuCommerce | Magyar WooCommerce kiegészítések* bővítményre.
 2. A bővítmény dobozában kattints a "Telepítés most" gombra.
 3. Telepítés után ugyanebben a dobozban kattints a "Bekapcsol" gombra, hogy aktiváld a *HuCommerce | Magyar WooCommerce kiegészítések* bővítményt.
-4. A "CPS Plugins -> HuCommerce" menüpont alatt állítsd be, hogy melyik modult szeretnéd használni.
+4. A "WooCommerce -> HuCommerce" menüpont alatt állítsd be, hogy melyik modult szeretnéd használni.
 5. Ennyi az egész. :)
 
 ### Manuális telepítés az admin felületen
@@ -203,7 +203,7 @@ Nézd meg a weboldalunkat: [HuCommerce.hu →](https://www.hucommerce.hu/)
 1. Töltsd le a bővítményt: [HuCommerce | Magyar WooCommerce kiegészítések](https://downloads.wordpress.org/plugin/surbma-magyar-woocommerce.zip)
 2. Töltsd fel a `surbma-magyar-woocommerce.zip` fájlt a "Bővítmények -> Új hozzáadása" menüpont alatt a "Bővítmény feltöltése" gombra kattintva.
 3. Aktiváld a *HuCommerce | Magyar WooCommerce kiegészítések* bővítményt a feltöltés után.
-4. A "CPS Plugins -> HuCommerce" menüpont alatt állítsd be, hogy melyik modult szeretnéd használni.
+4. A "WooCommerce -> HuCommerce" menüpont alatt állítsd be, hogy melyik modult szeretnéd használni.
 5. Ennyi az egész. :)
 
 ### Manuális telepítés FTP használatával
@@ -212,14 +212,14 @@ Nézd meg a weboldalunkat: [HuCommerce.hu →](https://www.hucommerce.hu/)
 2. Tömörítsd ki a zip fájlt a számítógépeden.
 3. Töltsd fel a `surbma-magyar-woocommerce` mappát a `/wp-content/plugins/` mappába.
 4. Aktiváld a *HuCommerce | Magyar WooCommerce kiegészítések* bővítményt a "Bővítmények" menüpont alatt a WordPress admin felületen.
-5. A "CPS Plugins -> HuCommerce" menüpont alatt állítsd be, hogy melyik modult szeretnéd használni.
+5. A "WooCommerce -> HuCommerce" menüpont alatt állítsd be, hogy melyik modult szeretnéd használni.
 6. Ennyi az egész. :)
 
 == Frequently Asked Questions ==
 
 = Hol találom a bővítmény beállításait? =
 
-A *HuCommerce | Magyar WooCommerce kiegészítések* bővítmény beállításait a "CPS Plugins -> HuCommerce" menüpont alatt éred el.
+A *HuCommerce | Magyar WooCommerce kiegészítések* bővítmény beállításait a "WooCommerce -> HuCommerce" menüpont alatt éred el.
 
 = Nem cserélődtek meg a nevek a Pénztár oldalon. =
 
@@ -232,6 +232,22 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+= 30.3.0 =
+
+Kiadás dátuma: 2022-03-04
+
+Kisebb hibajavítások a HuCommerce bővítményben és a Freemius frissítése a sebezhetőség miatt. A frissítés biztonságos és mindenképpen ajánlott.
+
+JAVÍTÁSOK
+
+- Ingyenes szállítás értesítés javítása, hogy üresen ne jelenjen meg.
+- A Jogi megfelelés modul szöveg mezők megjelenítésének a javításai, hogy html tagokat is lehessen használni.
+- A Fiók oldal javítása, hogy alapértelmezettként ne módosítson rajta semmit.
+
+EGYÉB
+
+- Linkek elhelyezése a Bővítmények menüpont alatt a HuCommerce bővítménynél.
 
 = 30.2.0 =
 
@@ -263,7 +279,7 @@ JAVÍTÁSOK
 - Adószám mező prioritásának a javítása, hogy az mindenképpen a Cégnév után jelenjen meg.
 - A Beállítások oldalon az alapértelmezett állapotok javítása, hogy minden ki legyen kapcsolva.
 - PRÉMIUM - SMTP Port beállítás javítása, hogy elmentse a választott értéket.
-- PRÉMIUM - Az uninstall funkciók ideiglenes törlése, hogy a HuCommerce Plusz verzióra váltásnál ne törölje a beállításokat.
+- PRÉMIUM - Az uninstall funkciók ideiglenes törlése, hogy a HuCommerce Pro verzióra váltásnál ne törölje a beállításokat.
 
 EGYÉB
 
@@ -288,7 +304,7 @@ EGYÉB
 
 Kiadás dátuma: 2021-05-31
 
-Új korszak kezdődik a HuCommerce életében. Az ingyenes verzió mellett megjelent a bővítmény fizetős verziója is: a HuCommerce Plusz további fantasztikus funkciókat ad az ingyenes HuCommerce Start bővítményhez:
+Új korszak kezdődik a HuCommerce életében. Az ingyenes verzió mellett megjelent a bővítmény fizetős verziója is: a HuCommerce Pro további fantasztikus funkciókat ad az ingyenes HuCommerce Start bővítményhez:
 
 - Globális adatok, amiket shortcode-dal lehet bárhol megjeleníteni.
 - SMTP szolgáltatás beállítása.
@@ -509,7 +525,7 @@ EGYÉB
 
 - Freemius SDK hozzáadása.
 - Freemius script-ek hozzáadása, hogy admin felületen lehessen megvásárolni a prémium verziót.
-- HuCommerce Plusz banner-ek hozzáadása.
+- HuCommerce Pro banner-ek hozzáadása.
 - HuCommerce feed-ek hozzáadása.
 - Admin értesítések feltételeinek a módosítása, hogy csak a megadott helyeken jelenjenek meg.
 - Új admin értesítés a legújabb verzióhoz.

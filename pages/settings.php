@@ -130,14 +130,14 @@ function surbma_hc_settings_page() {
 			<div class="updated notice is-dismissible"><p><strong><?php esc_html_e( 'Settings saved.' ); ?></strong></p></div>
 		<?php } ?>
 
-		<?php // HuCommerce Plusz promo ?>
+		<?php // HuCommerce Pro promo ?>
 		<?php if ( 'free' == SURBMA_HC_PLUGIN_VERSION ) { ?>
 			<div id="hucommerce-plusz-promo" class="uk-card uk-card-default uk-card-hover uk-card-small uk-grid-collapse uk-margin">
 				<div class="uk-card-body">
-					<h4>HuCommerce Plusz</h4>
-					<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Plusz verzió megvásárlásával további fantasztikus funkciókat kapsz. Nem utolsó sorban a fizetős verzióval a bővítmény fejlesztését is támogatod.</p>
-					<a href="#" class="purchase uk-button uk-button-default uk-button-primary"><span class="dashicons dashicons-cart" style="position: relative;top: 8px;left: -6px;"></span> HuCommerce Plusz megvásárlása</a>
-					<a href="https://www.hucommerce.hu/szolgaltatasok/bovitmenyek/hucommerce-plusz/" class="uk-button uk-button-default" target="_blank"><span class="dashicons dashicons-external" style="position: relative;top: 8px;left: -6px;"></span> HuCommerce Plusz megismerése</a>
+					<h4>HuCommerce Pro</h4>
+					<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat kapsz. Nem utolsó sorban a fizetős verzióval a bővítmény fejlesztését is támogatod.</p>
+					<a href="https://www.hucommerce.hu/penztar/?add-to-cart=1135" class="uk-button uk-button-default uk-button-primary" target="_blank"><span class="dashicons dashicons-cart" style="position: relative;top: 8px;left: -6px;"></span> HuCommerce Pro megvásárlása</a>
+					<a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" class="uk-button uk-button-default" target="_blank"><span class="dashicons dashicons-external" style="position: relative;top: 8px;left: -6px;"></span> HuCommerce Pro megismerése</a>
 					<a href="https://www.hucommerce.hu" class="uk-position-medium uk-position-bottom-right uk-visible@s" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright"></a>
 					<a href="#" class="uk-position-medium uk-position-top-right" uk-close uk-toggle="target: #hucommerce-plusz-promo"></a>
 				</div>

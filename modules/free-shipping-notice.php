@@ -70,17 +70,23 @@ function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
 
 add_action( 'woocommerce_before_cart', function() {
 	$notice = cps_hc_gems_free_shipping_notice();
-	wc_print_notice( $notice, 'notice' );
+	if ( $notice ) {
+		wc_print_notice( $notice, 'notice' );
+	}
 } );
 
 /* FUTURE FEATURES
 add_action( 'woocommerce_before_checkout_form', function() {
 	$notice = cps_hc_gems_free_shipping_notice();
-	wc_print_notice( $notice, 'notice' );
+	if ( $notice ) {
+		wc_print_notice( $notice, 'notice' );
+	}
 }, 0 );
 
 add_action( 'woocommerce_before_shop_loop', function() {
 	$notice = cps_hc_gems_free_shipping_notice( $returntoshop = false );
-	wc_print_notice( $notice, 'notice' );
+	if ( $notice ) {
+		wc_print_notice( $notice, 'notice' );
+	}
 }, 0 );
 */

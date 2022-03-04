@@ -1,5 +1,128 @@
 # Changelog
 
+## 3.8.1 (November 5, 2021)
+
+### Added
+
+- Add Less variables for outline style
+
+### Changed
+
+- Make padding large a little bigger on small devices
+- Change logo color to emphasis
+
+### Fixed
+
+- Fix scrollIntoView funtion with offset argument provided
+
+## 3.8.0 (October 28, 2021)
+
+### Changed
+
+- Refactor focus styles to use `focus-visible` in all components
+- Use custom properties in Position component
+- Make transition classes work with position or cover classes on the same element
+- Refactor animation component
+
+### Changed
+
+- Improve sticky performance when bottom option is used
+
+### Fixed
+
+- Revert setting focus to modal/offcanvas toggle after close
+
+## 3.7.6 (October 8, 2021)
+
+### Fixed
+
+- Fix Drop closing if clicked within through touch event
+- Fix Slider not animating slides if slide wider than slide container
+
+## 3.7.5 (October 5, 2021)
+
+### Change
+
+- Improve Cover component performance if applied to none video
+
+### Fixed
+
+- Fix toggle behavior in Toggle component
+- Fix Toggle component no longer sets tabindex in media mode
+
+## 3.7.4 (September 23, 2021)
+
+### Added
+
+- Add itemNav option to Switcher component
+
+### Changed
+
+- Focus modal/offcanvas upon opening
+
+### Fixed
+
+- Fix regression in Toggle component
+- Fix keyboard navigation in Navbar component
+- Fix navbar toggle style and navbar item inverse style if dropdown is open
+
+## 3.7.3 (September 9, 2021)
+
+### Added
+
+- Add tile hover hooks
+
+### Fixed
+
+- Fix toggle behavior in Toggle component
+- Fix navbar item style if dropdown is open and container option is used
+
+## 3.7.2 (August 6, 2021)
+
+### Fixed
+
+- Fix text alignment if tabs are left or right aligned in Tab component
+
+## 3.7.1 (July 15, 2021)
+
+### Fixed
+
+- Fix animation classes only partially being removed in Scrollspy component
+- Fix scrollIntoView did not return Promise if element is hidden 
+
+## 3.7.0 (June 29, 2021)
+
+### Added
+
+- Add text decoration modifier to Text component
+- Add width variable to range thumb in to Form Range component
+- Add Bag icon
+
+### Changed
+
+- Change default search width and horizontal padding in Search component
+- Change badge width and font size in Badge component
+- Change button link color and text decoration in Button component
+- Change card badge height in Card component
+- Remove margin from the navbar item last-child in Navbar component
+- Add white space gap for navbar item in Navbar component
+- Allow text after icon in Iconnav component
+
+### Removed
+
+- Remove badge hover color variable in Badge component
+
+### Fixed
+
+- Fix input type list showing picker indicator in Chrome
+- Fix focus background in Form and Search component
+- Fix form size modifier for textarea in Form component
+- Fix icon alignment in Nav, Subnav and Tab components
+- Fix default dropdown selector in Navbar component
+- Fix show behavior in Drop component for multiple toggles
+- Fix ScrollspyNav component triggering 'active' event on every scroll
+- Fix prevent updates on disconnected components
+
 ## 3.6.22 (May 18, 2021)
 
 ### Added
@@ -27,7 +150,7 @@
 
 ## 3.6.20 (April 22, 2021)
 
-### Change
+### Changed
 
 - Toggle component in hover mode toggles on focus and blur
 
@@ -37,7 +160,7 @@
 
 ## 3.6.19 (April 7, 2021)
 
-### Change
+### Changed
 
 - Update card badge style
 
@@ -51,7 +174,7 @@
 
 ### Added
 
-- Add Discord, Twitch and Tiktok icons
+- Add Discord, Twitch and TikTok icons
 
 ### Removed
 
@@ -59,7 +182,7 @@
 
 ### Fixed
 
-- Fix filter inital state
+- Fix filter initial state
 
 ## 3.6.17 (February 25, 2021)
 
@@ -73,7 +196,7 @@
 
 ## 3.6.16 (February 5, 2021)
 
-### Change
+### Changed
 
 - Make multiple select resizable
 
@@ -216,7 +339,7 @@
 ### Fixed
 
 - Fix 'aria-expanded' value on toggles
-- Fix responsivness in Switcher component
+- Fix responsiveness in Switcher component
 
 ## 3.5.17 (December 16, 2020)
 
@@ -714,7 +837,7 @@
 
 ### Changed
 
-- By default the Offcanvas `container` option is `false` now
+- By default, the Offcanvas `container` option is `false` now
 - The `focusable` attribute on SVG/Icon component makes SVG focusable in IE
 
 ### Fixed
@@ -899,7 +1022,7 @@
 
 ### Fixed
 
-- Fix visible toggle and its child elments not being focusable through keyboard navigation
+- Fix visible toggle and its child elements not being focusable through keyboard navigation
 - Fix Img component correctly escapes urls on background images
 
 ## 3.0.0 rc 26 (January 3, 2019)
@@ -978,7 +1101,7 @@
 
 ### Added
 
-- Add print, reddit, mircrophone, file-text, file-pdf, chevron-double left and right icons
+- Add print, reddit, microphone, file-text, file-pdf, chevron-double left and right icons
 - Add text emphasis to Text component
 - Add `src` as primary option to SVG component
 
@@ -1044,7 +1167,7 @@
 ### Fixed
 
 - Fix `UIkit.mixin()`
-- Fix issue with list bullet in combination with multi column layouts
+- Fix issue with list bullet in combination with multi-column layouts
 - Allow for special characters in URI hash in Scroll Component
 - Height Match also sets a `height` in IE
 - Slideshow sets `min-height` instead of `height`
@@ -1370,7 +1493,7 @@
 ### Changed
 
 - Add `uk-slider-container` class to clip the Slider component
-- Remove auto-clipping from Slider items. Use `uk-cover-container` instead.
+- Remove auto-clipping from Slider items. Use `uk-cover-container` instead
 
 ### Fixed
 

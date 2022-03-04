@@ -1,12 +1,12 @@
 <?php
 
 // CPS SDK Version.
-define( 'CPS_SDK_VERSION', '8.1.1' );
+define( 'CPS_SDK_VERSION', '8.2.0' );
 
 define( 'CPS_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'CPS_URL', plugins_url( '', __FILE__ ) );
 
-define( 'CPS_UIKIT_VERSION', '3.6.22' );
+define( 'CPS_UIKIT_VERSION', '3.8.1' );
 
 // https://github.com/collizo4sky/persist-admin-notices-dismissal
 require dirname( __FILE__ ) . '/vendors/pand/persist-admin-notices-dismissal.php';
