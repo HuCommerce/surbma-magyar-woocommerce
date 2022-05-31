@@ -8,20 +8,10 @@ add_action( 'wp_enqueue_scripts', function() {
 	if ( is_cart() ) {
 		ob_start();
 		?>
-<?php if ( wp_basename( get_bloginfo( 'template_directory' ) ) == 'blocksy' ) { ?>
-// Blocksy theme fix
-jQuery( function( $ ) {
-	$(document.body).on('click', '.ct-increase, .ct-decrease', function() {
-		var $qty = $( this ).closest( '.quantity' ).find( '.qty');
-		$qty.trigger( 'input' );
-	});
-} );
-<?php } ?>
-
 var timeout;
 
 jQuery( function( $ ) {
-	$('div.woocommerce').on('input', '.qty', function() {
+	$('div.woocommerce').on('input change', '.qty', function() {
 		if ( timeout !== undefined ) {
 			clearTimeout( timeout );
 		}

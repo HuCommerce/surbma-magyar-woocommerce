@@ -105,6 +105,15 @@ add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
 	return $fields;
 }, 9999 );
 
+// Remove Additional information section
+add_action( 'woocommerce_before_checkout_form' , function() {
+	$options = get_option( 'surbma_hc_fields' );
+	$noadditionalinformationValue = isset( $options['noadditionalinformation'] ) ? $options['noadditionalinformation'] : 0;
+	if ( 1 == $noadditionalinformationValue ) {
+		add_filter( 'woocommerce_enable_order_notes_field', '__return_false', 9999 );
+	}
+} );
+
 add_action( 'wp_enqueue_scripts', function() {
 	if ( is_checkout() ) {
 		$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';

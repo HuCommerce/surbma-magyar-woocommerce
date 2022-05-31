@@ -5,7 +5,7 @@ Plugin Name: HuCommerce | Magyar WooCommerce kiegészítések
 Plugin URI: https://www.hucommerce.hu/
 Description: Hasznos javítások a magyar nyelvű WooCommerce webáruházakhoz.
 
-Version: 2022.0.3
+Version: 2022.1.0
 
 Author: HuCommerce.hu
 Author URI: https://www.hucommerce.hu/
@@ -27,7 +27,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 // Prevent direct access
 defined( 'ABSPATH' ) || exit;
 
-define( 'SURBMA_HC_PLUGIN_VERSION_NUMBER', '2022.0.3' );
+define( 'SURBMA_HC_PLUGIN_VERSION_NUMBER', '2022.1.0' );
 define( 'SURBMA_HC_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'SURBMA_HC_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SURBMA_HC_PLUGIN_FILE', __FILE__ );

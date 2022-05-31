@@ -43,6 +43,23 @@ add_action( 'woocommerce_checkout_process', function() {
 	}
 } );
 
+add_action( 'woocommerce_after_save_address_validation', function() {
+	// Nonce verification before doing anything
+	check_ajax_referer( 'woocommerce-edit_address', 'woocommerce-edit-address-nonce', false );
+
+	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
+	$billing_tax_number = isset( $_POST['billing_tax_number'] ) ? sanitize_text_field( $_POST['billing_tax_number'] ) : '';
+
+	if ( 'hidden' != $woocommercecheckoutcompanyfieldValue && ( !empty( $_POST['billing_company'] ) || 'required' == $woocommercecheckoutcompanyfieldValue ) && empty( $billing_tax_number ) ) {
+		$field_label = __( 'Tax number', 'surbma-magyar-woocommerce' );
+		/* translators: %s: Field label */
+		$field_label = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $field_label );
+		/* translators: %s: Field label */
+		$noticeError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $field_label ) . '</strong>' );
+		wc_add_notice( $noticeError, 'error' );
+	}
+} );
+
 add_action( 'woocommerce_checkout_update_user_meta', function( $customer_id ) {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
@@ -117,7 +134,7 @@ add_filter( 'woocommerce_customer_meta_fields', function( $profileFieldArray ) {
 
 add_action( 'wp_enqueue_scripts', function() {
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
-	if ( 'hidden' != $woocommercecheckoutcompanyfieldValue && is_checkout() ) {
+	if ( 'hidden' != $woocommercecheckoutcompanyfieldValue && ( is_checkout() || is_account_page() ) ) {
 		$options = get_option( 'surbma_hc_fields' );
 		$moduleCheckoutValue = isset( $options['module-checkout'] ) ? $options['module-checkout'] : 0;
 		$billingcompanycheckValue = 1 == $moduleCheckoutValue && isset( $options['billingcompanycheck'] ) ? $options['billingcompanycheck'] : 0;
@@ -163,7 +180,7 @@ jQuery(document).ready(function($){
 				$('#billing_tax_number_field').removeClass('woocommerce-invalid woocommerce-invalid-required-field');
 			<?php } ?>
 			<?php if ( 1 == $companytaxnumberpairValue ) { ?>
-				// $('#billing_tax_number_field').removeClass('woocommerce-invalid woocommerce-invalid-required-field');
+				$('#billing_tax_number_field').removeClass('woocommerce-invalid woocommerce-invalid-required-field');
 				$('#billing_tax_number_field label abbr').hide();
 				$('#billing_tax_number_field label span').show();
 			<?php } ?>

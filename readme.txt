@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.0
-Stable tag: 2022.0.3
+Stable tag: 2022.1.0
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -30,32 +30,45 @@ Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg h
 
 - Vezetéknév és keresztnév rendbetétele (WooCommerce 4.4 verzió fölött is)
 - Adószám bekérése vásárlásnál
-- Termék extra beállítások
-- Jogi megfelelés (Fogyasztóvédelem, GDPR, ePrivacy, stb.)
-- Pénztár oldal formázása
 - Megye mező elrejtése
 - Pénztár mezők ellenőrzése
-- Plusz/minusz mennyiségi gombok a termékekhez
-- Automatikus frissítés a Kosár oldalon
-- Vásárlás folytatása gomb megjelenítése a Kosár és/vagy a Pénztár oldalakon
-- Belépés és regisztráció utáni átirányítás
-- Ingyenes szállítás értesítés
 - Város automatikus kitöltése az irányítószám alapján
 - Fordítási hiányosságok javítása
-- WPML és Polylang kompatibilitás
-- További funkciók hamarosan...
+- Alap ügyfélszolgálat és támogatás
 
 ### HuCommerce Pro (fizetős)
 
 A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő funkciókkal. Támogatói verzió, amivel te is hozzájárulsz a további fejlesztésekhez. [Bővebben a HuCommerce Pro bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
 
+>[Iratkozz fel a HuCommerce hírlevélre](https://www.hucommerce.hu/hc/hirlevel-feliratkozas/) és cserébe kapsz tőlünk egy 5.000 Ft értékű kupont, amit a HuCommerce Pro előfizetésnél beválthatsz.
+
 **HuCommerce Pro funkciói:**
 
 - Minden, amit a HuCommerce Start bővítményben találsz, plusz…
+- Jogi megfelelés (Fogyasztóvédelem, GDPR, ePrivacy, stb.)
+- Termék ár történet (új Fogyasztóvédelemi rendelet) - BÉTA
+- Pénztár oldal formázása
+- Kupon mező módosítások
+- Plusz/minusz mennyiségi gombok a termékekhez
+- Automatikus frissítés a Kosár oldalon
+- "Egy termék egyszerre" korlátozás
+- Kosár oldal átugrása
+- Vásárlás folytatása gomb megjelenítése a Kosár és/vagy a Pénztár oldalakon
+- Belépés és regisztráció utáni átirányítás
+- Ingyenes szállítás értesítés
+- Szállítási módok elrejtése
+- Egyedi “Kosárba teszem” gombok
+- Termék extra beállítások
 - Globális adatok, amiket shortcode-dal lehet bárhol megjeleníteni
 - SMTP szolgáltatás beállítása
-- Termék extra beállítások
+- Kiegészítők és sablonok fordításai
+- WPML és Polylang kompatibilitás
+- Kiemelt ügyfélszolgálat és támogatás
 - További funkciók hamarosan...
+
+**HuCommerce tudásbázis**
+
+A bővítmény használatáról, a Pro verzió aktiválásáról és az egyes modulokról részletesen a [HuCommerce tudásbázisunkban](https://www.hucommerce.hu/tudasbazis/) olvashatsz.
 
 #### Vezetéknév és keresztnév rendbetétele (WooCommerce 4.4 verzió fölött is)
 
@@ -71,6 +84,32 @@ A Pénztár oldalon a Cégnév mező alatt már Adószámot is be lehet kérni. 
 
 Már maszkolás és validálás is beállítható az Adószám mezőhöz és placeholder megjelenítése is bekapcsolható, ami azoknál a sablonoknál nagyon jól jön, amiknél nem jelennek meg a mezők címkéi.
 
+#### Megye mező elrejtése
+
+Mert ezt nálunk nem szokás használni, így csak plusz felesleges lépés. De ha valakinek nagyon kell, akkor visszaállítható.
+
+#### Pénztár mezők ellenőrzése
+
+Beállítható, hogy a Pénztár oldalon a Számlázási adatoknál az Adószám, Irányítószám és Telefonszám mezőket, a Szállítási adatoknál pedig az Irányítószámot maszkolja, azaz formai szempontból validálja, illetve a megadott beviteli értéket ellenőrizze. Így a következő értékek lesznek érvényben:
+
+- Számlázási Adószám: 00000000-0-00 (13 karakter), 00000000000 (11 szám), HU00000000 (HU előtag és 8 szám)
+- Számlázási és Szállítási Irányítószám: 0000 (4 karakter)
+- Számlázási Telefonszám: +36000000000 (11-12 karakter)
+
+#### Város automatikus kitöltése az irányítószám alapján
+
+A Pénztár oldalon az irányítószám mező kitöltése után automatikusan megjeleníti a várost. Ha már manuálisan lett módosítva a város, akkor nem módosítja az irányítószám alapján.
+
+Vannak olyan irányítószámok, amikkel nem működik, mert vagy még hiányzik az indexből vagy egy irányítószám több településhez is tartozik. Igyekszem az ilyen hiányosságokat javítani.
+
+#### Fordítási hiányosságok javítása
+
+Ideiglenes fordítási hiányosságok javítása a WooCommerce bővítményhez és a legnépszerűbb sablonokhoz (Divi, Storefront), amíg a hivatalos fordításban esetleg nem jelenik meg vagy nem frissíti a rendszer. Én hivatalos szerkesztője is vagyok a magyar WooCommerce fordítási csapatának, ezért ott sokmindent megcsinálok, de néha szükség van erre a kis trükkre.
+
+#### Alap ügyfélszolgálat és támogatás
+
+Ügyfélszolgálati kérdésekkel kapcsolatban a [Facebook csoportban](https://www.facebook.com/groups/HuCommerce.hu/) és itt, a [WordPress.org saját fórum felületén](https://wordpress.org/support/plugin/surbma-magyar-woocommerce/) van lehetőség írni nekünk.
+
 #### Jogi megfelelés (Fogyasztóvédelem, GDPR, ePrivacy, stb.)
 
 Lehetőség van az Általános Szerződési Feltételek és az Adatkezelési tájékoztató aktív cselekvésen alapuló elfogadtatására, azaz ki kell pipálnia a vásárlónak ezek elfogadását, mielőtt a rendelést leadhatná. Az adatok a rendeléseknél kerülnek elmentésre és a rendelés szerkesztése oldalon megjelenik az elfogadott státusz. Ebben az esetben a vásárló profil adatainál nem kerül elmentésre az elfogadás, így azt bejelentkezve is minden vásárlás alkalmával el kell fogadnia.
@@ -85,7 +124,25 @@ A regisztrációs űrlapnál is kérhető az Adatkezelési Tájékoztató kötel
 
 >**FIGYELEM!** A webáruház jogi megfelelése az aktuális törvényeknek és adatvédelmi rendeleteknek minden esetben a webáruház tulajdonosának a felelőssége. Ez az opció nem mentesít senkit sem az alól, hogy a megfelelést felülvizsgáltassa szakértővel vagy jogásszal. A fejlesztők nem vállalnak semmilyen felelősséget a webáruház jogi megfeleléséért.
 
-#### Pénztár oldal formázása
+#### Termék ár történet (új Fogyasztóvédelemi rendelet: 4/2009. (I. 30.) NFGM-SZMM együttes rendelet 2/A. §) - BÉTA
+
+Ez a modul nincs minden körülmény között tesztelve és nem tudja 100%-ban teljesíteni a funkcionális és/vagy jogi igényeket, feltételeket. Ezért a használata esetén fokozott figyelmet igényel.
+
+>**FIGYELEM!** A HuCommerce ügyfélszolgálatára beküldött visszajelzések és javaslatok jelentősen gyorsítják a modul fejlesztését, ezért szívesen várjuk az ilyen témájú megkereséseket. Köszönjük!
+
+Az Európai Unió területén, így Magyarországon is 2022. május 28-tól egységes szabályok vonatkoznak az árcsökkentésre.
+
+Az új szabályozás célja annak megakadályozása, hogy a kereskedők megtévesztő árcsökkentéseket alkalmazzanak azzal, hogy az akciók előtt megemeljék a korábbi árat és ezáltal megtévesszék a fogyasztókat az árengedmény mértékével kapcsolatban.
+
+>A 93/13/EGK tanácsi irányelvnek, valamint a 98/6/EK, a 2005/29/EK és a 2011/83/EU európai parlamenti és tanácsi irányelvnek az uniós fogyasztóvédelmi szabályok hatékonyabb végrehajtása és korszerűsítése tekintetében történő módosításáról szóló, 2019. november 27-i (EU) 2019/2161 európai parlamenti és tanácsi irányelv érintett rendelkezései a termékek eladási ára és egységára, továbbá a szolgáltatások díja feltüntetésének részletes szabályairól szóló 4/2009. (I. 30.) NFGM-SZMM együttes rendelet (a továbbiakban: Árrendelet) 2/A. §-ában kerültek átültetésére.
+
+Ez a modul biztosítja a rendeletnek való megfelelést. A termékhez kapcsolódó árak folyamatos mentésével és annak statisztikai megjelenítésével egy átfogó képet ad a webáruház tulajdonosnak az árváltozás és az aktuális kedvezmény rendelet alapján történő meghatározásáról. A modul minden termékhez létrehoz egy adatlapot, ahol táblázatban és vonal diagramon is mutatja az adatokat. A teljes adatbázis itt JSON formátumban kimásolható.
+
+A termék végoldalon pedig automatikusan létrehozott és számolt vagy manuálisan megadott szöveg is megadható, ami biztosítja a látogatók megfelelő információval való ellátását. Ezáltal tud megfelelni a webáruház a Fogyasztóvédelmi elvárásoknak.
+
+>**FIGYELEM!** A webáruház jogi megfelelése az aktuális törvényeknek és adatvédelmi rendeleteknek minden esetben a webáruház tulajdonosának a felelőssége. Ez az opció nem mentesít senkit sem az alól, hogy a megfelelést felülvizsgáltassa szakértővel vagy jogásszal. A fejlesztők nem vállalnak semmilyen felelősséget a webáruház jogi megfeleléséért.
+
+#### Pénztár oldal módosítások
 
 Céges számlázási adatok feltételes megjelenítése. Ebben az esetben egy checkbox jelenik meg és ha a látogató bepipálja, akkor jelennek csak meg a céges számlázás mezői, mint például a Cégnév és Adószám.
 
@@ -93,25 +150,17 @@ A Cégnév és Adószám, az Irányítószám és Város, valamint a Telefonszá
 
 Az Ország és a Rendelés jegyzetek mezőket akár ki is lehet kapcsolni, ha ezek a mezők nem relevánsak a te webáruházadnál. Ha az Ország mezőt elrejted, akkor a Bolt beállításainál kiválasztott ország lesz alapértelmezettként beállítva megrendelésnél.
 
-#### Megye mező elrejtése
+#### Kupon mező módosítások
 
-Mert ezt nálunk nem szokás használni, így csak plusz felesleges lépés. De ha valakinek nagyon kell, akkor visszaállítható.
+A Pénztár oldalon megjelenő kupon mező áthelyezése, elrejtése vagy éppen mindig láthatóvá tétele lehetséges ezzel a modullal.
 
-#### Pénztár mezők ellenőrzése
-
-Beállítható, hogy a Pénztár oldalon a Számlázási adatoknál az Adószám, Irányítószám és Telefonszám mezőket, a Szállítási adatoknál pedig az Irányítószámot maszkolja, azaz formai szempontból validálja, illetve a megadott beviteli értéket ellenőrizze. Így a következő értékek lesznek érvényben:
-
-- Számlázási Adószám: 00000000-0-00 (13 karakter)
-- Számlázási és Szállítási Irányítószám: 0000 (4 karakter)
-- Számlázási Telefonszám: +36000000000 (11-12 karakter)
-
-#### Plusz/minusz mennyiségi gombok a termékekhez
+#### Plusz/mínusz mennyiségi gombok a termékekhez
 
 A WooCommerce alapból csak egy szám típusú mezőt használ a termékek mennyiségénél, de ez felhasználói szemmel nézve nem elég. Ez a funkció a mennyiségi mező elé és után betesz egy plusz/minusz gombot, amivel a felhasználók könnyedén tudják változtatni a mennyiséget mind a termék végoldalon, mind pedig a kosár összegzés oldalán.
 
 FIGYELEM! A gombok a különböző sablonoknál esetleg másképp vagy nem megfelelően jelenhetnek meg. Ez minden esetben javítható egy kis CSS segítségével. Én azon vagyok, hogy a lehető legnépszerűbb sablonoknál már automatikusan jól nézzen ki, illetve kap egy alap formázást is, hogy a legtöbb esetben megfelelő legyen, de biztosan lesznek olyan sablonok, ahol ez még így is igényel majd további CSS formázást. A bővítmény támogatás fórumában lehet ezeket jelezni, de nem tudom vállalni, hogy mindenkinek, gyorsan tudok segíteni.
 
-Jelenleg ezeket a sablonokat támogatja alapból a bővítmény:
+Jelenleg ezeket a sablonokat biztosan támogatja alapból a bővítmény:
 
 - Storefront
 - Divi
@@ -120,6 +169,14 @@ Jelenleg ezeket a sablonokat támogatja alapból a bővítmény:
 #### Automatikus frissítés a Kosár oldalon
 
 A Kosár oldalon a termékek mennyiségének a módosításakor nincs szükség a "Kosár frissítése" gomb megnyomására a darabszám módosítása után, mert így automatikusan frissül a Kosár tartalma.
+
+#### Egy termék vásárlásonként
+
+A modul bekapcsolásával a látogatók egy adott vásárlási folyamatban csak egy terméket tudnak a kosárba tenni és megvásárolni. További vásárláshoz újabb rendelést kell leadniuk.
+
+#### Kosár átirányítása a Pénztár oldalra
+
+A modul lehetővé teszi, hogy a Kosár oldal automatikusan a Pénztár oldalra legyen irányítva, ezzel is gyorsítva a vásárlási folyamatot. Mindegy, hogy melyik oldalt használod Kosár oldalként vagy Pénztár oldalként, az átirányítás mindig működni fog.
 
 #### Vásárlás folytatása gomb megjelenítése a Kosár és/vagy a Pénztár oldalakon
 
@@ -133,21 +190,31 @@ Beállítható, hogy a látogatók a belépés és regisztráció után a meghat
 
 #### Ingyenes szállítás értesítés
 
-A Kosár oldalon kijelzi, hogy mennyi vásárlási összeg hiányzik még az ingyenes szállításhoz. A szöveg módosítható és többnyelvűsíthető.
+A termék listaoldalakon, illetve a Kosár és Pénztár oldalakon jeleníthető meg az értesítés, hogy mennyi vásárlási összeg hiányzik még az ingyenes szállításhoz. A szöveg módosítható és többnyelvűsíthető.
 
-#### Város automatikus kitöltése az irányítószám alapján
+#### Szállítási módok elrejtése
 
-A Pénztár oldalon az irányítószám mező kitöltése után automatikusan megjeleníti a várost. Ha már manuálisan lett módosítva a város, akkor nem módosítja az irányítószám alapján.
+Ingyenes szállítás esetén ezzel a modullal elrejtheted az összes nem releváns szállítási módot. Lehetőséged van a személyes átvétel és a “pont” szállítási módok megtartására is.
 
-Vannak olyan irányítószámok, amikkel nem működik, mert vagy még hiányzik az indexből vagy egy irányítószám több településhez is tartozik. Igyekszem az ilyen hiányosságokat javítani.
+#### Egyedi "Kosárba teszem" gombok
 
-#### Fordítási hiányosságok javítása
+Lehetőséged van teljesen egyedi szövegek megadására a “Kosárba teszem” szöveg helyett. Sőt a különböző termék típusok (egyszerű, előfizetés, tagság, stb.) esetén különböző szövegeket is megadhatsz.
 
-Ideiglenes fordítási hiányosságok javítása, amíg a hivatalos fordításban esetleg nem jelenik meg vagy nem frissíti a rendszer. Én hivatalos szerkesztője is vagyok a magyar WooCommerce fordítási csapatának, ezért ott sokmindent megcsinálok, de néha szükség van erre a kis trükkre.
+#### Termék extra beállítások
 
-#### WPML és Polylang kompatibilitás
+Új lehetőségekkel bővülnek a Termékekhez kapcsolódó beállítások. Ez a funkció folyamatosan fog bővülni.
 
-A szöveges mezők kompatibilisek a WPML, Polylang bővítményekkel, így azok beállíthatók a különböző nyelveken is.
+**Jelenleg ezek a lehetőségek lettek beépítve:**
+
+- Kosárba tesz gomb – A termék lista oldalakon az egyes termékekhez hozzá lehet adni a Kosárba tesz gombot.
+- Termék alcím hozzáadása – Egyedi alcímek adhatók a Termékekhez, melyek a listaoldalon és a Termék végoldalon is megjelennek. Az alcím a cím heading HTML kódjába lesz illesztve külön, szemantikus megjelöléssel. Ezt fontos figyelembe venni keresőoptimalizálási (SEO) szempontból is!
+- Kapcsolódó termékek kikapcsolása a termék végoldalakon
+- Termék lista oldal: termékek számának beállítása oldalanként
+- Termék lista oldal: oszlopok számának beállítása
+- Upsell termékek száma a termék végoldalakon
+- Upsell termékek száma soronként a termék végoldalakon
+- Kapcsolódó termékek száma a termék végoldalakon
+- Kapcsolódó termékek száma soronként a termék végoldalakon
 
 #### Globális adatok
 
@@ -173,14 +240,17 @@ Minden webáruházban fontos a kommunikáció az érdeklődővel és vásárlóv
 
 A HuCommerce Pro SMTP beállításával összekapcsolhatod a webáruházad levelezését az SMTP szolgáltatóval.
 
-#### Termék extra beállítások
+#### Prémium WooCommerce kiegészítők és sablonok fordításai
 
-Új lehetőségekkel bővülnek a Termékekhez kapcsolódó beállítások. Ez a funkció folyamatosan fog bővülni.
+Magyar fordítások a legnépszerűbb WooCommerce kiegészítőkhöz és sablonokhoz. Vannak olyanok, amikhez nincsenek fordítások és vannak olyanok, amikhez van, de nagyon rossz a hivatalos fordítás. A fordítások folyamatosan bővülnek.
 
-**Jelenleg ezek a lehetőségek lettek beépítve:**
+#### WPML és Polylang kompatibilitás
 
-- Kosárba tesz gomb – A termék lista oldalakon az egyes termékekhez hozzá lehet adni a Kosárba tesz gombot.
-- Termék alcím hozzáadása – Egyedi alcímek adhatók a Termékekhez, melyek a listaoldalon és a Termék végoldalon is megjelennek. Az alcím a cím heading HTML kódjába lesz illesztve külön, szemantikus megjelöléssel. Ezt fontos figyelembe venni keresőoptimalizálási (SEO) szempontból is!
+A szöveges mezők kompatibilisek a WPML, Polylang bővítményekkel, így azok beállíthatók a különböző nyelveken is.
+
+#### Kiemelt ügyfélszolgálat és támogatás
+
+A HuCommerce Pro ügyfelek számára email és live chat csatornákon is biztosítjuk az ügyfélszolgálati ügyek intézését és a támogatást a bővítményhez.
 
 >Azon dolgozunk, hogy folyamatosan hasznos funkciókkal bővítsük ezt a nagyszerű WooCommerce kiegészítőt. Kérlek, támogasd a fejlesztést és a HuCommerce közösséget azzal, hogy megvásárolod a Pro verziót! Ezzel fedezni tudjuk a fejlesztési költségeket és több időt tudunk arra fordítani, hogy a HuCommerce bővítmény még jobb legyen és még több hasznod legyen belőle.
 
@@ -233,25 +303,262 @@ A vezetéknevem visszafelé. ;)
 
 == Changelog ==
 
-= 2022.0.3 =
+= 2022.1.0 =
+
+Kiadás dátuma: 2022-05-31
+
+- A HuCommerce és a HuCommerce Pro első éles kiadása.
+- Minden változás a következő verziókban olvasható: 2022.0.0.1 - 2022.0.35
+- Boldog születésnapot Dorina! :)
+
+= 2022.0.35 =
+
+Kiadás dátuma: 2022-05-31
+
+- A termék ár történet figyelt időszakának javítása, hogy az aktuális akciós árhoz képest megtalálja az előző 30 nap legalacsonyabb aktív árát.
+- HuCommerce beállítások oldalon a moduloknál kisebb igazítások, hogy helyesen jelöljék az új modulokat és az opcióikat.
+- HuCommerce beállítások oldalon a modulok kaptak egy "Bővebben" linket a leírásnál.
+- Leírás aktualizálása, kiegészítése.
+
+= 2022.0.34 =
+
+Kiadás dátuma: 2022-05-30
+
+- Pro modulok feltételeinek a pontosítása.
+- Termék ár történet modul értékeinek megőrzése akkor is, ha nem aktív az előfizetés.
+
+= 2022.0.33 =
+
+Kiadás dátuma: 2022-05-30
+
+- Új opció hozzáadása a termékekhez, amivel a termék oldalon el lehet rejteni a legalacsonyabb ár szöveget.
+
+= 2022.0.32 =
 
 Kiadás dátuma: 2022-05-30
 
 - CPS SDK frissítése a 8.9.0 verzióra.
 
-= 2022.0.2 =
-
-Kiadás dátuma: 2022-05-30
-
-- CPS SDK frissítése a 8.8.0 verzióra.
-
-= 2022.0.1 =
+= 2022.0.31 =
 
 Kiadás dátuma: 2022-05-30
 
 - Pénztár mezők kompatibilitásának a javítása az Oxygen sablonnal.
+
+= 2022.0.30 =
+
+Kiadás dátuma: 2022-05-30
+
+- Új modul: Termék ár történet
+- Új badge a modulokhoz: Beta
+- Az Adószám megjelenítése modul megjelenítésének kisebb igazítása.
+- Disclaimer szöveg hozzáadása több modulhoz.
+
+= 2022.0.20 =
+
+Kiadás dátuma: 2022-05-26
+
+- CPS SDK frissítése a 8.8.0 verzióra.
+- Feed cache beállítása 24 órára.
+- A manuális API kérések kiegészítése a status lekéréssel.
+- A licensz kezelő menüpont kiegészítése a Pro promo-val.
+- API instance lecserélése a domainre. Így a későbbi újraaktiválás is egyszerűbb, mert weboldalhoz kötött.
+- Aktiválás és deaktiválás folyamat egyszerűsítése két gombra.
+- API szinkronizálás és API kezelés linkek hozzáadása.
+- A régi felhasználók értesítés feltételének a javítása.
+- A HuCommerce Pro promo banner törlése a beállítások oldalról.
+- A HuCommerce főmenüpont is kapott címet. A szűrők pedig eltüntek.
+- Hírlevél feliratkozás átadott paramétereinek a leegyszerűsítése.
+- A HuCommerce beállítások teljes UI módosítása.
+
+= 2022.0.19 =
+
+Kiadás dátuma: 2022-05-25
+
+- Felhasználói jogosultság ellenőrzésének a kikapcsolása a license.php fájlban.
+
+= 2022.0.18 =
+
+Kiadás dátuma: 2022-05-24
+
+- API kulcs kezelés teljeskörű átdolgozása. Most minden feltétel esetén megfelelően frissül és a státusz lekérés is jobb és optimálisabb lett.
+
+= 2022.0.17 =
+
+Kiadás dátuma: 2022-05-24
+
+- CPS SDK frissítése a 8.7.2 verzióra.
+
+= 2022.0.16 =
+
+Kiadás dátuma: 2022-05-22
+
+- Admin értesítés - ami a régi felhasználóknak jelenik meg - feltételeinek és szövegének a módosítása.
+- API státusz lekérés feltétel hozzáadása, hogy naponta csak egyszer fusson le.
+
+= 2022.0.15 =
+
+Kiadás dátuma: 2022-05-19
+
+- Manuális API hívásnál az URL paraméter törlése a lekérés után, hogy az esetleges oldalfrissítés ne okozzon konfliktust.
+- Az instancebackup és a licensekeybackup értékek feltételes mentése.
 - Kompatibilitás ellenőrzése a WordPress 6.0 verzióval.
+
+= 2022.0.14 =
+
+Kiadás dátuma: 2022-05-18
+
+- A product ID változó elnevezésének a módosítása.
+
+= 2022.0.13 =
+
+Kiadás dátuma: 2022-05-18
+
+- Licensz kezelésnél a product_id is kapott mezőt, hogy lehessen más terméket is tesztelni.
+- Fix product_id lecserélése dinamikusra.
+- A licensz kezelő menüpont alatt a mezők placeholder-t kaptak.
+
+= 2022.0.12 =
+
+Kiadás dátuma: 2022-05-17
+
+- Mezők formátumának ellenőrzése modul kiegészítése a mezőnkénti aktiválás lehetőségével.
+- Mezők értékének ellenőrzése modul kiegészítése a mezőnkénti aktiválás lehetőségével.
+
+= 2022.0.11 =
+
+Kiadás dátuma: 2022-05-17
+
+- Admin értesítésnél licensz állapottól függő szövegezés.
+- A license.php fájlban a feltételes kód javítása.
+- Katalógus szűrő ideiglenes elrejtése, amíg nem lesz több elem a katalógusban.
+- A licensz kezelő menüpont alatt a licensz átírása API-ra.
+- A licensz kezelő menüpont alatt debug módban több információ jelenik meg.
+- A HuCommerce menüpont alatt az eddigi debug rész törlése, mert arra már nincs szükség.
+
+= 2022.0.10 =
+
+Kiadás dátuma: 2022-05-15
+
+- Help Scout Beacon feltételek módosítása, hogy azoknak is megjelenjen, akiknek lejárt vagy nem érvényes a licensz kulcsuk.
+- HuCommerce admin sidebar törlése, mert már nincs rá szükség az új UI miatt.
+- Admin értesítések feltételeinek a finomításai.
+- Admin értesítések átszövegezése.
+- Admin widget kisebb módosítása.
+- A licensz kezelés átrakása külön fájlba a /lib/start.php fájlból.
+- Modul aktiválások feltételeinek a módosítása, hogy a licensz aktiválást és a régi HuCommerce felhasználók beállításait is megfelelően kezelje.
+- A /lib/license.php fájl kitisztítása.
+- Manuális lekérések hozzáadása a licensz kezeléshez. Ezeket most a külön aktiváláshoz és deaktiváláshoz használjuk egyelőre.
+- Az API lekéréshez a wp_error feltétel beállítása, hogy hiba esetén se legyen végzetes hiba.
+- API válasz mentése az adatbázisba későbbi felhasználási lehetőségekhez.
+- Licensz állapotokhoz kapcsolódó értesítések hozzáadása.
+- A kupon modul fájljának átnevezése.
+- ÚJ - Kupon megjelenítése nagybetűkkel az admin és a látogatói felületen is.
+- A kosár automatikus frissítése modul javítása, hogy több sablonnal is kompatibilis legyen.
+- HuCommerce beállításoknál az Információk fül kibővítése pár hasznos adattal.
+- A licensz kezelés fül teljes átszabása. Igazítás minden körülményhez és licensz állapothoz.
+- A licensz kezelés fül alatt megjelennek a licensz adatok.
+- A modulok mentésénél figyelmeztető szöveg hozzáadása a régi HuCommerce felhasználóknál.
+- A modulok mentését követő validálások kiegészítése az összes mezőre.
+- A modulok beállításait megörző logika kialakítása, hogy a régi felhasználóknál vagy lejárt licensz esetén is megmaradjanak a felhasználók beállításai.
+- Új brandnewuser mező mentése, amivel ellenőrizhető, hogy mióta használja a felhasználó a HuCommerce bővítményt.
+- Licensz kezeléshez kapcsolódó mezők validálása.
+- Licensz kezelő menüpont ikonjának módosítása dinamikusra, hogy a licensz állapottól függően legyen zárva vagy nyitva a lakat.
+- Licenszhez kapcsolódó értesítések beállítása a HuCommerce beállítások oldalon is.
+
+= 2022.0.9 =
+
+Kiadás dátuma: 2022-05-15
+
+- CPS SDK frissítése a 8.7.1 verzióra.
+- Kisebb módosítás a leírásban.
+- Hírlevél feliratkozás hozzáadása a leíráshoz.
 - Kompatibilitás ellenőrzése a WooCommerce 6.5 verzióval.
+
+= 2022.0.8 =
+
+Kiadás dátuma: 2022-05-06
+
+- Licensz kezelés első verziója. Az API lekérés még nem működik, de a licensz kulcs elmenthető és az érvényesség alapján kezeli a modulokat, egyéb megjelenéseket, illetve a licensz kezelő űrlapot.
+- A demo licensz kezelés kódja a license.php fájlba került. További módosítás szükséges a működéséhez.
+- Új licensz menü.
+- Licensz mező validálása hozzáadva.
+
+= 2022.0.7 =
+
+Kiadás dátuma: 2022-05-06
+
+- Az uninstall folyamat kiegészítése további opciókkal.
+
+= 2022.0.6 =
+
+Kiadás dátuma: 2022-05-06
+
+- CPS SDK frissítése a 8.4.0 verzióra.
+
+= 2022.0.5 =
+
+Kiadás dátuma: 2022-05-06
+
+- HuCommerce beállítások menüpontjai külön fájlokba lettek kiszervezve.
+- A social links sorrendjének a módosítása.
+- HuCommerce beállítások oldalon a footer kiegészítése és kisebb módosítása.
+- A settings-options.php fájl törlése, mert már nincs rá szükség.
+- A settings-nav-modules.php fájlba átkerültek a globális változók a beállításokhoz.
+
+= 2022.0.4 =
+
+Kiadás dátuma: 2022-04-18
+
+- HuCommerce Modulok menüpont kiszervezése külön fájlba. Idővel az összes menüpont külön fájlba kerül.
+- HuCommerce Extensions törlése, egyelőre nem lesz.
+- Az Ajánlatok, Katalógus és Hírek visszaállítása.
+- A settings.php fájlba visszakerül a beállítások oldal szerkezete, de minden menüpont külön fájlba lesz kiszervezve. Egyelőre a settings-options.php fájlt megtartottam, hogy most látszódjanak a különbségek, de már nem kell, a következő verzióban ki lesz törölve.
+
+= 2022.0.3 =
+
+Kiadás dátuma: 2022-04-18
+
+- Kisebb kód optimalizálás.
+- HuCommerce Beállítások oldal teljeskörű átszabása, új struktúra, új elrendezés, új menüpontok.
+- Az új beállítások oldal egyes elemeinek a kiszervezése külön fájlokba a könnyebb áttekinthetőség érdekében.
+- Az új modulok beállításainak a megjelenítése az új UI-ban.
+
+= 2022.0.2 =
+
+Kiadás dátuma: 2022-04-17
+
+- Törölve lett a HuCommerce beállítások oldalról a 2022.0.0 verzió búcsú üzenete.
+- Kompatibilitás ellenőrzése a WooCommerce 6.4 verzióval.
+- CPS SDK frissítése a 8.3.0 verzióra.
+
+= 2022.0.1 =
+
+Kiadás dátuma: 2022-04-09
+
+- HuCommerce Pro link a bővítmények oldalon csak akkor jelenik meg, ha az ingyenes verzió van használatban.
+- Help Scout Beacon visszaállítása. Van külön az ingyenes és a Pro verzióhoz is beállítva.
+- A HuCommerce beállítások oldalon is be lettek állítva a megfelelő feltételek a Pro és az ingyenes verziókhoz.
+- A tervezett funkciók visszakerültek az oldalsávba.
+- A Welcome notice visszaállítása az első aktiváláskor.
+- A Pro verzió ellenőrzésének az első verziója. Még nem végleges.
+- Új modulok kezelésének a hozzáadása. Egyelőre kezelőfelület nélkül, mert azok már az új UI részei lesznek.
+- Új modul: Kupon mező módosítások
+- Új modul: Egyedi "Kosárba teszem" gombok
+- Új modul: Szállítási módok elrejtése
+- Új modul: "Egy termék egyszerre" korlátozás
+- Új modul: Kosár oldal átugrása
+- Mezők maszkolásának a továbbfejlesztése: az adószám mező már több formátumot is tud engedélyezni, ráadásul dinamikusan.
+- Mezők validálásának a továbbfejlesztése: új adószám formátumok, dinamikus érvényesítéssel kitöltéskor.
+- Új opció a Pénztár oldal módosításokhoz: már a További információk rész is kikapcsolható.
+- Az ingyenes szállítás értesítőnél már beállítható, hogy hol jelenjen meg: termék listaoldalakon, kosár és pénztár oldalon.
+- Globális adatok modul visszaállítása.
+- Termék extra beállítások modul visszaállítása.
+- SMTP modul visszaállítása.
+- Adószám megjelenítése a Fiókom oldalon is.
+- A kosár automatikus frissítésének a javítása az Astra sablonnál.
+- Az uninstall műveletből is törölve lett a Freemius funkció.
+- A readme.txt frissítése az új modulokkal és leírásokkal.
 
 = 2022.0.0 =
 
