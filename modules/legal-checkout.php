@@ -12,6 +12,7 @@ add_action( 'woocommerce_register_form', function() {
 			'type'          => 'checkbox',
 			'class'         => array('woocommerce-form-row woocommerce-form-row--wide form-row-wide privacy'),
 			'label'         => '<span class="hc-checkbox-text">' . $regacceptppValue . '</span>',
+			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
 			'required'      => true
 		) );
 	}
@@ -145,6 +146,7 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 			'type'          => 'checkbox',
 			'class'         => array( 'form-row-wide', 'tos' ),
 			'label'         => '<span class="hc-checkbox-text">' . $accepttosValue . '</span>',
+			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
 			'required'      => true
 		), $checkout->get_value( 'accept_tos' ));
 	}
@@ -154,6 +156,7 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 			'type'          => 'checkbox',
 			'class'         => array( 'form-row-wide', 'pp' ),
 			'label'         => '<span class="hc-checkbox-text">' . $acceptppValue . '</span>',
+			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
 			'required'      => true
 		), $checkout->get_value( 'accept_pp' ) );
 	}
@@ -163,6 +166,7 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 			'type'          => 'checkbox',
 			'class'         => array( 'form-row-wide', 'pp' ),
 			'label'         => '<span class="hc-checkbox-text">' . $acceptcustom1Value . '</span>',
+			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
 			'required'      => true
 		), $checkout->get_value( 'accept_custom1' ) );
 	}
@@ -172,6 +176,7 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 			'type'          => 'checkbox',
 			'class'         => array( 'form-row-wide', 'pp' ),
 			'label'         => '<span class="hc-checkbox-text">' . $acceptcustom2Value . '</span>',
+			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
 			'required'      => true
 		), $checkout->get_value( 'accept_custom2' ) );
 	}

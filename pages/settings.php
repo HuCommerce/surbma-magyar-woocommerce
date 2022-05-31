@@ -14,8 +14,6 @@ add_action( 'admin_init', function() {
 global $returntoshopcartposition_options;
 global $returntoshopcheckoutposition_options;
 global $legalconfirmationsposition_options;
-global $smtpport_options;
-global $smtpsecure_options;
 
 $returntoshopcartposition_options = array(
 	'beforecarttable' => array(
@@ -62,46 +60,10 @@ $legalconfirmationsposition_options = array(
 	)
 );
 
-$smtpport_options = array(
-	'25' => array(
-		'value' => '25',
-		'label' => '25'
-	),
-	'465' => array(
-		'value' => '465',
-		'label' => '465'
-	),
-	'587' => array(
-		'value' => '587',
-		'label' => '587'
-	),
-	'2525' => array(
-		'value' => '2525',
-		'label' => '2525'
-	),
-);
-
-$smtpsecure_options = array(
-	'default' => array(
-		'value' => 'default',
-		'label' => __( 'Default encryption', 'surbma-magyar-woocommerce' )
-	),
-	'tls' => array(
-		'value' => 'tls',
-		'label' => 'TLS'
-	),
-	'ssl' => array(
-		'value' => 'ssl',
-		'label' => 'SSL'
-	),
-);
-
 function surbma_hc_settings_page() {
 	global $returntoshopcartposition_options;
 	global $returntoshopcheckoutposition_options;
 	global $legalconfirmationsposition_options;
-	global $smtpport_options;
-	global $smtpsecure_options;
 
 	$allowed_html = array(
 		'option' => array(
@@ -116,9 +78,6 @@ function surbma_hc_settings_page() {
 	);
 
 	// * HUCOMMERCE START
-	$freeNotification = SURBMA_HC_PLUGIN_VERSION == 'free' || SURBMA_HC_PLUGIN_LICENSE != 'valid' ? '<div class="uk-alert-danger uk-text-center" uk-alert><strong>' . __( 'Inactive options are available in the Premium Version of this plugin with an Active License.', 'surbma-magyar-woocommerce' ) . '</strong></div>' : '';
-	$disabled = SURBMA_HC_PLUGIN_VERSION == 'free' || SURBMA_HC_PLUGIN_LICENSE != 'valid' ? ' disabled' : '';
-	$premium = SURBMA_HC_PLUGIN_VERSION == 'free' || SURBMA_HC_PLUGIN_LICENSE != 'valid' ? '<span class="uk-label uk-label-danger">' . __( 'Premium', 'surbma-magyar-woocommerce' ) . '</span> ' : '';
 	$szamlazzhu_options = get_option( 'woocommerce_wc_szamlazz_settings' );
 	$billingo_options = get_option( 'woocommerce_wc_billingo_plus_settings' );
 	// * HUCOMMERCE END
@@ -132,14 +91,19 @@ function surbma_hc_settings_page() {
 
 		<?php // HuCommerce Pro promo ?>
 		<?php if ( 'free' == SURBMA_HC_PLUGIN_VERSION ) { ?>
-			<div id="hucommerce-plusz-promo" class="uk-card uk-card-default uk-card-hover uk-card-small uk-grid-collapse uk-margin">
+			<div class="uk-card uk-card-default uk-card-hover uk-card-small uk-grid-collapse uk-margin uk-animation-shake">
+				<div class="uk-card-header uk-background-muted">
+					<h3 class="uk-card-title uk-float-left uk-margin-remove">HuCommerce Pro</h3>
+					<a href="https://www.hucommerce.hu" class="uk-float-right uk-visible@s" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright"></a>
+				</div>
 				<div class="uk-card-body">
-					<h4>HuCommerce Pro</h4>
-					<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat kapsz. Nem utolsó sorban a fizetős verzióval a bővítmény fejlesztését is támogatod.</p>
-					<a href="https://www.hucommerce.hu/penztar/?add-to-cart=1135" class="uk-button uk-button-default uk-button-primary" target="_blank"><span class="dashicons dashicons-cart" style="position: relative;top: 8px;left: -6px;"></span> HuCommerce Pro megvásárlása</a>
-					<a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" class="uk-button uk-button-default" target="_blank"><span class="dashicons dashicons-external" style="position: relative;top: 8px;left: -6px;"></span> HuCommerce Pro megismerése</a>
-					<a href="https://www.hucommerce.hu" class="uk-position-medium uk-position-bottom-right uk-visible@s" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright"></a>
-					<a href="#" class="uk-position-medium uk-position-top-right" uk-close uk-toggle="target: #hucommerce-plusz-promo"></a>
+					<p><strong>FONTOS!</strong> Ez a HuCommerce legutolsó nem fizetős verziója, amiben az összes eddigi modul és funkció elérhető. Amennyiben újabb verzióra frissítesz, bizonyos funkciók nem lesznek elérhetők mentés után. Ez egy stabil és biztonságos verzió, ami további fejlesztéseket nem kap, maximum biztonsági frissítéseket. Minden további fejlesztés a HuCommerce Pro verziójában kap helyet, amire mindenképpen érdemes előfizetni, hiszen nem csak javításokat tartalmaz, hanem rengeteg új és hasznos funkcióval bővül szinte minden hónapban.</p>
+					<p><a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">HuCommerce Pro megismerése</a></p>
+				</div>
+				<div class="uk-card-footer uk-background-muted">
+					<p>
+						<a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="uk-button uk-button-default uk-button-primary" target="_blank"><span class="dashicons dashicons-cart" style="position: relative;top: 8px;left: -6px;"></span> HuCommerce Pro megvásárlása</a>
+					</p>
 				</div>
 			</div>
 		<?php } ?>
@@ -159,18 +123,18 @@ function surbma_hc_settings_page() {
 			if ( $maxitems_ajanlatok ) :
 				// Loop through each feed item and display each item as a hyperlink.
 				foreach ( $rss_ajanlatok_items as $item_ajanlatok ) :
-					echo '<div id="hucommerce-partner-banner-top" class="uk-card uk-card-default uk-card-hover uk--card-small uk-grid-collapse uk-margin uk-animation-shake" uk-grid>';
-					echo '<div class="uk-card-media-left uk-cover-container uk-width-1-4@s">';
+					echo '<div id="hucommerce-partner-banner-top" class="uk-card uk-card-default uk-card-hover uk-card-small uk-grid-collapse uk-margin uk-animation-shake" uk-grid>';
+					echo '<div class="uk-card-media-left uk-cover-container uk-width-auto@s">';
 					echo '<a href="' . esc_url( $item_ajanlatok->get_permalink() ) . '?utm_source=client-site&utm_medium=hucommerce-banner&utm_campaign=' . urlencode( $item_ajanlatok->get_title() ) . '&utm_content=hucommerce-top" target="_blank"><img src="' . esc_url( $item_ajanlatok->get_description() ) . '" alt="' . esc_html( $item_ajanlatok->get_title() ) . '" uk-cover></a>';
-					echo '<canvas width="600" height="400"></canvas>';
+					echo '<canvas width="300" height="195"></canvas>';
 					echo '</div>';
-					echo '<div class="uk-width-3-4@s">';
+					echo '<div class="uk-width-expand@s">';
 					echo '<div class="uk-card-body">';
 					echo '<h3 class="uk-card-title">' . esc_html( $item_ajanlatok->get_title() ) . '</h3>';
 					echo wp_kses_post( $item_ajanlatok->get_content() );
 					echo '<a href="' . esc_url( $item_ajanlatok->get_permalink() ) . '?utm_source=client-site&utm_medium=hucommerce-banner&utm_campaign=' . urlencode( $item_ajanlatok->get_title() ) . '&utm_content=hucommerce-top" class="uk-button uk-button-default" target="_blank"><span class="dashicons dashicons-external" style="position: relative;top: 8px;left: -6px;"></span> ' . esc_html__( 'View offer', 'surbma-magyar-woocommerce' ) . '</a>';
-					echo '<span class="uk-label uk-label-warning uk-position-medium uk-position-bottom-right">' . esc_html__( 'Ad', 'surbma-magyar-woocommerce' ) . '</span>';
-					echo '<a href="#" class="uk-position-medium uk-position-top-right" uk-close uk-toggle="target: #hucommerce-partner-banner-top"></a>';
+					echo '<span class="uk-label uk-label-warning uk-position-small uk-position-bottom-right">' . esc_html__( 'Ad', 'surbma-magyar-woocommerce' ) . '</span>';
+					echo '<a href="#" class="uk-position-small uk-position-top-right" uk-close uk-toggle="target: #hucommerce-partner-banner-top"></a>';
 					echo '</div>';
 					echo '</div>';
 					echo '</div>';
@@ -333,21 +297,6 @@ function surbma_hc_settings_page() {
 							<hr>
 
 							<div class="uk-margin">
-								<div class="uk-form-label"><span class="uk-label uk-label-success"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span> <?php esc_html_e( 'Product customizations', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: <?php esc_attr_e( 'Extra fields and other customizations for Products.', 'surbma-magyar-woocommerce' ); ?>; pos: right"></span></div>
-								<div class="uk-form-controls">
-									<p class="switch-wrap">
-										<label class="switch">
-											<?php $module_productsettingsValue = isset( $options['module-productsettings'] ) ? $options['module-productsettings'] : 0; ?>
-											<input id="module-productsettings" name="surbma_hc_fields[module-productsettings]" type="checkbox" value="1" <?php checked( '1', $module_productsettingsValue ); ?> />
-											<span class="slider round"></span>
-										</label>
-									</p>
-								</div>
-							</div>
-
-							<hr>
-
-							<div class="uk-margin">
 								<div class="uk-form-label"><?php esc_html_e( 'Checkout page customizations', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: <?php esc_attr_e( 'Extra fields and other customizations on the Checkout page.', 'surbma-magyar-woocommerce' ); ?>; pos: right"></span></div>
 								<div class="uk-form-controls">
 									<p class="switch-wrap">
@@ -449,40 +398,6 @@ function surbma_hc_settings_page() {
 									</p>
 								</div>
 							</div>
-
-							<hr>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<div class="uk-form-label"><?php echo wp_kses_post( $premium ); ?><span class="uk-label uk-label-success"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span> <?php esc_html_e( 'Global informations', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: <?php esc_attr_e( 'Use these fields for your global informations and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles. Local data will be semantic for search engines.', 'surbma-magyar-woocommerce' ); ?>; pos: right"></span></div>
-								<div class="uk-form-controls">
-									<p class="switch-wrap">
-										<label class="switch">
-											<?php $module_globalinfoValue = isset( $options['module-globalinfo'] ) ? $options['module-globalinfo'] : 0; ?>
-											<input id="module-globalinfo" name="surbma_hc_fields[module-globalinfo]" type="checkbox" value="1" <?php checked( '1', $module_globalinfoValue ); ?><?php echo esc_html( $disabled ); ?> />
-											<span class="slider round"></span>
-										</label>
-									</p>
-								</div>
-							</div>
-
-							<hr>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<div class="uk-form-label"><?php echo wp_kses_post( $premium ); ?><span class="uk-label uk-label-success"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span> <?php esc_html_e( 'SMTP service', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: <?php esc_attr_e( 'Send emails from a 3rd party SMTP service, instead of using webserver\'s mail() function.', 'surbma-magyar-woocommerce' ); ?>; pos: right"></span></div>
-								<div class="uk-form-controls">
-									<p class="switch-wrap">
-										<label class="switch">
-											<?php $module_smtpValue = isset( $options['module-smtp'] ) ? $options['module-smtp'] : 0; ?>
-											<input id="module-smtp" name="surbma_hc_fields[module-smtp]" type="checkbox" value="1" <?php checked( '1', $module_smtpValue ); ?><?php echo esc_html( $disabled ); ?> />
-											<span class="slider round"></span>
-										</label>
-									</p>
-								</div>
-							</div>
-
-							<?php // * HUCOMMERCE END ?>
-							<?php echo wp_kses( $freeNotification, $allowed_html ); ?>
-							<?php // * HUCOMMERCE END ?>
 						</div>
 						<div class="uk-card-footer uk-background-muted">
 							<p><input type="submit" class="uk-button uk-button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" /></p>
@@ -526,34 +441,6 @@ function surbma_hc_settings_page() {
 										<label class="switch">
 											<?php $taxnumberplaceholderValue = isset( $options['taxnumberplaceholder'] ) ? $options['taxnumberplaceholder'] : 0; ?>
 											<input id="taxnumberplaceholder" name="surbma_hc_fields[taxnumberplaceholder]" type="checkbox" value="1" <?php checked( '1', $taxnumberplaceholderValue ); ?> />
-											<span class="slider round"></span>
-										</label>
-									</p>
-								</div>
-							</div>
-
-							<h4 class="uk-heading-divider"><?php esc_html_e( 'Product customizations', 'surbma-magyar-woocommerce' ); ?></h4>
-
-							<div class="uk-margin">
-								<div class="uk-form-label"><span class="uk-label uk-label-success"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span> <?php esc_html_e( 'Add to cart button on archive pages', 'surbma-magyar-woocommerce' ); ?></div>
-								<div class="uk-form-controls">
-									<p class="switch-wrap">
-										<label class="switch">
-											<?php $addtocartonarchiveValue = isset( $options['addtocartonarchive'] ) ? $options['addtocartonarchive'] : 0; ?>
-											<input id="addtocartonarchive" name="surbma_hc_fields[addtocartonarchive]" type="checkbox" value="1" <?php checked( '1', $addtocartonarchiveValue ); ?> />
-											<span class="slider round"></span>
-										</label>
-									</p>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<div class="uk-form-label"><?php echo wp_kses_post( $premium ); ?><span class="uk-label uk-label-success"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span> <?php esc_html_e( 'Product subtitle', 'surbma-magyar-woocommerce' ); ?></div>
-								<div class="uk-form-controls">
-									<p class="switch-wrap">
-										<label class="switch">
-											<?php $productsubtitleValue = isset( $options['productsubtitle'] ) ? $options['productsubtitle'] : 0; ?>
-											<input id="productsubtitle" name="surbma_hc_fields[productsubtitle]" type="checkbox" value="1" <?php checked( '1', $productsubtitleValue ); ?><?php echo esc_html( $disabled ); ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
@@ -876,291 +763,15 @@ function surbma_hc_settings_page() {
 									<pre><?php echo allowed_tags(); ?></pre>
 								</div>
 							</div>
-
-							<?php // * HUCOMMERCE END ?>
-							<?php echo wp_kses( $freeNotification, $allowed_html ); ?>
-							<?php // * HUCOMMERCE END ?>
 						</div>
 						<div class="uk-card-footer uk-background-muted">
 							<p><input type="submit" class="uk-button uk-button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" /></p>
 						</div>
 					</div>
-
-					<div class="uk-card uk-card-small uk-card-default uk-card-hover uk-margin-bottom">
-						<div class="uk-card-header uk-background-muted">
-							<h3 class="uk-card-title"><?php echo wp_kses_post( $premium ); ?><span class="uk-label uk-label-success"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span> <?php esc_html_e( 'Global informations', 'surbma-magyar-woocommerce' ); ?> <a class="uk-float-right uk-margin-small-top" uk-icon="icon: more-vertical" uk-toggle="target: #globalinfosettings"></a></h3>
-						</div>
-						<div id="globalinfosettings" class="uk-card-body">
-
-							<div class="uk-alert-primary" uk-alert>
-								<a class="uk-alert-close" uk-close></a>
-								<p><?php esc_html_e( 'Use these fields for your global informations and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles.', 'surbma-magyar-woocommerce' ); ?></p>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[globalinfoname]"><?php esc_html_e( 'Name', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<?php $globalinfonameValue = isset( $options['globalinfoname'] ) && ( $options['globalinfoname'] ) ? $options['globalinfoname'] : ''; ?>
-									<input id="globalinfoname" class="uk-input" type="text" name="surbma_hc_fields[globalinfoname]" value="<?php echo esc_attr( wp_unslash( $globalinfonameValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									<p class="uk-text-meta"><?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-nev]</code></p>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[globalinfocompany]"><?php esc_html_e( 'Company', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<?php $globalinfocompanyValue = isset( $options['globalinfocompany'] ) && ( $options['globalinfocompany'] ) ? $options['globalinfocompany'] : ''; ?>
-									<input id="globalinfocompany" class="uk-input" type="text" name="surbma_hc_fields[globalinfocompany]" value="<?php echo esc_attr( wp_unslash( $globalinfocompanyValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									<p class="uk-text-meta"><?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-ceg]</code></p>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[globalinfoheadquarters]"><?php esc_html_e( 'Headquarters', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<?php $globalinfoheadquartersValue = isset( $options['globalinfoheadquarters'] ) && ( $options['globalinfoheadquarters'] ) ? $options['globalinfoheadquarters'] : ''; ?>
-									<input id="globalinfoheadquarters" class="uk-input" type="text" name="surbma_hc_fields[globalinfoheadquarters]" value="<?php echo esc_attr( wp_unslash( $globalinfoheadquartersValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									<p class="uk-text-meta"><?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-szekhely]</code></p>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[globalinfotaxnumber]"><?php esc_html_e( 'Tax number', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<?php $globalinfotaxnumberValue = isset( $options['globalinfotaxnumber'] ) && ( $options['globalinfotaxnumber'] ) ? $options['globalinfotaxnumber'] : ''; ?>
-									<input id="globalinfotaxnumber" class="uk-input" type="text" name="surbma_hc_fields[globalinfotaxnumber]" value="<?php echo esc_attr( wp_unslash( $globalinfotaxnumberValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									<p class="uk-text-meta"><?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-adoszam]</code></p>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[globalinforegnumber]"><?php esc_html_e( 'Company registration number', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<?php $globalinforegnumberValue = isset( $options['globalinforegnumber'] ) && ( $options['globalinforegnumber'] ) ? $options['globalinforegnumber'] : ''; ?>
-									<input id="globalinforegnumber" class="uk-input" type="text" name="surbma_hc_fields[globalinforegnumber]" value="<?php echo esc_attr( wp_unslash( $globalinforegnumberValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									<p class="uk-text-meta"><?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-cegjegyzekszam]</code></p>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[globalinfoaddress]"><?php esc_html_e( 'Address of store', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<?php $globalinfoaddressValue = isset( $options['globalinfoaddress'] ) && ( $options['globalinfoaddress'] ) ? $options['globalinfoaddress'] : ''; ?>
-									<input id="globalinfoaddress" class="uk-input" type="text" name="surbma_hc_fields[globalinfoaddress]" value="<?php echo esc_attr( wp_unslash( $globalinfoaddressValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									<p class="uk-text-meta"><?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-cim]</code></p>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[globalinfobankaccount]"><?php esc_html_e( 'Bank account number', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<?php $globalinfobankaccountValue = isset( $options['globalinfobankaccount'] ) && ( $options['globalinfobankaccount'] ) ? $options['globalinfobankaccount'] : ''; ?>
-									<input id="globalinfobankaccount" class="uk-input" type="text" name="surbma_hc_fields[globalinfobankaccount]" value="<?php echo esc_attr( wp_unslash( $globalinfobankaccountValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									<p class="uk-text-meta"><?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-bankszamlaszam]</code></p>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[globalinfomobile]"><?php esc_html_e( 'Mobile phone number', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<?php $globalinfomobileValue = isset( $options['globalinfomobile'] ) && ( $options['globalinfomobile'] ) ? $options['globalinfomobile'] : ''; ?>
-									<input id="globalinfomobile" class="uk-input" type="text" name="surbma_hc_fields[globalinfomobile]" value="<?php echo esc_attr( wp_unslash( $globalinfomobileValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									<p class="uk-text-meta"><?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-mobiltelefon]</code></p>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[globalinfophone]"><?php esc_html_e( 'Telephone number', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<?php $globalinfophoneValue = isset( $options['globalinfophone'] ) && ( $options['globalinfophone'] ) ? $options['globalinfophone'] : ''; ?>
-									<input id="globalinfophone" class="uk-input" type="text" name="surbma_hc_fields[globalinfophone]" value="<?php echo esc_attr( wp_unslash( $globalinfophoneValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									<p class="uk-text-meta"><?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-telefon]</code></p>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[globalinfoemail]"><?php esc_html_e( 'Email', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<?php $globalinfoemailValue = isset( $options['globalinfoemail'] ) && ( $options['globalinfoemail'] ) ? $options['globalinfoemail'] : ''; ?>
-									<input id="globalinfoemail" class="uk-input" type="text" name="surbma_hc_fields[globalinfoemail]" value="<?php echo esc_attr( wp_unslash( $globalinfoemailValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									<p class="uk-text-meta"><?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-email]</code></p>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[globalinfoaboutus]"><?php esc_html_e( 'About Us', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<?php $globalinfoaboutusValue = isset( $options['globalinfoaboutus'] ) ? $options['globalinfoaboutus'] : null; ?>
-									<textarea id="globalinfoaboutus" class="uk-textarea" cols="50" rows="5" name="surbma_hc_fields[globalinfoaboutus]"<?php echo esc_html( $disabled ); ?>><?php echo esc_html( wp_unslash( $globalinfoaboutusValue ) ); ?></textarea>
-									<p class="uk-text-meta"><?php esc_html_e( 'HTML tags are allowed', 'surbma-magyar-woocommerce' ); ?> | <?php esc_html_e( 'Shortcode:', 'surbma-magyar-woocommerce' ); ?>: <code>[hc-rolunk]</code></p>
-								</div>
-							</div>
-
-							<h4 class="uk-heading-divider"><?php esc_html_e( 'Extra shortcodes', 'surbma-magyar-woocommerce' ); ?></h4>
-
-							<table class="uk-table uk-table-divider uk-table-justify uk-table-small">
-								<thead>
-									<tr>
-										<th><?php esc_html_e( 'Shortcode', 'surbma-magyar-woocommerce' ); ?></th>
-										<th><?php esc_html_e( 'Description', 'surbma-magyar-woocommerce' ); ?></th>
-										<th><?php esc_html_e( 'Example', 'surbma-magyar-woocommerce' ); ?></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><code>[hc-mailto][/hc-mailto]</code></td>
-										<td><?php esc_html_e( 'The mailto shortcode can show an email address as a link and encode the characters, so bots can not read it from the source code.', 'surbma-magyar-woocommerce' ); ?></td>
-										<td><code>[hc-mailto]email@domain.hu[/hc-mailto]</code></td>
-									</tr>
-									<tr>
-										<td><code>[hc-tel][/hc-tel]</code></td>
-										<td><?php esc_html_e( 'The tel shortcode will create a clickable phone number.', 'surbma-magyar-woocommerce' ); ?></td>
-										<td><code>[hc-tel]+36 12 345 6789[/hc-tel]</code></td>
-									</tr>
-								</tbody>
-							</table>
-
-							<hr>
-
-							<div class="uk-margin">
-								<label class="uk-form-label"><?php esc_html_e( 'Allowed HTML tags', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<pre><?php echo allowed_tags(); ?></pre>
-								</div>
-							</div>
-
-							<?php // * HUCOMMERCE END ?>
-							<?php echo wp_kses( $freeNotification, $allowed_html ); ?>
-							<?php // * HUCOMMERCE END ?>
-						</div>
-						<div class="uk-card-footer uk-background-muted">
-							<p><input type="submit" class="uk-button uk-button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" /></p>
-						</div>
-					</div>
-
-					<div class="uk-card uk-card-small uk-card-default uk-card-hover uk-margin-bottom">
-						<div class="uk-card-header uk-background-muted">
-							<h3 class="uk-card-title"><?php echo wp_kses_post( $premium ); ?><span class="uk-label uk-label-success"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span> <?php esc_html_e( 'SMTP settings', 'surbma-magyar-woocommerce' ); ?> <a class="uk-float-right uk-margin-small-top" uk-icon="icon: more-vertical" uk-toggle="target: #smtpsettings"></a></h3>
-						</div>
-						<div id="smtpsettings" class="uk-card-body">
-
-							<div class="uk-alert-primary" uk-alert>
-								<a class="uk-alert-close" uk-close></a>
-								<p><?php esc_html_e( 'SMTP service is a must have for all WooCommerce webshops, as it makes your transactional email delivery more stable and secure. Register a new account at a 3rd party SMTP service and set your credentials here to enable this feature.', 'surbma-magyar-woocommerce' ); ?></p>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<div class="uk-form-label"><?php esc_html_e( 'SMTP port number', 'surbma-magyar-woocommerce' ); ?></div>
-								<div class="uk-form-controls">
-									<select class="uk-select" name="surbma_hc_fields[smtpport]"<?php echo esc_html( $disabled ); ?>>
-										<?php
-										$smtpportValue = isset( $options['smtpport'] ) ? $options['smtpport'] : '587';
-										$selected = $smtpportValue;
-										$p = '';
-										$r = '';
-
-										foreach ( $smtpport_options as $option ) {
-											$label = $option['label'];
-											// Make default first in list
-											if ( $selected == $option['value'] ) {
-												$p = PHP_EOL . '<option style="padding-right: 10px;" selected="selected" value="' . esc_attr( $option['value'] ) . '">' . esc_html( $label ) . '</option>';
-											} else {
-												$r .= PHP_EOL . '<option style="padding-right: 10px;" value="' . esc_attr( $option['value'] ) . '">' . esc_html( $label ) . '</option>';
-											}
-										}
-										echo wp_kses( $p, $allowed_html ) . wp_kses( $r, $allowed_html );
-										?>
-									</select>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<div class="uk-form-label"><?php esc_html_e( 'Encryption type', 'surbma-magyar-woocommerce' ); ?></div>
-								<div class="uk-form-controls">
-									<select class="uk-select" name="surbma_hc_fields[smtpsecure]"<?php echo esc_html( $disabled ); ?>>
-										<?php
-										$smtpsecureValue = isset( $options['smtpsecure'] ) ? $options['smtpsecure'] : 'default';
-										$selected = $smtpsecureValue;
-										$p = '';
-										$r = '';
-
-										foreach ( $smtpsecure_options as $option ) {
-											$label = $option['label'];
-											// Make default first in list
-											if ( $selected == $option['value'] ) {
-												$p = PHP_EOL . '<option style="padding-right: 10px;" selected="selected" value="' . esc_attr( $option['value'] ) . '">' . esc_html( $label ) . '</option>';
-											} else {
-												$r .= PHP_EOL . '<option style="padding-right: 10px;" value="' . esc_attr( $option['value'] ) . '">' . esc_html( $label ) . '</option>';
-											}
-										}
-										echo wp_kses( $p, $allowed_html ) . wp_kses( $r, $allowed_html );
-										?>
-									</select>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[smtpfrom]"><?php esc_html_e( 'SMTP From email address', 'surbma-magyar-woocommerce' ); ?> (<?php esc_html_e( 'Optional', 'surbma-magyar-woocommerce' ); ?>)</label>
-								<div class="uk-form-controls">
-									<?php $smtpfromValue = isset( $options['smtpfrom'] ) && ( $options['smtpfrom'] ) ? $options['smtpfrom'] : ''; ?>
-									<input id="surbma_hc_fields[smtpfrom]" class="uk-input" type="text" name="surbma_hc_fields[smtpfrom]" value="<?php echo esc_attr( wp_unslash( $smtpfromValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[smtpfromname]"><?php esc_html_e( 'SMTP From name', 'surbma-magyar-woocommerce' ); ?> (<?php esc_html_e( 'Optional', 'surbma-magyar-woocommerce' ); ?>)</label>
-								<div class="uk-form-controls">
-									<?php $smtpfromnameValue = isset( $options['smtpfromname'] ) && ( $options['smtpfromname'] ) ? $options['smtpfromname'] : ''; ?>
-									<input id="surbma_hc_fields[smtpfromname]" class="uk-input" type="text" name="surbma_hc_fields[smtpfromname]" value="<?php echo esc_attr( wp_unslash( $smtpfromnameValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[smtphost]"><?php esc_html_e( 'The hostname of the mail server', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<div class="uk-inline uk-width-1-1">
-										<?php $smtphostValue = isset( $options['smtphost'] ) && ( $options['smtphost'] ) ? $options['smtphost'] : ''; ?>
-										<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: world"></span>
-										<input id="surbma_hc_fields[smtphost]" class="uk-input" type="text" name="surbma_hc_fields[smtphost]" value="<?php echo esc_attr( wp_unslash( $smtphostValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									</div>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[smtpuser]"><?php esc_html_e( 'Username to use for SMTP authentication', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<div class="uk-inline uk-width-1-1">
-										<?php $smtpuserValue = isset( $options['smtpuser'] ) && ( $options['smtpuser'] ) ? $options['smtpuser'] : ''; ?>
-										<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
-										<input id="surbma_hc_fields[smtpuser]" class="uk-input" type="text" name="surbma_hc_fields[smtpuser]" value="<?php echo esc_attr( wp_unslash( $smtpuserValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									</div>
-								</div>
-							</div>
-
-							<div class="uk-margin<?php echo esc_html( $disabled ); ?>">
-								<label class="uk-form-label" for="surbma_hc_fields[smtppassword]"><?php esc_html_e( 'Password to use for SMTP authentication', 'surbma-magyar-woocommerce' ); ?></label>
-								<div class="uk-form-controls">
-									<div class="uk-inline uk-width-1-1">
-										<?php $smtppasswordValue = isset( $options['smtppassword'] ) && ( $options['smtppassword'] ) ? $options['smtppassword'] : ''; ?>
-										<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-										<input id="surbma_hc_fields[smtppassword]" class="uk-input" type="password" name="surbma_hc_fields[smtppassword]" value="<?php echo esc_attr( wp_unslash( $smtppasswordValue ) ); ?>"<?php echo esc_html( $disabled ); ?> />
-									</div>
-								</div>
-							</div>
-
-							<?php // * HUCOMMERCE END ?>
-							<?php echo wp_kses( $freeNotification, $allowed_html ); ?>
-							<?php // * HUCOMMERCE END ?>
-						</div>
-						<div class="uk-card-footer uk-background-muted">
-							<p><input type="submit" class="uk-button uk-button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" /></p>
-						</div>
-					</div>
-
 				</form>
 			</div>
 			<div class="uk-width-1-4@l">
-				<?php surbma_hc_admin_sidebar(); ?>
+				<?php cps_hc_gems_admin_sidebar(); ?>
 			</div>
 		</div>
 		<div class="uk-margin-bottom" id="bottom"></div>
@@ -1177,8 +788,6 @@ function surbma_hc_fields_validate( $input ) {
 	global $returntoshopcartposition_options;
 	global $returntoshopcheckoutposition_options;
 	global $legalconfirmationsposition_options;
-	global $smtpport_options;
-	global $smtpsecure_options;
 
 	$options = get_option( 'surbma_hc_fields' );
 
@@ -1204,8 +813,6 @@ function surbma_hc_fields_validate( $input ) {
 	$input['loginregistrationredirect'] = isset( $input['loginregistrationredirect'] ) && 1 == $input['loginregistrationredirect'] ? 1 : 0;
 	$input['freeshippingnotice'] = isset( $input['freeshippingnotice'] ) && 1 == $input['freeshippingnotice'] ? 1 : 0;
 	$input['legalcheckout'] = isset( $input['legalcheckout'] ) && 1 == $input['legalcheckout'] ? 1 : 0;
-	$input['module-globalinfo'] = isset( $input['module-globalinfo'] ) && 1 == $input['module-globalinfo'] ? 1 : 0;
-	$input['module-smtp'] = isset( $input['module-smtp'] ) && 1 == $input['module-smtp'] ? 1 : 0;
 
 	$input['taxnumberplaceholder'] = isset( $input['taxnumberplaceholder'] ) && 1 == $input['taxnumberplaceholder'] ? 1 : 0;
 	$input['billingcompanycheck'] = isset( $input['billingcompanycheck'] ) && 1 == $input['billingcompanycheck'] ? 1 : 0;
@@ -1227,12 +834,6 @@ function surbma_hc_fields_validate( $input ) {
 	if ( !array_key_exists( $input['legalconfirmationsposition'], $legalconfirmationsposition_options ) ) {
 		$input['legalconfirmationsposition'] = 'revieworderbeforesubmit';
 	}
-	if ( !array_key_exists( $input['smtpport'], $smtpport_options ) ) {
-		$input['smtpport'] = '587';
-	}
-	if ( !array_key_exists( $input['smtpsecure'], $smtpsecure_options ) ) {
-		$input['smtpsecure'] = 'default';
-	}
 
 	// Say our text option must be safe text with no HTML tags
 	$input['returntoshopmessage'] = wp_filter_nohtml_kses( $input['returntoshopmessage'] );
@@ -1240,21 +841,6 @@ function surbma_hc_fields_validate( $input ) {
 	$input['registrationredirecturl'] = wp_filter_nohtml_kses( $input['registrationredirecturl'] );
 	$input['freeshippingnoticemessage'] = wp_filter_nohtml_kses( $input['freeshippingnoticemessage'] );
 	$input['legalcheckouttitle'] = wp_filter_nohtml_kses( $input['legalcheckouttitle'] );
-	$input['globalinfoname'] = wp_filter_nohtml_kses( $input['globalinfoname'] );
-	$input['globalinfocompany'] = wp_filter_nohtml_kses( $input['globalinfocompany'] );
-	$input['globalinfoheadquarters'] = wp_filter_nohtml_kses( $input['globalinfoheadquarters'] );
-	$input['globalinfotaxnumber'] = wp_filter_nohtml_kses( $input['globalinfotaxnumber'] );
-	$input['globalinforegnumber'] = wp_filter_nohtml_kses( $input['globalinforegnumber'] );
-	$input['globalinfoaddress'] = wp_filter_nohtml_kses( $input['globalinfoaddress'] );
-	$input['globalinfobankaccount'] = wp_filter_nohtml_kses( $input['globalinfobankaccount'] );
-	$input['globalinfomobile'] = wp_filter_nohtml_kses( $input['globalinfomobile'] );
-	$input['globalinfophone'] = wp_filter_nohtml_kses( $input['globalinfophone'] );
-	$input['globalinfoemail'] = wp_filter_nohtml_kses( $input['globalinfoemail'] );
-	$input['smtpfrom'] = wp_filter_nohtml_kses( $input['smtpfrom'] );
-	$input['smtpfromname'] = wp_filter_nohtml_kses( $input['smtpfromname'] );
-	$input['smtphost'] = wp_filter_nohtml_kses( $input['smtphost'] );
-	$input['smtpuser'] = wp_filter_nohtml_kses( $input['smtpuser'] );
-	$input['smtppassword'] = wp_filter_nohtml_kses( $input['smtppassword'] );
 
 	// Say our text/textarea option must be safe text with the allowed tags for posts
 	$input['regacceptpp'] = wp_filter_post_kses( $input['regacceptpp'] );
@@ -1266,34 +852,6 @@ function surbma_hc_fields_validate( $input ) {
 	$input['acceptcustom2'] = wp_filter_post_kses( $input['acceptcustom2'] );
 	$input['beforeorderbuttonmessage'] = wp_filter_post_kses( $input['beforeorderbuttonmessage'] );
 	$input['afterorderbuttonmessage'] = wp_filter_post_kses( $input['afterorderbuttonmessage'] );
-	$input['globalinfoaboutus'] = wp_filter_post_kses( $input['globalinfoaboutus'] );
-
-	// * HUCOMMERCE START
-	// If no valid license, check if field has any value. If yes, save it, if no, set to default.
-	if ( SURBMA_HC_PLUGIN_VERSION == 'free' || SURBMA_HC_PLUGIN_LICENSE != 'valid' ) {
-		$input['module-globalinfo'] = isset( $options['module-globalinfo'] ) ? $options['module-globalinfo'] : 0;
-		$input['module-smtp'] = isset( $options['module-smtp'] ) ? $options['module-smtp'] : 0;
-		$input['productsubtitle'] = isset( $options['productsubtitle'] ) ? $options['productsubtitle'] : 0;
-		$input['globalinfoname'] = isset( $options['globalinfoname'] ) ? $options['globalinfoname'] : '';
-		$input['globalinfocompany'] = isset( $options['globalinfocompany'] ) ? $options['globalinfocompany'] : '';
-		$input['globalinfoheadquarters'] = isset( $options['globalinfoheadquarters'] ) ? $options['globalinfoheadquarters'] : '';
-		$input['globalinfotaxnumber'] = isset( $options['globalinfotaxnumber'] ) ? $options['globalinfotaxnumber'] : '';
-		$input['globalinforegnumber'] = isset( $options['globalinforegnumber'] ) ? $options['globalinforegnumber'] : '';
-		$input['globalinfoaddress'] = isset( $options['globalinfoaddress'] ) ? $options['globalinfoaddress'] : '';
-		$input['globalinfobankaccount'] = isset( $options['globalinfobankaccount'] ) ? $options['globalinfobankaccount'] : '';
-		$input['globalinfomobile'] = isset( $options['globalinfomobile'] ) ? $options['globalinfomobile'] : '';
-		$input['globalinfophone'] = isset( $options['globalinfophone'] ) ? $options['globalinfophone'] : '';
-		$input['globalinfoemail'] = isset( $options['globalinfoemail'] ) ? $options['globalinfoemail'] : '';
-		$input['globalinfoaboutus'] = isset( $options['globalinfoaboutus'] ) ? $options['globalinfoaboutus'] : '';
-		$input['smtpport'] = isset( $options['smtpport'] ) ? $options['smtpport'] : '587';
-		$input['smtpsecure'] = isset( $options['smtpsecure'] ) ? $options['smtpsecure'] : 'default';
-		$input['smtpfrom'] = isset( $options['smtpfrom'] ) ? $options['smtpfrom'] : '';
-		$input['smtpfromname'] = isset( $options['smtpfromname'] ) ? $options['smtpfromname'] : '';
-		$input['smtphost'] = isset( $options['smtphost'] ) ? $options['smtphost'] : '';
-		$input['smtpuser'] = isset( $options['smtpuser'] ) ? $options['smtpuser'] : '';
-		$input['smtppassword'] = isset( $options['smtppassword'] ) ? $options['smtppassword'] : '';
-	}
-	// * HUCOMMERCE END
 
 	return $input;
 }

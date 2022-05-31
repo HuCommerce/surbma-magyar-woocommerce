@@ -1,9 +1,9 @@
 === HuCommerce | Magyar WooCommerce kiegészítések ===
-Contributors: Surbma, xnagyg, freemius
+Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
-Tested up to: 5.9
-Stable tag: 30.3.0
+Tested up to: 6.0
+Stable tag: 2022.0.3
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -24,7 +24,7 @@ Csatlakozzatok a HuCommerce hivatalos támogatói Facebook csoportjához, ahol l
 
 ### HuCommerce Start (ingyenes)
 
-Több, mint 8000 webáruház tulajdonos választása Magyarországon. Rengeteg hasznos funkció, kötelező választás minden magyar WooCommerce webáruházhoz. [Bővebben a HuCommerce Start bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
+Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg hasznos funkció, kötelező választás minden magyar WooCommerce webáruházhoz. [Bővebben a HuCommerce Start bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
 
 **HuCommerce Start funkciói:**
 
@@ -232,6 +232,61 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+= 2022.0.3 =
+
+Kiadás dátuma: 2022-05-30
+
+- CPS SDK frissítése a 8.9.0 verzióra.
+
+= 2022.0.2 =
+
+Kiadás dátuma: 2022-05-30
+
+- CPS SDK frissítése a 8.8.0 verzióra.
+
+= 2022.0.1 =
+
+Kiadás dátuma: 2022-05-30
+
+- Pénztár mezők kompatibilitásának a javítása az Oxygen sablonnal.
+- Kompatibilitás ellenőrzése a WordPress 6.0 verzióval.
+- Kompatibilitás ellenőrzése a WooCommerce 6.5 verzióval.
+
+= 2022.0.0 =
+
+Ez a HuCommerce legutolsó nem fizetős verziója, amiben az összes eddigi modul és funkció elérhető. Amennyiben újabb verzióra frissítesz, bizonyos funkciók nem lesznek elérhetők mentés után. Ez egy stabil és biztonságos verzió, ami további fejlesztéseket nem kap, maximum biztonsági frissítéseket. Minden további fejlesztés a HuCommerce Pro verziójában kap helyet, amire mindenképpen érdemes előfizetni, hiszen nem csak javításokat tartalmaz, hanem rengeteg új és hasznos funkcióval bővül szinte minden hónapban.
+
+- A HuCommerce Pro vásárlás linkek cseréje ugrólinkekre, hogy mindig működjön.
+- A HuCommerce beállítások oldalon a HuCommerce Pro banner szövegének módosítása.
+
+**2022.0.0.4**
+
+- A HuCommerce beállítások oldalon külön blokkba került a HuCommerce Pro banner.
+- A HuCommerce beállítások oldalaon az ajánlat banner módosítása.
+- Kisebb szöveg javítás.
+
+**2022.0.0.3**
+
+- Tervezett funkciók rész törlése.
+- Kisebb megjelenítés igazítás az értékelésnél.
+
+**2022.0.0.2**
+
+- Admin értesítések szövegének a módosítása.
+- Termék módosítások modul törlése.
+- Kisebb szöveg módosítások.
+
+**2022.0.0.1**
+
+- Freemius törlése.
+- HS Beacon kódok törlése.
+- Üdvözlő üzenet törlése.
+- A Globális adatok és az SMTP szolgáltatás modulok törlése.
+- A Termék alcím opció törlése.
+- Beállítások oldal letisztítása, hogy ne jelenjenek meg felesleges információk, opciók.
+- Engedélyezett html tagok listájának a generálása.
+- A változók átnevezése, hogy tükrözzék a modulok logikáját.
 
 = 30.3.0 =
 

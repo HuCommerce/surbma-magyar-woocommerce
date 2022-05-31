@@ -12,7 +12,15 @@
 /* NEW SETTINGS END */
 
 .cps-admin {
-	margin-top: 16px;
+	margin-top: 20px;
+}
+
+/* UIkit */
+
+.uk-notification .uk-notification-message {
+	background: #000 !important;
+	text-align: center;
+	color: #999;
 }
 
 @media (min-width: 960px) {
