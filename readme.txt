@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.0
-Stable tag: 2022.1.2
+Stable tag: 2022.1.3
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -307,7 +307,7 @@ A vezetéknevem visszafelé. ;)
 
 == Changelog ==
 
-= 2022.1.2 =
+= 2022.1.3 =
 
 Kiadás dátuma: 2022-06-01
 
