@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.0
-Stable tag: 2022.1.0
+Stable tag: 2022.1.2
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -20,11 +20,13 @@ A funkciók folyamatosan bővülnek, de mindenki megírhatja a véleményét, ö
 
 #### HuCommerce támogatói Facebook csoport
 
-Csatlakozzatok a HuCommerce hivatalos támogatói Facebook csoportjához, ahol lehet a bővítménnyel kapcsolatban kérdezni, beszélhgetni, ötletelni. Mindenkit szívesen látunk: [HuCommerce Facebook csoport](https://www.facebook.com/groups/HuCommerce.hu/)
+Csatlakozzatok a HuCommerce hivatalos támogatói Facebook csoportjához, ahol lehet a bővítménnyel kapcsolatban kérdezni, beszélgetni, ötletelni. Mindenkit szívesen látunk: [HuCommerce Facebook csoport](https://www.facebook.com/groups/HuCommerce.hu/)
 
 ### HuCommerce Start (ingyenes)
 
-Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg hasznos funkció, kötelező választás minden magyar WooCommerce webáruházhoz. [Bővebben a HuCommerce Start bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
+Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg hasznos funkció, kötelező választás minden magyar WooCommerce webáruházhoz.
+
+[Bővebben a HuCommerce Start bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
 
 **HuCommerce Start funkciói:**
 
@@ -38,7 +40,9 @@ Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg h
 
 ### HuCommerce Pro (fizetős)
 
-A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő funkciókkal. Támogatói verzió, amivel te is hozzájárulsz a további fejlesztésekhez. [Bővebben a HuCommerce Pro bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
+A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő funkciókkal. Támogatói verzió, amivel te is hozzájárulsz a további fejlesztésekhez.
+
+[Bővebben a HuCommerce Pro bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
 
 >[Iratkozz fel a HuCommerce hírlevélre](https://www.hucommerce.hu/hc/hirlevel-feliratkozas/) és cserébe kapsz tőlünk egy 5.000 Ft értékű kupont, amit a HuCommerce Pro előfizetésnél beválthatsz.
 
@@ -51,8 +55,8 @@ A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő 
 - Kupon mező módosítások
 - Plusz/minusz mennyiségi gombok a termékekhez
 - Automatikus frissítés a Kosár oldalon
-- "Egy termék egyszerre" korlátozás
-- Kosár oldal átugrása
+- Egy termék vásárlásonként
+- Kosár átirányítása a Pénztár oldalra
 - Vásárlás folytatása gomb megjelenítése a Kosár és/vagy a Pénztár oldalakon
 - Belépés és regisztráció utáni átirányítás
 - Ingyenes szállítás értesítés
@@ -302,6 +306,19 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+= 2022.1.2 =
+
+Kiadás dátuma: 2022-06-01
+
+- Hiányzó fájlok javítása.
+
+= 2022.1.1 =
+
+Kiadás dátuma: 2022-06-01
+
+- Fordítások javítása az admin felületen.
+- Kisebb módosítások a leírásban.
 
 = 2022.1.0 =
 
