@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.0
-Stable tag: 2022.1.5
+Stable tag: 2022.2.0
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -14,7 +14,15 @@ Hasznos javítások a magyar WooCommerce webáruházakhoz.
 
 >Hasznos javítások a magyar WooCommerce webáruházakhoz.
 
-A WooCommerce a világ és most már Magyarország legnépszerűbb webáruház platformja is. De ez a tény a WooCommerce fejlesztőket nem érdekli annyira, hogy a magyar igényekhez igazítsák a bővítmény bizonyos funkcióit. Szerencsére adnak bőven lehetőséget a módosításokra, de ezekhez az átlag felhasználó nem ért. Ezért hoztam létre ezt a bővítményt, hogy a magyar WooCommerce webáruházak is végre rendben legyenek.
+A WooCommerce a világ és most már Magyarország legnépszerűbb webáruház platformja is. A HuCommerce kiegészítővel könnyebben és gyorsabban indíthatod a webáruházad, mert a legtöbb fontos funkciót és fejlesztést egy gombnyomással helyettesítheted.
+
+A HuCommerce bővítmény ingyenes változata most már évek óta a magyar WooCommerce webáruház tulajdonosok kedvenc kiegészítője. Több, mint 9000 webáruházban megtalálható és a letöltések száma folyamatosan nő.
+
+Azon dolgozunk, hogy folyamatosan hasznos funkciókkal bővítsük ezt a nagyszerű WooCommerce kiegészítőt. Kérlek, támogasd a fejlesztést és a HuCommerce közösséget azzal, hogy megvásárolod a Pro verziót! Ezzel fedezni tudjuk a fejlesztési költségeket és több időt tudunk arra fordítani, hogy a HuCommerce bővítmény még jobb legyen és még több hasznod legyen belőle.
+
+A HuCommerce ingyenes verziója rengeteg olyan apró, hasznos vagy akár jogilag kötelező funkciót tartalmaz, ami hiányzik a WooCommerce bővítményből. Többek között rendbe teszi a vezetéknév és keresztnév sorrendjét és az adószám mezőt is hozzáadja a pénztárhoz, de folyamatosan bővül hasonló praktikus, hasznos vagy kötelező funkciókkal.
+
+A HuCommerce Pro előfizetés éves díja egy kezdő magyar fejlesztő pár órás munkadíja, miközben neked napokat vagy akár hónapokat spórol meg fejlesztési és kutatási oldalon. Ez a kiegészítő a leghasznosabb és nélkülözhetetlen funkciókkal egészíti ki a webáruházad. A fizetős konstrukció biztosítja, hogy folyamatosan bővüljön újabb hasznos funkciókkal.
 
 A funkciók folyamatosan bővülnek, de mindenki megírhatja a véleményét, ötletét, hogyan tudjuk egyre jobbá tenni ezt a bővítményt.
 
@@ -22,35 +30,19 @@ A funkciók folyamatosan bővülnek, de mindenki megírhatja a véleményét, ö
 
 Csatlakozzatok a HuCommerce hivatalos támogatói Facebook csoportjához, ahol lehet a bővítménnyel kapcsolatban kérdezni, beszélgetni, ötletelni. Mindenkit szívesen látunk: [HuCommerce Facebook csoport](https://www.facebook.com/groups/HuCommerce.hu/)
 
-### HuCommerce Start (ingyenes)
+### HuCommerce (ingyenes)
 
 Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg hasznos funkció, kötelező választás minden magyar WooCommerce webáruházhoz.
 
-[Bővebben a HuCommerce Start bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
+[Bővebben a HuCommerce bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
 
-**HuCommerce Start funkciói:**
+**HuCommerce ingyenes funkciói:**
 
 - Vezetéknév és keresztnév rendbetétele (WooCommerce 4.4 verzió fölött is)
 - Adószám bekérése vásárlásnál
 - Megye mező elrejtése
 - Pénztár mezők ellenőrzése
 - Város automatikus kitöltése az irányítószám alapján
-- Fordítási hiányosságok javítása
-- Alap ügyfélszolgálat és támogatás
-
-### HuCommerce Pro (fizetős)
-
-A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő funkciókkal. Támogatói verzió, amivel te is hozzájárulsz a további fejlesztésekhez.
-
-[Bővebben a HuCommerce Pro bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
-
->[Iratkozz fel a HuCommerce hírlevélre](https://www.hucommerce.hu/hc/hirlevel-feliratkozas/) és cserébe kapsz tőlünk egy 5.000 Ft értékű kupont, amit a HuCommerce Pro előfizetésnél beválthatsz.
-
-**HuCommerce Pro funkciói:**
-
-- Minden, amit a HuCommerce Start bővítményben találsz, plusz…
-- Jogi megfelelés (Fogyasztóvédelem, GDPR, ePrivacy, stb.)
-- Termék ár történet (új Fogyasztóvédelemi rendelet) - BÉTA
 - Pénztár oldal formázása
 - Kupon mező módosítások
 - Plusz/minusz mennyiségi gombok a termékekhez
@@ -64,11 +56,27 @@ A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő 
 - Egyedi “Kosárba teszem” gombok
 - Termék extra beállítások
 - Globális adatok, amiket shortcode-dal lehet bárhol megjeleníteni
+- Fordítási hiányosságok javítása
+- WPML és Polylang kompatibilitás
+- Alap ügyfélszolgálat és támogatás
+- További funkciók hamarosan…
+
+### HuCommerce Pro (fizetős)
+
+A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő funkciókkal. Támogatói verzió, amivel te is hozzájárulsz a további fejlesztésekhez.
+
+[Bővebben a HuCommerce Pro bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
+
+>[Iratkozz fel a HuCommerce hírlevélre](https://www.hucommerce.hu/hc/hirlevel-feliratkozas/) és cserébe kapsz tőlünk egy 5.000 Ft értékű kupont, amit a HuCommerce Pro előfizetésnél beválthatsz.
+
+**HuCommerce Pro további funkciói:**
+
+- Jogi megfelelés (Fogyasztóvédelem, GDPR, ePrivacy, stb.)
+- Termék ár történet (új Fogyasztóvédelemi rendelet) - BÉTA
 - SMTP szolgáltatás beállítása
 - Kiegészítők és sablonok fordításai
-- WPML és Polylang kompatibilitás
 - Kiemelt ügyfélszolgálat és támogatás
-- További funkciók hamarosan...
+- További funkciók hamarosan…
 
 **HuCommerce tudásbázis**
 
@@ -306,6 +314,21 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+= 2022.2.0 =
+
+Kiadás dátuma: 2022-06-07
+
+Ez a verzió újra elérhetővé teszi a régi modulokat az ingyenes verzióban, sőt, több fizetős modul is ingyenes lett. :) A frissítése éppen ezért ajánlott és biztonságos.
+
+- Leírás kisebb módosítása.
+- A kisebb funkcióval rendelkező modulok mostantól ingyenesek újra. A legtöbb új funkció is mind ingyenes lett.
+- A régi HuCommerce felhasználóknak szóló értesítések törlése, illetve áthelyezése, hogy ne legyen zavaró.
+- A beállítások oldalon az ajánlat banner törlése, hogy ne legyen zavaró.
+- Kisebb javítás a productpricehistory-discounttext mező mentésénél.
+- A legacyuser mentése, hogy lehessen feltételeket megadni a régi felhasználókra.
+- A Pro modulok vizuális különválasztása a beállítások oldalon.
+- A Jogi megfelelés modul korlátlan ideig használható az ingyenes verzióval is, csak nem módosítható.
 
 = 2022.1.5 =
 

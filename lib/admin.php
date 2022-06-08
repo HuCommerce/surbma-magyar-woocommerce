@@ -141,7 +141,7 @@ add_action( 'admin_notices', function() {
 			<p style="display: none;"><a class="button button-primary button-large" href="<?php admin_url(); ?>admin.php?page=surbma-hucommerce-menu"><span class="dashicons dashicons-admin-generic" style="position: relative;top: 4px;left: -3px;"></span> <?php esc_html_e( 'HuCommerce Settings', 'surbma-magyar-woocommerce' ); ?></a></p>
 			<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE ) { ?>
 			<h3>HuCommerce Pro</h3>
-			<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat, reklámmentes kezelőfelületet és kiemelt ügyfélszolgálati segítséget kapsz.</p>
+			<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p>
 			<p><a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">HuCommerce Pro megismerése</a></p>
 			<p><a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="button button-primary button-large" target="_blank"><span class="dashicons dashicons-cart" style="position: relative;top: 4px;left: -3px;"></span> HuCommerce Pro megvásárlása</a></p>
 			<?php } ?>
@@ -153,46 +153,6 @@ add_action( 'admin_notices', function() {
 } );
 
 // * HUCOMMERCE START
-
-// HuCommerce legacy users notice
-add_action( 'admin_notices', function() {
-	$options = get_option( 'surbma_hc_fields' );
-	$home_url = get_option( 'home' );
-	$current_user = wp_get_current_user();
-
-	if ( ! PAnD::is_admin_notice_active( 'hucommerce-legacy-users-forever' ) ) {
-		return;
-	}
-
-	if ( SURBMA_HC_PREMIUM ) {
-		return;
-	}
-
-	if ( !$options ) {
-		return;
-	}
-
-	if ( isset( $options['brandnewuser'] ) ) {
-		return;
-	}
-
-	if ( isset( $_GET['page'] ) && 'surbma-hucommerce-menu' == $_GET['page'] ) {
-		return;
-	}
-
-	?>
-	<div data-dismissible="hucommerce-legacy-users-forever" class="notice notice-warning notice-alt notice-large is-dismissible">
-		<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a>
-		<h3>Figyelem régi HuCommerce felhasználók!</h3>
-		<p>Az eddig megszokott és beállított HuCommerce modulok közül sok nem használható a HuCommerce 2022.1.0 verziójától. Ezek a modulok átkerültek a HuCommerce fizetős, Pro verziójába. Minden eddig beállított modul továbbra is működik, de módosítani nem lehet a beállításokat, sőt mentés után kikapcsolásra kerülnek ezek a modulok!</p>
-		<p><strong>Milyen ajánlataink vannak az eddigi felhasználóknak?</strong></p>
-		<p><a href="https://www.hucommerce.hu/hucommerce-pro-egy-uj-korszak/" class="button button-primary button-large" target="_blank"><span class="dashicons dashicons-cart" style="position: relative;top: 4px;left: -3px;"></span> Kedvezmények mutatása és a HuCommerce Pro megvásárlása</a></p>
-		<p>Miért lett fizetős az, ami eddig ingyen volt? Kérlek olvasd el a cikkünket erről: <a href="https://www.hucommerce.hu/hucommerce-pro-egy-uj-korszak/" target="_blank">HuCommerce Pro, egy új korszak</a></p>
-		<hr style="margin: 1em 0;">
-		<p style="text-align: center;"><strong><?php esc_html_e( 'IMPORTANT!', 'surbma-magyar-woocommerce' ); ?></strong> <?php esc_html_e( 'This notification will never show up again after you close it.', 'surbma-magyar-woocommerce' ); ?></p>
-	</div>
-	<?php
-} );
 
 // HuCommerce Pro Promo notice
 add_action( 'admin_notices', function() {
@@ -226,7 +186,7 @@ add_action( 'admin_notices', function() {
 		<div data-dismissible="hucommerce-pro-promo-60" class="notice notice-info notice-alt notice-large is-dismissible">
 			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a>
 			<h3>HuCommerce Pro</h3>
-			<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat, reklámmentes kezelőfelületet és kiemelt ügyfélszolgálati segítséget kapsz.</p>
+			<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p>
 			<p><a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">HuCommerce Pro megismerése</a></p>
 			<p><a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="button button-primary button-large" target="_blank"><span class="dashicons dashicons-cart" style="position: relative;top: 4px;left: -3px;"></span> HuCommerce Pro megvásárlása</a></p>
 			<hr style="margin: 1em 0;">
@@ -300,7 +260,7 @@ function surbma_hc_dashboard() {
 	// HuCommerce Pro
 	if ( !SURBMA_HC_PREMIUM ) {
 		echo '<h3><strong>' . esc_html__( 'HuCommerce Pro', 'surbma-magyar-woocommerce' ) . '</strong></h3>';
-		echo '<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat, reklámmentes kezelőfelületet és kiemelt ügyfélszolgálati segítséget kapsz.</p>';
+		echo '<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p>';
 		echo '<p><a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">' . esc_html__( 'More about HuCommerce Pro', 'surbma-magyar-woocommerce' ) . '</a></p>';
 		echo '<p>';
 		echo '<a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="button button-primary" target="_blank"><span class="dashicons dashicons-cart" style="position: relative;top: 4px;left: -3px;"></span> ' . esc_html__( 'Get HuCommerce Pro', 'surbma-magyar-woocommerce' ) . '</a>';

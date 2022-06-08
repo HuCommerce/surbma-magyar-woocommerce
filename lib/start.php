@@ -63,23 +63,24 @@ if ( 1 == $module_translationsValue && !is_admin() ) {
 }
 // * HUCOMMERCE END
 
-// Modules
-
+// Free modules
 $module_taxnumberValue = isset( $options['taxnumber'] ) ? $options['taxnumber'] : 0;
-$module_checkoutValue = isset( $options['module-checkout'] ) && ( 'active' == SURBMA_HC_PLUGIN_LICENSE || !isset( $options['brandnewuser'] ) ) ? $options['module-checkout'] : 0;
-$module_couponValue = isset( $options['module-coupon'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-coupon'] : 0;
-$module_plusminusValue = isset( $options['plusminus'] ) && ( 'active' == SURBMA_HC_PLUGIN_LICENSE || !isset( $options['brandnewuser'] ) ) ? $options['plusminus'] : 0;
-$module_updatecartValue = isset( $options['updatecart'] ) && ( 'active' == SURBMA_HC_PLUGIN_LICENSE || !isset( $options['brandnewuser'] ) ) ? $options['updatecart'] : 0;
-$module_redirectcartValue = isset( $options['module-redirectcart'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-redirectcart'] : 0;
-$module_oneproductincartValue = isset( $options['module-oneproductincart'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-oneproductincart'] : 0;
-$module_custom_addtocart_buttonValue = isset( $options['module-custom-addtocart-button'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-custom-addtocart-button'] : 0;
-$module_returntoshopValue = isset( $options['returntoshop'] ) && ( 'active' == SURBMA_HC_PLUGIN_LICENSE || !isset( $options['brandnewuser'] ) ) ? $options['returntoshop'] : 0;
-$module_loginregistrationredirectValue = isset( $options['loginregistrationredirect'] ) && ( 'active' == SURBMA_HC_PLUGIN_LICENSE || !isset( $options['brandnewuser'] ) ) ? $options['loginregistrationredirect'] : 0;
-$module_freeshippingnoticeValue = isset( $options['freeshippingnotice'] ) && ( 'active' == SURBMA_HC_PLUGIN_LICENSE || !isset( $options['brandnewuser'] ) ) ? $options['freeshippingnotice'] : 0;
-$module_hideshippingmethods = isset( $options['module-hideshippingmethods'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-hideshippingmethods'] : 0;
-$module_legalcheckoutValue = isset( $options['legalcheckout'] ) && ( 'active' == SURBMA_HC_PLUGIN_LICENSE || !isset( $options['brandnewuser'] ) ) ? $options['legalcheckout'] : 0;
-$module_productsettingsValue = isset( $options['module-productsettings'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-productsettings'] : 0;
-$module_globalinfoValue = isset( $options['module-globalinfo'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-globalinfo'] : 0;
+$module_checkoutValue = isset( $options['module-checkout'] ) ? $options['module-checkout'] : 0;
+$module_couponValue = isset( $options['module-coupon'] ) ? $options['module-coupon'] : 0;
+$module_plusminusValue = isset( $options['plusminus'] ) ? $options['plusminus'] : 0;
+$module_updatecartValue = isset( $options['updatecart'] ) ? $options['updatecart'] : 0;
+$module_redirectcartValue = isset( $options['module-redirectcart'] ) ? $options['module-redirectcart'] : 0;
+$module_oneproductincartValue = isset( $options['module-oneproductincart'] ) ? $options['module-oneproductincart'] : 0;
+$module_custom_addtocart_buttonValue = isset( $options['module-custom-addtocart-button'] ) ? $options['module-custom-addtocart-button'] : 0;
+$module_returntoshopValue = isset( $options['returntoshop'] ) ? $options['returntoshop'] : 0;
+$module_loginregistrationredirectValue = isset( $options['loginregistrationredirect'] ) ? $options['loginregistrationredirect'] : 0;
+$module_freeshippingnoticeValue = isset( $options['freeshippingnotice'] ) ? $options['freeshippingnotice'] : 0;
+$module_hideshippingmethods = isset( $options['module-hideshippingmethods'] ) ? $options['module-hideshippingmethods'] : 0;
+$module_productsettingsValue = isset( $options['module-productsettings'] ) ? $options['module-productsettings'] : 0;
+$module_globalinfoValue = isset( $options['module-globalinfo'] ) ? $options['module-globalinfo'] : 0;
+
+// Pro modules
+$module_legalcheckoutValue = isset( $options['legalcheckout'] ) && ( 'active' == SURBMA_HC_PLUGIN_LICENSE || !isset( $options['brandnewuser'] ) || ( isset( $options['legacyuser'] ) && 1 == $options['legacyuser'] ) ) ? $options['legalcheckout'] : 0;
 $module_smtpValue = isset( $options['module-smtp'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-smtp'] : 0;
 
 if ( 1 == $module_taxnumberValue ) {

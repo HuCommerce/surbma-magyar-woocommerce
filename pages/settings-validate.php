@@ -168,63 +168,14 @@ function surbma_hc_fields_validate( $input ) {
 	if ( 'active' != SURBMA_HC_PLUGIN_LICENSE ) {
 		// Modules
 		$input['module-productpricehistory'] = isset( $options['module-productpricehistory'] ) ? $options['module-productpricehistory'] : 0;
-		$input['module-checkout'] = isset( $options['module-checkout'] ) ? $options['module-checkout'] : 0;
-		$input['module-coupon'] = isset( $options['module-coupon'] ) ? $options['module-coupon'] : 0;
-		$input['plusminus'] = isset( $options['plusminus'] ) ? $options['plusminus'] : 0;
-		$input['updatecart'] = isset( $options['updatecart'] ) ? $options['updatecart'] : 0;
-		$input['module-redirectcart'] = isset( $options['module-redirectcart'] ) ? $options['module-redirectcart'] : 0;
-		$input['module-oneproductincart'] = isset( $options['module-oneproductincart'] ) ? $options['module-oneproductincart'] : 0;
-		$input['module-custom-addtocart-button'] = isset( $options['module-custom-addtocart-button'] ) ? $options['module-custom-addtocart-button'] : 0;
-		$input['returntoshop'] = isset( $options['returntoshop'] ) ? $options['returntoshop'] : 0;
-		$input['loginregistrationredirect'] = isset( $options['loginregistrationredirect'] ) ? $options['loginregistrationredirect'] : 0;
-		$input['freeshippingnotice'] = isset( $options['freeshippingnotice'] ) ? $options['freeshippingnotice'] : 0;
-		$input['module-hideshippingmethods'] = isset( $options['module-hideshippingmethods'] ) ? $options['module-hideshippingmethods'] : 0;
 		$input['legalcheckout'] = isset( $options['legalcheckout'] ) ? $options['legalcheckout'] : 0;
-		$input['module-productsettings'] = isset( $options['module-productsettings'] ) ? $options['module-productsettings'] : 0;
-		$input['module-globalinfo'] = isset( $options['module-globalinfo'] ) ? $options['module-globalinfo'] : 0;
 		$input['module-smtp'] = isset( $options['module-smtp'] ) ? $options['module-smtp'] : 0;
 
 		// Product price history
 		$input['productpricehistory-showlowestprice'] = isset( $options['productpricehistory-showlowestprice'] ) ? $options['productpricehistory-showlowestprice'] : 0;
 		$input['productpricehistory-lowestpricetext'] = isset( $options['productpricehistory-lowestpricetext'] ) ? $options['productpricehistory-lowestpricetext'] : __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
 		$input['productpricehistory-showdiscount'] = isset( $options['productpricehistory-showdiscount'] ) ? $options['productpricehistory-showdiscount'] : 0;
-		$input['productpricehistory-lowestpricetext'] = isset( $options['productpricehistory-lowestpricetext'] ) ? $options['productpricehistory-lowestpricetext'] : __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
-
-		// Product customizations
-		$input['productsubtitle'] = isset( $options['productsubtitle'] ) ? $options['productsubtitle'] : 0;
-		$input['addtocartonarchive'] = isset( $options['addtocartonarchive'] ) ? $options['addtocartonarchive'] : 0;
-		$input['norelatedproducts'] = isset( $options['norelatedproducts'] ) ? $options['norelatedproducts'] : 0;
-		$input['productsnumber'] = isset( $options['productsnumber'] ) ? $options['productsnumber'] : '';
-		$input['productsperrow'] = isset( $options['productsperrow'] ) ? $options['productsperrow'] : '';
-		$input['upsellproductsnumber'] = isset( $options['upsellproductsnumber'] ) ? $options['upsellproductsnumber'] : '';
-		$input['upsellproductsperrow'] = isset( $options['upsellproductsperrow'] ) ? $options['upsellproductsperrow'] : '';
-		$input['relatedproductsnumber'] = isset( $options['relatedproductsnumber'] ) ? $options['relatedproductsnumber'] : '';
-		$input['relatedproductsperrow'] = isset( $options['relatedproductsperrow'] ) ? $options['relatedproductsperrow'] : '';
-
-		// Checkout page customizations
-		$input['billingcompanycheck'] = isset( $options['billingcompanycheck'] ) ? $options['billingcompanycheck'] : 0;
-		$input['nocountry'] = isset( $options['nocountry'] ) ? $options['nocountry'] : 0;
-		$input['noordercomments'] = isset( $options['noordercomments'] ) ? $options['noordercomments'] : 0;
-		$input['noadditionalinformation'] = isset( $options['noadditionalinformation'] ) ? $options['noadditionalinformation'] : 0;
-		$input['companytaxnumberpair'] = isset( $options['companytaxnumberpair'] ) ? $options['companytaxnumberpair'] : 0;
-		$input['postcodecitypair'] = isset( $options['postcodecitypair'] ) ? $options['postcodecitypair'] : 0;
-		$input['phoneemailpair'] = isset( $options['phoneemailpair'] ) ? $options['phoneemailpair'] : 0;
-		$input['emailtothetop'] = isset( $options['emailtothetop'] ) ? $options['emailtothetop'] : 0;
-
-		// Continue shopping buttons
-		$input['returntoshopcartposition'] = isset( $options['returntoshopcartposition'] ) ? $options['returntoshopcartposition'] : 'cartactions';
-		$input['returntoshopcheckoutposition'] = isset( $options['returntoshopcheckoutposition'] ) ? $options['returntoshopcheckoutposition'] : 'nocheckout';
-		$input['returntoshopmessage'] = isset( $options['returntoshopmessage'] ) ? $options['returntoshopmessage'] : '';
-
-		// Login and registration redirection
-		$input['loginredirecturl'] = isset( $options['loginredirecturl'] ) ? $options['loginredirecturl'] : '';
-		$input['registrationredirecturl'] = isset( $options['registrationredirecturl'] ) ? $options['registrationredirecturl'] : '';
-
-		// Free shipping notification
-		$input['freeshippingnoticeshoploop'] = isset( $options['freeshippingnoticeshoploop'] ) ? $options['freeshippingnoticeshoploop'] : 0;
-		$input['freeshippingnoticecart'] = isset( $options['freeshippingnoticecart'] ) ? $options['freeshippingnoticecart'] : 1;
-		$input['freeshippingnoticecheckout'] = isset( $options['freeshippingnoticecheckout'] ) ? $options['freeshippingnoticecheckout'] : 0;
-		$input['freeshippingnoticemessage'] = isset( $options['freeshippingnoticemessage'] ) ? $options['freeshippingnoticemessage'] : __( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
+		$input['productpricehistory-discounttext'] = isset( $options['productpricehistory-discounttext'] ) ? $options['productpricehistory-discounttext'] : __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
 
 		// Legal compliance
 		$input['regip'] = isset( $options['regip'] ) ? $options['regip'] : 0;
@@ -240,45 +191,6 @@ function surbma_hc_fields_validate( $input ) {
 		$input['beforeorderbuttonmessage'] = isset( $options['beforeorderbuttonmessage'] ) ? $options['beforeorderbuttonmessage'] : '';
 		$input['afterorderbuttonmessage'] = isset( $options['afterorderbuttonmessage'] ) ? $options['afterorderbuttonmessage'] : '';
 
-		// Coupon field customizations
-		$input['couponuppercase'] = isset( $options['couponuppercase'] ) ? $options['couponuppercase'] : 0;
-		$input['couponfieldhiddenoncart'] = isset( $options['couponfieldhiddenoncart'] ) ? $options['couponfieldhiddenoncart'] : 0;
-		$input['couponfieldhiddenoncheckout'] = isset( $options['couponfieldhiddenoncheckout'] ) ? $options['couponfieldhiddenoncheckout'] : 0;
-		$input['couponfieldalwaysvisible'] = isset( $options['couponfieldalwaysvisible'] ) ? $options['couponfieldalwaysvisible'] : 0;
-		$input['couponfieldposition'] = isset( $options['couponfieldposition'] ) ? $options['couponfieldposition'] : 'beforecheckoutform';
-
-		// Custom Add To Cart Button
-		$input['custom-addtocart-button-single-simple'] = isset( $options['custom-addtocart-button-single-simple'] ) ? $options['custom-addtocart-button-single-simple'] : '';
-		$input['custom-addtocart-button-single-grouped'] = isset( $options['custom-addtocart-button-single-grouped'] ) ? $options['custom-addtocart-button-single-grouped'] : '';
-		$input['custom-addtocart-button-single-external'] = isset( $options['custom-addtocart-button-single-external'] ) ? $options['custom-addtocart-button-single-external'] : '';
-		$input['custom-addtocart-button-single-variable'] = isset( $options['custom-addtocart-button-single-variable'] ) ? $options['custom-addtocart-button-single-variable'] : '';
-		$input['custom-addtocart-button-single-subscription'] = isset( $options['custom-addtocart-button-single-subscription'] ) ? $options['custom-addtocart-button-single-subscription'] : '';
-		$input['custom-addtocart-button-single-variable-subscription'] = isset( $options['custom-addtocart-button-single-variable-subscription'] ) ? $options['custom-addtocart-button-single-variable-subscription'] : '';
-		$input['custom-addtocart-button-single-booking'] = isset( $options['custom-addtocart-button-single-booking'] ) ? $options['custom-addtocart-button-single-booking'] : '';
-		$input['custom-addtocart-button-archive-simple'] = isset( $options['custom-addtocart-button-archive-simple'] ) ? $options['custom-addtocart-button-archive-simple'] : '';
-		$input['custom-addtocart-button-archive-grouped'] = isset( $options['custom-addtocart-button-archive-grouped'] ) ? $options['custom-addtocart-button-archive-grouped'] : '';
-		$input['custom-addtocart-button-archive-external'] = isset( $options['custom-addtocart-button-archive-external'] ) ? $options['custom-addtocart-button-archive-external'] : '';
-		$input['custom-addtocart-button-archive-variable'] = isset( $options['custom-addtocart-button-archive-variable'] ) ? $options['custom-addtocart-button-archive-variable'] : '';
-		$input['custom-addtocart-button-archive-subscription'] = isset( $options['custom-addtocart-button-archive-subscription'] ) ? $options['custom-addtocart-button-archive-subscription'] : '';
-		$input['custom-addtocart-button-archive-variable-subscription'] = isset( $options['custom-addtocart-button-archive-variable-subscription'] ) ? $options['custom-addtocart-button-archive-variable-subscription'] : '';
-		$input['custom-addtocart-button-archive-booking'] = isset( $options['custom-addtocart-button-archive-booking'] ) ? $options['custom-addtocart-button-archive-booking'] : '';
-
-		// Hide shipping methods
-		$input['shippingmethodstohide'] = isset( $options['shippingmethodstohide'] ) ? $options['shippingmethodstohide'] : 'hideall';
-
-		// Global informations
-		$input['globalinfoname'] = isset( $options['globalinfoname'] ) ? $options['globalinfoname'] : '';
-		$input['globalinfocompany'] = isset( $options['globalinfocompany'] ) ? $options['globalinfocompany'] : '';
-		$input['globalinfoheadquarters'] = isset( $options['globalinfoheadquarters'] ) ? $options['globalinfoheadquarters'] : '';
-		$input['globalinfotaxnumber'] = isset( $options['globalinfotaxnumber'] ) ? $options['globalinfotaxnumber'] : '';
-		$input['globalinforegnumber'] = isset( $options['globalinforegnumber'] ) ? $options['globalinforegnumber'] : '';
-		$input['globalinfoaddress'] = isset( $options['globalinfoaddress'] ) ? $options['globalinfoaddress'] : '';
-		$input['globalinfobankaccount'] = isset( $options['globalinfobankaccount'] ) ? $options['globalinfobankaccount'] : '';
-		$input['globalinfomobile'] = isset( $options['globalinfomobile'] ) ? $options['globalinfomobile'] : '';
-		$input['globalinfophone'] = isset( $options['globalinfophone'] ) ? $options['globalinfophone'] : '';
-		$input['globalinfoemail'] = isset( $options['globalinfoemail'] ) ? $options['globalinfoemail'] : '';
-		$input['globalinfoaboutus'] = isset( $options['globalinfoaboutus'] ) ? $options['globalinfoaboutus'] : '';
-
 		// SMTP service
 		$input['smtpport'] = isset( $options['smtpport'] ) ? $options['smtpport'] : '587';
 		$input['smtpsecure'] = isset( $options['smtpsecure'] ) ? $options['smtpsecure'] : 'default';
@@ -288,6 +200,9 @@ function surbma_hc_fields_validate( $input ) {
 		$input['smtpuser'] = isset( $options['smtpuser'] ) ? $options['smtpuser'] : '';
 		$input['smtppassword'] = isset( $options['smtppassword'] ) ? $options['smtppassword'] : '';
 	}
+
+	// Check legacy HuCommerce users
+	$input['legacyuser'] = $options && ( !isset( $options['brandnewuser'] ) || ( isset( $options['legacyuser'] ) && 1 == $options['legacyuser'] ) ) ? 1 : 0;
 
 	// Check brand new HuCommerce users (from HuCommerce 2022.1.0 version)
 	$input['brandnewuser'] = 1;

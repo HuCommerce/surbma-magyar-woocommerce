@@ -86,18 +86,8 @@ function surbma_hc_settings_page() {
 			</div>
 		<?php } ?>
 
-		<?php // HuCommerce legacy users notice ?>
-		<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE && $options && !isset( $options['brandnewuser'] ) ) { ?>
-			<div class="cps-alert uk-alert-danger uk-animation-slide-top-medium" uk-alert>
-				<a class="uk-alert-close" uk-close></a>
-				<p><strong class="uk-text-uppercase">Figyelem régi HuCommerce felhasználók!</strong></p>
-				<p>Az eddig megszokott és beállított HuCommerce modulok közül sok nem használható a HuCommerce 2022.1.0 verziójától. Ezek a modulok átkerültek a HuCommerce fizetős, Pro verziójába. Minden eddig beállított modul továbbra is működik, de módosítani nem lehet a beállításokat, sőt mentés után kikapcsolásra kerülnek ezek a modulok!</p>
-				<p>Miért lett fizetős az, ami eddig ingyen volt? Milyen ajánlataink vannak az eddigi felhasználóknak? Kérlek olvasd el a cikkünket erről: <br><a href="https://www.hucommerce.hu/hucommerce-pro-egy-uj-korszak/" target="_blank">HuCommerce Pro, egy új korszak</a></p>
-			</div>
-		<?php } ?>
-
 		<?php // HuCommerce partner banner ?>
-		<?php
+		<?php /*
 		if ( !SURBMA_HC_PREMIUM ) {
 			// Partners
 			$rss_ajanlatok = fetch_feed( 'https://www.hucommerce.hu/cimke/kiemelt-ajanlat-hucommerce-top/feed/' );
@@ -130,7 +120,7 @@ function surbma_hc_settings_page() {
 				endforeach;
 			endif;
 		}
-		?>
+		*/ ?>
 
 		<div id="cps-settings" class="uk-card uk-card-default uk-card-hover uk-margin-bottom">
 			<div class="uk-card-header uk-background-muted">

@@ -15,15 +15,6 @@ function surbma_hc_get_starred( $str ) {
 $license_status = get_option( 'surbma_hc_license_status', array() );
 
 ?>
-		<?php // HuCommerce Pro promo ?>
-		<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE ) { ?>
-			<div class="cps-alert uk-alert-danger uk--text-center uk--text-bold uk--padding" uk-alert>
-				<p><strong>HuCommerce Pro</strong></p>
-				<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat, reklámmentes kezelőfelületet és kiemelt ügyfélszolgálati segítséget kapsz.<br><a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">HuCommerce Pro megismerése</a></p>
-				<a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="uk-button uk--button-default uk-button-danger uk-button-small" target="_blank">HuCommerce Pro megvásárlása</a>
-			</div>
-		<?php } ?>
-
 <p>Itt kell megadnod és aktiválnod a HuCommerce Pro API kulcsodat. Sikeres aktiválás után a HuCommerce Pro minden funkciója elérhető lesz számodra az aktív előfizetésed alatt. Lejárt előfizetés esetén a Pro funkciók kikapcsolnak!</p>
 
 <form class="uk-form-stacked" method="post" action="options.php">
