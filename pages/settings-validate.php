@@ -169,7 +169,6 @@ function surbma_hc_fields_validate( $input ) {
 		// Modules
 		$input['module-productpricehistory'] = isset( $options['module-productpricehistory'] ) ? $options['module-productpricehistory'] : 0;
 		$input['legalcheckout'] = isset( $options['legalcheckout'] ) ? $options['legalcheckout'] : 0;
-		$input['module-smtp'] = isset( $options['module-smtp'] ) ? $options['module-smtp'] : 0;
 
 		// Product price history
 		$input['productpricehistory-showlowestprice'] = isset( $options['productpricehistory-showlowestprice'] ) ? $options['productpricehistory-showlowestprice'] : 0;
@@ -190,15 +189,6 @@ function surbma_hc_fields_validate( $input ) {
 		$input['acceptcustom2'] = isset( $options['acceptcustom2'] ) ? $options['acceptcustom2'] : '';
 		$input['beforeorderbuttonmessage'] = isset( $options['beforeorderbuttonmessage'] ) ? $options['beforeorderbuttonmessage'] : '';
 		$input['afterorderbuttonmessage'] = isset( $options['afterorderbuttonmessage'] ) ? $options['afterorderbuttonmessage'] : '';
-
-		// SMTP service
-		$input['smtpport'] = isset( $options['smtpport'] ) ? $options['smtpport'] : '587';
-		$input['smtpsecure'] = isset( $options['smtpsecure'] ) ? $options['smtpsecure'] : 'default';
-		$input['smtpfrom'] = isset( $options['smtpfrom'] ) ? $options['smtpfrom'] : '';
-		$input['smtpfromname'] = isset( $options['smtpfromname'] ) ? $options['smtpfromname'] : '';
-		$input['smtphost'] = isset( $options['smtphost'] ) ? $options['smtphost'] : '';
-		$input['smtpuser'] = isset( $options['smtpuser'] ) ? $options['smtpuser'] : '';
-		$input['smtppassword'] = isset( $options['smtppassword'] ) ? $options['smtppassword'] : '';
 	}
 
 	// Check legacy HuCommerce users

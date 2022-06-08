@@ -556,6 +556,31 @@ __( 'Password to use for SMTP authentication', 'surbma-magyar-woocommerce' );
 				<p><a href="https://www.hucommerce.hu/dokumentum/globalis-adatok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'SMTP service', 'module-smtp' ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'SMTP service', 'module-smtp', false, false, true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<li><p><?php esc_html_e( 'SMTP service is a must have for all WooCommerce webshops, as it makes your transactional email delivery more stable and secure. Register a new account at a 3rd party SMTP service and set your credentials here to enable this feature.', 'surbma-magyar-woocommerce' ); ?></p></li>
+					<?php cps_hc_wcgems_form_field_select( 'SMTP port number', 'smtpport', $smtpport_options, '587', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_select( 'Encryption type', 'smtpsecure', $smtpsecure_options, 'default', false, false, true ); ?>
+
+					<?php cps_hc_wcgems_form_field_text( 'SMTP From email address', 'smtpfrom', '', false, false, true, 'Optional' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'SMTP From name', 'smtpfromname', '', false, false, true, 'Optional' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'The hostname of the mail server', 'smtphost', '', false, false, true, false, 'world' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Username to use for SMTP authentication', 'smtpuser', '', false, false, true, false, 'user' ); ?>
+
+					<?php cps_hc_wcgems_form_field_password( 'Password to use for SMTP authentication', 'smtppassword', '', false, false, true, false, 'lock' ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Send emails from a 3rd party SMTP service, instead of using webserver\'s mail() function.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/smtp-szolgaltatas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
 	</ul>
 	<h4>HuCommerce Pro modulok</h4>
 	<hr>
@@ -651,31 +676,6 @@ __( 'Password to use for SMTP authentication', 'surbma-magyar-woocommerce' );
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Disclaimer', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'HuCommerce modules are tools to comply with local and/or international rules and laws, but it is the webshop owner\'s duty to make sure to comply with all rules and laws! Developers and the owners of HuCommerce take no responsibility for any legal compliance. However our mission is to provide all necessary tools for these challenges.', 'surbma-magyar-woocommerce' ); ?></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'SMTP service', 'module-smtp' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'SMTP service', 'module-smtp', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<li><p><?php esc_html_e( 'SMTP service is a must have for all WooCommerce webshops, as it makes your transactional email delivery more stable and secure. Register a new account at a 3rd party SMTP service and set your credentials here to enable this feature.', 'surbma-magyar-woocommerce' ); ?></p></li>
-					<?php cps_hc_wcgems_form_field_select( 'SMTP port number', 'smtpport', $smtpport_options, '587' ); ?>
-					<?php cps_hc_wcgems_form_field_select( 'Encryption type', 'smtpsecure', $smtpsecure_options, 'default' ); ?>
-
-					<?php cps_hc_wcgems_form_field_text( 'SMTP From email address', 'smtpfrom', '', false, false, false, 'Optional' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'SMTP From name', 'smtpfromname', '', false, false, false, 'Optional' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'The hostname of the mail server', 'smtphost', '', false, false, false, false, 'world' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Username to use for SMTP authentication', 'smtpuser', '', false, false, false, false, 'user' ); ?>
-
-					<?php cps_hc_wcgems_form_field_password( 'Password to use for SMTP authentication', 'smtppassword', '', false, false, false, false, 'lock' ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Send emails from a 3rd party SMTP service, instead of using webserver\'s mail() function.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/smtp-szolgaltatas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 	</ul>

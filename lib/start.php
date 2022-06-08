@@ -30,15 +30,17 @@ include_once SURBMA_HC_PLUGIN_DIR . '/lib/license.php';
 $options = get_option( 'surbma_hc_fields' );
 
 // * HUCOMMERCE START
-// HU Modules
 
+// Free HU modules
 $module_huformatfixValue = isset( $options['huformatfix'] ) ? $options['huformatfix'] : 0;
 $module_nocountyValue = isset( $options['nocounty'] ) ? $options['nocounty'] : 0;
 $module_autofillcityValue = isset( $options['autofillcity'] ) ? $options['autofillcity'] : 0;
 $module_maskcheckoutfieldsValue = isset( $options['maskcheckoutfields'] ) ? $options['maskcheckoutfields'] : 0;
 $module_validatecheckoutfieldsValue = isset( $options['validatecheckoutfields'] ) ? $options['validatecheckoutfields'] : 0;
-$module_productpricehistoryValue = isset( $options['module-productpricehistory'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-productpricehistory'] : 0;
 $module_translationsValue = isset( $options['translations'] ) ? $options['translations'] : 0;
+
+// Pro HU modules
+$module_productpricehistoryValue = isset( $options['module-productpricehistory'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-productpricehistory'] : 0;
 
 if ( 1 == $module_huformatfixValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules-hu/hu-format-fix.php';
@@ -78,10 +80,10 @@ $module_freeshippingnoticeValue = isset( $options['freeshippingnotice'] ) ? $opt
 $module_hideshippingmethods = isset( $options['module-hideshippingmethods'] ) ? $options['module-hideshippingmethods'] : 0;
 $module_productsettingsValue = isset( $options['module-productsettings'] ) ? $options['module-productsettings'] : 0;
 $module_globalinfoValue = isset( $options['module-globalinfo'] ) ? $options['module-globalinfo'] : 0;
+$module_smtpValue = isset( $options['module-smtp'] ) ? $options['module-smtp'] : 0;
 
 // Pro modules
 $module_legalcheckoutValue = isset( $options['legalcheckout'] ) && ( 'active' == SURBMA_HC_PLUGIN_LICENSE || !isset( $options['brandnewuser'] ) || ( isset( $options['legacyuser'] ) && 1 == $options['legacyuser'] ) ) ? $options['legalcheckout'] : 0;
-$module_smtpValue = isset( $options['module-smtp'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-smtp'] : 0;
 
 if ( 1 == $module_taxnumberValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules/tax-number.php';

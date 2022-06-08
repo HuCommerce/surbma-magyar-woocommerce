@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.0
-Stable tag: 2022.2.0
+Stable tag: 2022.2.1
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -56,6 +56,7 @@ Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg h
 - Egyedi “Kosárba teszem” gombok
 - Termék extra beállítások
 - Globális adatok, amiket shortcode-dal lehet bárhol megjeleníteni
+- SMTP szolgáltatás beállítása
 - Fordítási hiányosságok javítása
 - WPML és Polylang kompatibilitás
 - Alap ügyfélszolgálat és támogatás
@@ -73,7 +74,6 @@ A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő 
 
 - Jogi megfelelés (Fogyasztóvédelem, GDPR, ePrivacy, stb.)
 - Termék ár történet (új Fogyasztóvédelemi rendelet) - BÉTA
-- SMTP szolgáltatás beállítása
 - Kiegészítők és sablonok fordításai
 - Kiemelt ügyfélszolgálat és támogatás
 - További funkciók hamarosan…
@@ -314,6 +314,12 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+= 2022.2.1 =
+
+Kiadás dátuma: 2022-06-08
+
+- Az SMTP szolgáltatás modul is átkerült az ingyenes modulok közé. :)
 
 = 2022.2.0 =
 
