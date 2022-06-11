@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.0
-Stable tag: 2022.2.1
+Stable tag: 2022.3.0
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -148,7 +148,7 @@ Az új szabályozás célja annak megakadályozása, hogy a kereskedők megtéve
 
 >A 93/13/EGK tanácsi irányelvnek, valamint a 98/6/EK, a 2005/29/EK és a 2011/83/EU európai parlamenti és tanácsi irányelvnek az uniós fogyasztóvédelmi szabályok hatékonyabb végrehajtása és korszerűsítése tekintetében történő módosításáról szóló, 2019. november 27-i (EU) 2019/2161 európai parlamenti és tanácsi irányelv érintett rendelkezései a termékek eladási ára és egységára, továbbá a szolgáltatások díja feltüntetésének részletes szabályairól szóló 4/2009. (I. 30.) NFGM-SZMM együttes rendelet (a továbbiakban: Árrendelet) 2/A. §-ában kerültek átültetésére.
 
-Ez a modul biztosítja a rendeletnek való megfelelést. A termékhez kapcsolódó árak folyamatos mentésével és annak statisztikai megjelenítésével egy átfogó képet ad a webáruház tulajdonosnak az árváltozás és az aktuális kedvezmény rendelet alapján történő meghatározásáról. A modul minden termékhez létrehoz egy adatlapot, ahol táblázatban és vonal diagramon is mutatja az adatokat. A teljes adatbázis itt JSON formátumban kimásolható.
+Ez a modul biztosítja a rendeletnek való megfelelést. A termékhez kapcsolódó árak folyamatos mentésével és annak statisztikai megjelenítésével egy átfogó képet ad a webáruház tulajdonosnak az árváltozás és az aktuális kedvezmény rendelet alapján történő meghatározásáról. A modul minden termékhez létrehoz egy adatlapot, ahol táblázatban és vonal diagramon is mutatja az adatokat. A teljes adatbázis itt JSON és CSV formátumban kimásolható.
 
 A termék végoldalon pedig automatikusan létrehozott és számolt vagy manuálisan megadott szöveg is megadható, ami biztosítja a látogatók megfelelő információval való ellátását. Ezáltal tud megfelelni a webáruház a Fogyasztóvédelmi elvárásoknak.
 
@@ -314,6 +314,23 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+= 2022.3.0 =
+
+Kiadás dátuma: 2022-06-11
+
+Ebben a verzióban a Termék ár történet modul lett továbbfejlesztve. Megbízhatóbb ár mentéssel és egy új opcióval érkezik, hogy a termék ár statisztikát a látogatók számára is meg lehessen jeleníteni.
+
+- Új opció a Termék ár történet statisztika megjelenítésére a látogatók számára.
+- Régi felhasználóknak kiírt figyelmeztetés törlése.
+- Egyedi előfizetés azonosító megadási lehetősége a licensz kezelésnél.
+- Információknál a weboldal információk másolásánál a figyelmeztetés módosítása natív böngésző kisablakra.
+- Termék ár történet kód optimalizálás és biztonsági feltételek hozzáadása.
+- Termék ár történet algoritmusának a jelentős javítása.
+- Termék ár történet most már a WooCommerce importálással és a WP All Import bővítmény importálásával is kompatibilis.
+- Termék ár történet korlátozott statisztika megjelenítése a látogatók számára.
+- Termék ár történet statisztika megjelenítésének a módosítása.
+- Termék ár történet statisztika kiegészítése CSV formátummal.
 
 = 2022.2.1 =
 

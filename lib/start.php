@@ -40,7 +40,7 @@ $module_validatecheckoutfieldsValue = isset( $options['validatecheckoutfields'] 
 $module_translationsValue = isset( $options['translations'] ) ? $options['translations'] : 0;
 
 // Pro HU modules
-$module_productpricehistoryValue = isset( $options['module-productpricehistory'] ) && 'active' == SURBMA_HC_PLUGIN_LICENSE ? $options['module-productpricehistory'] : 0;
+$module_productpricehistoryValue = isset( $options['module-productpricehistory'] ) ? $options['module-productpricehistory'] : 0;
 
 if ( 1 == $module_huformatfixValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules-hu/hu-format-fix.php';
@@ -83,7 +83,7 @@ $module_globalinfoValue = isset( $options['module-globalinfo'] ) ? $options['mod
 $module_smtpValue = isset( $options['module-smtp'] ) ? $options['module-smtp'] : 0;
 
 // Pro modules
-$module_legalcheckoutValue = isset( $options['legalcheckout'] ) && ( 'active' == SURBMA_HC_PLUGIN_LICENSE || !isset( $options['brandnewuser'] ) || ( isset( $options['legacyuser'] ) && 1 == $options['legacyuser'] ) ) ? $options['legalcheckout'] : 0;
+$module_legalcheckoutValue = isset( $options['legalcheckout'] ) && ( SURBMA_HC_PREMIUM || !isset( $options['brandnewuser'] ) || ( isset( $options['legacyuser'] ) && 1 == $options['legacyuser'] ) ) ? $options['legalcheckout'] : 0;
 
 if ( 1 == $module_taxnumberValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules/tax-number.php';

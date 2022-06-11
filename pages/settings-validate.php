@@ -40,6 +40,7 @@ function surbma_hc_fields_validate( $input ) {
 	$input['validateshippingaddressfield'] = isset( $input['validateshippingaddressfield'] ) && 1 == $input['validateshippingaddressfield'] ? 1 : 0;
 	$input['productpricehistory-showlowestprice'] = isset( $input['productpricehistory-showlowestprice'] ) && 1 == $input['productpricehistory-showlowestprice'] ? 1 : 0;
 	$input['productpricehistory-showdiscount'] = isset( $input['productpricehistory-showdiscount'] ) && 1 == $input['productpricehistory-showdiscount'] ? 1 : 0;
+	$input['productpricehistory-showstatisticslink'] = isset( $input['productpricehistory-showstatisticslink'] ) && 1 == $input['productpricehistory-showstatisticslink'] ? 1 : 0;
 
 	// Say our text/textarea option must be safe text with the allowed tags for posts
 	$input['productpricehistory-lowestpricetext'] = wp_filter_post_kses( $input['productpricehistory-lowestpricetext'] );
@@ -142,6 +143,7 @@ function surbma_hc_fields_validate( $input ) {
 	$input['smtphost'] = wp_filter_nohtml_kses( $input['smtphost'] );
 	$input['smtpuser'] = wp_filter_nohtml_kses( $input['smtpuser'] );
 	$input['smtppassword'] = wp_filter_nohtml_kses( $input['smtppassword'] );
+	$input['productpricehistory-statisticslinktext'] = wp_filter_nohtml_kses( $input['productpricehistory-statisticslinktext'] );
 
 	// Say our text/textarea option must be safe text with the allowed tags for posts
 	$input['regacceptpp'] = wp_filter_post_kses( $input['regacceptpp'] );
@@ -175,6 +177,8 @@ function surbma_hc_fields_validate( $input ) {
 		$input['productpricehistory-lowestpricetext'] = isset( $options['productpricehistory-lowestpricetext'] ) ? $options['productpricehistory-lowestpricetext'] : __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
 		$input['productpricehistory-showdiscount'] = isset( $options['productpricehistory-showdiscount'] ) ? $options['productpricehistory-showdiscount'] : 0;
 		$input['productpricehistory-discounttext'] = isset( $options['productpricehistory-discounttext'] ) ? $options['productpricehistory-discounttext'] : __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
+		$input['productpricehistory-showstatisticslink'] = isset( $options['productpricehistory-showstatisticslink'] ) ? $options['productpricehistory-showstatisticslink'] : 0;
+		$input['productpricehistory-statisticslinktext'] = isset( $options['productpricehistory-statisticslinktext'] ) ? $options['productpricehistory-statisticslinktext'] : __( 'Advanced statistics', 'surbma-magyar-woocommerce' );
 
 		// Legal compliance
 		$input['regip'] = isset( $options['regip'] ) ? $options['regip'] : 0;

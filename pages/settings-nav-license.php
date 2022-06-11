@@ -13,6 +13,7 @@ function surbma_hc_get_starred( $str ) {
 }
 
 $license_status = get_option( 'surbma_hc_license_status', array() );
+$custom_product_id = isset( $_GET['hc-product_id'] ) ? $_GET['hc-product_id'] : false;
 
 ?>
 <p>Itt kell megadnod és aktiválnod a HuCommerce Pro API kulcsodat. Sikeres aktiválás után a HuCommerce Pro minden funkciója elérhető lesz számodra az aktív előfizetésed alatt. Lejárt előfizetés esetén a Pro funkciók kikapcsolnak!</p>
@@ -27,7 +28,15 @@ $license_status = get_option( 'surbma_hc_license_status', array() );
 
 	<?php $inputType = defined( 'WP_DEBUG' ) && 1 == WP_DEBUG ? 'text' : 'hidden'; ?>
 
-	<?php $product_idValue = isset( $license_options['product_id'] ) && $license_options['product_id'] ? $license_options['product_id'] : '1135'; ?>
+	<?php
+		if ( isset( $license_options['product_id'] ) && $license_options['product_id'] ) {
+			$product_idValue = $license_options['product_id'];
+		} elseif ( $custom_product_id ) {
+			$product_idValue = $custom_product_id;
+		} else {
+			$product_idValue = '1135';
+		}
+	?>
 	<input id="surbma_hc_license[product_id]" class="uk-input uk-form-large uk-margin-bottom" type="<?php echo esc_attr( $inputType ); ?>" name="surbma_hc_license[product_id]" value="<?php echo esc_attr( wp_unslash( $product_idValue ) ); ?>" placeholder="Product ID" style="font-family: monospace;"<?php echo esc_html( $disabled ); ?> />
 
 	<?php $instanceValue = isset( $license_options['instance'] ) && $license_options['instance'] ? $license_options['instance'] : wp_generate_password( 40, false ); ?>

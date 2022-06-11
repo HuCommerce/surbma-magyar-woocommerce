@@ -23,7 +23,7 @@ function surbma_hc_create_url( $request_args ) {
 $manual_request = isset( $_GET['hc-request'] ) ? $_GET['hc-request'] : false;
 if ( $api_key && $product_id && $instance && $manual_request ) {
 	// Activate request sent from HuCommerce Pro menu with the "Frissítés & Újra aktiválás" button
-	if ( $manual_request == 'activate' ) {
+	if ( 'activate' == $manual_request ) {
 		$manual_request_args = array(
 			'wc_am_action' => 'activate',
 			'api_key'      => $api_key,
@@ -34,7 +34,7 @@ if ( $api_key && $product_id && $instance && $manual_request ) {
 	}
 
 	// Dectivate request sent from HuCommerce Pro menu with the "Megtartás & deaktiválás" button
-	if ( $manual_request == 'deactivate' ) {
+	if ( 'deactivate' == $manual_request ) {
 		$manual_request_args = array(
 			'wc_am_action' => 'deactivate',
 			'api_key'      => $api_key,
@@ -44,7 +44,7 @@ if ( $api_key && $product_id && $instance && $manual_request ) {
 	}
 
 	// Status request sent from HuCommerce Pro menu with the "API szinkronizálás" link
-	if ( $manual_request == 'status' ) {
+	if ( 'status' == $manual_request ) {
 		$manual_request_args = array(
 			'wc_am_action' => 'status',
 			'api_key'      => $api_key,
@@ -135,7 +135,7 @@ if ( ( $api_key && $product_id && $instance && $last_check_diff > ( 24 * 60 * 60
  * SURBMA_HC_PLUGIN_LICENSE
  *
  * This global is to check license status, if user has rights to use premium features.
- * Values can be: valid, expired, invalid, free
+ * Values can be: active, inactive, invalid, free
  *
 */
 if ( $status ) {

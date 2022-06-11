@@ -7,7 +7,6 @@ defined( 'ABSPATH' ) || exit;
 $options = get_option( 'surbma_hc_fields' );
 $szamlazzhu_options = get_option( 'woocommerce_wc_szamlazz_settings' );
 $billingo_options = get_option( 'woocommerce_wc_billingo_plus_settings' );
-$legacyconfirmation = 'free' == SURBMA_HC_PLUGIN_LICENSE && $options && !isset( $options['brandnewuser'] ) ? 'onsubmit="return confirm(\'FIGYELEM! Mivel a HuCommerce ingyenes verzióját használod, ezért az űrlap mentése kikapcsolja az összes HuCommerce Pro modult, tehát esetleg azokat is, amik eddig használatban voltak. Mindenképpen mented az űrlapot?\');"' : '';
 // * HUCOMMERCE END
 
 global $couponfieldposition_options;
@@ -144,9 +143,12 @@ __( 'SMTP From name', 'surbma-magyar-woocommerce' );
 __( 'The hostname of the mail server', 'surbma-magyar-woocommerce' );
 __( 'Username to use for SMTP authentication', 'surbma-magyar-woocommerce' );
 __( 'Password to use for SMTP authentication', 'surbma-magyar-woocommerce' );
+__( 'Show the link for advanced statistics on Product pages', 'surbma-magyar-woocommerce' );
+__( 'It will show a link also on the Product pages, where visitors can see a more detailed Product price history for the actual Product.', 'surbma-magyar-woocommerce' );
+__( 'Text for the advanced statistics link', 'surbma-magyar-woocommerce' );
 ?>
 
-<form class="uk-form-stacked" method="post" action="options.php" <?php echo $legacyconfirmation; ?>>
+<form class="uk-form-stacked" method="post" action="options.php">
 	<?php settings_fields( 'surbma_hc_options' ); ?>
 
 	<ul class="uk-list uk-list-large" uk-accordion>
@@ -608,11 +610,15 @@ __( 'Password to use for SMTP authentication', 'surbma-magyar-woocommerce' );
 					<?php cps_hc_wcgems_form_field_text( 'Text before the lowest price', 'productpricehistory-lowestpricetext', 'Our lowest price from previous term', false, true, false, 'HTML tags are allowed' ); ?>
 					<?php cps_hc_wcgems_form_field_checkbox( 'Show the calculated discount on Product pages', 'productpricehistory-showdiscount', 'It will show the discount, that is calculated from the lowest price automatically.', true ); ?>
 					<?php cps_hc_wcgems_form_field_text( 'Text before the discount', 'productpricehistory-discounttext', 'Current discount based on the lowest price', false, true, false, 'HTML tags are allowed' ); ?>
+
 					<li>
-						<div class="uk-alert-danger cps-alert" uk-alert>
+						<div class="uk-alert-primary cps-alert" uk-alert>
 							<p>FIGYELEM! Minden terméknél beállítható egy egyedi szöveg, ami megjelenik az adott terméknél az ár alatt. Ez felülírja a fenti beállításokat.</p>
 						</div>
 					</li>
+
+					<?php cps_hc_wcgems_form_field_checkbox( 'Show the link for advanced statistics on Product pages', 'productpricehistory-showstatisticslink', 'It will show a link also on the Product pages, where visitors can see a more detailed Product price history for the actual Product.', true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Text for the advanced statistics link', 'productpricehistory-statisticslinktext', 'Advanced statistics', false, true ); ?>
 
 					<li>
 						<label class="uk-form-label"><?php esc_html_e( 'Allowed HTML tags', 'surbma-magyar-woocommerce' ); ?></label>
