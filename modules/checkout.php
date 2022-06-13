@@ -11,12 +11,13 @@ add_filter( 'woocommerce_billing_fields', function( $fields ) {
 	if ( 'optional' == $woocommercecheckoutcompanyfieldValue && 1 == $billingcompanycheckValue ) {
 		$fields['billing_company_check'] = array(
 			'type' 			=> 'checkbox',
+			'class'         => array( 'form-row-wide', 'woocommerce-form-row', 'woocommerce-form-row--wide', 'company' ),
 			'label' 		=> '<span>' . __( 'Company billing', 'surbma-magyar-woocommerce' ) . '</span>',
-			'required' 		=> false,
-			'class' 		=> array( 'form-row-wide' ),
-			'label_class' 	=> array( 'woocommerce-form__label woocommerce-form__label-for-checkbox checkbox' ),
+			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
+			'input_class'   => array( 'woocommerce-form__input', 'woocommerce-form__input-checkbox' ),
 			'priority' 		=> 29,
-			'clear' 		=> true
+			'clear' 		=> true,
+			'required' 		=> false
 		);
 	}
 	return $fields;

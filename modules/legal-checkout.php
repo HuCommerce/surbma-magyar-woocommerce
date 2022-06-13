@@ -10,9 +10,10 @@ add_action( 'woocommerce_register_form', function() {
 	if ( !is_checkout() && $regacceptppValue ) {
 		woocommerce_form_field( 'reg_accept_pp', array(
 			'type'          => 'checkbox',
-			'class'         => array('woocommerce-form-row woocommerce-form-row--wide form-row-wide privacy'),
+			'class'         => array( 'form-row-wide', 'woocommerce-form-row', 'woocommerce-form-row--wide', 'privacy' ),
 			'label'         => '<span class="hc-checkbox-text">' . $regacceptppValue . '</span>',
 			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
+			'input_class'   => array( 'woocommerce-form__input', 'woocommerce-form__input-checkbox' ),
 			'required'      => true
 		) );
 	}
@@ -144,9 +145,10 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 	if ( $accepttosValue ) {
 		woocommerce_form_field( 'accept_tos', array(
 			'type'          => 'checkbox',
-			'class'         => array( 'form-row-wide', 'tos' ),
+			'class'         => array( 'form-row-wide', 'woocommerce-form-row', 'woocommerce-form-row--wide', 'tos' ),
 			'label'         => '<span class="hc-checkbox-text">' . $accepttosValue . '</span>',
 			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
+			'input_class'   => array( 'woocommerce-form__input', 'woocommerce-form__input-checkbox' ),
 			'required'      => true
 		), $checkout->get_value( 'accept_tos' ));
 	}
@@ -154,9 +156,10 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 	if ( $acceptppValue ) {
 		woocommerce_form_field( 'accept_pp', array(
 			'type'          => 'checkbox',
-			'class'         => array( 'form-row-wide', 'pp' ),
+			'class'         => array( 'form-row-wide', 'woocommerce-form-row', 'woocommerce-form-row--wide', 'pp' ),
 			'label'         => '<span class="hc-checkbox-text">' . $acceptppValue . '</span>',
 			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
+			'input_class'   => array( 'woocommerce-form__input', 'woocommerce-form__input-checkbox' ),
 			'required'      => true
 		), $checkout->get_value( 'accept_pp' ) );
 	}
@@ -164,9 +167,10 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 	if ( $acceptcustom1Value ) {
 		woocommerce_form_field( 'accept_custom1', array(
 			'type'          => 'checkbox',
-			'class'         => array( 'form-row-wide', 'pp' ),
+			'class'         => array( 'form-row-wide', 'woocommerce-form-row', 'woocommerce-form-row--wide', 'custom1' ),
 			'label'         => '<span class="hc-checkbox-text">' . $acceptcustom1Value . '</span>',
 			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
+			'input_class'   => array( 'woocommerce-form__input', 'woocommerce-form__input-checkbox' ),
 			'required'      => true
 		), $checkout->get_value( 'accept_custom1' ) );
 	}
@@ -174,9 +178,10 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 	if ( $acceptcustom2Value ) {
 		woocommerce_form_field( 'accept_custom2', array(
 			'type'          => 'checkbox',
-			'class'         => array( 'form-row-wide', 'pp' ),
+			'class'         => array( 'form-row-wide', 'woocommerce-form-row', 'woocommerce-form-row--wide', 'custom2' ),
 			'label'         => '<span class="hc-checkbox-text">' . $acceptcustom2Value . '</span>',
 			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
+			'input_class'   => array( 'woocommerce-form__input', 'woocommerce-form__input-checkbox' ),
 			'required'      => true
 		), $checkout->get_value( 'accept_custom2' ) );
 	}

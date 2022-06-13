@@ -166,7 +166,7 @@ __( 'Text for the advanced statistics link', 'surbma-magyar-woocommerce' );
 		</li>
 		<?php // * HUCOMMERCE END ?>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Tax number field', 'taxnumberplaceholder' ); ?>
+			<?php cps_hc_wcgems_form_accordion_title( 'Tax number field', 'taxnumber' ); ?>
 			<div class="uk-accordion-content">
 				<?php // * HUCOMMERCE START ?>
 					<?php $szamlazzhu_vatnumber_Value = isset( $szamlazzhu_options['vat_number_form'] ) ? $szamlazzhu_options['vat_number_form'] : false; ?>
