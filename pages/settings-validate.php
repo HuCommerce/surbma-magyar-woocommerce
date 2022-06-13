@@ -183,7 +183,7 @@ function surbma_hc_fields_validate( $input ) {
 		// Legal compliance
 		$input['regip'] = isset( $options['regip'] ) ? $options['regip'] : 0;
 		$input['regacceptpp'] = isset( $options['regacceptpp'] ) ? $options['regacceptpp'] : __( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
-		$input['legalconfirmationsposition'] = isset( $options['legalconfirmationsposition'] ) ? $options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
+		$input['legalconfirmationsposition'] = isset( $options['legalconfirmationsposition'] ) && 'revieworderbeforesubmit' != $options['legalconfirmationsposition'] ? $options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
 		$input['legalcheckouttitle'] = isset( $options['legalcheckouttitle'] ) ? $options['legalcheckouttitle'] : __( 'Legal confirmations', 'surbma-magyar-woocommerce' );
 		$input['accepttos'] = isset( $options['accepttos'] ) ? $options['accepttos'] : __( 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'surbma-magyar-woocommerce' );
 		$input['acceptpp'] = isset( $options['acceptpp'] ) ? $options['acceptpp'] : __( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
