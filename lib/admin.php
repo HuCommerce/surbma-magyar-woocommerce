@@ -3,6 +3,18 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
+$test_email_request = isset( $_GET['hc-test-email'] ) ? $_GET['hc-test-email'] : false;
+if ( $test_email_request ) {
+	$subject = esc_html__( 'HuCommerce test email', 'surbma-magyar-woocommerce' );
+	$body = esc_html__( 'Congratulations! The SMTP settings are correct.', 'surbma-magyar-woocommerce' );
+	wp_mail( $test_email_request, $subject, $body );
+
+	// Remove query parameter from url
+	$url = esc_url_raw( remove_query_arg( 'hc-test-email' ) );
+	$url = add_query_arg( 'hc-response', 'email-sent', $url );
+	wp_redirect( $url );
+}
+
 include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings.php');
 
 // Admin options menu

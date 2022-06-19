@@ -563,6 +563,12 @@ __( 'Text for the advanced statistics link', 'surbma-magyar-woocommerce' );
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'SMTP service', 'module-smtp', false, false, true ); ?>
+				<br>
+				<?php
+					$current_user = wp_get_current_user();
+					$current_user_email = urlencode( $current_user->user_email );
+				?>
+				<a href="<?php echo esc_url( add_query_arg( 'hc-test-email', $current_user_email ) ); ?>" class="uk-button uk-button-primary" uk-tooltip="title: <?php esc_html_e( 'Clicking on this button will send a test email to the actual user\'s email address.', 'surbma-magyar-woocommerce' ); ?>; pos: right"><?php esc_html_e( 'Send test email', 'surbma-magyar-woocommerce' ); ?></a>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">

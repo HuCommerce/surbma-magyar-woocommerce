@@ -61,6 +61,7 @@ if ( $api_key && $product_id && $instance && $manual_request ) {
 
 	// Remove query parameter from url
 	$url = esc_url_raw( remove_query_arg( 'hc-request' ) );
+	$url = add_query_arg( 'hc-response', $manual_request, $url );
 	wp_redirect( $url );
 }
 

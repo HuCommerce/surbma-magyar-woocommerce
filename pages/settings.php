@@ -60,6 +60,14 @@ function surbma_hc_settings_page() {
 			<div class="updated notice is-dismissible"><p><strong><?php esc_html_e( 'Settings saved.' ); ?></strong></p></div>
 		<?php } ?>
 
+		<?php if ( isset( $_GET['hc-response'] ) && 'status' == $_GET['hc-response'] ) { ?>
+			<div class="updated notice is-dismissible"><p><strong><?php esc_html_e( 'API sync finished.', 'surbma-magyar-woocommerce' ); ?></strong></p></div>
+		<?php } ?>
+
+		<?php if ( isset( $_GET['hc-response'] ) && 'email-sent' == $_GET['hc-response'] ) { ?>
+			<div class="updated notice is-dismissible"><p><strong><?php esc_html_e( 'Test email sent.', 'surbma-magyar-woocommerce' ); ?></strong></p></div>
+		<?php } ?>
+
 		<h2 class="uk-hidden"></h2>
 
 		<?php // Inactive notification ?>
