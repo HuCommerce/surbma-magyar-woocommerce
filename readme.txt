@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.0
-Stable tag: 2022.3.2
+Stable tag: 2022.3.3
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -314,6 +314,12 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+= 2022.3.3 =
+
+Kiadás dátuma: 2022-06-19
+
+- A Szállítási módok elrejtése modul javítása, hogy minden beállításnál a megfelelő szállítási módokat mutassa.
 
 = 2022.3.2 =
 
