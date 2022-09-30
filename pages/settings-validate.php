@@ -180,10 +180,6 @@ function surbma_hc_fields_validate( $input ) {
 	// * HUCOMMERCE START
 	// If no valid license, check if field has any value. If yes, save it, if no, set to default.
 	if ( 'active' != SURBMA_HC_PLUGIN_LICENSE ) {
-		// Modules
-		$input['module-productpricehistory'] = isset( $options['module-productpricehistory'] ) ? $options['module-productpricehistory'] : 0;
-		$input['legalcheckout'] = isset( $options['legalcheckout'] ) ? $options['legalcheckout'] : 0;
-
 		// Product price history
 		$input['productpricehistory-showlowestprice'] = isset( $options['productpricehistory-showlowestprice'] ) ? $options['productpricehistory-showlowestprice'] : 0;
 		$input['productpricehistory-lowestpricetext'] = isset( $options['productpricehistory-lowestpricetext'] ) ? $options['productpricehistory-lowestpricetext'] : __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
