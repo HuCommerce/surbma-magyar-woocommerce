@@ -25,6 +25,10 @@ $couponfieldposition_options = array(
 );
 
 $returntoshopcartposition_options = array(
+	'nocart' => array(
+		'value' => 'nocart',
+		'label' => __( 'Don\'t show on Cart page', 'surbma-magyar-woocommerce' )
+	),
 	'beforecarttable' => array(
 		'value' => 'beforecarttable',
 		'label' => __( 'Before Product table (with text)', 'surbma-magyar-woocommerce' )
