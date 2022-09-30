@@ -77,13 +77,13 @@ $module_oneproductincartValue = isset( $options['module-oneproductincart'] ) ? $
 $module_custom_addtocart_buttonValue = isset( $options['module-custom-addtocart-button'] ) ? $options['module-custom-addtocart-button'] : 0;
 $module_returntoshopValue = isset( $options['returntoshop'] ) ? $options['returntoshop'] : 0;
 $module_loginregistrationredirectValue = isset( $options['loginregistrationredirect'] ) ? $options['loginregistrationredirect'] : 0;
-$module_freeshippingnoticeValue = isset( $options['freeshippingnotice'] ) ? $options['freeshippingnotice'] : 0;
 $module_hideshippingmethods = isset( $options['module-hideshippingmethods'] ) ? $options['module-hideshippingmethods'] : 0;
 $module_productsettingsValue = isset( $options['module-productsettings'] ) ? $options['module-productsettings'] : 0;
 $module_globalinfoValue = isset( $options['module-globalinfo'] ) ? $options['module-globalinfo'] : 0;
 $module_smtpValue = isset( $options['module-smtp'] ) ? $options['module-smtp'] : 0;
 
 // Pro modules
+$module_freeshippingnoticeValue = isset( $options['freeshippingnotice'] ) && SURBMA_HC_PREMIUM ? $options['freeshippingnotice'] : 0;
 $module_legalcheckoutValue = isset( $options['legalcheckout'] ) && ( SURBMA_HC_PREMIUM || !isset( $options['brandnewuser'] ) || ( isset( $options['legacyuser'] ) && 1 == $options['legacyuser'] ) ) ? $options['legalcheckout'] : 0;
 
 if ( 1 == $module_taxnumberValue ) {

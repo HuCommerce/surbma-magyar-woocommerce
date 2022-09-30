@@ -404,25 +404,6 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			</div>
 		</li>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Free shipping notification', 'freeshippingnotice', true ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Free shipping notification', 'freeshippingnotice', false, false, true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Product listing pages', 'freeshippingnoticeshoploop', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Cart page', 'freeshippingnoticecart', false, false, true, 1 ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Checkout page', 'freeshippingnoticecheckout', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Message text', 'freeshippingnoticemessage', 'The remaining amount to get FREE shipping', false, false, true ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'A notification on the Cart page to let customer know, how much total purchase is missing to get free shipping.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/ingyenes-szallitas-ertesites/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Coupon field customizations', 'module-coupon', true ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
@@ -627,6 +608,25 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 		</div>
 	<?php } ?>
 	<ul class="uk-list uk-list-large" uk-accordion>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Free shipping notification', 'freeshippingnotice' ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Free shipping notification', 'freeshippingnotice' ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Product listing pages', 'freeshippingnoticeshoploop', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Cart page', 'freeshippingnoticecart', false, false, false, 1 ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Checkout page', 'freeshippingnoticecheckout', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Message text', 'freeshippingnoticemessage', 'The remaining amount to get FREE shipping' ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'A notification on the Cart page to let customer know, how much total purchase is missing to get free shipping.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/ingyenes-szallitas-ertesites/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
 		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Product price history', 'module-productpricehistory', true, true ); ?>
 			<div class="uk-accordion-content">
