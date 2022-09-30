@@ -29,10 +29,10 @@ $custom_product_id = isset( $_GET['hc-product_id'] ) ? $_GET['hc-product_id'] : 
 	<?php $inputType = defined( 'WP_DEBUG' ) && 1 == WP_DEBUG ? 'text' : 'hidden'; ?>
 
 	<?php
-		if ( isset( $license_options['product_id'] ) && $license_options['product_id'] ) {
-			$product_idValue = $license_options['product_id'];
-		} elseif ( $custom_product_id ) {
+		if ( $custom_product_id ) {
 			$product_idValue = $custom_product_id;
+		} elseif ( isset( $license_options['product_id'] ) && $license_options['product_id'] ) {
+			$product_idValue = $license_options['product_id'];
 		} else {
 			$product_idValue = '1135';
 		}
