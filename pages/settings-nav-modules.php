@@ -165,7 +165,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Fixes for Hungarian language', 'huformatfix' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Fixes for Hungarian language', 'huformatfix', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Fixes for Hungarian language', 'huformatfix', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Fixes the name formats in Hungarian. Changes the order of Last name and First name.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -206,7 +206,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 				<?php // * HUCOMMERCE END ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Tax number field', 'taxnumber', true, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Tax number field', 'taxnumber', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -226,7 +226,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Hungarian translation fixes', 'translations' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Hungarian translation fixes', 'translations', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Hungarian translation fixes', 'translations', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Temporary fixes for Hungarian translations, till the official translation doesn\’t include or missing some strings.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -237,7 +237,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Hide County field if Country is Hungary', 'nocounty' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Hide County field if Country is Hungary', 'nocounty', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Hide County field if Country is Hungary', 'nocounty', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Using County for Hungarian addresses is very uncommon in Hungary.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -248,7 +248,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Autofill City after Postcode is given', 'autofillcity' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Autofill City after Postcode is given', 'autofillcity', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Autofill City after Postcode is given', 'autofillcity', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'On the Checkout page the City field be automatically filled, when Postcode is entered by the customer.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -259,7 +259,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Check field formats (Masking)', 'maskcheckoutfields', true ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Check field formats (Masking)', 'maskcheckoutfields', true, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Check field formats (Masking)', 'maskcheckoutfields', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -279,7 +279,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Check field values', 'validatecheckoutfields', true ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Check field values', 'validatecheckoutfields', true, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Check field values', 'validatecheckoutfields', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -301,7 +301,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Product customizations', 'module-productsettings', true ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Product customizations', 'module-productsettings', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Product customizations', 'module-productsettings', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -327,7 +327,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Checkout page customizations', 'module-checkout', true ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Checkout page customizations', 'module-checkout', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Checkout page customizations', 'module-checkout', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -350,7 +350,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Plus/minus quantity buttons', 'plusminus' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Plus/minus quantity buttons', 'plusminus', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Plus/minus quantity buttons', 'plusminus', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Shows plus/minus quantity buttons for products.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -361,7 +361,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Automatic Cart update', 'updatecart' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Automatic Cart update', 'updatecart', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Automatic Cart update', 'updatecart', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'It will automatically update the cart, when customer changes the quantity on the Cart page.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -372,7 +372,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Continue shopping buttons', 'returntoshop' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Continue shopping buttons', 'returntoshop', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Continue shopping buttons', 'returntoshop', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -390,7 +390,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Login and registration redirection', 'loginregistrationredirect' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Login and registration redirection', 'loginregistrationredirect', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Login and registration redirection', 'loginregistrationredirect', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -426,7 +426,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Coupon field customizations', 'module-coupon', true ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Coupon field customizations', 'module-coupon', false, true, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Coupon field customizations', 'module-coupon', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -446,7 +446,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Redirect Cart page to Checkout page', 'module-redirectcart', true ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Redirect Cart page to Checkout page', 'module-redirectcart', false, true, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Redirect Cart page to Checkout page', 'module-redirectcart', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'It will redirect the Cart page to Checkout page, so visitors can finish the purchase faster.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -477,7 +477,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'One product per purchase', 'module-oneproductincart', true ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'One product per purchase', 'module-oneproductincart', false, true, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'One product per purchase', 'module-oneproductincart', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'It will allow only one product in the cart. If cart has a product already, it will be replaced by the new product.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -488,7 +488,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Custom Add To Cart Button', 'module-custom-addtocart-button', true ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Custom Add To Cart Button', 'module-custom-addtocart-button', false, true, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Custom Add To Cart Button', 'module-custom-addtocart-button', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -521,7 +521,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Hide shipping methods', 'module-hideshippingmethods', true ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Hide shipping methods', 'module-hideshippingmethods', false, true, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Hide shipping methods', 'module-hideshippingmethods', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -538,7 +538,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Global informations', 'module-globalinfo' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Global informations', 'module-globalinfo', false, true, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Global informations', 'module-globalinfo', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -590,7 +590,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'SMTP service', 'module-smtp' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'SMTP service', 'module-smtp', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'SMTP service', 'module-smtp', true ); ?>
 				<br>
 				<?php
 					$current_user = wp_get_current_user();
@@ -631,12 +631,12 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 			<?php cps_hc_wcgems_form_accordion_title( 'Product price history', 'module-productpricehistory', true, true ); ?>
 			<div class="uk-accordion-content">
 				<div class="uk-alert-primary cps-alert" uk-alert>
-					<p><strong>BETA verzió</strong><br>
+					<p><strong>BÉTA verzió</strong><br>
 					Ez a modul nincs minden körülmény között tesztelve és nem tudja 100%-ban teljesíteni a funkcionális és/vagy jogi igényeket, feltételeket. Ezért a használata esetén fokozott figyelmet igényel.<br>
 					FIGYELEM! A HuCommerce ügyfélszolgálatára beküldött visszajelzések és javaslatok jelentősen gyorsítják a modul fejlesztését, ezért szívesen várjuk az ilyen témájú megkereséseket. Köszönjük!</p>
 				</div>
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Product price history', 'module-productpricehistory', false, true, false ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Product price history', 'module-productpricehistory' ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
@@ -680,7 +680,7 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 					</div>
 				<?php } ?>
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Legal compliance (GDPR, CCPA, ePrivacy)', 'legalcheckout', true ); ?>
+				<?php cps_hc_wcgems_form_field_main( 'Legal compliance (GDPR, CCPA, ePrivacy)', 'legalcheckout' ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">

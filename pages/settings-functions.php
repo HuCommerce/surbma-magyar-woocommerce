@@ -48,16 +48,15 @@ function cps_hc_wcgems_form_accordion_title( $module_title, $module_option, $mod
 	echo $module;
 }
 
-function cps_hc_wcgems_form_field_main( $field_label, $field_option, $field_more_settings = false, $field_new = false, $field_free = false ) {
+function cps_hc_wcgems_form_field_main( $field_label, $field_option, $field_free = false ) {
 	$options = get_option( 'surbma_hc_fields' );
 	$field = '';
-	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
-	$new = $field_new ? ' <span class="uk-badge">' . __( 'New', 'surbma-magyar-woocommerce' ) . '</span>' : '';
+	$disabled = $field_free || SURBMA_HC_PREMIUM || ( isset( $options[$field_option] ) && 1 == $options[$field_option] ) ? '' : ' disabled';
 
 	ob_start();
 		?>
 		<div class="cps-form-module cps-form-checkbox<?php echo esc_html( $disabled ); ?>">
-			<div class="uk-form-label uk--text-bold"><?php esc_html_e( $field_label, 'surbma-magyar-woocommerce' ); ?><?php echo wp_kses_post( $new ); ?></div>
+			<div class="uk-form-label uk-text-bold uk-text-uppercase"><?php esc_html_e( $field_label, 'surbma-magyar-woocommerce' ); ?></div>
 			<div class="uk-form-controls">
 				<div class="switch-wrap">
 					<label class="switch">
