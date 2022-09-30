@@ -10,6 +10,8 @@ global $shippingmethodstohide_options;
 global $legalconfirmationsposition_options;
 global $smtpport_options;
 global $smtpsecure_options;
+global $emptycartbutton_cartpage_options;
+global $emptycartbutton_checkoutpage_options;
 
 $couponfieldposition_options = array(
 	'beforecheckoutform' => array(
@@ -114,4 +116,38 @@ $smtpsecure_options = array(
 		'value' => 'ssl',
 		'label' => 'SSL'
 	),
+);
+
+$emptycartbutton_cartpage_options = array(
+	'none' => array(
+		'value' => 'none',
+		'label' => __( 'Don\'t show on Cart page', 'surbma-magyar-woocommerce' )
+	),
+	'woocommerce_cart_coupon' => array(
+		'value' => 'woocommerce_cart_coupon',
+		'label' => __( 'Next to the Apply coupon button', 'surbma-magyar-woocommerce' )
+	),
+	'woocommerce_cart_actions' => array(
+		'value' => 'woocommerce_cart_actions',
+		'label' => __( 'Next to the Update cart button', 'surbma-magyar-woocommerce' )
+	),
+	'woocommerce_before_cart_collaterals' => array(
+		'value' => 'woocommerce_before_cart_collaterals',
+		'label' => __( 'Under the Products table', 'surbma-magyar-woocommerce' )
+	)
+);
+
+$emptycartbutton_checkoutpage_options = array(
+	'none' => array(
+		'value' => 'none',
+		'label' => __( 'Don\'t show on Checkout page', 'surbma-magyar-woocommerce' )
+	),
+	'woocommerce_before_checkout_form' => array(
+		'value' => 'woocommerce_before_checkout_form',
+		'label' => __( 'Before Checkout form (with text)', 'surbma-magyar-woocommerce' )
+	),
+	'woocommerce_after_checkout_form' => array(
+		'value' => 'woocommerce_after_checkout_form',
+		'label' => __( 'After Checkout form (with text)', 'surbma-magyar-woocommerce' )
+	)
 );

@@ -16,6 +16,8 @@ global $shippingmethodstohide_options;
 global $legalconfirmationsposition_options;
 global $smtpport_options;
 global $smtpsecure_options;
+global $emptycartbutton_cartpage_options;
+global $emptycartbutton_checkoutpage_options;
 
 // Translation fixes
 __( 'Fixes for Hungarian language', 'surbma-magyar-woocommerce' );
@@ -146,6 +148,12 @@ __( 'Password to use for SMTP authentication', 'surbma-magyar-woocommerce' );
 __( 'Show the link for advanced statistics on Product pages', 'surbma-magyar-woocommerce' );
 __( 'It will show a link also on the Product pages, where visitors can see a more detailed Product price history for the actual Product.', 'surbma-magyar-woocommerce' );
 __( 'Text for the advanced statistics link', 'surbma-magyar-woocommerce' );
+__( 'Empty Cart button', 'surbma-magyar-woocommerce' );
+__( 'Show Empty Cart button on Cart page', 'surbma-magyar-woocommerce' );
+__( 'Show Empty Cart button on Checkout page', 'surbma-magyar-woocommerce' );
+__( 'Changed your mind?', 'surbma-magyar-woocommerce' );
+__( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' );
+__( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 ?>
 
 <form class="uk-form-stacked" method="post" action="options.php">
@@ -443,6 +451,26 @@ __( 'Text for the advanced statistics link', 'surbma-magyar-woocommerce' );
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'It will redirect the Cart page to Checkout page, so visitors can finish the purchase faster.', 'surbma-magyar-woocommerce' ); ?></p>
 				<p><a href="https://www.hucommerce.hu/dokumentum/kosar-atiranyitasa-a-penztar-oldalra/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Empty Cart button', 'module-emptycartbutton', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Empty Cart button', 'module-emptycartbutton', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_wcgems_form_field_select( 'Button position on Cart page', 'emptycartbutton-cartpage', $emptycartbutton_cartpage_options, 'none', false, true, true ); ?>
+					<?php cps_hc_wcgems_form_field_select( 'Button position on Checkout page', 'emptycartbutton-checkoutpage', $emptycartbutton_checkoutpage_options, 'none', false, true, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Message text', 'emptycartbutton-checkoutpagemessage', 'Changed your mind?', false, true, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Link text', 'emptycartbutton-checkoutpagelinktext', 'Empty cart & continue shopping', false, true, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Confirmation text', 'emptycartbutton-checkoutpageconfirmationtext', 'Are you sure you want to empty the Cart?', false, true, true ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'It will display buttons, that can empty the entire Cart with one click. You can also add a custom link to your navigation with a special parameter, so it is possible to have an Empty Cart link in your menu. Read more about this option in our Documentation.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/kosar-uritese-gomb/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>

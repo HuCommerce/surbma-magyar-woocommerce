@@ -151,6 +151,8 @@ function cps_hc_wcgems_form_field_select( $field_label, $field_option, $field_op
 	global $legalconfirmationsposition_options;
 	global $smtpport_options;
 	global $smtpsecure_options;
+	global $emptycartbutton_cartpage_options;
+	global $emptycartbutton_checkoutpage_options;
 
 	$options = get_option( 'surbma_hc_fields' );
 	$field = '';

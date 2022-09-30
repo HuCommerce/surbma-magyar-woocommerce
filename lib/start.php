@@ -72,6 +72,7 @@ $module_couponValue = isset( $options['module-coupon'] ) ? $options['module-coup
 $module_plusminusValue = isset( $options['plusminus'] ) ? $options['plusminus'] : 0;
 $module_updatecartValue = isset( $options['updatecart'] ) ? $options['updatecart'] : 0;
 $module_redirectcartValue = isset( $options['module-redirectcart'] ) ? $options['module-redirectcart'] : 0;
+$module_emptycartbuttonValue = isset( $options['module-emptycartbutton'] ) ? $options['module-emptycartbutton'] : 0;
 $module_oneproductincartValue = isset( $options['module-oneproductincart'] ) ? $options['module-oneproductincart'] : 0;
 $module_custom_addtocart_buttonValue = isset( $options['module-custom-addtocart-button'] ) ? $options['module-custom-addtocart-button'] : 0;
 $module_returntoshopValue = isset( $options['returntoshop'] ) ? $options['returntoshop'] : 0;
@@ -102,6 +103,9 @@ if ( 1 == $module_updatecartValue ) {
 }
 if ( 1 == $module_redirectcartValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules/redirect-cart.php';
+}
+if ( 1 == $module_emptycartbuttonValue ) {
+	include_once SURBMA_HC_PLUGIN_DIR . '/modules/empty-cart-button.php';
 }
 if ( 1 == $module_oneproductincartValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules/one-product-in-cart.php';

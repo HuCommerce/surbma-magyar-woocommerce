@@ -5,6 +5,9 @@
 			<key name="loginredirecturl" />
 			<key name="registrationredirecturl" />
 			<key name="freeshippingnoticemessage" />
+			<key name="emptycartbutton-checkoutpagemessage" />
+			<key name="emptycartbutton-checkoutpagelinktext" />
+			<key name="emptycartbutton-checkoutpageconfirmationtext" />
 			<key name="legalcheckouttitle" />
 			<key name="regacceptpp" />
 			<key name="accepttos" />

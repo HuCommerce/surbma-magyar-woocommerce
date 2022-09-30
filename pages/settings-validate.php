@@ -15,6 +15,8 @@ function surbma_hc_fields_validate( $input ) {
 	global $legalconfirmationsposition_options;
 	global $smtpport_options;
 	global $smtpsecure_options;
+	global $emptycartbutton_cartpage_options;
+	global $emptycartbutton_checkoutpage_options;
 
 	$options = get_option( 'surbma_hc_fields' );
 
@@ -54,6 +56,7 @@ function surbma_hc_fields_validate( $input ) {
 	$input['plusminus'] = isset( $input['plusminus'] ) && 1 == $input['plusminus'] ? 1 : 0;
 	$input['updatecart'] = isset( $input['updatecart'] ) && 1 == $input['updatecart'] ? 1 : 0;
 	$input['module-redirectcart'] = isset( $input['module-redirectcart'] ) && 1 == $input['module-redirectcart'] ? 1 : 0;
+	$input['module-emptycartbutton'] = isset( $input['module-emptycartbutton'] ) && 1 == $input['module-emptycartbutton'] ? 1 : 0;
 	$input['module-oneproductincart'] = isset( $input['module-oneproductincart'] ) && 1 == $input['module-oneproductincart'] ? 1 : 0;
 	$input['module-custom-addtocart-button'] = isset( $input['module-custom-addtocart-button'] ) && 1 == $input['module-custom-addtocart-button'] ? 1 : 0;
 	$input['returntoshop'] = isset( $input['returntoshop'] ) && 1 == $input['returntoshop'] ? 1 : 0;
@@ -107,6 +110,12 @@ function surbma_hc_fields_validate( $input ) {
 	if ( !array_key_exists( $input['smtpsecure'], $smtpsecure_options ) ) {
 		$input['smtpsecure'] = 'default';
 	}
+	if ( !array_key_exists( $input['emptycartbutton-cartpage'], $emptycartbutton_cartpage_options ) ) {
+		$input['emptycartbutton-cartpage'] = 'none';
+	}
+	if ( !array_key_exists( $input['emptycartbutton-checkoutpage'], $emptycartbutton_checkoutpage_options ) ) {
+		$input['emptycartbutton-checkoutpage'] = 'none';
+	}
 
 	// Say our text option must be safe text with no HTML tags
 	$input['returntoshopmessage'] = wp_filter_nohtml_kses( $input['returntoshopmessage'] );
@@ -127,6 +136,9 @@ function surbma_hc_fields_validate( $input ) {
 	$input['custom-addtocart-button-archive-variable-subscription'] = wp_filter_nohtml_kses( $input['custom-addtocart-button-archive-variable-subscription'] );
 	$input['custom-addtocart-button-archive-booking'] = wp_filter_nohtml_kses( $input['custom-addtocart-button-archive-booking'] );
 	$input['freeshippingnoticemessage'] = wp_filter_nohtml_kses( $input['freeshippingnoticemessage'] );
+	$input['emptycartbutton-checkoutpagemessage'] = wp_filter_nohtml_kses( $input['emptycartbutton-checkoutpagemessage'] );
+	$input['emptycartbutton-checkoutpagelinktext'] = wp_filter_nohtml_kses( $input['emptycartbutton-checkoutpagelinktext'] );
+	$input['emptycartbutton-checkoutpageconfirmationtext'] = wp_filter_nohtml_kses( $input['emptycartbutton-checkoutpageconfirmationtext'] );
 	$input['legalcheckouttitle'] = wp_filter_nohtml_kses( $input['legalcheckouttitle'] );
 	$input['globalinfoname'] = wp_filter_nohtml_kses( $input['globalinfoname'] );
 	$input['globalinfocompany'] = wp_filter_nohtml_kses( $input['globalinfocompany'] );
