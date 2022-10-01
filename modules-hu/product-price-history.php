@@ -184,12 +184,16 @@ add_action( 'woocommerce_process_product_meta', function( $post_id ) {
 	$product->save();
 } );
 
-// Show the notification under the Product's price
-add_action( 'woocommerce_single_product_summary', function() {
+// Product price history display
+add_shortcode( 'hc-termekartortenet', function( $atts ) {
 	// Abort function if HuCommerce Pro is not active
 	if ( ! SURBMA_HC_PREMIUM ) {
 		return;
 	}
+
+	extract( shortcode_atts( array(
+		'product_id' => ''
+	), $atts ) );
 
 	$options = get_option( 'surbma_hc_fields' );
 	$productpricehistory_showlowestpriceValue = isset( $options['productpricehistory-showlowestprice'] ) && 1 == $options['productpricehistory-showlowestprice'] ? 1 : 0;
@@ -200,7 +204,7 @@ add_action( 'woocommerce_single_product_summary', function() {
 	$productpricehistory_statisticslinktextValue = isset( $options['productpricehistory-statisticslinktext'] ) && $options['productpricehistory-statisticslinktext'] ? $options['productpricehistory-statisticslinktext'] : __( 'Advanced statistics', 'surbma-magyar-woocommerce' );
 
 	global $product;
-	$product_id = $product->get_id();
+	$product_id = $product_id ? $product_id : $product->get_id();
 	$product_lowestpricetext = get_post_meta( $product_id, '_hc_product_lowest_price_text' ) ? get_post_meta( $product_id, '_hc_product_lowest_price_text', true ) : false;
 	$product_hidelowestpricetext = get_post_meta( $product_id, '_hc_product_hide_lowest_price_text' ) ? get_post_meta( $product_id, '_hc_product_hide_lowest_price_text', true ) : false;
 	$product_regular_price = intval( $product->get_regular_price() );
@@ -244,6 +248,8 @@ add_action( 'woocommerce_single_product_summary', function() {
 	// If we have the product price and the lowest price, get the discount
 	$discount = $product_price && $lowest_price ? number_format( round( ( ( 1 - ( $product_price / $lowest_price ) ) * 100 ), 2 ), 0 ) : false;
 
+	ob_start();
+
 	echo '<div class="hc-product-price-history product_meta">';
 	// Custom text will overwrite the module's settings
 	if ( $product_lowestpricetext ) {
@@ -260,4 +266,14 @@ add_action( 'woocommerce_single_product_summary', function() {
 		echo '<div class="hc-product-price-history-statistics"><a href="' . SURBMA_HC_PLUGIN_URL . '/modules-hu/product-price-history-display.php?product_id=' . $product_id . '" target="_blank">' . esc_html( $productpricehistory_statisticslinktextValue ) . '</a></div>';
 	}
 	echo '</div>';
+
+	$output_string = ob_get_contents();
+	ob_end_clean();
+
+	return $output_string;
+} );
+
+// Show the notification under the Product's price
+add_action( 'woocommerce_single_product_summary', function() {
+	echo do_shortcode( '[hc-termekartortenet]' );
 }, 11 );
