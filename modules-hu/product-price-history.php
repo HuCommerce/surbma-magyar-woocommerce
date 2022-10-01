@@ -239,6 +239,14 @@ add_shortcode( 'hc-termekartortenet', function( $atts ) {
 			}
 			$lowest_price_array[] = $product_price_history[$i][2];
 		}
+
+		// Check if last saved price is more, then 30 days old. In this case, empty $lowest_price_array to disable the lowest price display.
+		// This check is disabled for now, because we need to check the last 30 days since the last day, the price was dicounted.
+		/*
+		if ( strtotime( $product_price_history[0][0] ) < strtotime( '-30 day', time() ) ) {
+			$lowest_price_array = array();
+		}
+		*/
 	}
 	array_multisort( $lowest_price_array, SORT_ASC );
 
