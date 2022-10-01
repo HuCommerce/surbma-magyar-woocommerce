@@ -250,22 +250,22 @@ add_shortcode( 'hc-termekartortenet', function( $atts ) {
 
 	ob_start();
 
-	echo '<div class="hc-product-price-history product_meta">';
-	// Custom text will overwrite the module's settings
-	if ( $product_lowestpricetext ) {
-		echo wp_kses_post( $product_lowestpricetext );
-	} else {
-		if ( $productpricehistory_showlowestpriceValue && $lowest_price ) {
-			echo '<div class="hc-product-price-history-price">' . wp_kses_post( $productpricehistory_lowestpricetextValue ) . ': <span>' . $lowest_price . ' ' . $curreny_symbol . '</span></div>';
+		echo '<div class="hc-product-price-history product_meta">';
+		// Custom text will overwrite the module's settings
+		if ( $product_lowestpricetext ) {
+			echo wp_kses_post( $product_lowestpricetext );
+		} else {
+			if ( $productpricehistory_showlowestpriceValue && $lowest_price ) {
+				echo '<div class="hc-product-price-history-price">' . wp_kses_post( $productpricehistory_lowestpricetextValue ) . ': <span>' . $lowest_price . ' ' . $curreny_symbol . '</span></div>';
+			}
+			if ( $productpricehistory_showdiscountpriceValue && ( 0 <= $discount ) ) {
+				echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_discounttextValue ) . ': <span>' . $discount . '%</span></div>';
+			}
 		}
-		if ( $productpricehistory_showdiscountpriceValue && ( 0 <= $discount ) ) {
-			echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_discounttextValue ) . ': <span>' . $discount . '%</span></div>';
+		if ( $productpricehistory_showstatisticslinkValue ) {
+			echo '<div class="hc-product-price-history-statistics"><a href="' . SURBMA_HC_PLUGIN_URL . '/modules-hu/product-price-history-display.php?product_id=' . $product_id . '" target="_blank">' . esc_html( $productpricehistory_statisticslinktextValue ) . '</a></div>';
 		}
-	}
-	if ( $productpricehistory_showstatisticslinkValue ) {
-		echo '<div class="hc-product-price-history-statistics"><a href="' . SURBMA_HC_PLUGIN_URL . '/modules-hu/product-price-history-display.php?product_id=' . $product_id . '" target="_blank">' . esc_html( $productpricehistory_statisticslinktextValue ) . '</a></div>';
-	}
-	echo '</div>';
+		echo '</div>';
 
 	$output_string = ob_get_contents();
 	ob_end_clean();
