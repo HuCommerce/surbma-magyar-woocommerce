@@ -234,7 +234,7 @@ add_shortcode( 'hc-termekartortenet', function( $atts ) {
 		$product_price_history = get_post_meta( $product_id, '_hc_product_price_history', true );
 
 		for( $i = 1; $i < count( $product_price_history ) ; $i++ ) {
-			if ( strtotime( $product_price_history[$i][0] ) < strtotime( '-31 day', strtotime( $product_price_history[0][0] ) ) ) {
+			if ( strtotime( $product_price_history[$i][0] ) < strtotime( '-30 day', strtotime( $product_price_history[0][0] ) ) ) {
 				break;
 			}
 			$lowest_price_array[] = $product_price_history[$i][2];
