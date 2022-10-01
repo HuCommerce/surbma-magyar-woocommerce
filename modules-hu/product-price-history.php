@@ -258,7 +258,7 @@ add_shortcode( 'hc-termekartortenet', function( $atts ) {
 			if ( $productpricehistory_showlowestpriceValue && $lowest_price ) {
 				echo '<div class="hc-product-price-history-price">' . wp_kses_post( $productpricehistory_lowestpricetextValue ) . ': <span>' . $lowest_price . ' ' . $curreny_symbol . '</span></div>';
 			}
-			if ( $productpricehistory_showdiscountpriceValue && ( 0 <= $discount ) ) {
+			if ( $productpricehistory_showdiscountpriceValue && $discount && ( 0 <= $discount ) ) {
 				echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_discounttextValue ) . ': <span>' . $discount . '%</span></div>';
 			}
 		}
