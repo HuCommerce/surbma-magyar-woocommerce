@@ -9,23 +9,23 @@ function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
 	$freeshippingnoticemessageValue = isset( $options['freeshippingnoticemessage'] ) && ( $options['freeshippingnoticemessage'] ) ? $options['freeshippingnoticemessage'] : __( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
 	global $woocommerce;
 
-	// Get Free Shipping Methods for Rest of the World Zone & populate array $min_amounts
+	// Get enabled Free Shipping Methods for Rest of the World Zone & populate array $min_amounts
 	$default_zone = new WC_Shipping_Zone(0);
 	$default_methods = $default_zone->get_shipping_methods();
 	$min_amounts = array();
 	foreach ( $default_methods as $key => $value ) {
-		if ( 'free_shipping' === $value->id ) {
+		if ( 'free_shipping' === $value->id && 'yes' === $value->enabled ) {
 			if ( $value->min_amount > 0 ) {
 				$min_amounts[] = $value->min_amount;
 			}
 		}
 	}
 
-	// Get Free Shipping Methods for all other Zones & populate array $min_amounts
+	// Get enabled Free Shipping Methods for all other Zones & populate array $min_amounts
 	$delivery_zones = WC_Shipping_Zones::get_zones();
 	foreach ( $delivery_zones as $key => $delivery_zone ) {
 		foreach ( $delivery_zone['shipping_methods'] as $key => $value ) {
-			if ( 'free_shipping' === $value->id ) {
+			if ( 'free_shipping' === $value->id && 'yes' === $value->enabled ) {
 				if ( $value->min_amount > 0 ) {
 					$min_amounts[] = $value->min_amount;
 				}
@@ -40,10 +40,10 @@ function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
 	// Find lowest min_amount
 	$min_amount = min( $min_amounts );
 
-	// Get "Display prices during cart and checkout" option: incl or excl
+	// Get "Display prices during cart and checkout" option from WooCommerce -> Settings -> Tax -> Tax options. Values: incl or excl
 	$taxdisplaycart = get_option( 'woocommerce_tax_display_cart' );
 
-	// Get Cart Subtotal without Shipping costs
+	// Get Cart Subtotal without Shipping costs and before any Coupon discounts
 	if ( 'incl' == $taxdisplaycart ) {
 		// Tax included
 		$current = WC()->cart->subtotal;
