@@ -95,13 +95,6 @@ add_action( 'wp_insert_post', function( $post_id, $post, $update ) {
 		return;
 	}
 
-	/*
-	global $product;
-	if ( ! $product->is_type( 'simple' ) ) {
-		return;
-	}
-	*/
-
 	surbma_hc_update_product_price_history( $post_id );
 }, 10, 3 );
 
@@ -146,16 +139,28 @@ add_action( 'woocommerce_product_options_pricing', function() {
 		return;
 	}
 
-	// Show a link to the product price history page
+	// We are on the edit product page, right? Let's get the product ID from the URL.
 	$product_id = ( isset( $_GET['post'] ) ) ? $_GET['post'] : false;
+
+	// If we are on the product edit page, get the product object. If it is not the product edit page, return.
 	if ( $product_id ) {
+		$product = wc_get_product( $product_id );
+	} else {
+		return;
+	}
+
+	// This function has to run only for simple products
+	if ( ! $product->is_type( 'simple' ) ) {
+		return;
+	}
+
+	// Show a link to the product price history page
 	?>
 	<p class="form-field">
 		<label><?php esc_html_e( 'Price history', 'surbma-magyar-woocommerce' ); ?></label>
 		<a href="<?php echo SURBMA_HC_PLUGIN_URL; ?>/modules-hu/product-price-history-display.php?product_id=<?php echo $product_id; ?>" target="_blank"><?php esc_html_e( 'Show the price history of this product', 'surbma-magyar-woocommerce' ); ?></a> (<?php esc_html_e( 'Open on a new tab', 'surbma-magyar-woocommerce' ); ?>)
 	</p>
 	<?php
-	}
 
 	// Textarea to set custom lowest price text
 	woocommerce_wp_textarea_input( array(
@@ -290,5 +295,12 @@ add_shortcode( 'hc-termekartortenet', function( $atts ) {
 
 // Show the notification under the Product's price
 add_action( 'woocommerce_single_product_summary', function() {
+	global $product;
+
+	// This function has to run only for simple products
+	if ( ! $product->is_type( 'simple' ) ) {
+		return;
+	}
+
 	echo do_shortcode( '[hc-termekartortenet]' );
 }, 11 );
