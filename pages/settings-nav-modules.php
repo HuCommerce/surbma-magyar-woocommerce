@@ -154,6 +154,14 @@ __( 'Show Empty Cart button on Checkout page', 'surbma-magyar-woocommerce' );
 __( 'Changed your mind?', 'surbma-magyar-woocommerce' );
 __( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' );
 __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
+__( 'Minimum order amount', 'surbma-magyar-woocommerce' );
+__( 'Users will need to spend this amount to get free shipping.', 'surbma-magyar-woocommerce' );
+__( 'Apply minimum order rule before coupon discount', 'surbma-magyar-woocommerce' );
+__( 'If checked, free shipping would be available based on pre-discount order amount.', 'surbma-magyar-woocommerce' );
+__( 'Apply minimum order rule without tax', 'surbma-magyar-woocommerce' );
+__( 'If checked, free shipping would be available based on order amount exclusive of tax.', 'surbma-magyar-woocommerce' );
+__( 'Message before minimum order amount reached', 'surbma-magyar-woocommerce' );
+__( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 ?>
 
 <form class="uk-form-stacked" method="post" action="options.php">
@@ -596,10 +604,14 @@ __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Product listing pages', 'freeshippingnoticeshoploop', false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Cart page', 'freeshippingnoticecart', false, false, false, 1 ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Checkout page', 'freeshippingnoticecheckout', false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Message text', 'freeshippingnoticemessage', 'The remaining amount to get FREE shipping' ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Product listing pages', 'freeshippingnoticeshoploop' ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Cart page', 'freeshippingnoticecart' ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Show on Checkout page', 'freeshippingnoticecheckout' ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Minimum order amount', 'freeshippingminimumorderamount', '', 'Users will need to spend this amount to get free shipping.' ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Apply minimum order rule before coupon discount', 'freeshippingcouponsdiscounts', 'If checked, free shipping would be available based on pre-discount order amount.' ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Apply minimum order rule without tax', 'freeshippingwithouttax', 'If checked, free shipping would be available based on order amount exclusive of tax.' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'Message before minimum order amount reached', 'freeshippingnoticemessage', 'The remaining amount to get FREE shipping' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'Message when minimum order amount reached', 'freeshippingsuccessfulmessage', '', 'If you would like to show a message, when minimum order amount reached. Leave empty if you do not want to show this notice to customers.' ); ?>
 				</ul>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>

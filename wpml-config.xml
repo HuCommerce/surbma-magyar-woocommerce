@@ -4,7 +4,9 @@
 			<key name="returntoshopmessage" />
 			<key name="loginredirecturl" />
 			<key name="registrationredirecturl" />
+			<key name="freeshippingminimumorderamount" />
 			<key name="freeshippingnoticemessage" />
+			<key name="freeshippingsuccessfulmessage" />
 			<key name="emptycartbutton-checkoutpagemessage" />
 			<key name="emptycartbutton-checkoutpagelinktext" />
 			<key name="emptycartbutton-checkoutpageconfirmationtext" />

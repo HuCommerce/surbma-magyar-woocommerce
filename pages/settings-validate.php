@@ -83,6 +83,8 @@ function surbma_hc_fields_validate( $input ) {
 	$input['freeshippingnoticeshoploop'] = isset( $input['freeshippingnoticeshoploop'] ) && 1 == $input['freeshippingnoticeshoploop'] ? 1 : 0;
 	$input['freeshippingnoticecart'] = isset( $input['freeshippingnoticecart'] ) && 1 == $input['freeshippingnoticecart'] ? 1 : 0;
 	$input['freeshippingnoticecheckout'] = isset( $input['freeshippingnoticecheckout'] ) && 1 == $input['freeshippingnoticecheckout'] ? 1 : 0;
+	$input['freeshippingcouponsdiscounts'] = isset( $input['freeshippingcouponsdiscounts'] ) && 1 == $input['freeshippingcouponsdiscounts'] ? 1 : 0;
+	$input['freeshippingwithouttax'] = isset( $input['freeshippingwithouttax'] ) && 1 == $input['freeshippingwithouttax'] ? 1 : 0;
 	$input['regip'] = isset( $input['regip'] ) && 1 == $input['regip'] ? 1 : 0;
 	$input['addtocartonarchive'] = isset( $input['addtocartonarchive'] ) && 1 == $input['addtocartonarchive'] ? 1 : 0;
 	$input['productsubtitle'] = isset( $input['productsubtitle'] ) && 1 == $input['productsubtitle'] ? 1 : 0;
@@ -135,7 +137,6 @@ function surbma_hc_fields_validate( $input ) {
 	$input['custom-addtocart-button-archive-subscription'] = wp_filter_nohtml_kses( $input['custom-addtocart-button-archive-subscription'] );
 	$input['custom-addtocart-button-archive-variable-subscription'] = wp_filter_nohtml_kses( $input['custom-addtocart-button-archive-variable-subscription'] );
 	$input['custom-addtocart-button-archive-booking'] = wp_filter_nohtml_kses( $input['custom-addtocart-button-archive-booking'] );
-	$input['freeshippingnoticemessage'] = wp_filter_nohtml_kses( $input['freeshippingnoticemessage'] );
 	$input['emptycartbutton-checkoutpagemessage'] = wp_filter_nohtml_kses( $input['emptycartbutton-checkoutpagemessage'] );
 	$input['emptycartbutton-checkoutpagelinktext'] = wp_filter_nohtml_kses( $input['emptycartbutton-checkoutpagelinktext'] );
 	$input['emptycartbutton-checkoutpageconfirmationtext'] = wp_filter_nohtml_kses( $input['emptycartbutton-checkoutpageconfirmationtext'] );
@@ -158,6 +159,8 @@ function surbma_hc_fields_validate( $input ) {
 	$input['productpricehistory-statisticslinktext'] = wp_filter_nohtml_kses( $input['productpricehistory-statisticslinktext'] );
 
 	// Say our text/textarea option must be safe text with the allowed tags for posts
+	$input['freeshippingnoticemessage'] = wp_filter_post_kses( $input['freeshippingnoticemessage'] );
+	$input['freeshippingsuccessfulmessage'] = wp_filter_post_kses( $input['freeshippingsuccessfulmessage'] );
 	$input['regacceptpp'] = wp_filter_post_kses( $input['regacceptpp'] );
 	$input['accepttos'] = wp_filter_post_kses( $input['accepttos'] );
 	$input['acceptpp'] = wp_filter_post_kses( $input['acceptpp'] );
@@ -176,6 +179,7 @@ function surbma_hc_fields_validate( $input ) {
 	$input['upsellproductsperrow'] = preg_replace( '/\D/', '', $input['upsellproductsperrow'] );
 	$input['relatedproductsnumber'] = preg_replace( '/\D/', '', $input['relatedproductsnumber'] );
 	$input['relatedproductsperrow'] = preg_replace( '/\D/', '', $input['relatedproductsperrow'] );
+	$input['freeshippingminimumorderamount'] = preg_replace( '/\D/', '', $input['freeshippingminimumorderamount'] );
 
 	// * HUCOMMERCE START
 	// If no valid license, check if field has any value. If yes, save it, if no, set to default.
@@ -184,7 +188,11 @@ function surbma_hc_fields_validate( $input ) {
 		$input['freeshippingnoticeshoploop'] = isset( $options['freeshippingnoticeshoploop'] ) ? $options['freeshippingnoticeshoploop'] : 0;
 		$input['freeshippingnoticecart'] = isset( $options['freeshippingnoticecart'] ) ? $options['freeshippingnoticecart'] : 0;
 		$input['freeshippingnoticecheckout'] = isset( $options['freeshippingnoticecheckout'] ) ? $options['freeshippingnoticecheckout'] : 0;
+		$input['freeshippingminimumorderamount'] = isset( $options['freeshippingminimumorderamount'] ) ? $options['freeshippingminimumorderamount'] : 0;
+		$input['freeshippingcouponsdiscounts'] = isset( $options['freeshippingcouponsdiscounts'] ) ? $options['freeshippingcouponsdiscounts'] : 0;
+		$input['freeshippingwithouttax'] = isset( $options['freeshippingwithouttax'] ) ? $options['freeshippingwithouttax'] : 0;
 		$input['freeshippingnoticemessage'] = isset( $options['freeshippingnoticemessage'] ) ? $options['freeshippingnoticemessage'] : __( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
+		$input['freeshippingsuccessfulmessage'] = isset( $options['freeshippingsuccessfulmessage'] ) ? $options['freeshippingsuccessfulmessage'] : '';
 
 		// Empty Cart button
 		$input['emptycartbutton-cartpage'] = isset( $options['emptycartbutton-cartpage'] ) ? $options['emptycartbutton-cartpage'] : 'none';
