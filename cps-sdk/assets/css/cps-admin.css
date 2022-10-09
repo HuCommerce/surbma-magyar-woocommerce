@@ -347,6 +347,7 @@ body {
 }
 
 .cps-admin-2 .cps-form-horizontal .uk-form-controls {
+	width: 100%;
 	max-width: 150px;
 	float: right;
 }
@@ -402,6 +403,11 @@ body {
 	overflow: hidden;
 	line-height: 40px;
 	margin: 0;
+}
+
+.cps-admin-2 .uk-form-label span {
+	display: inline-block;
+	line-height: 1.6em;
 }
 
 .cps-admin-2 .switch-wrap {
