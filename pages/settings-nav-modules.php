@@ -306,7 +306,7 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 		</li>
 		<?php // * HUCOMMERCE END ?>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Product customizations', 'module-productsettings', true ); ?>
+			<?php cps_hc_wcgems_form_accordion_title( 'Product customizations', 'module-productsettings' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Product customizations', 'module-productsettings', true ); ?>
@@ -315,15 +315,13 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 				<ul class="cps-form-fields uk-list uk-list-divider">
 					<?php cps_hc_wcgems_form_field_checkbox( 'Product subtitle', 'productsubtitle', false, false, true ); ?>
 					<?php cps_hc_wcgems_form_field_checkbox( 'Add to cart button on archive pages', 'addtocartonarchive', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Remove related products on single product pages', 'norelatedproducts', false, true, true ); ?>
-					<li><strong><?php _e( 'Product archive pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
-					<?php cps_hc_wcgems_form_field_text( 'Number of products on archive pages', 'productsnumber', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Products per row on archive pages', 'productsperrow', '', false, true, true ); ?>
-					<li><strong><?php _e( 'Single product pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
-					<?php cps_hc_wcgems_form_field_text( 'Number of upsell products on single product pages', 'upsellproductsnumber', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Upsell products per row on single product pages', 'upsellproductsperrow', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Number of related products on single product pages', 'relatedproductsnumber', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Related products per row on single product pages', 'relatedproductsperrow', '', false, true, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Remove related products on single product pages', 'norelatedproducts', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Number of products on archive pages', 'productsnumber', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Products per row on archive pages', 'productsperrow', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Number of upsell products on single product pages', 'upsellproductsnumber', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Upsell products per row on single product pages', 'upsellproductsperrow', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Number of related products on single product pages', 'relatedproductsnumber', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Related products per row on single product pages', 'relatedproductsperrow', '', false, false, true ); ?>
 				</ul>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
@@ -332,7 +330,7 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 			</div>
 		</li>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Checkout page customizations', 'module-checkout', true ); ?>
+			<?php cps_hc_wcgems_form_accordion_title( 'Checkout page customizations', 'module-checkout' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Checkout page customizations', 'module-checkout', true ); ?>
@@ -342,7 +340,7 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 					<?php cps_hc_wcgems_form_field_checkbox( 'Conditional display of Company fields', 'billingcompanycheck', false, false, true ); ?>
 					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Country field', 'nocountry', false, false, true ); ?>
 					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Order notes field', 'noordercomments', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Additional information section', 'noadditionalinformation', 'It will hide Order notes field also.', true, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Additional information section', 'noadditionalinformation', 'It will hide Order notes field also.', false, true ); ?>
 					<?php cps_hc_wcgems_form_field_checkbox( 'Inline Company and Tax number fields', 'companytaxnumberpair', false, false, true ); ?>
 					<?php cps_hc_wcgems_form_field_checkbox( 'Inline Postcode and City fields', 'postcodecitypair', false, false, true ); ?>
 					<?php cps_hc_wcgems_form_field_checkbox( 'Inline Phone and Email fields', 'phoneemailpair', false, false, true ); ?>
@@ -587,14 +585,17 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 			</div>
 		</li>
 	</ul>
+
 	<h4>HuCommerce Pro modulok</h4>
 	<hr>
+
 	<?php if ( !SURBMA_HC_PREMIUM ) { ?>
 		<div class="cps-alert uk-alert-danger" uk-alert>
 			<p><strong>Ha szeretnéd aktiválni ezeket a modulokat, előbb HuCommerce Pro előfizetést kell vásárolnod!</strong><br>A HuCommerce Pro előfizetés megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p>
 			<a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="uk-button uk-button-danger uk-button-small" target="_blank">HuCommerce Pro megvásárlása</a>
 		</div>
 	<?php } ?>
+
 	<ul class="uk-list uk-list-large" uk-accordion>
 		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Free shipping notification', 'freeshippingnotice' ); ?>
@@ -653,9 +654,9 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
 					<?php cps_hc_wcgems_form_field_checkbox( 'Show lowest price on Product pages', 'productpricehistory-showlowestprice', 'It will show the lowest price from the product price history log automatically.', true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Text before the lowest price', 'productpricehistory-lowestpricetext', 'Our lowest price from previous term', false, true, false, 'HTML tags are allowed' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'Text before the lowest price', 'productpricehistory-lowestpricetext', 'Our lowest price from previous term' ); ?>
 					<?php cps_hc_wcgems_form_field_checkbox( 'Show the calculated discount on Product pages', 'productpricehistory-showdiscount', 'It will show the discount, that is calculated from the lowest price automatically.', true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Text before the discount', 'productpricehistory-discounttext', 'Current discount based on the lowest price', false, true, false, 'HTML tags are allowed' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'Text before the discount', 'productpricehistory-discounttext', 'Current discount based on the lowest price' ); ?>
 
 					<li>
 						<div class="uk-alert-primary cps-alert" uk-alert>
@@ -699,18 +700,18 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 					<li><strong><?php esc_html_e( 'Registration settings', 'surbma-magyar-woocommerce' ); ?></strong></li>
 
 					<?php cps_hc_wcgems_form_field_checkbox( 'Save customer IP address on registration', 'regip', 'If enabled, the customer\'s IP address will be saved in profile after registration.' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Privacy Policy checkbox text on Registration form', 'regacceptpp', 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'If empty, then this checkbox will not be displayed.', false, false, 'HTML tags are allowed' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'Privacy Policy checkbox text on Registration form', 'regacceptpp', 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'If empty, then this checkbox will not be displayed.' ); ?>
 
 					<li><strong><?php esc_html_e( 'Checkout settings', 'surbma-magyar-woocommerce' ); ?></strong></li>
 
 					<?php cps_hc_wcgems_form_field_select( 'Legal confirmation checkboxes position on Checkout page', 'legalconfirmationsposition', $legalconfirmationsposition_options, 'revieworderbeforesubmit' ); ?>
 					<?php cps_hc_wcgems_form_field_text( 'Section title on Checkout page', 'legalcheckouttitle', 'Legal confirmations', 'Title above the checkbox. If empty, then no title will be displayed.' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Terms of Service checkbox text on Checkout page', 'accepttos', 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'If empty, then this checkbox will not be displayed.', false, false, 'HTML tags are allowed' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Privacy Policy checkbox text on Checkout page', 'acceptpp', 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'If empty, then this checkbox will not be displayed.', false, false, 'HTML tags are allowed' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'Terms of Service checkbox text on Checkout page', 'accepttos', 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'If empty, then this checkbox will not be displayed.' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'Privacy Policy checkbox text on Checkout page', 'acceptpp', 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'If empty, then this checkbox will not be displayed.' ); ?>
 					<?php cps_hc_wcgems_form_field_text( 'Custom 1 checkbox label on Checkout page', 'acceptcustom1label', '', 'The label of the custom checkbox field. Used by the error message, if checkbox is not accepted. If empty, then no error message will be displayed.' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Custom 1 checkbox text on Checkout page', 'acceptcustom1', '', 'If empty, then this checkbox will not be displayed.', false, false, 'HTML tags are allowed' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'Custom 1 checkbox text on Checkout page', 'acceptcustom1', '', 'If empty, then this checkbox will not be displayed.' ); ?>
 					<?php cps_hc_wcgems_form_field_text( 'Custom 2 checkbox label on Checkout page', 'acceptcustom2label', '', 'The label of the custom checkbox field. Used by the error message, if checkbox is not accepted. If empty, then no error message will be displayed.' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Custom 2 checkbox text on Checkout page', 'acceptcustom2', '', 'If empty, then this checkbox will not be displayed.', false, false, 'HTML tags are allowed' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'Custom 2 checkbox text on Checkout page', 'acceptcustom2', '', 'If empty, then this checkbox will not be displayed.' ); ?>
 					<?php cps_hc_wcgems_form_field_textarea( 'Custom text before Place order button', 'beforeorderbuttonmessage', '', 'This text will be displayed just above the Place order button on Checkout page. If empty, then no text will be displayed.' ); ?>
 					<?php cps_hc_wcgems_form_field_textarea( 'Custom text after Place order button', 'afterorderbuttonmessage', '', 'This text will be displayed just under the Place order button on Checkout page. If empty, then no text will be displayed.' ); ?>
 
