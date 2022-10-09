@@ -338,13 +338,33 @@ body {
 	overflow: hidden;
 }
 
-.cps-admin-2 .cps-form-checkbox .uk-form-label {
+.cps-admin-2 .cps-form-horizontal .uk-form-label {
+	width: 100%;
+	min-width: 150px;
+	max-width: calc(100% - 160px);
 	float: left;
 	margin: 0;
 }
 
-.cps-admin-2 .cps-form-checkbox .uk-form-controls {
+.cps-admin-2 .cps-form-horizontal .uk-form-controls {
+	max-width: 150px;
 	float: right;
+}
+
+.cps-admin-2 .cps-form-horizontal.cps-form-horizontal-medium .uk-form-label {
+	max-width: calc(100% - 310px);
+}
+
+.cps-admin-2 .cps-form-horizontal.cps-form-horizontal-medium .uk-form-controls {
+	max-width: 300px;
+}
+
+.cps-admin-2 .cps-form-horizontal.cps-form-horizontal-large .uk-form-label {
+	max-width: calc(100% - 510px);
+}
+
+.cps-admin-2 .cps-form-horizontal.cps-form-horizontal-large .uk-form-controls {
+	max-width: 500px;
 }
 
 .cps-admin-2 .cps-form-fields > * {
@@ -375,10 +395,6 @@ body {
 .cps-admin-2 #cps-settings .uk-navbar-nav > li > a,
 .cps-admin-2 #cps-settings .uk-navbar-toggle {
 	min-height: 30px;
-}
-
-.cps-admin-2 .cps-form-checkbox .uk-form-label {
-	width: calc(100% - 60px);
 }
 
 .cps-admin-2 .uk-form-label,

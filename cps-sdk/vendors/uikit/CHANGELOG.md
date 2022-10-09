@@ -1,5 +1,152 @@
 # Changelog
 
+## 3.15.10 (September 21, 2022)
+
+### Fixed
+
+- Fix regression in Filter component animation
+- Fix case where UIkit breaks if a form with an input named `attributes` exits
+
+## 3.15.9 (September 19, 2022)
+
+### Fixed
+
+- Fix WAI-ARIA rules for Tooltip component
+- Fix slide animation in Sortable component
+- Fix input fields reverting to previous value while sorting in Sortable component
+
+## 3.15.8 (September 14, 2022)
+
+### Fixed
+
+- Fix column break within the list item in List component
+- Fix Toggle component when using mouse and keyboard simultaneously
+- Fix register passive event handler in Slider component
+
+## 3.15.7 (September 13, 2022)
+
+### Changed
+
+- Improve Accordion component keeps toggle in view when toggling 
+
+### Fixed
+
+- Fix Slider drag stops on scroll now
+
+## 3.15.6 (August 31, 2022)
+
+### Changed
+
+- Modal closes on click on hash links
+
+### Fixed
+
+- Fix check for selectable Text in Slider drag
+- Fix reactivity in Switcher component
+
+
+## 3.15.5 (August 24, 2022)
+
+### Fixed
+
+- Fix accordion items wrap themselves during transition
+- Fix regression in Video component (no autoplay if within a Scrollspy)
+
+## 3.15.4 (August 23, 2022)
+
+### Fixed
+
+- Fix detecting unit in Parallax component stops
+- Fix regression in transition animations in Drop component
+- Fix regression in Filter component
+
+## 3.15.3 (August 12, 2022)
+
+### Changed
+
+- Remove divider from nav header for divider modifier in Nav component
+
+### Fixed
+
+- Fix Slideshow no longer completely resets upon adding slides 
+
+## 3.15.2 (August 8, 2022)
+
+### Added
+
+- Add `boundary-x` and `boundary-y` options to Drop component
+
+### Fixed
+
+- Remove click event listener in Scroll component correctly 
+
+## 3.15.1 (July 15, 2022)
+
+### Changed
+
+- Video component will set `allow="autoplay"` on iframe elements
+- Allow additional props to be set on Navbar component to initialize its Drops with
+
+### Fixed
+
+- Fix Navbar component resize does not trigger reposition of dropbar
+- Fix register scroll listener as passive
+
+## 3.15.0 (July 11, 2022)
+
+### Added
+
+- Add Dropbar component
+- Add `target`, `target-x`, `target-y` and `inset` options to Drop component 
+- Add `stretch` and `bg-scroll` options to Drop component 
+- Add `shift` option to Drop component
+- Add `slide` and `reveal` animations to Drop component
+- Add `animate-out` option to Drop component
+- Add open and close animation to toggle icon in Navbar component
+- Add dropdown large modifier to Dropdown and Navbar component
+- Add gap variables to navbar items in Navbar component
+- Add color mode variables for dropdowns in Dropdown and Navbar component
+- Add navbar parent icon to Navbar component
+- Add secondary style modifier to Nav component
+- Add font size variables to nav and sublist in Nav component
+- Add padding variables for small breakpoint to Modal component
+- Add zero z-index utility class to Position component
+- Add support for `picture` element to logo in Utility component
+- Add box sizing classes to Utility component
+- Support scroll parent as viewport in Height Viewport component
+- Add ARIA `role="alert"` to Notification component
+
+### Changed
+
+- IMPORTANT: Remove `.uk-nav-parent-icon` from Nav component. Use `uk-nav-parent-icon` attribute on items instead
+- IMPORTANT: Remove `*-justify` in `pos` option from Drop and Dropdown components. Use new `stretch` option instead
+- IMPORTANT: Remove `boundary-align` option from Drop and Dropdown components. Use new `target` option instead
+- IMPORTANT: Change `flip` option values in Drop and Dropdown components. Use new `shift` option too
+- IMPORTANT: Remove `display` option in Drop and Dropdown components. Use new `auto-update` option instead.
+- IMPORTANT: Rename `@offcanvas-bar-width-m` to `@offcanvas-bar-width-s`
+- IMPORTANT: Rename `@offcanvas-bar-padding-vertical-m` to `@offcanvas-bar-padding-vertical-s`
+- IMPORTANT: Rename `@offcanvas-bar-padding-horizontal-m` to `@offcanvas-bar-padding-horizontal-s`
+- IMPORTANT: Rename `@nav-primary-item-font-size` to `@nav-primary-font-size`
+- IMPORTANT: Rename `@nav-primary-item-line-height` to `@nav-primary-line-height`
+- IMPORTANT: Rename `@navbar-dropdown-dropbar-margin-top` to `@navbar-dropdown-dropbar-padding-top`
+- IMPORTANT: Rename `@navbar-dropdown-dropbar-margin-bottom` to `@navbar-dropdown-dropbar-padding-bottom`
+- IMPORTANT: Remove style from `.uk-navbar-dropbar`. Now uses `uk-dropbar`
+
+### Removed
+
+- Remove `getCssVar()` utility function
+
+### Fixed
+
+- Fix body is no longer scrollable in Modal component with overlay
+- Fix `offsetPosition()` adds `border-top` of offsetParents
+- Fix dragging in Slider component on iOS
+- Fix Drop component no longer flips, if it does not fit into scroll area
+- Fix Drop component alignment within Dropbar
+- Fix ensure write updates aren't called if component is already disconnected
+- Fix Offcanvas component no longer overflows document if isn't wide enough
+- Remove margin from the last-child within dropdowns in Dropdown and Navbar components
+
 ## 3.14.3 (May 27, 2022)
 
 ### Fixed
@@ -665,8 +812,8 @@
 
 ### Changed
 
-- IMPORTANT: Change options 'animationMode' to 'animation', 'animation' to 'duration'
-- IMPORTANT: Rename 'shift' animation to 'slide'
+- IMPORTANT: Change options `animationMode` to `animation` and `animation` to `duration`
+- IMPORTANT: Rename `shift` animation to `slide`
 
 ## 3.6.1 (December 17, 2020)
 
@@ -865,7 +1012,7 @@
 
 ### Changed
 
-- IMPORTANT: Renamed Less variable parts `xxlarge` to `2xlarge`
+- IMPORTANT: Rename Less variable parts `xxlarge` to `2xlarge`
 - Replace clearfix by creating a block formatting context with display flow-root
 
 ### Deprecated
