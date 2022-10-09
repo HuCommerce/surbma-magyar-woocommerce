@@ -184,6 +184,21 @@ function surbma_hc_fields_validate( $input ) {
 	// * HUCOMMERCE START
 	// If no valid license, check if field has any value. If yes, save it, if no, set to default.
 	if ( 'active' != SURBMA_HC_PLUGIN_LICENSE ) {
+		// Check field formats (Masking)
+		$input['maskcheckoutfieldsplaceholder'] = isset( $options['maskcheckoutfieldsplaceholder'] ) ? $options['maskcheckoutfieldsplaceholder'] : 0;
+		$input['maskbillingtaxfield'] = isset( $options['maskbillingtaxfield'] ) ? $options['maskbillingtaxfield'] : 0;
+		$input['maskbillingpostcodefield'] = isset( $options['maskbillingpostcodefield'] ) ? $options['maskbillingpostcodefield'] : 0;
+		$input['maskbillingphonefield'] = isset( $options['maskbillingphonefield'] ) ? $options['maskbillingphonefield'] : 0;
+		$input['maskshippingpostcodefield'] = isset( $options['maskshippingpostcodefield'] ) ? $options['maskshippingpostcodefield'] : 0;
+
+		// Check field values
+		$input['validatebillingtaxfield'] = isset( $options['validatebillingtaxfield'] ) ? $options['validatebillingtaxfield'] : 0;
+		$input['validatebillingcityfield'] = isset( $options['validatebillingcityfield'] ) ? $options['validatebillingcityfield'] : 0;
+		$input['validatebillingaddressfield'] = isset( $options['validatebillingaddressfield'] ) ? $options['validatebillingaddressfield'] : 0;
+		$input['validatebillingphonefield'] = isset( $options['validatebillingphonefield'] ) ? $options['validatebillingphonefield'] : 0;
+		$input['validateshippingcityfield'] = isset( $options['validateshippingcityfield'] ) ? $options['validateshippingcityfield'] : 0;
+		$input['validateshippingaddressfield'] = isset( $options['validateshippingaddressfield'] ) ? $options['validateshippingaddressfield'] : 0;
+
 		// Free shipping notification
 		$input['freeshippingnoticeshoploop'] = isset( $options['freeshippingnoticeshoploop'] ) ? $options['freeshippingnoticeshoploop'] : 0;
 		$input['freeshippingnoticecart'] = isset( $options['freeshippingnoticecart'] ) ? $options['freeshippingnoticecart'] : 0;
@@ -222,6 +237,19 @@ function surbma_hc_fields_validate( $input ) {
 		$input['acceptcustom2'] = isset( $options['acceptcustom2'] ) ? $options['acceptcustom2'] : '';
 		$input['beforeorderbuttonmessage'] = isset( $options['beforeorderbuttonmessage'] ) ? $options['beforeorderbuttonmessage'] : '';
 		$input['afterorderbuttonmessage'] = isset( $options['afterorderbuttonmessage'] ) ? $options['afterorderbuttonmessage'] : '';
+
+		// Global informations
+		$input['globalinfoname'] = isset( $options['globalinfoname'] ) ? $options['globalinfoname'] : '';
+		$input['globalinfocompany'] = isset( $options['globalinfocompany'] ) ? $options['globalinfocompany'] : '';
+		$input['globalinfoheadquarters'] = isset( $options['globalinfoheadquarters'] ) ? $options['globalinfoheadquarters'] : '';
+		$input['globalinfotaxnumber'] = isset( $options['globalinfotaxnumber'] ) ? $options['globalinfotaxnumber'] : '';
+		$input['globalinforegnumber'] = isset( $options['globalinforegnumber'] ) ? $options['globalinforegnumber'] : '';
+		$input['globalinfoaddress'] = isset( $options['globalinfoaddress'] ) ? $options['globalinfoaddress'] : '';
+		$input['globalinfobankaccount'] = isset( $options['globalinfobankaccount'] ) ? $options['globalinfobankaccount'] : '';
+		$input['globalinfomobile'] = isset( $options['globalinfomobile'] ) ? $options['globalinfomobile'] : '';
+		$input['globalinfophone'] = isset( $options['globalinfophone'] ) ? $options['globalinfophone'] : '';
+		$input['globalinfoemail'] = isset( $options['globalinfoemail'] ) ? $options['globalinfoemail'] : '';
+		$input['globalinfoaboutus'] = isset( $options['globalinfoaboutus'] ) ? $options['globalinfoaboutus'] : '';
 	}
 
 	// Check legacy HuCommerce users

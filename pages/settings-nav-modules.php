@@ -263,47 +263,6 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 				<p><a href="https://www.hucommerce.hu/dokumentum/varos-automatikus-kitoltese-az-iranyitoszam-alapjan/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Check field formats (Masking)', 'maskcheckoutfields', true ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Check field formats (Masking)', 'maskcheckoutfields', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_wcgems_form_field_checkbox( 'Masking with placeholder', 'maskcheckoutfieldsplaceholder', 'The masking scheme will be displayed as a placeholder in the field. This will override the default placeholder.', false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Tax field', 'maskbillingtaxfield', 'Allowed formats: 00000000-0-00, 00000000000, HU00000000', true, true, 1 ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Postcode field', 'maskbillingpostcodefield', 'Allows only 4 numbers.', true, true, 1 ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Phone field', 'maskbillingphonefield', false, true, true, 1 ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Shipping Postcode field', 'maskshippingpostcodefield', 'Allows only 4 numbers.', true, true, 1 ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Masking these fields: Billing VAT number, Billing Postcode, Billing Phone, Shipping Postcode', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/mezok-formatumanak-ellenorzese-maszkolas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Check field values', 'validatecheckoutfields', true ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Check field values', 'validatecheckoutfields', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Tax field', 'validatebillingtaxfield', 'Allowed formats: 00000000-0-00, 00000000000, HU00000000', true, true, 1 ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Billing City field', 'validatebillingcityfield', 'Allows only letters and space.', true, true, 1 ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Address field', 'validatebillingaddressfield', 'Must have at least one letter, one number and one space in the address.', true, true, 1 ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Phone field', 'validatebillingphonefield', false, true, true, 1 ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Shipping City field', 'validateshippingcityfield', 'Allows only letters and space.', true, true, 1 ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Shipping Address field', 'validateshippingaddressfield', 'Must have at least one letter, one number and one space in the address.', true, true, 1 ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Checking these fields: Billing VAT number, Billing Postcode, Billing Phone, Shipping Postcode', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/mezok-ertekenek-ellenorzese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
 		<?php // * HUCOMMERCE END ?>
 		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Product customizations', 'module-productsettings' ); ?>
@@ -410,18 +369,18 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 			</div>
 		</li>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Coupon field customizations', 'module-coupon', true ); ?>
+			<?php cps_hc_wcgems_form_accordion_title( 'Coupon field customizations', 'module-coupon' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Coupon field customizations', 'module-coupon', true ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_wcgems_form_field_checkbox( 'Show Coupons in upper case', 'couponuppercase', 'Show Coupons in upper case in both admin and front-end, instead of lower case, which is the default setting for WooCommerce.', true, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Coupon field on Cart page', 'couponfieldhiddenoncart', 'It will hide the Coupon field completely from the Cart page.', true, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Coupon field on Checkout page', 'couponfieldhiddenoncheckout', 'It will hide the Coupon field completely from the Checkout page.', true, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Coupon field always visible on Checkout page', 'couponfieldalwaysvisible', 'It will hide the Coupon field toggle and makes the Coupon field always visible for customers.', true, true ); ?>
-					<?php cps_hc_wcgems_form_field_select( 'Reposition the Coupon field', 'couponfieldposition', $couponfieldposition_options, 'beforecheckoutform', false, true, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Show Coupons in upper case', 'couponuppercase', 'Show Coupons in upper case in both admin and front-end, instead of lower case, which is the default setting for WooCommerce.', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Coupon field on Cart page', 'couponfieldhiddenoncart', 'It will hide the Coupon field completely from the Cart page.', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Coupon field on Checkout page', 'couponfieldhiddenoncheckout', 'It will hide the Coupon field completely from the Checkout page.', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Coupon field always visible on Checkout page', 'couponfieldalwaysvisible', 'It will hide the Coupon field toggle and makes the Coupon field always visible for customers.', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_select( 'Reposition the Coupon field', 'couponfieldposition', $couponfieldposition_options, 'beforecheckoutform', false, false, true ); ?>
 				</ul>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
@@ -430,7 +389,7 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 			</div>
 		</li>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Redirect Cart page to Checkout page', 'module-redirectcart', true ); ?>
+			<?php cps_hc_wcgems_form_accordion_title( 'Redirect Cart page to Checkout page', 'module-redirectcart' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Redirect Cart page to Checkout page', 'module-redirectcart', true ); ?>
@@ -441,7 +400,7 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 			</div>
 		</li>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'One product per purchase', 'module-oneproductincart', true ); ?>
+			<?php cps_hc_wcgems_form_accordion_title( 'One product per purchase', 'module-oneproductincart' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'One product per purchase', 'module-oneproductincart', true ); ?>
@@ -452,7 +411,7 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 			</div>
 		</li>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Custom Add To Cart Button', 'module-custom-addtocart-button', true ); ?>
+			<?php cps_hc_wcgems_form_accordion_title( 'Custom Add To Cart Button', 'module-custom-addtocart-button' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Custom Add To Cart Button', 'module-custom-addtocart-button', true ); ?>
@@ -461,22 +420,22 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 				<ul class="cps-form-fields uk-list uk-list-divider">
 					<li><strong><?php _e( 'Single product pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
 					<li><p><?php _e( 'Give your custom texts to your Add to cart buttons on the product pages. You can set custom texts for different product types. If you leave them empty, the button texts will fall back to default WooCommerce texts.', 'surbma-magyar-woocommerce' ); ?></p></li>
-					<?php cps_hc_wcgems_form_field_text( 'Simple product', 'custom-addtocart-button-single-simple', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Grouped product', 'custom-addtocart-button-single-grouped', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-single-external', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Variable product', 'custom-addtocart-button-single-variable', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-subscription', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Variable subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-variable-subscription', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Bookable product (WooCommerce Bookings)', 'custom-addtocart-button-single-booking', '', false, true, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Simple product', 'custom-addtocart-button-single-simple', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Grouped product', 'custom-addtocart-button-single-grouped', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-single-external', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Variable product', 'custom-addtocart-button-single-variable', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-subscription', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Variable subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-variable-subscription', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Bookable product (WooCommerce Bookings)', 'custom-addtocart-button-single-booking', '', false, false, true ); ?>
 					<li><strong><?php _e( 'Product archive pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
 					<li><p><?php _e( 'Give your custom texts to your Add to cart buttons on the product archive pages. You can set custom texts for different product types. If you leave them empty, the button texts will inherit texts from single product settings or fall back to default WooCommerce texts, if those fields are also empty.', 'surbma-magyar-woocommerce' ); ?></p></li>
-					<?php cps_hc_wcgems_form_field_text( 'Simple product', 'custom-addtocart-button-archive-simple', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Grouped product', 'custom-addtocart-button-archive-grouped', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-archive-external', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Variable product', 'custom-addtocart-button-archive-variable', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-archive-subscription', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Variable subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-archive-variable-subscription', '', false, true, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Bookable product (WooCommerce Bookings)', 'custom-addtocart-button-archive-booking', '', false, true, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Simple product', 'custom-addtocart-button-archive-simple', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Grouped product', 'custom-addtocart-button-archive-grouped', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-archive-external', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Variable product', 'custom-addtocart-button-archive-variable', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-archive-subscription', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Variable subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-archive-variable-subscription', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Bookable product (WooCommerce Bookings)', 'custom-addtocart-button-archive-booking', '', false, false, true ); ?>
 				</ul>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
@@ -485,7 +444,7 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 			</div>
 		</li>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Hide shipping methods', 'module-hideshippingmethods', true ); ?>
+			<?php cps_hc_wcgems_form_accordion_title( 'Hide shipping methods', 'module-hideshippingmethods' ); ?>
 			<div class="uk-accordion-content">
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Hide shipping methods', 'module-hideshippingmethods', true ); ?>
@@ -499,58 +458,6 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'It will hide all shipping methods, except free shipping, local pickup and other pickup points, when free shipping is available for customers.', 'surbma-magyar-woocommerce' ); ?></p>
 				<p><a href="https://www.hucommerce.hu/dokumentum/szallitasi-modok-elrejtese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Global informations', 'module-globalinfo' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Global informations', 'module-globalinfo', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<li><p><?php esc_html_e( 'Use these fields for your global informations and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles.', 'surbma-magyar-woocommerce' ); ?></p></li>
-					<?php cps_hc_wcgems_form_field_text( 'Name', 'globalinfoname', '', false, false, true, 'Shortcode: <code>[hc-nev]</code>' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Company', 'globalinfocompany', '', false, false, true, 'Shortcode: <code>[hc-ceg]</code>' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Headquarters', 'globalinfoheadquarters', '', false, false, true, 'Shortcode: <code>[hc-szekhely]</code>' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Tax number', 'globalinfotaxnumber', '', false, false, true, 'Shortcode: <code>[hc-adoszam]</code>' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Company registration number', 'globalinforegnumber', '', false, false, true, 'Shortcode: <code>[hc-cegjegyzekszam]</code>' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Address of store', 'globalinfoaddress', '', false, false, true, 'Shortcode: <code>[hc-cim]</code>' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Bank account number', 'globalinfobankaccount', '', false, false, true, 'Shortcode: <code>[hc-bankszamlaszam]</code>' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Mobile phone number', 'globalinfomobile', '', false, false, true, 'Shortcode: <code>[hc-mobiltelefon]</code>' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Telephone number', 'globalinfophone', '', false, false, true, 'Shortcode: <code>[hc-telefon]</code>' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Email', 'globalinfoemail', '', false, false, true, 'Shortcode: <code>[hc-email]</code>' ); ?>
-					<?php cps_hc_wcgems_form_field_textarea( 'About Us', 'globalinfoaboutus', '', false, false, true, ' | Shortcode: <code>[hc-rolunk]</code>' ); ?>
-
-					<li><strong><?php esc_html_e( 'Extra shortcodes', 'surbma-magyar-woocommerce' ); ?></strong></li>
-					<li class="uk-overflow-auto">
-						<table class="uk-table uk-table-divider uk-table-justify uk-table-small">
-							<thead>
-								<tr>
-									<th><?php esc_html_e( 'Shortcode', 'surbma-magyar-woocommerce' ); ?></th>
-									<th><?php esc_html_e( 'Description', 'surbma-magyar-woocommerce' ); ?></th>
-									<th><?php esc_html_e( 'Example', 'surbma-magyar-woocommerce' ); ?></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><code>[hc-mailto][/hc-mailto]</code></td>
-									<td><?php esc_html_e( 'The mailto shortcode can show an email address as a link and encode the characters, so bots can not read it from the source code.', 'surbma-magyar-woocommerce' ); ?></td>
-									<td><code>[hc-mailto]email@domain.hu[/hc-mailto]</code></td>
-								</tr>
-								<tr>
-									<td><code>[hc-tel][/hc-tel]</code></td>
-									<td><?php esc_html_e( 'The tel shortcode will create a clickable phone number.', 'surbma-magyar-woocommerce' ); ?></td>
-									<td><code>[hc-tel]+36 12 345 6789[/hc-tel]</code></td>
-								</tr>
-							</tbody>
-						</table>
-					</li>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Use these fields for your global informations and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles. Local data will be semantic for search engines.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/globalis-adatok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -597,6 +504,47 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 	<?php } ?>
 
 	<ul class="uk-list uk-list-large" uk-accordion>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Check field formats (Masking)', 'maskcheckoutfields' ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Check field formats (Masking)', 'maskcheckoutfields' ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_wcgems_form_field_checkbox( 'Masking with placeholder', 'maskcheckoutfieldsplaceholder', 'The masking scheme will be displayed as a placeholder in the field. This will override the default placeholder.' ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Tax field', 'maskbillingtaxfield', 'Allowed formats: 00000000-0-00, 00000000000, HU00000000', false, false, 1 ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Postcode field', 'maskbillingpostcodefield', 'Allows only 4 numbers.', false, false, 1 ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Phone field', 'maskbillingphonefield', false, false, false, 1 ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Shipping Postcode field', 'maskshippingpostcodefield', 'Allows only 4 numbers.', false, false, 1 ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Masking these fields: Billing VAT number, Billing Postcode, Billing Phone, Shipping Postcode', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/mezok-formatumanak-ellenorzese-maszkolas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Check field values', 'validatecheckoutfields' ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Check field values', 'validatecheckoutfields' ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Tax field', 'validatebillingtaxfield', 'Allowed formats: 00000000-0-00, 00000000000, HU00000000', false, false, 1 ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Billing City field', 'validatebillingcityfield', 'Allows only letters and space.', false, false, 1 ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Address field', 'validatebillingaddressfield', 'Must have at least one letter, one number and one space in the address.', false, false, 1 ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Billing Phone field', 'validatebillingphonefield', false, false, false, 1 ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Shipping City field', 'validateshippingcityfield', 'Allows only letters and space.', false, false, 1 ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Shipping Address field', 'validateshippingaddressfield', 'Must have at least one letter, one number and one space in the address.', false, false, 1 ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Checking these fields: Billing VAT number, Billing Postcode, Billing Phone, Shipping Postcode', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/mezok-ertekenek-ellenorzese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
 		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Free shipping notification', 'freeshippingnotice' ); ?>
 			<div class="uk-accordion-content">
@@ -729,6 +677,58 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Disclaimer', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'HuCommerce modules are tools to comply with local and/or international rules and laws, but it is the webshop owner\'s duty to make sure to comply with all rules and laws! Developers and the owners of HuCommerce take no responsibility for any legal compliance. However our mission is to provide all necessary tools for these challenges.', 'surbma-magyar-woocommerce' ); ?></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Global informations', 'module-globalinfo' ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Global informations', 'module-globalinfo' ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<li><p><?php esc_html_e( 'Use these fields for your global informations and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles.', 'surbma-magyar-woocommerce' ); ?></p></li>
+					<?php cps_hc_wcgems_form_field_text( 'Name', 'globalinfoname', '', false, false, false, 'Shortcode: <code>[hc-nev]</code>' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Company', 'globalinfocompany', '', false, false, false, 'Shortcode: <code>[hc-ceg]</code>' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Headquarters', 'globalinfoheadquarters', '', false, false, false, 'Shortcode: <code>[hc-szekhely]</code>' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Tax number', 'globalinfotaxnumber', '', false, false, false, 'Shortcode: <code>[hc-adoszam]</code>' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Company registration number', 'globalinforegnumber', '', false, false, false, 'Shortcode: <code>[hc-cegjegyzekszam]</code>' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Address of store', 'globalinfoaddress', '', false, false, false, 'Shortcode: <code>[hc-cim]</code>' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Bank account number', 'globalinfobankaccount', '', false, false, false, 'Shortcode: <code>[hc-bankszamlaszam]</code>' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Mobile phone number', 'globalinfomobile', '', false, false, false, 'Shortcode: <code>[hc-mobiltelefon]</code>' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Telephone number', 'globalinfophone', '', false, false, false, 'Shortcode: <code>[hc-telefon]</code>' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Email', 'globalinfoemail', '', false, false, false, 'Shortcode: <code>[hc-email]</code>' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'About Us', 'globalinfoaboutus', '', false, false, false, ' | Shortcode: <code>[hc-rolunk]</code>' ); ?>
+
+					<li><strong><?php esc_html_e( 'Extra shortcodes', 'surbma-magyar-woocommerce' ); ?></strong></li>
+					<li class="uk-overflow-auto">
+						<table class="uk-table uk-table-divider uk-table-justify uk-table-small">
+							<thead>
+								<tr>
+									<th><?php esc_html_e( 'Shortcode', 'surbma-magyar-woocommerce' ); ?></th>
+									<th><?php esc_html_e( 'Description', 'surbma-magyar-woocommerce' ); ?></th>
+									<th><?php esc_html_e( 'Example', 'surbma-magyar-woocommerce' ); ?></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><code>[hc-mailto][/hc-mailto]</code></td>
+									<td><?php esc_html_e( 'The mailto shortcode can show an email address as a link and encode the characters, so bots can not read it from the source code.', 'surbma-magyar-woocommerce' ); ?></td>
+									<td><code>[hc-mailto]email@domain.hu[/hc-mailto]</code></td>
+								</tr>
+								<tr>
+									<td><code>[hc-tel][/hc-tel]</code></td>
+									<td><?php esc_html_e( 'The tel shortcode will create a clickable phone number.', 'surbma-magyar-woocommerce' ); ?></td>
+									<td><code>[hc-tel]+36 12 345 6789[/hc-tel]</code></td>
+								</tr>
+							</tbody>
+						</table>
+					</li>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Use these fields for your global informations and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles. Local data will be semantic for search engines.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/globalis-adatok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 	</ul>
