@@ -34,6 +34,10 @@
 			<key name="productpricehistory-lowestpricetext" />
 			<key name="productpricehistory-discounttext" />
 			<key name="productpricehistory-statisticslinktext" />
+			<key name="productpriceadditions-product-prefix" />
+			<key name="productpriceadditions-product-suffix" />
+			<key name="productpriceadditions-archive-prefix" />
+			<key name="productpriceadditions-archive-suffix" />
 		</key>
 	</admin-texts>
 </wpml-config>

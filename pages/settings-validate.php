@@ -157,6 +157,10 @@ function surbma_hc_fields_validate( $input ) {
 	$input['smtpuser'] = wp_filter_nohtml_kses( $input['smtpuser'] );
 	$input['smtppassword'] = wp_filter_nohtml_kses( $input['smtppassword'] );
 	$input['productpricehistory-statisticslinktext'] = wp_filter_nohtml_kses( $input['productpricehistory-statisticslinktext'] );
+	$input['productpriceadditions-product-prefix'] = wp_filter_nohtml_kses( $input['productpriceadditions-product-prefix'] );
+	$input['productpriceadditions-product-suffix'] = wp_filter_nohtml_kses( $input['productpriceadditions-product-suffix'] );
+	$input['productpriceadditions-archive-prefix'] = wp_filter_nohtml_kses( $input['productpriceadditions-archive-prefix'] );
+	$input['productpriceadditions-archive-suffix'] = wp_filter_nohtml_kses( $input['productpriceadditions-archive-suffix'] );
 
 	// Say our text/textarea option must be safe text with the allowed tags for posts
 	$input['freeshippingnoticemessage'] = wp_filter_post_kses( $input['freeshippingnoticemessage'] );
@@ -223,6 +227,12 @@ function surbma_hc_fields_validate( $input ) {
 		$input['productpricehistory-discounttext'] = isset( $options['productpricehistory-discounttext'] ) ? $options['productpricehistory-discounttext'] : __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
 		$input['productpricehistory-showstatisticslink'] = isset( $options['productpricehistory-showstatisticslink'] ) ? $options['productpricehistory-showstatisticslink'] : 0;
 		$input['productpricehistory-statisticslinktext'] = isset( $options['productpricehistory-statisticslinktext'] ) ? $options['productpricehistory-statisticslinktext'] : __( 'Advanced statistics', 'surbma-magyar-woocommerce' );
+
+		// Product price additions
+		$input['productpriceadditions-product-prefix'] = isset( $options['productpriceadditions-product-prefix'] ) ? $options['productpriceadditions-product-prefix'] : '';
+		$input['productpriceadditions-product-suffix'] = isset( $options['productpriceadditions-product-suffix'] ) ? $options['productpriceadditions-product-suffix'] : '';
+		$input['productpriceadditions-archive-prefix'] = isset( $options['productpriceadditions-archive-prefix'] ) ? $options['productpriceadditions-archive-prefix'] : '';
+		$input['productpriceadditions-archive-suffix'] = isset( $options['productpriceadditions-archive-suffix'] ) ? $options['productpriceadditions-archive-suffix'] : '';
 
 		// Legal compliance
 		$input['regip'] = isset( $options['regip'] ) ? $options['regip'] : 0;

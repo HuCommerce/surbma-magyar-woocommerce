@@ -632,6 +632,25 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 			</div>
 		</li>
 		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Product price additions', 'module-productpriceadditions', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Product price additions', 'module-productpriceadditions' ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_wcgems_form_field_text( 'Price prefix on Product page', 'productpriceadditions-product-prefix' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Price suffix on Product page', 'productpriceadditions-product-suffix' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Price prefix on Archive pages', 'productpriceadditions-archive-prefix' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Price suffix on Archive pages', 'productpriceadditions-archive-suffix' ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Set a default prefix or suffix for your prices. You can use this feature to give a unit of measure for your product prices or give a general information, that is specific for your webshop and your products. With the above settings you can give your default, global prefix and suffix, but you can customize these fields per product also. Even, you can remove it, when you edit your products.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/termek-ar-kiegeszitesek/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Legal compliance (GDPR, CCPA, ePrivacy)', 'legalcheckout' ); ?>
 			<div class="uk-accordion-content">
 		<?php // HuCommerce legacy users notice ?>
