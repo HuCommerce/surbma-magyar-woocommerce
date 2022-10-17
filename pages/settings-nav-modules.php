@@ -589,11 +589,10 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 			</div>
 		</li>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Product price history', 'module-productpricehistory', true, true ); ?>
+			<?php cps_hc_wcgems_form_accordion_title( 'Product price history', 'module-productpricehistory' ); ?>
 			<div class="uk-accordion-content">
 				<div class="uk-alert-primary cps-alert" uk-alert>
-					<p><strong>BÉTA verzió</strong><br>
-					Ez a modul nincs minden körülmény között tesztelve és nem tudja 100%-ban teljesíteni a funkcionális és/vagy jogi igényeket, feltételeket. Ezért a használata esetén fokozott figyelmet igényel.<br>
+					<p>Ez a modul nincs minden körülmény között tesztelve és nem tudja 100%-ban teljesíteni a funkcionális és/vagy jogi igényeket, feltételeket. Ezért a használata esetén fokozott figyelmet igényel.<br>
 					FIGYELEM! A HuCommerce ügyfélszolgálatára beküldött visszajelzések és javaslatok jelentősen gyorsítják a modul fejlesztését, ezért szívesen várjuk az ilyen témájú megkereséseket. Köszönjük!</p>
 				</div>
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
