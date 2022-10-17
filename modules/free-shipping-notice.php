@@ -5,6 +5,11 @@ defined( 'ABSPATH' ) || exit;
 
 // Code reference: https://businessbloomer.com/woocommerce-add-need-spend-x-get-free-shipping-cart-page/
 function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
+	// Return false if Cart is empty
+	if ( count( WC()->cart->get_cart() ) < 1 ) {
+		return;
+	}
+
 	$options = get_option( 'surbma_hc_fields' );
 	$freeshippingminimumorderamountValue = isset( $options['freeshippingminimumorderamount'] ) && ( $options['freeshippingminimumorderamount'] ) ? $options['freeshippingminimumorderamount'] : 0;
 	$freeshippingcouponsdiscountsValue = isset( $options['freeshippingcouponsdiscounts'] ) && ( $options['freeshippingcouponsdiscounts'] ) ? $options['freeshippingcouponsdiscounts'] : 0;
@@ -45,6 +50,7 @@ function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
 		}
 	}
 
+	// Return false if no minimum amount is set
 	if ( empty( $min_amounts ) ) {
 		return;
 	}
