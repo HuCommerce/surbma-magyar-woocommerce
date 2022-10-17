@@ -97,6 +97,16 @@ add_action( 'woocommerce_process_product_meta', function( $post_id, $post ) {
 
 // Display prefixes and suffixes
 add_filter( 'woocommerce_get_price_html', function( $price, $product ) {
+	// Don't show it on admin
+	if ( is_admin() ) {
+		return $price;
+	}
+
+	// This function is not needed for grouped products
+	if ( $product->is_type( 'grouped' ) ) {
+		return $price;
+	}
+
 	$options = get_option( 'surbma_hc_fields' );
 	$productpriceadditions_productprefixValue = isset( $options['productpriceadditions-product-prefix'] ) && $options['productpriceadditions-product-prefix'] ? $options['productpriceadditions-product-prefix'] : false;
 	$productpriceadditions_productsuffixValue = isset( $options['productpriceadditions-product-suffix'] ) && $options['productpriceadditions-product-suffix'] ? $options['productpriceadditions-product-suffix'] : false;
@@ -153,3 +163,8 @@ add_filter( 'woocommerce_get_price_html', function( $price, $product ) {
 
 	return $price;
 }, 100, 2 );
+
+// TEMPORARY SOLUTION: Hide the product additions for variable products
+add_action( 'woocommerce_before_variations_form', function() {
+	echo '<style>.single_variation_wrap .hc-price-prefix, .single_variation_wrap .hc-price-suffix {display: none;}</style>';
+} );
