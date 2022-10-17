@@ -31,6 +31,9 @@
 			<key name="globalinfophone" />
 			<key name="globalinfoemail" />
 			<key name="globalinfoaboutus" />
+			<key name="productpricehistory-lowestpricetext" />
+			<key name="productpricehistory-discounttext" />
+			<key name="productpricehistory-statisticslinktext" />
 		</key>
 	</admin-texts>
 </wpml-config>
