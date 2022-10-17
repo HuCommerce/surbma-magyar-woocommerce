@@ -122,9 +122,10 @@ $options = get_option( 'surbma_hc_fields' );
 $legalconfirmationsposition = isset( $options['legalconfirmationsposition'] ) ? $options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
 
 add_action( $legalconfirmationsposition, function( $checkout = null ) {
-	if ( !$checkout ) {
+	if ( ! $checkout ) {
 		$checkout = WC()->checkout();
 	}
+
 	$options = get_option( 'surbma_hc_fields' );
 	$legalcheckouttitleValue = isset( $options['legalcheckouttitle'] ) ? $options['legalcheckouttitle'] : esc_html__( 'Legal confirmations', 'surbma-magyar-woocommerce' );
 	$legalconfirmationsposition = isset( $options['legalconfirmationsposition'] ) ? $options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
@@ -138,7 +139,9 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 	$accepttosValue = isset( $options['accepttos'] ) ? wp_kses_post( wp_unslash( $options['accepttos'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'surbma-magyar-woocommerce' );
 	$acceptppValue = isset( $options['acceptpp'] ) ? wp_kses_post( wp_unslash( $options['acceptpp'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
 	$acceptcustom1Value = isset( $options['acceptcustom1'] ) ? wp_kses_post( wp_unslash( $options['acceptcustom1'] ) ) : '';
+	$legalcheckout_custom1optionalValue = isset( $options['legalcheckout-custom1optional'] ) && 1 == $options['legalcheckout-custom1optional'] ? false : true;
 	$acceptcustom2Value = isset( $options['acceptcustom2'] ) ? wp_kses_post( wp_unslash( $options['acceptcustom2'] ) ) : '';
+	$legalcheckout_custom2optionalValue = isset( $options['legalcheckout-custom2optional'] ) && 1 == $options['legalcheckout-custom2optional'] ? false : true;
 
 	echo '<div id="surbma_hc_gdpr_checkout">' . wp_kses_post( $legalcheckouttitleValue );
 
@@ -171,7 +174,7 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 			'label'         => '<span class="hc-checkbox-text">' . $acceptcustom1Value . '</span>',
 			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
 			'input_class'   => array( 'woocommerce-form__input', 'woocommerce-form__input-checkbox' ),
-			'required'      => true
+			'required'      => $legalcheckout_custom1optionalValue
 		), $checkout->get_value( 'accept_custom1' ) );
 	}
 
@@ -182,7 +185,7 @@ add_action( $legalconfirmationsposition, function( $checkout = null ) {
 			'label'         => '<span class="hc-checkbox-text">' . $acceptcustom2Value . '</span>',
 			'label_class'   => array( 'woocommerce-form__label', 'woocommerce-form__label-for-checkbox' ),
 			'input_class'   => array( 'woocommerce-form__input', 'woocommerce-form__input-checkbox' ),
-			'required'      => true
+			'required'      => $legalcheckout_custom2optionalValue
 		), $checkout->get_value( 'accept_custom2' ) );
 	}
 
@@ -194,6 +197,8 @@ add_action( 'woocommerce_checkout_process', function() {
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
 	$options = get_option( 'surbma_hc_fields' );
+	$legalcheckout_custom1optionalValue = isset( $options['legalcheckout-custom1optional'] ) && 1 == $options['legalcheckout-custom1optional'] ? false : true;
+	$legalcheckout_custom2optionalValue = isset( $options['legalcheckout-custom2optional'] ) && 1 == $options['legalcheckout-custom2optional'] ? false : true;
 
 	if ( isset( $options['accepttos'] ) && $options['accepttos'] && empty( $_POST['accept_tos'] ) ) {
 		$accepttosError = __( 'Terms of Service', 'surbma-magyar-woocommerce' );
@@ -209,12 +214,12 @@ add_action( 'woocommerce_checkout_process', function() {
 		wc_add_notice( $acceptppError, 'error' );
 	}
 
-	if ( isset( $options['acceptcustom1'] ) && $options['acceptcustom1'] && isset( $options['acceptcustom1label'] ) && $options['acceptcustom1label'] && empty( $_POST['accept_custom1'] ) ) {
+	if ( $legalcheckout_custom1optionalValue && isset( $options['acceptcustom1'] ) && $options['acceptcustom1'] && isset( $options['acceptcustom1label'] ) && $options['acceptcustom1label'] && empty( $_POST['accept_custom1'] ) ) {
 		$custom1errormessage = '<strong>' . $options['acceptcustom1label'] . '</strong> ' . esc_html__( 'is a required field.', 'surbma-magyar-woocommerce' );
 		wc_add_notice( $custom1errormessage, 'error' );
 	}
 
-	if ( isset( $options['acceptcustom2'] ) && $options['acceptcustom2'] && isset( $options['acceptcustom2label'] ) && $options['acceptcustom2label'] && empty( $_POST['accept_custom2'] ) ) {
+	if ( $legalcheckout_custom2optionalValue && isset( $options['acceptcustom2'] ) && $options['acceptcustom2'] && isset( $options['acceptcustom2label'] ) && $options['acceptcustom2label'] && empty( $_POST['accept_custom2'] ) ) {
 		$custom2errormessage = '<strong>' . $options['acceptcustom2label'] . '</strong> ' . esc_html__( 'is a required field.', 'surbma-magyar-woocommerce' );
 		wc_add_notice( $custom2errormessage, 'error' );
 	}
@@ -231,17 +236,37 @@ add_action( 'woocommerce_checkout_update_order_meta', function( $order_id ) {
 	if ( !empty( $_POST['accept_pp'] ) ) {
 		update_post_meta( $order_id, 'accept_pp', true );
 	}
+
+	if ( !empty( $_POST['accept_custom1'] ) ) {
+		update_post_meta( $order_id, 'accept_custom1', true );
+	}
+
+	if ( !empty( $_POST['accept_custom2'] ) ) {
+		update_post_meta( $order_id, 'accept_custom2', true );
+	}
 } );
 
 add_action( 'woocommerce_admin_order_data_after_billing_address', function( $order ) {
-	$accepttos = !get_post_meta( $order->get_id(), 'accept_tos', true ) ? '' : esc_html__( 'Accepted', 'surbma-magyar-woocommerce' );
-	$acceptpp = !get_post_meta( $order->get_id(), 'accept_pp', true ) ? '' : esc_html__( 'Accepted', 'surbma-magyar-woocommerce' );
+	$options = get_option( 'surbma_hc_fields' );
+	$acceptcustom1labelValue = isset( $options['acceptcustom1label'] ) && $options['acceptcustom1label'] ? $options['acceptcustom1label'] : __( 'Custom 1 checkbox', 'surbma-magyar-woocommerce' );
+	$acceptcustom2labelValue = isset( $options['acceptcustom2label'] ) && $options['acceptcustom2label'] ? $options['acceptcustom2label'] : __( 'Custom 2 checkbox', 'surbma-magyar-woocommerce' );
+
+	$accepttos = get_post_meta( $order->get_id(), 'accept_tos', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
+	$acceptpp = get_post_meta( $order->get_id(), 'accept_pp', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
+	$acceptcustom1 = get_post_meta( $order->get_id(), 'accept_custom1', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
+	$acceptcustom2 = get_post_meta( $order->get_id(), 'accept_custom2', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
 
 	if ( $accepttos ) {
 		echo '<p><strong>' . esc_html__( 'Terms of Service', 'surbma-magyar-woocommerce' ) . ':</strong> ' . esc_html( $accepttos ) . '</p>';
 	}
 	if ( $acceptpp ) {
 		echo '<p><strong>' . esc_html__( 'Privacy Policy', 'surbma-magyar-woocommerce' ) . ':</strong> ' . esc_html( $acceptpp ) . '</p>';
+	}
+	if ( $acceptcustom1 ) {
+		echo '<p><strong>' . esc_html( $acceptcustom1labelValue ) . ':</strong> ' . esc_html( $acceptcustom1 ) . '</p>';
+	}
+	if ( $acceptcustom2 ) {
+		echo '<p><strong>' . esc_html( $acceptcustom2labelValue ) . ':</strong> ' . esc_html( $acceptcustom2 ) . '</p>';
 	}
 }, 10, 1 );
 

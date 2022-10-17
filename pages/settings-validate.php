@@ -86,6 +86,8 @@ function surbma_hc_fields_validate( $input ) {
 	$input['freeshippingcouponsdiscounts'] = isset( $input['freeshippingcouponsdiscounts'] ) && 1 == $input['freeshippingcouponsdiscounts'] ? 1 : 0;
 	$input['freeshippingwithouttax'] = isset( $input['freeshippingwithouttax'] ) && 1 == $input['freeshippingwithouttax'] ? 1 : 0;
 	$input['regip'] = isset( $input['regip'] ) && 1 == $input['regip'] ? 1 : 0;
+	$input['legalcheckout-custom1optional'] = isset( $input['legalcheckout-custom1optional'] ) && 1 == $input['legalcheckout-custom1optional'] ? 1 : 0;
+	$input['legalcheckout-custom2optional'] = isset( $input['legalcheckout-custom2optional'] ) && 1 == $input['legalcheckout-custom2optional'] ? 1 : 0;
 	$input['addtocartonarchive'] = isset( $input['addtocartonarchive'] ) && 1 == $input['addtocartonarchive'] ? 1 : 0;
 	$input['productsubtitle'] = isset( $input['productsubtitle'] ) && 1 == $input['productsubtitle'] ? 1 : 0;
 	$input['norelatedproducts'] = isset( $input['norelatedproducts'] ) && 1 == $input['norelatedproducts'] ? 1 : 0;
@@ -243,8 +245,10 @@ function surbma_hc_fields_validate( $input ) {
 		$input['acceptpp'] = isset( $options['acceptpp'] ) ? $options['acceptpp'] : __( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
 		$input['acceptcustom1label'] = isset( $options['acceptcustom1label'] ) ? $options['acceptcustom1label'] : '';
 		$input['acceptcustom1'] = isset( $options['acceptcustom1'] ) ? $options['acceptcustom1'] : '';
+		$input['legalcheckout-custom1optional'] = isset( $options['legalcheckout-custom1optional'] ) ? $options['legalcheckout-custom1optional'] : 0;
 		$input['acceptcustom2label'] = isset( $options['acceptcustom2label'] ) ? $options['acceptcustom2label'] : '';
 		$input['acceptcustom2'] = isset( $options['acceptcustom2'] ) ? $options['acceptcustom2'] : '';
+		$input['legalcheckout-custom2optional'] = isset( $options['legalcheckout-custom2optional'] ) ? $options['legalcheckout-custom2optional'] : 0;
 		$input['beforeorderbuttonmessage'] = isset( $options['beforeorderbuttonmessage'] ) ? $options['beforeorderbuttonmessage'] : '';
 		$input['afterorderbuttonmessage'] = isset( $options['afterorderbuttonmessage'] ) ? $options['afterorderbuttonmessage'] : '';
 

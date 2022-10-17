@@ -162,6 +162,9 @@ __( 'Apply minimum order rule without tax', 'surbma-magyar-woocommerce' );
 __( 'If checked, free shipping would be available based on order amount exclusive of tax.', 'surbma-magyar-woocommerce' );
 __( 'Message before minimum order amount reached', 'surbma-magyar-woocommerce' );
 __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
+__( 'Make Custom 1 checkbox optional', 'surbma-magyar-woocommerce' );
+__( 'Make Custom 2 checkbox optional', 'surbma-magyar-woocommerce' );
+__( 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.', 'surbma-magyar-woocommerce' );
 ?>
 
 <form class="uk-form-stacked" method="post" action="options.php">
@@ -676,8 +679,10 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 					<?php cps_hc_wcgems_form_field_textarea( 'Privacy Policy checkbox text on Checkout page', 'acceptpp', 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'If empty, then this checkbox will not be displayed.' ); ?>
 					<?php cps_hc_wcgems_form_field_text( 'Custom 1 checkbox label on Checkout page', 'acceptcustom1label', '', 'The label of the custom checkbox field. Used by the error message, if checkbox is not accepted. If empty, then no error message will be displayed.' ); ?>
 					<?php cps_hc_wcgems_form_field_textarea( 'Custom 1 checkbox text on Checkout page', 'acceptcustom1', '', 'If empty, then this checkbox will not be displayed.' ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Make Custom 1 checkbox optional', 'legalcheckout-custom1optional', 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.' ); ?>
 					<?php cps_hc_wcgems_form_field_text( 'Custom 2 checkbox label on Checkout page', 'acceptcustom2label', '', 'The label of the custom checkbox field. Used by the error message, if checkbox is not accepted. If empty, then no error message will be displayed.' ); ?>
 					<?php cps_hc_wcgems_form_field_textarea( 'Custom 2 checkbox text on Checkout page', 'acceptcustom2', '', 'If empty, then this checkbox will not be displayed.' ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Make Custom 2 checkbox optional', 'legalcheckout-custom2optional', 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.' ); ?>
 					<?php cps_hc_wcgems_form_field_textarea( 'Custom text before Place order button', 'beforeorderbuttonmessage', '', 'This text will be displayed just above the Place order button on Checkout page. If empty, then no text will be displayed.' ); ?>
 					<?php cps_hc_wcgems_form_field_textarea( 'Custom text after Place order button', 'afterorderbuttonmessage', '', 'This text will be displayed just under the Place order button on Checkout page. If empty, then no text will be displayed.' ); ?>
 
