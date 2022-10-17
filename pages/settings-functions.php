@@ -212,7 +212,7 @@ function cps_hc_wcgems_form_field_select( $field_label, $field_option, $field_op
 	echo $field;
 }
 
-function cps_hc_wcgems_form_field_text( $field_label, $field_option, $field_default, $field_info = false, $field_new = false, $field_free = false, $field_description = false, $field_icon = false ) {
+function cps_hc_wcgems_form_field_text( $field_label, $field_option, $field_default = '', $field_info = false, $field_new = false, $field_free = false, $field_description = false, $field_icon = false ) {
 	$options = get_option( 'surbma_hc_fields' );
 	$field = '';
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : '';
