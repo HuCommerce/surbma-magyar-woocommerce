@@ -48,13 +48,7 @@ if ( 'none' != $emptycartbutton_checkoutpageValue ) {
 add_action( 'template_redirect', function() {
 	if ( ( is_cart() || is_checkout() ) && isset( $_GET['hc-empty-cart'] ) && 1 == esc_html( $_GET['hc-empty-cart'] ) ) {
 		WC()->cart->empty_cart();
-
-		if ( is_cart() ) {
-			$referer = wp_get_referer() ? esc_url( remove_query_arg( 'hc-empty-cart' ) ) : esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) );
-		}
-		if ( is_checkout() ) {
-			$referer = esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) );
-		}
+		$referer = esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) );
 		wp_safe_redirect( $referer );
 	}
 }, 20 );
