@@ -113,7 +113,13 @@ add_filter( 'woocommerce_get_price_html', function( $price, $product ) {
 	$productpriceadditions_archiveprefixValue = isset( $options['productpriceadditions-archive-prefix'] ) && $options['productpriceadditions-archive-prefix'] ? $options['productpriceadditions-archive-prefix'] : false;
 	$productpriceadditions_archivesuffixValue = isset( $options['productpriceadditions-archive-suffix'] ) && $options['productpriceadditions-archive-suffix'] ? $options['productpriceadditions-archive-suffix'] : false;
 
+	// Get the parent product object if product is variable
+	if ( $product->get_parent_id() ) {
+		$product = wc_get_product( $product->get_parent_id() );
+	}
+
 	$product_id = $product->get_id();
+
 	$product_productprefix = get_post_meta( $product_id, '_hc_productpriceadditions_product_prefix' ) ? get_post_meta( $product_id, '_hc_productpriceadditions_product_prefix', true ) : false;
 	$product_disableproductprefix = get_post_meta( $product_id, '_hc_productpriceadditions_disable_product_prefix' ) ? get_post_meta( $product_id, '_hc_productpriceadditions_disable_product_prefix', true ) : false;
 	$product_productsuffix = get_post_meta( $product_id, '_hc_productpriceadditions_product_suffix' ) ? get_post_meta( $product_id, '_hc_productpriceadditions_product_suffix', true ) : false;
@@ -163,8 +169,3 @@ add_filter( 'woocommerce_get_price_html', function( $price, $product ) {
 
 	return $price;
 }, 100, 2 );
-
-// TEMPORARY SOLUTION: Hide the product additions for variable products
-add_action( 'woocommerce_before_variations_form', function() {
-	echo '<style>.single_variation_wrap .hc-price-prefix, .single_variation_wrap .hc-price-suffix {display: none;}</style>';
-} );
