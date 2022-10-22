@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.0
-Stable tag: 2022.3.5
+Stable tag: 2022.4.0
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -41,7 +41,6 @@ Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg h
 - Vezetéknév és keresztnév rendbetétele (WooCommerce 4.4 verzió fölött is)
 - Adószám bekérése vásárlásnál
 - Megye mező elrejtése
-- Pénztár mezők ellenőrzése
 - Város automatikus kitöltése az irányítószám alapján
 - Pénztár oldal formázása
 - Kupon mező módosítások
@@ -51,11 +50,9 @@ Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg h
 - Kosár átirányítása a Pénztár oldalra
 - Vásárlás folytatása gomb megjelenítése a Kosár és/vagy a Pénztár oldalakon
 - Belépés és regisztráció utáni átirányítás
-- Ingyenes szállítás értesítés
 - Szállítási módok elrejtése
 - Egyedi “Kosárba teszem” gombok
 - Termék extra beállítások
-- Globális adatok, amiket shortcode-dal lehet bárhol megjeleníteni
 - SMTP szolgáltatás beállítása
 - Fordítási hiányosságok javítása
 - WPML és Polylang kompatibilitás
@@ -72,9 +69,13 @@ A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő 
 
 **HuCommerce Pro további funkciói:**
 
+- Pénztár mezők ellenőrzése
+- Ingyenes szállítás értesítés
+- Kosár ürítése gomb
+- Termék ár történet (új Fogyasztóvédelemi rendelet)
+- Termék ár kiegészítések
 - Jogi megfelelés (Fogyasztóvédelem, GDPR, ePrivacy, stb.)
-- Termék ár történet (új Fogyasztóvédelemi rendelet) - BÉTA
-- Kiegészítők és sablonok fordításai
+- Globális adatok, amiket shortcode-dal lehet bárhol megjeleníteni
 - Kiemelt ügyfélszolgálat és támogatás
 - További funkciók hamarosan…
 
@@ -136,7 +137,7 @@ A regisztrációs űrlapnál is kérhető az Adatkezelési Tájékoztató kötel
 
 >**FIGYELEM!** A webáruház jogi megfelelése az aktuális törvényeknek és adatvédelmi rendeleteknek minden esetben a webáruház tulajdonosának a felelőssége. Ez az opció nem mentesít senkit sem az alól, hogy a megfelelést felülvizsgáltassa szakértővel vagy jogásszal. A fejlesztők nem vállalnak semmilyen felelősséget a webáruház jogi megfeleléséért.
 
-#### Termék ár történet (új Fogyasztóvédelemi rendelet: 4/2009. (I. 30.) NFGM-SZMM együttes rendelet 2/A. §) - BÉTA
+#### Termék ár történet (új Fogyasztóvédelemi rendelet: 4/2009. (I. 30.) NFGM-SZMM együttes rendelet 2/A. §)
 
 Ez a modul nincs minden körülmény között tesztelve és nem tudja 100%-ban teljesíteni a funkcionális és/vagy jogi igényeket, feltételeket. Ezért a használata esetén fokozott figyelmet igényel.
 
@@ -212,6 +213,14 @@ Ingyenes szállítás esetén ezzel a modullal elrejtheted az összes nem relev�
 
 Lehetőséged van teljesen egyedi szövegek megadására a “Kosárba teszem” szöveg helyett. Sőt a különböző termék típusok (egyszerű, előfizetés, tagság, stb.) esetén különböző szövegeket is megadhatsz.
 
+#### Kosár ürítése gomb
+
+A Kosár és Pénztár oldalakon elhelyezhető gombbal a vásárló egy kattintásra tudja törölni az összes kosárban lévő terméket. A gomb csak akkor jelenik meg, ha minimum 2 termék van a kosárban. A véletlen törlés elkerülése végett a teljes törlést meg kell erősítenie a vásárlónak.
+
+#### Termék ár kiegészítések
+
+A Termékek árához lehet beállítani elő- és utótagokat. Előtag lehet például a "Csak ma", "Nettó" stb., utótag pedig lehet a "/ pár", "/ kg", "(darabár)" vagy bármi, ami az adott termék árára jellemző. Az előtagot és utótagot a HuCommerce beállításainál globálisan lehet beállítani, azaz az ott megadott értékek minden terméknél meg fognak jelenni. Ezt a globális beállítást minden terméknél egyesével felül lehet írni, ahol egyedi elő- és utótagok is megadhatók vagy éppen letilthatók adott terméknél. Az előtagokat és utótagokat külön lehet meghatározni a gyüjtő (archívum) oldalakhoz és a termék végoldalakhoz.
+
 #### Termék extra beállítások
 
 Új lehetőségekkel bővülnek a Termékekhez kapcsolódó beállítások. Ez a funkció folyamatosan fog bővülni.
@@ -251,10 +260,6 @@ Ezek az adatok állíthatók be:
 Minden webáruházban fontos a kommunikáció az érdeklődővel és vásárlóval mind a vásárlás előtt, mind pedig a megrendelés leadása után. Ezért nagyon fontos, hogy a levelek kézbesítése biztonságos és megbízható legyen. Ezt a külső SMTP szolgáltatók tudják biztosítani, mint például a Mailgun vagy Sendgrid.
 
 A HuCommerce Pro SMTP beállításával összekapcsolhatod a webáruházad levelezését az SMTP szolgáltatóval.
-
-#### Prémium WooCommerce kiegészítők és sablonok fordításai
-
-Magyar fordítások a legnépszerűbb WooCommerce kiegészítőkhöz és sablonokhoz. Vannak olyanok, amikhez nincsenek fordítások és vannak olyanok, amikhez van, de nagyon rossz a hivatalos fordítás. A fordítások folyamatosan bővülnek.
 
 #### WPML és Polylang kompatibilitás
 
@@ -314,6 +319,76 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+= 2022.4.0 =
+
+Kiadás dátuma: 2022-10-22
+
+- Új Pro modul: Kosár ürítése gomb
+- Új Pro modul: Termék ár kiegészítések
+
+TERMÉK ÁR TÖRTÉNET
+
+- Megjelenítés shortcode használatával, hogy egyéb helyeken is meg lehessen jeleníteni.
+- Algoritmus kisebb módosítása.
+- Kedvezmény megjelenítésének a kisebb javítása, optimalizálása.
+- Kiegészítés egy lehetséges ellenőrzéssel, ami egyelőre ki lett kapcsolva.
+- További fordítás hozzáadása.
+- Bizonyos funcióknál biztosítani kellett, hogy csak az egyszerű termékeknél fussanak le.
+- Már a variálható termékeknél is menthetőek az egyedi mezők.
+- Termék szerkesztés oldalon a megjelenítés javítása.
+- Minden termék típus esetén jól jelenik meg: Egyszerű, Külső/Partner, Variálható, Csoportosított
+- Variálható termékekkel is kompatibilis lett.
+- Pro licensz nélkül is menti az adatokat.
+- WPML kompatibilitás a szöveges mezőkhöz.
+
+JOGI MEGFELELÉS (FOGYASZTÓVÉDELEM, GDPR, EPRIVACY, STB.)
+
+- Az egyedi checkbox-ok opcionális beállítási lehetősége.
+- Az egyedi checkbox-ok értékeit is megjeleníti a rendelésnél.
+
+VÁSÁRLÁS FOLYTATÁSA GOMBOK
+
+- Új opciót kapott, így a Kosár oldalon is elrejthető a gomb, nem csak a Pénztár oldalon.
+
+KOSÁR ÁTIRÁNYÍTÁSA A PÉNZTÁR OLDALRA
+
+- Javítva lett az átirányítás, ha a Kosár üres.
+
+SMTP SZOLGÁLTATÁS
+
+- Teszt üzenet küldésének a javítása.
+
+INGYENES SZÁLLÍTÁS ÉRTESÍTÉS
+
+- Átkerült a Pro verzióba.
+- Kiegészítés egyedi beállításokkal, amivel minden szállítási móddal kompatibilis lesz ezentúl.
+- Kisebb javítás, hogy ellenőrizze az ingyenes szállítás bekapcsolt állapotát.
+- Csak akkor jelenik meg, ha van termék a kosárban.
+
+MEZŐK FORMÁTUMÁNAK ELLENŐRZÉSE (MASZKOLÁS)
+
+- Átkerült a Pro verzióba.
+
+MEZŐK ÉRTÉKÉNEK ELLENŐRZÉSE
+
+- Átkerült a Pro verzióba.
+
+MAGYAR FORMÁTUM JAVÍTÁSOK
+
+- Kódok optimalizálása.
+- Rendelés szerkesztésnél is helyesen jelenik meg a név mezők sorrendje.
+
+EGYÉB
+
+- A Licensz aktiválásnál az egyedi termék azonosítót veszi figyelembe, ha az meg lett adva az url paraméterben.
+- Modul fő mező megjelenítésének a módosítása, optimalizálása.
+- Pro modulok ki-bekapcsolt állapotának a javítása, hogy licensz nélkül kikapcsolhatóak legyenek.
+- Kisebb módosítás a kód elrendezésében.
+- HuCommerce beállítások felület módosítása és új beviteli mező típus (number) hozzáadása.
+- Kisebb módosítás a text mező funkciónál.
+- CPS SDK frissítése a 8.11.2 verzióra.
+- Kompatibilitás ellenőrzése a WooCommerce 7.0 verzióval.
 
 = 2022.3.5 =
 
