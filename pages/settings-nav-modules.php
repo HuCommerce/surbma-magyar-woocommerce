@@ -151,6 +151,9 @@ __( 'Text for the advanced statistics link', 'surbma-magyar-woocommerce' );
 __( 'Empty Cart button', 'surbma-magyar-woocommerce' );
 __( 'Show Empty Cart button on Cart page', 'surbma-magyar-woocommerce' );
 __( 'Show Empty Cart button on Checkout page', 'surbma-magyar-woocommerce' );
+__( 'Button text', 'surbma-magyar-woocommerce' );
+__( 'Link text', 'surbma-magyar-woocommerce' );
+__( 'Confirmation text', 'surbma-magyar-woocommerce' );
 __( 'Changed your mind?', 'surbma-magyar-woocommerce' );
 __( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' );
 __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
@@ -581,9 +584,10 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 				<ul class="cps-form-fields uk-list uk-list-divider">
 					<?php cps_hc_wcgems_form_field_select( 'Button position on Cart page', 'emptycartbutton-cartpage', $emptycartbutton_cartpage_options, 'none' ); ?>
 					<?php cps_hc_wcgems_form_field_select( 'Button position on Checkout page', 'emptycartbutton-checkoutpage', $emptycartbutton_checkoutpage_options, 'none' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Button text', 'emptycartbutton-cartpagebuttontext', 'Empty cart' ); ?>
 					<?php cps_hc_wcgems_form_field_text( 'Message text', 'emptycartbutton-checkoutpagemessage', 'Changed your mind?' ); ?>
 					<?php cps_hc_wcgems_form_field_text( 'Link text', 'emptycartbutton-checkoutpagelinktext', 'Empty cart & continue shopping' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Confirmation text', 'emptycartbutton-checkoutpageconfirmationtext', 'Are you sure you want to empty the Cart?' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Confirmation text', 'emptycartbutton-confirmationtext', 'Are you sure you want to empty the Cart?' ); ?>
 				</ul>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>

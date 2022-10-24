@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.0
-Stable tag: 2022.4.0
+Stable tag: 2022.4.1
 Requires PHP: 7.0
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -319,6 +319,16 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+= 2022.4.1 =
+
+Kiadás dátuma: 2022-10-24
+
+KOSÁR ÜRÍTÉSE GOMB
+
+- A Kosár oldalon megjelenő gomb szövegének a beállítási lehetősége.
+- Pénztár oldalon is csak akkor jelenik meg, ha több termék van a kosárban.
+- Fordítások javítása.
 
 = 2022.4.0 =
 

@@ -17,8 +17,11 @@ $emptycartbutton_checkoutpagePosition = 'woocommerce_before_checkout_form' == $e
 if ( 'none' != $emptycartbutton_cartpageValue ) {
 	add_action( $emptycartbutton_cartpageValue, function() {
 		if ( count( WC()->cart->get_cart() ) > 1 ) {
-			echo '<a href="' . esc_url( add_query_arg( 'hc-empty-cart', '1' ) ) . '" class="button alt hc-empty-cart-button">' . esc_html( 'Empty Cart', 'surbma-magyar-woocommerce' ) . '</a>';
-			echo "<script>jQuery('.hc-empty-cart-button').on('click', function () {return confirm('Are you sure you want to empty the Cart?');});</script>";
+			$options = get_option( 'surbma_hc_fields' );
+			$emptycartbutton_cartpagebuttontextValue = isset( $options['emptycartbutton-cartpagebuttontext'] ) ? $options['emptycartbutton-cartpagebuttontext'] : __( 'Empty cart', 'surbma-magyar-woocommerce' );
+			$emptycartbutton_checkoutpageconfirmationtextValue = isset( $options['emptycartbutton-confirmationtext'] ) ? $options['emptycartbutton-confirmationtext'] : __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
+			echo '<a href="' . esc_url( add_query_arg( 'hc-empty-cart', '1' ) ) . '" class="button alt hc-empty-cart-button">' . $emptycartbutton_cartpagebuttontextValue . '</a>';
+			echo "<script>jQuery('.hc-empty-cart-button').on('click', function () {return confirm('" . $emptycartbutton_checkoutpageconfirmationtextValue . "');});</script>";
 		}
 	} );
 }
@@ -33,14 +36,17 @@ if ( 'none' != $emptycartbutton_cartpageValue ) {
 */
 if ( 'none' != $emptycartbutton_checkoutpageValue ) {
 	add_action( $emptycartbutton_checkoutpageValue, function() {
-		$options = get_option( 'surbma_hc_fields' );
-		$emptycartbutton_checkoutpagemessageValue = isset( $options['emptycartbutton-checkoutpagemessage'] ) ? $options['emptycartbutton-checkoutpagemessage'] : 'Changed your mind?';
-		$emptycartbutton_checkoutpagelinktextValue = isset( $options['emptycartbutton-checkoutpagelinktext'] ) ? $options['emptycartbutton-checkoutpagelinktext'] : 'Empty cart & continue shopping';
-		$emptycartbutton_checkoutpageconfirmationtextValue = isset( $options['emptycartbutton-checkoutpageconfirmationtext'] ) ? $options['emptycartbutton-checkoutpageconfirmationtext'] : 'Are you sure you want to empty the Cart?';
-		$returnurl = esc_url( add_query_arg( 'hc-empty-cart', '1' ) );
-		$notice = sprintf( '%s <a href="%s" class="button wc-forward hc-empty-cart-button">%s</a>', $emptycartbutton_checkoutpagemessageValue, $returnurl, $emptycartbutton_checkoutpagelinktextValue );
-		wc_print_notice( $notice, 'notice' );
-		echo "<script>jQuery('.hc-empty-cart-button').on('click', function () {return confirm('" . $emptycartbutton_checkoutpageconfirmationtextValue . "');});</script>";
+		if ( count( WC()->cart->get_cart() ) > 1 ) {
+			$options = get_option( 'surbma_hc_fields' );
+			$emptycartbutton_checkoutpagemessageValue = isset( $options['emptycartbutton-checkoutpagemessage'] ) ? $options['emptycartbutton-checkoutpagemessage'] : __( 'Changed your mind?', 'surbma-magyar-woocommerce' );
+			$emptycartbutton_checkoutpagelinktextValue = isset( $options['emptycartbutton-checkoutpagelinktext'] ) ? $options['emptycartbutton-checkoutpagelinktext'] : __( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' );
+			$emptycartbutton_checkoutpageconfirmationtextValue = isset( $options['emptycartbutton-confirmationtext'] ) ? $options['emptycartbutton-confirmationtext'] : __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
+			$returnurl = esc_url( add_query_arg( 'hc-empty-cart', '1' ) );
+			$notice = sprintf( '%s <a href="%s" class="button wc-forward hc-empty-cart-button">%s</a>', $emptycartbutton_checkoutpagemessageValue, $returnurl, $emptycartbutton_checkoutpagelinktextValue );
+
+			wc_print_notice( $notice, 'notice' );
+			echo "<script>jQuery('.hc-empty-cart-button').on('click', function () {return confirm('" . $emptycartbutton_checkoutpageconfirmationtextValue . "');});</script>";
+		}
 	}, $emptycartbutton_checkoutpagePosition );
 }
 
