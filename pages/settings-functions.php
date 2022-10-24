@@ -21,12 +21,13 @@ function cps_hc_wcgems_nav_item_header( $nav_item_title ) {
 	echo $header;
 }
 
-function cps_hc_wcgems_form_accordion_title( $module_title, $module_option, $module_new = false, $module_beta = false ) {
+function cps_hc_wcgems_form_accordion_title( $module_title, $module_option, $module_free = false, $module_new = false, $module_beta = false ) {
 	$options = get_option( 'surbma_hc_fields' );
 
 	$module = '';
 	$new = $module_new ? ' <span class="uk-badge">' . __( 'New', 'surbma-magyar-woocommerce' ) . '</span>' : '';
 	$beta = $module_beta ? ' <span class="uk-badge">' . __( 'Beta', 'surbma-magyar-woocommerce' ) . '</span>' : '';
+	$pro = $module_free ? '' : ' <span class="uk-badge" style="background: #fff;color: #ffd700 !important;font-weight: bold;">PRO</span>';
 
 	$moduleValue = isset( $options[$module_option] ) ? $options[$module_option] : 0;
 	$module_indicator = 1 == $moduleValue ? '<span class="module-indicator module-on" uk-tooltip="title: Aktív modul"></span>' : '<span class="module-indicator module-off" uk-tooltip="title: Kikapcsolt modul"></span>';
@@ -40,7 +41,7 @@ function cps_hc_wcgems_form_accordion_title( $module_title, $module_option, $mod
 
 	ob_start();
 		?>
-			<a class="uk-accordion-title" href="#"><?php echo wp_kses( $module_indicator, $allowed_html ); ?> <?php esc_html_e( $module_title, 'surbma-magyar-woocommerce' ); ?><?php echo wp_kses_post( $new ); ?><?php echo wp_kses_post( $beta ); ?></a>
+			<a class="uk-accordion-title" href="#"><?php echo wp_kses( $module_indicator, $allowed_html ); ?> <?php esc_html_e( $module_title, 'surbma-magyar-woocommerce' ); ?><?php echo wp_kses_post( $new ); ?><?php echo wp_kses_post( $pro ); ?><?php echo wp_kses_post( $beta ); ?></a>
 		<?php
 	$module = ob_get_contents();
 	ob_end_clean();

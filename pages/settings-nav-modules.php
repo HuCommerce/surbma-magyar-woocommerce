@@ -7,6 +7,7 @@ defined( 'ABSPATH' ) || exit;
 $options = get_option( 'surbma_hc_fields' );
 $szamlazzhu_options = get_option( 'woocommerce_wc_szamlazz_settings' );
 $billingo_options = get_option( 'woocommerce_wc_billingo_plus_settings' );
+$pro_notice = SURBMA_HC_PREMIUM ? '' : '<div class="cps-alert uk-alert uk-alert-danger"><p><strong>Ha szeretnéd aktiválni ezt a modult, előbb HuCommerce Pro előfizetést kell vásárolnod!</strong><br>A HuCommerce Pro előfizetés megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p><a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="uk-button uk-button-danger uk-button-small" target="_blank">HuCommerce Pro megvásárlása</a></div>';
 // * HUCOMMERCE END
 
 global $couponfieldposition_options;
@@ -174,345 +175,10 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 	<?php settings_fields( 'surbma_hc_options' ); ?>
 
 	<ul class="uk-list uk-list-large" uk-accordion>
-		<?php // * HUCOMMERCE START ?>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Fixes for Hungarian language', 'huformatfix' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Fixes for Hungarian language', 'huformatfix', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Fixes the name formats in Hungarian. Changes the order of Last name and First name.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/magyar-formatum-javitasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<?php // * HUCOMMERCE END ?>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Tax number field', 'taxnumber' ); ?>
-			<div class="uk-accordion-content">
-				<?php // * HUCOMMERCE START ?>
-					<?php $szamlazzhu_vatnumber_Value = isset( $szamlazzhu_options['vat_number_form'] ) ? $szamlazzhu_options['vat_number_form'] : false; ?>
-					<?php if ( class_exists( 'WC_Szamlazz' ) && 'yes' == $szamlazzhu_vatnumber_Value ) { ?>
-						<div class="uk-alert-danger cps-alert" uk-alert>
-							<a class="uk-alert-close" uk-close></a>
-							<p><?php esc_html_e( 'A Tax number field is already added by the Integration for Szamlazz.hu & WooCommerce plugin. If you want to use the Tax field added by the HuCommerce plugin, you need to disable the Tax field option at the other plugin\'s settings.', 'surbma-magyar-woocommerce' ); ?></p>
-						</div>
-					<?php } ?>
-					<?php $billingo_vatnumber_Value = isset( $billingo_options['vat_number_form'] ) ? $billingo_options['vat_number_form'] : false; ?>
-					<?php if ( class_exists( 'WC_Billingo_Plus' ) && 'yes' == $billingo_vatnumber_Value ) { ?>
-						<div class="uk-alert-danger cps-alert" uk-alert>
-							<a class="uk-alert-close" uk-close></a>
-							<p><?php esc_html_e( 'A Tax number field is already added by the Woo Billingo Plus plugin. If you want to use the Tax field added by the HuCommerce plugin, you need to disable the Tax field option at the other plugin\'s settings.', 'surbma-magyar-woocommerce' ); ?></p>
-						</div>
-					<?php } ?>
-					<?php if ( class_exists( 'WC_Billingo' ) && 'yes' == get_option('wc_billingo_vat_number_form') ) { ?>
-						<div class="uk-alert-danger cps-alert" uk-alert>
-							<a class="uk-alert-close" uk-close></a>
-							<p><?php esc_html_e( 'A Tax number field is already added by the Integration for Billingo & WooCommerce plugin. If you want to use the Tax field added by the HuCommerce plugin, you need to disable the Tax field option at the other plugin\'s settings.', 'surbma-magyar-woocommerce' ); ?></p>
-						</div>
-					<?php } ?>
-					<?php if ( class_exists( 'WC_Billingo' ) && 'yes' == get_option('wc_billingo_vat_number_form_checkbox_custom') ) { ?>
-						<div class="uk-alert-danger cps-alert" uk-alert>
-							<a class="uk-alert-close" uk-close></a>
-							<p><?php esc_html_e( 'A Tax number field is already added by the Integration for Billingo & WooCommerce plugin\’s custom field option. If you want to use the Tax field added by the HuCommerce plugin, you need to disable the "Egyedi meta mezőt használok adószámhoz" option at the other plugin\'s settings.', 'surbma-magyar-woocommerce' ); ?></p>
-						</div>
-					<?php } ?>
-				<?php // * HUCOMMERCE END ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Tax number field', 'taxnumber', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_wcgems_form_field_checkbox( 'Add placeholder to this field', 'taxnumberplaceholder', false, false, true ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Additional Tax field for Company details at Checkout.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/adoszam-megjelenitese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Disclaimer', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'HuCommerce modules are tools to comply with local and/or international rules and laws, but it is the webshop owner\'s duty to make sure to comply with all rules and laws! Developers and the owners of HuCommerce take no responsibility for any legal compliance. However our mission is to provide all necessary tools for these challenges.', 'surbma-magyar-woocommerce' ); ?></p>
-			</div>
-		</li>
-		<?php // * HUCOMMERCE START ?>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Hungarian translation fixes', 'translations' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Hungarian translation fixes', 'translations', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Temporary fixes for Hungarian translations, till the official translation doesn\’t include or missing some strings.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/forditasi-hianyossagok-javitasa/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Hide County field if Country is Hungary', 'nocounty' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Hide County field if Country is Hungary', 'nocounty', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Using County for Hungarian addresses is very uncommon in Hungary.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/megye-mezo-elrejtese-magyar-cim-eseten/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Autofill City after Postcode is given', 'autofillcity' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Autofill City after Postcode is given', 'autofillcity', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'On the Checkout page the City field be automatically filled, when Postcode is entered by the customer.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/varos-automatikus-kitoltese-az-iranyitoszam-alapjan/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<?php // * HUCOMMERCE END ?>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Product customizations', 'module-productsettings' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Product customizations', 'module-productsettings', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_wcgems_form_field_checkbox( 'Product subtitle', 'productsubtitle', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Add to cart button on archive pages', 'addtocartonarchive', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Remove related products on single product pages', 'norelatedproducts', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_number( 'Number of products on archive pages', 'productsnumber', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_number( 'Products per row on archive pages', 'productsperrow', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_number( 'Number of upsell products on single product pages', 'upsellproductsnumber', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_number( 'Upsell products per row on single product pages', 'upsellproductsperrow', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_number( 'Number of related products on single product pages', 'relatedproductsnumber', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_number( 'Related products per row on single product pages', 'relatedproductsperrow', '', false, false, true ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Extra fields and other customizations for Products.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/termek-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Checkout page customizations', 'module-checkout' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Checkout page customizations', 'module-checkout', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_wcgems_form_field_checkbox( 'Conditional display of Company fields', 'billingcompanycheck', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Country field', 'nocountry', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Order notes field', 'noordercomments', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Additional information section', 'noadditionalinformation', 'It will hide Order notes field also.', false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Inline Company and Tax number fields', 'companytaxnumberpair', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Inline Postcode and City fields', 'postcodecitypair', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Inline Phone and Email fields', 'phoneemailpair', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Make Email field the first field', 'emailtothetop', false, false, true ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Extra fields and other customizations on the Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/penztar-oldal-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Plus/minus quantity buttons', 'plusminus' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Plus/minus quantity buttons', 'plusminus', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Shows plus/minus quantity buttons for products.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/plusz-minusz-mennyisegi-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Automatic Cart update', 'updatecart' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Automatic Cart update', 'updatecart', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'It will automatically update the cart, when customer changes the quantity on the Cart page.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/kosar-automatikus-frissitese-darabszam-modositas-utan/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Continue shopping buttons', 'returntoshop' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Continue shopping buttons', 'returntoshop', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_wcgems_form_field_select( 'Button position on Cart page', 'returntoshopcartposition', $returntoshopcartposition_options, 'cartactions', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_select( 'Button position on Checkout page', 'returntoshopcheckoutposition', $returntoshopcheckoutposition_options, 'nocheckout', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Message text', 'returntoshopmessage', 'Would you like to continue shopping?', false, false, true ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'A Continue shopping button on Cart and/or Checkout pages, that will bring customer to Shop page.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/vasarlas-folytatasa-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Login and registration redirection', 'loginregistrationredirect' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Login and registration redirection', 'loginregistrationredirect', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_wcgems_form_field_text( 'Redirection URL after Login', 'loginredirecturl', '', 'Absolute URL path. If empty, then default WooCommerce redirection will be set.', false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Redirection URL after Registration', 'registrationredirecturl', '', 'Absolute URL path. If empty, then default WooCommerce redirection will be set.', false, true ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Set custom landing pages after login and/or registration.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/belepes-es-regisztracio-utani-atiranyitas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Coupon field customizations', 'module-coupon' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Coupon field customizations', 'module-coupon', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_wcgems_form_field_checkbox( 'Show Coupons in upper case', 'couponuppercase', 'Show Coupons in upper case in both admin and front-end, instead of lower case, which is the default setting for WooCommerce.', false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Coupon field on Cart page', 'couponfieldhiddenoncart', 'It will hide the Coupon field completely from the Cart page.', false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Coupon field on Checkout page', 'couponfieldhiddenoncheckout', 'It will hide the Coupon field completely from the Checkout page.', false, true ); ?>
-					<?php cps_hc_wcgems_form_field_checkbox( 'Coupon field always visible on Checkout page', 'couponfieldalwaysvisible', 'It will hide the Coupon field toggle and makes the Coupon field always visible for customers.', false, true ); ?>
-					<?php cps_hc_wcgems_form_field_select( 'Reposition the Coupon field', 'couponfieldposition', $couponfieldposition_options, 'beforecheckoutform', false, false, true ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Useful settings for the Coupon field on the Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/kupon-mezo-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Redirect Cart page to Checkout page', 'module-redirectcart' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Redirect Cart page to Checkout page', 'module-redirectcart', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'It will redirect the Cart page to Checkout page, so visitors can finish the purchase faster.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/kosar-atiranyitasa-a-penztar-oldalra/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'One product per purchase', 'module-oneproductincart' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'One product per purchase', 'module-oneproductincart', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'It will allow only one product in the cart. If cart has a product already, it will be replaced by the new product.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/egy-termek-vasarlasonkent/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Custom Add To Cart Button', 'module-custom-addtocart-button' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Custom Add To Cart Button', 'module-custom-addtocart-button', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<li><strong><?php _e( 'Single product pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
-					<li><p><?php _e( 'Give your custom texts to your Add to cart buttons on the product pages. You can set custom texts for different product types. If you leave them empty, the button texts will fall back to default WooCommerce texts.', 'surbma-magyar-woocommerce' ); ?></p></li>
-					<?php cps_hc_wcgems_form_field_text( 'Simple product', 'custom-addtocart-button-single-simple', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Grouped product', 'custom-addtocart-button-single-grouped', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-single-external', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Variable product', 'custom-addtocart-button-single-variable', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-subscription', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Variable subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-variable-subscription', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Bookable product (WooCommerce Bookings)', 'custom-addtocart-button-single-booking', '', false, false, true ); ?>
-					<li><strong><?php _e( 'Product archive pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
-					<li><p><?php _e( 'Give your custom texts to your Add to cart buttons on the product archive pages. You can set custom texts for different product types. If you leave them empty, the button texts will inherit texts from single product settings or fall back to default WooCommerce texts, if those fields are also empty.', 'surbma-magyar-woocommerce' ); ?></p></li>
-					<?php cps_hc_wcgems_form_field_text( 'Simple product', 'custom-addtocart-button-archive-simple', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Grouped product', 'custom-addtocart-button-archive-grouped', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-archive-external', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Variable product', 'custom-addtocart-button-archive-variable', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-archive-subscription', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Variable subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-archive-variable-subscription', '', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Bookable product (WooCommerce Bookings)', 'custom-addtocart-button-archive-booking', '', false, false, true ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Customize the Add to cart buttons for your webhop.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/egyedi-kosarba-teszem-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Hide shipping methods', 'module-hideshippingmethods' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'Hide shipping methods', 'module-hideshippingmethods', true ); ?>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<li><p><strong><?php esc_html_e( 'Compatible shipping plugins (Pickup methods)', 'surbma-magyar-woocommerce' ); ?>:</strong> <br>Hungarian Pickup Points for WooCommerce, Pont shipping for Woocommerce (Szathmári), Foxpost, Foxpost Parcel, Postapont</p></li>
-					<?php cps_hc_wcgems_form_field_select( 'Shipping methods to hide, when free shipping is available', 'shippingmethodstohide', $shippingmethodstohide_options, 'hideall', false, false, true ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'It will hide all shipping methods, except free shipping, local pickup and other pickup points, when free shipping is available for customers.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/szallitasi-modok-elrejtese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'SMTP service', 'module-smtp' ); ?>
-			<div class="uk-accordion-content">
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
-				<?php cps_hc_wcgems_form_field_main( 'SMTP service', 'module-smtp', true ); ?>
-				<br>
-				<?php
-					$current_user = wp_get_current_user();
-					$current_user_email = urlencode( $current_user->user_email );
-				?>
-				<a href="<?php echo esc_url( add_query_arg( 'hc-test-email', $current_user_email ) ); ?>" class="uk-button uk-button-primary" uk-tooltip="title: <?php esc_html_e( 'Clicking on this button will send a test email to the actual user\'s email address.', 'surbma-magyar-woocommerce' ); ?>; pos: right"><?php esc_html_e( 'Send test email', 'surbma-magyar-woocommerce' ); ?></a>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<li><p><?php esc_html_e( 'SMTP service is a must have for all WooCommerce webshops, as it makes your transactional email delivery more stable and secure. Register a new account at a 3rd party SMTP service and set your credentials here to enable this feature.', 'surbma-magyar-woocommerce' ); ?></p></li>
-					<?php cps_hc_wcgems_form_field_select( 'SMTP port number', 'smtpport', $smtpport_options, '587', false, false, true ); ?>
-					<?php cps_hc_wcgems_form_field_select( 'Encryption type', 'smtpsecure', $smtpsecure_options, 'default', false, false, true ); ?>
-
-					<?php cps_hc_wcgems_form_field_text( 'SMTP From email address', 'smtpfrom', '', false, false, true, 'Optional' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'SMTP From name', 'smtpfromname', '', false, false, true, 'Optional' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'The hostname of the mail server', 'smtphost', '', false, false, true, false, 'world' ); ?>
-					<?php cps_hc_wcgems_form_field_text( 'Username to use for SMTP authentication', 'smtpuser', '', false, false, true, false, 'user' ); ?>
-
-					<?php cps_hc_wcgems_form_field_password( 'Password to use for SMTP authentication', 'smtppassword', '', false, false, true, false, 'lock' ); ?>
-				</ul>
-
-				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Send emails from a 3rd party SMTP service, instead of using webserver\'s mail() function.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/smtp-szolgaltatas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
-			</div>
-		</li>
-	</ul>
-
-	<h4>HuCommerce Pro modulok</h4>
-	<hr>
-
-	<?php if ( !SURBMA_HC_PREMIUM ) { ?>
-		<div class="cps-alert uk-alert-danger" uk-alert>
-			<p><strong>Ha szeretnéd aktiválni ezeket a modulokat, előbb HuCommerce Pro előfizetést kell vásárolnod!</strong><br>A HuCommerce Pro előfizetés megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p>
-			<a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="uk-button uk-button-danger uk-button-small" target="_blank">HuCommerce Pro megvásárlása</a>
-		</div>
-	<?php } ?>
-
-	<ul class="uk-list uk-list-large" uk-accordion>
 		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Check field formats (Masking)', 'maskcheckoutfields' ); ?>
 			<div class="uk-accordion-content">
+				<?php echo wp_kses_post( $pro_notice ); ?>
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Check field formats (Masking)', 'maskcheckoutfields' ); ?>
 
@@ -533,6 +199,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Check field values', 'validatecheckoutfields' ); ?>
 			<div class="uk-accordion-content">
+				<?php echo wp_kses_post( $pro_notice ); ?>
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Check field values', 'validatecheckoutfields' ); ?>
 
@@ -554,6 +221,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Free shipping notification', 'freeshippingnotice' ); ?>
 			<div class="uk-accordion-content">
+				<?php echo wp_kses_post( $pro_notice ); ?>
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Free shipping notification', 'freeshippingnotice' ); ?>
 
@@ -575,8 +243,9 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 			</div>
 		</li>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Empty Cart button', 'module-emptycartbutton', true ); ?>
+			<?php cps_hc_wcgems_form_accordion_title( 'Empty Cart button', 'module-emptycartbutton', false, true ); ?>
 			<div class="uk-accordion-content">
+				<?php echo wp_kses_post( $pro_notice ); ?>
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Empty Cart button', 'module-emptycartbutton' ); ?>
 
@@ -598,6 +267,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Product price history', 'module-productpricehistory' ); ?>
 			<div class="uk-accordion-content">
+				<?php echo wp_kses_post( $pro_notice ); ?>
 				<div class="uk-alert-primary cps-alert" uk-alert>
 					<p>Ez a modul nincs minden körülmény között tesztelve és nem tudja 100%-ban teljesíteni a funkcionális és/vagy jogi igényeket, feltételeket. Ezért a használata esetén fokozott figyelmet igényel.<br>
 					FIGYELEM! A HuCommerce ügyfélszolgálatára beküldött visszajelzések és javaslatok jelentősen gyorsítják a modul fejlesztését, ezért szívesen várjuk az ilyen témájú megkereséseket. Köszönjük!</p>
@@ -638,8 +308,9 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 			</div>
 		</li>
 		<li>
-			<?php cps_hc_wcgems_form_accordion_title( 'Product price additions', 'module-productpriceadditions', true ); ?>
+			<?php cps_hc_wcgems_form_accordion_title( 'Product price additions', 'module-productpriceadditions', false, true ); ?>
 			<div class="uk-accordion-content">
+				<?php echo wp_kses_post( $pro_notice ); ?>
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Product price additions', 'module-productpriceadditions' ); ?>
 
@@ -659,7 +330,8 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Legal compliance (GDPR, CCPA, ePrivacy)', 'legalcheckout' ); ?>
 			<div class="uk-accordion-content">
-		<?php // HuCommerce legacy users notice ?>
+				<?php echo wp_kses_post( $pro_notice ); ?>
+				<?php // HuCommerce legacy users notice ?>
 				<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE && $options && !isset( $options['brandnewuser'] ) ) { ?>
 					<div class="cps-alert uk-alert-danger" uk-alert>
 						<p><strong class="uk-text-uppercase">Figyelem!</strong> A "Jogi megfelelés" modul átkerült a HuCommerce fizetős, Pro verziójába. Minden eddigi beállítás továbbra is működik, de módosítani nem lehet a beállításokat. Mentés után is használhatod a modult korlátlan ideig, ha már egyszer beállítottad.</p>
@@ -709,6 +381,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 		<li>
 			<?php cps_hc_wcgems_form_accordion_title( 'Global informations', 'module-globalinfo' ); ?>
 			<div class="uk-accordion-content">
+				<?php echo wp_kses_post( $pro_notice ); ?>
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
 				<?php cps_hc_wcgems_form_field_main( 'Global informations', 'module-globalinfo' ); ?>
 
@@ -756,6 +429,334 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Use these fields for your global informations and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles. Local data will be semantic for search engines.', 'surbma-magyar-woocommerce' ); ?></p>
 				<p><a href="https://www.hucommerce.hu/dokumentum/globalis-adatok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+	</ul>
+
+	<hr>
+
+	<ul class="uk-list uk-list-large" uk-accordion>
+		<?php // * HUCOMMERCE START ?>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Fixes for Hungarian language', 'huformatfix', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Fixes for Hungarian language', 'huformatfix', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Fixes the name formats in Hungarian. Changes the order of Last name and First name.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/magyar-formatum-javitasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<?php // * HUCOMMERCE END ?>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Tax number field', 'taxnumber', true ); ?>
+			<div class="uk-accordion-content">
+				<?php // * HUCOMMERCE START ?>
+					<?php $szamlazzhu_vatnumber_Value = isset( $szamlazzhu_options['vat_number_form'] ) ? $szamlazzhu_options['vat_number_form'] : false; ?>
+					<?php if ( class_exists( 'WC_Szamlazz' ) && 'yes' == $szamlazzhu_vatnumber_Value ) { ?>
+						<div class="uk-alert-danger cps-alert" uk-alert>
+							<a class="uk-alert-close" uk-close></a>
+							<p><?php esc_html_e( 'A Tax number field is already added by the Integration for Szamlazz.hu & WooCommerce plugin. If you want to use the Tax field added by the HuCommerce plugin, you need to disable the Tax field option at the other plugin\'s settings.', 'surbma-magyar-woocommerce' ); ?></p>
+						</div>
+					<?php } ?>
+					<?php $billingo_vatnumber_Value = isset( $billingo_options['vat_number_form'] ) ? $billingo_options['vat_number_form'] : false; ?>
+					<?php if ( class_exists( 'WC_Billingo_Plus' ) && 'yes' == $billingo_vatnumber_Value ) { ?>
+						<div class="uk-alert-danger cps-alert" uk-alert>
+							<a class="uk-alert-close" uk-close></a>
+							<p><?php esc_html_e( 'A Tax number field is already added by the Woo Billingo Plus plugin. If you want to use the Tax field added by the HuCommerce plugin, you need to disable the Tax field option at the other plugin\'s settings.', 'surbma-magyar-woocommerce' ); ?></p>
+						</div>
+					<?php } ?>
+					<?php if ( class_exists( 'WC_Billingo' ) && 'yes' == get_option('wc_billingo_vat_number_form') ) { ?>
+						<div class="uk-alert-danger cps-alert" uk-alert>
+							<a class="uk-alert-close" uk-close></a>
+							<p><?php esc_html_e( 'A Tax number field is already added by the Integration for Billingo & WooCommerce plugin. If you want to use the Tax field added by the HuCommerce plugin, you need to disable the Tax field option at the other plugin\'s settings.', 'surbma-magyar-woocommerce' ); ?></p>
+						</div>
+					<?php } ?>
+					<?php if ( class_exists( 'WC_Billingo' ) && 'yes' == get_option('wc_billingo_vat_number_form_checkbox_custom') ) { ?>
+						<div class="uk-alert-danger cps-alert" uk-alert>
+							<a class="uk-alert-close" uk-close></a>
+							<p><?php esc_html_e( 'A Tax number field is already added by the Integration for Billingo & WooCommerce plugin\’s custom field option. If you want to use the Tax field added by the HuCommerce plugin, you need to disable the "Egyedi meta mezőt használok adószámhoz" option at the other plugin\'s settings.', 'surbma-magyar-woocommerce' ); ?></p>
+						</div>
+					<?php } ?>
+				<?php // * HUCOMMERCE END ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Tax number field', 'taxnumber', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_wcgems_form_field_checkbox( 'Add placeholder to this field', 'taxnumberplaceholder', false, false, true ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Additional Tax field for Company details at Checkout.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/adoszam-megjelenitese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Disclaimer', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'HuCommerce modules are tools to comply with local and/or international rules and laws, but it is the webshop owner\'s duty to make sure to comply with all rules and laws! Developers and the owners of HuCommerce take no responsibility for any legal compliance. However our mission is to provide all necessary tools for these challenges.', 'surbma-magyar-woocommerce' ); ?></p>
+			</div>
+		</li>
+		<?php // * HUCOMMERCE START ?>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Hungarian translation fixes', 'translations', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Hungarian translation fixes', 'translations', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Temporary fixes for Hungarian translations, till the official translation doesn\’t include or missing some strings.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/forditasi-hianyossagok-javitasa/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Hide County field if Country is Hungary', 'nocounty', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Hide County field if Country is Hungary', 'nocounty', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Using County for Hungarian addresses is very uncommon in Hungary.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/megye-mezo-elrejtese-magyar-cim-eseten/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Autofill City after Postcode is given', 'autofillcity', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Autofill City after Postcode is given', 'autofillcity', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'On the Checkout page the City field be automatically filled, when Postcode is entered by the customer.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/varos-automatikus-kitoltese-az-iranyitoszam-alapjan/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<?php // * HUCOMMERCE END ?>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Product customizations', 'module-productsettings', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Product customizations', 'module-productsettings', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_wcgems_form_field_checkbox( 'Product subtitle', 'productsubtitle', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Add to cart button on archive pages', 'addtocartonarchive', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Remove related products on single product pages', 'norelatedproducts', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Number of products on archive pages', 'productsnumber', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Products per row on archive pages', 'productsperrow', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Number of upsell products on single product pages', 'upsellproductsnumber', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Upsell products per row on single product pages', 'upsellproductsperrow', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Number of related products on single product pages', 'relatedproductsnumber', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_number( 'Related products per row on single product pages', 'relatedproductsperrow', '', false, false, true ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Extra fields and other customizations for Products.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/termek-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Checkout page customizations', 'module-checkout', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Checkout page customizations', 'module-checkout', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_wcgems_form_field_checkbox( 'Conditional display of Company fields', 'billingcompanycheck', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Country field', 'nocountry', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Order notes field', 'noordercomments', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Additional information section', 'noadditionalinformation', 'It will hide Order notes field also.', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Inline Company and Tax number fields', 'companytaxnumberpair', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Inline Postcode and City fields', 'postcodecitypair', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Inline Phone and Email fields', 'phoneemailpair', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Make Email field the first field', 'emailtothetop', false, false, true ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Extra fields and other customizations on the Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/penztar-oldal-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Plus/minus quantity buttons', 'plusminus', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Plus/minus quantity buttons', 'plusminus', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Shows plus/minus quantity buttons for products.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/plusz-minusz-mennyisegi-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Automatic Cart update', 'updatecart', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Automatic Cart update', 'updatecart', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'It will automatically update the cart, when customer changes the quantity on the Cart page.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/kosar-automatikus-frissitese-darabszam-modositas-utan/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Continue shopping buttons', 'returntoshop', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Continue shopping buttons', 'returntoshop', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_wcgems_form_field_select( 'Button position on Cart page', 'returntoshopcartposition', $returntoshopcartposition_options, 'cartactions', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_select( 'Button position on Checkout page', 'returntoshopcheckoutposition', $returntoshopcheckoutposition_options, 'nocheckout', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Message text', 'returntoshopmessage', 'Would you like to continue shopping?', false, false, true ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'A Continue shopping button on Cart and/or Checkout pages, that will bring customer to Shop page.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/vasarlas-folytatasa-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Login and registration redirection', 'loginregistrationredirect', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Login and registration redirection', 'loginregistrationredirect', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_wcgems_form_field_text( 'Redirection URL after Login', 'loginredirecturl', '', 'Absolute URL path. If empty, then default WooCommerce redirection will be set.', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Redirection URL after Registration', 'registrationredirecturl', '', 'Absolute URL path. If empty, then default WooCommerce redirection will be set.', false, true ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Set custom landing pages after login and/or registration.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/belepes-es-regisztracio-utani-atiranyitas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Coupon field customizations', 'module-coupon', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Coupon field customizations', 'module-coupon', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_wcgems_form_field_checkbox( 'Show Coupons in upper case', 'couponuppercase', 'Show Coupons in upper case in both admin and front-end, instead of lower case, which is the default setting for WooCommerce.', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Coupon field on Cart page', 'couponfieldhiddenoncart', 'It will hide the Coupon field completely from the Cart page.', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Hide Coupon field on Checkout page', 'couponfieldhiddenoncheckout', 'It will hide the Coupon field completely from the Checkout page.', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Coupon field always visible on Checkout page', 'couponfieldalwaysvisible', 'It will hide the Coupon field toggle and makes the Coupon field always visible for customers.', false, true ); ?>
+					<?php cps_hc_wcgems_form_field_select( 'Reposition the Coupon field', 'couponfieldposition', $couponfieldposition_options, 'beforecheckoutform', false, false, true ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Useful settings for the Coupon field on the Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/kupon-mezo-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Redirect Cart page to Checkout page', 'module-redirectcart', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Redirect Cart page to Checkout page', 'module-redirectcart', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'It will redirect the Cart page to Checkout page, so visitors can finish the purchase faster.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/kosar-atiranyitasa-a-penztar-oldalra/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'One product per purchase', 'module-oneproductincart', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'One product per purchase', 'module-oneproductincart', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'It will allow only one product in the cart. If cart has a product already, it will be replaced by the new product.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/egy-termek-vasarlasonkent/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Custom Add To Cart Button', 'module-custom-addtocart-button', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Custom Add To Cart Button', 'module-custom-addtocart-button', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<li><strong><?php _e( 'Single product pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
+					<li><p><?php _e( 'Give your custom texts to your Add to cart buttons on the product pages. You can set custom texts for different product types. If you leave them empty, the button texts will fall back to default WooCommerce texts.', 'surbma-magyar-woocommerce' ); ?></p></li>
+					<?php cps_hc_wcgems_form_field_text( 'Simple product', 'custom-addtocart-button-single-simple', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Grouped product', 'custom-addtocart-button-single-grouped', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-single-external', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Variable product', 'custom-addtocart-button-single-variable', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-subscription', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Variable subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-variable-subscription', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Bookable product (WooCommerce Bookings)', 'custom-addtocart-button-single-booking', '', false, false, true ); ?>
+					<li><strong><?php _e( 'Product archive pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
+					<li><p><?php _e( 'Give your custom texts to your Add to cart buttons on the product archive pages. You can set custom texts for different product types. If you leave them empty, the button texts will inherit texts from single product settings or fall back to default WooCommerce texts, if those fields are also empty.', 'surbma-magyar-woocommerce' ); ?></p></li>
+					<?php cps_hc_wcgems_form_field_text( 'Simple product', 'custom-addtocart-button-archive-simple', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Grouped product', 'custom-addtocart-button-archive-grouped', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-archive-external', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Variable product', 'custom-addtocart-button-archive-variable', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-archive-subscription', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Variable subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-archive-variable-subscription', '', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Bookable product (WooCommerce Bookings)', 'custom-addtocart-button-archive-booking', '', false, false, true ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Customize the Add to cart buttons for your webhop.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/egyedi-kosarba-teszem-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'Hide shipping methods', 'module-hideshippingmethods', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'Hide shipping methods', 'module-hideshippingmethods', true ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<li><p><strong><?php esc_html_e( 'Compatible shipping plugins (Pickup methods)', 'surbma-magyar-woocommerce' ); ?>:</strong> <br>Hungarian Pickup Points for WooCommerce, Pont shipping for Woocommerce (Szathmári), Foxpost, Foxpost Parcel, Postapont</p></li>
+					<?php cps_hc_wcgems_form_field_select( 'Shipping methods to hide, when free shipping is available', 'shippingmethodstohide', $shippingmethodstohide_options, 'hideall', false, false, true ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'It will hide all shipping methods, except free shipping, local pickup and other pickup points, when free shipping is available for customers.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/szallitasi-modok-elrejtese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+			</div>
+		</li>
+		<li>
+			<?php cps_hc_wcgems_form_accordion_title( 'SMTP service', 'module-smtp', true ); ?>
+			<div class="uk-accordion-content">
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?></h5>
+				<?php cps_hc_wcgems_form_field_main( 'SMTP service', 'module-smtp', true ); ?>
+				<br>
+				<?php
+					$current_user = wp_get_current_user();
+					$current_user_email = urlencode( $current_user->user_email );
+				?>
+				<a href="<?php echo esc_url( add_query_arg( 'hc-test-email', $current_user_email ) ); ?>" class="uk-button uk-button-primary" uk-tooltip="title: <?php esc_html_e( 'Clicking on this button will send a test email to the actual user\'s email address.', 'surbma-magyar-woocommerce' ); ?>; pos: right"><?php esc_html_e( 'Send test email', 'surbma-magyar-woocommerce' ); ?></a>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<li><p><?php esc_html_e( 'SMTP service is a must have for all WooCommerce webshops, as it makes your transactional email delivery more stable and secure. Register a new account at a 3rd party SMTP service and set your credentials here to enable this feature.', 'surbma-magyar-woocommerce' ); ?></p></li>
+					<?php cps_hc_wcgems_form_field_select( 'SMTP port number', 'smtpport', $smtpport_options, '587', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_select( 'Encryption type', 'smtpsecure', $smtpsecure_options, 'default', false, false, true ); ?>
+
+					<?php cps_hc_wcgems_form_field_text( 'SMTP From email address', 'smtpfrom', '', false, false, true, 'Optional' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'SMTP From name', 'smtpfromname', '', false, false, true, 'Optional' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'The hostname of the mail server', 'smtphost', '', false, false, true, false, 'world' ); ?>
+					<?php cps_hc_wcgems_form_field_text( 'Username to use for SMTP authentication', 'smtpuser', '', false, false, true, false, 'user' ); ?>
+
+					<?php cps_hc_wcgems_form_field_password( 'Password to use for SMTP authentication', 'smtppassword', '', false, false, true, false, 'lock' ); ?>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'Send emails from a 3rd party SMTP service, instead of using webserver\'s mail() function.', 'surbma-magyar-woocommerce' ); ?></p>
+				<p><a href="https://www.hucommerce.hu/dokumentum/smtp-szolgaltatas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 	</ul>
