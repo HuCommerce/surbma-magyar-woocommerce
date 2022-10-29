@@ -90,6 +90,7 @@ function surbma_hc_fields_validate( $input ) {
 	$input['legalcheckout-custom2optional'] = isset( $input['legalcheckout-custom2optional'] ) && 1 == $input['legalcheckout-custom2optional'] ? 1 : 0;
 	$input['addtocartonarchive'] = isset( $input['addtocartonarchive'] ) && 1 == $input['addtocartonarchive'] ? 1 : 0;
 	$input['productsubtitle'] = isset( $input['productsubtitle'] ) && 1 == $input['productsubtitle'] ? 1 : 0;
+	$input['productsettings-removeimagezoom'] = isset( $input['productsettings-removeimagezoom'] ) && 1 == $input['productsettings-removeimagezoom'] ? 1 : 0;
 	$input['norelatedproducts'] = isset( $input['norelatedproducts'] ) && 1 == $input['norelatedproducts'] ? 1 : 0;
 
 	// Our select option must actually be in our array of select options

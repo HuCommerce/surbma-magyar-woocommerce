@@ -116,6 +116,20 @@ if ( $productsubtitleValue ) {
 }
 
 /*
+ ** Remove Image Zoom
+ */
+
+$productsettings_removeimagezoomValue = isset( $options['productsettings-removeimagezoom'] ) ? $options['productsettings-removeimagezoom'] : 0;
+
+if ( $productsettings_removeimagezoomValue ) {
+
+	add_action( 'wp', function() {
+		remove_theme_support( 'wc-product-gallery-zoom' );
+	}, 100 );
+
+}
+
+/*
  ** Add to cart button on archive pages
  */
 

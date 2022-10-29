@@ -54,6 +54,7 @@ __( 'Text before the discount', 'surbma-magyar-woocommerce' );
 __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
 __( 'Product customizations', 'surbma-magyar-woocommerce' );
 __( 'Product subtitle', 'surbma-magyar-woocommerce' );
+__( 'Remove image zoom on single product pages', 'surbma-magyar-woocommerce' );
 __( 'Add to cart button on archive pages', 'surbma-magyar-woocommerce' );
 __( 'Remove related products on single product pages', 'surbma-magyar-woocommerce' );
 __( 'Number of products on archive pages', 'surbma-magyar-woocommerce' );
@@ -541,6 +542,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
 					<?php cps_hc_wcgems_form_field_checkbox( 'Product subtitle', 'productsubtitle', false, false, true ); ?>
+					<?php cps_hc_wcgems_form_field_checkbox( 'Remove image zoom on single product pages', 'productsettings-removeimagezoom', false, false, true ); ?>
 					<?php cps_hc_wcgems_form_field_checkbox( 'Add to cart button on archive pages', 'addtocartonarchive', false, false, true ); ?>
 					<?php cps_hc_wcgems_form_field_checkbox( 'Remove related products on single product pages', 'norelatedproducts', false, false, true ); ?>
 					<?php cps_hc_wcgems_form_field_number( 'Number of products on archive pages', 'productsnumber', '', false, false, true ); ?>
