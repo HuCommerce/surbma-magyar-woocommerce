@@ -320,9 +320,9 @@ A vezetéknevem visszafelé. ;)
 
 == Changelog ==
 
-= 2022.4.1 =
+#### 2022.4.1
 
-Kiadás dátuma: 2022-10-24
+**Kiadás dátuma: 2022-10-24**
 
 KOSÁR ÜRÍTÉSE GOMB
 
@@ -330,9 +330,9 @@ KOSÁR ÜRÍTÉSE GOMB
 - Pénztár oldalon is csak akkor jelenik meg, ha több termék van a kosárban.
 - Fordítások javítása.
 
-= 2022.4.0 =
+#### 2022.4.0
 
-Kiadás dátuma: 2022-10-22
+**Kiadás dátuma: 2022-10-22**
 
 - Új Pro modul: Kosár ürítése gomb
 - Új Pro modul: Termék ár kiegészítések
@@ -400,43 +400,43 @@ EGYÉB
 - CPS SDK frissítése a 8.11.2 verzióra.
 - Kompatibilitás ellenőrzése a WooCommerce 7.0 verzióval.
 
-= 2022.3.5 =
+#### 2022.3.5
 
-Kiadás dátuma: 2022-06-19
+****Kiadás dátuma: 2022-06-19****
 
 - A Szállítási módok elrejtése modul további javítása, hogy minden beállításnál a megfelelő szállítási módokat mutassa.
 
-= 2022.3.4 =
+#### 2022.3.4
 
-Kiadás dátuma: 2022-06-19
+**Kiadás dátuma: 2022-06-19**
 
 - SMTP szolgáltatás kiegészítése teszt email küldéssel.
 - Új értesítés a teszt email küldés után.
 - Új értesítés az API szinkronizálás után.
 
-= 2022.3.3 =
+#### 2022.3.3
 
-Kiadás dátuma: 2022-06-19
+**Kiadás dátuma: 2022-06-19**
 
 - A Szállítási módok elrejtése modul javítása, hogy minden beállításnál a megfelelő szállítási módokat mutassa.
 
-= 2022.3.2 =
+#### 2022.3.2
 
-Kiadás dátuma: 2022-06-13
+**Kiadás dátuma: 2022-06-13**
 
 - A Jogi megfelelés pozíció értékének a validálása kiszűri az esetlegesen rosszul elmentett értéket az adatbázisban.
 
-= 2022.3.1 =
+#### 2022.3.1
 
-Kiadás dátuma: 2022-06-13
+**Kiadás dátuma: 2022-06-13**
 
 - A Pénztár oldali checkbox mezők kódjának a javítása, hogy minden WooCommerce natív jelölést megkapjanak.
 - A Beállítások oldalon az Adószám mező megjelenítésének a javítása.
 - A Jogi megfelelés egyik opciójának az alapértelmezett értékét kellett javítani.
 
-= 2022.3.0 =
+#### 2022.3.0
 
-Kiadás dátuma: 2022-06-11
+**Kiadás dátuma: 2022-06-11**
 
 Ebben a verzióban a Termék ár történet modul lett továbbfejlesztve. Megbízhatóbb ár mentéssel és egy új opcióval érkezik, hogy a termék ár statisztikát a látogatók számára is meg lehessen jeleníteni.
 
@@ -451,15 +451,15 @@ Ebben a verzióban a Termék ár történet modul lett továbbfejlesztve. Megbí
 - Termék ár történet statisztika megjelenítésének a módosítása.
 - Termék ár történet statisztika kiegészítése CSV formátummal.
 
-= 2022.2.1 =
+#### 2022.2.1
 
-Kiadás dátuma: 2022-06-08
+**Kiadás dátuma: 2022-06-08**
 
 - Az SMTP szolgáltatás modul is átkerült az ingyenes modulok közé. :)
 
-= 2022.2.0 =
+#### 2022.2.0
 
-Kiadás dátuma: 2022-06-07
+**Kiadás dátuma: 2022-06-07**
 
 Ez a verzió újra elérhetővé teszi a régi modulokat az ingyenes verzióban, sőt, több fizetős modul is ingyenes lett. :) A frissítése éppen ezért ajánlott és biztonságos.
 
@@ -472,73 +472,73 @@ Ez a verzió újra elérhetővé teszi a régi modulokat az ingyenes verzióban,
 - A Pro modulok vizuális különválasztása a beállítások oldalon.
 - A Jogi megfelelés modul korlátlan ideig használható az ingyenes verzióval is, csak nem módosítható.
 
-= 2022.1.5 =
+#### 2022.1.5
 
-Kiadás dátuma: 2022-06-01
+**Kiadás dátuma: 2022-06-01**
 
 - Hiányzó fájlok javítása.
 
-= 2022.1.1 =
+#### 2022.1.1
 
-Kiadás dátuma: 2022-06-01
+**Kiadás dátuma: 2022-06-01**
 
 - Fordítások javítása az admin felületen.
 - Kisebb módosítások a leírásban.
 
-= 2022.1.0 =
+#### 2022.1.0
 
-Kiadás dátuma: 2022-05-31
+**Kiadás dátuma: 2022-05-31**
 
 - A HuCommerce és a HuCommerce Pro első éles kiadása.
 - Minden változás a következő verziókban olvasható: 2022.0.0.1 - 2022.0.35
 - Boldog születésnapot Dorina! :)
 
-= 2022.0.35 =
+#### 2022.0.35
 
-Kiadás dátuma: 2022-05-31
+**Kiadás dátuma: 2022-05-31**
 
 - A termék ár történet figyelt időszakának javítása, hogy az aktuális akciós árhoz képest megtalálja az előző 30 nap legalacsonyabb aktív árát.
 - HuCommerce beállítások oldalon a moduloknál kisebb igazítások, hogy helyesen jelöljék az új modulokat és az opcióikat.
 - HuCommerce beállítások oldalon a modulok kaptak egy "Bővebben" linket a leírásnál.
 - Leírás aktualizálása, kiegészítése.
 
-= 2022.0.34 =
+#### 2022.0.34
 
-Kiadás dátuma: 2022-05-30
+**Kiadás dátuma: 2022-05-30**
 
 - Pro modulok feltételeinek a pontosítása.
 - Termék ár történet modul értékeinek megőrzése akkor is, ha nem aktív az előfizetés.
 
-= 2022.0.33 =
+#### 2022.0.33
 
-Kiadás dátuma: 2022-05-30
+**Kiadás dátuma: 2022-05-30**
 
 - Új opció hozzáadása a termékekhez, amivel a termék oldalon el lehet rejteni a legalacsonyabb ár szöveget.
 
-= 2022.0.32 =
+#### 2022.0.32
 
-Kiadás dátuma: 2022-05-30
+**Kiadás dátuma: 2022-05-30**
 
 - CPS SDK frissítése a 8.9.0 verzióra.
 
-= 2022.0.31 =
+#### 2022.0.31
 
-Kiadás dátuma: 2022-05-30
+**Kiadás dátuma: 2022-05-30**
 
 - Pénztár mezők kompatibilitásának a javítása az Oxygen sablonnal.
 
-= 2022.0.30 =
+#### 2022.0.30
 
-Kiadás dátuma: 2022-05-30
+**Kiadás dátuma: 2022-05-30**
 
 - Új modul: Termék ár történet
 - Új badge a modulokhoz: Beta
 - Az Adószám megjelenítése modul megjelenítésének kisebb igazítása.
 - Disclaimer szöveg hozzáadása több modulhoz.
 
-= 2022.0.20 =
+#### 2022.0.20
 
-Kiadás dátuma: 2022-05-26
+**Kiadás dátuma: 2022-05-26**
 
 - CPS SDK frissítése a 8.8.0 verzióra.
 - Feed cache beállítása 24 órára.
@@ -553,63 +553,63 @@ Kiadás dátuma: 2022-05-26
 - Hírlevél feliratkozás átadott paramétereinek a leegyszerűsítése.
 - A HuCommerce beállítások teljes UI módosítása.
 
-= 2022.0.19 =
+#### 2022.0.19
 
-Kiadás dátuma: 2022-05-25
+**Kiadás dátuma: 2022-05-25**
 
 - Felhasználói jogosultság ellenőrzésének a kikapcsolása a license.php fájlban.
 
-= 2022.0.18 =
+#### 2022.0.18
 
-Kiadás dátuma: 2022-05-24
+**Kiadás dátuma: 2022-05-24**
 
 - API kulcs kezelés teljeskörű átdolgozása. Most minden feltétel esetén megfelelően frissül és a státusz lekérés is jobb és optimálisabb lett.
 
-= 2022.0.17 =
+#### 2022.0.17
 
-Kiadás dátuma: 2022-05-24
+**Kiadás dátuma: 2022-05-24**
 
 - CPS SDK frissítése a 8.7.2 verzióra.
 
-= 2022.0.16 =
+#### 2022.0.16
 
-Kiadás dátuma: 2022-05-22
+**Kiadás dátuma: 2022-05-22**
 
 - Admin értesítés - ami a régi felhasználóknak jelenik meg - feltételeinek és szövegének a módosítása.
 - API státusz lekérés feltétel hozzáadása, hogy naponta csak egyszer fusson le.
 
-= 2022.0.15 =
+#### 2022.0.15
 
-Kiadás dátuma: 2022-05-19
+**Kiadás dátuma: 2022-05-19**
 
 - Manuális API hívásnál az URL paraméter törlése a lekérés után, hogy az esetleges oldalfrissítés ne okozzon konfliktust.
 - Az instancebackup és a licensekeybackup értékek feltételes mentése.
 - Kompatibilitás ellenőrzése a WordPress 6.0 verzióval.
 
-= 2022.0.14 =
+#### 2022.0.14
 
-Kiadás dátuma: 2022-05-18
+**Kiadás dátuma: 2022-05-18**
 
 - A product ID változó elnevezésének a módosítása.
 
-= 2022.0.13 =
+#### 2022.0.13
 
-Kiadás dátuma: 2022-05-18
+**Kiadás dátuma: 2022-05-18**
 
 - Licensz kezelésnél a product_id is kapott mezőt, hogy lehessen más terméket is tesztelni.
 - Fix product_id lecserélése dinamikusra.
 - A licensz kezelő menüpont alatt a mezők placeholder-t kaptak.
 
-= 2022.0.12 =
+#### 2022.0.12
 
-Kiadás dátuma: 2022-05-17
+**Kiadás dátuma: 2022-05-17**
 
 - Mezők formátumának ellenőrzése modul kiegészítése a mezőnkénti aktiválás lehetőségével.
 - Mezők értékének ellenőrzése modul kiegészítése a mezőnkénti aktiválás lehetőségével.
 
-= 2022.0.11 =
+#### 2022.0.11
 
-Kiadás dátuma: 2022-05-17
+**Kiadás dátuma: 2022-05-17**
 
 - Admin értesítésnél licensz állapottól függő szövegezés.
 - A license.php fájlban a feltételes kód javítása.
@@ -618,9 +618,9 @@ Kiadás dátuma: 2022-05-17
 - A licensz kezelő menüpont alatt debug módban több információ jelenik meg.
 - A HuCommerce menüpont alatt az eddigi debug rész törlése, mert arra már nincs szükség.
 
-= 2022.0.10 =
+#### 2022.0.10
 
-Kiadás dátuma: 2022-05-15
+**Kiadás dátuma: 2022-05-15**
 
 - Help Scout Beacon feltételek módosítása, hogy azoknak is megjelenjen, akiknek lejárt vagy nem érvényes a licensz kulcsuk.
 - HuCommerce admin sidebar törlése, mert már nincs rá szükség az új UI miatt.
@@ -648,39 +648,39 @@ Kiadás dátuma: 2022-05-15
 - Licensz kezelő menüpont ikonjának módosítása dinamikusra, hogy a licensz állapottól függően legyen zárva vagy nyitva a lakat.
 - Licenszhez kapcsolódó értesítések beállítása a HuCommerce beállítások oldalon is.
 
-= 2022.0.9 =
+#### 2022.0.9
 
-Kiadás dátuma: 2022-05-15
+**Kiadás dátuma: 2022-05-15**
 
 - CPS SDK frissítése a 8.7.1 verzióra.
 - Kisebb módosítás a leírásban.
 - Hírlevél feliratkozás hozzáadása a leíráshoz.
 - Kompatibilitás ellenőrzése a WooCommerce 6.5 verzióval.
 
-= 2022.0.8 =
+#### 2022.0.8
 
-Kiadás dátuma: 2022-05-06
+**Kiadás dátuma: 2022-05-06**
 
 - Licensz kezelés első verziója. Az API lekérés még nem működik, de a licensz kulcs elmenthető és az érvényesség alapján kezeli a modulokat, egyéb megjelenéseket, illetve a licensz kezelő űrlapot.
 - A demo licensz kezelés kódja a license.php fájlba került. További módosítás szükséges a működéséhez.
 - Új licensz menü.
 - Licensz mező validálása hozzáadva.
 
-= 2022.0.7 =
+#### 2022.0.7
 
-Kiadás dátuma: 2022-05-06
+**Kiadás dátuma: 2022-05-06**
 
 - Az uninstall folyamat kiegészítése további opciókkal.
 
-= 2022.0.6 =
+#### 2022.0.6
 
-Kiadás dátuma: 2022-05-06
+**Kiadás dátuma: 2022-05-06**
 
 - CPS SDK frissítése a 8.4.0 verzióra.
 
-= 2022.0.5 =
+#### 2022.0.5
 
-Kiadás dátuma: 2022-05-06
+**Kiadás dátuma: 2022-05-06**
 
 - HuCommerce beállítások menüpontjai külön fájlokba lettek kiszervezve.
 - A social links sorrendjének a módosítása.
@@ -688,35 +688,35 @@ Kiadás dátuma: 2022-05-06
 - A settings-options.php fájl törlése, mert már nincs rá szükség.
 - A settings-nav-modules.php fájlba átkerültek a globális változók a beállításokhoz.
 
-= 2022.0.4 =
+#### 2022.0.4
 
-Kiadás dátuma: 2022-04-18
+**Kiadás dátuma: 2022-04-18**
 
 - HuCommerce Modulok menüpont kiszervezése külön fájlba. Idővel az összes menüpont külön fájlba kerül.
 - HuCommerce Extensions törlése, egyelőre nem lesz.
 - Az Ajánlatok, Katalógus és Hírek visszaállítása.
 - A settings.php fájlba visszakerül a beállítások oldal szerkezete, de minden menüpont külön fájlba lesz kiszervezve. Egyelőre a settings-options.php fájlt megtartottam, hogy most látszódjanak a különbségek, de már nem kell, a következő verzióban ki lesz törölve.
 
-= 2022.0.3 =
+#### 2022.0.3
 
-Kiadás dátuma: 2022-04-18
+**Kiadás dátuma: 2022-04-18**
 
 - Kisebb kód optimalizálás.
 - HuCommerce Beállítások oldal teljeskörű átszabása, új struktúra, új elrendezés, új menüpontok.
 - Az új beállítások oldal egyes elemeinek a kiszervezése külön fájlokba a könnyebb áttekinthetőség érdekében.
 - Az új modulok beállításainak a megjelenítése az új UI-ban.
 
-= 2022.0.2 =
+#### 2022.0.2
 
-Kiadás dátuma: 2022-04-17
+**Kiadás dátuma: 2022-04-17**
 
 - Törölve lett a HuCommerce beállítások oldalról a 2022.0.0 verzió búcsú üzenete.
 - Kompatibilitás ellenőrzése a WooCommerce 6.4 verzióval.
 - CPS SDK frissítése a 8.3.0 verzióra.
 
-= 2022.0.1 =
+#### 2022.0.1
 
-Kiadás dátuma: 2022-04-09
+**Kiadás dátuma: 2022-04-09**
 
 - HuCommerce Pro link a bővítmények oldalon csak akkor jelenik meg, ha az ingyenes verzió van használatban.
 - Help Scout Beacon visszaállítása. Van külön az ingyenes és a Pro verzióhoz is beállítva.
@@ -742,7 +742,7 @@ Kiadás dátuma: 2022-04-09
 - Az uninstall műveletből is törölve lett a Freemius funkció.
 - A readme.txt frissítése az új modulokkal és leírásokkal.
 
-= 2022.0.0 =
+#### 2022.0.0
 
 Ez a HuCommerce legutolsó nem fizetős verziója, amiben az összes eddigi modul és funkció elérhető. Amennyiben újabb verzióra frissítesz, bizonyos funkciók nem lesznek elérhetők mentés után. Ez egy stabil és biztonságos verzió, ami további fejlesztéseket nem kap, maximum biztonsági frissítéseket. Minden további fejlesztés a HuCommerce Pro verziójában kap helyet, amire mindenképpen érdemes előfizetni, hiszen nem csak javításokat tartalmaz, hanem rengeteg új és hasznos funkcióval bővül szinte minden hónapban.
 
@@ -777,9 +777,9 @@ Ez a HuCommerce legutolsó nem fizetős verziója, amiben az összes eddigi modu
 - Engedélyezett html tagok listájának a generálása.
 - A változók átnevezése, hogy tükrözzék a modulok logikáját.
 
-= 30.3.0 =
+#### 30.3.0
 
-Kiadás dátuma: 2022-03-04
+**Kiadás dátuma: 2022-03-04**
 
 Kisebb hibajavítások a HuCommerce bővítményben és a Freemius frissítése a sebezhetőség miatt. A frissítés biztonságos és mindenképpen ajánlott.
 
@@ -793,9 +793,9 @@ EGYÉB
 
 - Linkek elhelyezése a Bővítmények menüpont alatt a HuCommerce bővítménynél.
 
-= 30.2.0 =
+#### 30.2.0
 
-Kiadás dátuma: 2021-10-25
+**Kiadás dátuma: 2021-10-25**
 
 További apró finomítások és javítások a kódban. A frissítés biztonságos és ajánlott!
 
@@ -810,9 +810,9 @@ JAVÍTÁSOK
 - Kisebb javítás a beállításoknál.
 - Mezők hozzáadása a WPML konfigurációhoz.
 
-= 30.1.0 =
+#### 30.1.0
 
-Kiadás dátuma: 2021-10-17
+**Kiadás dátuma: 2021-10-17**
 
 Ebben a verzióban semmi új funkció nincs, de sok fontos javítás történt. A frissítése biztonságos és mindenképpen ajánlott!
 
@@ -832,9 +832,9 @@ EGYÉB
 - Kompatibilitás ellenőrzése a WordPress 5.8 verzióval.
 - Kompatibilitás ellenőrzése a WooCommerce 5.8 verzióval.
 
-= 30.0.1 =
+#### 30.0.1
 
-Kiadás dátuma: 2021-06-02
+**Kiadás dátuma: 2021-06-02**
 
 JAVÍTÁSOK
 
@@ -844,9 +844,9 @@ EGYÉB
 
 - Kompatibilitás ellenőrzése a WordPress 5.7 verzióval.
 
-= 30.0.0 (29.6 → 30.0) =
+#### 30.0.0 (29.6 → 30.0)
 
-Kiadás dátuma: 2021-05-31
+**Kiadás dátuma: 2021-05-31**
 
 Új korszak kezdődik a HuCommerce életében. Az ingyenes verzió mellett megjelent a bővítmény fizetős verziója is: a HuCommerce Pro további fantasztikus funkciókat ad az ingyenes HuCommerce Start bővítményhez:
 
@@ -871,60 +871,60 @@ EGYÉB
 
 - Boldog születésnapot Dorina! :)
 
-= 29.15.3 =
+#### 29.15.3
 
-Kiadás dátuma: 2021-05-28
+**Kiadás dátuma: 2021-05-28**
 
 EGYÉB
 
 - Welcome admin értesítés módosítása.
 
-= 29.15.2 =
+#### 29.15.2
 
-Kiadás dátuma: 2021-05-26
+**Kiadás dátuma: 2021-05-26**
 
 EGYÉB
 
 - Admin értesítések javítása, módosítása és kibővítése.
 - Admin dasboard widget kiegészítése.
 
-== Changelog ==
+=#### Changelog=
 
-= 29.15.1 =
+#### 29.15.1
 
-Kiadás dátuma: 2021-05-26
+**Kiadás dátuma: 2021-05-26**
 
 EGYÉB
 
 - HuCommerce ikon hozzáadása a Freemius installációs folyamatához.
 
-= 29.15.0 =
+#### 29.15.0
 
-Kiadás dátuma: 2021-05-26
+**Kiadás dátuma: 2021-05-26**
 
 EGYÉB
 
 - Freemius aktiválási logika bevezetése, hogy az ingyenes és fizetős bővítmények ne legyenek konfliktusban.
 
-= 29.14.2 =
+#### 29.14.2
 
-Kiadás dátuma: 2021-05-25
+**Kiadás dátuma: 2021-05-25**
 
 JAVÍTÁSOK
 
 - Pénztár oldali megjelenítés javítása, hogy a html kódot ne kiírja, hanem feldolgozza.
 
-= 29.14.1 =
+#### 29.14.1
 
-Kiadás dátuma: 2021-05-25
+**Kiadás dátuma: 2021-05-25**
 
 JAVÍTÁSOK
 
 - PRÉMIUM - Help Scout Beacon kód javítása, boztonság növelése.
 
-= 29.14.0 =
+#### 29.14.0
 
-Kiadás dátuma: 2021-05-25
+**Kiadás dátuma: 2021-05-25**
 
 Új funkcióként mostantól globális adatok is megadhatók, melyeket shortcode segítségével lehet megjeleníteni bárhol a weboldalon. Így ha változik egy adat, például a telefonszám, akkor azt elég egyszer módosítani és mindenhol az új adat jelenik meg.
 
@@ -932,9 +932,9 @@ Kiadás dátuma: 2021-05-25
 
 - PRÉMIUM - Új modul: Globális adatok.
 
-= 29.13.6 =
+#### 29.13.6
 
-Kiadás dátuma: 2021-05-24
+**Kiadás dátuma: 2021-05-24**
 
 EGYÉB
 
@@ -942,17 +942,17 @@ EGYÉB
 - Az SMTP beállításoknál ikonokat kaptak a fiók azonosító mezők.
 - Az SMTP beállításoknál a jelszó mező típusa módosítva lett, hogy a jelszó ne látszódjon.
 
-= 29.13.5 =
+#### 29.13.5
 
-Kiadás dátuma: 2021-05-24
+**Kiadás dátuma: 2021-05-24**
 
 JAVÍTÁSOK
 
 - A prémium verzió konfigurálásának kisebb módosítása.
 
-= 29.13.4 =
+#### 29.13.4
 
-Kiadás dátuma: 2021-05-23
+**Kiadás dátuma: 2021-05-23**
 
 JAVÍTÁSOK
 
@@ -961,33 +961,33 @@ JAVÍTÁSOK
 - SMTP beállítás validálásának javítása, hogy az alapértelmezett beállítás a megfelelő legyen.
 - A prémium beállítások megőrzése akkor is, ha lejár a licensz vagy ingyenesre vált a felhasználó.
 
-= 29.13.3 =
+#### 29.13.3
 
-Kiadás dátuma: 2021-05-23
+**Kiadás dátuma: 2021-05-23**
 
 JAVÍTÁSOK
 
 - Kisebb javítások a kódban a WPCS és WCCS szabvány alapján.
 
-= 29.13.2 =
+#### 29.13.2
 
-Kiadás dátuma: 2021-05-23
+**Kiadás dátuma: 2021-05-23**
 
 EGYÉB
 
 - PRÉMIUM - A termék alcím függvény módosítása, hogy a Freemius megfelelően kezelje a prémium kódot.
 
-= 29.13.1 =
+#### 29.13.1
 
-Kiadás dátuma: 2021-05-23
+**Kiadás dátuma: 2021-05-23**
 
 EGYÉB
 
 - Az érkező funkciókból ki lett véve egy, ami bekerül a prémium verzióba.
 
-= 29.13.0 =
+#### 29.13.0
 
-Kiadás dátuma: 2021-05-23
+**Kiadás dátuma: 2021-05-23**
 
 Mostantól külsős SMTP szolgáltatót is beállíthatsz a weboldaladhoz, hogy az értesítők kézbesítése még biztosabb legyen. Ez minden webáruház tulajdonosnak ajánlott funkció!
 
@@ -995,9 +995,9 @@ Mostantól külsős SMTP szolgáltatót is beállíthatsz a weboldaladhoz, hogy 
 
 - PRÉMIUM - Új modul: SMTP szolgáltatás beállítása.
 
-= 29.12.0 =
+#### 29.12.0
 
-Kiadás dátuma: 2021-05-22
+**Kiadás dátuma: 2021-05-22**
 
 Újabb validálások a Pénztár oldalon. Most már a város és cím mezőket is validálja.
 
@@ -1006,9 +1006,9 @@ Kiadás dátuma: 2021-05-22
 - Új funkció: város mező validálása. Csak betűket és szóközt tartalmazhat.
 - Új funkció: cím mező validálása. Mindenképpen kell tartalmaznia betűt, szóközt és számot.
 
-= 29.11.0 =
+#### 29.11.0
 
-Kiadás dátuma: 2021-05-22
+**Kiadás dátuma: 2021-05-22**
 
 Új lehetőségként a "Kosárba teszem" gomb megjeleníthető a termék lista oldalakon (Üzlet, kategóriák, stb.).
 
@@ -1016,17 +1016,17 @@ Kiadás dátuma: 2021-05-22
 
 - Új funkció hozzáadása: Kosárba teszem gomb a termék listaoldalakon.
 
-= 29.10.1 =
+#### 29.10.1
 
-Kiadás dátuma: 2021-05-21
+**Kiadás dátuma: 2021-05-21**
 
 JAVÍTÁSOK
 
 - Kisebb javítás a dashboard widget megjelenítésében.
 
-= 29.10.0 =
+#### 29.10.0
 
-Kiadás dátuma: 2021-05-20
+**Kiadás dátuma: 2021-05-20**
 
 Új lehetőségként a termékekhez alcím adható, ami megjelenik a termékek végoldalain és a gyüjtőoldalakon. Az alcím a címsor része, ami külön szemantikus kódként van beillesztve.
 
@@ -1035,33 +1035,33 @@ Kiadás dátuma: 2021-05-20
 - Új modul hozzáadása: Termék extra beállítások
 - PRÉMIUM - Új funkció hozzáadása: Termék alcím
 
-= 29.9.3 =
+#### 29.9.3
 
-Kiadás dátuma: 2021-05-17
+**Kiadás dátuma: 2021-05-17**
 
 JAVÍTÁSOK
 
 - Link javítása az egyik admin értesítésnél.
 
-= 29.9.2 =
+#### 29.9.2
 
-Kiadás dátuma: 2021-05-17
+**Kiadás dátuma: 2021-05-17**
 
 JAVÍTÁSOK
 
 - Feed frissítés idejének a javítása.
 
-= 29.9.1 =
+#### 29.9.1
 
-Kiadás dátuma: 2021-05-17
+**Kiadás dátuma: 2021-05-17**
 
 JAVÍTÁSOK
 
 - A bővítmény törlése esetén az adatbázis további tisztítása.
 
-= 29.9.0 =
+#### 29.9.0
 
-Kiadás dátuma: 2021-05-17
+**Kiadás dátuma: 2021-05-17**
 
 A HuCommerce bővítmény előkészítése a prémium verzió kiadásához.
 
@@ -1075,9 +1075,9 @@ EGYÉB
 - Új admin értesítés a legújabb verzióhoz.
 - Új HuCommerce dashboard widget hozzáadása.
 
-= 29.8.0 =
+#### 29.8.0
 
-Kiadás dátuma: 2021-05-16
+**Kiadás dátuma: 2021-05-16**
 
 A bővítmény teljes kódbázisa újra lett írva a legszigorúbb szintaktikai és biztonsági szempontok alapján.
 
@@ -1089,9 +1089,9 @@ EGYÉB
 
 - Az újnak jelölt moduloknál az "ÚJ" címke eltávolítása.
 
-= 29.7.0 =
+#### 29.7.0
 
-Kiadás dátuma: 2021-05-10
+**Kiadás dátuma: 2021-05-10**
 
 JAVÍTÁSOK
 
@@ -1105,42 +1105,42 @@ EGYÉB
 
 - Kompatibilitás ellenőrzése a WooCommerce 5.2 verzióval.
 
-= 29.6.3 =
+#### 29.6.3
 
-Kiadás dátuma: 2021-05-09
+**Kiadás dátuma: 2021-05-09**
 
 EGYÉB
 
 - Új ignore szabály bevezetése a .gitignore fájlban, hogy könnyen lehessen fájlokat kivonni a verziókövetés alól.
 - A new-settings.php fájl átnevezése, hogy az már megfeleljen a fenti szabálynak.
 
-= 29.6.2 =
+#### 29.6.2
 
-Kiadás dátuma: 2021-05-09
+**Kiadás dátuma: 2021-05-09**
 
 EGYÉB
 
 - CPS SDK hozzáadása submodule-ként. Emiatt az SDK útvonala is változott.
 
-= 29.6.1 =
+#### 29.6.1
 
-Kiadás dátuma: 2021-05-09
+**Kiadás dátuma: 2021-05-09**
 
 EGYÉB
 
 - WCCS ellenörző hozzáadása és a .gitignore módosítása ennek alapján.
 
-= 29.6 =
+#### 29.6
 
-Kiadás dátuma: 2020-11-27
+**Kiadás dátuma: 2020-11-27**
 
 JAVÍTÁSOK
 
 - A Jogi megfelelés checkbox-ok kisebb módosítása, hogy ne legyen konfliktusban másik stílusokkal.
 
-= 29.5 =
+#### 29.5
 
-Kiadás dátuma: 2020-11-27
+**Kiadás dátuma: 2020-11-27**
 
 HTML struktúra kisebb módosítása a Pénztár oldalon. A frissítés biztonságos.
 
@@ -1148,9 +1148,9 @@ EGYÉB
 
 - Jogi megfelelés checkbox-ok HTML struktúrájának a kisebb módosítása, hogy CSS-sel könnyebben lehessen formázni.
 
-= 29.4 =
+#### 29.4
 
-Kiadás dátuma: 2020-11-22
+**Kiadás dátuma: 2020-11-22**
 
 Admin üzenet javítása. Egyéb kisebb optimalizálás a kódban. A frissítés biztonságos.
 
@@ -1161,9 +1161,9 @@ JAVÍTÁSOK
 - CPS SDK módosítása, előkészítése a következő verzióhoz.
 - PAnD kód javítása.
 
-= 29.3 =
+#### 29.3
 
-Kiadás dátuma: 2020-10-28
+**Kiadás dátuma: 2020-10-28**
 
 Kisebb karbantartás. A frissítés biztonságos.
 
@@ -1175,9 +1175,9 @@ JAVÍTÁSOK
 
 - Elírás javítása.
 
-= 29.2 =
+#### 29.2
 
-Kiadás dátuma: 2020-10-26
+**Kiadás dátuma: 2020-10-26**
 
 A Pénztár modul aktív állapotának ellenőrzése, hogy ne legyen semmilyen beállítás mellett sem konfliktusban az Adószámmal. A frissítése biztonságos és mindenképpen ajánlott!
 
@@ -1189,9 +1189,9 @@ EGYÉB
 
 - Kompatibilitás ellenőrzése a WooCommerce 4.6 verzióval.
 
-= 29.1 =
+#### 29.1
 
-Kiadás dátuma: 2020-10-01
+**Kiadás dátuma: 2020-10-01**
 
 Ez csak egy karbantartási frissítés. A Vásárlás folytatása gombok modul kódja lett módosítva. A frissítése biztonságos.
 
@@ -1199,9 +1199,9 @@ EGYÉB
 
 - A Vásárlás folytatása gombok kódjának újraírása.
 
-= 29.0 =
+#### 29.0
 
-Kiadás dátuma: 2020-09-30
+**Kiadás dátuma: 2020-09-30**
 
 A Jogi megfeleléshez kapcsolódó checkbox mezők pozíciója választható. Most már a Megrendelés gomb fölött is megjeleníthetők ezek a mezők, sőt ez az alapértelmezett beállítás. További két extra checkbox mezőt is hozzá lehet adni, amennyiben további megerősítések is szükségesek az oldalnál.
 
@@ -1219,9 +1219,9 @@ EGYÉB
 - Kisebb módosítások a szövegben.
 - Bővítmény leírásának a kibővítése.
 
-= 28.0 =
+#### 28.0
 
-Kiadás dátuma: 2020-09-17
+**Kiadás dátuma: 2020-09-17**
 
 A HuCommerce mostantól bármilyen nyelvre fordítható. Minden szöveg angol a kódban, a magyar is egy fordítás, amit frissítés után külön kell letölteni. A Magyar formátum javítások kompatibilisek a legújabb és a régebbi verziókkal is.
 
@@ -1241,9 +1241,9 @@ EGYÉB
 - Kisebb kód optimalizálások.
 - Kompatibilitás ellenőrzése a WooCommerce 4.5 verzióval.
 
-= 27.2 =
+#### 27.2
 
-Kiadás dátuma: 2020-08-16
+**Kiadás dátuma: 2020-08-16**
 
 Egy kis módosítás a Pénztár oldalon, hogy a Céges adatok checkbox több sablonnal is kompatibilis legyen.
 
@@ -1256,9 +1256,9 @@ EGYÉB
 - Kompatibilitás ellenőrzése a WordPress 5.5 verzióval.
 - Minimum WordPress verzió növelése 5.3 verzióra.
 
-= 27.1 =
+#### 27.1
 
-Kiadás dátuma: 2020-08-11
+**Kiadás dátuma: 2020-08-11**
 
 A bővítmény aktiválásának ellenőrzése már Multisite környezetben is jól működik. Ezen kívül kisebb javítás történt a telefonszám maszkolásnál, hogy kevesebb hibalehetőség legyen. A frissítése biztonságos és mindenképpen ajánlott.
 
@@ -1267,9 +1267,9 @@ JAVÍTÁSOK
 - A "WooCommerce aktiválásának ellenőrzése" már Multisite kompatibilis.
 - A telefonszám maszkolás javítása, hogy kevesebb elütéses hiba lehessen.
 
-= 27.0 =
+#### 27.0
 
-Kiadás dátuma: 2020-08-02
+**Kiadás dátuma: 2020-08-02**
 
 Nincs új funkció, de kód szinten nagy változtatások vannak ebben az új főverzióban. Mind biztonsági, mind logikai szinten történtek fejlesztések. Frissítése biztonságos.
 
@@ -1284,25 +1284,25 @@ MÓDOSÍTÁSOK
 - A Pénztár oldal címek átrendezése átkerült a hu-format-fix.php fájlba.
 - A Jogi megfelelés modulhoz tartozó admin adatok megjelenítésének módosítása.
 
-= 26.7 =
+#### 26.7
 
-Kiadás dátuma: 2020-07-31
+**Kiadás dátuma: 2020-07-31**
 
 JAVÍTÁSOK
 
 - A plusz-minusz gombok további igazítása.
 
-= 26.6 =
+#### 26.6
 
-Kiadás dátuma: 2020-07-31
+**Kiadás dátuma: 2020-07-31**
 
 JAVÍTÁSOK
 
 - A plusz-minusz gombok kisebb igazítása.
 
-= 26.5 =
+#### 26.5
 
-Kiadás dátuma: 2020-07-31
+**Kiadás dátuma: 2020-07-31**
 
 A magyar formátum javításnál ki lett véve az autofocus, mert már nem is releváns és így nem okoz konfliktust más bővítményekkel. A frissítés biztonságos.
 
@@ -1310,17 +1310,17 @@ JAVÍTÁSOK
 
 - A Pénztár oldalon a név mezőknél az autofocus törlése.
 
-= 26.4 =
+#### 26.4
 
-Kiadás dátuma: 2020-07-02
+**Kiadás dátuma: 2020-07-02**
 
 JAVÍTÁSOK
 
 - Az Adatkezelési Tájékoztató ellenőrzésének a javítása.
 
-= 26.3 =
+#### 26.3
 
-Kiadás dátuma: 2020-07-02
+**Kiadás dátuma: 2020-07-02**
 
 Az irányítószámok listáját kicsit kibővítettem, így még több irányítószám esetén kitölti a várost. Frissítése biztonságos.
 
@@ -1330,25 +1330,25 @@ MÓDOSÍTÁSOK
 - Irányítószám mező automatikus kitöltésénél újabb JS event hozzáadása, hogy biztosabb legyen a kitöltés.
 - Beállítások oldal kisebb módosítása.
 
-= 26.2 =
+#### 26.2
 
-Kiadás dátuma: 2020-06-29
+**Kiadás dátuma: 2020-06-29**
 
 MÓDOSÍTÁSOK
 
 - "Mezők értékének ellenőrzése" opció már a telefonszám helyes formátumát is ellenőrzi.
 
-= 26.1 =
+#### 26.1
 
-Kiadás dátuma: 2020-06-29
+**Kiadás dátuma: 2020-06-29**
 
 JAVÍTÁSOK
 
 - "Mezők értékének ellenőrzése" opció aktiválásának a javítása.
 
-= 26.0 =
+#### 26.0
 
-Kiadás dátuma: 2020-06-25
+**Kiadás dátuma: 2020-06-25**
 
 Kisebb, de fontos módosítások. A maszkolásnál kikapcsolható a placeholder használata, így nem zavar be azoknál a sablonoknál, ahol csak a mezők jelennek meg. Illetve az Adószám mezőhöz is aktiválható a placeholder megjelenítése, ami szintén azoknál a sablonoknál fontos, ahol csak a mezők jelennek meg.
 
@@ -1361,9 +1361,9 @@ MÓDOSÍTÁSOK
 
 - Változtatások a leírásban.
 
-= 25.0 =
+#### 25.0
 
-Kiadás dátuma: 2020-06-25
+**Kiadás dátuma: 2020-06-25**
 
 A beállítások oldal menüpontja visszakerült a WooCommerce főmenüpont alá! Az admin felületen az egyes modulok és beállítások át lettek rendezve, hogy logikusabb legyen a megjelenés.
 
@@ -1383,9 +1383,9 @@ MÓDOSÍTÁSOK
 - Kódok optimalizálása.
 - Új mappa és fájlstruktúra a funkciók logikai elszeparálásához.
 
-= 24.0 =
+#### 24.0
 
-Kiadás dátuma: 2020-06-24
+**Kiadás dátuma: 2020-06-24**
 
 Mostantól beállítható a Pénztár oldalon a beviteli értékek validálása az Adószám, Irányítószám és Telefonszám mezőkhöz. FIGYELEM! Ez a beállítás esetleg konfliktusban lehet bizonyos számlázó és/vagy szállítási kiegészítőkkel. Mindenképpen tesztelni kell, hogy a formátumok megfelelnek-e a számlázó és/vagy szállíási kiegészítőknek! A bővítmény frissítése egyébként biztonságos, mivel az új funkció alapértelmezetten nem aktív.
 
@@ -1403,9 +1403,9 @@ JAVÍTÁSOK
 
 - Kisebb szintű kódoptimalizálások.
 
-= 23.11 =
+#### 23.11
 
-Kiadás dátuma: 2020-06-24
+**Kiadás dátuma: 2020-06-24**
 
 További javítások a WooCommerce 4.1 verzióban megjelent hibákra, hogy minden beállítás mellett helyesen működjenek a Pénztár funkciók. Frissítése biztonságos és ajánlott.
 
@@ -1413,9 +1413,9 @@ JAVÍTÁSOK
 
 - Adószám mező kezelésének javítása.
 
-= 23.10 =
+#### 23.10
 
-Kiadás dátuma: 2020-06-24
+**Kiadás dátuma: 2020-06-24**
 
 További javítások a WooCommerce 4.1 verzióban megjelent hibákra, hogy minden beállítás mellett helyesen működjenek a Pénztár funkciók. Frissítése biztonságos és ajánlott.
 
@@ -1424,9 +1424,9 @@ JAVÍTÁSOK
 - Adószám mező kezelésének javítása.
 - Kisebb logikai műveletek optimalizálása.
 
-= 23.9 =
+#### 23.9
 
-Kiadás dátuma: 2020-06-11
+**Kiadás dátuma: 2020-06-11**
 
 A Pénztár oldalon javítja a céges adatok mezőinek a kezelését, hogy bizonyos szituációkban ne törölje a már beírt adatokat. A frissítés ajánlott és biztonságos.
 
@@ -1434,9 +1434,9 @@ JAVÍTÁSOK
 
 - A Pénztár oldalon a céges adatok kezelésének a javítása. (Köszönet: @dosabalint)
 
-= 23.8 =
+#### 23.8
 
-Kiadás dátuma: 2020-05-13
+**Kiadás dátuma: 2020-05-13**
 
 Kisebb javítás, ami a cím második sorát feltételesen jeleníti csak meg. Frissítése biztonságos.
 
@@ -1444,9 +1444,9 @@ JAVÍTÁSOK
 
 - A Pénztár oldalon a második címsor feltételes módosítása.
 
-= 23.7 =
+#### 23.7
 
-Kiadás dátuma: 2020-05-09
+**Kiadás dátuma: 2020-05-09**
 
 A WooCommerce 4.1 verzióban kijött WooCommerce beállítások kezelésének a hibáját javítja ez a verzió. Frissítése biztonságos.
 
@@ -1458,33 +1458,33 @@ JAVÍTÁSOK
 
 - A Pénztár oldalon a WooCommerce beállítások alternatív ellenőrzése.
 
-= 23.6 =
+#### 23.6
 
-Kiadás dátuma: 2020-05-05
-
-JAVÍTÁSOK
-
-- Kisebb javítások a Pénztár oldal JavaScript kódjaiban.
-
-= 23.5 =
-
-Kiadás dátuma: 2020-05-04
+**Kiadás dátuma: 2020-05-05**
 
 JAVÍTÁSOK
 
 - Kisebb javítások a Pénztár oldal JavaScript kódjaiban.
 
-= 23.4 =
+#### 23.5
 
-Kiadás dátuma: 2020-05-03
+**Kiadás dátuma: 2020-05-04**
 
 JAVÍTÁSOK
 
 - Kisebb javítások a Pénztár oldal JavaScript kódjaiban.
 
-= 23.3 =
+#### 23.4
 
-Kiadás dátuma: 2020-04-27
+**Kiadás dátuma: 2020-05-03**
+
+JAVÍTÁSOK
+
+- Kisebb javítások a Pénztár oldal JavaScript kódjaiban.
+
+#### 23.3
+
+**Kiadás dátuma: 2020-04-27**
 
 Céges adatok ideiglenes mentése a feltételes megjelenítés esetén, ha mégis kell a vásárlás során. További javítások a kódban az optimálisabb script kezelések érdekében. A frissítés biztonságos.
 
@@ -1498,9 +1498,9 @@ JAVÍTÁSOK
 - Az Adószám kezeléséhez szükséges script meghívása a jQuery után.
 - Felesleges js fájlok törlése.
 
-= 23.2 =
+#### 23.2
 
-Kiadás dátuma: 2020-04-25
+**Kiadás dátuma: 2020-04-25**
 
 Apró javítás az inline script-ek kezelésével kapcsolatban. A frissítés biztonságos.
 
@@ -1512,9 +1512,9 @@ EGYÉB
 
 - CPS SDK frissítése a 6.0 verzióra.
 
-= 23.1 =
+#### 23.1
 
-Kiadás dátuma: 2020-04-13
+**Kiadás dátuma: 2020-04-13**
 
 Kisebb módosítás, ami javítja az előző verziók üres Cégnév és Adószám mezőinek a felülírásait. A frissítés biztonságos és ajánlott.
 
@@ -1522,9 +1522,9 @@ JAVÍTÁSOK
 
 - Az üres Cégnév és Adószám mezők az előző verziókban a '- N/A -' értéket kapták alapértelmezettként. Ebben a verzióban ezeket törli a Pénztár oldalon, hogy az újabb megrendelésnél már ne zavarjon be.
 
-= 23.0 =
+#### 23.0
 
-Kiadás dátuma: 2020-04-13
+**Kiadás dátuma: 2020-04-13**
 
 Új funkció nincs a frissítéssel, de a Pénztár oldalon jelentős módosítások történtek, ami növeli a kompatibilitást más bővítményekkel, igazodik a WooCommerce és a HuCommerce különböző variációjú beállításaihoz és optimalizálja a kódokat, csökkenti a lekérések számát. Frissítése biztonságos.
 
@@ -1539,9 +1539,9 @@ JAVÍTÁSOK
 
 - További ellenőrzések a Pénztár mezők módosításainál, hogy kompatibilis legyen más bővítményekkel, amik szintén módosítják a Pénztár mezőket. (Köszönet: Viszt Péter - @passatgt)
 
-= 22.1 =
+#### 22.1
 
-Kiadás dátuma: 2020-03-30
+**Kiadás dátuma: 2020-03-30**
 
 Kicsi, de fontos javításokat tartalmazó frissítés. Mindenképpen ajánlott a frissítés, de minimum a WooCommerce 4.x főverzió esetén!
 
@@ -1555,9 +1555,9 @@ EGYÉB
 - Kompatibilitás ellenőrzése a WordPress 5.4 főverzióval.
 - CPS SDK frissítése az 5.10 verzióra.
 
-= 22.0 =
+#### 22.0
 
-Kiadás dátuma: 2020-03-12
+**Kiadás dátuma: 2020-03-12**
 
 FONTOS! Csak akkor frissíts erre a verzióra, ha a WooCommerce is frissítve lett legalább a 4.0 verzióra!
 
@@ -1572,9 +1572,9 @@ EGYÉB
 - Kompatibilitás ellenőrzése a WooCommerce 4.0 verzióval.
 - A minimum PHP követelmény módosítása 7.0 verzióra.
 
-= 21.6 =
+#### 21.6
 
-Kiadás dátuma: 2020-03-09
+**Kiadás dátuma: 2020-03-09**
 
 Kisebb módosításokat és hibajavítást tartalmaz ez a verzió. A frissítése biztonságos és mindenkinek ajánlott.
 
@@ -1587,17 +1587,17 @@ JAVÍTÁSOK
 - Fordítás textdomain módosítása egy-két helyen.
 - Beállítások globális változóinak a korai hívása, hogy betöltésnél már rendelkezésre álljanak a választások.
 
-= 21.5 =
+#### 21.5
 
-Kiadás dátuma: 2020-02-20
+**Kiadás dátuma: 2020-02-20**
 
 MÓDOSÍTÁSOK
 
 - Pénztár oldalon a város automatikus kitöltése esetén a mező validálása.
 
-= 21.4 =
+#### 21.4
 
-Kiadás dátuma: 2020-02-19
+**Kiadás dátuma: 2020-02-19**
 
 Kisebb módosítás, hogy a számlázási és a szállítási adatoknál az irányítószám megadása esetén frissüljön a Pénztár.
 
@@ -1605,17 +1605,17 @@ MÓDOSÍTÁSOK
 
 - Pénztár frissítése az irányítószám megadása után, az automatikus kitöltés esetén.
 
-= 21.3 =
+#### 21.3
 
-Kiadás dátuma: 2020-02-19
+**Kiadás dátuma: 2020-02-19**
 
 JAVÍTÁSOK
 
 - Verziószám frissítés.
 
-= 21.2 =
+#### 21.2
 
-Kiadás dátuma: 2020-02-19
+**Kiadás dátuma: 2020-02-19**
 
 JAVÍTÁSOK
 
@@ -1623,17 +1623,17 @@ JAVÍTÁSOK
 - Felesleges JS kódok törlése.
 - Nyelvi mappa törlése, mivel már elérhető a hivatalos forrásból.
 
-= 21.1 =
+#### 21.1
 
-Kiadás dátuma: 2020-02-19
+**Kiadás dátuma: 2020-02-19**
 
 JAVÍTÁSOK
 
 - Az Adószám mező külön kötelezővé tétele már felesleges, mert alapból is kötelező.
 
-= 21.0 =
+#### 21.0
 
-Kiadás dátuma: 2020-02-18
+**Kiadás dátuma: 2020-02-18**
 
 Az előző verzióból kimaradt egy fontos fejlesztés, amit most bepótoltam. Ha nem feltételesen jelennek meg a céges számlázási mezők, akkor is csak a Cégnév látszik alapból és az Adószám csak akkor, ha kitölti a Cégnevet. Az Adószám innentől kezdve kötelező mező lett.
 
@@ -1645,9 +1645,9 @@ JAVÍTÁSOK
 
 - Kisebb javítás a leírásban.
 
-= 20.0 =
+#### 20.0
 
-Kiadás dátuma: 2020-02-18
+**Kiadás dátuma: 2020-02-18**
 
 A legújabb főverzió igazán nagy és régóta várt újításokat tartalmaz. Mostantól megjeleníthető egy "Céges számlázás" checkbox, ami elrejti vagy megjeleníti a céges számlázási adatokat (Cégnév, Adószám). Illetve egy régi "hibát" is javítottam: az Ország mező elrejtése esetén a megrendelés során alapértelmezettként a Bolt beállított országa lesz az aktuális Ország. Így nem lesz konfliktusban a szállítási és fizetési modulokkal.
 
@@ -1662,9 +1662,9 @@ JAVÍTÁSOK
 - JS fájlok kiegészítése verziószámmal és a kód átmozgatása a footer-be.
 - Kisebb kód igazítások.
 
-= 19.1 =
+#### 19.1
 
-Kiadás dátuma: 2020-02-15
+**Kiadás dátuma: 2020-02-15**
 
 Fontos javítások a fordítási lehetőségekkel kapcsolatban.
 
@@ -1677,9 +1677,9 @@ EGYÉB
 
 - Ideiglenesen a bővítmény fordítását mellékeltem, amíg a hivatalos forrásból nem lesz elérhető.
 
-= 19.0 =
+#### 19.0
 
-Kiadás dátuma: 2020-02-11
+**Kiadás dátuma: 2020-02-11**
 
 Az irányítószám automatikus kitöltése most már a szállítási címnél is működik. A bővítmény elő lett készítve a fordíthatóságra. Viszont emiatt mindent át kell majd írni angolra, aztán lefordítani magyarra. Ez biztos hosszabb folyamat lesz, de megéri. :)
 
@@ -1697,9 +1697,9 @@ EGYÉB
 - Kompatibilitás ellenőrzése a WooCommerce 3.9 főverzióval.
 - Új frissítési mód bevezetése, hogy automatikusan feltöltse a wp.org repo-ba.
 
-= 18.7 =
+#### 18.7
 
-Kiadás dátuma: 2019-11-03
+**Kiadás dátuma: 2019-11-03**
 
 Mostantól megjelenít egy figyelmeztető szöveget az Adószám megjelenítése opciónál, ha a Viszt Péter által írt Szamlazz.hu vagy Billingo bővítményeknél is be van kapcsolva az adószám mező. Ebben az esetben két adószám mező jelenik meg, így az egyik bővítménynél ki kell ezt az opciót kapcsolni.
 
@@ -1707,9 +1707,9 @@ EGYÉB
 
 - Kompatibilitás javítása a Viszt Péter által írt Szamlazz.hu és Billingo bővítményekhez.
 
-= 18.6 =
+#### 18.6
 
-Kiadás dátuma: 2019-11-03
+**Kiadás dátuma: 2019-11-03**
 
 Ez a frissítés az irányítószám adatbázis frissítését tartalmazza. Így most már Budapest és a nagyvárosok is szerepelnek az adatbázisban.
 
@@ -1718,9 +1718,9 @@ JAVÍTÁSOK
 - Irányítószámok frissítése.
 - Apró javítás a leírásban, hogy az admin menüpontot helyesen írja le.
 
-= 18.5 =
+#### 18.5
 
-Kiadás dátuma: 2019-08-08
+**Kiadás dátuma: 2019-08-08**
 
 Ebben a kiadásban a HuCommerce menüpont átkerült a CPS Plugins főmenüpont alá, illetve néhány apró javítás és fejlesztés található. A frissítése biztonságos éles oldalakon is.
 
@@ -1735,9 +1735,9 @@ EGYÉB
 - CPS SDK frissítése az 5.3 verzióra.
 - A HuCommerce menüpont átkerült a CPS Plugins menüpont alá.
 
-= 18.4 =
+#### 18.4
 
-Kiadás dátuma: 2019-07-25
+**Kiadás dátuma: 2019-07-25**
 
 Semmi funkcionális változtatás most, csak egy kis rendrakás. Kompatibilitás javítása a többi CherryPick Studios bővítménnyel.
 
@@ -1751,17 +1751,17 @@ EGYÉB
 - CPS SDK frissítése az 5.2 verzióra.
 - Új assets mappa, hogy logikusabb legyen a mappa struktúra.
 
-= 18.3 =
+#### 18.3
 
-Kiadás dátuma: 2019-07-18
+**Kiadás dátuma: 2019-07-18**
 
 JAVÍTÁSOK
 
 - WooCommerce bővítmény aktív állapotának az ellenőrzése most már minden esetben jól működik.
 
-= 18.2 =
+#### 18.2
 
-Kiadás dátuma: 2019-07-18
+**Kiadás dátuma: 2019-07-18**
 
 Betettem egy ellenőrzést, hogy a WooCommerce bővítmény aktív-e. Ha nem, akkor a kódok nem futnak le, csak egy figyelmeztetés jelenik meg az admin felületen.
 
@@ -1769,9 +1769,9 @@ JAVÍTÁSOK
 
 - WooCommerce bővítmény ellenőrzése, hogy be van-e kapcsolva.
 
-= 18.1 =
+#### 18.1
 
-Kiadás dátuma: 2019-07-16
+**Kiadás dátuma: 2019-07-16**
 
 Ebben a verzióban az Avada sablonhoz lett egyedi CSS rendelve, hogy a Pénztár oldalon működjenek a magyar formátum javítások.
 
@@ -1779,9 +1779,9 @@ JAVÍTÁSOK
 
 - CSS hozzáadása az Avada sablon megjelenítésének a javításához.
 
-= 18.0 =
+#### 18.0
 
-Kiadás dátuma: 2019-07-09
+**Kiadás dátuma: 2019-07-09**
 
 A mostani verzióban külön modul lett hozzáadva a Pénztár oldali módosításokhoz. Itt lehet vezérelni, hogy az Irányítószám és Város, valamint a Telefonszám és Email mezők egymás mellé kerüljenek, illetve az Ország és Rendelés jegyzetek mezőket ki is lehet kapcsolni.
 
@@ -1794,9 +1794,9 @@ EGYÉB
 - CPS SDK frissítése a 3.0 verzióra.
 - Admin oldal módosítások a CPS SDK 3.0 alapján.
 
-= 17.0 =
+#### 17.0
 
-Kiadás dátuma: 2019-07-01
+**Kiadás dátuma: 2019-07-01**
 
 Ez a frissítés javítja a WPML bővítmény kompatibilitást és gyorsabb is a betöltés WPML használata mellett. A magyar formátum javítások logikája is megváltozott, mert most bizonyos mezők akkor módosulnak, ha magyar nyelven nézi a látogató, nem pedig akkor, ha Magyarország a számlázási cím. A Divi és Storefront sablonok esetén kisebb fordítással kapcsolatos javításokat is tartalmaz. Admin felületen megjelenik egy üdvözlés, ami lezárás után nem jelenik meg újra.
 
@@ -1813,44 +1813,44 @@ MÓDOSÍTÁSOK
 - Admin üdvözlés a bővítmény első bekapcsolása után vagy a mostani frissítés után.
 - A Divi és Storefront sablonok esetén javítja a kosár ikon melletti szöveget, hogy "elem" helyett "termék" jelenjen meg a megfelelő többesszám kezeléssel.
 
-= 16.0 =
+#### 16.0
 
 - FRISSÍTÉS - 2019-06-11
 - ÚJ - HuCommerce hírlevél feliratkozási lehetőség a HuCommerce admin oldaláról.
 
-= 15.1 =
+#### 15.1
 
 - FRISSÍTÉS - 2019-05-07
 - JAVÍTÁS - Új opció validálása.
 
-= 15.0 =
+#### 15.0
 
 - FRISSÍTÉS - 2019-05-07
 - ÚJ - Automatikus frissítés a Kosár oldalon. (Köszönet: Nagy Gábor - @xnagyg)
 - JAVÍTÁS - Irányítószámok kiegészítése a budapesti kerületekkel. (Köszönet: Nagy Gábor - @xnagyg)
 
-= 14.4 =
+#### 14.4
 
 - FRISSÍTÉS - 2019-05-02
 - JAVÍTÁS - Változó alapértelmezett értékének beállítása. (Köszönet: Szépe Viktor - @szepeviktor)
 
-= 14.3 =
+#### 14.3
 
 - FRISSÍTÉS - 2019-04-22
 - MÓDOSÍTÁS - Kisebb változtatások a leírásban.
 - Tesztelve a WooCommerce 3.6 verziójával.
 
-= 14.2 =
+#### 14.2
 
 - FRISSÍTÉS - 2019-04-15
 - JAVÍTÁS - Ingyenes szállítás értesítés link módosítása, hogy mindig az Üzlet oldalra mutasson.
 
-= 14.1 =
+#### 14.1
 
 - FRISSÍTÉS - 2019-04-08
 - JAVÍTÁS - Admin stílusok betöltése csak a szükséges oldalakon.
 
-= 14.0 =
+#### 14.0
 
 - FRISSÍTÉS - 2019-04-07
 - ÚJ - CPS SDK az egységes kinézethez és funkcionalitáshoz a többi bővítmény esetén is.
@@ -1858,53 +1858,53 @@ MÓDOSÍTÁSOK
 - MÓDOSÍTÁS - Leírásokban és a bővítmény jellemzőinél CherryPick Solutions megemlítése.
 - MÓDOSÍTÁS - Prémium verzió kezelésének előkészítése.
 
-= 13.0 =
+#### 13.0
 
 - FRISSÍTÉS - 2019-04-02
 - ÚJ - Adatkezelési tájékoztató elfogadásának rögzítése a regisztrációs folyamatban.
 - ÚJ - IP cím opcionális rögzítése a regisztrációs folyamatban.
 - ÚJ - Regisztrációs adatok megjelenítése mind az admin felületen, mind a fiókadatok oldalon.
 
-= 12.0 =
+#### 12.0
 
 - FRISSÍTÉS - 2019-03-11
 - ÚJ - Adatkezelési Tájékoztató kötelező elfogadtatása a regisztrációs űrlapnál.
 - FIGYELEM! Ha a Jogi megfelelés opció aktív, akkor a regisztrációs űrlapnál automatikusan megjelenik az Adatkezelési Tájékoztató elfogadtatása pipa. Kikapcsolásához törölni kell az alapértelmezett szöveget a mezőben.
 
-= 11.3 =
+#### 11.3
 
 - FRISSÍTÉS - 2019-03-06
 - JAVÍTÁS - Kosár oldalon a becslés címének javítása az Adószám megjelenítése esetén.
 
-= 11.2 =
+#### 11.2
 
 - FRISSÍTÉS - 2019-02-28
 - JAVÍTÁS - Admin felület nyelvi beállítása.
 
-= 11.1 =
+#### 11.1
 
 - FRISSÍTÉS - 2019-02-27
 - JAVÍTÁS - WPML ellenőrzése csak a front-end felületen.
 
-= 11.0 =
+#### 11.0
 
 - FRISSÍTÉS - 2019-02-17
 - ÚJ - Facebook támogatói csoport jelentkezési lehetőség az admin felületről.
 - ÚJ - Jogi szövegek elhelyezése a Pénztár oldalon a Megrendelés gomb fölött és/vagy alatt közvetlenül.
 - MÓDOSÍTÁS - Kisebb változtatások az admin felület megjelenésén.
 
-= 10.1 =
+#### 10.1
 
 - FRISSÍTÉS - 2019-02-17
 - JAVÍTÁS - WPML bővítmény ellenőrzése, hogy ne generáljon végzetes hibát.
 
-= 10.0 =
+#### 10.0
 
 - FRISSÍTÉS - 2019-02-10
 - ÚJ - Város automatikus kitöltése az irányítószám alapján.
 - JAVÍTÁS - Kisebb javítások az admin felület megjelenítésén.
 
-= 9.0 =
+#### 9.0
 
 - FRISSÍTÉS - 2019-02-09
 - ÚJ - Adószám bekérése vásárlásnál
@@ -1913,40 +1913,40 @@ MÓDOSÍTÁSOK
 - JAVÍTÁS - A magyar név sorrend kompatibilis a WPML bővítménnyel, így többnyelvű webáruháznál igazodik a választott nyelvhez.
 - MÓDOSÍTÁS - Kisebb változtatás az admin megjelenésén.
 
-= 8.0 =
+#### 8.0
 
 - FRISSÍTÉS - 2019-02-06
 - ÚJ - Ingyenes szállítás értesítés.
 - JAVÍTÁS - Mező értékek validálásának a javítása.
 
-= 7.1 =
+#### 7.1
 
 - FRISSÍTÉS - 2019-02-06
 - JAVÍTÁS - Vásárlás folytatása gomb class meghatározásainak módosítása a könnyebb formázás érdekében.
 
-= 7.0 =
+#### 7.0
 
 - FRISSÍTÉS - 2019-02-06
 - ÚJ - Belépés és regisztráció utáni átirányítás.
 - ÚJ - WPML és Polylang kompatibilitás a szöveges mezőkhöz.
 
-= 6.0 =
+#### 6.0
 
 - FRISSÍTÉS - 2019-02-06
 - ÚJ - Vásárlás folytatása gomb megjelenítése a Kosár és/vagy a Pénztár oldalakon. A gomb pozíciója is beállítható.
 
-= 5.2 =
+#### 5.2
 
 - FRISSÍTÉS - 2019-01-12
 - MÓDOSÍTÁS- Admin UIkit frissítése.
 
-= 5.1 =
+#### 5.1
 
 - FRISSÍTÉS - 2019-01-12
 - JAVÍTÁS - Divi sablon egyedi formázások a plusz/minusz gombokhoz.
 - JAVÍTÁS - Kisebb kód optimalizálás a plusz/minusz gombok CSS formázásánál.
 
-= 5.0 =
+#### 5.0
 
 - FRISSÍTÉS - 2019-01-11
 - ÚJ - Mennyiségi gombok a termékekhez.
@@ -1957,51 +1957,51 @@ MÓDOSÍTÁSOK
 - MÓDOSÍTÁS - A megye mező elrejtésének a kikapcsolása már nem működik az eddigi globális változó megadásával, ezt is az admin felületen lehet beállítani.
 - MÓDOSÍTÁS - Kisebb javítások a leírásban.
 
-= 4.5 =
+#### 4.5
 
 - Kis javítás a leírásban.
 - Tesztelve a WooCommerce 3.5 verziójával.
 - Tesztelve a WordPress 5.0 verziójával.
 
-= 4.4 =
+#### 4.4
 
 - FIX - A form-edit-account template fájl frissítése a legújabb verzióra.
 
-= 4.3 =
+#### 4.3
 
 - Autofocus beállítása a vezetéknévre. (Köszönet: @nagygabor) #1
 
-= 4.2 =
+#### 4.2
 
 - A keresztnév mező autofocus törlése. #1
 
-= 4.1 =
+#### 4.1
 
 - A szerződési feltételek szövegének a felülírása már nem kell, mert az új verzióban helyesen jelenik meg.
 - Tesztelve a WooCommerce 3.3 verziójával.
 
-= 4.0 =
+#### 4.0
 
 - A bővítmény most már felül tudja írni a WooCommerce template fájlokat.
 - Fiók adatoknál is jól jelenik meg a nevek sorrendje, ha a számlázási cím Magyarország.
 - Szállítási és számlázási címeknél is helyes a név megjelenítése magyarországi cím esetén.
 - Kisebb kód javítások.
 
-= 3.0 =
+#### 3.0
 
 - A WooCommerce 3.2 verziónál a szerződési feltételek elfogadása szöveg fordítása nem jelenik meg, erre van egy javítás, amíg nem lesz elérhető a hivatalos fordítás javított változata.
 
-= 2.0 =
+#### 2.0
 
 - Az Irányítószám és Város mezők nagy monitoron egymás mellé kerültek és az Ország mező alatt jelennek meg közvetlenül, hogy logikusabb legyen a megjelenési sorrend.
 - A Megye mező elrejtését most már WooCommerce filter kezeli. (Köszönet: Viszt Péter - @passatgt)
 - További címkék a bővítményhez a jobb keresési találatok miatt.
 
-= 1.1 =
+#### 1.1
 
 - Kód elírás javítása.
 - Leírások hozzáadása a függvényekhez.
 
-= 1.0.0 =
+#### 1.0.0
 
 - Első kiadás.
