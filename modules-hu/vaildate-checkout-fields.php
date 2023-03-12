@@ -24,7 +24,7 @@ add_action( 'woocommerce_checkout_process', function() {
 		$billing_address_1 = sanitize_text_field( $_POST['billing_address_1'] );
 		$billing_phone = sanitize_text_field( $_POST['billing_phone'] );
 		$shipping_city = sanitize_text_field( $_POST['shipping_city'] );
-		$ship_to_different_address = sanitize_text_field( $_POST['ship_to_different_address'] );
+		$ship_to_different_address = !empty( $_POST['ship_to_different_address'] ) ? sanitize_text_field( $_POST['ship_to_different_address'] ) : 0;
 		$shipping_address_1 = sanitize_text_field( $_POST['shipping_address_1'] );
 
 		$billing_tax_number_pattern_short = '/^\d{11}$/';
