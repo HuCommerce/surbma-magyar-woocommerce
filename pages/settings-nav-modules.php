@@ -194,7 +194,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Masking these fields: Billing VAT number, Billing Postcode, Billing Phone, Shipping Postcode', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/mezok-formatumanak-ellenorzese-maszkolas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/mezok-formatumanak-ellenorzese-maszkolas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -216,7 +216,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Checking these fields: Billing VAT number, Billing Postcode, Billing Phone, Shipping Postcode', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/mezok-ertekenek-ellenorzese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/mezok-ertekenek-ellenorzese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -240,7 +240,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'A notification on the Cart page to let customer know, how much total purchase is missing to get free shipping.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/ingyenes-szallitas-ertesites/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/ingyenes-szallitas-ertesites/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -262,7 +262,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'It will display buttons, that can empty the entire Cart with one click. You can also add a custom link to your navigation with a special parameter, so it is possible to have an Empty Cart link in your menu. Read more about this option in our Documentation.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/kosar-uritese-gomb/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/kosar-uritese-gomb/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -302,7 +302,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Saves all Product price changes and can display the lowest price from the previous term. This is a Hungarian legal requirement to protect customers rights.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/termek-ar-tortenet/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/termek-ar-tortenet/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Disclaimer', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'HuCommerce modules are tools to comply with local and/or international rules and laws, but it is the webshop owner\'s duty to make sure to comply with all rules and laws! Developers and the owners of HuCommerce take no responsibility for any legal compliance. However our mission is to provide all necessary tools for these challenges.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -325,7 +325,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Set a default prefix or suffix for your prices. You can use this feature to give a unit of measure for your product prices or give a general information, that is specific for your webshop and your products. With the above settings you can give your default, global prefix and suffix, but you can customize these fields per product also. Even, you can remove it, when you edit your products.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/termek-ar-kiegeszitesek/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/termek-ar-kiegeszitesek/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -373,7 +373,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Custom Terms & Conditions and Privacy Policy checkboxes on Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/jogi-megfeleles/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/jogi-megfeleles/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Disclaimer', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'HuCommerce modules are tools to comply with local and/or international rules and laws, but it is the webshop owner\'s duty to make sure to comply with all rules and laws! Developers and the owners of HuCommerce take no responsibility for any legal compliance. However our mission is to provide all necessary tools for these challenges.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -429,7 +429,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Use these fields for your global informations and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles. Local data will be semantic for search engines.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/globalis-adatok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/globalis-adatok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 	</ul>
@@ -446,7 +446,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Fixes the name formats in Hungarian. Changes the order of Last name and First name.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/magyar-formatum-javitasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/magyar-formatum-javitasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<?php // * HUCOMMERCE END ?>
@@ -492,7 +492,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Additional Tax field for Company details at Checkout.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/adoszam-megjelenitese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/adoszam-megjelenitese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Disclaimer', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'HuCommerce modules are tools to comply with local and/or international rules and laws, but it is the webshop owner\'s duty to make sure to comply with all rules and laws! Developers and the owners of HuCommerce take no responsibility for any legal compliance. However our mission is to provide all necessary tools for these challenges.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -507,7 +507,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Temporary fixes for Hungarian translations, till the official translation doesn\’t include or missing some strings.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/forditasi-hianyossagok-javitasa/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/forditasi-hianyossagok-javitasa/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -518,7 +518,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Using County for Hungarian addresses is very uncommon in Hungary.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/megye-mezo-elrejtese-magyar-cim-eseten/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/megye-mezo-elrejtese-magyar-cim-eseten/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -529,7 +529,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'On the Checkout page the City field be automatically filled, when Postcode is entered by the customer.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/varos-automatikus-kitoltese-az-iranyitoszam-alapjan/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/varos-automatikus-kitoltese-az-iranyitoszam-alapjan/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<?php // * HUCOMMERCE END ?>
@@ -555,7 +555,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Extra fields and other customizations for Products.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/termek-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/termek-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -578,7 +578,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Extra fields and other customizations on the Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/penztar-oldal-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/penztar-oldal-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -589,7 +589,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Shows plus/minus quantity buttons for products.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/plusz-minusz-mennyisegi-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/plusz-minusz-mennyisegi-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -600,7 +600,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'It will automatically update the cart, when customer changes the quantity on the Cart page.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/kosar-automatikus-frissitese-darabszam-modositas-utan/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/kosar-automatikus-frissitese-darabszam-modositas-utan/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -618,7 +618,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'A Continue shopping button on Cart and/or Checkout pages, that will bring customer to Shop page.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/vasarlas-folytatasa-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/vasarlas-folytatasa-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -635,7 +635,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Set custom landing pages after login and/or registration.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/belepes-es-regisztracio-utani-atiranyitas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/belepes-es-regisztracio-utani-atiranyitas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -655,7 +655,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Useful settings for the Coupon field on the Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/kupon-mezo-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/kupon-mezo-modositasok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -666,7 +666,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'It will redirect the Cart page to Checkout page, so visitors can finish the purchase faster.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/kosar-atiranyitasa-a-penztar-oldalra/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/kosar-atiranyitasa-a-penztar-oldalra/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -677,7 +677,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'It will allow only one product in the cart. If cart has a product already, it will be replaced by the new product.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/egy-termek-vasarlasonkent/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/egy-termek-vasarlasonkent/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -710,7 +710,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Customize the Add to cart buttons for your webhop.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/egyedi-kosarba-teszem-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/egyedi-kosarba-teszem-gombok/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -727,7 +727,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'It will hide all shipping methods, except free shipping, local pickup and other pickup points, when free shipping is available for customers.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/szallitasi-modok-elrejtese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/szallitasi-modok-elrejtese/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 		<li>
@@ -758,7 +758,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module description', 'surbma-magyar-woocommerce' ); ?></h5>
 				<p><?php esc_html_e( 'Send emails from a 3rd party SMTP service, instead of using webserver\'s mail() function.', 'surbma-magyar-woocommerce' ); ?></p>
-				<p><a href="https://www.hucommerce.hu/dokumentum/smtp-szolgaltatas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
+				<p><a href="https://www.hucommerce.hu/modul/smtp-szolgaltatas/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span uk-icon="icon: sign-out"></span></a></p>
 			</div>
 		</li>
 	</ul>
