@@ -25,7 +25,7 @@ if ( $product ) {
 	// Remove query parameter from url
 	$hc_manual_request = isset( $_GET['hc-product_price_history'] ) ? $_GET['hc-product_price_history'] : false;
 	if ( $hc_manual_request ) {
-		if ( 'delete' == $hc_manual_request ) {
+		if ( current_user_can( 'manage_options' ) && 'delete' == $hc_manual_request ) {
 			delete_post_meta( $product_id, '_hc_product_price_history' );
 		}
 
@@ -185,7 +185,7 @@ if ( $product ) {
 									<th class="uk-text-center">Dátum</th>
 									<th class="uk-text-center">Normál ár</th>
 									<th class="uk-text-center">Aktív ár</th>
-									<th class="uk-text-center">Aznapi kedvezmény mértéke</th>
+									<th class="uk-text-center">Aktuális kedvezmény</th>
 								</tr>
 							</thead>
 							<tbody>
