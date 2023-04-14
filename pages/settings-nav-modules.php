@@ -19,6 +19,7 @@ global $smtpport_options;
 global $smtpsecure_options;
 global $emptycartbutton_cartpage_options;
 global $emptycartbutton_checkoutpage_options;
+global $productpricehistory_statisticslinkdisplay_options;
 
 // Translation fixes
 __( 'Fixes for Hungarian language', 'surbma-magyar-woocommerce' );
@@ -47,10 +48,14 @@ __( 'Product price history', 'surbma-magyar-woocommerce' );
 __( 'Show lowest price on Product pages', 'surbma-magyar-woocommerce' );
 __( 'It will show the lowest price from the product price history log automatically.', 'surbma-magyar-woocommerce' );
 __( 'Text before the lowest price', 'surbma-magyar-woocommerce' );
+__( 'Text when actual sale price is the only sale price recently', 'surbma-magyar-woocommerce' );
+__( 'Actual sale price is our lowest price recently', 'surbma-magyar-woocommerce' );
 __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
 __( 'Show the calculated discount on Product pages', 'surbma-magyar-woocommerce' );
 __( 'It will show the discount, that is calculated from the lowest price automatically.', 'surbma-magyar-woocommerce' );
 __( 'Text before the discount', 'surbma-magyar-woocommerce' );
+__( 'Text before the discount, when actual sale price is the only sale price recently', 'surbma-magyar-woocommerce' );
+__( 'Actual discount', 'surbma-magyar-woocommerce' );
 __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
 __( 'Product customizations', 'surbma-magyar-woocommerce' );
 __( 'Product subtitle', 'surbma-magyar-woocommerce' );
@@ -149,6 +154,7 @@ __( 'Username to use for SMTP authentication', 'surbma-magyar-woocommerce' );
 __( 'Password to use for SMTP authentication', 'surbma-magyar-woocommerce' );
 __( 'Show the link for advanced statistics on Product pages', 'surbma-magyar-woocommerce' );
 __( 'It will show a link also on the Product pages, where visitors can see a more detailed Product price history for the actual Product.', 'surbma-magyar-woocommerce' );
+__( 'It will always show the advanced statistics link, even if there is no actual sale.', 'surbma-magyar-woocommerce' );
 __( 'Text for the advanced statistics link', 'surbma-magyar-woocommerce' );
 __( 'Empty Cart button', 'surbma-magyar-woocommerce' );
 __( 'Show Empty Cart button on Cart page', 'surbma-magyar-woocommerce' );
@@ -280,8 +286,10 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 				<ul class="cps-form-fields uk-list uk-list-divider">
 					<?php cps_hc_wcgems_form_field_checkbox( 'Show lowest price on Product pages', 'productpricehistory-showlowestprice', 'It will show the lowest price from the product price history log automatically.', true ); ?>
 					<?php cps_hc_wcgems_form_field_textarea( 'Text before the lowest price', 'productpricehistory-lowestpricetext', 'Our lowest price from previous term' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'Text when actual sale price is the only sale price recently', 'productpricehistory-nolowestpricetext', 'Actual sale price is our lowest price recently' ); ?>
 					<?php cps_hc_wcgems_form_field_checkbox( 'Show the calculated discount on Product pages', 'productpricehistory-showdiscount', 'It will show the discount, that is calculated from the lowest price automatically.', true ); ?>
 					<?php cps_hc_wcgems_form_field_textarea( 'Text before the discount', 'productpricehistory-discounttext', 'Current discount based on the lowest price' ); ?>
+					<?php cps_hc_wcgems_form_field_textarea( 'Text before the discount, when actual sale price is the only sale price recently', 'productpricehistory-nolowestpricediscounttext', 'Actual discount', 'Show actual discount based on the regular price' ); ?>
 
 					<li>
 						<div class="uk-alert-primary cps-alert" uk-alert>
@@ -289,7 +297,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 						</div>
 					</li>
 
-					<?php cps_hc_wcgems_form_field_checkbox( 'Show the link for advanced statistics on Product pages', 'productpricehistory-showstatisticslink', 'It will show a link also on the Product pages, where visitors can see a more detailed Product price history for the actual Product.', true ); ?>
+					<?php cps_hc_wcgems_form_field_select( 'Show the link for advanced statistics on Product pages', 'productpricehistory-statisticslinkdisplay', $productpricehistory_statisticslinkdisplay_options, 'show', 'It will show a link also on the Product pages, where visitors can see a more detailed Product price history for the actual Product.', true ); ?>
 					<?php cps_hc_wcgems_form_field_text( 'Text for the advanced statistics link', 'productpricehistory-statisticslinktext', 'Advanced statistics', false, true ); ?>
 
 					<li>
@@ -350,7 +358,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 					<li><strong><?php esc_html_e( 'Checkout settings', 'surbma-magyar-woocommerce' ); ?></strong></li>
 
-					<?php cps_hc_wcgems_form_field_select( 'Legal confirmation checkboxes position on Checkout page', 'legalconfirmationsposition', $legalconfirmationsposition_options, 'revieworderbeforesubmit' ); ?>
+					<?php cps_hc_wcgems_form_field_select( 'Legal confirmation checkboxes position on Checkout page', 'legalconfirmationsposition', $legalconfirmationsposition_options, 'woocommerce_review_order_before_submit' ); ?>
 					<?php cps_hc_wcgems_form_field_text( 'Section title on Checkout page', 'legalcheckouttitle', 'Legal confirmations', 'Title above the checkbox. If empty, then no title will be displayed.' ); ?>
 					<?php cps_hc_wcgems_form_field_textarea( 'Terms of Service checkbox text on Checkout page', 'accepttos', 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'If empty, then this checkbox will not be displayed.' ); ?>
 					<?php cps_hc_wcgems_form_field_textarea( 'Privacy Policy checkbox text on Checkout page', 'acceptpp', 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'If empty, then this checkbox will not be displayed.' ); ?>

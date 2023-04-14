@@ -12,6 +12,7 @@ global $smtpport_options;
 global $smtpsecure_options;
 global $emptycartbutton_cartpage_options;
 global $emptycartbutton_checkoutpage_options;
+global $productpricehistory_statisticslinkdisplay_options;
 
 $couponfieldposition_options = array(
 	'beforecheckoutform' => array(
@@ -153,5 +154,20 @@ $emptycartbutton_checkoutpage_options = array(
 	'woocommerce_after_checkout_form' => array(
 		'value' => 'woocommerce_after_checkout_form',
 		'label' => __( 'After Checkout form (with text)', 'surbma-magyar-woocommerce' )
+	)
+);
+
+$productpricehistory_statisticslinkdisplay_options = array(
+	'show' => array(
+		'value' => 'show',
+		'label' => __( 'Show advanced statistics, when Product is on Sale', 'surbma-magyar-woocommerce' )
+	),
+	'always' => array(
+		'value' => 'always',
+		'label' => __( 'Always show advanced statistics', 'surbma-magyar-woocommerce' )
+	),
+	'hide' => array(
+		'value' => 'hide',
+		'label' => __( 'Hide advanced statistics', 'surbma-magyar-woocommerce' )
 	)
 );

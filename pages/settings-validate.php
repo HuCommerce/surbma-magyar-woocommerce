@@ -17,6 +17,7 @@ function surbma_hc_fields_validate( $input ) {
 	global $smtpsecure_options;
 	global $emptycartbutton_cartpage_options;
 	global $emptycartbutton_checkoutpage_options;
+	global $productpricehistory_statisticslinkdisplay_options;
 
 	$options = get_option( 'surbma_hc_fields' );
 
@@ -42,11 +43,17 @@ function surbma_hc_fields_validate( $input ) {
 	$input['validateshippingaddressfield'] = isset( $input['validateshippingaddressfield'] ) && 1 == $input['validateshippingaddressfield'] ? 1 : 0;
 	$input['productpricehistory-showlowestprice'] = isset( $input['productpricehistory-showlowestprice'] ) && 1 == $input['productpricehistory-showlowestprice'] ? 1 : 0;
 	$input['productpricehistory-showdiscount'] = isset( $input['productpricehistory-showdiscount'] ) && 1 == $input['productpricehistory-showdiscount'] ? 1 : 0;
-	$input['productpricehistory-showstatisticslink'] = isset( $input['productpricehistory-showstatisticslink'] ) && 1 == $input['productpricehistory-showstatisticslink'] ? 1 : 0;
 
 	// Say our text/textarea option must be safe text with the allowed tags for posts
 	$input['productpricehistory-lowestpricetext'] = wp_filter_post_kses( $input['productpricehistory-lowestpricetext'] );
+	$input['productpricehistory-nolowestpricetext'] = wp_filter_post_kses( $input['productpricehistory-nolowestpricetext'] );
 	$input['productpricehistory-discounttext'] = wp_filter_post_kses( $input['productpricehistory-discounttext'] );
+	$input['productpricehistory-nolowestpricediscounttext'] = wp_filter_post_kses( $input['productpricehistory-nolowestpricediscounttext'] );
+
+	// Our select option must actually be in our array of select options
+	if ( !array_key_exists( $input['productpricehistory-statisticslinkdisplay'], $productpricehistory_statisticslinkdisplay_options ) ) {
+		$input['productpricehistory-statisticslinkdisplay'] = 'show';
+	}
 
 	// * HUCOMMERCE END
 
@@ -226,9 +233,11 @@ function surbma_hc_fields_validate( $input ) {
 		// Product price history
 		$input['productpricehistory-showlowestprice'] = isset( $options['productpricehistory-showlowestprice'] ) ? $options['productpricehistory-showlowestprice'] : 0;
 		$input['productpricehistory-lowestpricetext'] = isset( $options['productpricehistory-lowestpricetext'] ) ? $options['productpricehistory-lowestpricetext'] : __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
+		$input['productpricehistory-nolowestpricetext'] = isset( $options['productpricehistory-nolowestpricetext'] ) ? $options['productpricehistory-nolowestpricetext'] : __( 'Actual sale price is our lowest price recently', 'surbma-magyar-woocommerce' );
 		$input['productpricehistory-showdiscount'] = isset( $options['productpricehistory-showdiscount'] ) ? $options['productpricehistory-showdiscount'] : 0;
 		$input['productpricehistory-discounttext'] = isset( $options['productpricehistory-discounttext'] ) ? $options['productpricehistory-discounttext'] : __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
-		$input['productpricehistory-showstatisticslink'] = isset( $options['productpricehistory-showstatisticslink'] ) ? $options['productpricehistory-showstatisticslink'] : 0;
+		$input['productpricehistory-nolowestpricediscounttext'] = isset( $options['productpricehistory-nolowestpricediscounttext'] ) ? $options['productpricehistory-nolowestpricediscounttext'] : __( 'Actual discount', 'surbma-magyar-woocommerce' );
+		$input['productpricehistory-statisticslinkdisplay'] = isset( $options['productpricehistory-statisticslinkdisplay'] ) ? $options['productpricehistory-statisticslinkdisplay'] : 'show';
 		$input['productpricehistory-statisticslinktext'] = isset( $options['productpricehistory-statisticslinktext'] ) ? $options['productpricehistory-statisticslinktext'] : __( 'Advanced statistics', 'surbma-magyar-woocommerce' );
 
 		// Product price additions
@@ -240,6 +249,7 @@ function surbma_hc_fields_validate( $input ) {
 		// Legal compliance
 		$input['regip'] = isset( $options['regip'] ) ? $options['regip'] : 0;
 		$input['regacceptpp'] = isset( $options['regacceptpp'] ) ? $options['regacceptpp'] : __( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
+		// FIX for deprecated value (revieworderbeforesubmit) if used on old version of the plugin
 		$input['legalconfirmationsposition'] = isset( $options['legalconfirmationsposition'] ) && 'revieworderbeforesubmit' != $options['legalconfirmationsposition'] ? $options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
 		$input['legalcheckouttitle'] = isset( $options['legalcheckouttitle'] ) ? $options['legalcheckouttitle'] : __( 'Legal confirmations', 'surbma-magyar-woocommerce' );
 		$input['accepttos'] = isset( $options['accepttos'] ) ? $options['accepttos'] : __( 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'surbma-magyar-woocommerce' );

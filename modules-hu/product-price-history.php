@@ -8,7 +8,7 @@ function surbma_hc_update_product_price_history( $product_id ) {
 	$product = wc_get_product( $product_id );
 
 	// Stop if we don't process a product
-	if ( ! $product ) {
+	if ( !$product ) {
 		return;
 	}
 
@@ -81,6 +81,22 @@ add_action( 'woocommerce_update_product', function( $product_id ) {
 }, 10, 1 );
 */
 
+// Trigger surbma_hc_update_product_price_history when a product is edited. This is only needed, if _hc_product_price_history is still not saved.
+add_action( 'current_screen', function( $current_screen ) {
+	if ( 'product' != $current_screen->post_type && 'post' === $current_screen->base ) {
+		return;
+	}
+
+	// We are on the edit product page, right? Let's get the product ID from the URL.
+	$post_id = ( isset( $_GET['post'] ) ) ? $_GET['post'] : false;
+
+	if ( !$post_id || !is_int( $post_id ) ) {
+		return;
+	}
+
+	surbma_hc_update_product_price_history( $post_id );
+}, 10, 3 );
+
 // Trigger surbma_hc_update_product_price_history when a product is updated or created
 add_action( 'wp_insert_post', function( $post_id, $post, $update ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -145,7 +161,7 @@ add_action( 'woocommerce_product_options_general_product_data', function() {
 	}
 
 	// This function has to run only for simple & external products
-	if ( ! $product->is_type( 'simple' ) && ! $product->is_type( 'external' ) ) {
+	if ( !$product->is_type( 'simple' ) && !$product->is_type( 'external' ) ) {
 		return;
 	}
 
@@ -179,10 +195,36 @@ add_action( 'woocommerce_product_options_general_product_data', function() {
 		'desc_tip' => true
 	) );
 
+	// Select to set advanced statistics display
+	woocommerce_wp_select(array(
+		'id' => '_hc_productpricehistory_statisticslinkdisplay',
+		'label' => __( 'Advanced statistics display settings', 'surbma-magyar-woocommerce' ),
+	    'options' => array(
+	        'global' => __( 'Use the global setting', 'surbma-magyar-woocommerce' ),
+	        'show' => __( 'Show advanced statistics, when Product is on Sale', 'surbma-magyar-woocommerce' ),
+	        'always' => __( 'Always show advanced statistics', 'surbma-magyar-woocommerce' ),
+	        'hide' => __( 'Hide advanced statistics', 'surbma-magyar-woocommerce' )
+	    ),
+		'wrapper_class' => 'form-field-wide',
+		'description' => __( 'With this option, you can overwrite the global setting for advanced statistics display.', 'surbma-magyar-woocommerce' ),
+		'desc_tip' => true
+	));
+
 	echo '</div>';
 } );
 
-// Add custom fields for the Variations
+// Save meta for single products
+add_action( 'woocommerce_process_product_meta', function( $post_id ) {
+	$lowestpricetextValue = isset( $_POST['_hc_product_lowest_price_text'] ) ? $_POST['_hc_product_lowest_price_text'] : '';
+	$hidelowestpricetextValue = isset( $_POST['_hc_product_hide_lowest_price_text'] ) ? $_POST['_hc_product_hide_lowest_price_text'] : '';
+	$statisticslinkdisplayValue = isset( $_POST['_hc_productpricehistory_statisticslinkdisplay'] ) ? $_POST['_hc_productpricehistory_statisticslinkdisplay'] : 'global';
+
+	update_post_meta( $post_id, '_hc_product_lowest_price_text', esc_attr( $lowestpricetextValue ) );
+	update_post_meta( $post_id, '_hc_product_hide_lowest_price_text', esc_attr( $hidelowestpricetextValue ) );
+	update_post_meta( $post_id, '_hc_productpricehistory_statisticslinkdisplay', esc_attr( $statisticslinkdisplayValue ) );
+} );
+
+// Add custom fields for variations
 add_action( 'woocommerce_variation_options_pricing', function( $loop, $variation_data, $variation ) {
 	// Show a link to the product price history page
 	$product_id = ( isset( $_GET['post'] ) ) ? $_GET['post'] : false;
@@ -214,32 +256,41 @@ add_action( 'woocommerce_variation_options_pricing', function( $loop, $variation
 		'desc_tip' => true,
 		'value' => get_post_meta( $variation->ID, '_hc_product_hide_lowest_price_text', true )
 	) );
+
+	// Select to set advanced statistics display
+	woocommerce_wp_select(array(
+		'id' => '_hc_productpricehistory_statisticslinkdisplay[' . $loop . ']',
+		'label' => __( 'Advanced statistics display settings', 'surbma-magyar-woocommerce' ),
+	    'options' => array(
+	        'global' => __( 'Use the global setting', 'surbma-magyar-woocommerce' ),
+	        'show' => __( 'Show advanced statistics, when Product is on Sale', 'surbma-magyar-woocommerce' ),
+	        'always' => __( 'Always show advanced statistics', 'surbma-magyar-woocommerce' ),
+	        'hide' => __( 'Hide advanced statistics', 'surbma-magyar-woocommerce' )
+	    ),
+		'wrapper_class' => 'form-field-wide',
+		'description' => __( 'With this option, you can overwrite the global setting for advanced statistics display.', 'surbma-magyar-woocommerce' ),
+		'desc_tip' => true,
+		'value' => get_post_meta( $variation->ID, '_hc_productpricehistory_statisticslinkdisplay', true )
+	));
 }, 10, 3 );
 
 // Save meta and update product price history for variations
 add_action( 'woocommerce_save_product_variation', function( $variation_id, $i ) {
 	$lowestpricetextValue = isset( $_POST['_hc_product_lowest_price_text'][$i] ) ? $_POST['_hc_product_lowest_price_text'][$i] : '';
 	$hidelowestpricetextValue = isset( $_POST['_hc_product_hide_lowest_price_text'][$i] ) ? $_POST['_hc_product_hide_lowest_price_text'][$i] : '';
+	$statisticslinkdisplayValue = isset( $_POST['_hc_productpricehistory_statisticslinkdisplay'][$i] ) ? $_POST['_hc_productpricehistory_statisticslinkdisplay'][$i] : 'global';
 
 	update_post_meta( $variation_id, '_hc_product_lowest_price_text', esc_attr( $lowestpricetextValue ) );
 	update_post_meta( $variation_id, '_hc_product_hide_lowest_price_text', esc_attr( $hidelowestpricetextValue ) );
+	update_post_meta( $variation_id, '_hc_productpricehistory_statisticslinkdisplay', esc_attr( $statisticslinkdisplayValue ) );
 
 	surbma_hc_update_product_price_history( $variation_id );
 }, 10, 2 );
 
-// Save meta for single products
-add_action( 'woocommerce_process_product_meta', function( $post_id ) {
-	$lowestpricetextValue = isset( $_POST['_hc_product_lowest_price_text'] ) ? $_POST['_hc_product_lowest_price_text'] : '';
-	$hidelowestpricetextValue = isset( $_POST['_hc_product_hide_lowest_price_text'] ) ? $_POST['_hc_product_hide_lowest_price_text'] : '';
-
-	update_post_meta( $post_id, '_hc_product_lowest_price_text', esc_attr( $lowestpricetextValue ) );
-	update_post_meta( $post_id, '_hc_product_hide_lowest_price_text', esc_attr( $hidelowestpricetextValue ) );
-} );
-
 // Product price history display
 add_shortcode( 'hc-termekartortenet', function( $atts ) {
 	// Abort function if HuCommerce Pro is not active
-	if ( ! SURBMA_HC_PREMIUM ) {
+	if ( !SURBMA_HC_PREMIUM ) {
 		return;
 	}
 
@@ -250,45 +301,49 @@ add_shortcode( 'hc-termekartortenet', function( $atts ) {
 	$options = get_option( 'surbma_hc_fields' );
 	$productpricehistory_showlowestpriceValue = isset( $options['productpricehistory-showlowestprice'] ) && 1 == $options['productpricehistory-showlowestprice'] ? 1 : 0;
 	$productpricehistory_lowestpricetextValue = isset( $options['productpricehistory-lowestpricetext'] ) && $options['productpricehistory-lowestpricetext'] ? $options['productpricehistory-lowestpricetext'] : __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
+	$productpricehistory_nolowestpricetextValue = isset( $options['productpricehistory-nolowestpricetext'] ) && $options['productpricehistory-nolowestpricetext'] ? $options['productpricehistory-nolowestpricetext'] : false;
 	$productpricehistory_showdiscountpriceValue = isset( $options['productpricehistory-showdiscount'] ) && 1 == $options['productpricehistory-showdiscount'] ? 1 : 0;
 	$productpricehistory_discounttextValue = isset( $options['productpricehistory-discounttext'] ) && $options['productpricehistory-discounttext'] ? $options['productpricehistory-discounttext'] : __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
-	$productpricehistory_showstatisticslinkValue = isset( $options['productpricehistory-showstatisticslink'] ) && 1 == $options['productpricehistory-showstatisticslink'] ? 1 : 0;
+	$productpricehistory_nolowestpricediscounttextValue = isset( $options['productpricehistory-nolowestpricediscounttext'] ) && $options['productpricehistory-nolowestpricediscounttext'] ? $options['productpricehistory-nolowestpricediscounttext'] : __( 'Actual discount', 'surbma-magyar-woocommerce' );
+	$productpricehistory_statisticslinkdisplayValue = isset( $options['productpricehistory-statisticslinkdisplay'] ) ? $options['productpricehistory-statisticslinkdisplay'] : 'show';
 	$productpricehistory_statisticslinktextValue = isset( $options['productpricehistory-statisticslinktext'] ) && $options['productpricehistory-statisticslinktext'] ? $options['productpricehistory-statisticslinktext'] : __( 'Advanced statistics', 'surbma-magyar-woocommerce' );
 
-	global $product;
-
-	// Stop if neither $product object nor $product_id are available
-	if ( !$product && !$product_id ) {
-		return;
-	}
-
-	// If no $product object, let's get it by $product_id
-	if ( !$product ) {
+	// If we have $product_id, let's get the $product object
+	if ( $product_id ) {
 		$product = wc_get_product( $product_id );
 	}
 
-	// If no $product_id, let's get it from $product object
+	// If no $product_id, let's get it from global $product object
 	if ( !$product_id ) {
+		global $product;
 		$product_id = $product->get_id();
 	}
 
+	// Stop if $product_id is still not available
+	if ( !$product_id ) {
+		return;
+	}
+
+	// Overrides by individual product settings
 	$product_lowestpricetext = get_post_meta( $product_id, '_hc_product_lowest_price_text' ) ? get_post_meta( $product_id, '_hc_product_lowest_price_text', true ) : false;
 	$product_hidelowestpricetext = get_post_meta( $product_id, '_hc_product_hide_lowest_price_text' ) ? get_post_meta( $product_id, '_hc_product_hide_lowest_price_text', true ) : false;
+	$productpricehistory_statisticslinkdisplayValue = get_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay' ) && 'global' != get_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay', true ) ? get_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay', true ) : $productpricehistory_statisticslinkdisplayValue;
 	$product_regular_price = intval( $product->get_regular_price() );
 	$product_price = intval( $product->get_price() );
+	$sale = $product_regular_price == $product_price ? false : true;
 
 	// Stop if not enabled by the settings
 	if ( !$productpricehistory_showlowestpriceValue && !$productpricehistory_showdiscountpriceValue && !$product_lowestpricetext ) {
 		return;
 	}
 
-	// Stop if there is no active sale
-	if ( $product_regular_price == $product_price ) {
+	// Stop if there is no active sale & advanced statistcs link is not set to "Always show advanced statistics"
+	if ( !$sale && ( 'always' != $productpricehistory_statisticslinkdisplayValue ) ) {
 		return;
 	}
 
-	// Stop if this is hidden by the product's settings
-	if ( $product_hidelowestpricetext ) {
+	// Stop if both settings are hidden by the product's settings: lowest price text & advanced statistics
+	if ( $product_hidelowestpricetext && 'hide' == $productpricehistory_statisticslinkdisplayValue ) {
 		return;
 	}
 
@@ -322,22 +377,29 @@ add_shortcode( 'hc-termekartortenet', function( $atts ) {
 
 	// If we have the product price and the lowest price, get the discount
 	$discount = $product_price && $lowest_price ? number_format( round( ( ( 1 - ( $product_price / $lowest_price ) ) * 100 ), 2 ), 0 ) : false;
+	$actual_discount = number_format( round( ( ( 1 - ( $product_price / $product_regular_price ) ) * 100 ), 2 ), 0 );
 
 	ob_start();
 
 		echo '<div id="product-' . $product_id . '" class="hc-product-price-history product_meta">';
 		// Custom text will overwrite the module's settings
-		if ( $product_lowestpricetext ) {
-			echo wp_kses_post( $product_lowestpricetext );
-		} else {
-			if ( $productpricehistory_showlowestpriceValue && $lowest_price ) {
-				echo '<div class="hc-product-price-history-price">' . wp_kses_post( $productpricehistory_lowestpricetextValue ) . ': <span>' . $lowest_price . ' ' . $curreny_symbol . '</span></div>';
-			}
-			if ( $productpricehistory_showdiscountpriceValue && $discount && ( 0 <= $discount ) ) {
-				echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_discounttextValue ) . ': <span>' . $discount . '%</span></div>';
+		if ( $sale && !$product_hidelowestpricetext ) {
+			if ( $product_lowestpricetext ) {
+				echo wp_kses_post( $product_lowestpricetext );
+			} else {
+				if ( $productpricehistory_showlowestpriceValue && $lowest_price ) {
+					echo '<div class="hc-product-price-history-price">' . wp_kses_post( $productpricehistory_lowestpricetextValue ) . ': <span>' . $lowest_price . ' ' . $curreny_symbol . '</span></div>';
+				} elseif ( $productpricehistory_showlowestpriceValue && $productpricehistory_nolowestpricetextValue ) {
+					echo '<div class="hc-product-price-history-no-lowest">' . wp_kses_post( $productpricehistory_nolowestpricetextValue ) . '</div>';
+				}
+				if ( $productpricehistory_showdiscountpriceValue && $discount && ( 0 <= $discount ) ) {
+					echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_discounttextValue ) . ': <span>' . $discount . '%</span></div>';
+				} elseif ( $productpricehistory_showdiscountpriceValue && !$discount ) {
+					echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_nolowestpricediscounttextValue ) . ': <span>' . $actual_discount . '%</span></div>';
+				}
 			}
 		}
-		if ( $productpricehistory_showstatisticslinkValue ) {
+		if ( 'hide' != $productpricehistory_statisticslinkdisplayValue ) {
 			echo '<div class="hc-product-price-history-statistics"><a href="' . SURBMA_HC_PLUGIN_URL . '/modules-hu/product-price-history-display.php?product_id=' . $product_id . '" target="_blank">' . esc_html( $productpricehistory_statisticslinktextValue ) . '</a></div>';
 		}
 		echo '</div>';
@@ -348,24 +410,24 @@ add_shortcode( 'hc-termekartortenet', function( $atts ) {
 	return $output_string;
 } );
 
-// Show the notification under the Product's price
+// Show the notification under the Product's price for simple products
 add_action( 'woocommerce_single_product_summary', function() {
 	global $product;
 
 	// This function has to run only for simple & external products
-	if ( ! $product->is_type( 'simple' ) && ! $product->is_type( 'external' ) ) {
+	if ( !$product->is_type( 'simple' ) && !$product->is_type( 'external' ) ) {
 		return;
 	}
 
 	echo do_shortcode( '[hc-termekartortenet]' );
 }, 11 );
 
-// Show the notification under the Product's price
+// Show the notification under the Product's price for variation products
 add_action( 'woocommerce_single_variation', function() {
 	global $product;
 
-	// This function has to run only for simple products
-	if ( ! $product->is_type( 'variable' ) ) {
+	// This function has to run only for variable products
+	if ( !$product->is_type( 'variable' ) ) {
 		return;
 	}
 
