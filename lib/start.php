@@ -39,6 +39,8 @@ $module_translationsValue = isset( $options['translations'] ) ? $options['transl
 
 // New Pro HU modules
 $module_productpricehistoryValue = isset( $options['module-productpricehistory'] ) ? $options['module-productpricehistory'] : 0;
+// Force Product Price History module to load to save data for everyone
+$module_productpricehistoryValue = 1;
 
 // Legacy Pro HU modules
 $module_maskcheckoutfieldsValue = isset( $options['maskcheckoutfields'] ) && ( SURBMA_HC_PREMIUM || !isset( $options['brandnewuser'] ) || ( isset( $options['legacyuser'] ) && 1 == $options['legacyuser'] ) ) ? $options['maskcheckoutfields'] : 0;

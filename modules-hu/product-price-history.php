@@ -114,6 +114,11 @@ add_action( 'wp_insert_post', function( $post_id, $post, $update ) {
 	surbma_hc_update_product_price_history( $post_id );
 }, 10, 3 );
 
+// Trigger surbma_hc_update_product_price_history when a variable product is updated
+add_action( 'woocommerce_save_product_variation', function( $variation_id, $i ) {
+	surbma_hc_update_product_price_history( $variation_id );
+}, 10, 2 );
+
 /*
  *
  * Trigger surbma_hc_update_product_price_history when a product price changed with WooCommerce import.
@@ -147,6 +152,11 @@ if ( is_plugin_active( 'wp-all-import-pro/wp-all-import-pro.php' ) ) {
 	}, 10, 3 );
 }
 */
+
+$options = get_option( 'surbma_hc_fields' );
+$module_productpricehistoryValue = isset( $options['module-productpricehistory'] ) ? $options['module-productpricehistory'] : 0;
+
+if ( 1 == $module_productpricehistoryValue ) {
 
 // Add custom fields in the General tab of the Product data metabox
 add_action( 'woocommerce_product_options_general_product_data', function() {
@@ -213,7 +223,7 @@ add_action( 'woocommerce_product_options_general_product_data', function() {
 	echo '</div>';
 } );
 
-// Save meta for single products
+// Save meta for simple products
 add_action( 'woocommerce_process_product_meta', function( $post_id ) {
 	$lowestpricetextValue = isset( $_POST['_hc_product_lowest_price_text'] ) ? $_POST['_hc_product_lowest_price_text'] : '';
 	$hidelowestpricetextValue = isset( $_POST['_hc_product_hide_lowest_price_text'] ) ? $_POST['_hc_product_hide_lowest_price_text'] : '';
@@ -274,7 +284,7 @@ add_action( 'woocommerce_variation_options_pricing', function( $loop, $variation
 	));
 }, 10, 3 );
 
-// Save meta and update product price history for variations
+// Save meta for variable products
 add_action( 'woocommerce_save_product_variation', function( $variation_id, $i ) {
 	$lowestpricetextValue = isset( $_POST['_hc_product_lowest_price_text'][$i] ) ? $_POST['_hc_product_lowest_price_text'][$i] : '';
 	$hidelowestpricetextValue = isset( $_POST['_hc_product_hide_lowest_price_text'][$i] ) ? $_POST['_hc_product_hide_lowest_price_text'][$i] : '';
@@ -283,8 +293,6 @@ add_action( 'woocommerce_save_product_variation', function( $variation_id, $i ) 
 	update_post_meta( $variation_id, '_hc_product_lowest_price_text', esc_attr( $lowestpricetextValue ) );
 	update_post_meta( $variation_id, '_hc_product_hide_lowest_price_text', esc_attr( $hidelowestpricetextValue ) );
 	update_post_meta( $variation_id, '_hc_productpricehistory_statisticslinkdisplay', esc_attr( $statisticslinkdisplayValue ) );
-
-	surbma_hc_update_product_price_history( $variation_id );
 }, 10, 2 );
 
 // Product price history display
@@ -461,3 +469,5 @@ add_action( 'woocommerce_before_variations_form', function() {
 	</script>
 	<?php
 } );
+
+}
