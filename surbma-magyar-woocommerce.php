@@ -65,3 +65,16 @@ function surbma_hc_woocommerce_version_check( $version ) {
 	}
 	return false;
 }
+
+/**
+ * Overwrite iThemes Security plugin's PHP Execution settings to enable HuCommerce plugin's product-price-history-display.php file.
+ * Settings -> Advanced -> System Tweaks -> PHP Execution -> Disable PHP in Plugins
+**/
+if ( !has_filter( 'itsec_filter_apache_server_config_modification' ) ) {
+	add_filter( 'itsec_filter_apache_server_config_modification', function ( $modification ) {
+		$modification = str_replace( 'RewriteRule ^wp\-content/plugins/.*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]', 'RewriteRule ^wp\-content/plugins/(?!surbma\-magyar\-woocommerce/modules\-hu/product\-price\-history\-display\.php).*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]', $modification );
+		return $modification;
+	}, PHP_INT_MAX - 5 );
+}
+
+
