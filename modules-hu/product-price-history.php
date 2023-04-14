@@ -88,22 +88,22 @@ add_action( 'current_screen', function( $current_screen ) {
 	}
 
 	// We are on the edit product page, right? Let's get the product ID from the URL.
-	$post_id = ( isset( $_GET['post'] ) ) ? $_GET['post'] : false;
+	$product_id = ( isset( $_GET['post'] ) ) ? $_GET['post'] : false;
 
-	if ( !$post_id || !is_int( $post_id ) ) {
+	if ( !$product_id || !is_int( $product_id ) ) {
 		return;
 	}
 
-	surbma_hc_update_product_price_history( $post_id );
+	surbma_hc_update_product_price_history( $product_id );
 }, 10, 3 );
 
 // Trigger surbma_hc_update_product_price_history when a product is updated or created
-add_action( 'wp_insert_post', function( $post_id, $post, $update ) {
+add_action( 'wp_insert_post', function( $product_id, $post, $update ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return;
 	}
 
-	if ( wp_is_post_revision( $post_id ) ) {
+	if ( wp_is_post_revision( $product_id ) ) {
 		return;
 	}
 
@@ -111,7 +111,7 @@ add_action( 'wp_insert_post', function( $post_id, $post, $update ) {
 		return;
 	}
 
-	surbma_hc_update_product_price_history( $post_id );
+	surbma_hc_update_product_price_history( $product_id );
 }, 10, 3 );
 
 // Trigger surbma_hc_update_product_price_history when a variable product is updated
@@ -144,10 +144,10 @@ add_action( 'woocommerce_product_import_inserted_product_object', function( $obj
 /*
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'wp-all-import-pro/wp-all-import-pro.php' ) ) {
-	add_action( 'pmxi_saved_post', function( $post_id, $xml_node, $is_update ) {
+	add_action( 'pmxi_saved_post', function( $product_id, $xml_node, $is_update ) {
 		$post_type = wp_all_import_get_import_post_type();
 		if ( 'product' === $post_type ) {
-			surbma_hc_update_product_price_history( $post_id );
+			surbma_hc_update_product_price_history( $product_id );
 		}
 	}, 10, 3 );
 }
@@ -224,14 +224,14 @@ add_action( 'woocommerce_product_options_general_product_data', function() {
 } );
 
 // Save meta for simple products
-add_action( 'woocommerce_process_product_meta', function( $post_id ) {
+add_action( 'woocommerce_process_product_meta', function( $product_id ) {
 	$lowestpricetextValue = isset( $_POST['_hc_product_lowest_price_text'] ) ? $_POST['_hc_product_lowest_price_text'] : '';
 	$hidelowestpricetextValue = isset( $_POST['_hc_product_hide_lowest_price_text'] ) ? $_POST['_hc_product_hide_lowest_price_text'] : '';
 	$statisticslinkdisplayValue = isset( $_POST['_hc_productpricehistory_statisticslinkdisplay'] ) ? $_POST['_hc_productpricehistory_statisticslinkdisplay'] : 'global';
 
-	update_post_meta( $post_id, '_hc_product_lowest_price_text', esc_attr( $lowestpricetextValue ) );
-	update_post_meta( $post_id, '_hc_product_hide_lowest_price_text', esc_attr( $hidelowestpricetextValue ) );
-	update_post_meta( $post_id, '_hc_productpricehistory_statisticslinkdisplay', esc_attr( $statisticslinkdisplayValue ) );
+	update_post_meta( $product_id, '_hc_product_lowest_price_text', esc_attr( $lowestpricetextValue ) );
+	update_post_meta( $product_id, '_hc_product_hide_lowest_price_text', esc_attr( $hidelowestpricetextValue ) );
+	update_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay', esc_attr( $statisticslinkdisplayValue ) );
 } );
 
 // Add custom fields for variations
