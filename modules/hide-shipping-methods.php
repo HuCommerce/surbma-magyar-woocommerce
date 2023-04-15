@@ -1,8 +1,25 @@
 <?php
 
+// Remove all Shipping methods on the Cart page
+add_filter( 'woocommerce_cart_ready_to_calc_shipping', function( $show_shipping ) {
+	$options = get_option( 'surbma_hc_fields' );
+	$hideshippingmethodscartValue = isset( $options['hideshippingmethods-cart'] ) && 1 == $options['hideshippingmethods-cart'] ? 1 : 0;
+
+	if ( $hideshippingmethodscartValue && is_cart() ) {
+		return false;
+	}
+
+	return $show_shipping;
+}, 99 );
+
 add_filter( 'woocommerce_package_rates', function( $available_shipping_methods, $package ) {
 	$options = get_option( 'surbma_hc_fields' );
-	$shippingmethodstohideValue = isset( $options['shippingmethodstohide'] ) ? $options['shippingmethodstohide'] : 'hideall';
+	$shippingmethodstohideValue = isset( $options['shippingmethodstohide'] ) ? $options['shippingmethodstohide'] : 'showall';
+
+	if ( 'showall' == $shippingmethodstohideValue ) {
+		return $available_shipping_methods;
+	}
+
 	$new_shipping_methods = array();
 
 	if ( !empty( $available_shipping_methods ) ) {

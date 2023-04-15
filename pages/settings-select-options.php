@@ -64,6 +64,10 @@ $returntoshopcheckoutposition_options = array(
 );
 
 $shippingmethodstohide_options = array(
+	'showall' => array(
+		'value' => 'showall',
+		'label' => __( 'Show all shipping methods', 'surbma-magyar-woocommerce' )
+	),
 	'hideall' => array(
 		'value' => 'hideall',
 		'label' => __( 'Hide all shipping methods, except Free shipping', 'surbma-magyar-woocommerce' )

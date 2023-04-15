@@ -92,6 +92,7 @@ function surbma_hc_fields_validate( $input ) {
 	$input['freeshippingnoticecheckout'] = isset( $input['freeshippingnoticecheckout'] ) && 1 == $input['freeshippingnoticecheckout'] ? 1 : 0;
 	$input['freeshippingcouponsdiscounts'] = isset( $input['freeshippingcouponsdiscounts'] ) && 1 == $input['freeshippingcouponsdiscounts'] ? 1 : 0;
 	$input['freeshippingwithouttax'] = isset( $input['freeshippingwithouttax'] ) && 1 == $input['freeshippingwithouttax'] ? 1 : 0;
+	$input['hideshippingmethods-cart'] = isset( $input['hideshippingmethods-cart'] ) && 1 == $input['hideshippingmethods-cart'] ? 1 : 0;
 	$input['regip'] = isset( $input['regip'] ) && 1 == $input['regip'] ? 1 : 0;
 	$input['legalcheckout-custom1optional'] = isset( $input['legalcheckout-custom1optional'] ) && 1 == $input['legalcheckout-custom1optional'] ? 1 : 0;
 	$input['legalcheckout-custom2optional'] = isset( $input['legalcheckout-custom2optional'] ) && 1 == $input['legalcheckout-custom2optional'] ? 1 : 0;
@@ -111,7 +112,7 @@ function surbma_hc_fields_validate( $input ) {
 		$input['returntoshopcheckoutposition'] = 'nocheckout';
 	}
 	if ( !array_key_exists( $input['shippingmethodstohide'], $shippingmethodstohide_options ) ) {
-		$input['shippingmethodstohide'] = 'hideall';
+		$input['shippingmethodstohide'] = 'showall';
 	}
 	if ( !array_key_exists( $input['legalconfirmationsposition'], $legalconfirmationsposition_options ) ) {
 		$input['legalconfirmationsposition'] = 'woocommerce_review_order_before_submit';
