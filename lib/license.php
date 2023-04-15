@@ -133,16 +133,56 @@ if ( ( $api_key && $product_id && $instance && $last_check_diff > ( 24 * 60 * 60
 
 /*
  *
+ * HuCommerce Whitelist
+ *
+ * We have a whitelist for domains, that don't need API key to use PRO version
+ *
+*/
+
+// Get the current website's domain
+$current_domain = $_SERVER['HTTP_HOST'];
+$current_domain = preg_replace('/^(www\.)/i', '', $current_domain); // remove www prefix if it exists
+$current_domain = preg_replace('/\/.*$/i', '', $current_domain); // remove everything after the first slash
+
+// Enable PRO for hucommerce.hu domain
+if ( 'hucommerce.hu' == $current_domain ) {
+	define( 'SURBMA_HC_PLUGIN_LICENSE', 'active' );
+	define( 'SURBMA_HC_PREMIUM', true );
+	define( 'SURBMA_HC_PRO_USER', true );
+} else {
+	/*
+	 * Temporary disabled feature, will be enabled in the future
+	 *
+	$response = wp_remote_get( 'https://www.hucommerce.hu/hucommerce-whitelist.json' );
+
+	if ( !is_wp_error( $response ) ) {
+		$json = wp_remote_retrieve_body( $response );
+		$domains = json_decode( $json, true );
+
+		// Check if current domain is in the whitelist. If it is, enable PRO version.
+		if ( in_array( array( 'domain' => $current_domain ), $domains ) ) {
+			define( 'SURBMA_HC_PLUGIN_LICENSE', 'active' );
+			define( 'SURBMA_HC_PREMIUM', true );
+			define( 'SURBMA_HC_PRO_USER', true );
+		}
+	}
+	*/
+}
+
+/*
+ *
  * SURBMA_HC_PLUGIN_LICENSE
  *
  * This global is to check license status, if user has rights to use premium features.
  * Values can be: active, inactive, invalid, free
  *
 */
-if ( $status ) {
-	define( 'SURBMA_HC_PLUGIN_LICENSE', $status );
-} else {
-	define( 'SURBMA_HC_PLUGIN_LICENSE', 'free' );
+if ( !defined( 'SURBMA_HC_PLUGIN_LICENSE' ) ) {
+	if ( $status ) {
+		define( 'SURBMA_HC_PLUGIN_LICENSE', $status );
+	} else {
+		define( 'SURBMA_HC_PLUGIN_LICENSE', 'free' );
+	}
 }
 
 /*
@@ -153,10 +193,12 @@ if ( $status ) {
  * Values can be: true, false (BUT php uses it to be 1 or none)
  *
 */
-if ( 'active' == $status ) {
-	define( 'SURBMA_HC_PREMIUM', true );
-} else {
-	define( 'SURBMA_HC_PREMIUM', false );
+if ( !defined( 'SURBMA_HC_PREMIUM' ) ) {
+	if ( 'active' == $status ) {
+		define( 'SURBMA_HC_PREMIUM', true );
+	} else {
+		define( 'SURBMA_HC_PREMIUM', false );
+	}
 }
 
 /*
@@ -167,10 +209,12 @@ if ( 'active' == $status ) {
  * Values can be: true, false (BUT php uses it to be 1 or none)
  *
 */
-if ( isset( $license_options['licensekey'] ) && $license_options['licensekey'] ) {
-	define( 'SURBMA_HC_PRO_USER', true );
-} else {
-	define( 'SURBMA_HC_PRO_USER', false );
+if ( !defined( 'SURBMA_HC_PRO_USER' ) ) {
+	if ( isset( $license_options['licensekey'] ) && $license_options['licensekey'] ) {
+		define( 'SURBMA_HC_PRO_USER', true );
+	} else {
+		define( 'SURBMA_HC_PRO_USER', false );
+	}
 }
 
 // Fires when the surbma_hc_license option is added

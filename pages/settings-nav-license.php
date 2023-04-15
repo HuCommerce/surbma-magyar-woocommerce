@@ -74,7 +74,7 @@ $custom_product_id = isset( $_GET['hc-product_id'] ) ? $_GET['hc-product_id'] : 
 		$licensestatus = '<span class="uk-label">Nincs aktiválva</span>';
 	}
 ?>
-<p><strong>API állapot:</strong> <?php echo wp_kses_post( $licensestatus ); ?> | <a href="<?php echo esc_url( add_query_arg( 'hc-request', 'status' ) ); ?>" uk-tooltip="title: API kulcs manuális szinkronizálása, ha valamiért nem frissülne automatikusan az API állapot.; pos: right"><span style="position: relative;top: -2px;" uk-icon="icon: refresh; ratio: .8"></span> API szinkronizálás</a> | <a href="https://www.hucommerce.hu/fiokom/" target="_blank" uk-tooltip="title: API kulcs kezelése a Fiókodban, a HuCommerce.hu weboldalon.; pos: right"><span style="position: relative;top: -2px;" uk-icon="icon: cog; ratio: .8"></span> API kezelés</a></p>
+<p><strong>API állapot:</strong> <?php echo wp_kses_post( $licensestatus ); ?> | <a href="<?php echo esc_url( add_query_arg( 'hc-request', 'status' ) ); ?>" uk-tooltip="title: API kulcs manuális szinkronizálása, ha valamiért nem frissülne automatikusan az API állapot.; pos: right"><span style="position: relative;top: -2px;" uk-icon="icon: refresh; ratio: .8"></span> API szinkronizálás</a> | <a href="https://www.hucommerce.hu/fiokom/api-keys/" target="_blank" uk-tooltip="title: API kulcs kezelése a Fiókodban, a HuCommerce.hu weboldalon.; pos: right"><span style="position: relative;top: -2px;" uk-icon="icon: cog; ratio: .8"></span> API kezelés</a></p>
 <?php if ( $licensekeyValue ) { ?>
 <h4>API kulcshoz kapcsolódó adatok</h4>
 <ul class="uk-list">
