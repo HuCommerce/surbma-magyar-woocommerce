@@ -156,6 +156,11 @@ function surbma_hc_settings_page() {
 								</div>
 							</li>
 						</ul>
+						<ul class="uk-navbar-nav uk-visible@l">
+							<li>
+								<a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="uk-button uk-button-danger uk-button-small" target="_blank" style="color: #fff;">HuCommerce Pro megvásárlása</a>
+							</li>
+						</ul>
 					</div>
 				</nav>
 			</div>
