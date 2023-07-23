@@ -127,46 +127,6 @@ add_filter( 'plugin_action_links_' . plugin_basename( SURBMA_HC_PLUGIN_FILE ), f
 
 // Custom styles and scripts for admin pages
 add_action( 'admin_enqueue_scripts', function( $hook ) {
-	// * HUCOMMERCE START
-	if ( SURBMA_HC_PRO_USER ) {
-		$current_user = wp_get_current_user();
-		$username = $current_user->user_login;
-		$email = $current_user->user_email;
-		$firstname = $current_user->user_firstname;
-		$lastname = $current_user->user_lastname;
-		$displayname = $current_user->display_name;
-		$userid = $current_user->ID;
-
-		ob_start();
-		?>
-		!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});
-
-		window.Beacon('init', 'ab57a81e-5722-44ec-9f95-10d6ed71593e')
-
-		window.Beacon('identify', {
-			name: '<?php echo esc_js( $displayname ); ?>',
-			email: '<?php echo esc_js( $email ); ?>',
-			signature: '<?php echo esc_js( hash_hmac( 'sha256', $email, 'Uxg6ogSnpxhCb/0sH/5AIdHpKALTzMYOqYSlsk6xvcU=' ) ); ?>'
-		})
-		<?php
-		$helpscout_beacon_pro_script = ob_get_contents();
-		ob_end_clean();
-	} else {
-		ob_start();
-		?>
-		!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});
-
-		window.Beacon('init', 'cc6686f3-4089-42a7-ab45-01a797527267')
-
-		Beacon('show-message', '9d013f4a-b201-43e0-8313-aa2f594f98eb', { force: true })
-		<?php
-		$helpscout_beacon_free_script = ob_get_contents();
-		ob_end_clean();
-	}
-	// * HUCOMMERCE END
-
-	wp_register_style( 'surbma-hc-admin', SURBMA_HC_PLUGIN_URL . '/assets/css/admin.css' );
-
 	global $surbma_hc_main_page;
 	global $surbma_hc_modules_page;
 	global $surbma_hc_offers_page;
@@ -176,16 +136,96 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 	global $surbma_hc_informations_page;
 
 	if ( $hook == $surbma_hc_main_page || $hook == $surbma_hc_modules_page || $hook == $surbma_hc_offers_page || $hook == $surbma_hc_directory_page || $hook == $surbma_hc_news_page || $hook == $surbma_hc_license_page || $hook == $surbma_hc_informations_page ) {
-		add_action( 'admin_enqueue_scripts', 'cps_admin_scripts', 9999 );
-		wp_enqueue_style( 'surbma-hc-admin' );
-		// * HUCOMMERCE START
-		if ( SURBMA_HC_PRO_USER ) {
-			wp_add_inline_script( 'jquery', $helpscout_beacon_pro_script );
-		} else {
-			wp_add_inline_script( 'jquery', $helpscout_beacon_free_script );
-		}
-		// * HUCOMMERCE END
+		$hc_page = true;
+	} else {
+		$hc_page = false;
 	}
+
+	// Load plugin scripts & styles for plugin pages
+	if ( $hc_page ) {
+		add_action( 'admin_enqueue_scripts', 'cps_admin_scripts', 9999 );
+		wp_enqueue_style( 'surbma-hc-admin', SURBMA_HC_PLUGIN_URL . '/assets/css/admin.css', array(), SURBMA_HC_PLUGIN_VERSION_NUMBER );
+	}
+
+	// * HUCOMMERCE START
+
+	// Load page specific Help Scout Beacons
+	if ( SURBMA_HC_PRO_USER ) {
+
+		// HC-ALL-PRO
+		$hs_beacon__ID = '8343e517-6ce5-408e-b9b7-194ed15224dc';
+
+		// HC-HC-PRO
+		if ( $hc_page ) {
+			$hs_beacon__ID = 'ab57a81e-5722-44ec-9f95-10d6ed71593e';
+		}
+
+		// HC-DB-PRO
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'index.php' ) {
+			$hs_beacon__ID = '02a19139-0bb6-41f0-b786-bf3dfdf56744';
+		}
+
+		// HC-WC-ORDERS-PRO
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-orders' ) {
+			$hs_beacon__ID = '634c7b27-24c2-42ee-822f-ee05c3a1db3e';
+		}
+
+		// HC-WC-PRODUCTS-PRO
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] === 'product' ) {
+			$hs_beacon__ID = '6eea179a-5225-4c2a-8c8a-b99ca9c6168a';
+		}
+
+		// HC-WC-SETTINGS-PRO
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' ) {
+			$hs_beacon__ID = 'c36756c5-aa68-4a5e-b283-32797b8ca2b3';
+		}
+
+	} else {
+
+		// HC-ALL-START
+		$hs_beacon__ID = 'bdba10a4-0230-4f42-ac98-0af5f013ad4e';
+
+		// HC-HC-START
+		if ( $hc_page ) {
+			$hs_beacon__ID = 'cc6686f3-4089-42a7-ab45-01a797527267';
+		}
+
+		// HC-DB-START
+		if ( $GLOBALS['pagenow'] == 'index.php' ) {
+			$hs_beacon__ID = '0703d7a7-98ba-4dce-8071-89996098347f';
+		}
+
+		// HC-WC-ORDERS-START
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-orders' ) {
+			$hs_beacon__ID = '56db0132-3d8d-4c1e-a5f6-8462b174de7a';
+		}
+
+		// HC-WC-PRODUCTS-START
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] === 'product' ) {
+			$hs_beacon__ID = 'a1c2316d-7891-4377-a2af-2569240332bd';
+		}
+
+		// HC-WC-SETTINGS-START
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' ) {
+			$hs_beacon__ID = '654fa50f-d1c3-465e-9be5-93bd6d601ae0';
+		}
+
+	}
+
+	ob_start();
+		echo '!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});' . PHP_EOL;
+		echo "window.Beacon('init', '" . $hs_beacon__ID . "')" . PHP_EOL;
+		if ( SURBMA_HC_PRO_USER && $hc_page ) {
+			$current_user = wp_get_current_user();
+			$email = $current_user->user_email;
+			$displayname = $current_user->display_name;
+			echo "window.Beacon('identify', {name: '" . esc_js( $displayname ) . "',email: '" . esc_js( $email ) . "',signature: '" . esc_js( hash_hmac( 'sha256', $email, 'Uxg6ogSnpxhCb/0sH/5AIdHpKALTzMYOqYSlsk6xvcU=' ) ) . "'})";
+		}
+	$hs_beacon__script = ob_get_contents();
+	ob_end_clean();
+	wp_add_inline_script( 'jquery', $hs_beacon__script );
+
+	// * HUCOMMERCE END
 } );
 
 // Get allowed post tags
