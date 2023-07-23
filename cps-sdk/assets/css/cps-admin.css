@@ -287,24 +287,23 @@ body {
 }
 
 .cps-admin-2 .cps-settings-nav .uk-nav-divider {
-	border-top: 1px solid #e5e5e5;
-	margin: 20px;
+	margin: 20px 40px;
 	padding: 0;
-}
-
-.cps-admin-2 #cps-settings-mobile-nav .cps-settings-nav .uk-nav-divider {
-	border-color: rgba(255,255,255,.1);
 }
 
 .cps-admin-2 .cps-settings-nav li {
 	padding-left: 10px;
 	padding-right: 10px;
-	word-break: break-all;
 }
 
-.cps-admin-2 .cps-settings-nav li:not(.uk-nav-header):not(.uk-nav-divider):hover,
-.cps-admin-2 .cps-settings-nav li.uk-active {
-	background-color: #f0f0f0;
+.cps-admin-2 .cps-settings-nav > li:not(.uk-nav-header):not(.uk-nav-divider):not(.cps-settings-subnav):hover,
+.cps-admin-2 .cps-settings-nav > li.uk-active {
+	background-color: #fafafa;
+	border-radius: 5px;
+}
+
+.cps-admin-2 .cps-settings-nav > li.uk-active {
+	border: 1px solid #1e87f0;
 }
 
 .cps-admin-2 .cps-settings-nav a.uk-offcanvas-close {
@@ -319,15 +318,6 @@ body {
 
 .cps-admin-2 #cps-settings-mobile-nav .cps-settings-nav .uk-nav-header a {
 	color: #fff;
-}
-
-.cps-admin-2 #cps-settings-mobile-nav .cps-settings-nav li:not(.uk-nav-header):not(.uk-nav-divider):hover,
-.cps-admin-2 #cps-settings-mobile-nav .cps-settings-nav li.uk-active {
-	background-color: #000;
-}
-
-.cps-admin-2 .uk-subnav.uk-subnav-pill > li {
-	padding: 0 5px 0 0;
 }
 
 .cps-admin-2 .uk-subnav.uk-subnav-pill li a {
@@ -350,6 +340,14 @@ body {
 	width: 100%;
 	max-width: 150px;
 	float: right;
+}
+
+.cps-admin-2 .cps-form-horizontal.cps-form-checkbox .uk-form-label {
+	max-width: calc(100% - 60px);
+}
+
+.cps-admin-2 .cps-form-horizontal.cps-form-checkbox .uk-form-controls {
+	max-width: 52px;
 }
 
 .cps-admin-2 .cps-form-horizontal.cps-form-horizontal-medium .uk-form-label {
@@ -451,7 +449,7 @@ body {
 	margin-left: 10px;
 }
 
-.cps-admin-2 .uk-accordion-title .module-indicator {
+.cps-admin-2 .module-indicator {
 	display: inline-block;
 	width: 10px;
 	height: 10px;
@@ -459,11 +457,11 @@ body {
 	margin-right: 10px;
 }
 
-.cps-admin-2 .uk-accordion-title .module-indicator.module-on {
+.cps-admin-2 .module-indicator.module-on {
 	background: #32d296;
 }
 
-.cps-admin-2 .uk-accordion-title .module-indicator.module-off {
+.cps-admin-2 .module-indicator.module-off {
 	background: #f0506e;
 }
 
@@ -475,3 +473,19 @@ body {
 	padding: 20px 20px 20px 39px;
 }
 
+.cps-admin-2 .cps-card {
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.cps-admin-2 .cps-button {
+	border-radius: 10px;
+}
+
+.cps-admin-2 .cps-more {
+	text-transform: none;
+}
+
+.cps-admin-2 #hucommerce-modules .uk-card-body .uk-label {
+	font-size: 12px;
+}

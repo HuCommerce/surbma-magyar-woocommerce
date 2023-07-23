@@ -1,5 +1,381 @@
 # Changelog
 
+## 3.16.22 (June 22, 2023)
+
+### Fixed
+
+- Fix existing notification container has to be visible before appending notification 
+
+## 3.16.21 (June 13, 2023)
+
+### Fixed
+
+- Fix release changelog
+
+## 3.16.20 (June 13, 2023)
+
+### Fixed
+
+- Fix Toggle component with `cls` option in hover mode
+- Fix `aria-roledescription` attribute in Slider nav component
+
+## 3.16.19 (May 24, 2023)
+
+### Fixed
+
+- Fix Parallax component responsiveness on resize of scroll container
+
+## 3.16.18 (May 22, 2023)
+
+### Changed
+
+- Modal prompt dialog selects text in input
+- Sticky component sets position context with `!important` modifier
+
+### Fixed
+
+- Fix keyboard navigation in Navbar component
+
+## 3.16.17 (May 9, 2023)
+
+### Added
+
+- Add i18n labels for Search Icons
+
+### Fixed
+
+- Fix Toggle component uses anchor element's hash as target fallback
+
+## 3.16.16 (May 8, 2023)
+
+### Removed
+
+- Remove `Deferred` util class
+
+### Fixed
+
+- Fix auto pausing videos in Video component
+- Fix Tooltips are not removed from Dom if showing is prevented
+- Fix Switcher component not initializing properly
+- Fix Tooltip generates duplicate id
+- Fix calculating sets in Slider component with `center` option enabled
+- Fix JavaScript error in Parallax component
+
+## 3.16.15 (April 14, 2023)
+
+### Fixed
+
+- Fix Drop component height if `inset: true` and `stretch: true`
+- Fix Drop component `maxWidth` property with fractional viewport view
+- Fix Sticky component listens for resize of itself as long as no transition is in Progress
+
+## 3.16.14 (April 6, 2023)
+
+### Changed
+
+- Make Navbar/Dropnav items tabbable again
+
+### Fixed
+
+- Fix using `rgb` and `rgba` values in color stops in Parallax component
+- Fix setting `will-change` css property in Parallax component for camelCased props
+- Fix Slider removes `tabindex` from focusable elements in slides
+- Fix class `uk-svg` gets added to `<svg>` element only in Svg component 
+
+## 3.16.13 (March 28, 2023)
+
+### Fixed
+
+- Fix Sass sources
+- Fix Scrollspy Nav component updates state once shown
+
+## 3.16.12 (March 27, 2023)
+
+### Fixed
+
+- Fix push history state in Scroll component if href differs from current url only
+
+## 3.16.11 (March 24, 2023)
+
+### Changed
+
+- Remove roles `menubar` and `menuitem` from Navbar component
+- Add `watch` to component options API
+
+## 3.16.10 (March 20, 2023)
+
+### Fixed
+
+- Fix including UIkit scripts at the end of `body` element
+
+## 3.16.9 (March 18, 2023)
+
+### Fixed
+
+- Fix reactivity in Toggle component
+- Fix regression in Scrollspy component
+
+## 3.16.8 (March 17, 2023)
+
+### Fixed
+
+- Fix focus style for dropdowns when used with Inverse component
+- Fix regression in Lightbox component
+
+## 3.16.7 (March 16, 2023)
+
+### Added
+
+- Add hidden visually class for assistive technologies to Visibility component
+- Make toggle classes to display elements on hover or focus accessible to screen readers in Visibility component
+
+### Changed
+
+- Change boot behavior: if script is loaded synchronous, UIkit boots as soon as body element is available
+
+### Fixed
+
+- Fix component distributions
+- Fix Slider/Slideshow component autoplay in Firefox
+- Fix using input of type range in Modal component on touch devices
+- Fix accessibility in Slideshow/Slider and Nav component
+- Fix prevent initial transition in Sticky component
+- Fix keyboard navigation in Navbar component
+- Fix importing UIkit in Next.js
+
+## 3.16.6 (March 10, 2023)
+
+### Fixed
+
+- Fix Sass sources
+- Fix `createComponent` call without `element` parameter
+
+## 3.16.5 (March 10, 2023)
+
+### Fixed
+
+- Fix functional component initialization
+- Fix `pause-on-hover` option in Slider/Slideshow component
+
+## 3.16.4 (March 8, 2023)
+
+### Added
+
+- Add `observe` to component options API
+
+### Fixed
+
+- Fix default i18n option for Modal dialogs
+- Fix Slideshow initially shows last slide first
+- Fix Height Match component does not change height while updating
+- Fix Slider reactivity when a slide is hidden/shown
+- Fix Scroll component correctly changes history state
+
+## 3.16.3 (February 27, 2023)
+
+### Fixed
+
+- Fix object type coercion
+
+## 3.16.2 (February 27, 2023)
+
+### Fixed
+
+- Fix event delegation did not delete `current` property causing parent event handler to trigger
+- Fix focusable elements within none visible slides are no longer focusable in Slider component
+- Fix opened Drop component prevents smooth scrolling of document on iOS
+
+## 3.16.1 (February 23, 2023)
+
+### Fixed
+
+- Fix missing dropnav.scss file from dist
+
+## 3.16.0 (February 23, 2023)
+
+### Added
+
+- Add WAI-ARIA roles, states and properties to interactive JavaScript components
+- Add WAI-ARIA keyboard interaction pattern to interactive JavaScript components
+- Add language internationalization (i18n) for interactive JavaScript components
+- Add `i18n` option to corresponding JavaScript components
+- Add Dropnav component
+- Add parent icon to Drop component
+- Add support for YouTube Shorts URLs in Lightbox component
+- Add Android, Android Robot, Apple and Microsoft icons
+- Add `uikit:init` event triggered on document before components initialize
+- Add `countdownstart`, `countdownstop` and `countdownend` events to Countdown component
+
+### Changed
+
+- IMPORTANT: Remove `.uk-dropdown-close` from Dropdown component. Use `uk-drop-close` instead
+- IMPORTANT: Remove `.uk-dropdown-grid` from Dropdown component. Use `uk-drop-grid` instead
+- IMPORTANT: Remove `.uk-navbar-dropdown-close` from Navbar component. Use `uk-drop-close` instead
+- IMPORTANT: Remove `.uk-navbar-dropdown-grid` from Navbar component. Use `uk-drop-grid` instead
+- IMPORTANT: Remove error message options in Upload component, use `i18n` option
+- IMPORTANT: Rename `labels` default property and option on `UIkit.modal` to `i18n`
+- Move functional CSS from Dropdown, Dropbar and Navbar component to Drop component
+
+### Removed
+
+- Remove `ajax()` util function, use native `fetch` instead
+- Remove `getImage()` util function
+
+## 3.15.25 (February 23, 2023)
+
+### Fixed
+
+- Fix Dropbar partially closing before opening when switching between Navbar items
+- Fix Parallax component updating too late during slide animation in Filter component
+
+## 3.15.24 (February 9, 2023)
+
+### Fixed
+
+- Fix Tooltip component appends to `container` option, prevents margins in scroll container
+- Fix regression in `scrollParents` function
+
+## 3.15.23 (February 1, 2023)
+
+### Fixed
+
+- Fix prevent background scrolling in Safari
+
+## 3.15.22 (January 19, 2023)
+
+### Added
+
+- Add Eye and Eye Slash icons
+
+### Changed
+
+- Update Lifesaver, Paint Bucket and Video Camera icons to fit outline style
+
+### Fixed
+
+- Fix Scroll component scrolls to elements by name
+- Fix Tooltip appends itself to the closest scroll container if within element referenced by `container` option
+
+## 3.15.21 (January 12, 2023)
+
+### Added
+
+- Add larger gap on larger viewports to Navbar component in UIkit theme
+- Add gradient for text background to Text component in UIkit theme
+- Add gradient for thumbnav item to Thumbnav component in UIkit theme
+
+## 3.15.20 (January 5, 2023)
+
+### Changed
+
+- Improve close icon not overlaying content in Modal component in UIkit theme
+
+### Fixed
+
+- Fix nav in Dropdown component not overriding properties of Nav component
+- Fix disable native position sticky in Sticky component if parents `overflow` is not set to visible
+- Fix Drop positioning
+
+## 3.15.19 (December 20, 2022)
+
+### Changed
+
+- `removeAttr` no longer accepts a space separated list of attribute names
+
+### Fixed
+
+- Fix stacking context if using `position: sticky` in Sticky component
+- Fix height calculation for `box-sizing: border-box` on Accordion content
+- Fix error in console if image can't be loaded in Svg component with `stroke-animation: true`
+- Fix `scrollIntoView()` no longer considers elements with `position: clip` as scrollable parents
+- Fix Slider shows not centered initially with `center: true`
+
+## 3.15.18 (December 13, 2022)
+
+### Fixed
+
+- Fix positioning of Tooltip and Drop components if target is inline element
+- Fix Sticky component resizing on `clsBelow` class causes stutter
+- Fix Sticky component correctly resets on becoming inactive
+- Fix detection of finite mode in Slider component with `center` option enabled
+
+## 3.15.17 (December 6, 2022)
+
+### Fixed
+
+- Fix detecting unit in Parallax component stops
+
+## 3.15.16 (December 5, 2022)
+
+### Changed
+
+- Add `will-change` css property to Parallax elements 
+
+### Fixed
+
+- Fix for elements with `position: sticky` to keep their position when Offcanvas is opened
+- Fix regression in clicking hash links in Modal component that match `sel-close` option
+- Fix jump after animation if Accordion content has `padding-bottom`
+- Fix Sticky listens for resize of itself while not positioned `fixed`
+- Fix Sticky positioning on mobile devices
+
+## 3.15.15 (December 1, 2022)
+
+### Changed
+
+- Remove `offsetTop` and `offsetLeft` options from Image and Scrollspy component. Use `margin` instead.
+- Sticky component uses native `position: sticky` if possible
+
+### Fixed
+
+- Fix Scroll and Scrollspy Nav components handle same site links only
+- Fix Drop positioning within not scrollable viewport
+- Fix overscroll behavior in Dropbar
+- Fix conversion of viewport height units with `toPx()` on mobile devices 
+
+## 3.15.14 (November 21, 2022)
+
+### Fixed
+
+- Fix error thrown when keyboard navigating Navbar component
+
+## 3.15.13 (November 17, 2022)
+
+### Fixed
+
+- Fix Sticky component does not reset width on resize
+
+## 3.15.12 (November 4, 2022)
+
+### Added
+
+- Add `uikit:init` event triggered on document before components initialize
+
+### Fixed
+
+- Fix placeholder has no width if Sticky element's width depends on its content
+- Fix Slider/Slideshow Parallax respect `media` option
+- Fix Video component with `autoplay: true` no longer resumes autoplay on scroll after being paused
+- Fix width/height passed through `attrs` to video item in Lightbox component
+- Fix regression in Sortable component (elements are hidden after sorting)
+
+## 3.15.11 (October 25, 2022)
+
+### Added
+
+- Add Crosshairs icon
+
+### Removed
+
+- Remove `focusable` option from Icon and SVG component
+
+### Fixed
+
+- Fix content not focusable with keyboard in Scrollspy component
+- Fix removing Lightbox causes JavaScript error
+- Fix cases where Switcher component wouldn't correctly initialize in Chrome
+- Fix Drop component positioning if target and element are not within same scroll parent
+
 ## 3.15.10 (September 21, 2022)
 
 ### Fixed
@@ -27,7 +403,7 @@
 
 ### Changed
 
-- Improve Accordion component keeps toggle in view when toggling 
+- Improve Accordion component keeps toggle in view when toggling
 
 ### Fixed
 
@@ -68,7 +444,7 @@
 
 ### Fixed
 
-- Fix Slideshow no longer completely resets upon adding slides 
+- Fix Slideshow no longer completely resets upon adding slides
 
 ## 3.15.2 (August 8, 2022)
 
@@ -78,7 +454,7 @@
 
 ### Fixed
 
-- Remove click event listener in Scroll component correctly 
+- Remove click event listener in Scroll component correctly
 
 ## 3.15.1 (July 15, 2022)
 
@@ -97,8 +473,8 @@
 ### Added
 
 - Add Dropbar component
-- Add `target`, `target-x`, `target-y` and `inset` options to Drop component 
-- Add `stretch` and `bg-scroll` options to Drop component 
+- Add `target`, `target-x`, `target-y` and `inset` options to Drop component
+- Add `stretch` and `bg-scroll` options to Drop component
 - Add `shift` option to Drop component
 - Add `slide` and `reveal` animations to Drop component
 - Add `animate-out` option to Drop component
@@ -175,7 +551,7 @@
 
 - Add `box-shadow` to `toggleHeight()` hide properties
 - Add adaptive velocity to Alert and Accordion components
- 
+
 ### Changed
 
 - Set `transition` option to `ease` by default in Togglable mixin
@@ -384,7 +760,7 @@
 ### Removed
 
 - Remove IE11 support
-- Removed `data-width` and `data-height` for `<img>` element from Image component. Use native attributes instead.
+- Remove `data-width` and `data-height` for `<img>` element from Image component. Use native attributes instead.
 
 ### Fixed
 
@@ -705,7 +1081,7 @@
 
 ### Fixed
 
-- Fix showing/hidding Modal/Offcanvas programmatically
+- Fix showing/hiding Modal/Offcanvas programmatically
 
 ## 3.6.14 (January 26, 2021)
 
@@ -981,7 +1357,7 @@
 ### Fixed
 
 - Fix prop observer for dataSrc option in Image component
-- Fix ajax function supports responseType 'json' in IE 11
+- Fix ajax function supports responseType 'json' in IE11
 - Fix Accordion component with `multiple: true` and `collapsible: false`
 
 ## 3.5.3 (May 29, 2020)
@@ -1083,7 +1459,7 @@
 - Fix Sticky component sets its width with fraction
 - Fix Sticky component with `show-on-up` and `bottom` option updates correctly
 - Fix Tooltip component no longer disappears on SVG shape elements
-- Fix regression with Modal/Offcanvas component not opening in IE 11
+- Fix regression with Modal/Offcanvas component not opening in IE11
 
 ## 3.4.0 (April 9, 2020)
 
@@ -1123,7 +1499,7 @@
 
 ### Changed
 
-- Removed `duration` option from Scroll component
+- Remove `duration` option from Scroll component
 
 ### Fixed
 
@@ -1163,7 +1539,7 @@
 
 - Fix style for breadcrumbs without last active item
 - Fix infinite loop in Slider component
-- Fix IE 11 compatibility
+- Fix IE11 compatibility
 - Fix Spinner component in RTL mode
 - Fix animating `stroke` in Parallax component when element is hidden
 
@@ -1322,7 +1698,7 @@
 - Fix Modal close on bgClick behaviour
 - Fix spreading event args on delegated event listeners
 - Fix clicking an empty link within itself no longer closes the Drop
-- Fix IE 11 compatibility
+- Fix IE11 compatibility
 - Fix empty tooltips will no longer show
 
 ## 3.1.7 (July 31, 2019)
@@ -1531,7 +1907,7 @@
 
 ### Fixed
 
-- Fix `flex bug` mixin (IE 11)
+- Fix `flex bug` mixin (IE11)
 - Fix properly resolving css custom properties in scss
 - Fix order of variable assignments in scss
 - Fix background images are shown too large on retina displays in Image component
@@ -1772,11 +2148,11 @@
 ### Fixed
 
 - Fix Filter component height during transition
-- Fix Filter/Sortable component in IE 11
+- Fix Filter/Sortable component in IE11
 - Fix Overflow Auto component triggering `resize` event indefinitely
 - Fix Slider/Slideshow capture slide during transition in Safari 11
 - Fix Slider/Slideshow drag behavior in iOS 11.3+ (https://bugs.webkit.org/show_bug.cgi?id=184250)
-- Fix `toEventTargets` in IE 11
+- Fix `toEventTargets` in IE11
 
 ## 3.0.0 rc 8 (July 5, 2018)
 
@@ -1798,7 +2174,7 @@
 
 ### Fixed
 
-- Fix Dropbar in Navbar in IE 11
+- Fix Dropbar in Navbar in IE11
 - Fix single components did not get exported from their modules
 - Fix Lightbox reactivity
 
@@ -1859,7 +2235,7 @@
 
 ### Fixed
 
-- Fix regression in Scrollspy in IE 11
+- Fix regression in Scrollspy in IE11
 - Fix Sass distribution
 - Fix large close icon
 
@@ -1891,7 +2267,7 @@
 - Fix Slideshow combined with Height Viewport component
 - Fix Height Match component's `row` matching
 - Fix height calculation in Height Match component
-- Fix regression with Video component not auto play/pause
+- Fix regression with Video component not autoplay/pause
 
 ## 3.0.0 beta 42 (April 5, 2018)
 
@@ -1971,7 +2347,7 @@
 - Fix Slider Nav initially has no state
 - Fix Esc closing on Confirm and Prompt dialogs
 - Fix using Grids in Slider component in Safari
-- Fix edge scrolling in Sortable component in IE 11
+- Fix edge scrolling in Sortable component in IE11
 - Fix touch scrolling in Slideshow/Slider in Edge
 - Fix tap event on touch devices
 - Fix initial Drop positioning
@@ -2075,7 +2451,7 @@
 - Fix Scrollspy triggering before other components have been applied at least once
 - Fix Accordion title click behavior
 - Fix Sortable on iOS
-- Fix Sticky Navbar (IE 11)
+- Fix Sticky Navbar (IE11)
 
 ## 3.0.0 beta 34 (November 7, 2017)
 
@@ -2216,7 +2592,7 @@
 ### Fixed
 
 - Remove stacking context for `uk-inline`
-- Prevent scrolling in Lightboxes with one slide only
+- Prevent scrolling in Lightbox with one slide only
 
 ## 3.0.0 beta 26 (July 20, 2017)
 
@@ -2422,7 +2798,7 @@
 
 - Fix deferred UIKit loading
 - Fix Dropdowns not closing immediately upon hovering other navbar item in Navbar component
-- Fix navbar groups center left/right (IE 11)
+- Fix navbar groups center left/right (IE11)
 - Fix "sticky on up" behaviour in Sticky component
 - Fix Offcanvas closing without animation
 - Fix links in Notification message clickable
