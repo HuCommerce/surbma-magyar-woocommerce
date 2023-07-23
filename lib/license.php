@@ -3,28 +3,99 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-$license_options = get_option( 'surbma_hc_license', array() );
-$home_url = parse_url( get_option( 'home' ) );
+/*
+ *
+ * HuCommerce Whitelist
+ *
+ * We have a whitelist for domains, that don't need API key to use PRO version
+ *
+*/
 
-// API variables
-$api_key = isset( $license_options['licensekey'] ) && $license_options['licensekey'] ? $license_options['licensekey'] : false;
-$product_id = isset( $license_options['product_id'] ) && $license_options['product_id'] ? $license_options['product_id'] : false;
-$instance = isset( $license_options['instance'] ) && $license_options['instance'] ? $license_options['instance'] : false;
-$object = isset( $home_url['host'] ) ? $home_url['host'] : '';
+$license_status = get_option( 'surbma_hc_license_status', array() );
+$status = isset( $license_status['status'] ) && $license_status['status'] ? $license_status['status'] : 'free';
+$whitelisted = false;
+
+// Get the current website's domain
+$current_domain = $_SERVER['HTTP_HOST'];
+$current_domain = preg_replace('/^(www\.)/i', '', $current_domain); // remove www prefix if it exists
+$current_domain = preg_replace('/\/.*$/i', '', $current_domain); // remove everything after the first slash
+
+// Check for manual request
+$manual_request = isset( $_GET['hc-request'] ) ? true : false;
+
+// Enable PRO for hucommerce.hu domain
+if ( 'hucommerce.hu' == $current_domain || 'demo.hucommerce.hu' == $current_domain || 'woocommerce.local' == $current_domain ) {
+	$status = 'active';
+	$whitelisted = true;
+} else {
+	$last_check = isset( $license_status['last_check'] ) && $license_status['last_check'] ? $license_status['last_check'] : false;
+	$current_time = current_datetime();
+	$current_time = $current_time->getTimestamp() + $current_time->getOffset();
+	$last_check_diff = $last_check ? $current_time - $last_check : '86401';
+
+	// Update license status after 24 hours OR manual request has been processed
+	if ( $last_check_diff > ( 24 * 60 * 60 ) || $manual_request ) {
+		$response = wp_remote_get( 'https://pub-6f3752f70b634a50bf297697d2ae59a6.r2.dev/hucommerce-whitelist.json' );
+
+		if ( !is_wp_error( $response ) ) {
+			$json = wp_remote_retrieve_body( $response );
+			$domains = json_decode( $json, true );
+
+			// Check if current domain is in the whitelist. If it is, enable PRO version.
+			if ( in_array( array( 'domain' => $current_domain ), $domains ) ) {
+				$status = 'active';
+				$whitelisted = true;
+
+				$current_time = current_datetime();
+				$current_time = $current_time->getTimestamp() + $current_time->getOffset();
+
+				$license_status = array(
+					'last_check' => $current_time,
+					'status' => 'active',
+					'success' => true,
+					'unlimited_activations' => true,
+					'total_activations_purchased' => '',
+					'total_activations' => '',
+					'activations_remaining' => '',
+					'activated' => true
+				);
+				update_option( 'surbma_hc_license_status', $license_status );
+			}
+		}
+	}
+}
 
 // Create the API request URL
-function surbma_hc_create_url( $request_args ) {
+function surbma_hc_license_create_url( $request_args ) {
 	$base_url = 'https://www.hucommerce.hu/';
 	$base_url = add_query_arg( 'wc-api', 'wc-am-api', $base_url );
 	return $base_url . '&' . http_build_query( $request_args );
 }
 
-// Execute manual requests
-$manual_request = isset( $_GET['hc-request'] ) ? $_GET['hc-request'] : false;
-if ( $api_key && $product_id && $instance && $manual_request ) {
-	// Activate request sent from HuCommerce Pro menu with the "Frissítés & Újra aktiválás" button
-	if ( 'activate' == $manual_request ) {
-		$manual_request_args = array(
+// Send the requested action to the API Manager
+function surbma_hc_license_api_manager_action( $action ) {
+	// Stop if action is not valid
+	if ( 'activate' != $action && 'deactivate' != $action && 'status' != $action ) {
+		return;
+	}
+
+	$license_options = get_option( 'surbma_hc_license', array() );
+	$home_url = parse_url( get_option( 'home' ) );
+
+	// API variables
+	$api_key = isset( $license_options['licensekey'] ) && $license_options['licensekey'] ? $license_options['licensekey'] : false;
+	$product_id = isset( $license_options['product_id'] ) && $license_options['product_id'] ? $license_options['product_id'] : false;
+	$instance = isset( $license_options['instance'] ) && $license_options['instance'] ? $license_options['instance'] : false;
+	$object = isset( $home_url['host'] ) ? $home_url['host'] : '';
+
+	// Stop if we don't have the required data
+	if ( !$api_key || !$product_id || !$instance ) {
+		return;
+	}
+
+	// Preparing activate request
+	if ( 'activate' == $action ) {
+		$request_args = array(
 			'wc_am_action' => 'activate',
 			'api_key'      => $api_key,
 			'product_id'   => $product_id,
@@ -33,9 +104,9 @@ if ( $api_key && $product_id && $instance && $manual_request ) {
 		);
 	}
 
-	// Dectivate request sent from HuCommerce Pro menu with the "Megtartás & deaktiválás" button
-	if ( 'deactivate' == $manual_request ) {
-		$manual_request_args = array(
+	// Preparing deactivate request
+	if ( 'deactivate' == $action ) {
+		$request_args = array(
 			'wc_am_action' => 'deactivate',
 			'api_key'      => $api_key,
 			'product_id'   => $product_id,
@@ -43,9 +114,9 @@ if ( $api_key && $product_id && $instance && $manual_request ) {
 		);
 	}
 
-	// Status request sent from HuCommerce Pro menu with the "API szinkronizálás" link
-	if ( 'status' == $manual_request ) {
-		$manual_request_args = array(
+	// Preparing status request
+	if ( 'status' == $action ) {
+		$request_args = array(
 			'wc_am_action' => 'status',
 			'api_key'      => $api_key,
 			'product_id'   => $product_id,
@@ -53,41 +124,40 @@ if ( $api_key && $product_id && $instance && $manual_request ) {
 		);
 	}
 
-	$manual_request_url = surbma_hc_create_url( $manual_request_args );
-	$manual_request_data = wp_remote_get( $manual_request_url );
-
-	// Delete surbma_hc_license_status option to force this option to save again
-	delete_option( 'surbma_hc_license_status' );
-
-	// Remove query parameter from url
-	$url = esc_url_raw( remove_query_arg( 'hc-request' ) );
-	$url = add_query_arg( 'hc-response', $manual_request, $url );
-	wp_redirect( $url );
+	// Execute request
+	$request_url = surbma_hc_license_create_url( $request_args );
+	$request_data = wp_remote_get( $request_url );
 }
 
-// Check the difference between last check and current time
-$license_status = get_option( 'surbma_hc_license_status', array() );
-$last_check = isset( $license_status['last_check'] ) && $license_status['last_check'] ? $license_status['last_check'] : false;
-$status = isset( $license_status['status'] ) && $license_status['status'] ? $license_status['status'] : false;
-$current_time = current_datetime();
-$current_time = $current_time->getTimestamp() + $current_time->getOffset();
-$last_check_diff = $last_check ? $current_time - $last_check : '86401';
+// Update the surbma_hc_license_status option
+function surbma_hc_license_status_update() {
+	$license_options = get_option( 'surbma_hc_license', array() );
 
-// Status check
-if ( ( $api_key && $product_id && $instance && $last_check_diff > ( 24 * 60 * 60 ) ) || ( isset( $_GET['settings-updated'] ) && true == $_GET['settings-updated'] ) ) {
-	$request_args = array(
-		'wc_am_action' => 'status',
-		'api_key'      => $api_key,
-		'product_id'   => $product_id,
-		'instance' 	   => $instance
-	);
-	$request_url = surbma_hc_create_url( $request_args );
-	$request_data = wp_remote_get( $request_url );
+	// API variables
+	$api_key = isset( $license_options['licensekey'] ) && $license_options['licensekey'] ? $license_options['licensekey'] : false;
+	$product_id = isset( $license_options['product_id'] ) && $license_options['product_id'] ? $license_options['product_id'] : false;
+	$instance = isset( $license_options['instance'] ) && $license_options['instance'] ? $license_options['instance'] : false;
 
-	if ( !is_wp_error( $request_data ) ) {
-		$request_data_array = json_decode( $request_data['body'], true );
-	} else {
-		$request_data_array = array();
+	$license_status = get_option( 'surbma_hc_license_status', array() );
+
+	$status = isset( $license_status['status'] ) && $license_status['status'] ? $license_status['status'] : 'free';
+
+	// Check status
+	if ( $api_key && $product_id && $instance ) {
+		$request_args = array(
+			'wc_am_action' => 'status',
+			'api_key'      => $api_key,
+			'product_id'   => $product_id,
+			'instance' 	   => $instance
+		);
+		$request_url = surbma_hc_license_create_url( $request_args );
+		$request_data = wp_remote_get( $request_url );
+
+		if ( !is_wp_error( $request_data ) ) {
+			$request_data_array = json_decode( $request_data['body'], true );
+		} else {
+			$request_data_array = array();
+		}
 	}
 
 	$success = isset( $request_data_array['success'] ) && 1 == $request_data_array['success'] ? true : false;
@@ -97,7 +167,7 @@ if ( ( $api_key && $product_id && $instance && $last_check_diff > ( 24 * 60 * 60
 	$activations_remaining = isset( $request_data_array['data']['activations_remaining'] ) && $request_data_array['data']['activations_remaining'] ? $request_data_array['data']['activations_remaining'] : false;
 	$activated = isset( $request_data_array['data']['activated'] ) && 1 == $request_data_array['data']['activated'] ? true : false;
 
-	/*
+	/* TESTING
 	$api_key = true;
 	$success = true;
 	$activated = true;
@@ -112,11 +182,15 @@ if ( ( $api_key && $product_id && $instance && $last_check_diff > ( 24 * 60 * 60
 				$status = 'inactive'; // Set plugin license to inactive, if license key is valid, but not activated.
 			}
 		} else {
-			$status = 'invalid'; // Set plugin license to invalid, if user has set a license key, but it is invalid or expired.
+			// $status = 'invalid'; // Set plugin license to invalid, if user has set a license key, but it is invalid or expired.
+			$status = $status; // Keep existing status, as user has an API key, but the request was not successful to get license data from hucommerce.hu website.
 		}
 	} else {
 		$status = 'free'; // Set plugin license to free if no license key given.
 	}
+
+	$current_time = current_datetime();
+	$current_time = $current_time->getTimestamp() + $current_time->getOffset();
 
 	$license_status = array(
 		'last_check' => $current_time,
@@ -131,42 +205,142 @@ if ( ( $api_key && $product_id && $instance && $last_check_diff > ( 24 * 60 * 60
 	update_option( 'surbma_hc_license_status', $license_status );
 }
 
-/*
- *
- * HuCommerce Whitelist
- *
- * We have a whitelist for domains, that don't need API key to use PRO version
- *
-*/
+if ( !$whitelisted ) {
+	// Everyday I'm shuffling...I mean updating the status
+	add_action( 'init', function() {
+		$license_status = get_option( 'surbma_hc_license_status', array() );
+		$last_check = isset( $license_status['last_check'] ) && $license_status['last_check'] ? $license_status['last_check'] : false;
+		$current_time = current_datetime();
+		$current_time = $current_time->getTimestamp() + $current_time->getOffset();
+		$last_check_diff = $last_check ? $current_time - $last_check : '86401';
 
-// Get the current website's domain
-$current_domain = $_SERVER['HTTP_HOST'];
-$current_domain = preg_replace('/^(www\.)/i', '', $current_domain); // remove www prefix if it exists
-$current_domain = preg_replace('/\/.*$/i', '', $current_domain); // remove everything after the first slash
-
-// Enable PRO for hucommerce.hu domain
-if ( 'hucommerce.hu' == $current_domain ) {
-	define( 'SURBMA_HC_PLUGIN_LICENSE', 'active' );
-	define( 'SURBMA_HC_PREMIUM', true );
-	define( 'SURBMA_HC_PRO_USER', true );
-} else {
-	/*
-	 * Temporary disabled feature, will be enabled in the future
-	 *
-	$response = wp_remote_get( 'https://www.hucommerce.hu/hucommerce-whitelist.json' );
-
-	if ( !is_wp_error( $response ) ) {
-		$json = wp_remote_retrieve_body( $response );
-		$domains = json_decode( $json, true );
-
-		// Check if current domain is in the whitelist. If it is, enable PRO version.
-		if ( in_array( array( 'domain' => $current_domain ), $domains ) ) {
-			define( 'SURBMA_HC_PLUGIN_LICENSE', 'active' );
-			define( 'SURBMA_HC_PREMIUM', true );
-			define( 'SURBMA_HC_PRO_USER', true );
+		if ( $last_check_diff > ( 24 * 60 * 60 ) ) {
+			surbma_hc_license_status_update();
 		}
-	}
-	*/
+	} );
+
+	// License management page actions
+	add_action( 'current_screen', function() {
+		$screen = get_current_screen();
+		global $surbma_hc_license_page;
+
+		// Stop if we are not on the License Management page
+		if ( $surbma_hc_license_page != $screen->base ) {
+			return;
+		}
+
+		$update_request = isset( $_GET['settings-updated'] ) && true == $_GET['settings-updated'] ? true : false;
+		$manual_request = isset( $_GET['hc-request'] ) ? $_GET['hc-request'] : false;
+
+		// Update license status if License Management page settings are updated
+		if ( $update_request ) {
+			surbma_hc_license_status_update();
+		}
+
+		// Stop if there is no manual request
+		if ( !$manual_request ) {
+			return;
+		}
+
+		// Stop if there is manual request, but not valid
+		if ( 'activate' != $manual_request && 'deactivate' != $manual_request && 'status' != $manual_request ) {
+			return;
+		}
+
+		// We are indeed on the License Management page and there is a valid manual request...
+
+		// Activate request sent from HuCommerce Pro menu with the "Frissítés & Újra aktiválás" button
+		if ( 'activate' == $manual_request ) {
+			surbma_hc_license_api_manager_action( 'activate' );
+		}
+
+		// Dectivate request sent from HuCommerce Pro menu with the "Megtartás & deaktiválás" button
+		if ( 'deactivate' == $manual_request ) {
+			surbma_hc_license_api_manager_action( 'deactivate' );
+		}
+
+		// Status request sent from HuCommerce Pro menu with the "API szinkronizálás" link
+		if ( 'status' == $manual_request ) {
+			surbma_hc_license_api_manager_action( 'status' );
+		}
+
+		// Update license status
+		surbma_hc_license_status_update();
+
+		// Remove query parameter from url
+		$url = esc_url_raw( remove_query_arg( 'hc-request' ) );
+		$url = add_query_arg( 'hc-request-finished', $manual_request, $url );
+		wp_redirect( $url );
+	} );
+
+	// Fires when the surbma_hc_license option is added
+	add_action( 'add_option_surbma_hc_license', function( $name, $value ) {
+		// update_option( 'surbma_hc_license_test', $value['licensekey'] );
+		$home_url = parse_url( get_option( 'home' ) );
+
+		// API variables
+		$api_key = isset( $value['licensekey'] ) && $value['licensekey'] ? $value['licensekey'] : false;
+		$product_id = isset( $value['product_id'] ) && $value['product_id'] ? $value['product_id'] : '1135';
+		$instance = isset( $value['instance'] ) && $value['instance'] ? $value['instance'] : false;
+		$object = isset( $home_url['host'] ) ? $home_url['host'] : '';
+
+		$request_args = array(
+			'wc_am_action'	=> 'activate',
+			'api_key'		=> $api_key,
+			'product_id'	=> $product_id,
+			'instance'		=> $instance,
+			'object'		=> $object
+		);
+
+		$request_url = surbma_hc_license_create_url( $request_args );
+		$request_data = wp_remote_get( $request_url );
+
+		// Update license status
+		surbma_hc_license_status_update();
+	}, 10, 2 );
+
+	// Fires when the surbma_hc_license option is updated with new values
+	add_action( 'update_option_surbma_hc_license', function( $old_value, $value ) {
+		$home_url = parse_url( get_option( 'home' ) );
+
+		// API variables
+		$api_key = isset( $value['licensekey'] ) && $value['licensekey'] ? $value['licensekey'] : false;
+		$product_id = isset( $value['product_id'] ) && $value['product_id'] ? $value['product_id'] : false;
+		$instance = isset( $value['instance'] ) && $value['instance'] ? $value['instance'] : false;
+		$object = isset( $home_url['host'] ) ? $home_url['host'] : '';
+
+		$old_api_key = isset( $old_value['licensekey'] ) && $old_value['licensekey'] ? $old_value['licensekey'] : false;
+		$old_product_id = isset( $old_value['product_id'] ) && $old_value['product_id'] ? $old_value['product_id'] : false;
+		$old_instance = isset( $old_value['instance'] ) && $old_value['instance'] ? $old_value['instance'] : false;
+
+		// Deactivate previous API key
+		if ( $old_api_key && $old_product_id && $old_instance ) {
+			$deactivate_request_args = array(
+				'wc_am_action'	=> 'deactivate',
+				'api_key'		=> $old_api_key,
+				'product_id'	=> $old_product_id,
+				'instance'		=> $old_instance
+			);
+			$deactivate_request_url = surbma_hc_license_create_url( $deactivate_request_args );
+			$deactivate_request_data = wp_remote_get( $deactivate_request_url );
+		}
+
+		// Activate new API key
+		if ( $api_key && $product_id && $instance ) {
+			$request_args = array(
+				'wc_am_action'	=> 'activate',
+				'api_key'		=> $api_key,
+				'product_id'	=> $product_id,
+				'instance'		=> $instance,
+				'object'		=> $object
+			);
+			$request_url = surbma_hc_license_create_url( $request_args );
+			$request_data = wp_remote_get( $request_url );
+		}
+
+		// Update license status
+		surbma_hc_license_status_update();
+	}, 10, 2 );
 }
 
 /*
@@ -177,13 +351,7 @@ if ( 'hucommerce.hu' == $current_domain ) {
  * Values can be: active, inactive, invalid, free
  *
 */
-if ( !defined( 'SURBMA_HC_PLUGIN_LICENSE' ) ) {
-	if ( $status ) {
-		define( 'SURBMA_HC_PLUGIN_LICENSE', $status );
-	} else {
-		define( 'SURBMA_HC_PLUGIN_LICENSE', 'free' );
-	}
-}
+define( 'SURBMA_HC_PLUGIN_LICENSE', $status );
 
 /*
  *
@@ -193,12 +361,10 @@ if ( !defined( 'SURBMA_HC_PLUGIN_LICENSE' ) ) {
  * Values can be: true, false (BUT php uses it to be 1 or none)
  *
 */
-if ( !defined( 'SURBMA_HC_PREMIUM' ) ) {
-	if ( 'active' == $status ) {
-		define( 'SURBMA_HC_PREMIUM', true );
-	} else {
-		define( 'SURBMA_HC_PREMIUM', false );
-	}
+if ( 'active' == $status ) {
+	define( 'SURBMA_HC_PREMIUM', true );
+} else {
+	define( 'SURBMA_HC_PREMIUM', false );
 }
 
 /*
@@ -209,82 +375,11 @@ if ( !defined( 'SURBMA_HC_PREMIUM' ) ) {
  * Values can be: true, false (BUT php uses it to be 1 or none)
  *
 */
-if ( !defined( 'SURBMA_HC_PRO_USER' ) ) {
-	if ( isset( $license_options['licensekey'] ) && $license_options['licensekey'] ) {
-		define( 'SURBMA_HC_PRO_USER', true );
-	} else {
-		define( 'SURBMA_HC_PRO_USER', false );
-	}
+if ( 'free' != $status ) {
+	define( 'SURBMA_HC_PRO_USER', true );
+} else {
+	define( 'SURBMA_HC_PRO_USER', false );
 }
-
-// Fires when the surbma_hc_license option is added
-add_action( 'add_option_surbma_hc_license', function( $name, $value ) {
-	// update_option( 'surbma_hc_license_test', $value['licensekey'] );
-	$home_url = parse_url( get_option( 'home' ) );
-
-	// API variables
-	$api_key = isset( $value['licensekey'] ) && $value['licensekey'] ? $value['licensekey'] : false;
-	$product_id = isset( $value['product_id'] ) && $value['product_id'] ? $value['product_id'] : '1135';
-	$instance = isset( $value['instance'] ) && $value['instance'] ? $value['instance'] : false;
-	$object = isset( $home_url['host'] ) ? $home_url['host'] : '';
-
-	$request_args = array(
-		'wc_am_action'	=> 'activate',
-		'api_key'		=> $api_key,
-		'product_id'	=> $product_id,
-		'instance'		=> $instance,
-		'object'		=> $object
-	);
-
-	$request_url = surbma_hc_create_url( $request_args );
-	$request_data = wp_remote_get( $request_url );
-
-	// Delete surbma_hc_license_status option to force this option to save again
-	delete_option( 'surbma_hc_license_status' );
-}, 10, 2 );
-
-// Fires when the surbma_hc_license option is updated with new values
-add_action( 'update_option_surbma_hc_license', function( $old_value, $value ) {
-	$home_url = parse_url( get_option( 'home' ) );
-
-	// API variables
-	$api_key = isset( $value['licensekey'] ) && $value['licensekey'] ? $value['licensekey'] : false;
-	$product_id = isset( $value['product_id'] ) && $value['product_id'] ? $value['product_id'] : false;
-	$instance = isset( $value['instance'] ) && $value['instance'] ? $value['instance'] : false;
-	$object = isset( $home_url['host'] ) ? $home_url['host'] : '';
-
-	$old_api_key = isset( $old_value['licensekey'] ) && $old_value['licensekey'] ? $old_value['licensekey'] : false;
-	$old_product_id = isset( $old_value['product_id'] ) && $old_value['product_id'] ? $old_value['product_id'] : false;
-	$old_instance = isset( $old_value['instance'] ) && $old_value['instance'] ? $old_value['instance'] : false;
-
-	// Deactivate previous API key
-	if ( $old_api_key && $old_product_id && $old_instance ) {
-		$deactivate_request_args = array(
-			'wc_am_action'	=> 'deactivate',
-			'api_key'		=> $old_api_key,
-			'product_id'	=> $old_product_id,
-			'instance'		=> $old_instance
-		);
-		$deactivate_request_url = surbma_hc_create_url( $deactivate_request_args );
-		$deactivate_request_data = wp_remote_get( $deactivate_request_url );
-	}
-
-	// Activate new API key
-	if ( $api_key && $product_id && $instance ) {
-		$request_args = array(
-			'wc_am_action'	=> 'activate',
-			'api_key'		=> $api_key,
-			'product_id'	=> $product_id,
-			'instance'		=> $instance,
-			'object'		=> $object
-		);
-		$request_url = surbma_hc_create_url( $request_args );
-		$request_data = wp_remote_get( $request_url );
-	}
-
-	// Delete surbma_hc_license_status option to force this option to save again
-	delete_option( 'surbma_hc_license_status' );
-}, 10, 2 );
 
 // License notices
 add_action( 'admin_notices', function() {
