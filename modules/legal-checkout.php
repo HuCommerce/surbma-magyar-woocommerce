@@ -225,24 +225,24 @@ add_action( 'woocommerce_checkout_process', function() {
 	}
 } );
 
-add_action( 'woocommerce_checkout_update_order_meta', function( $order_id ) {
+add_action( 'woocommerce_checkout_create_order', function( $order ) {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
 	if ( !empty( $_POST['accept_tos'] ) ) {
-		update_post_meta( $order_id, 'accept_tos', true );
+		$order->add_meta_data( 'accept_tos', true, true );
 	}
 
 	if ( !empty( $_POST['accept_pp'] ) ) {
-		update_post_meta( $order_id, 'accept_pp', true );
+		$order->add_meta_data( 'accept_pp', true, true );
 	}
 
 	if ( !empty( $_POST['accept_custom1'] ) ) {
-		update_post_meta( $order_id, 'accept_custom1', true );
+		$order->add_meta_data( 'accept_custom1', true, true );
 	}
 
 	if ( !empty( $_POST['accept_custom2'] ) ) {
-		update_post_meta( $order_id, 'accept_custom2', true );
+		$order->add_meta_data( 'accept_custom2', true, true );
 	}
 } );
 
@@ -251,10 +251,10 @@ add_action( 'woocommerce_admin_order_data_after_billing_address', function( $ord
 	$acceptcustom1labelValue = isset( $options['acceptcustom1label'] ) && $options['acceptcustom1label'] ? $options['acceptcustom1label'] : __( 'Custom 1 checkbox', 'surbma-magyar-woocommerce' );
 	$acceptcustom2labelValue = isset( $options['acceptcustom2label'] ) && $options['acceptcustom2label'] ? $options['acceptcustom2label'] : __( 'Custom 2 checkbox', 'surbma-magyar-woocommerce' );
 
-	$accepttos = get_post_meta( $order->get_id(), 'accept_tos', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
-	$acceptpp = get_post_meta( $order->get_id(), 'accept_pp', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
-	$acceptcustom1 = get_post_meta( $order->get_id(), 'accept_custom1', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
-	$acceptcustom2 = get_post_meta( $order->get_id(), 'accept_custom2', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
+	$accepttos = $order->get_meta( 'accept_tos', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
+	$acceptpp = $order->get_meta( 'accept_pp', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
+	$acceptcustom1 = $order->get_meta( 'accept_custom1', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
+	$acceptcustom2 = $order->get_meta( 'accept_custom2', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
 
 	if ( $accepttos ) {
 		echo '<p><strong>' . esc_html__( 'Terms of Service', 'surbma-magyar-woocommerce' ) . ':</strong> ' . esc_html( $accepttos ) . '</p>';
