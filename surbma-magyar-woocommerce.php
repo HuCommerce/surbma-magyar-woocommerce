@@ -55,6 +55,12 @@ add_action( 'plugins_loaded', function() {
 	}
 } );
 
+add_action( 'before_woocommerce_init', function() {
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+	}
+} );
+
 // Create a check for WooCommerce version. Used for deprecated functions for older WooCommerce versions.
 function surbma_hc_woocommerce_version_check( $version ) {
 	if ( class_exists( 'WooCommerce' ) ) {
