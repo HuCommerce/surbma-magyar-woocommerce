@@ -103,7 +103,7 @@ function surbma_hc_page_social_nav() {
 	ob_start();
 		?>
 		<li><a class="uk-inline" href="https://hucommerce.us20.list-manage.com/subscribe?u=8e6a039140be449ecebeb5264&id=2f5c70bc50&EMAIL=<?php echo urlencode( $current_user->user_email ); ?>&FNAME=<?php echo urlencode( $current_user->user_firstname ); ?>&LNAME=<?php echo urlencode( $current_user->user_lastname ); ?>&URL=<?php echo urlencode( $home_url ); ?>" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: mail"></span> <?php esc_html_e( 'Newsletter', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
-		<li><a class="uk-inline" href="https://www.hucommerce.hu/ugyfelszolgalat/" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: lifesaver"></span> <?php esc_html_e( 'Support', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
+		<li><a class="uk-inline" href="#" onclick="Beacon('open'); Beacon('navigate', '/ask/message')"><span class="uk-margin-small-right" uk-icon="icon: lifesaver"></span> <?php esc_html_e( 'Support', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
 		<li><a class="uk-inline" href="https://www.facebook.com/groups/HuCommerce.hu/" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: facebook"></span> <?php esc_html_e( 'Facebook group', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
 		<li><a class="uk-inline" href="https://hu.wordpress.org/plugins/surbma-magyar-woocommerce/" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: wordpress"></span> <?php esc_html_e( 'WordPress.org', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
 		<li><a class="uk-inline" href="https://www.hucommerce.hu" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: world"></span> HuCommerce.hu <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
@@ -244,7 +244,7 @@ function surbma_hc_page_card_footer() {
 				<div class="uk-navbar-right">
 					<ul class="uk-navbar-nav">
 						<li><a href="https://hucommerce.us20.list-manage.com/subscribe?u=8e6a039140be449ecebeb5264&id=2f5c70bc50&EMAIL=<?php echo urlencode( $current_user->user_email ); ?>&FNAME=<?php echo urlencode( $current_user->user_firstname ); ?>&LNAME=<?php echo urlencode( $current_user->user_lastname ); ?>&URL=<?php echo urlencode( $home_url ); ?>" target="_blank"><span uk-icon="icon: mail"></span></a></li>
-						<li><a href="https://www.hucommerce.hu/ugyfelszolgalat/" target="_blank"><span uk-icon="icon: lifesaver"></span></a></li>
+						<li><a href="#" onclick="Beacon('open'); Beacon('navigate', '/ask/message')"><span uk-icon="icon: lifesaver"></span></a></li>
 						<li><a href="https://www.facebook.com/groups/HuCommerce.hu/" target="_blank"><span uk-icon="icon: facebook"></span></a></li>
 						<li><a href="https://hu.wordpress.org/plugins/surbma-magyar-woocommerce/" target="_blank"><span uk-icon="icon: wordpress"></span></a></li>
 						<li><a href="https://www.hucommerce.hu" target="_blank"><span uk-icon="icon: world"></span></a></li>
