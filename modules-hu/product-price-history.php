@@ -306,6 +306,16 @@ if ( 1 == $module_productpricehistoryValue ) {
 			'product_id' => ''
 		), $atts ) );
 
+		// Convert product_id parameter into an integer
+		$product_id = $product_id ? intval( $product_id ) : '';
+
+		// Check if given product id in parameter is a valid number
+		if ( 0 === $product_id || 1 === $product_id ) {
+			return '<div class="woocommerce-error">' . '<strong>' . __( 'Error with [hc-termekartortenet] shortcode', 'surbma-magyar-woocommerce' ) . '</strong><br>' . __( 'The product_id parameter is not valid.', 'surbma-magyar-woocommerce' ) . '</div>';
+		}
+
+		$shortcode_has_product_id = $product_id ? true : false;
+
 		$options = get_option( 'surbma_hc_fields' );
 		$productpricehistory_showlowestpriceValue = isset( $options['productpricehistory-showlowestprice'] ) && 1 == $options['productpricehistory-showlowestprice'] ? 1 : 0;
 		$productpricehistory_lowestpricetextValue = isset( $options['productpricehistory-lowestpricetext'] ) && $options['productpricehistory-lowestpricetext'] ? $options['productpricehistory-lowestpricetext'] : __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
@@ -332,94 +342,118 @@ if ( 1 == $module_productpricehistoryValue ) {
 			return;
 		}
 
-		// Overrides by individual product settings
-		$product_lowestpricetext = get_post_meta( $product_id, '_hc_product_lowest_price_text' ) ? get_post_meta( $product_id, '_hc_product_lowest_price_text', true ) : false;
-		$product_hidelowestpricetext = get_post_meta( $product_id, '_hc_product_hide_lowest_price_text' ) ? get_post_meta( $product_id, '_hc_product_hide_lowest_price_text', true ) : false;
-		$productpricehistory_statisticslinkdisplayValue = get_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay' ) && 'global' != get_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay', true ) ? get_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay', true ) : $productpricehistory_statisticslinkdisplayValue;
-		$product_regular_price = intval( $product->get_regular_price() );
-		$product_price = intval( $product->get_price() );
-		$sale = $product_regular_price == $product_price ? false : true;
-
-		// Stop if not enabled by the settings
-		if ( !$productpricehistory_showlowestpriceValue && !$productpricehistory_showdiscountpriceValue && !$product_lowestpricetext ) {
-			return;
+		// Stop if $product_id is not a valid product ID
+		if ( !$product ) {
+			return '<div class="woocommerce-error">' . '<strong>' . __( 'Error with [hc-termekartortenet] shortcode', 'surbma-magyar-woocommerce' ) . '</strong><br>' . __( 'The product_id parameter is not a valid product ID.', 'surbma-magyar-woocommerce' ) . '</div>';
 		}
 
-		// Stop if there is no active sale & advanced statistcs link is not set to "Always show advanced statistics"
-		if ( !$sale && ( 'always' != $productpricehistory_statisticslinkdisplayValue ) ) {
-			return;
+		// Fill the $product_ids array with product IDs
+		if ( $shortcode_has_product_id ) {
+			// Get the product ID, that is given in the shortcode parameter
+			$product_ids = array( $product_id );
+		} else {
+			// Get all the variation IDs or return the single product ID
+			$product_ids = !empty( $product->get_children() ) ? $product->get_children() : array( $product_id );
 		}
-
-		// Stop if both settings are hidden by the product's settings: lowest price text & advanced statistics
-		if ( $product_hidelowestpricetext && 'hide' == $productpricehistory_statisticslinkdisplayValue ) {
-			return;
-		}
-
-		global $woocommerce;
-		$curreny_symbol = get_woocommerce_currency_symbol();
-
-		// Build the lowest price array
-		$lowest_price_array = array();
-		if ( get_post_meta( $product_id, '_hc_product_price_history' ) ) {
-			$product_price_history = get_post_meta( $product_id, '_hc_product_price_history', true );
-
-			for( $i = 1; $i < count( $product_price_history ) ; $i++ ) {
-				if ( strtotime( $product_price_history[$i][0] ) < strtotime( '-30 day', strtotime( $product_price_history[0][0] ) ) ) {
-					break;
-				}
-				$lowest_price_array[] = $product_price_history[$i][2];
-			}
-
-			// Check if last saved price is more, then 30 days old. In this case, empty $lowest_price_array to disable the lowest price display.
-			// This check is disabled for now, because we need to check the last 30 days since the last day, the price was dicounted.
-			/*
-			if ( strtotime( $product_price_history[0][0] ) < strtotime( '-30 day', time() ) ) {
-				$lowest_price_array = array();
-			}
-			*/
-		}
-		array_multisort( $lowest_price_array, SORT_ASC );
-
-		// Get the lowest price from the array
-		$lowest_price = $lowest_price_array ? $lowest_price_array[0] : false;
-
-		// If we have the product price and the lowest price, get the discount
-		$discount = $product_price && $lowest_price ? number_format( round( ( ( 1 - ( $product_price / $lowest_price ) ) * 100 ), 2 ), 0 ) : false;
-		$actual_discount = number_format( round( ( ( 1 - ( $product_price / $product_regular_price ) ) * 100 ), 2 ), 0 );
 
 		ob_start();
 
-			echo '<div id="product-' . $product_id . '" class="hc-product-price-history product_meta">';
-			// Custom text will overwrite the module's settings
-			if ( $sale && !$product_hidelowestpricetext ) {
-				if ( $product_lowestpricetext ) {
-					echo wp_kses_post( $product_lowestpricetext );
-				} else {
-					if ( $productpricehistory_showlowestpriceValue && $lowest_price ) {
-						echo '<div class="hc-product-price-history-price">' . wp_kses_post( $productpricehistory_lowestpricetextValue ) . ': <span>' . $lowest_price . ' ' . $curreny_symbol . '</span></div>';
-					} elseif ( $productpricehistory_showlowestpriceValue && $productpricehistory_nolowestpricetextValue ) {
-						echo '<div class="hc-product-price-history-no-lowest">' . wp_kses_post( $productpricehistory_nolowestpricetextValue ) . '</div>';
+			// Loop all product IDs we have
+			foreach ( $product_ids as $product_id ) :
+				// Overrides by individual product settings
+				$product_lowestpricetext = get_post_meta( $product_id, '_hc_product_lowest_price_text' ) ? get_post_meta( $product_id, '_hc_product_lowest_price_text', true ) : false;
+				$product_hidelowestpricetext = get_post_meta( $product_id, '_hc_product_hide_lowest_price_text' ) ? get_post_meta( $product_id, '_hc_product_hide_lowest_price_text', true ) : false;
+				$productpricehistory_statisticslinkdisplayValue = get_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay' ) && 'global' != get_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay', true ) ? get_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay', true ) : $productpricehistory_statisticslinkdisplayValue;
+				// $product_regular_price = intval( $product_object->get_regular_price() );
+				// $product_price = intval( $product_object->get_price() );
+				$product_regular_price = intval( get_post_meta( $product_id, '_regular_price', true ) );
+				$product_price = intval( get_post_meta( $product_id, '_price', true ) );
+				$sale = $product_regular_price == $product_price ? false : true;
+
+				// Stop if not enabled by the settings
+				if ( !$productpricehistory_showlowestpriceValue && !$productpricehistory_showdiscountpriceValue && !$product_lowestpricetext ) {
+					continue;
+				}
+
+				// Stop if there is no active sale & advanced statistcs link is not set to "Always show advanced statistics"
+				if ( !$sale && ( 'always' != $productpricehistory_statisticslinkdisplayValue ) ) {
+					continue;
+				}
+
+				// Stop if both settings are hidden by the product's settings: lowest price text & advanced statistics
+				if ( $product_hidelowestpricetext && 'hide' == $productpricehistory_statisticslinkdisplayValue ) {
+					continue;
+				}
+
+				global $woocommerce;
+				$curreny_symbol = get_woocommerce_currency_symbol();
+
+				// Build the lowest price array
+				$lowest_price_array = array();
+				if ( get_post_meta( $product_id, '_hc_product_price_history' ) ) {
+					$product_price_history = get_post_meta( $product_id, '_hc_product_price_history', true );
+
+					for( $i = 1; $i < count( $product_price_history ) ; $i++ ) {
+						if ( strtotime( $product_price_history[$i][0] ) < strtotime( '-30 day', strtotime( $product_price_history[0][0] ) ) ) {
+							break;
+						}
+						$lowest_price_array[] = $product_price_history[$i][2];
 					}
-					if ( $productpricehistory_showdiscountpriceValue && $discount && ( 0 <= $discount ) ) {
-						echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_discounttextValue ) . ': <span>' . $discount . '%</span></div>';
-					} elseif ( $productpricehistory_showdiscountpriceValue && !$discount ) {
-						echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_nolowestpricediscounttextValue ) . ': <span>' . $actual_discount . '%</span></div>';
+
+					// Check if last saved price is more, then 30 days old. In this case, empty $lowest_price_array to disable the lowest price display.
+					// This check is disabled for now, because we need to check the last 30 days since the last day, the price was dicounted.
+					/*
+					if ( strtotime( $product_price_history[0][0] ) < strtotime( '-30 day', time() ) ) {
+						$lowest_price_array = array();
+					}
+					*/
+				}
+				array_multisort( $lowest_price_array, SORT_ASC );
+
+				// Get the lowest price from the array
+				$lowest_price = $lowest_price_array ? $lowest_price_array[0] : false;
+
+				// If we have the product price and the lowest price, get the discount
+				$discount = $product_price && $lowest_price ? number_format( round( ( ( 1 - ( $product_price / $lowest_price ) ) * 100 ), 2 ), 0 ) : false;
+				$actual_discount = number_format( round( ( ( 1 - ( $product_price / $product_regular_price ) ) * 100 ), 2 ), 0 );
+
+				echo '<div id="product-' . $product_id . '" class="hc-product-price-history product_meta">';
+				// Custom text will overwrite the module's settings
+				if ( $sale && !$product_hidelowestpricetext ) {
+					if ( $product_lowestpricetext ) {
+						echo wp_kses_post( $product_lowestpricetext );
+					} else {
+						if ( $productpricehistory_showlowestpriceValue && $lowest_price ) {
+							echo '<div class="hc-product-price-history-price">' . wp_kses_post( $productpricehistory_lowestpricetextValue ) . ': <span>' . $lowest_price . ' ' . $curreny_symbol . '</span></div>';
+						} elseif ( $productpricehistory_showlowestpriceValue && $productpricehistory_nolowestpricetextValue ) {
+							echo '<div class="hc-product-price-history-no-lowest">' . wp_kses_post( $productpricehistory_nolowestpricetextValue ) . '</div>';
+						}
+						if ( $productpricehistory_showdiscountpriceValue && $discount && ( 0 <= $discount ) ) {
+							echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_discounttextValue ) . ': <span>' . $discount . '%</span></div>';
+						} elseif ( $productpricehistory_showdiscountpriceValue && !$discount ) {
+							echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_nolowestpricediscounttextValue ) . ': <span>' . $actual_discount . '%</span></div>';
+						}
 					}
 				}
-			}
-			if ( 'hide' != $productpricehistory_statisticslinkdisplayValue ) {
-				echo '<div class="hc-product-price-history-statistics"><a href="' . SURBMA_HC_PLUGIN_URL . '/modules-hu/product-price-history-display.php?product_id=' . $product_id . '" target="_blank">' . esc_html( $productpricehistory_statisticslinktextValue ) . '</a></div>';
-			}
-			echo '</div>';
+				if ( 'hide' != $productpricehistory_statisticslinkdisplayValue ) {
+					echo '<div class="hc-product-price-history-statistics"><a href="' . SURBMA_HC_PLUGIN_URL . '/modules-hu/product-price-history-display.php?product_id=' . $product_id . '" target="_blank">' . esc_html( $productpricehistory_statisticslinktextValue ) . '</a></div>';
+				}
+				echo '</div>';
+			endforeach;
 
 		$output_string = ob_get_contents();
 		ob_end_clean();
+
+		if ( $product->is_type( 'variable' ) ) {
+			$output_string = '<div class="hc-variable-product-price-history">' . $output_string . '</div>';
+		}
 
 		return $output_string;
 	} );
 
 	// Show the notification under the Product's price for simple products
-	add_action( 'woocommerce_single_product_summary', function() {
+	add_action( 'woocommerce_single_product_summary', 'surbma_hc_show_termekartortenet_single', 11 );
+	function surbma_hc_show_termekartortenet_single() {
 		global $product;
 
 		// This function has to run only for simple & external products
@@ -428,10 +462,11 @@ if ( 1 == $module_productpricehistoryValue ) {
 		}
 
 		echo do_shortcode( '[hc-termekartortenet]' );
-	}, 11 );
+	}
 
 	// Show the notification under the Product's price for variation products
-	add_action( 'woocommerce_single_variation', function() {
+	add_action( 'woocommerce_single_variation', 'surbma_hc_show_termekartortenet_variation', 11 );
+	function surbma_hc_show_termekartortenet_variation() {
 		global $product;
 
 		// This function has to run only for variable products
@@ -439,13 +474,8 @@ if ( 1 == $module_productpricehistoryValue ) {
 			return;
 		}
 
-		// Get variation IDs
-		$product_ids = $product->get_children();
-
-		foreach ( $product_ids as $product_id ) {
-			echo do_shortcode( '[hc-termekartortenet product_id="' . $product_id . '"]' );
-		}
-	}, 11 );
+		echo do_shortcode( '[hc-termekartortenet]' );
+	}
 
 	// Show and hide the product price history block for variable products
 	add_action( 'woocommerce_before_variations_form', function() {
@@ -453,7 +483,7 @@ if ( 1 == $module_productpricehistoryValue ) {
 		?>
 		<script>
 			jQuery(document).ready(function($){
-				$( '.hc-product-price-history' ).hide();
+				$( '.hc-variable-product-price-history .hc-product-price-history' ).hide();
 				$( 'input.variation_id' ).change( function(){
 					if( $.trim( $( 'input.variation_id' ).val() )!='' ) {
 						var variation = $( 'input.variation_id' ).val();
@@ -462,7 +492,7 @@ if ( 1 == $module_productpricehistoryValue ) {
 					}
 					if( $.trim( $( 'input.variation_id' ).val() )=='' ) {
 						// console.log('Variation ID: empty');
-						$( '.hc-product-price-history' ).slideUp( 200 );
+						$( '.hc-variable-product-price-history .hc-product-price-history' ).slideUp( 200 );
 					}
 				});
 			});
