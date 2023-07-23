@@ -14,20 +14,20 @@ if ( !is_wp_error( $rss_hirek ) ) {
 
 if ( $maxitems_hirek ) {
 	?>
-	<div class="uk-child-width-1-2@s uk-child-width-1-3@xl" uk-grid="masonry: true">
+	<div class="uk-child-width-1-2@s uk-child-width-1-1@m uk-child-width-1-3@l uk-child-width-1-4@xl" uk-grid="masonry: true">
 	<?php
 	// Loop through each feed item and display each item as a hyperlink.
 	foreach ( $rss_hirek_items as $item_hirek ) :
 		?>
 		<article>
-			<div class="uk-card uk-card-default uk-card-hover">
+			<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 				<div class="uk-card-media-top">
 					<a href="<?php echo esc_url( $item_hirek->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_hirek->get_title() ); ?>&utm_content=hucommerce-news" target="_blank"><img src="<?php echo esc_url( $item_hirek->get_description() ); ?>" alt="<?php echo esc_html( $item_hirek->get_title() ); ?>" style="display: block;width: 100%;height: auto;"></a>
 				</div>
 				<div class="uk-card-body">
 					<h2 class="uk-h5 uk-text-bold"><?php echo wp_kses_post( $item_hirek->get_title() ); ?></h2>
 					<?php echo wp_kses_post( $item_hirek->get_content() ); ?>
-					<p><a href="<?php echo esc_url( $item_hirek->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_hirek->get_title() ); ?>&utm_content=hucommerce-news" class="uk-button uk-button-primary uk-width-1-1" target="_blank"><?php esc_html_e( 'Read article', 'surbma-magyar-woocommerce' ); ?></a></p>
+					<p><a href="<?php echo esc_url( $item_hirek->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_hirek->get_title() ); ?>&utm_content=hucommerce-news" class="cps-more uk-button uk-button-text uk-button-small uk-padding-remove-horizontal uk-animation-toggle" target="_blank"><?php esc_html_e( 'Read article', 'surbma-magyar-woocommerce' ); ?> <span class="uk-animation-slide-left-small" uk-icon="icon: arrow-right"></span></a></p>
 				</div>
 			</div>
 		</article>

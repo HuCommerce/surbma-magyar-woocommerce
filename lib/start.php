@@ -20,12 +20,12 @@ if ( !function_exists( 'cps' ) ) {
 }
 
 // Include files.
-if ( is_admin() ) {
-	include_once SURBMA_HC_PLUGIN_DIR . '/lib/admin.php';
-}
 // * HUCOMMERCE START
 include_once SURBMA_HC_PLUGIN_DIR . '/lib/license.php';
 // * HUCOMMERCE END
+if ( is_admin() ) {
+	include_once SURBMA_HC_PLUGIN_DIR . '/lib/admin.php';
+}
 
 $options = get_option( 'surbma_hc_fields' );
 

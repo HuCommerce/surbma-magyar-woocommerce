@@ -14,13 +14,13 @@ if ( !is_wp_error( $rss_ajanlatok ) ) {
 
 if ( $maxitems_ajanlatok ) {
 	?>
-	<div class="uk-child-width-1-2@s uk-child-width-1-3@xl" uk-grid="masonry: true">
+	<div class="uk-child-width-1-2@s uk-child-width-1-1@m uk-child-width-1-3@l uk-child-width-1-4@xl" uk-grid="masonry: true">
 	<?php
 	// Loop through each feed item and display each item as a hyperlink.
 	foreach ( $rss_ajanlatok_items as $item_ajanlatok ) :
 		?>
 		<article>
-			<div class="uk-card uk-card-default uk-card-hover">
+			<div class="uk-card uk-card-default uk-card-small uk-card-hover">
 				<div class="uk-card-media-top">
 					<a href="<?php echo esc_url( $item_ajanlatok->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_ajanlatok->get_title() ); ?>&utm_content=hucommerce-offers" target="_blank">
 						<img src="<?php echo esc_url( $item_ajanlatok->get_description() ); ?>" alt="<?php echo esc_html( $item_ajanlatok->get_title() ); ?>" style="display: block;width: 100%;height: auto;">
@@ -29,7 +29,9 @@ if ( $maxitems_ajanlatok ) {
 				<div class="uk-card-body">
 					<h2 class="uk-h5 uk-text-bold"><?php echo wp_kses_post( $item_ajanlatok->get_title() ); ?></h2>
 					<?php echo wp_kses_post( $item_ajanlatok->get_content() ); ?>
-					<p><a href="<?php echo esc_url( $item_ajanlatok->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_ajanlatok->get_title() ); ?>&utm_content=hucommerce-offers" class="uk-button uk-button-primary uk-width-1-1" target="_blank"><?php esc_html_e( 'View offer', 'surbma-magyar-woocommerce' ); ?></a></p>
+				</div>
+				<div class="uk-card-footer">
+					<a class="cps-more uk-button uk-button-text uk-button-small uk-padding-remove-horizontal uk-animation-toggle" href="<?php echo esc_url( $item_ajanlatok->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_ajanlatok->get_title() ); ?>&utm_content=hucommerce-offers" target="_blank"><?php esc_html_e( 'View offer', 'surbma-magyar-woocommerce' ); ?> <span class="uk-animation-slide-left-small" uk-icon="icon: arrow-right"></span></a>
 				</div>
 			</div>
 		</article>

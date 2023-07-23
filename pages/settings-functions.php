@@ -21,6 +21,16 @@ function cps_hc_wcgems_nav_item_header( $nav_item_title ) {
 	echo $header;
 }
 
+function cps_hc_wcgems_module_nav_item( $module_title, $module_option ) {
+	$options = get_option( 'surbma_hc_fields' );
+
+	$module = '';
+	$moduleValue = isset( $options[$module_option] ) ? $options[$module_option] : 0;
+	$module_class = 1 == $moduleValue ? '' : 'uk-hidden';
+
+	echo '<li class="' . esc_attr( $module_class ) . '"><a class="uk-offcanvas-close uk-modal-close-default"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: chevron-right; ratio: 1"></span> ' . esc_html__( $module_title, 'surbma-magyar-woocommerce' ) . '</a></li>';
+}
+
 function cps_hc_wcgems_form_accordion_title( $module_title, $module_option, $module_free = false, $module_new = false, $module_beta = false ) {
 	$options = get_option( 'surbma_hc_fields' );
 
@@ -49,6 +59,10 @@ function cps_hc_wcgems_form_accordion_title( $module_title, $module_option, $mod
 	echo $module;
 }
 
+function cps_hc_wcgems_module_card_more( $href ) {
+	echo '<a class="cps-more uk-button uk-button-text uk-button-small uk-padding-remove-horizontal uk-animation-toggle" href="https://www.hucommerce.hu/modul/' . esc_attr( $href ) . '/" target="_blank">' . esc_html__( 'Read more', 'surbma-magyar-woocommerce' ) . ' <span class="uk-animation-slide-left-small" uk-icon="icon: arrow-right"></span></a>';
+}
+
 function cps_hc_wcgems_form_field_main( $field_label, $field_option, $field_free = false ) {
 	$options = get_option( 'surbma_hc_fields' );
 	$field = '';
@@ -57,7 +71,7 @@ function cps_hc_wcgems_form_field_main( $field_label, $field_option, $field_free
 	ob_start();
 		?>
 		<div class="cps-form-module cps-form-horizontal cps-form-checkbox<?php echo esc_html( $disabled ); ?>">
-			<div class="uk-form-label uk-text-bold uk-text-uppercase"><span><?php esc_html_e( $field_label, 'surbma-magyar-woocommerce' ); ?></span></div>
+			<div class="uk-form-label uk-text-bold"><span><?php esc_html_e( $field_label, 'surbma-magyar-woocommerce' ); ?>:</span></div>
 			<div class="uk-form-controls">
 				<div class="switch-wrap">
 					<label class="switch">

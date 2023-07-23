@@ -85,7 +85,11 @@ $custom_product_id = isset( $_GET['hc-product_id'] ) ? $_GET['hc-product_id'] : 
 <?php }
 
 if ( defined( 'WP_DEBUG' ) && 1 == WP_DEBUG ) {
-	echo '<h4>API Request</h4>';
+	echo '<h4>License options</h4>';
+	echo '<pre>';
+	print_r( $license_options );
+	echo '</pre>';
+	echo '<h4>License status</h4>';
 	echo '<pre>';
 	print_r( $license_status );
 	echo '</pre>';

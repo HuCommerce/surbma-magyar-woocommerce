@@ -19,7 +19,7 @@ if ( $maxitems_katalogus ) {
 	?>
 	<div uk-filter="target: .directory-filter">
 
-		<ul class="uk-subnav uk-subnav-pill uk-text-small uk-margin-remove-left uk-flex uk-flex-center uk-hidden">
+		<ul class="uk-subnav uk-subnav-pill uk-text-small uk-hidden">
 			<li class="uk-active" uk-filter-control><a href="#"><?php esc_html_e( 'All post', 'surbma-magyar-woocommerce' ); ?></a></li>
 			<li uk-filter-control="[data-tags*='woocommerce-extensions']"><a href="#"><span uk-icon="icon: bag;ratio: .7"></span> <?php esc_html_e( 'WooCommerce Extensions', 'surbma-magyar-woocommerce' ); ?></a></li>
 			<li uk-filter-control="[data-tags*='woocommerce-fejlesztok']"><a href="#"><span uk-icon="icon: cart;ratio: .7"></span> <?php esc_html_e( 'WooCommerce Developers', 'surbma-magyar-woocommerce' ); ?></a></li>
@@ -28,22 +28,22 @@ if ( $maxitems_katalogus ) {
 			<li uk-filter-control="[data-tags*='ugyvedek']"><a href="#"><span uk-icon="icon: thumbnails;ratio: .7"></span> <?php esc_html_e( 'Lawyers', 'surbma-magyar-woocommerce' ); ?></a></li>
 		</ul>
 
-		<ul class="directory-filter uk-child-width-1-2@s uk-child-width-1-3@xl" uk-grid="masonry: true">
+		<ul class="directory-filter uk-child-width-1-2@s uk-child-width-1-2@m uk-child-width-1-3@l uk-child-width-1-5@xl" uk-grid="masonry: true">
 		<?php
 		// Loop through each feed item and display each item as a hyperlink.
 		foreach ( $rss_katalogus_items as $item_katalogus ) :
 			?>
 			<li data-tags="<?php echo basename( esc_url( $item_katalogus->get_permalink() ) ); ?>">
-				<div class="uk-card uk-card-default uk-card-hover">
+				<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 					<div class="uk-card-media-top">
 						<a href="<?php echo esc_url( $item_katalogus->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_katalogus->get_title() ); ?>&utm_content=hucommerce-directory" target="_blank">
 							<img src="<?php echo esc_url( $item_katalogus->get_description() ); ?>" alt="<?php echo esc_html( $item_katalogus->get_title() ); ?>" style="display: block;width: 100%;height: auto;">
 						</a>
 					</div>
-					<div class="uk-card-body">
+					<div class="uk-card-body uk-text-center">
 						<h2 class="uk-h5 uk-text-bold"><?php echo wp_kses_post( $item_katalogus->get_title() ); ?></h2>
-						<?php echo wp_kses_post( $item_katalogus->get_content() ); ?>
-						<p><a href="<?php echo esc_url( $item_katalogus->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_katalogus->get_title() ); ?>&utm_content=hucommerce-directory" class="uk-button uk-button-primary uk-width-1-1" target="_blank"><?php esc_html_e( 'View post', 'surbma-magyar-woocommerce' ); ?></a></p>
+						<?php /*echo wp_kses_post( $item_katalogus->get_content() );*/ ?>
+						<p><a href="<?php echo esc_url( $item_katalogus->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_katalogus->get_title() ); ?>&utm_content=hucommerce-directory" class="cps-more uk-button uk-button-text uk-button-small uk-padding-remove-horizontal uk-animation-toggle" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span class="uk-animation-slide-left-small" uk-icon="icon: arrow-right"></span></a></p>
 					</div>
 				</div>
 			</li>
@@ -52,7 +52,7 @@ if ( $maxitems_katalogus ) {
 		?>
 		</ul>
 	</div>
-	<p class="uk-text-center uk-margin-medium-top"><a class="uk-button uk-button-danger" href="https://www.hucommerce.hu/katalogus/" target="_blank"><?php esc_html_e( 'Check all posts in HuCommerce Directory', 'surbma-magyar-woocommerce' ); ?></a></p>
+	<p class="uk-text-center uk-margin-medium-top"><a class="cps-button uk-button uk-button-primary uk-button-large" href="https://www.hucommerce.hu/katalogus/" target="_blank"><?php esc_html_e( 'Check all posts in HuCommerce Directory', 'surbma-magyar-woocommerce' ); ?></a></p>
 	<?php
 } else {
 	?>
