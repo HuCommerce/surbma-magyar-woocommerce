@@ -115,6 +115,16 @@ add_action( 'woocommerce_before_checkout_form' , function() {
 	}
 } );
 
+// Custom submit button text
+add_filter( 'woocommerce_order_button_text', function( $button_text ) {
+	$options = get_option( 'surbma_hc_fields' );
+	$checkout_customsubmitbuttontextValue = isset( $options['checkout-customsubmitbuttontext'] ) && '' != $options['checkout-customsubmitbuttontext'] ? $options['checkout-customsubmitbuttontext'] : false;
+	if ( $checkout_customsubmitbuttontextValue ) {
+		$button_text = $checkout_customsubmitbuttontextValue;
+	}
+	return $button_text;
+} );
+
 add_action( 'wp_enqueue_scripts', function() {
 	if ( is_checkout() ) {
 		$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';

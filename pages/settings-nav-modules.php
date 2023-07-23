@@ -863,6 +863,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 				<?php cps_hc_wcgems_form_field_checkbox( 'Inline Postcode and City fields', 'postcodecitypair', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_checkbox( 'Inline Phone and Email fields', 'phoneemailpair', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_checkbox( 'Make Email field the first field', 'emailtothetop', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_text( 'Custom submit button text', 'checkout-customsubmitbuttontext', '', false, true, true ); ?>
 			</ul>
 		</li>
 		<li>

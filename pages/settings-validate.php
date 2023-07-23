@@ -131,6 +131,7 @@ function surbma_hc_fields_validate( $input ) {
 	}
 
 	// Say our text option must be safe text with no HTML tags
+	$input['checkout-customsubmitbuttontext'] = wp_filter_nohtml_kses( $input['checkout-customsubmitbuttontext'] );
 	$input['returntoshopmessage'] = wp_filter_nohtml_kses( $input['returntoshopmessage'] );
 	$input['loginredirecturl'] = wp_filter_nohtml_kses( $input['loginredirecturl'] );
 	$input['registrationredirecturl'] = wp_filter_nohtml_kses( $input['registrationredirecturl'] );
