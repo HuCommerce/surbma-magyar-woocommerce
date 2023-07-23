@@ -23,8 +23,8 @@ $current_domain = preg_replace('/\/.*$/i', '', $current_domain); // remove every
 // Check for manual request
 $manual_request = isset( $_GET['hc-request'] ) ? true : false;
 
-// Enable PRO for hucommerce.hu domain
-if ( 'hucommerce.hu' == $current_domain || 'demo.hucommerce.hu' == $current_domain || 'woocommerce.local' == $current_domain ) {
+// Whitelist enabled domains
+if ( ( ( defined( 'SURBMA_HC_WHITELIST' ) && false !== SURBMA_HC_WHITELIST ) && ( 'hucommerce.hu' == $current_domain || 'demo.hucommerce.hu' == $current_domain || 'woocommerce.local' == $current_domain ) ) || ( !defined( 'SURBMA_HC_WHITELIST' ) && ( 'hucommerce.hu' == $current_domain || 'demo.hucommerce.hu' == $current_domain || 'woocommerce.local' == $current_domain ) ) ) {
 	$status = 'active';
 	$whitelisted = true;
 } else {
