@@ -84,15 +84,16 @@ add_action( 'woocommerce_product_options_general_product_data', function() {
 	echo '</div>';
 } );
 
-add_action( 'woocommerce_process_product_meta', function( $post_id, $post ) {
-	update_post_meta( $post_id, '_hc_productpriceadditions_product_prefix', $_POST['_hc_productpriceadditions_product_prefix'] );
-	update_post_meta( $post_id, '_hc_productpriceadditions_disable_product_prefix', $_POST['_hc_productpriceadditions_disable_product_prefix'] );
-	update_post_meta( $post_id, '_hc_productpriceadditions_product_suffix', $_POST['_hc_productpriceadditions_product_suffix'] );
-	update_post_meta( $post_id, '_hc_productpriceadditions_disable_product_suffix', $_POST['_hc_productpriceadditions_disable_product_suffix'] );
-	update_post_meta( $post_id, '_hc_productpriceadditions_archive_prefix', $_POST['_hc_productpriceadditions_archive_prefix'] );
-	update_post_meta( $post_id, '_hc_productpriceadditions_disable_archive_prefix', $_POST['_hc_productpriceadditions_disable_archive_prefix'] );
-	update_post_meta( $post_id, '_hc_productpriceadditions_archive_suffix', $_POST['_hc_productpriceadditions_archive_suffix'] );
-	update_post_meta( $post_id, '_hc_productpriceadditions_disable_archive_suffix', $_POST['_hc_productpriceadditions_disable_archive_suffix'] );
+// Save meta data for the Product
+add_action( 'woocommerce_admin_process_product_object', function( $product ) {
+	$product->update_meta_data( '_hc_productpriceadditions_product_prefix', $_POST['_hc_productpriceadditions_product_prefix'] );
+	$product->update_meta_data( '_hc_productpriceadditions_disable_product_prefix', $_POST['_hc_productpriceadditions_disable_product_prefix'] );
+	$product->update_meta_data( '_hc_productpriceadditions_product_suffix', $_POST['_hc_productpriceadditions_product_suffix'] );
+	$product->update_meta_data( '_hc_productpriceadditions_disable_product_suffix', $_POST['_hc_productpriceadditions_disable_product_suffix'] );
+	$product->update_meta_data( '_hc_productpriceadditions_archive_prefix', $_POST['_hc_productpriceadditions_archive_prefix'] );
+	$product->update_meta_data( '_hc_productpriceadditions_disable_archive_prefix', $_POST['_hc_productpriceadditions_disable_archive_prefix'] );
+	$product->update_meta_data( '_hc_productpriceadditions_archive_suffix', $_POST['_hc_productpriceadditions_archive_suffix'] );
+	$product->update_meta_data( '_hc_productpriceadditions_disable_archive_suffix', $_POST['_hc_productpriceadditions_disable_archive_suffix'] );
 }, 10, 2 );
 
 // Display prefixes and suffixes
@@ -118,16 +119,14 @@ add_filter( 'woocommerce_get_price_html', function( $price, $product ) {
 		$product = wc_get_product( $product->get_parent_id() );
 	}
 
-	$product_id = $product->get_id();
-
-	$product_productprefix = get_post_meta( $product_id, '_hc_productpriceadditions_product_prefix' ) ? get_post_meta( $product_id, '_hc_productpriceadditions_product_prefix', true ) : false;
-	$product_disableproductprefix = get_post_meta( $product_id, '_hc_productpriceadditions_disable_product_prefix' ) ? get_post_meta( $product_id, '_hc_productpriceadditions_disable_product_prefix', true ) : false;
-	$product_productsuffix = get_post_meta( $product_id, '_hc_productpriceadditions_product_suffix' ) ? get_post_meta( $product_id, '_hc_productpriceadditions_product_suffix', true ) : false;
-	$product_disableproductsuffix = get_post_meta( $product_id, '_hc_productpriceadditions_disable_product_suffix' ) ? get_post_meta( $product_id, '_hc_productpriceadditions_disable_product_suffix', true ) : false;
-	$product_archiveprefix = get_post_meta( $product_id, '_hc_productpriceadditions_archive_prefix' ) ? get_post_meta( $product_id, '_hc_productpriceadditions_archive_prefix', true ) : false;
-	$product_disablearchiveprefix = get_post_meta( $product_id, '_hc_productpriceadditions_disable_archive_prefix' ) ? get_post_meta( $product_id, '_hc_productpriceadditions_disable_archive_prefix', true ) : false;
-	$product_archivesuffix = get_post_meta( $product_id, '_hc_productpriceadditions_archive_suffix' ) ? get_post_meta( $product_id, '_hc_productpriceadditions_archive_suffix', true ) : false;
-	$product_disablearchivesuffix = get_post_meta( $product_id, '_hc_productpriceadditions_disable_archive_suffix' ) ? get_post_meta( $product_id, '_hc_productpriceadditions_disable_archive_suffix', true ) : false;
+	$product_productprefix = $product->get_meta( '_hc_productpriceadditions_product_prefix' ) ? $product->get_meta( '_hc_productpriceadditions_product_prefix', true ) : false;
+	$product_disableproductprefix = $product->get_meta( '_hc_productpriceadditions_disable_product_prefix' ) ? $product->get_meta( '_hc_productpriceadditions_disable_product_prefix', true ) : false;
+	$product_productsuffix = $product->get_meta( '_hc_productpriceadditions_product_suffix' ) ? $product->get_meta( '_hc_productpriceadditions_product_suffix', true ) : false;
+	$product_disableproductsuffix = $product->get_meta( '_hc_productpriceadditions_disable_product_suffix' ) ? $product->get_meta( '_hc_productpriceadditions_disable_product_suffix', true ) : false;
+	$product_archiveprefix = $product->get_meta( '_hc_productpriceadditions_archive_prefix' ) ? $product->get_meta( '_hc_productpriceadditions_archive_prefix', true ) : false;
+	$product_disablearchiveprefix = $product->get_meta( '_hc_productpriceadditions_disable_archive_prefix' ) ? $product->get_meta( '_hc_productpriceadditions_disable_archive_prefix', true ) : false;
+	$product_archivesuffix = $product->get_meta( '_hc_productpriceadditions_archive_suffix' ) ? $product->get_meta( '_hc_productpriceadditions_archive_suffix', true ) : false;
+	$product_disablearchivesuffix = $product->get_meta( '_hc_productpriceadditions_disable_archive_suffix' ) ? $product->get_meta( '_hc_productpriceadditions_disable_archive_suffix', true ) : false;
 
 	// Price prefix and suffix on Product page
 	if ( is_product() ) {
