@@ -2,9 +2,9 @@
 Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
-Tested up to: 6.0
-Stable tag: 2022.4.1
-Requires PHP: 7.0
+Tested up to: 6.3
+Stable tag: 2023.1.0
+Requires PHP: 7.3
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -319,6 +319,96 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+#### 2023.1.0
+
+**Kiadás dátuma: 2023-07-24**
+
+Ez egy nagy kiadás lett, rengeteg kisebb és nagyobb módosítással. A legfontosabb változás, hogy most már HPOS/COT kompatibilis lett a HuCommerce is. Az admin felületen új főmenüpontot kapott a bővítmény, így a beállítások és az egyéb menüpontok könnyebben elérhetők. A kezelő felület is teljesen megváltozott, új, modernebb megjelenést kapott, amivel a kezelés is egyszerűbb lesz. Vannak új opciók is a modulokhoz, most új modul nem került bele ebbe a verzióba. A fókusz a kódok optimalizálásán és az új fejlesztések előkészítésén volt. Kérlek olvasd el a részleteket is, biztosan találsz számodra is hasznos funkciót, változtatást.
+
+PÉNZTÁR OLDAL MÓDOSÍTÁSOK
+
+- Új opció: egyedi Megrendelés gomb szöveg megadása.
+
+TERMÉK ÁR KIEGÉSZÍTÉSEK
+
+- [HPOS/COT](https://woocommerce.com/document/high-performance-order-storage/) kompatibilitás bevezetése.
+
+JOGI MEGFELELÉS
+
+- [HPOS/COT](https://woocommerce.com/document/high-performance-order-storage/) kompatibilitás bevezetése.
+
+ADÓSZÁM MEGJELENÍTÉSE
+
+- Kódok átrendezése logikailag.
+- Minden kódhoz leírás hozzáadása vagy módosítása.
+
+SZÁLLÍTÁSI MÓDOK ELREJTÉSE
+
+- Új opciót kapott a Szállítási módok elrejtése, amivel ez a funkció kikapcsolható, mivel van már más funkció is a modulhoz.
+- Új funkció: szállítási módok elrejtése a kosár oldalon.
+
+TERMÉK ÁR TÖRTÉNET
+
+- Shortcode paraméter értékének ellenőrzése és hibás adat esetén visszajelzés kiírása.
+- Shortcode logika átírása, hogy variálható termékek esetén is működjön.
+- Variálható termék esetén külön wrapper, hogy a dinamikus megjelenést specifikusabban lehessen célozni.
+- A termék végoldalakon megjelenítendő kódok módosítása, hogy azok kódolással felülírhatók legyenek, ha egyedi megjelenítésre van esetleg szükség.
+- A kód indent-álása a helyes szintaxis miatt.
+- A kódban a változók elnevezésének az egységesítése.
+- A "Termék ár történet" log-olása kikapcsolt modul esetén is az ingyenes változatban is.
+- Kód dokumentálásának a javításai.
+- iThemes Security bővítmény PHP Execution beállításának a felülírása, hogy a product-price-history-display.php fájl futtatható legyen.
+- Termék ár történet mentése első alkalommal, amikor egy terméket szerkesztünk.
+- Részletes statisztika link megjelenítésének a beállítása globálisan és termékenként is, akár variációnként is.
+- Külön szövegek megadása akkor, ha az aktuális kedvezményes ár a legalacsonyabb ár.
+- Logika optimalizálása a termék azonosító meghatározására.
+- Logika optimalizálása az akció meghatározására.
+- Kód optimalizálása a feltételek jobb alkalmazásával.
+- Aktuális kedvezmény számítása és használata.
+- A részletes statisztika oldalon új feltétel megadása, hogy csak megfelelő jogosultsággal lehessen törlési műveletet végrehajtani.
+- Kis módosítás a szövegezésben.
+
+MEZŐK ÉRTÉKÉNEK ELLENŐRZÉSE
+
+- A “Szállítás másik címre” opció ellenőrzése, hogy egyáltalán létezik-e?
+
+TERMÉK MÓDOSÍTÁSOK
+
+- Új opció: Kép nagyítás kikapcsolása.
+
+LICENSZ KEZELÉS
+
+- Whitelist bevezetése a saját és a Prémium WordPress weboldalakhoz.
+- A whitelist feltétel kibővítése, hogy lehessen szabályozni fejlesztésnél.
+- Kódok sorrendjének módosítása az optimális működés érdekében.
+- Új logika bevezetése a sikertelen lekérés esetén, hogy maradjon az előző státusz, amíg sikeres nem lesz a licensz státusz lekérése.
+- A Licensz kezeléshez kapcsolódó manuális műveletek csak a Licensz kezelés oldalon futnak le.
+- A globális változók értékeinek meghatározása új logikával.
+- Kódok általános optimalizálása.
+- Az API kezelés link módosítása, hogy egyből az API kulcsok kezelésére mutasson.
+
+EGYÉB
+
+- Ügyfélszolgálati link módosítása Pro előfizetőknél, hogy a Help Scout Beacon-t nyissa meg közvetlenül.
+- A HuCommerce új főmenüpontba költözött és az egyes menüpontok almenüpontként közvetlenül is elérhetőek.
+- A teljes admin UI átdolgozása.
+- Új HuCommerce logó.
+- Az egyes menüpontok külön oldalra kerültek.
+- Egységes kinézet a listázásokhoz, elemekhez.
+- A modulokhoz szűrők bevezetése.
+- Modul beállítások feltételes megjelenítése.
+- Ideiglenesen a Hírek és Ajánlatok menüpontok törlése.
+- Ajánlatok és Hírek loop-ok törlése az admin Vezérlőpult alól.
+- [HPOS/COT](https://woocommerce.com/document/high-performance-order-storage/) kompatibilitás.
+- Új "HuCommerce Pro megvásárlása" gomb a HuCommerce beállítások oldalon a navigációnál.
+- A hucommerce.hu oldalra mutató linkek javítása.
+- A Beacon kód generálása dinamikus lett.
+- Különböző feltételek megadása az egyes Beacon-ökhöz.
+- Changelog szintaxis módosítása.
+- Kompatibilitás ellenőrzése a WordPress 6.3 verzióval.
+- Kompatibilitás ellenőrzése a WooCommerce 8.0 verzióval.
+- CPS SDK frissítése a 8.13.0 verzióra.
 
 #### 2022.4.1
 
