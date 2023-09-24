@@ -42,7 +42,7 @@ add_action( 'admin_menu', function() {
 		'manage_options',
 		'surbma-hucommerce-menu',
 		'surbma_hc_modules_page',
-		'dashicons-feedback',
+		'dashicons-welcome-widgets-menus',
 		'58'
 	);
 
@@ -218,8 +218,18 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 		if ( SURBMA_HC_PRO_USER && $hc_page ) {
 			$current_user = wp_get_current_user();
 			$email = $current_user->user_email;
-			$displayname = $current_user->display_name;
-			echo "window.Beacon('identify', {name: '" . esc_js( $displayname ) . "',email: '" . esc_js( $email ) . "',signature: '" . esc_js( hash_hmac( 'sha256', $email, 'Uxg6ogSnpxhCb/0sH/5AIdHpKALTzMYOqYSlsk6xvcU=' ) ) . "'})";
+			if ( $current_user->first_name ) {
+				if ( $current_user->last_name ) {
+					$name = $current_user->first_name . ' ' . $current_user->last_name;
+				} else {
+					$name = $current_user->first_name;
+				}
+			} else {
+				$name = $current_user->display_name;
+			}
+			$website = parse_url( get_site_url(), PHP_URL_HOST );
+			echo "window.Beacon('identify', {name: '" . esc_js( $name ) . "',email: '" . esc_js( $email ) . "',signature: '" . esc_js( hash_hmac( 'sha256', $email, 'Uxg6ogSnpxhCb/0sH/5AIdHpKALTzMYOqYSlsk6xvcU=' ) ) . "'})" . PHP_EOL;
+			echo "window.Beacon('prefill', {subject: '[" . esc_js( $website ) . "]'})";
 		}
 	$hs_beacon__script = ob_get_contents();
 	ob_end_clean();

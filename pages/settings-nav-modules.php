@@ -134,7 +134,6 @@ __( 'Username to use for SMTP authentication', 'surbma-magyar-woocommerce' );
 __( 'Password to use for SMTP authentication', 'surbma-magyar-woocommerce' );
 __( 'Show the link for advanced statistics on Product pages', 'surbma-magyar-woocommerce' );
 __( 'It will show a link also on the Product pages, where visitors can see a more detailed Product price history for the actual Product.', 'surbma-magyar-woocommerce' );
-__( 'It will always show the advanced statistics link, even if there is no actual sale.', 'surbma-magyar-woocommerce' );
 __( 'Text for the advanced statistics link', 'surbma-magyar-woocommerce' );
 __( 'Show Empty Cart button on Cart page', 'surbma-magyar-woocommerce' );
 __( 'Show Empty Cart button on Checkout page', 'surbma-magyar-woocommerce' );
@@ -155,6 +154,7 @@ __( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
 __( 'Make Custom 1 checkbox optional', 'surbma-magyar-woocommerce' );
 __( 'Make Custom 2 checkbox optional', 'surbma-magyar-woocommerce' );
 __( 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.', 'surbma-magyar-woocommerce' );
+__( 'Activate module', 'surbma-magyar-woocommerce' );
 ?>
 
 <form class="uk-form-stacked" method="post" action="options.php">
