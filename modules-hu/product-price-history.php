@@ -334,12 +334,14 @@ if ( 1 == $module_productpricehistoryValue ) {
 		// If no $product_id, let's get it from global $product object
 		if ( !$product_id ) {
 			global $product;
-			$product_id = $product->get_id();
+			if ( is_a( $product, 'WC_Product' ) ) {
+				$product_id = $product->get_id();
+			}
 		}
 
 		// Stop if $product_id is still not available
 		if ( !$product_id ) {
-			return;
+			return '<div class="woocommerce-error">' . '<strong>' . __( 'Error with [hc-termekartortenet] shortcode', 'surbma-magyar-woocommerce' ) . '</strong><br>' . __( 'No product ID has been defined so far.', 'surbma-magyar-woocommerce' ) . '</div>';
 		}
 
 		// Stop if $product_id is not a valid product ID
