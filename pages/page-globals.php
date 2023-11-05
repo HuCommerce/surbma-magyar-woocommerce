@@ -41,6 +41,7 @@ function surbma_hc_page_modules_nav() {
 				<?php cps_hc_wcgems_module_nav_item( 'Custom Add To Cart Button', 'module-custom-addtocart-button' ); ?>
 				<?php cps_hc_wcgems_module_nav_item( 'Hide shipping methods', 'module-hideshippingmethods' ); ?>
 				<?php cps_hc_wcgems_module_nav_item( 'SMTP service', 'module-smtp' ); ?>
+				<?php cps_hc_wcgems_module_nav_item( 'Catalog mode', 'module-catalogmode' ); ?>
 			</ul>
 		</li>
 		<?php } ?>

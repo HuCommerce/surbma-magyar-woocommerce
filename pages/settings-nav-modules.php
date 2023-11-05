@@ -140,6 +140,7 @@ __( 'Show Empty Cart button on Checkout page', 'surbma-magyar-woocommerce' );
 __( 'Button text', 'surbma-magyar-woocommerce' );
 __( 'Link text', 'surbma-magyar-woocommerce' );
 __( 'Confirmation text', 'surbma-magyar-woocommerce' );
+__( 'Empty cart', 'surbma-magyar-woocommerce' );
 __( 'Changed your mind?', 'surbma-magyar-woocommerce' );
 __( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' );
 __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
@@ -150,7 +151,9 @@ __( 'If checked, free shipping would be available based on pre-discount order am
 __( 'Apply minimum order rule without tax', 'surbma-magyar-woocommerce' );
 __( 'If checked, free shipping would be available based on order amount exclusive of tax.', 'surbma-magyar-woocommerce' );
 __( 'Message before minimum order amount reached', 'surbma-magyar-woocommerce' );
-__( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
+__( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
+__( 'Message when minimum order amount reached', 'surbma-magyar-woocommerce' );
+__( 'If you would like to show a message, when minimum order amount reached. Leave empty if you do not want to show this notice to customers.', 'surbma-magyar-woocommerce' );
 __( 'Make Custom 1 checkbox optional', 'surbma-magyar-woocommerce' );
 __( 'Make Custom 2 checkbox optional', 'surbma-magyar-woocommerce' );
 __( 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.', 'surbma-magyar-woocommerce' );
@@ -237,10 +240,9 @@ __( 'Activate module', 'surbma-magyar-woocommerce' );
 							</div>
 						</div>
 					</li>
-					<li data-license="pro" data-age="new" data-tags="cart checkout">
+					<li data-license="pro" data-tags="cart checkout">
 						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 							<div class="uk-card-body">
-								<span class="uk-label uk-label-default"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
 								<span class="uk-label uk-label-danger">Pro</span> <span class="uk-label uk-label-warning"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></span>
 								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
 								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Empty Cart button', 'surbma-magyar-woocommerce' ); ?></h5>
@@ -268,10 +270,9 @@ __( 'Activate module', 'surbma-magyar-woocommerce' );
 							</div>
 						</div>
 					</li>
-					<li data-license="pro" data-age="new" data-tags="product conversion legal">
+					<li data-license="pro" data-tags="product conversion legal">
 						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 							<div class="uk-card-body">
-								<span class="uk-label uk-label-default"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
 								<span class="uk-label uk-label-danger">Pro</span>
 								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></span>
 								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Legal', 'surbma-magyar-woocommerce' ); ?></span>
@@ -563,6 +564,22 @@ __( 'Activate module', 'surbma-magyar-woocommerce' );
 							</div>
 							<div class="uk-card-footer uk-background-muted">
 								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-smtp', true ); ?>
+							</div>
+						</div>
+					</li>
+					<li data-license="free" data-age="new" data-tags="product other">
+						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
+							<div class="uk-card-body">
+								<span class="uk-label uk-label-default"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
+								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
+								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></span>
+								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></span>
+								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Catalog mode', 'surbma-magyar-woocommerce' ); ?></h5>
+								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Disables all functions regarding purchasing products. Cart, Checkout and Account pages will be redirected to Shop page.', 'surbma-magyar-woocommerce' ); ?></p>
+								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'katalogus-mod' ); ?></p>
+							</div>
+							<div class="uk-card-footer uk-background-muted">
+								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-catalogmode', true ); ?>
 							</div>
 						</div>
 					</li>
@@ -975,6 +992,10 @@ __( 'Activate module', 'surbma-magyar-woocommerce' );
 
 				<?php cps_hc_wcgems_form_field_password( 'Password to use for SMTP authentication', 'smtppassword', '', false, false, true, false, 'lock' ); ?>
 			</ul>
+		</li>
+		<li>
+			<h3 class="uk-card-title"><?php esc_html_e( 'Catalog mode', 'surbma-magyar-woocommerce' ); ?></h3>
+			<?php echo wp_kses_post( $no_options_notice ); ?>
 		</li>
 	</ul>
 	<div class="uk-text-center uk-margin-top"><input type="submit" class="uk-button uk-button-primary uk-button-large uk-width-large" value="<?php esc_attr_e( 'Save Changes' ); ?>" /></div>

@@ -83,6 +83,7 @@ $module_loginregistrationredirectValue = isset( $options['loginregistrationredir
 $module_hideshippingmethods = isset( $options['module-hideshippingmethods'] ) ? $options['module-hideshippingmethods'] : 0;
 $module_productsettingsValue = isset( $options['module-productsettings'] ) ? $options['module-productsettings'] : 0;
 $module_smtpValue = isset( $options['module-smtp'] ) ? $options['module-smtp'] : 0;
+$module_catalogmodeValue = isset( $options['module-catalogmode'] ) ? $options['module-catalogmode'] : 0;
 
 // New Pro modules
 $module_emptycartbuttonValue = isset( $options['module-emptycartbutton'] ) && SURBMA_HC_PREMIUM ? $options['module-emptycartbutton'] : 0;
@@ -146,6 +147,9 @@ if ( 1 == $module_smtpValue ) {
 }
 if ( 1 == $module_productpriceadditionsValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules/product-price-additions.php';
+}
+if ( 1 == $module_catalogmodeValue ) {
+	include_once SURBMA_HC_PLUGIN_DIR . '/modules/catalog-mode.php';
 }
 
 // Add plugin WooCommerce templates if exist
