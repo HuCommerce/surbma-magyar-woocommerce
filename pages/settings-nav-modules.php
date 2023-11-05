@@ -873,6 +873,7 @@ __( 'Activate module', 'surbma-magyar-woocommerce' );
 			<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 			<ul class="cps-form-fields uk-list uk-list-divider">
 				<?php cps_hc_wcgems_form_field_checkbox( 'Conditional display of Company fields', 'billingcompanycheck', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_checkbox( 'Hide Company and Tax number fields, if billing country is not Hungary', 'checkout-hidecompanytaxfields', false, true, true ); ?>
 				<?php cps_hc_wcgems_form_field_checkbox( 'Hide Country field', 'nocountry', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_checkbox( 'Hide Order notes field', 'noordercomments', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_checkbox( 'Hide Additional information section', 'noadditionalinformation', 'It will hide Order notes field also.', false, true ); ?>
