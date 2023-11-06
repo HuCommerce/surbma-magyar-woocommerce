@@ -15,7 +15,8 @@ function surbma_hc_page_modules_nav() {
 		<?php if ( $surbma_hc_modules_page == $screen->base ) { ?>
 		<li class="cps-settings-subnav">
 			<ul class="uk-nav-sub uk-padding-remove-left uk-padding-remove-bottom" uk-switcher="connect: #surbma-hc-modules; animation: uk-animation-fade">
-				<li><a class="uk-offcanvas-close uk-text-uppercase"><?php esc_html_e( 'All modules', 'surbma-magyar-woocommerce' ); ?></a></li>
+				<li><a class="uk-offcanvas-close uk-modal-close-default"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: chevron-double-right; ratio: 1"></span> <?php esc_html_e( 'All modules', 'surbma-magyar-woocommerce' ); ?></a></li>
+				<li class="uk-nav-header"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: settings; ratio: 1"></span> <?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?>:</li>
 				<?php cps_hc_wcgems_module_nav_item( 'Check field formats (Masking)', 'maskcheckoutfields' ); ?>
 				<?php cps_hc_wcgems_module_nav_item( 'Check field values', 'validatecheckoutfields' ); ?>
 				<?php cps_hc_wcgems_module_nav_item( 'Free shipping notification', 'freeshippingnotice' ); ?>

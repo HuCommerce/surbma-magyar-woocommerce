@@ -166,7 +166,7 @@ __( 'Activate module', 'surbma-magyar-woocommerce' );
 	<ul id="surbma-hc-modules" class="uk-switcher">
 		<li id="hucommerce-modules">
 			<div uk-filter="target: .js-filter">
-				<div class="uk-grid-small uk-grid-divider uk-child-width-auto" uk-grid>
+				<div class="uk-grid-small uk-grid-divider uk-child-width-auto uk-flex uk-flex-center" uk-grid>
 					<div>
 						<ul class="uk-subnav uk-subnav-pill" uk-margin>
 							<li class="uk-active" uk-filter-control><a href="#"><?php esc_html_e( 'All', 'surbma-magyar-woocommerce' ); ?></a></li>
@@ -184,7 +184,7 @@ __( 'Activate module', 'surbma-magyar-woocommerce' );
 						</ul>
 					</div>
 					<div>
-						<ul class="uk-subnav uk-subnav-pill" uk-margin>
+						<ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center" uk-margin>
 							<li uk-filter-control="filter: [data-tags*='product']; group: tags"><a href="#"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></a></li>
 							<li uk-filter-control="filter: [data-tags*='cart']; group: tags"><a href="#"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></a></li>
 							<li uk-filter-control="filter: [data-tags*='checkout']; group: tags"><a href="#"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></a></li>
@@ -195,7 +195,7 @@ __( 'Activate module', 'surbma-magyar-woocommerce' );
 					</div>
 				</div>
 
-				<ul class="js-filter uk-child-width-1-1@s uk-child-width-1-1@m uk-child-width-1-1@l uk-child-width-1-1@xl uk-margin-large-bottom uk-grid-small" uk-grid uk-height-match="target: > li > .uk-card > .uk-card-body">
+				<ul class="js-filter uk-margin-large-bottom uk-flex uk-flex-center" uk-grid uk-height-match="target: > li > .uk-card > .uk-card-body">
 					<li data-license="pro" data-tags="checkout conversion">
 						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 							<div class="uk-card-body">
@@ -586,6 +586,7 @@ __( 'Activate module', 'surbma-magyar-woocommerce' );
 				</ul>
 			</div>
 		</li>
+		<li></li>
 		<li>
 			<h3 class="uk-card-title"><?php esc_html_e( 'Check field formats (Masking)', 'surbma-magyar-woocommerce' ); ?></h3>
 
