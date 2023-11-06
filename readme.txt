@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.3
-Stable tag: 2023.1.0
+Stable tag: 2023.2.0
 Requires PHP: 7.3
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -42,7 +42,7 @@ Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg h
 - Adószám bekérése vásárlásnál
 - Megye mező elrejtése
 - Város automatikus kitöltése az irányítószám alapján
-- Pénztár oldal formázása
+- Pénztár oldal módosítások
 - Kupon mező módosítások
 - Plusz/minusz mennyiségi gombok a termékekhez
 - Automatikus frissítés a Kosár oldalon
@@ -54,6 +54,7 @@ Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg h
 - Egyedi “Kosárba teszem” gombok
 - Termék extra beállítások
 - SMTP szolgáltatás beállítása
+- Katalógus mód
 - Fordítási hiányosságok javítása
 - WPML és Polylang kompatibilitás
 - Alap ügyfélszolgálat és támogatás
@@ -159,6 +160,8 @@ A termék végoldalon pedig automatikusan létrehozott és számolt vagy manuál
 
 Céges számlázási adatok feltételes megjelenítése. Ebben az esetben egy checkbox jelenik meg és ha a látogató bepipálja, akkor jelennek csak meg a céges számlázás mezői, mint például a Cégnév és Adószám.
 
+A Cégnév és Adószám mezők feltételes megjelenítése csak akkor, ha a számlázási cím Magyarország. Minden más ország esetében elrejti ezeket a mezőket.
+
 A Cégnév és Adószám, az Irányítószám és Város, valamint a Telefonszám és Email cím mezőket nagy monitoron be lehet állítani, hogy egymás mellé kerüljenek. Az Irányítószám és Város mezők az Ország mező alatt jelennek meg közvetlenül, hogy logikusabb legyen a megjelenési sorrend.
 
 Az Ország és a Rendelés jegyzetek mezőket akár ki is lehet kapcsolni, ha ezek a mezők nem relevánsak a te webáruházadnál. Ha az Ország mezőt elrejted, akkor a Bolt beállításainál kiválasztott ország lesz alapértelmezettként beállítva megrendelésnél.
@@ -261,6 +264,10 @@ Minden webáruházban fontos a kommunikáció az érdeklődővel és vásárlóv
 
 A HuCommerce Pro SMTP beállításával összekapcsolhatod a webáruházad levelezését az SMTP szolgáltatóval.
 
+#### Katalógus mód
+
+Ezzel a modullal az értékesítéshez kapcsolódó funkciók és oldalak kapcsolhatók ki. Tehát a termékeket nem lehet kosárba tenni, nincs Pénztár oldal vagy fiók kezelés. A weboldal és a WooCommerce így katalógusként használható.
+
 #### WPML és Polylang kompatibilitás
 
 A szöveges mezők kompatibilisek a WPML, Polylang bővítményekkel, így azok beállíthatók a különböző nyelveken is.
@@ -319,6 +326,40 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+#### 2023.2.0
+
+**Kiadás dátuma: 2023-11-06**
+
+Újabb nagy kiadás több új funkcióval és rengeteg javítással. Új ingyenes modullal bővült a kínálat, amivel a katalógus mód aktiválható, ha az értékesítéshez kapcsolódó funkciókat ki szeretnéd kapcsolni. A Pénztár oldalon pedig egy új opcióval a Cégnév és Adószám mezőket elrejtheted a nem magyarországi számlázási cím esetén.
+
+Figyelem! A HuCommerce Kosár és Pénztár oldalakhoz kapcsolódó moduljai közül nem mind kompatibilis az új blokkokkal.
+
+- Új modul: Katalógus mód
+
+LICENSZ KEZELÉS
+
+- Az API kulcs kezelésének a módosítása.
+- Kódok optimalizálása.
+
+PÉNZTÁR OLDAL MÓDOSÍTÁSOK
+
+- Új opció: Cégnév és Adószám mezők elrejtése, ha a számlázási ország nem Magyarország
+
+TERMÉK ÁR TÖRTÉNET
+
+- Kód optimalizálása.
+- Hibaüzenet hozzáadása a termék azonosító hiánya esetén.
+
+EGYÉB
+
+- HuCommerce beállítások megjelenésének a finomításai.
+- Hiányzó fordítások hozzáadása.
+- Megjelenítés igazítása a Licensz kezelés oldalon.
+- Ikon módosítása az admin felületen.
+- HS Beacon kiegészítése további adatokkal.
+- CPS SDK frissítése a 8.14.0 verzióra.
+- WooCommerce inkompatibilitás meghatározása: Kosár és Pénztár blokkok.
 
 #### 2023.1.0
 
