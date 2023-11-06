@@ -55,10 +55,22 @@ add_action( 'plugins_loaded', function() {
 	}
 } );
 
+// Declare compatibility: Custom order tables
 add_action( 'before_woocommerce_init', function() {
 	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 	}
+} );
+
+// Declare incompatibility: Cart & Checkout blocks
+add_action( 'before_woocommerce_init', function() {
+
+    if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, false );
+
+    }
+
 } );
 
 // Create a check for WooCommerce version. Used for deprecated functions for older WooCommerce versions.
