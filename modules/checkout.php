@@ -129,12 +129,39 @@ add_action( 'wp_enqueue_scripts', function() {
 	if ( is_checkout() ) {
 		$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
 		$options = get_option( 'surbma_hc_fields' );
-		$nocountryValue = isset( $options['nocountry'] ) ? $options['nocountry'] : 0;
 		$billingcompanycheckValue = isset( $options['billingcompanycheck'] ) ? $options['billingcompanycheck'] : 0;
+		$checkout_hidecompanytaxfields_value = isset( $options['checkout-hidecompanytaxfields'] ) ? $options['checkout-hidecompanytaxfields'] : 0;
+		$nocountryValue = isset( $options['nocountry'] ) ? $options['nocountry'] : 0;
 		$companytaxnumberpairValue = isset( $options['companytaxnumberpair'] ) ? $options['companytaxnumberpair'] : 0;
 		ob_start();
 		?>
 jQuery(document).ready(function($){
+	<?php if ( 1 == $checkout_hidecompanytaxfields_value ) { ?>
+		// Function to hide/show company fields based on selected country
+		function hideShowCompanyFields() {
+			var selectedCountry = $('#billing_country').val();
+			var companyField = $('#billing_company_field');
+			var taxnumberField = $('#billing_tax_number_field');
+
+			if ( selectedCountry !== 'HU' ) {
+				companyField.hide();
+				taxnumberField.hide();
+				$('#billing_company').val('');
+				$('#billing_tax_number').val('');
+			} else {
+				companyField.show();
+			}
+		}
+
+		// Call the function on page load
+		hideShowCompanyFields();
+
+		// Call the function when the country dropdown changes
+		$('#billing_country').on('change', function() {
+			hideShowCompanyFields();
+		});
+	<?php } ?>
+
 	<?php if ( 1 == $nocountryValue ) { ?>
 		$("#billing_country_field").hide();
 	<?php } ?>

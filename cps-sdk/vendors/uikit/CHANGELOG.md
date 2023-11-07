@@ -1,5 +1,128 @@
 # Changelog
 
+## 3.17.8 (November 2, 2023)
+
+### Fixed
+
+- Fix build
+
+## 3.17.7
+
+### Added
+
+- Add `uk-transition-disable` utility class to Transition component
+
+### Fixed
+
+- Fix disabling transition during Sticky component size recalculation
+
+## 3.17.6 (October 25, 2023)
+
+### Fixed
+
+- Fix regression in Video component causing videos to autoplay with `autoplay` set to `false`
+
+## 3.17.5 (October 24, 2023)
+
+### Deprecated
+
+- Deprecate `isInView()` function
+- Deprecate `intersectRect()` function
+- Deprecate `target-offset` option in Sticky component
+
+### Changed
+
+- Video component uses IntersectionObserver only
+
+### Fixed
+
+- Fix Scroll component not detecting covering element correctly
+
+## 3.17.4 (October 18, 2023)
+
+### Fixed
+
+- Fix filter animation fade
+
+## 3.17.3 (October 17, 2023)
+
+### Fixed
+
+- Fix Grid component applies `uk-grid-stack` class wrongly
+
+## 3.17.2 (October 16, 2023)
+
+### Fixed
+
+- Fix `scrollIntoView()` function uses offset left to detect elements that would cover target
+- Fix Height Match component recalculates its heights, when a font has loaded
+
+## 3.17.1 (October 5, 2023)
+
+### Fixed
+
+- Fix icon alignment in Pagination component
+- Fix Sticky component overflow scrolling position on resize
+- Fix Cover component no longer uses inline style
+
+## 3.17.0 (September 28, 2023)
+
+### Added
+
+- Add modes `pack` (default) and `next` to Grid component's `masonry` option
+- Add `parallax-start`, `parallax-end`, `parallax-justify` option to Grid component
+- Add `close-on-scroll` option to Drop and Dropdown component
+- Add transparent Navbar gets its color modifier from underlying section 
+- Add support for `<td>` and `<tr>` elements to `fragment()` function
+- Add 3XL size modifier to Heading component
+- Add support for a CSS Selector in `offsetTop` option in Height Viewport component
+
+### Change
+
+- Scroll component scrolls beneath elements covering its target 
+- The `closest()` function no longer accepts an array of elements
+- Reset fieldset min-width
+
+## 3.16.27 (September 28, 2023)
+
+### Fixed
+
+- Fix Height Viewport component not observing viewport changes with `expand: true`
+- Fix passing a `vh` unit to option `scale` relates to element's height in Parallax component 
+
+## 3.16.26 (August 28, 2023)
+
+### Fixed
+
+- Fix minified build to use template-strings too
+
+## 3.16.25 (August 28, 2023)
+
+### Added
+
+- Add `-source` argument to `prefix` command
+
+### Fixed
+
+- Fix Toggle in hover mode does not trigger when scrolling in FireFox
+- Fix Parallax component stop parsing
+
+## 3.16.24 (August 1, 2023)
+
+### Fixed
+
+- Fix delayed show in Drop component shows drop, although toggle is no longer hovered
+- Fix regression in Slider component
+- Fix disconnecting Sticky component
+
+## 3.16.23 (July 26, 2023)
+
+### Fixed
+
+- Fix potential rounding issues in `offset()` function, when used as setter
+- Fix to ensure Slider items have `max-width: 100%`
+- Fix Dropdowns in Dropnav and Navbar components are initialized too late causing CLS
+
 ## 3.16.22 (June 22, 2023)
 
 ### Fixed

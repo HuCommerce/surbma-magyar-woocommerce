@@ -134,13 +134,13 @@ __( 'Username to use for SMTP authentication', 'surbma-magyar-woocommerce' );
 __( 'Password to use for SMTP authentication', 'surbma-magyar-woocommerce' );
 __( 'Show the link for advanced statistics on Product pages', 'surbma-magyar-woocommerce' );
 __( 'It will show a link also on the Product pages, where visitors can see a more detailed Product price history for the actual Product.', 'surbma-magyar-woocommerce' );
-__( 'It will always show the advanced statistics link, even if there is no actual sale.', 'surbma-magyar-woocommerce' );
 __( 'Text for the advanced statistics link', 'surbma-magyar-woocommerce' );
 __( 'Show Empty Cart button on Cart page', 'surbma-magyar-woocommerce' );
 __( 'Show Empty Cart button on Checkout page', 'surbma-magyar-woocommerce' );
 __( 'Button text', 'surbma-magyar-woocommerce' );
 __( 'Link text', 'surbma-magyar-woocommerce' );
 __( 'Confirmation text', 'surbma-magyar-woocommerce' );
+__( 'Empty cart', 'surbma-magyar-woocommerce' );
 __( 'Changed your mind?', 'surbma-magyar-woocommerce' );
 __( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' );
 __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
@@ -151,10 +151,13 @@ __( 'If checked, free shipping would be available based on pre-discount order am
 __( 'Apply minimum order rule without tax', 'surbma-magyar-woocommerce' );
 __( 'If checked, free shipping would be available based on order amount exclusive of tax.', 'surbma-magyar-woocommerce' );
 __( 'Message before minimum order amount reached', 'surbma-magyar-woocommerce' );
-__( 'Message after minimum order amount reached', 'surbma-magyar-woocommerce' );
+__( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
+__( 'Message when minimum order amount reached', 'surbma-magyar-woocommerce' );
+__( 'If you would like to show a message, when minimum order amount reached. Leave empty if you do not want to show this notice to customers.', 'surbma-magyar-woocommerce' );
 __( 'Make Custom 1 checkbox optional', 'surbma-magyar-woocommerce' );
 __( 'Make Custom 2 checkbox optional', 'surbma-magyar-woocommerce' );
 __( 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.', 'surbma-magyar-woocommerce' );
+__( 'Activate module', 'surbma-magyar-woocommerce' );
 ?>
 
 <form class="uk-form-stacked" method="post" action="options.php">
@@ -163,7 +166,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 	<ul id="surbma-hc-modules" class="uk-switcher">
 		<li id="hucommerce-modules">
 			<div uk-filter="target: .js-filter">
-				<div class="uk-grid-small uk-grid-divider uk-child-width-auto" uk-grid>
+				<div class="uk-grid-small uk-grid-divider uk-child-width-auto uk-flex uk-flex-center" uk-grid>
 					<div>
 						<ul class="uk-subnav uk-subnav-pill" uk-margin>
 							<li class="uk-active" uk-filter-control><a href="#"><?php esc_html_e( 'All', 'surbma-magyar-woocommerce' ); ?></a></li>
@@ -181,7 +184,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 						</ul>
 					</div>
 					<div>
-						<ul class="uk-subnav uk-subnav-pill" uk-margin>
+						<ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center" uk-margin>
 							<li uk-filter-control="filter: [data-tags*='product']; group: tags"><a href="#"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></a></li>
 							<li uk-filter-control="filter: [data-tags*='cart']; group: tags"><a href="#"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></a></li>
 							<li uk-filter-control="filter: [data-tags*='checkout']; group: tags"><a href="#"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></a></li>
@@ -192,7 +195,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 					</div>
 				</div>
 
-				<ul class="js-filter uk-child-width-1-1@s uk-child-width-1-1@m uk-child-width-1-1@l uk-child-width-1-1@xl uk-margin-large-bottom uk-grid-small" uk-grid uk-height-match="target: > li > .uk-card > .uk-card-body">
+				<ul class="js-filter uk-margin-large-bottom uk-flex uk-flex-center" uk-grid uk-height-match="target: > li > .uk-card > .uk-card-body">
 					<li data-license="pro" data-tags="checkout conversion">
 						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 							<div class="uk-card-body">
@@ -237,10 +240,9 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 							</div>
 						</div>
 					</li>
-					<li data-license="pro" data-age="new" data-tags="cart checkout">
+					<li data-license="pro" data-tags="cart checkout">
 						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 							<div class="uk-card-body">
-								<span class="uk-label uk-label-default"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
 								<span class="uk-label uk-label-danger">Pro</span> <span class="uk-label uk-label-warning"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></span>
 								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
 								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Empty Cart button', 'surbma-magyar-woocommerce' ); ?></h5>
@@ -268,10 +270,9 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 							</div>
 						</div>
 					</li>
-					<li data-license="pro" data-age="new" data-tags="product conversion legal">
+					<li data-license="pro" data-tags="product conversion legal">
 						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 							<div class="uk-card-body">
-								<span class="uk-label uk-label-default"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
 								<span class="uk-label uk-label-danger">Pro</span>
 								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></span>
 								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Legal', 'surbma-magyar-woocommerce' ); ?></span>
@@ -566,9 +567,26 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 							</div>
 						</div>
 					</li>
+					<li data-license="free" data-age="new" data-tags="product other">
+						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
+							<div class="uk-card-body">
+								<span class="uk-label uk-label-default"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
+								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
+								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></span>
+								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></span>
+								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Catalog mode', 'surbma-magyar-woocommerce' ); ?></h5>
+								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Disables all functions regarding purchasing products. Cart, Checkout and Account pages will be redirected to Shop page.', 'surbma-magyar-woocommerce' ); ?></p>
+								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'katalogus-mod' ); ?></p>
+							</div>
+							<div class="uk-card-footer uk-background-muted">
+								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-catalogmode', true ); ?>
+							</div>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</li>
+		<li></li>
 		<li>
 			<h3 class="uk-card-title"><?php esc_html_e( 'Check field formats (Masking)', 'surbma-magyar-woocommerce' ); ?></h3>
 
@@ -856,6 +874,7 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 			<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 			<ul class="cps-form-fields uk-list uk-list-divider">
 				<?php cps_hc_wcgems_form_field_checkbox( 'Conditional display of Company fields', 'billingcompanycheck', false, false, true ); ?>
+				<?php cps_hc_wcgems_form_field_checkbox( 'Hide Company and Tax number fields, if billing country is not Hungary', 'checkout-hidecompanytaxfields', false, true, true ); ?>
 				<?php cps_hc_wcgems_form_field_checkbox( 'Hide Country field', 'nocountry', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_checkbox( 'Hide Order notes field', 'noordercomments', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_checkbox( 'Hide Additional information section', 'noadditionalinformation', 'It will hide Order notes field also.', false, true ); ?>
@@ -975,6 +994,10 @@ __( 'If this option is enabled, the checkbox on the Checkout page won\'t be requ
 
 				<?php cps_hc_wcgems_form_field_password( 'Password to use for SMTP authentication', 'smtppassword', '', false, false, true, false, 'lock' ); ?>
 			</ul>
+		</li>
+		<li>
+			<h3 class="uk-card-title"><?php esc_html_e( 'Catalog mode', 'surbma-magyar-woocommerce' ); ?></h3>
+			<?php echo wp_kses_post( $no_options_notice ); ?>
 		</li>
 	</ul>
 	<div class="uk-text-center uk-margin-top"><input type="submit" class="uk-button uk-button-primary uk-button-large uk-width-large" value="<?php esc_attr_e( 'Save Changes' ); ?>" /></div>

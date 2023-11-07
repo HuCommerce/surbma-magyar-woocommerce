@@ -5,7 +5,7 @@ Plugin Name: HuCommerce | Magyar WooCommerce kiegészítések
 Plugin URI: https://www.hucommerce.hu/
 Description: Hasznos javítások a magyar nyelvű WooCommerce webáruházakhoz.
 
-Version: 2023.1.0
+Version: 2023.2.0
 
 Author: HuCommerce.hu
 Author URI: https://www.hucommerce.hu/
@@ -16,7 +16,7 @@ Text Domain: surbma-magyar-woocommerce
 Domain Path: /languages
 
 WC requires at least: 4.6
-WC tested up to: 8.0
+WC tested up to: 8.2
 
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -27,7 +27,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 // Prevent direct access
 defined( 'ABSPATH' ) || exit;
 
-define( 'SURBMA_HC_PLUGIN_VERSION_NUMBER', '2023.1.0' );
+define( 'SURBMA_HC_PLUGIN_VERSION_NUMBER', '2023.2.0' );
 define( 'SURBMA_HC_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'SURBMA_HC_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SURBMA_HC_PLUGIN_FILE', __FILE__ );
@@ -55,10 +55,22 @@ add_action( 'plugins_loaded', function() {
 	}
 } );
 
+// Declare compatibility: Custom order tables
 add_action( 'before_woocommerce_init', function() {
 	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 	}
+} );
+
+// Declare incompatibility: Cart & Checkout blocks
+add_action( 'before_woocommerce_init', function() {
+
+    if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, false );
+
+    }
+
 } );
 
 // Create a check for WooCommerce version. Used for deprecated functions for older WooCommerce versions.
