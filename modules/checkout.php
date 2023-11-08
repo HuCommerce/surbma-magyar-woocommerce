@@ -136,36 +136,6 @@ add_action( 'wp_enqueue_scripts', function() {
 		ob_start();
 		?>
 jQuery(document).ready(function($){
-	<?php if ( 1 == $checkout_hidecompanytaxfields_value ) { ?>
-		// Function to hide/show company fields based on selected country
-		function hideShowCompanyFields() {
-			var selectedCountry = $('#billing_country').val();
-			var companyField = $('#billing_company_field');
-			var taxnumberField = $('#billing_tax_number_field');
-
-			if ( selectedCountry !== 'HU' ) {
-				companyField.hide();
-				taxnumberField.hide();
-				$('#billing_company').val('');
-				$('#billing_tax_number').val('');
-			} else {
-				companyField.show();
-			}
-		}
-
-		// Call the function on page load
-		hideShowCompanyFields();
-
-		// Call the function when the country dropdown changes
-		$('#billing_country').on('change', function() {
-			hideShowCompanyFields();
-		});
-	<?php } ?>
-
-	<?php if ( 1 == $nocountryValue ) { ?>
-		$("#billing_country_field").hide();
-	<?php } ?>
-
 	// Fix for previous version, that saved '- N/A -'' value if billing_company was empty
 	if ( $('#billing_company').val() == '- N/A -' ){
 		$('#billing_company').val('');
@@ -233,6 +203,36 @@ jQuery(document).ready(function($){
 				$("#billing_tax_number_field").removeClass('woocommerce-invalid woocommerce-invalid-required-field');
 			}
 		});
+	<?php } ?>
+
+	<?php if ( 1 == $checkout_hidecompanytaxfields_value ) { ?>
+		// Function to hide/show company fields based on selected country
+		function hideShowCompanyFields() {
+			var selectedCountry = $('#billing_country').val();
+			var companyField = $('#billing_company_field');
+			var taxnumberField = $('#billing_tax_number_field');
+
+			if ( selectedCountry !== 'HU' ) {
+				companyField.hide();
+				taxnumberField.hide();
+				$('#billing_company').val('');
+				$('#billing_tax_number').val('');
+			} else {
+				companyField.show();
+			}
+		}
+
+		// Call the function on page load
+		hideShowCompanyFields();
+
+		// Call the function when the country dropdown changes
+		$('#billing_country').on('change', function() {
+			hideShowCompanyFields();
+		});
+	<?php } ?>
+
+	<?php if ( 1 == $nocountryValue ) { ?>
+		$("#billing_country_field").hide();
 	<?php } ?>
 });
 <?php
