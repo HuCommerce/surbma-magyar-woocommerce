@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.4
-Stable tag: 2023.2.0
+Stable tag: 2023.2.1
 Requires PHP: 7.3
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -326,6 +326,28 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+#### 2023.2.1
+
+**Kiadás dátuma: 2023-11-08**
+
+Kisebb javítások és a kódok optimalizálása. Nincs új funkció, a frissítés biztonságos és mindenképpen ajánlott.
+
+ADÓSZÁM MEGJELENÍTÉSE
+
+- Kód optimalizálás.
+
+PÉNZTÁR OLDAL MÓDOSÍTÁSOK
+
+- JavaScript kódok sorrendjének módosítása.
+- Kód optimalizálás.
+- Cégnév és Adószám mezők elrejtése opció javítása a Céges számlázási adatok feltételes megjelenítése esetén.
+
+EGYÉB
+
+- Fordítások javítása az admin felületen.
+- Bővítmény leírás javítása.
+- Kompatibilitás ellenőrzése a WordPress 6.4 verzióval.
 
 #### 2023.2.0
 
