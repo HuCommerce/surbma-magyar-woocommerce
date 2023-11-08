@@ -2,7 +2,7 @@
 Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
-Tested up to: 6.3
+Tested up to: 6.4
 Stable tag: 2023.2.0
 Requires PHP: 7.3
 License: GPLv3 or later License
@@ -16,7 +16,7 @@ Hasznos javítások a magyar WooCommerce webáruházakhoz.
 
 A WooCommerce a világ és most már Magyarország legnépszerűbb webáruház platformja is. A HuCommerce kiegészítővel könnyebben és gyorsabban indíthatod a webáruházad, mert a legtöbb fontos funkciót és fejlesztést egy gombnyomással helyettesítheted.
 
-A HuCommerce bővítmény ingyenes változata most már évek óta a magyar WooCommerce webáruház tulajdonosok kedvenc kiegészítője. Több, mint 9000 webáruházban megtalálható és a letöltések száma folyamatosan nő.
+A HuCommerce bővítmény ingyenes változata most már évek óta a magyar WooCommerce webáruház tulajdonosok kedvenc kiegészítője. Több, mint 10000 webáruházban megtalálható és a letöltések száma folyamatosan nő.
 
 Azon dolgozunk, hogy folyamatosan hasznos funkciókkal bővítsük ezt a nagyszerű WooCommerce kiegészítőt. Kérlek, támogasd a fejlesztést és a HuCommerce közösséget azzal, hogy megvásárolod a Pro verziót! Ezzel fedezni tudjuk a fejlesztési költségeket és több időt tudunk arra fordítani, hogy a HuCommerce bővítmény még jobb legyen és még több hasznod legyen belőle.
 
@@ -32,7 +32,7 @@ Csatlakozzatok a HuCommerce hivatalos támogatói Facebook csoportjához, ahol l
 
 ### HuCommerce (ingyenes)
 
-Több, mint 9000 webáruház tulajdonos választása Magyarországon. Rengeteg hasznos funkció, kötelező választás minden magyar WooCommerce webáruházhoz.
+Több, mint 10000 webáruház tulajdonos választása Magyarországon. Rengeteg hasznos funkció, kötelező választás minden magyar WooCommerce webáruházhoz.
 
 [Bővebben a HuCommerce bővítményről →](https://www.hucommerce.hu/bovitmenyek/hucommerce/)
 
