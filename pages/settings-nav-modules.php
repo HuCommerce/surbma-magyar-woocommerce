@@ -63,6 +63,7 @@ __( 'Upsell products per row on single product pages', 'surbma-magyar-woocommerc
 __( 'Number of related products on single product pages', 'surbma-magyar-woocommerce' );
 __( 'Related products per row on single product pages', 'surbma-magyar-woocommerce' );
 __( 'Conditional display of Company fields', 'surbma-magyar-woocommerce' );
+__( 'Hide Company and Tax number fields, if billing country is not Hungary', 'surbma-magyar-woocommerce' );
 __( 'Hide Country field', 'surbma-magyar-woocommerce' );
 __( 'Hide Order notes field', 'surbma-magyar-woocommerce' );
 __( 'Hide Additional information section', 'surbma-magyar-woocommerce' );
@@ -71,6 +72,7 @@ __( 'Inline Company and Tax number fields', 'surbma-magyar-woocommerce' );
 __( 'Inline Postcode and City fields', 'surbma-magyar-woocommerce' );
 __( 'Inline Phone and Email fields', 'surbma-magyar-woocommerce' );
 __( 'Make Email field the first field', 'surbma-magyar-woocommerce' );
+__( 'Custom submit button text', 'surbma-magyar-woocommerce' );
 __( 'Button position on Cart page', 'surbma-magyar-woocommerce' );
 __( 'Button position on Checkout page', 'surbma-magyar-woocommerce' );
 __( 'Message text', 'surbma-magyar-woocommerce' );
@@ -158,6 +160,10 @@ __( 'Make Custom 1 checkbox optional', 'surbma-magyar-woocommerce' );
 __( 'Make Custom 2 checkbox optional', 'surbma-magyar-woocommerce' );
 __( 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.', 'surbma-magyar-woocommerce' );
 __( 'Activate module', 'surbma-magyar-woocommerce' );
+__( 'Price prefix on Product page', 'surbma-magyar-woocommerce' );
+__( 'Price suffix on Product page', 'surbma-magyar-woocommerce' );
+__( 'Price prefix on Archive pages', 'surbma-magyar-woocommerce' );
+__( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' );
 ?>
 
 <form class="uk-form-stacked" method="post" action="options.php">

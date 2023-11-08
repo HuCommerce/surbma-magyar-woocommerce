@@ -138,15 +138,19 @@ add_filter( 'woocommerce_customer_meta_fields', function( $profileFieldArray ) {
 } );
 
 // Modifying Tax number field with JS
-add_action( 'wp_enqueue_scripts', function() {
+add_action( 'wp_footer', function() {
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
-	if ( 'hidden' != $woocommercecheckoutcompanyfieldValue && ( is_checkout() || is_account_page() ) ) {
-		$options = get_option( 'surbma_hc_fields' );
-		$moduleCheckoutValue = isset( $options['module-checkout'] ) ? $options['module-checkout'] : 0;
-		$billingcompanycheckValue = 1 == $moduleCheckoutValue && isset( $options['billingcompanycheck'] ) ? $options['billingcompanycheck'] : 0;
-		$companytaxnumberpairValue = 1 == $moduleCheckoutValue && isset( $options['companytaxnumberpair'] ) ? $options['companytaxnumberpair'] : 0;
-		ob_start();
-		?>
+	if ( 'hidden' == $woocommercecheckoutcompanyfieldValue || ( ! is_checkout() && ! is_account_page() ) ) {
+		return;
+	}
+
+	$options = get_option( 'surbma_hc_fields' );
+	$moduleCheckoutValue = isset( $options['module-checkout'] ) ? $options['module-checkout'] : 0;
+	$billingcompanycheckValue = 1 == $moduleCheckoutValue && isset( $options['billingcompanycheck'] ) ? $options['billingcompanycheck'] : 0;
+	$companytaxnumberpairValue = 1 == $moduleCheckoutValue && isset( $options['companytaxnumberpair'] ) ? $options['companytaxnumberpair'] : 0;
+	// ob_start();
+	?>
+<script id="cps-hc-wcgems-tax-number">
 jQuery(document).ready(function($){
 	// Add required sign and remove the "not required" text from billing_tax_number_field
 	$('#billing_tax_number_field label').append( ' <abbr class="required" title="required">*</abbr>' );
@@ -202,10 +206,10 @@ jQuery(document).ready(function($){
 	}).keyup();
 	<?php } ?>
 });
+</script>
 <?php
-		$script = ob_get_contents();
-		ob_end_clean();
+	// $script = ob_get_contents();
+	// ob_end_clean();
 
-		wp_add_inline_script( 'cps-jquery-fix', $script );
-	}
+	// wp_add_inline_script( 'cps-jquery-fix', $script );
 } );

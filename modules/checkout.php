@@ -125,47 +125,21 @@ add_filter( 'woocommerce_order_button_text', function( $button_text ) {
 	return $button_text;
 } );
 
-add_action( 'wp_enqueue_scripts', function() {
-	if ( is_checkout() ) {
-		$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
-		$options = get_option( 'surbma_hc_fields' );
-		$billingcompanycheckValue = isset( $options['billingcompanycheck'] ) ? $options['billingcompanycheck'] : 0;
-		$checkout_hidecompanytaxfields_value = isset( $options['checkout-hidecompanytaxfields'] ) ? $options['checkout-hidecompanytaxfields'] : 0;
-		$nocountryValue = isset( $options['nocountry'] ) ? $options['nocountry'] : 0;
-		$companytaxnumberpairValue = isset( $options['companytaxnumberpair'] ) ? $options['companytaxnumberpair'] : 0;
-		ob_start();
-		?>
+add_action( 'wp_footer', function() {
+	if ( ! is_checkout() ) {
+		return;
+	}
+
+	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
+	$options = get_option( 'surbma_hc_fields' );
+	$billingcompanycheckValue = isset( $options['billingcompanycheck'] ) ? $options['billingcompanycheck'] : 0;
+	$checkout_hidecompanytaxfields_value = isset( $options['checkout-hidecompanytaxfields'] ) ? $options['checkout-hidecompanytaxfields'] : 0;
+	$nocountryValue = isset( $options['nocountry'] ) ? $options['nocountry'] : 0;
+	$companytaxnumberpairValue = isset( $options['companytaxnumberpair'] ) ? $options['companytaxnumberpair'] : 0;
+	// ob_start();
+	?>
+<script id="cps-hc-wcgems-checkout">
 jQuery(document).ready(function($){
-	<?php if ( 1 == $checkout_hidecompanytaxfields_value ) { ?>
-		// Function to hide/show company fields based on selected country
-		function hideShowCompanyFields() {
-			var selectedCountry = $('#billing_country').val();
-			var companyField = $('#billing_company_field');
-			var taxnumberField = $('#billing_tax_number_field');
-
-			if ( selectedCountry !== 'HU' ) {
-				companyField.hide();
-				taxnumberField.hide();
-				$('#billing_company').val('');
-				$('#billing_tax_number').val('');
-			} else {
-				companyField.show();
-			}
-		}
-
-		// Call the function on page load
-		hideShowCompanyFields();
-
-		// Call the function when the country dropdown changes
-		$('#billing_country').on('change', function() {
-			hideShowCompanyFields();
-		});
-	<?php } ?>
-
-	<?php if ( 1 == $nocountryValue ) { ?>
-		$("#billing_country_field").hide();
-	<?php } ?>
-
 	// Fix for previous version, that saved '- N/A -'' value if billing_company was empty
 	if ( $('#billing_company').val() == '- N/A -' ){
 		$('#billing_company').val('');
@@ -175,6 +149,44 @@ jQuery(document).ready(function($){
 		$("#billing_company_field label span").remove();
 		$("#billing_tax_number_field label span").remove();
 	<?php } ?>
+
+	// All the actions, when the billing_company_check field is unchecked
+	function showCompanyFields() {
+		$('#billing_company_field').show();
+
+		// Add saved values back
+		if(localStorage.getItem('billing_company')){
+			$('#billing_company').val(localStorage.getItem('billing_company'));
+		}
+		if(localStorage.getItem('billing_tax_number')){
+			$('#billing_tax_number').val(localStorage.getItem('billing_tax_number'));
+		}
+		localStorage.removeItem('billing_company');
+		localStorage.removeItem('billing_tax_number');
+	}
+
+	// All the actions, when the billing_company_check field is unchecked
+	function hideCompanyFields() {
+		// Save already entered value, if customer wants to enable company fields again
+		localStorage.setItem('billing_company', $('#billing_company').val());
+		localStorage.setItem('billing_tax_number', $('#billing_tax_number').val());
+
+		// Hiding the company related fields
+		$('#billing_company_field').hide();
+		$('#billing_tax_number_field').hide();
+
+		// Empty the company related field values, because we don't want to save company details
+		$('#billing_company').val('');
+		$('#billing_tax_number').val('');
+
+		// Reset classes, as they are empty again
+		$("#billing_company_field").removeClass('validate-required');
+		$("#billing_company_field").removeClass('woocommerce-validated');
+		$("#billing_company_field").removeClass('woocommerce-invalid woocommerce-invalid-required-field');
+		$("#billing_tax_number_field").removeClass('validate-required');
+		$("#billing_tax_number_field").removeClass('woocommerce-validated');
+		$("#billing_tax_number_field").removeClass('woocommerce-invalid woocommerce-invalid-required-field');
+	}
 
 	<?php if ( 'optional' == $woocommercecheckoutcompanyfieldValue && 1 == $billingcompanycheckValue ) { ?>
 		$('#billing_company_check_field label span.optional').hide();
@@ -197,48 +209,60 @@ jQuery(document).ready(function($){
 			if($(this).prop('checked') == true){
 				$('#billing_company_field').addClass('validate-required');
 				$('#billing_tax_number_field').addClass('validate-required');
-
-				$('#billing_company_field').show();
 				$('#billing_tax_number_field').show();
-
-				// Add saved values back
-				if(localStorage.getItem('billing_company')){
-					$('#billing_company').val(localStorage.getItem('billing_company'));
-				}
-				if(localStorage.getItem('billing_tax_number')){
-					$('#billing_tax_number').val(localStorage.getItem('billing_tax_number'));
-				}
-				localStorage.removeItem('billing_company');
-				localStorage.removeItem('billing_tax_number');
+				showCompanyFields();
 			}
 			else if($(this).prop('checked') == false){
-				// Save already entered value, if customer wants to enable company fields again
-				localStorage.setItem('billing_company', $('#billing_company').val());
-				localStorage.setItem('billing_tax_number', $('#billing_tax_number').val());
-
-				// Hiding the company related fields
-				$('#billing_company_field').hide();
-				$('#billing_tax_number_field').hide();
-
-				// Empty the company related field values, because we don't want to save company details
-				$('#billing_company').val('');
-				$('#billing_tax_number').val('');
-
-				// Reset classes, as they are empty again
-				$("#billing_company_field").removeClass('validate-required');
-				$("#billing_company_field").removeClass('woocommerce-validated');
-				$("#billing_company_field").removeClass('woocommerce-invalid woocommerce-invalid-required-field');
-				$("#billing_tax_number_field").removeClass('validate-required');
-				$("#billing_tax_number_field").removeClass('woocommerce-validated');
-				$("#billing_tax_number_field").removeClass('woocommerce-invalid woocommerce-invalid-required-field');
+				hideCompanyFields();
 			}
 		});
 	<?php } ?>
-});
-<?php
-		$script = ob_get_contents();
-		ob_end_clean();
 
-		wp_add_inline_script( 'cps-jquery-fix', $script );
-	}
-} );
+	<?php if ( 1 == $checkout_hidecompanytaxfields_value ) { ?>
+		// Function to hide/show company fields based on selected country
+		function hideShowCompanyFields() {
+			const selectedCountry = $('#billing_country').val();
+
+			<?php if ( 1 == $billingcompanycheckValue ) { ?>
+				if ( selectedCountry !== 'HU' ) {
+					// Hiding the Company checkbox
+					$('#billing_company_check_field').hide();
+
+					// Uncheck the Company checkbox
+					$('#billing_company_check').prop('checked', false);
+
+					hideCompanyFields();
+				} else {
+					$('#billing_company_check_field').show();
+				}
+			<?php } else { ?>
+				if ( selectedCountry !== 'HU' ) {
+					hideCompanyFields();
+				} else {
+					showCompanyFields();
+					if ( $('#billing_company').val().trim() !== '' ) {
+						$('#billing_tax_number_field').show();
+					}
+				}
+			<?php } ?>
+		}
+
+		hideShowCompanyFields();
+
+		// Call the function when the Country dropdown changes
+		$('#billing_country').on('change', function() {
+			hideShowCompanyFields();
+		});
+	<?php } ?>
+
+	<?php if ( 1 == $nocountryValue ) { ?>
+		$("#billing_country_field").hide();
+	<?php } ?>
+});
+</script>
+<?php
+	// $script = ob_get_contents();
+	// ob_end_clean();
+
+	// wp_add_inline_script( 'cps-jquery-fix', $script );
+}, 99 );
