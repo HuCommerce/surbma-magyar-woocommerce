@@ -6,11 +6,17 @@ defined( 'ABSPATH' ) || exit;
 // Code reference: https://stackoverflow.com/questions/52367826/custom-plus-and-minus-quantity-buttons-in-woocommerce-3
 
 add_action( 'woocommerce_before_quantity_input_field', function() {
-	echo '<button type="button" class="qty-button minus">-</button>';
+	global $product;
+	if ( $product->get_max_purchase_quantity() != 1 ) {
+		echo '<button type="button" class="qty-button minus">-</button>';
+	}
 } );
 
 add_action( 'woocommerce_after_quantity_input_field', function() {
-	echo '<button type="button" class="qty-button plus">+</button>';
+	global $product;
+	if ( $product->get_max_purchase_quantity() != 1 ) {
+		echo '<button type="button" class="qty-button plus">+</button>';
+	}
 } );
 
 add_action( 'wp_enqueue_scripts', function() {
