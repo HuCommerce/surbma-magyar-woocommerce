@@ -6,23 +6,39 @@ defined( 'ABSPATH' ) || exit;
 // Code reference: https://stackoverflow.com/questions/52367826/custom-plus-and-minus-quantity-buttons-in-woocommerce-3
 
 add_action( 'woocommerce_before_quantity_input_field', function() {
-	global $product;
-	if ( $product->get_max_purchase_quantity() != 1 ) {
-		echo '<button type="button" class="qty-button minus">-</button>';
+	if ( is_product() ) {
+		global $product;
+		if ( $product && $product instanceof WC_Product && $product->get_max_purchase_quantity() != 1 ) {
+			echo '<button type="button" class="qty-button minus">-</button>';
+		}
 	}
 } );
 
 add_action( 'woocommerce_after_quantity_input_field', function() {
-	global $product;
-	if ( $product->get_max_purchase_quantity() != 1 ) {
-		echo '<button type="button" class="qty-button plus">+</button>';
+	if ( is_product() ) {
+		global $product;
+		if ( $product && $product instanceof WC_Product && $product->get_max_purchase_quantity() != 1 ) {
+			echo '<button type="button" class="qty-button plus">+</button>';
+		}
 	}
 } );
 
-add_action( 'wp_enqueue_scripts', function() {
+add_filter( 'woocommerce_cart_item_quantity', function( $product_quantity, $cart_item_key, $cart_item ) {
+	$product_data = $cart_item['data'];
+	$product_properties = $product_data->get_data();
+	$sold_individually = $product_properties['sold_individually'];
+	if ( ! $sold_individually ) {
+		$minusButton = '<button type="button" class="qty-button minus">-</button>';
+		$plusButton = '<button type="button" class="qty-button plus">+</button>';
+		return '<div class="quantity-wrap">' . $minusButton . $product_quantity . $plusButton . '</div>';
+	}
+	return $product_quantity;
+}, 10, 3 );
+
+add_action( 'wp_footer', function() {
 	if ( is_product() || is_cart() ) {
-		ob_start();
-		?>
+	?>
+<script>
 jQuery( function( $ ) {
 	if ( ! String.prototype.getDecimals ) {
 		String.prototype.getDecimals = function() {
@@ -36,12 +52,20 @@ jQuery( function( $ ) {
 	}
 	// Quantity "plus" and "minus" buttons
 	$( document.body ).on( 'click', '.plus, .minus', function() {
+		<?php if ( is_product() ) { // Get the right quantity input field on the product page ?>
 		var $qty        = $( this ).closest( '.quantity' ).find( '.qty'),
 			currentVal  = parseFloat( $qty.val() ),
 			max         = parseFloat( $qty.attr( 'max' ) ),
 			min         = parseFloat( $qty.attr( 'min' ) ),
 			step        = $qty.attr( 'step' );
-
+		<?php } ?>
+		<?php if ( is_cart() ) { // Get the right quantity input field on the cart page ?>
+		var $qty        = $( this ).closest( '.quantity-wrap' ).find( '.qty'),
+			currentVal  = parseFloat( $qty.val() ),
+			max         = parseFloat( $qty.attr( 'max' ) ),
+			min         = parseFloat( $qty.attr( 'min' ) ),
+			step        = $qty.attr( 'step' );
+		<?php } ?>
 		// Format values
 		if ( ! currentVal || currentVal === '' || currentVal === 'NaN' ) currentVal = 0;
 		if ( max === '' || max === 'NaN' ) max = '';
@@ -55,7 +79,8 @@ jQuery( function( $ ) {
 			} else {
 				$qty.val( ( currentVal + parseFloat( step )).toFixed( step.getDecimals() ) );
 			}
-		} else {
+		}
+		if ( $( this ).is( '.minus' ) ) {
 			if ( min && ( currentVal <= min ) ) {
 				$qty.val( min );
 			} else if ( currentVal > 0 ) {
@@ -67,11 +92,8 @@ jQuery( function( $ ) {
 		$qty.trigger( 'input' );
 	});
 });
-<?php
-		$script = ob_get_contents();
-		ob_end_clean();
-
-		wp_add_inline_script( 'cps-jquery-fix', $script );
+</script>>
+	<?php
 	}
 } );
 
@@ -79,6 +101,7 @@ add_action( 'wp_head', function() {
 	if ( is_product() || is_cart() ) {
 		?>
 <style id="plus-minus-buttons-style">
+	td.product-quantity .quantity-wrap {display: flex;gap: 3px;}
 	.quantity input::-webkit-outer-spin-button,
 	.quantity input::-webkit-inner-spin-button {-webkit-appearance: none !important;margin: 0; !important}
 	.quantity input {appearance: textfield !important;-moz-appearance: textfield !important;}
