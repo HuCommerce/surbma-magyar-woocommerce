@@ -25,7 +25,7 @@ add_action( 'woocommerce_after_quantity_input_field', function() {
 
 add_filter( 'woocommerce_cart_item_quantity', function( $product_quantity, $cart_item_key, $cart_item ) {
 	$product_data = $cart_item['data'];
-	if ( is_object( $product_data ) && get_class( $product_data ) === 'WC_Product_Simple' ) {
+	if ( is_object( $product_data ) ) {
 		$product_properties = $product_data->get_data();
 		if ( array_key_exists( 'sold_individually', $product_properties ) ) {
 			$sold_individually = $product_properties['sold_individually'];

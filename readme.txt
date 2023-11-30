@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.4
-Stable tag: 2023.2.4
+Stable tag: 2023.2.5
 Requires PHP: 7.3
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -326,6 +326,14 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+#### 2023.2.5
+
+**Kiadás dátuma: 2023-11-30**
+
+JAVÍTÁS
+
+- A Plusz/mínusz mennyiségi gombok modul ellenőrzésének a javítása a Kosár oldalon.
 
 #### 2023.2.4
 
