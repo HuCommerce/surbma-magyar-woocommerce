@@ -24,6 +24,7 @@ function surbma_hc_page_modules_nav() {
 				<?php cps_hc_wcgems_module_nav_item( 'Product price history', 'module-productpricehistory' ); ?>
 				<?php cps_hc_wcgems_module_nav_item( 'Product price additions', 'module-productpriceadditions' ); ?>
 				<?php cps_hc_wcgems_module_nav_item( 'Legal compliance (GDPR, CCPA, ePrivacy)', 'legalcheckout' ); ?>
+				<?php cps_hc_wcgems_module_nav_item( 'Limit Payment Methods', 'module-limitpaymentmethods' ); ?>
 				<?php cps_hc_wcgems_module_nav_item( 'Global informations', 'module-globalinfo' ); ?>
 				<?php cps_hc_wcgems_module_nav_item( 'Fixes for Hungarian language', 'huformatfix' ); ?>
 				<?php cps_hc_wcgems_module_nav_item( 'Tax number field', 'taxnumber' ); ?>

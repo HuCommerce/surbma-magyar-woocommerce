@@ -194,6 +194,7 @@ __( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' );
 							<li uk-filter-control="filter: [data-tags*='product']; group: tags"><a href="#"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></a></li>
 							<li uk-filter-control="filter: [data-tags*='cart']; group: tags"><a href="#"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></a></li>
 							<li uk-filter-control="filter: [data-tags*='checkout']; group: tags"><a href="#"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></a></li>
+							<li uk-filter-control="filter: [data-tags*='payments']; group: tags"><a href="#"><?php esc_html_e( 'Payments', 'surbma-magyar-woocommerce' ); ?></a></li>
 							<li uk-filter-control="filter: [data-tags*='legal']; group: tags"><a href="#"><?php esc_html_e( 'Legal', 'surbma-magyar-woocommerce' ); ?></a></li>
 							<li uk-filter-control="filter: [data-tags*='conversion']; group: tags"><a href="#"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></a></li>
 							<li uk-filter-control="filter: [data-tags*='other']; group: tags"><a href="#"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></a></li>
@@ -305,6 +306,22 @@ __( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' );
 							</div>
 							<div class="uk-card-footer uk-background-muted">
 								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'legalcheckout' ); ?>
+							</div>
+						</div>
+					</li>
+					<li data-license="pro" data-age="new" data-tags="checkout payments">
+						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
+							<div class="uk-card-body">
+								<span class="uk-label uk-label-default"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
+								<span class="uk-label uk-label-danger">Pro</span>
+								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
+								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Payments', 'surbma-magyar-woocommerce' ); ?></span>
+								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Limit Payment Methods', 'surbma-magyar-woocommerce' ); ?></h5>
+								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Disable any Payment Methods for a particular user. The disabled Payment Method will not be shown to the Customer on the Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
+								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'fizetesi-modok-korlatozasa' ); ?></p>
+							</div>
+							<div class="uk-card-footer uk-background-muted">
+								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-limitpaymentmethods' ); ?>
 							</div>
 						</div>
 					</li>
@@ -750,6 +767,13 @@ __( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' );
 
 			<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Disclaimer', 'surbma-magyar-woocommerce' ); ?></h5>
 			<p><?php esc_html_e( 'HuCommerce modules are tools to comply with local and/or international rules and laws, but it is the webshop owner\'s duty to make sure to comply with all rules and laws! Developers and the owners of HuCommerce take no responsibility for any legal compliance. However our mission is to provide all necessary tools for these challenges.', 'surbma-magyar-woocommerce' ); ?></p>
+		</li>
+		<li>
+			<h3 class="uk-card-title"><?php esc_html_e( 'Limit Payment Methods', 'surbma-magyar-woocommerce' ); ?></h3>
+
+			<?php echo wp_kses_post( $pro_notice ); ?>
+
+			<?php echo wp_kses_post( $no_options_notice ); ?>
 		</li>
 		<li>
 			<h3 class="uk-card-title"><?php esc_html_e( 'Global informations', 'surbma-magyar-woocommerce' ); ?></h3>

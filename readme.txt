@@ -3,8 +3,8 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
 Tested up to: 6.4
-Stable tag: 2023.2.5
-Requires PHP: 7.3
+Stable tag: 2023.3.0
+Requires PHP: 7.4
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -76,6 +76,7 @@ A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő 
 - Termék ár történet (új Fogyasztóvédelemi rendelet)
 - Termék ár kiegészítések
 - Jogi megfelelés (Fogyasztóvédelem, GDPR, ePrivacy, stb.)
+- Fizetési módok korlátozása
 - Globális adatok, amiket shortcode-dal lehet bárhol megjeleníteni
 - Kiemelt ügyfélszolgálat és támogatás
 - További funkciók hamarosan…
@@ -240,6 +241,10 @@ A Termékek árához lehet beállítani elő- és utótagokat. Előtag lehet pé
 - Kapcsolódó termékek száma a termék végoldalakon
 - Kapcsolódó termékek száma soronként a termék végoldalakon
 
+#### Fizetési módok korlátozása
+
+Minden vásárlónál külön állíthatod be, hogy milyen fizetési módot választhat a Pénztár oldalon. Így könnyedén kikapcsolhatsz egy-egy fizetési módot mondjuk azoknál a vásárlóknál, akiknél rendszeres volt az utánvétes rendelés esetén a nem fizetés és elállás. De bármilyen más okból is kikapcsolhatsz bizonyos fizetési módokat adott vásárlóknál.
+
 #### Globális adatok
 
 Előre beállítható adatok, amiket rövidkódokkal a webáruház bármely részén megjeleníthetsz. Például a webáruház telefonszáma, ami ha egyszer változik, csak itt kell módosítanod és minden helyen egyszerre a jó telefonszám fog megjelenni. Egyes adatok aktívan jelennek meg, így a telefonszám egy kattintással hívható lesz és az email cím is kattintható formában és titkosítva jelenik meg, hogy a botok ne tudják kiolvasni a kódból.
@@ -326,6 +331,14 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+#### 2023.3.0
+
+**Kiadás dátuma: 2023-12-31**
+
+FIZETÉSI MÓDOK KORLÁTOZÁSA
+
+- Új Pro modul, amivel korlátozni lehet minden egyes felhasználónál az elérhető fizetési módokat.
 
 #### 2023.2.5
 

@@ -88,6 +88,7 @@ $module_catalogmodeValue = isset( $options['module-catalogmode'] ) ? $options['m
 // New Pro modules
 $module_emptycartbuttonValue = isset( $options['module-emptycartbutton'] ) && SURBMA_HC_PREMIUM ? $options['module-emptycartbutton'] : 0;
 $module_productpriceadditionsValue = isset( $options['module-productpriceadditions'] ) && SURBMA_HC_PREMIUM ? $options['module-productpriceadditions'] : 0;
+$module_limitpaymentmethodsValue = isset( $options['module-limitpaymentmethods'] ) && SURBMA_HC_PREMIUM ? $options['module-limitpaymentmethods'] : 0;
 
 // Legacy Pro modules
 $module_freeshippingnoticeValue = isset( $options['freeshippingnotice'] ) && ( SURBMA_HC_PREMIUM || !isset( $options['brandnewuser'] ) || ( isset( $options['legacyuser'] ) && 1 == $options['legacyuser'] ) ) ? $options['freeshippingnotice'] : 0;
@@ -138,6 +139,9 @@ if ( 1 == $module_legalcheckoutValue ) {
 }
 if ( 1 == $module_productsettingsValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules/product-settings.php';
+}
+if ( 1 == $module_limitpaymentmethodsValue ) {
+	include_once SURBMA_HC_PLUGIN_DIR . '/modules/limit-payment-methods.php';
 }
 if ( 1 == $module_globalinfoValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules/global-info.php';
