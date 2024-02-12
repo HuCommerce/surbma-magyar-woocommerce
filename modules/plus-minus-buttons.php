@@ -96,7 +96,7 @@ jQuery( function( $ ) {
 		$qty.trigger( 'input' );
 	});
 });
-</script>>
+</script>
 	<?php
 	}
 } );

@@ -24,3 +24,13 @@ add_filter( 'woocommerce_states', function( $states ) {
 	$states['HU'] = array();
 	return $states;
 } );
+
+/*
+// Alternative method to hide State fields
+// TODO: Make a condition to dinamically hide it only if Country is Hungary.
+add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
+	unset( $fields['billing']['billing_state'] );
+	unset( $fields['shipping']['shipping_state'] );
+	return $fields;
+} );
+*/
