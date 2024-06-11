@@ -3,13 +3,11 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-function surbma_hc_get_starred( $str ) {
+function surbma_hc_mask( $str ) {
 	$str_length = strlen( $str );
-	if ( $str_length < 10 ) {
-		return $str;
-	} else {
-		return substr( $str, 0, 5 ) . str_repeat( '*', $str_length - 10 ) . substr( $str, $str_length - 5, 5 );
-	}
+	$visibleLength = 4;
+	$maskedLength = $str_length - ( $visibleLength * 2 );
+	return substr( $str, 0, $visibleLength ) . str_repeat( '&bull;', $maskedLength ) . substr( $str, $str_length - $visibleLength );
 }
 
 $license_status = get_option( 'surbma_hc_license_status', array() );
@@ -50,7 +48,7 @@ $custom_product_id = isset( $_GET['hc-product_id'] ) ? $_GET['hc-product_id'] : 
 			<div class="uk-inline uk-width-expand">
 				<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
 				<?php $licensekeyValue = isset( $license_options['licensekey'] ) ? $license_options['licensekey'] : ''; ?>
-				<input id="surbma_hc_license[licensekey]" class="uk-input uk-form-large" type="text" name="surbma_hc_license[licensekey]" value="<?php echo esc_attr( wp_unslash( $licensekeyValue ) ); ?>" placeholder="API kulcs" style="font-family: monospace;"<?php echo esc_html( $disabled ); ?> />
+				<input id="surbma_hc_license[licensekey]" class="uk-input uk-form-large" type="text" name="surbma_hc_license[licensekey]" value="<?php echo esc_attr( wp_unslash( surbma_hc_mask( $licensekeyValue ) ) ); ?>" placeholder="API kulcs" style="font-family: monospace;"<?php echo esc_html( $disabled ); ?> />
 			</div>
 		</div>
 

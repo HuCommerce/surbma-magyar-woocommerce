@@ -2,8 +2,8 @@
 Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian, hungary
 Requires at least: 5.3
-Tested up to: 6.4
-Stable tag: 2023.3.1
+Tested up to: 6.5
+Stable tag: 2024.1.0
 Requires PHP: 7.4
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -331,6 +331,20 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 A vezetéknevem visszafelé. ;)
 
 == Changelog ==
+
+#### 2024.1.0
+
+**Kiadás dátuma: 2024-06-11**
+
+TERMÉK ÁR TÖRTÉNET
+
+- Egy feltétel optimalizálása, hogy semmiképpen se lehessen végzetes hiba.
+
+EGYÉB
+
+- Maszkolás újra bevezetése a licensz kulcshoz.
+- Kompatibilitás ellenőrzése a WordPress 6.5 verzióval.
+- Kompatibilitás ellenőrzése a WooCommerce 8.9 verzióval.
 
 #### 2023.3.1
 

@@ -35,8 +35,11 @@ function surbma_hc_update_product_price_history( $product_id ) {
 	}
 	*/
 
-	if ( get_post_meta( $product_id, '_hc_product_price_history' ) ) {
-		$product_price_history = get_post_meta( $product_id, '_hc_product_price_history', true );
+	// Get the _hc_product_price_history meta field
+	$product_price_history = get_post_meta( $product_id, '_hc_product_price_history', true );
+
+	// Check if we already have saved prices
+	if ( $product_price_history && is_array( $product_price_history ) ) {
 		$product_regular_price_old = $product_price_history[0][1];
 		$product_price_old = $product_price_history[0][2];
 
@@ -50,7 +53,7 @@ function surbma_hc_update_product_price_history( $product_id ) {
 		$product_price_history = array(
 			array( $current_time, $product_regular_price, $product_price )
 		);
-		add_post_meta( $product_id, '_hc_product_price_history', $product_price_history );
+		update_post_meta( $product_id, '_hc_product_price_history', $product_price_history );
 	}
 }
 
