@@ -1,10 +1,10 @@
 <?php
 
-add_shortcode( 'hc-tel', function( $atts, $content = null ) {
+add_shortcode( 'hc-tel', function( $atts, $content = '' ) {
 	return '<a href="tel:+' . preg_replace('/\D/', '', $content) . '">' . $content . '</a>';
 } );
 
-add_shortcode( 'hc-mailto', function( $atts, $content = null ) {
+add_shortcode( 'hc-mailto', function( $atts, $content = '' ) {
 	$encodedemail = '';
 	for ( $i = 0; $i <strlen( $content ); $i++ ) {
 		$encodedemail .= '&#' . ord( $content[$i] ) . ';';

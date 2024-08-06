@@ -89,6 +89,7 @@ $module_catalogmodeValue = isset( $options['module-catalogmode'] ) ? $options['m
 $module_emptycartbuttonValue = isset( $options['module-emptycartbutton'] ) && SURBMA_HC_PREMIUM ? $options['module-emptycartbutton'] : 0;
 $module_productpriceadditionsValue = isset( $options['module-productpriceadditions'] ) && SURBMA_HC_PREMIUM ? $options['module-productpriceadditions'] : 0;
 $module_limitpaymentmethodsValue = isset( $options['module-limitpaymentmethods'] ) && SURBMA_HC_PREMIUM ? $options['module-limitpaymentmethods'] : 0;
+$module_translationsValue = isset( $options['module-translations'] ) && SURBMA_HC_PREMIUM ? $options['module-translations'] : 0;
 
 // Legacy Pro modules
 $module_freeshippingnoticeValue = isset( $options['freeshippingnotice'] ) && ( SURBMA_HC_PREMIUM || !isset( $options['brandnewuser'] ) || ( isset( $options['legacyuser'] ) && 1 == $options['legacyuser'] ) ) ? $options['freeshippingnotice'] : 0;
@@ -154,6 +155,9 @@ if ( 1 == $module_productpriceadditionsValue ) {
 }
 if ( 1 == $module_catalogmodeValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules/catalog-mode.php';
+}
+if ( 1 == $module_translationsValue ) {
+	include_once SURBMA_HC_PLUGIN_DIR . '/modules/translations.php';
 }
 
 // Add plugin WooCommerce templates if exist

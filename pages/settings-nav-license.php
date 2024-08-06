@@ -4,6 +4,9 @@
 defined( 'ABSPATH' ) || exit;
 
 function surbma_hc_mask( $str ) {
+	if ( !$str || 'active' != SURBMA_HC_PLUGIN_LICENSE ) {
+		return $str;
+	}
 	$str_length = strlen( $str );
 	$visibleLength = 4;
 	$maskedLength = $str_length - ( $visibleLength * 2 );
@@ -66,7 +69,7 @@ $custom_product_id = isset( $_GET['hc-product_id'] ) ? $_GET['hc-product_id'] : 
 <?php
 	if ( 'active' == SURBMA_HC_PLUGIN_LICENSE ) {
 		$licensestatus = '<span class="uk-label uk-label-success">Aktív</span>';
-	} elseif ( 'invalid' == SURBMA_HC_PLUGIN_LICENSE ) {
+	} elseif ( 'invalid' == SURBMA_HC_PLUGIN_LICENSE || ( $licensekeyValue ) ) {
 		$licensestatus = '<span class="uk-label uk-label-danger">Érvénytelen API kulcs</span>';
 	} else {
 		$licensestatus = '<span class="uk-label">Nincs aktiválva</span>';

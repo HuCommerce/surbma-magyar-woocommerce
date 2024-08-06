@@ -144,7 +144,7 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 	// Load plugin scripts & styles for plugin pages
 	if ( $hc_page ) {
 		add_action( 'admin_enqueue_scripts', 'cps_admin_scripts', 9999 );
-		wp_enqueue_style( 'surbma-hc-admin', SURBMA_HC_PLUGIN_URL . '/assets/css/admin.css', array(), SURBMA_HC_PLUGIN_VERSION_NUMBER );
+		wp_enqueue_style( 'surbma-hc-admin', SURBMA_HC_PLUGIN_URL . '/assets/css/admin.css', array(), SURBMA_HC_PLUGIN_VERSION );
 	}
 
 	// * HUCOMMERCE START

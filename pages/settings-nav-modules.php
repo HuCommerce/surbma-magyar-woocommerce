@@ -339,6 +339,20 @@ __( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' );
 							</div>
 						</div>
 					</li>
+					<li data-license="pro" data-tags="other">
+						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
+							<div class="uk-card-body">
+								<span class="uk-label uk-label-danger">Pro</span>
+								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></span>
+								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Translations for premium plugins & themes', 'surbma-magyar-woocommerce' ); ?></h5>
+								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Adds translations for most popular premium plugins & themes. Supported softwares added regularly. Please let us know, what plugin or theme do you need to be translated next time!', 'surbma-magyar-woocommerce' ); ?></p>
+								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'forditasok' ); ?></p>
+							</div>
+							<div class="uk-card-footer uk-background-muted">
+								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-translations' ); ?>
+							</div>
+						</div>
+					</li>
 					<li data-license="free" data-tags="other">
 						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 							<div class="uk-card-body">
@@ -820,6 +834,34 @@ __( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' );
 					</table>
 				</li>
 			</ul>
+		</li>
+		<li>
+			<h3 class="uk-card-title"><?php esc_html_e( 'Translations for premium plugins & themes', 'surbma-magyar-woocommerce' ); ?></h3>
+
+			<?php echo wp_kses_post( $pro_notice ); ?>
+
+			<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+			<p><?php esc_html_e( 'Adds translations for most popular premium plugins & themes. Supported softwares added regularly. Please let us know, what plugin or theme do you need to be translated next time!', 'surbma-magyar-woocommerce' ); ?></p>
+			<div class="uk-overflow-auto uk-margin-large-top">
+				<table class="uk-table uk-table-divider uk-table-justify uk-table-small">
+					<thead>
+						<tr>
+							<th><?php esc_html_e( 'Supported softwares', 'surbma-magyar-woocommerce' ); ?></th>
+							<th><?php esc_html_e( 'Type', 'surbma-magyar-woocommerce' ); ?></th>
+							<th><?php esc_html_e( 'Link', 'surbma-magyar-woocommerce' ); ?></th>
+							<th><?php esc_html_e( 'Languages', 'surbma-magyar-woocommerce' ); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>WooCommerce Subscriptions</td>
+							<td><span class="uk-label"><?php esc_html_e( 'Plugin', 'surbma-magyar-woocommerce' ); ?></span></td>
+							<td><a href="https://woocommerce.com/products/woocommerce-subscriptions/" target="_blank">https://woocommerce.com/products/woocommerce-subscriptions/</a></td>
+							<td><code>HU</code></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</li>
 		<?php // * HUCOMMERCE START ?>
 		<li>

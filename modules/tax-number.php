@@ -102,7 +102,7 @@ add_filter( 'woocommerce_localisation_address_formats', function( $formats ) {
 
 // Replacement for the new {tax_number} field
 add_filter( 'woocommerce_formatted_address_replacements', function( $replacements, $args ) {
-	$taxnumber = isset( $args['tax_number'] ) ? $args['tax_number'] : null;
+	$taxnumber = isset( $args['tax_number'] ) ? $args['tax_number'] : '';
 	$replacements['{tax_number}'] = $taxnumber;
 	return $replacements;
 }, 10, 2 );
@@ -110,20 +110,20 @@ add_filter( 'woocommerce_formatted_address_replacements', function( $replacement
 // Adding Tax number to My Account -> Addresses page
 add_filter( 'woocommerce_my_account_my_address_formatted_address', function( $address, $customer_id, $address_type ) {
 	$taxnumber = get_user_meta( $customer_id, 'billing_tax_number', true );
-	$address['tax_number'] = 'billing' == $address_type && '' != $taxnumber ? __( 'Tax number', 'surbma-magyar-woocommerce' ) . ': ' . $taxnumber : null;
+	$address['tax_number'] = 'billing' == $address_type && '' != $taxnumber ? __( 'Tax number', 'surbma-magyar-woocommerce' ) . ': ' . $taxnumber : '';
 	return $address;
 }, 10, 3 );
 
 // Adding Tax number to Billing address on Thank you page and admin Preview
 add_filter( 'woocommerce_order_formatted_billing_address', function( $address, $wc_order ) {
 	$taxnumber = $wc_order->get_meta( '_billing_tax_number' );
-	$address['tax_number'] = '' != $taxnumber ? __( 'Tax number', 'surbma-magyar-woocommerce' ) . ': ' . $taxnumber : null;
+	$address['tax_number'] = '' != $taxnumber ? __( 'Tax number', 'surbma-magyar-woocommerce' ) . ': ' . $taxnumber : '';
 	return $address;
 }, 10, 2 );
 
 // Removing Tax number from Shipping address on Thank you page
 add_filter( 'woocommerce_order_formatted_shipping_address', function( $address ) {
-	$address['tax_number'] = null;
+	$address['tax_number'] = '';
 	return $address;
 } );
 

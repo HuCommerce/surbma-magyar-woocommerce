@@ -15,6 +15,7 @@ add_filter( 'gettext', function( $translation, $text, $domain ) {
 }, 20, 3 );
 */
 
+/*
 // Custom translations for plural strings without context
 add_filter( 'ngettext', function( $translation, $single, $plural, $number, $domain ) {
 	// _n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), 'storefront' )
@@ -35,6 +36,7 @@ add_filter( 'ngettext', function( $translation, $single, $plural, $number, $doma
 	}
 	return $translation;
 }, 20, 5 );
+*/
 
 // Custom translations for plural strings with context
 add_filter( 'ngettext_with_context', function( $translation, $single, $plural, $number, $context, $domain ) {

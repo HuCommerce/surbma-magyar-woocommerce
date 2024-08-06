@@ -11,12 +11,12 @@ add_filter( 'woocommerce_get_country_locale', function( $locale ) {
 
 // Default billing state reset function
 add_filter( 'default_checkout_billing_state', function() {
-	return null;
+	return '';
 } );
 
 // Default shipping state reset function
 add_filter( 'default_checkout_shipping_state', function() {
-	return null;
+	return '';
 } );
 
 // Hide the state field

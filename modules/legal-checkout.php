@@ -52,9 +52,9 @@ add_action( 'user_register', function( $user_id ) {
 			$_SERVER['REMOTE_ADDR'] = filter_var( $_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP );
 			$_SERVER['HTTP_CLIENT_IP'] = filter_var( $_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP );
 		}
-		$remote = isset( $_SERVER['REMOTE_ADDR'] ) ? filter_var( $_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP ) : null;
-		$client = isset( $_SERVER['HTTP_CLIENT_IP'] ) ? filter_var( $_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP ) : null;
-		$forward = isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ? filter_var( $_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP ) : null;
+		$remote = isset( $_SERVER['REMOTE_ADDR'] ) ? filter_var( $_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP ) : '';
+		$client = isset( $_SERVER['HTTP_CLIENT_IP'] ) ? filter_var( $_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP ) : '';
+		$forward = isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ? filter_var( $_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP ) : '';
 
 		if ( $remote ) {
 			$ip = $remote;
@@ -121,7 +121,7 @@ add_action( 'woocommerce_edit_account_form', function() {
 $options = get_option( 'surbma_hc_fields' );
 $legalconfirmationsposition = isset( $options['legalconfirmationsposition'] ) ? $options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
 
-add_action( $legalconfirmationsposition, function( $checkout = null ) {
+add_action( $legalconfirmationsposition, function( $checkout = '' ) {
 	if ( ! $checkout ) {
 		$checkout = WC()->checkout();
 	}
@@ -272,7 +272,7 @@ add_action( 'woocommerce_admin_order_data_after_billing_address', function( $ord
 
 add_action( 'woocommerce_review_order_before_submit', function() {
 	$options = get_option( 'surbma_hc_fields' );
-	$beforeorderbuttonmessageValue = isset( $options['beforeorderbuttonmessage'] ) ? wp_unslash( $options['beforeorderbuttonmessage'] ) : null;
+	$beforeorderbuttonmessageValue = isset( $options['beforeorderbuttonmessage'] ) ? wp_unslash( $options['beforeorderbuttonmessage'] ) : '';
 	if ( $beforeorderbuttonmessageValue ) {
 		echo '<div class="surbma-hc-before-submit" style="margin: 0 0 1em;text-align: center;">' . wp_kses_post( $beforeorderbuttonmessageValue ) . '</div>';
 	}
@@ -280,7 +280,7 @@ add_action( 'woocommerce_review_order_before_submit', function() {
 
 add_action( 'woocommerce_review_order_after_submit', function() {
 	$options = get_option( 'surbma_hc_fields' );
-	$afterorderbuttonmessageValue = isset( $options['afterorderbuttonmessage'] ) ? wp_unslash( $options['afterorderbuttonmessage'] ) : null;
+	$afterorderbuttonmessageValue = isset( $options['afterorderbuttonmessage'] ) ? wp_unslash( $options['afterorderbuttonmessage'] ) : '';
 	if ( $afterorderbuttonmessageValue ) {
 		echo '<div class="surbma-hc-before-submit" style="margin: 1em 0 0;text-align: center;">' . wp_kses_post( $afterorderbuttonmessageValue ) . '</div>';
 	}

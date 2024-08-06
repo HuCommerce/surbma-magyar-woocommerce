@@ -76,7 +76,7 @@ function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
 		}
 	}
 
-	$notice = null;
+	$notice = '';
 
 	// If Subtotal < Min Amount Echo Notice and add "Continue Shopping" button
 	if ( $current < $min_amount ) {
