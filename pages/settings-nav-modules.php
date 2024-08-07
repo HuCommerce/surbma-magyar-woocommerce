@@ -760,6 +760,7 @@ __( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' );
 
 				<?php cps_hc_wcgems_form_field_select( 'Legal confirmation checkboxes position on Checkout page', 'legalconfirmationsposition', $legalconfirmationsposition_options, 'woocommerce_review_order_before_submit' ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'Section title on Checkout page', 'legalcheckouttitle', 'Legal confirmations', 'Title above the checkbox. If empty, then no title will be displayed.' ); ?>
+				<?php cps_hc_wcgems_form_field_textarea( 'Section text on Checkout page', 'legalcheckouttext', '', 'General description of the legal section. If empty, then this text will not be displayed.' ); ?>
 				<?php cps_hc_wcgems_form_field_textarea( 'Terms of Service checkbox text on Checkout page', 'accepttos', 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'If empty, then this checkbox will not be displayed.' ); ?>
 				<?php cps_hc_wcgems_form_field_textarea( 'Privacy Policy checkbox text on Checkout page', 'acceptpp', 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'If empty, then this checkbox will not be displayed.' ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'Custom 1 checkbox label on Checkout page', 'acceptcustom1label', '', 'The label of the custom checkbox field. Used by the error message, if checkbox is not accepted. If empty, then no error message will be displayed.' ); ?>

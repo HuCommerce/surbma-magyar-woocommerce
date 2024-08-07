@@ -182,6 +182,7 @@ function surbma_hc_fields_validate( $input ) {
 	$input['freeshippingnoticemessage'] = wp_filter_post_kses( $input['freeshippingnoticemessage'] );
 	$input['freeshippingsuccessfulmessage'] = wp_filter_post_kses( $input['freeshippingsuccessfulmessage'] );
 	$input['regacceptpp'] = wp_filter_post_kses( $input['regacceptpp'] );
+	$input['legalcheckouttext'] = wp_filter_post_kses( $input['legalcheckouttext'] );
 	$input['accepttos'] = wp_filter_post_kses( $input['accepttos'] );
 	$input['acceptpp'] = wp_filter_post_kses( $input['acceptpp'] );
 	$input['acceptcustom1label'] = wp_filter_post_kses( $input['acceptcustom1label'] );

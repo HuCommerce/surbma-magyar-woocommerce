@@ -3,7 +3,7 @@ Contributors: Surbma, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 6.6
-Stable tag: 2024.2.0
+Stable tag: 2024.3.0
 Requires PHP: 7.4
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -271,6 +271,15 @@ Először töröld a szerver oldali és a böngésző gyorsítótárát és fris
 Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van állítva a webáruház.
 
 == Changelog ==
+
+#### 2024.3.0
+
+**Kiadás dátuma: 2024-08-08**
+
+JOGI MEGFELELÉS
+
+- A WooCommerce saját Adatkezelési tájékoztató és Általános szerződési feltételek mezőinek az elrejtése a Pénztár oldalon, ha a Jogi megfelelés modul aktív.
+- Új szöveg mező a Pénztár oldalon, ami a jogi szakasz elnevezése alatt jelenik meg. Ez használható egy rövid jogi szöveg megjelenítésére.
 
 #### 2024.2.0
 

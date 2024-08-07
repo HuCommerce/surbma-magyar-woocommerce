@@ -5,7 +5,7 @@ Plugin Name: HuCommerce | Magyar WooCommerce kiegészítések
 Plugin URI: https://www.hucommerce.hu/
 Description: Hasznos javítások a magyar nyelvű WooCommerce webáruházakhoz.
 
-Version: 2024.2.0
+Version: 2024.3.0
 
 Author: HuCommerce.hu
 Author URI: https://www.hucommerce.hu/

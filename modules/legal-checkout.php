@@ -118,9 +118,18 @@ add_action( 'woocommerce_edit_account_form', function() {
 <?php
 }, 10 );
 
+// Disable WooCommerce default Terms & Conditions fields on Checkout page
+add_action( 'init', function() {
+	if ( ! is_admin() ) {
+		add_filter('woocommerce_checkout_show_terms', '__return_false');
+	}
+} );
+
+// Get the position for the Terms & Conditions fields on Checkout page
 $options = get_option( 'surbma_hc_fields' );
 $legalconfirmationsposition = isset( $options['legalconfirmationsposition'] ) ? $options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
 
+// Show our Terms & Conditions fields on Checkout page
 add_action( $legalconfirmationsposition, function( $checkout = '' ) {
 	if ( ! $checkout ) {
 		$checkout = WC()->checkout();
@@ -128,14 +137,8 @@ add_action( $legalconfirmationsposition, function( $checkout = '' ) {
 
 	$options = get_option( 'surbma_hc_fields' );
 	$legalcheckouttitleValue = isset( $options['legalcheckouttitle'] ) ? $options['legalcheckouttitle'] : esc_html__( 'Legal confirmations', 'surbma-magyar-woocommerce' );
+	$legalcheckouttextValue = isset( $options['legalcheckouttext'] ) ? $options['legalcheckouttext'] : '';
 	$legalconfirmationsposition = isset( $options['legalconfirmationsposition'] ) ? $options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
-	if ( $legalcheckouttitleValue ) {
-		if ( 'woocommerce_review_order_before_submit' == $legalconfirmationsposition ) {
-			$legalcheckouttitleValue = '<p><strong>' . $legalcheckouttitleValue . '</strong></p>';
-		} else {
-			$legalcheckouttitleValue = '<h3>' . $legalcheckouttitleValue . '</h3>';
-		}
-	}
 	$accepttosValue = isset( $options['accepttos'] ) ? wp_kses_post( wp_unslash( $options['accepttos'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'surbma-magyar-woocommerce' );
 	$acceptppValue = isset( $options['acceptpp'] ) ? wp_kses_post( wp_unslash( $options['acceptpp'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
 	$acceptcustom1Value = isset( $options['acceptcustom1'] ) ? wp_kses_post( wp_unslash( $options['acceptcustom1'] ) ) : '';
@@ -143,7 +146,20 @@ add_action( $legalconfirmationsposition, function( $checkout = '' ) {
 	$acceptcustom2Value = isset( $options['acceptcustom2'] ) ? wp_kses_post( wp_unslash( $options['acceptcustom2'] ) ) : '';
 	$legalcheckout_custom2optionalValue = isset( $options['legalcheckout-custom2optional'] ) && 1 == $options['legalcheckout-custom2optional'] ? false : true;
 
-	echo '<div id="surbma_hc_gdpr_checkout">' . wp_kses_post( $legalcheckouttitleValue );
+	echo '<div id="surbma_hc_legal_checkout">';
+
+	if ( $legalcheckouttitleValue ) {
+		if ( 'woocommerce_review_order_before_submit' == $legalconfirmationsposition ) {
+			$legalcheckouttitleValue = '<p id="surbma_hc_legal_checkout_title"><strong>' . $legalcheckouttitleValue . '</strong></p>';
+		} else {
+			$legalcheckouttitleValue = '<h3 id="surbma_hc_legal_checkout_title">' . $legalcheckouttitleValue . '</h3>';
+		}
+		echo wp_kses_post( $legalcheckouttitleValue );
+	}
+
+	if ( $legalcheckouttextValue ) {
+		echo '<p id="surbma_hc_legal_checkout_text">' . wp_kses_post( $legalcheckouttextValue ) . '</p>';
+	}
 
 	if ( $accepttosValue ) {
 		woocommerce_form_field( 'accept_tos', array(
