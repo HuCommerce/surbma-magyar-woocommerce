@@ -23,6 +23,7 @@ global $smtpsecure_options;
 global $emptycartbutton_cartpage_options;
 global $emptycartbutton_checkoutpage_options;
 global $productpricehistory_statisticslinkdisplay_options;
+global $catalogmode_productpricedisplay_options;
 
 // Translation fixes
 __( 'Add placeholder to this field', 'surbma-magyar-woocommerce' );
@@ -164,6 +165,7 @@ __( 'Price prefix on Product page', 'surbma-magyar-woocommerce' );
 __( 'Price suffix on Product page', 'surbma-magyar-woocommerce' );
 __( 'Price prefix on Archive pages', 'surbma-magyar-woocommerce' );
 __( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' );
+__( 'Translations', 'surbma-magyar-woocommerce' );
 ?>
 
 <form class="uk-form-stacked" method="post" action="options.php">
@@ -233,10 +235,11 @@ __( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' );
 							</div>
 						</div>
 					</li>
-					<li data-license="pro" data-tags="conversion">
+					<li data-license="pro" data-tags="cart conversion">
 						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 							<div class="uk-card-body">
 								<span class="uk-label uk-label-danger">Pro</span>
+								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></span>
 								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
 								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Free shipping notification', 'surbma-magyar-woocommerce' ); ?></h5>
 								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'A notification on the Cart page to let customer know, how much total purchase is missing to get free shipping.', 'surbma-magyar-woocommerce' ); ?></p>
@@ -1070,7 +1073,11 @@ __( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' );
 		</li>
 		<li>
 			<h3 class="uk-card-title"><?php esc_html_e( 'Catalog mode', 'surbma-magyar-woocommerce' ); ?></h3>
-			<?php echo wp_kses_post( $no_options_notice ); ?>
+
+			<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+			<ul class="cps-form-fields uk-list uk-list-divider">
+				<?php cps_hc_wcgems_form_field_select( 'Product price display', 'catalogmode-productpricedisplay', $catalogmode_productpricedisplay_options, 'none', false, true, true ); ?>
+			</ul>
 		</li>
 	</ul>
 	<div class="uk-text-center uk-margin-top"><input type="submit" class="uk-button uk-button-primary uk-button-large uk-width-large" value="<?php esc_attr_e( 'Save Changes' ); ?>" /></div>

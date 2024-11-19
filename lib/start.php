@@ -4,7 +4,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Localization
-add_action( 'plugins_loaded', function() {
+add_action( 'init', function() {
 	load_plugin_textdomain( 'surbma-magyar-woocommerce', false, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
 } );
 

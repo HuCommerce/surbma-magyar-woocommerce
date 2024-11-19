@@ -18,6 +18,7 @@ function surbma_hc_fields_validate( $input ) {
 	global $emptycartbutton_cartpage_options;
 	global $emptycartbutton_checkoutpage_options;
 	global $productpricehistory_statisticslinkdisplay_options;
+	global $catalogmode_productpricedisplay_options;
 
 	$options = get_option( 'surbma_hc_fields' );
 
@@ -131,6 +132,9 @@ function surbma_hc_fields_validate( $input ) {
 		$input['emptycartbutton-cartpage'] = 'none';
 	}
 	if ( !array_key_exists( $input['emptycartbutton-checkoutpage'], $emptycartbutton_checkoutpage_options ) ) {
+		$input['emptycartbutton-checkoutpage'] = 'none';
+	}
+	if ( !array_key_exists( $input['catalogmode-productpricedisplay'], $catalogmode_productpricedisplay_options ) ) {
 		$input['emptycartbutton-checkoutpage'] = 'none';
 	}
 

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Module: Catalog mode
+ */
+
 /*
 add_action( 'after_setup_theme', function() {
 	add_filter( 'woocommerce_is_purchasable', '__return_false', 999999 );
@@ -19,7 +23,14 @@ add_action( 'after_setup_theme', function() {
 */
 
 add_filter( 'woocommerce_is_purchasable', '__return_false', 999999 );
-add_filter( 'woocommerce_get_price_html', '__return_false', 999999 );
+add_filter( 'woocommerce_get_price_html', function( $price ) {
+	$options = get_option( 'surbma_hc_fields' );
+	$productpricedisplayValue = $options['catalogmode-productpricedisplay'] ?? 'hide_prices';
+	if ( 'hide_prices' == $productpricedisplayValue || ( 'show_only_single' == $productpricedisplayValue && ! is_product() ) || ( 'show_only_archive' == $productpricedisplayValue && is_product() ) ) {
+		return false;
+	}
+	return $price;
+}, 999999 );
 
 // Archive pages
 remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );

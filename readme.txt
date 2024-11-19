@@ -1,9 +1,9 @@
 === HuCommerce | Magyar WooCommerce kiegészítések ===
-Contributors: Surbma, xnagyg
+Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
-Tested up to: 6.6
-Stable tag: 2024.3.0
+Tested up to: 6.7
+Stable tag: 2024.4.0
 Requires PHP: 7.4
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -271,6 +271,28 @@ Először töröld a szerver oldali és a böngésző gyorsítótárát és fris
 Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van állítva a webáruház.
 
 == Changelog ==
+
+#### 2024.4.0
+
+**Kiadás dátuma: 2024-11-19**
+
+Ez egy kisebb, gyors kiadás, mivel a WordPress 6.7 verzió szigorúbb a fordításokat kezelő meghívásra. Ezért a frissítés mindenképpen ajánlott! A Katalógus mód pedig kiegészült egy új funkcióval, hogy az árakat meg lehessen akár jeleníteni.
+
+KATALÓGUS MÓD
+
+- Új beállítás, hogy az árak megjelenjenek-e és hol jelenjenek meg.
+
+JAVÍTÁS
+
+- A textdomain megfelelő időben történő meghívása.
+- Hiányzó fordítás hozzáadása.
+
+EGYÉB
+
+- Az Ingyenes szállítás értesítés is megkapta a Kosár címkét a HuCommerce Modulok menüpont alatt.
+- A WooCommerce függőség megadása a bővítmény meta adataiban.
+- Kompatibilitás ellenőrzése a WordPress 6.7 verzióval.
+- Kompatibilitás ellenőrzése a WooCommerce 9.4 verzióval.
 
 #### 2024.3.0
 
