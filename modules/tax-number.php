@@ -1,11 +1,15 @@
 <?php
 
+/**
+ * Module: Tax number field
+ */
+
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
 // Adding Tax number field
 add_filter( 'woocommerce_billing_fields', function( $fields ) {
-	if ( get_option( 'woocommerce_checkout_company_field' ) != 'hidden' ) {
+	if ( 'hidden' != get_option( 'woocommerce_checkout_company_field' ) ) {
 		$fields['billing_tax_number'] = array(
 			'label' 		=> __( 'Tax number', 'surbma-magyar-woocommerce' ),
 			'required' 		=> false,
@@ -19,41 +23,50 @@ add_filter( 'woocommerce_billing_fields', function( $fields ) {
 
 // Adding placeholder to Tax number field conditionally
 add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
-	$options = get_option( 'surbma_hc_fields' );
-	$taxnumberplaceholderValue = isset( $options['taxnumberplaceholder'] ) ? $options['taxnumberplaceholder'] : 0;
+	// Get the settings array
+	global $options;
+
+	$taxnumberplaceholderValue = $options['taxnumberplaceholder'] ?? 0;
+
 	if ( 1 == $taxnumberplaceholderValue ) {
 		$fields['billing']['billing_tax_number']['placeholder'] = __( 'Tax number', 'surbma-magyar-woocommerce' );
 	}
+
 	return $fields;
 }, 20, 1 );
 
-// Adding custom validation messages to Tax number field on Checkout page
+// Adding custom validation message for Tax number field on Checkout page
 add_action( 'woocommerce_checkout_process', function() {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
-	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
-	$billing_tax_number = isset( $_POST['billing_tax_number'] ) ? sanitize_text_field( $_POST['billing_tax_number'] ) : '';
-
-	if ( 'hidden' != $woocommercecheckoutcompanyfieldValue && ( ( !empty( $_POST['billing_company'] ) ) || ( !empty( $_POST['billing_company_check'] ) && 1 == $_POST['billing_company_check'] ) || 'required' == $woocommercecheckoutcompanyfieldValue ) && empty( $billing_tax_number ) ) {
-		$field_label = __( 'Tax number', 'surbma-magyar-woocommerce' );
-		/* translators: %s: Field label */
-		$field_label = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $field_label );
-		/* translators: %s: Field label */
-		$noticeError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $field_label ) . '</strong>' );
-		wc_add_notice( $noticeError, 'error' );
-	}
+	// Init the Billing Tax number check process
+	cps_wcgems_hc_billing_tax_number_check();
 } );
 
-// Adding custom validation messages to Tax number field on My Account -> Addresses page
-add_action( 'woocommerce_after_save_address_validation', function() {
+// Adding custom validation message for Tax number field on My Account -> Addresses page
+add_action( 'woocommerce_after_save_address_validation', function( $user_id, $address_type ) {
+	// Only proceed if this is the billing address form
+	if ( 'billing' !== $address_type ) {
+		return;
+	}
+
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-edit_address', 'woocommerce-edit-address-nonce', false );
 
-	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
-	$billing_tax_number = isset( $_POST['billing_tax_number'] ) ? sanitize_text_field( $_POST['billing_tax_number'] ) : '';
+	// Init the Billing Tax number check process
+	cps_wcgems_hc_billing_tax_number_check();
+}, 10, 2 );
 
-	if ( 'hidden' != $woocommercecheckoutcompanyfieldValue && ( !empty( $_POST['billing_company'] ) || 'required' == $woocommercecheckoutcompanyfieldValue ) && empty( $billing_tax_number ) ) {
+// Billing Tax number check process
+function cps_wcgems_hc_billing_tax_number_check() {
+	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
+	$billing_company = $_POST['billing_company'] ?? '';
+	$billing_company_check = $_POST['billing_company_check'] ?? 0;
+	$billing_tax_number = $_POST['billing_tax_number'] ?? '';
+
+	// Add error notice, if Tax number field is empty, but it should be filled out
+	if ( 'hidden' != $woocommercecheckoutcompanyfieldValue && ( !empty( $billing_company ) || 1 == $billing_company_check || 'required' == $woocommercecheckoutcompanyfieldValue ) && empty( $billing_tax_number ) ) {
 		$field_label = __( 'Tax number', 'surbma-magyar-woocommerce' );
 		/* translators: %s: Field label */
 		$field_label = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $field_label );
@@ -61,7 +74,7 @@ add_action( 'woocommerce_after_save_address_validation', function() {
 		$noticeError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $field_label ) . '</strong>' );
 		wc_add_notice( $noticeError, 'error' );
 	}
-} );
+}
 
 // Updating Tax number user meta on Checkout page
 add_action( 'woocommerce_checkout_update_user_meta', function( $customer_id ) {
@@ -137,18 +150,21 @@ add_filter( 'woocommerce_customer_meta_fields', function( $profileFieldArray ) {
 	return $profileFieldArray;
 } );
 
-// Modifying Tax number field with JS
+// Custom JavaScript codes
 add_action( 'wp_footer', function() {
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
-	if ( 'hidden' == $woocommercecheckoutcompanyfieldValue || ( ! is_checkout() && ! is_account_page() ) ) {
+
+	if ( 'hidden' == $woocommercecheckoutcompanyfieldValue || ( ! is_checkout() && ! is_wc_endpoint_url( 'edit-address' ) ) ) {
 		return;
 	}
 
-	$options = get_option( 'surbma_hc_fields' );
-	$moduleCheckoutValue = isset( $options['module-checkout'] ) ? $options['module-checkout'] : 0;
+	// Get the settings array
+	global $options;
+
+	$moduleCheckoutValue = $options['module-checkout'] ?? 0;
 	$billingcompanycheckValue = 1 == $moduleCheckoutValue && isset( $options['billingcompanycheck'] ) ? $options['billingcompanycheck'] : 0;
 	$companytaxnumberpairValue = 1 == $moduleCheckoutValue && isset( $options['companytaxnumberpair'] ) ? $options['companytaxnumberpair'] : 0;
-	// ob_start();
+
 	?>
 <script id="cps-hc-wcgems-tax-number">
 jQuery(document).ready(function($){
@@ -208,8 +224,4 @@ jQuery(document).ready(function($){
 });
 </script>
 <?php
-	// $script = ob_get_contents();
-	// ob_end_clean();
-
-	// wp_add_inline_script( 'cps-jquery-fix', $script );
 } );
