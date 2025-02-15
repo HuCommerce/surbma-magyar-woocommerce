@@ -106,6 +106,10 @@ function surbma_hc_fields_validate( $input ) {
 	$input['productsubtitle'] = isset( $input['productsubtitle'] ) && 1 == $input['productsubtitle'] ? 1 : 0;
 	$input['productsettings-removeimagezoom'] = isset( $input['productsettings-removeimagezoom'] ) && 1 == $input['productsettings-removeimagezoom'] ? 1 : 0;
 	$input['norelatedproducts'] = isset( $input['norelatedproducts'] ) && 1 == $input['norelatedproducts'] ? 1 : 0;
+	$input['translations-woocommerceapimanager'] = isset( $input['translations-woocommerceapimanager'] ) && 1 == $input['translations-woocommerceapimanager'] ? 1 : 0;
+	$input['translations-restrictcontentpro'] = isset( $input['translations-restrictcontentpro'] ) && 1 == $input['translations-restrictcontentpro'] ? 1 : 0;
+	$input['translations-woocommercememberships'] = isset( $input['translations-woocommercememberships'] ) && 1 == $input['translations-woocommercememberships'] ? 1 : 0;
+	$input['translations-woocommercesubscriptions'] = isset( $input['translations-woocommercesubscriptions'] ) && 1 == $input['translations-woocommercesubscriptions'] ? 1 : 0;
 
 	// Our select option must actually be in our array of select options
 	if ( !array_key_exists( $input['couponfieldposition'], $couponfieldposition_options ) ) {
