@@ -20,7 +20,8 @@ function surbma_hc_fields_validate( $input ) {
 	global $productpricehistory_statisticslinkdisplay_options;
 	global $catalogmode_productpricedisplay_options;
 
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
 
 	// * HUCOMMERCE START
 
