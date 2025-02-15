@@ -1,13 +1,21 @@
 <?php
 
+/**
+ * Module: Checkout page customizations
+ */
+
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
 // Add new fields
 add_filter( 'woocommerce_billing_fields', function( $fields ) {
-	$options = get_option( 'surbma_hc_fields' );
-	$billingcompanycheckValue = isset( $options['billingcompanycheck'] ) ? $options['billingcompanycheck'] : 0;
-	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
+	// Get the settings array
+	global $options;
+
+	// Get the settings
+	$billingcompanycheckValue = $options['billingcompanycheck'] ?? 0;
+	$woocommercecheckoutcompanyfieldValue = false !== get_option( 'woocommerce_checkout_company_field' ) ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
+
 	if ( 'optional' == $woocommercecheckoutcompanyfieldValue && 1 == $billingcompanycheckValue ) {
 		$fields['billing_company_check'] = array(
 			'type' 			=> 'checkbox',
@@ -20,16 +28,39 @@ add_filter( 'woocommerce_billing_fields', function( $fields ) {
 			'required' 		=> false
 		);
 	}
+
 	return $fields;
 } );
 
+// Adding custom validation message for Billing Company field on Checkout page
 add_action( 'woocommerce_checkout_process', function() {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
-	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
+	// Init the Billing Company check process
+	cps_wcgems_hc_billing_company_check();
+} );
 
-	if ( 'optional' == $woocommercecheckoutcompanyfieldValue && ( !empty( $_POST['billing_company_check'] ) && 1 == $_POST['billing_company_check'] ) && empty( $_POST['billing_company'] ) ) {
+// Adding custom validation message for Billing Company field on My Account -> Addresses page
+add_action( 'woocommerce_after_save_address_validation', function( $user_id, $address_type ) {
+	// Only proceed if this is the billing address form
+	if ( 'billing' !== $address_type ) {
+		return;
+	}
+
+	// Nonce verification before doing anything
+	check_ajax_referer( 'woocommerce-edit_address', 'woocommerce-edit-address-nonce', false );
+
+	// Init the Billing Company check process
+	cps_wcgems_hc_billing_company_check();
+}, 10, 2 );
+
+// Billing Company check process
+function cps_wcgems_hc_billing_company_check() {
+	// Get the settings
+	$woocommercecheckoutcompanyfieldValue = false !== get_option( 'woocommerce_checkout_company_field' ) ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
+
+	if ( 'optional' == $woocommercecheckoutcompanyfieldValue && 1 == $_POST['billing_company_check'] && empty( $_POST['billing_company'] ) ) {
 		$field_label = __( 'Company name', 'woocommerce' );
 		/* translators: %s: Field label */
 		$field_label = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $field_label );
@@ -37,12 +68,16 @@ add_action( 'woocommerce_checkout_process', function() {
 		$noticeError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $field_label ) . '</strong>' );
 		wc_add_notice( $noticeError, 'error' );
 	}
-} );
+}
 
 // Pre-populate billing_country field, if it's hidden
 add_filter( 'default_checkout_billing_country', function( $value ) {
-	$options = get_option( 'surbma_hc_fields' );
-	$nocountryValue = isset( $options['nocountry'] ) ? $options['nocountry'] : 0;
+	// Get the settings array
+	global $options;
+
+	// Get the settings
+	$nocountryValue = $options['nocountry'] ?? 0;
+
 	if ( 1 == $nocountryValue ) {
 		// The country/state
 		$store_raw_country = get_option( 'woocommerce_default_country' );
@@ -50,28 +85,54 @@ add_filter( 'default_checkout_billing_country', function( $value ) {
 		$split_country = explode( ':', $store_raw_country );
 		// Country and state separated:
 		$store_country = $split_country[0];
-		// $store_state = $split_country[1];
 
 		$value = $store_country;
 	}
+
 	return $value;
 } );
 
+// Customize the Billing fields on the Checkout and My account -> Addresses pages
 add_filter( 'woocommerce_billing_fields', function( $address_fields ) {
-	$options = get_option( 'surbma_hc_fields' );
-	$emailtothetopValue = isset( $options['emailtothetop'] ) ? $options['emailtothetop'] : 0;
+	// Get the settings array
+	global $options;
+
+	// Get the settings
+	$companytaxnumberpairValue = $options['companytaxnumberpair'] ?? 0;
+	$phoneemailpairValue = $options['phoneemailpair'] ?? 0;
+	$emailtothetopValue = $options['emailtothetop'] ?? 0;
+
+	// Inline Billing Company and Billing Tax number fields
+	if ( isset( $address_fields['billing_company'] ) && isset( $address_fields['billing_tax_number'] ) && 1 == $companytaxnumberpairValue ) {
+		$address_fields['billing_company']['class'] = array( 'form-row-first' );
+		$address_fields['billing_tax_number']['class'] = array( 'form-row-last' );
+	}
+
+	// Inline Billing Phone and Billing Email fields
+	if ( isset( $address_fields['billing_phone'] ) && isset( $address_fields['billing_email'] ) && 1 == $phoneemailpairValue && 1 !== $emailtothetopValue ) {
+		$address_fields['billing_phone']['class'] = array( 'form-row-first' );
+		$address_fields['billing_email']['class'] = array( 'form-row-last' );
+	}
+
+	// Move Email field to the top of the Checkout form
 	if ( 1 == $emailtothetopValue ) {
 		$address_fields['billing_email']['priority'] = 5;
 	}
+
 	return $address_fields;
 }, 10, 1 );
 
-// Customize the checkout default address fields
+// Customize the default address fields on the Checkout and My account -> Addresses pages
 add_filter( 'woocommerce_default_address_fields' , function( $address_fields ) {
-	$woocommercecheckoutaddress2fieldValue = get_option( 'woocommerce_checkout_address_2_field' ) != false ? get_option( 'woocommerce_checkout_address_2_field' ) : 'optional';
-	$options = get_option( 'surbma_hc_fields' );
+	$woocommercecheckoutaddress2fieldValue = false !== get_option( 'woocommerce_checkout_address_2_field' ) ? get_option( 'woocommerce_checkout_address_2_field' ) : 'optional';
 
-	$postcodecitypairValue = isset( $options['postcodecitypair'] ) ? $options['postcodecitypair'] : 0;
+	// Get the settings array
+	global $options;
+
+	// Get the settings
+	$postcodecitypairValue = $options['postcodecitypair'] ?? 0;
+
+	// Inline Postcode and City fields
 	if ( 1 == $postcodecitypairValue ) {
 		$address_fields['postcode']['priority'] = 69;
 		$address_fields['postcode']['class'] = array( 'form-row-first' );
@@ -81,24 +142,14 @@ add_filter( 'woocommerce_default_address_fields' , function( $address_fields ) {
 	return $address_fields;
 } );
 
-// Customize the checkout fields
+// Customize the Checkout fields
 add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
 
-	$companytaxnumberpairValue = isset( $options['companytaxnumberpair'] ) ? $options['companytaxnumberpair'] : 0;
-	if ( isset( $fields['billing']['billing_company'] ) && isset( $fields['billing']['billing_tax_number'] ) && 1 == $companytaxnumberpairValue ) {
-		$fields['billing']['billing_company']['class'] = array( 'form-row-first' );
-		$fields['billing']['billing_tax_number']['class'] = array( 'form-row-last' );
-	}
+	// Get the settings
+	$noordercommentsValue = $options['noordercomments'] ?? 0;
 
-	$phoneemailpairValue = isset( $options['phoneemailpair'] ) ? $options['phoneemailpair'] : 0;
-	$emailtothetopValue = isset( $options['emailtothetop'] ) ? $options['emailtothetop'] : 0;
-	if ( isset( $fields['billing']['billing_phone'] ) && isset( $fields['billing']['billing_email'] ) && 1 == $phoneemailpairValue && 1 != $emailtothetopValue ) {
-		$fields['billing']['billing_phone']['class'] = array( 'form-row-first' );
-		$fields['billing']['billing_email']['class'] = array( 'form-row-last' );
-	}
-
-	$noordercommentsValue = isset( $options['noordercomments'] ) ? $options['noordercomments'] : 0;
 	if ( isset( $fields['order']['order_comments'] ) && 1 == $noordercommentsValue ) {
 		unset( $fields['order']['order_comments'] );
 	}
@@ -108,8 +159,11 @@ add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
 
 // Remove Additional information section
 add_action( 'woocommerce_before_checkout_form' , function() {
-	$options = get_option( 'surbma_hc_fields' );
-	$noadditionalinformationValue = isset( $options['noadditionalinformation'] ) ? $options['noadditionalinformation'] : 0;
+	// Get the settings array
+	global $options;
+
+	$noadditionalinformationValue = $options['noadditionalinformation'] ?? 0;
+
 	if ( 1 == $noadditionalinformationValue ) {
 		add_filter( 'woocommerce_enable_order_notes_field', '__return_false', 9999 );
 	}
@@ -117,26 +171,37 @@ add_action( 'woocommerce_before_checkout_form' , function() {
 
 // Custom submit button text
 add_filter( 'woocommerce_order_button_text', function( $button_text ) {
-	$options = get_option( 'surbma_hc_fields' );
-	$checkout_customsubmitbuttontextValue = isset( $options['checkout-customsubmitbuttontext'] ) && '' != $options['checkout-customsubmitbuttontext'] ? $options['checkout-customsubmitbuttontext'] : false;
-	if ( $checkout_customsubmitbuttontextValue ) {
+	// Get the settings array
+	global $options;
+
+	$checkout_customsubmitbuttontextValue = $options['checkout-customsubmitbuttontext'] ?? false;
+
+	if ( !empty( $checkout_customsubmitbuttontextValue ) ) {
 		$button_text = $checkout_customsubmitbuttontextValue;
 	}
+
 	return $button_text;
 } );
 
+// Custom JavaScript codes
 add_action( 'wp_footer', function() {
-	if ( ! is_checkout() ) {
+	// Make sure, we are on the right page
+	if ( !is_checkout() && !is_wc_endpoint_url( 'edit-address' ) ) {
 		return;
 	}
 
-	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
-	$options = get_option( 'surbma_hc_fields' );
-	$billingcompanycheckValue = isset( $options['billingcompanycheck'] ) ? $options['billingcompanycheck'] : 0;
-	$checkout_hidecompanytaxfields_value = isset( $options['checkout-hidecompanytaxfields'] ) ? $options['checkout-hidecompanytaxfields'] : 0;
-	$nocountryValue = isset( $options['nocountry'] ) ? $options['nocountry'] : 0;
-	$companytaxnumberpairValue = isset( $options['companytaxnumberpair'] ) ? $options['companytaxnumberpair'] : 0;
-	// ob_start();
+	// Get the settings array
+	global $options;
+
+	$billingcompanycheckValue = $options['billingcompanycheck'] ?? 0;
+	$checkout_hidecompanytaxfields_value = $options['checkout-hidecompanytaxfields'] ?? 0;
+	$checkout_hidecompanyfield_value = $options['checkout-hide_company_field_if_not_hungary'] ?? 0;
+	$checkout_hidetaxfield_value = $options['checkout-hide_tax_field_if_not_hungary'] ?? 0;
+	$nocountryValue = $options['nocountry'] ?? 0;
+	$companytaxnumberpairValue = $options['companytaxnumberpair'] ?? 0;
+
+	$woocommercecheckoutcompanyfieldValue = false !== get_option( 'woocommerce_checkout_company_field' ) ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
+
 	?>
 <script id="cps-hc-wcgems-checkout">
 jQuery(document).ready(function($){
@@ -261,8 +326,4 @@ jQuery(document).ready(function($){
 });
 </script>
 <?php
-	// $script = ob_get_contents();
-	// ob_end_clean();
-
-	// wp_add_inline_script( 'cps-jquery-fix', $script );
 }, 99 );
