@@ -50,6 +50,7 @@ function cps_wcgems_hc_validate_checkout_fields() {
 	$validatebillingphonefieldValue = $options['validatebillingphonefield'] ?? 0;
 	$validateshippingcityfieldValue = $options['validateshippingcityfield'] ?? 0;
 	$validateshippingaddressfieldValue = $options['validateshippingaddressfield'] ?? 0;
+	$validatecheckoutfields_mobileonly_value = $options['validatecheckoutfields-mobileonly'] ?? 0;
 
 	// Get the submitted fields
 	$billing_tax_number = $_POST['billing_tax_number'] ?? '';
@@ -61,6 +62,11 @@ function cps_wcgems_hc_validate_checkout_fields() {
 	$ship_to_different_address = $_POST['ship_to_different_address'] ?? 0;
 	$shipping_address_1 = $_POST['shipping_address_1'] ?? '';
 
+	// Define area code arrays
+	$budapest_area_code = array( 1 );
+	$mobile_area_codes = array( 20, 30, 31, 70 );
+	$six_digit_area_codes = array( 22, 23, 24, 25, 26, 27, 28, 29, 32, 33, 34, 35, 36, 37, 42, 44, 45, 46, 47, 48, 49, 52, 53, 54, 56, 57, 59, 62, 63, 66, 68, 69, 72, 73, 74, 75, 76, 77, 78, 79, 82, 83, 84, 85, 87, 88, 89, 92, 93, 94, 95, 96, 99 );
+
 	// Set patterns
 	$billing_tax_number_pattern_short = '/^\d{11}$/';
 	$billing_tax_number_pattern_full = '/^\d{8}-\d{1}-\d{2}$/';
@@ -69,6 +75,7 @@ function cps_wcgems_hc_validate_checkout_fields() {
 	$checkout_city_pattern = '/^([\p{L}])+([\p{L} ])*$/iu';
 	$checkout_address_1_pattern = '/^(?=.*\p{L})(?=.*\d)(?=.* )/iu';
 
+	// TAX number validation
 	if ( 1 == $validatebillingtaxfieldValue && !empty( $billing_tax_number ) && !preg_match( $billing_tax_number_pattern_short, $billing_tax_number ) && !preg_match( $billing_tax_number_pattern_full, $billing_tax_number ) && !preg_match( $billing_tax_number_pattern_eu, $billing_tax_number ) ) {
 		$noticeError = __( '<strong>Billing VAT number</strong> field is invalid. Please check again!', 'surbma-magyar-woocommerce' );
 		wc_add_notice( $noticeError, 'error' );
@@ -89,31 +96,95 @@ function cps_wcgems_hc_validate_checkout_fields() {
 	}
 	*/
 
+	// City validation
 	if ( 1 == $validatebillingcityfieldValue && $billing_city && !preg_match( $checkout_city_pattern, $billing_city ) ) {
 		$noticeError = __( '<strong>Billing City</strong> field is invalid: only letters and space are allowed.', 'surbma-magyar-woocommerce' );
 		wc_add_notice( $noticeError, 'error' );
 	}
 
+	// Address validation
 	if ( 1 == $validatebillingaddressfieldValue && $billing_address_1 && empty( $_POST['billing_address_2'] ) && !preg_match( $checkout_address_1_pattern, $billing_address_1 ) ) {
 		$noticeError = __( '<strong>Billing Address</strong> field is invalid: must have at least one letter, one number and one space in the address.', 'surbma-magyar-woocommerce' );
 		wc_add_notice( $noticeError, 'error' );
 	}
 
-	if ( 1 == $validatebillingphonefieldValue && $billing_phone && strlen( $billing_phone ) < 11 ) {
-		$noticeError = __( '<strong>Billing Phone</strong> field is invalid: too few characters.', 'surbma-magyar-woocommerce' );
-		wc_add_notice( $noticeError, 'error' );
+	// Phone number validation
+	if ( 1 == $validatebillingphonefieldValue && $billing_phone ) {
+		// Check if phone number starts with +36
+		if ( substr( $billing_phone, 0, 3 ) !== '+36' ) {
+			$noticeError = __( '<strong>Billing Phone</strong> field is invalid: must start with "+36".', 'surbma-magyar-woocommerce' );
+			wc_add_notice( $noticeError, 'error' );
+		}
+		// Check if characters are valid
+		elseif ( $billing_phone[0] !== '+' || !ctype_digit( substr( $billing_phone, 1 ) ) ) {
+			$noticeError = __( '<strong>Billing Phone</strong> field is invalid: can only contain "+" as first character and digits.', 'surbma-magyar-woocommerce' );
+			wc_add_notice( $noticeError, 'error' );
+		} else {
+			// Remove +36 prefix for further validation
+			$phoneNumber = substr( $billing_phone, 3 );
+
+			// Extract area code
+			$areaCode = '';
+			for ( $i = 0; $i <= 2; $i++ ) {
+				$possibleAreaCode = substr( $phoneNumber, 0, $i + 1 );
+
+				// If mobile-only validation is enabled
+				if ( $validatecheckoutfields_mobileonly_value == 1 ) {
+					if ( in_array( (int)$possibleAreaCode, $mobile_area_codes ) ) {
+						$areaCode = $possibleAreaCode;
+						break;
+					}
+				} else {
+					// Normal validation with all area codes
+					if ( in_array( (int)$possibleAreaCode, $budapest_area_code ) || in_array( (int)$possibleAreaCode, $mobile_area_codes ) || in_array( (int)$possibleAreaCode, $six_digit_area_codes ) ) {
+						$areaCode = $possibleAreaCode;
+						break;
+					}
+				}
+			}
+
+			// Check if area code is valid
+			if ( !$areaCode ) {
+				if ( $validatecheckoutfields_mobileonly_value == 1 ) {
+					$noticeError = __( '<strong>Billing Phone</strong> field is invalid: only mobile numbers are accepted.', 'surbma-magyar-woocommerce' );
+				} else {
+					$noticeError = __( '<strong>Billing Phone</strong> field is invalid: wrong area code.', 'surbma-magyar-woocommerce' );
+				}
+				wc_add_notice( $noticeError, 'error' );
+			} else {
+				// Remove area code from phone number to get subscriber number
+				$subscriber = substr( $phoneNumber, strlen( $areaCode ) );
+
+				if ( $validatecheckoutfields_mobileonly_value == 1 ) {
+					// For mobile-only validation, check only mobile number length
+					if ( strlen( $subscriber ) !== 7 ) {
+						$noticeError = __( '<strong>Billing Phone</strong> field is invalid: mobile numbers must have 7 digits after area code.', 'surbma-magyar-woocommerce' );
+						wc_add_notice( $noticeError, 'error' );
+					}
+				} else {
+					// Normal validation with all number types
+					if ( in_array( (int)$areaCode, $budapest_area_code ) && strlen( $subscriber ) !== 7 ) {
+						$noticeError = __( '<strong>Billing Phone</strong> field is invalid: Budapest numbers must have 7 digits after area code.', 'surbma-magyar-woocommerce' );
+						wc_add_notice( $noticeError, 'error' );
+					} elseif ( in_array( (int)$areaCode, $mobile_area_codes ) && strlen( $subscriber ) !== 7 ) {
+						$noticeError = __( '<strong>Billing Phone</strong> field is invalid: mobile numbers must have 7 digits after area code.', 'surbma-magyar-woocommerce' );
+						wc_add_notice( $noticeError, 'error' );
+					} elseif ( in_array( (int)$areaCode, $six_digit_area_codes ) && strlen( $subscriber ) !== 6 ) {
+						$noticeError = __( '<strong>Billing Phone</strong> field is invalid: this area code must have 6 digits after it.', 'surbma-magyar-woocommerce' );
+						wc_add_notice( $noticeError, 'error' );
+					}
+				}
+			}
+		}
 	}
 
-	if ( 1 == $validatebillingphonefieldValue && $billing_phone && substr( $billing_phone, 3, 1 ) == 0 ) {
-		$noticeError = __( '<strong>Billing Phone</strong> field is invalid: wrong format.', 'surbma-magyar-woocommerce' );
-		wc_add_notice( $noticeError, 'error' );
-	}
-
+	// Shipping city validation
 	if ( 1 == $validateshippingcityfieldValue && 1 == $ship_to_different_address && $shipping_city && !preg_match( $checkout_city_pattern, $shipping_city ) ) {
 		$noticeError = __( '<strong>Shipping City</strong> field is invalid: only letters and space are allowed.', 'surbma-magyar-woocommerce' );
 		wc_add_notice( $noticeError, 'error' );
 	}
 
+	// Shipping address validation
 	if ( 1 == $validateshippingaddressfieldValue && 1 == $ship_to_different_address && $shipping_address_1 && empty( $_POST['shipping_address_2'] ) && !preg_match( $checkout_address_1_pattern, $shipping_address_1 ) ) {
 		$noticeError = __( '<strong>Shipping Address</strong> field is invalid: must have at least one letter, one number and one space in the address.', 'surbma-magyar-woocommerce' );
 		wc_add_notice( $noticeError, 'error' );
