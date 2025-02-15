@@ -4,6 +4,9 @@
  * Module: Catalog mode
  */
 
+// Prevent direct access to the plugin
+defined( 'ABSPATH' ) || exit;
+
 /*
 add_action( 'after_setup_theme', function() {
 	add_filter( 'woocommerce_is_purchasable', '__return_false', 999999 );
@@ -23,12 +26,17 @@ add_action( 'after_setup_theme', function() {
 */
 
 add_filter( 'woocommerce_is_purchasable', '__return_false', 999999 );
+
 add_filter( 'woocommerce_get_price_html', function( $price ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$productpricedisplayValue = $options['catalogmode-productpricedisplay'] ?? 'hide_prices';
+
 	if ( 'hide_prices' == $productpricedisplayValue || ( 'show_only_single' == $productpricedisplayValue && ! is_product() ) || ( 'show_only_archive' == $productpricedisplayValue && is_product() ) ) {
 		return false;
 	}
+
 	return $price;
 }, 999999 );
 

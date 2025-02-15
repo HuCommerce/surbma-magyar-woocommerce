@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Module: Limit Payment Methods
+ */
+
+// Prevent direct access to the plugin
+defined( 'ABSPATH' ) || exit;
+
 // Add multiselect checkbox for user profiles
 add_action( 'show_user_profile', 'cps_hc_wcgems_add_payment_methods_field', 9999 );
 add_action( 'edit_user_profile', 'cps_hc_wcgems_add_payment_methods_field', 9999 );

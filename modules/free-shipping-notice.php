@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Module: Free shipping notification
+ */
+
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
@@ -10,12 +14,14 @@ function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
 		return;
 	}
 
-	$options = get_option( 'surbma_hc_fields' );
-	$freeshippingminimumorderamountValue = isset( $options['freeshippingminimumorderamount'] ) && ( $options['freeshippingminimumorderamount'] ) ? $options['freeshippingminimumorderamount'] : 0;
-	$freeshippingcouponsdiscountsValue = isset( $options['freeshippingcouponsdiscounts'] ) && ( $options['freeshippingcouponsdiscounts'] ) ? $options['freeshippingcouponsdiscounts'] : 0;
-	$freeshippingwithouttaxValue = isset( $options['freeshippingwithouttax'] ) && ( $options['freeshippingwithouttax'] ) ? $options['freeshippingwithouttax'] : 0;
-	$freeshippingnoticemessageValue = isset( $options['freeshippingnoticemessage'] ) && ( $options['freeshippingnoticemessage'] ) ? $options['freeshippingnoticemessage'] : __( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
-	$freeshippingsuccessfulmessageValue = isset( $options['freeshippingsuccessfulmessage'] ) && ( $options['freeshippingsuccessfulmessage'] ) ? $options['freeshippingsuccessfulmessage'] : '';
+	// Get the settings array
+	global $options;
+
+	$freeshippingminimumorderamountValue = $options['freeshippingminimumorderamount'] ?? 0;
+	$freeshippingcouponsdiscountsValue = $options['freeshippingcouponsdiscounts'] ?? 0;
+	$freeshippingwithouttaxValue = $options['freeshippingwithouttax'] ?? 0;
+	$freeshippingnoticemessageValue = $options['freeshippingnoticemessage'] ?? __( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
+	$freeshippingsuccessfulmessageValue = $options['freeshippingsuccessfulmessage'] ?? '';
 
 	global $woocommerce;
 
@@ -97,34 +103,40 @@ function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
 	return $notice;
 }
 
-$options = get_option( 'surbma_hc_fields' );
-$freeshippingnoticeshoploopValue = isset( $options['freeshippingnoticeshoploop'] ) ? $options['freeshippingnoticeshoploop'] : 0;
-$freeshippingnoticecartValue = isset( $options['freeshippingnoticecart'] ) ? $options['freeshippingnoticecart'] : 1;
-$freeshippingnoticecheckoutValue = isset( $options['freeshippingnoticecheckout'] ) ? $options['freeshippingnoticecheckout'] : 0;
+// Get the settings to display the free shipping notice
+$freeshippingnoticeshoploopValue = $options['freeshippingnoticeshoploop'] ?? 0;
+$freeshippingnoticecartValue = $options['freeshippingnoticecart'] ?? 1;
+$freeshippingnoticecheckoutValue = $options['freeshippingnoticecheckout'] ?? 0;
 
-if ( $freeshippingnoticeshoploopValue ) {
+if ( 1 === $freeshippingnoticeshoploopValue ) :
+
 	add_action( 'woocommerce_before_shop_loop', function() {
 		$notice = cps_hc_gems_free_shipping_notice( $returntoshop = false );
 		if ( $notice ) {
 			wc_print_notice( $notice, 'notice' );
 		}
 	}, 0 );
-}
 
-if ( $freeshippingnoticecartValue ) {
+endif;
+
+if ( 1 === $freeshippingnoticecartValue ) :
+
 	add_action( 'woocommerce_before_cart', function() {
 		$notice = cps_hc_gems_free_shipping_notice();
 		if ( $notice ) {
 			wc_print_notice( $notice, 'notice' );
 		}
 	} );
-}
 
-if ( $freeshippingnoticecheckoutValue ) {
+endif;
+
+if ( 1 === $freeshippingnoticecheckoutValue ) :
+
 	add_action( 'woocommerce_before_checkout_form', function() {
 		$notice = cps_hc_gems_free_shipping_notice();
 		if ( $notice ) {
 			wc_print_notice( $notice, 'notice' );
 		}
 	}, 0 );
-}
+
+endif;

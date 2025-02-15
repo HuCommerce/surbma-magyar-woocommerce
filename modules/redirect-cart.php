@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Module: Redirect Cart page to Checkout page
+ */
+
+// Prevent direct access to the plugin
+defined( 'ABSPATH' ) || exit;
+
 add_action( 'template_redirect', function() {
 	if ( is_cart() ) {
 		if ( WC()->cart->get_cart_contents_count() == 0 ) {

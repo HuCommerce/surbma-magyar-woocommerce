@@ -1,101 +1,107 @@
 <?php
 
-$options = get_option( 'surbma_hc_fields' );
+/**
+ * Module: Product customizations
+ */
+
+// Prevent direct access to the plugin
+defined( 'ABSPATH' ) || exit;
+
+// Get the module's settings
+$productsettings_productsubtitleValue = $options['productsubtitle'] ?? 0;
+$productsettings_removeimagezoomValue = $options['productsettings-removeimagezoom'] ?? false;
+$productsettings_addtocartonarchiveValue = $options['addtocartonarchive'] ?? false;
+$productsettings_norelatedproductsValue = $options['norelatedproducts'] ?? false;
 
 /*
  ** Metabox for Products
  */
 
-// Registering Metabox for Products
-add_action( 'add_meta_boxes', function() {
-	add_meta_box(
-		'surbma_hc_product_metabox',
-		'HuCommerce ' . __( 'Product Settings', 'surbma-magyar-woocommerce' ),
-		'surbma_hc_product_metabox',
-		'product',
-		'normal',
-		'high'
-	);
-} );
+if ( $productsettings_productsubtitleValue ) :
 
-// Metabox on the Product edit page
-function surbma_hc_product_metabox() {
-	global $post;
+	// Registering Metabox for Products
+	add_action( 'add_meta_boxes', function() {
+		add_meta_box(
+			'surbma_hc_product_metabox',
+			'HuCommerce ' . __( 'Product Settings', 'surbma-magyar-woocommerce' ),
+			'surbma_hc_product_metabox',
+			'product',
+			'normal',
+			'high'
+		);
+	} );
 
-	// Nonce field to validate form request came from current site
-	wp_nonce_field( basename( __FILE__ ), 'surbma_hc_product_settings_nonce' );
+	// Metabox on the Product edit page
+	function surbma_hc_product_metabox() {
+		global $post;
 
-	// Get the field data if it's already been entered
-	$productsubtitle = get_post_meta( $post->ID, 'surbma_hc_product_subtitle', true );
-	// $productcustom = get_post_meta( $post->ID, 'surbma_hc_product_custom', true );
+		// Nonce field to validate form request came from current site
+		wp_nonce_field( basename( __FILE__ ), 'surbma_hc_product_settings_nonce' );
 
-	// Output the fields
-	echo '<p>';
-	echo '<label for="surbma_hc_product_subtitle">' . esc_html__( 'Product Subtitle', 'surbma-magyar-woocommerce' ) . '</label>';
-	echo '<input id="surbma_hc_product_subtitle" name="surbma_hc_product_subtitle" type="text" value="' . esc_textarea( $productsubtitle ) . '" class="widefat">';
-	echo '</p>';
+		// Get the field data if it's already been entered
+		$productsubtitle = get_post_meta( $post->ID, 'surbma_hc_product_subtitle', true );
+		// $productcustom = get_post_meta( $post->ID, 'surbma_hc_product_custom', true );
 
-	/*
-	echo '<p>';
-	echo '<label for="surbma_hc_product_custom">Product Custom</label>';
-	echo '<input id="surbma_hc_product_custom" name="surbma_hc_product_custom" type="text" value="' . esc_textarea( $productcustom )  . '" class="widefat">';
-	echo '</p>';
-	*/
+		// Output the fields
+		echo '<p>';
+		echo '<label for="surbma_hc_product_subtitle">' . esc_html__( 'Product Subtitle', 'surbma-magyar-woocommerce' ) . '</label>';
+		echo '<input id="surbma_hc_product_subtitle" name="surbma_hc_product_subtitle" type="text" value="' . esc_textarea( $productsubtitle ) . '" class="widefat">';
+		echo '</p>';
 
-	echo '<hr><p style="text-align: center;font-size: smaller;">' . esc_html__( 'These settings are added by the HuCommerce plugin.', 'surbma-magyar-woocommerce' ) . '</p>';
-}
+		/*
+		echo '<p>';
+		echo '<label for="surbma_hc_product_custom">Product Custom</label>';
+		echo '<input id="surbma_hc_product_custom" name="surbma_hc_product_custom" type="text" value="' . esc_textarea( $productcustom )  . '" class="widefat">';
+		echo '</p>';
+		*/
 
-// Saving the fields in the Metabox
-add_action( 'save_post', function( $post_id, $post ) {
-
-	// Return if the user doesn't have edit permissions.
-	if ( ! current_user_can( 'edit_post', $post_id ) ) {
-		return $post_id;
+		echo '<hr><p style="text-align: center;font-size: smaller;">' . esc_html__( 'These settings are added by the HuCommerce plugin.', 'surbma-magyar-woocommerce' ) . '</p>';
 	}
 
-	// Verify this came from the our screen and with proper authorization,
-	// because save_post can be triggered at other times.
-	if ( !isset( $_POST['surbma_hc_product_subtitle'] ) /*|| !isset( $_POST['surbma_hc_product_custom'] ) */|| ( !isset( $_POST['surbma_hc_product_settings_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['surbma_hc_product_settings_nonce'] ), basename(__FILE__) ) ) ) {
-		return $post_id;
-	}
+	// Saving the fields in the Metabox
+	add_action( 'save_post', function( $post_id, $post ) {
 
-	// Now that we're authenticated, time to save the data.
-	// This sanitizes the data from the field and saves it into an array $products_meta.
-	$products_meta['surbma_hc_product_subtitle'] = sanitize_text_field( $_POST['surbma_hc_product_subtitle'] );
-	// $products_meta['surbma_hc_product_custom'] = sanitize_text_field( $_POST['surbma_hc_product_custom'] );
+		// Return if the user doesn't have edit permissions
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return $post_id;
+		}
 
-	// Cycle through the $products_meta array.
-	foreach ( $products_meta as $key => $value ) :
-
-		// Don't store custom data twice
-		if ( 'revision' === $post->post_type ) {
+		// Don't store meta data, if this is a revision
+		if ( wp_is_post_revision( $post_id ) ) {
 			return;
 		}
 
-		if ( get_post_meta( $post_id, $key, false ) ) {
-			// If the custom field already has a value, update it
-			update_post_meta( $post_id, $key, $value );
-		} else {
-			// If the custom field doesn't have a value, add it
-			add_post_meta( $post_id, $key, $value);
+		// Verify this came from our screen and with proper authorization, because save_post can be triggered at other times
+		if ( ! isset( $_POST['surbma_hc_product_subtitle'] ) /*|| ! isset( $_POST['surbma_hc_product_custom'] ) */|| ( ! isset( $_POST['surbma_hc_product_settings_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['surbma_hc_product_settings_nonce'] ), basename(__FILE__) ) ) ) {
+			return $post_id;
 		}
 
-		if ( ! $value ) {
-			// Delete the meta key if there's no value
-			delete_post_meta( $post_id, $key );
-		}
+		// This sanitizes the data from the field and saves it into an array $products_meta.
+		$products_meta['surbma_hc_product_subtitle'] = sanitize_text_field( $_POST['surbma_hc_product_subtitle'] );
+		// $products_meta['surbma_hc_product_custom'] = sanitize_text_field( $_POST['surbma_hc_product_custom'] );
 
-	endforeach;
+		// Cycle through the $products_meta array
+		foreach ( $products_meta as $key => $value ) :
 
-}, 1, 2 );
+			if ( $value ) {
+				// Update or add meta data to the post
+				update_post_meta( $post_id, $key, $value );
+			} else {
+				// Delete the meta key if there's no value
+				delete_post_meta( $post_id, $key );
+			}
+
+		endforeach;
+
+	}, 1, 2 );
+
+endif;
 
 /*
  ** Product Subtitle
  */
 
-$productsubtitleValue = isset( $options['productsubtitle'] ) ? $options['productsubtitle'] : 0;
-
-if ( $productsubtitleValue ) {
+if ( $productsettings_productsubtitleValue ) :
 
 	// The Title filter
 	add_filter( 'the_title', function( $title, $id ) {
@@ -113,56 +119,56 @@ if ( $productsubtitleValue ) {
 		echo '<style>.product .product_subtitle {display: block;font-size: smaller;opacity: .75;}</style>';
 	} );
 
-}
+endif;
 
 /*
  ** Remove Image Zoom
  */
 
-$productsettings_removeimagezoomValue = isset( $options['productsettings-removeimagezoom'] ) ? $options['productsettings-removeimagezoom'] : 0;
-
-if ( $productsettings_removeimagezoomValue ) {
+if ( $productsettings_removeimagezoomValue ) :
 
 	add_action( 'wp', function() {
 		remove_theme_support( 'wc-product-gallery-zoom' );
 	}, 100 );
 
-}
+endif;
 
 /*
  ** Add to cart button on archive pages
  */
 
-$addtocartonarchiveValue = isset( $options['addtocartonarchive'] ) ? $options['addtocartonarchive'] : 0;
+if ( $productsettings_addtocartonarchiveValue ) :
 
-if ( $addtocartonarchiveValue ) {
 	add_action( 'after_setup_theme', function() {
 		add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_add_to_cart', 10 );
 	} );
-}
+
+endif;
 
 /*
  ** Remove related products output
  */
 
-$norelatedproductsValue = isset( $options['norelatedproducts'] ) ? $options['norelatedproducts'] : 0;
+if ( $productsettings_norelatedproductsValue ) :
 
-if ( $norelatedproductsValue ) {
 	add_action( 'woocommerce_after_single_product_summary', function() {
 		remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 	}, 0 );
-}
+
+endif;
 
 /*
  ** Products per page
  */
 
 add_filter( 'loop_shop_per_page', function( $cols ) {
-	$options = get_option( 'surbma_hc_fields' );
-	$productsnumberValue = isset( $options['productsnumber'] ) ? $options['productsnumber'] : false;
+	// Get the settings array
+	global $options;
 
-	if ( $productsnumberValue ) {
-		return $productsnumberValue;
+	$productsettings_productsnumberValue = $options['productsnumber'] ?? false;
+
+	if ( $productsettings_productsnumberValue ) {
+		return $productsettings_productsnumberValue;
 	}
 
 	return $cols;
@@ -173,11 +179,13 @@ add_filter( 'loop_shop_per_page', function( $cols ) {
  */
 
 add_filter( 'loop_shop_columns', function( $columns ) {
-	$options = get_option( 'surbma_hc_fields' );
-	$productsperrowValue = isset( $options['productsperrow'] ) ? $options['productsperrow'] : false;
+	// Get the settings array
+	global $options;
 
-	if ( $productsperrowValue ) {
-		return $productsperrowValue;
+	$productsettings_productsperrowValue = $options['productsperrow'] ?? false;
+
+	if ( $productsettings_productsperrowValue ) {
+		return $productsettings_productsperrowValue;
 	}
 
 	return $columns;
@@ -188,15 +196,18 @@ add_filter( 'loop_shop_columns', function( $columns ) {
  */
 
 add_filter( 'woocommerce_upsell_display_args', function( $args ) {
-	$options = get_option( 'surbma_hc_fields' );
-	$upsellproductsnumberValue = isset( $options['upsellproductsnumber'] ) ? $options['upsellproductsnumber'] : false;
-	$upsellproductsperrowValue = isset( $options['upsellproductsperrow'] ) ? $options['upsellproductsperrow'] : false;
+	// Get the settings array
+	global $options;
 
-	if ( $upsellproductsnumberValue ) {
-		$args['posts_per_page'] = $upsellproductsnumberValue;
+	$productsettings_upsellproductsnumberValue = $options['upsellproductsnumber'] ?? false;
+	$productsettings_upsellproductsperrowValue = $options['upsellproductsperrow'] ?? false;
+
+	if ( $productsettings_upsellproductsnumberValue ) {
+		$args['posts_per_page'] = $productsettings_upsellproductsnumberValue;
 	}
-	if ( $upsellproductsperrowValue ) {
-		$args['columns'] = $upsellproductsperrowValue;
+
+	if ( $productsettings_upsellproductsperrowValue ) {
+		$args['columns'] = $productsettings_upsellproductsperrowValue;
 	}
 
 	return $args;
@@ -207,15 +218,18 @@ add_filter( 'woocommerce_upsell_display_args', function( $args ) {
  */
 
 add_filter( 'woocommerce_output_related_products_args', function( $args ) {
-	$options = get_option( 'surbma_hc_fields' );
-	$relatedproductsnumberValue = isset( $options['relatedproductsnumber'] ) ? $options['relatedproductsnumber'] : false;
-	$relatedproductsperrowValue = isset( $options['relatedproductsperrow'] ) ? $options['relatedproductsperrow'] : false;
+	// Get the settings array
+	global $options;
 
-	if ( $relatedproductsnumberValue ) {
-		$args['posts_per_page'] = $relatedproductsnumberValue;
+	$productsettings_relatedproductsnumberValue = $options['relatedproductsnumber'] ?? false;
+	$productsettings_relatedproductsperrowValue = $options['relatedproductsperrow'] ?? false;
+
+	if ( $productsettings_relatedproductsnumberValue ) {
+		$args['posts_per_page'] = $productsettings_relatedproductsnumberValue;
 	}
-	if ( $relatedproductsperrowValue ) {
-		$args['columns'] = $relatedproductsperrowValue;
+
+	if ( $productsettings_relatedproductsperrowValue ) {
+		$args['columns'] = $productsettings_relatedproductsperrowValue;
 	}
 
 	return $args;

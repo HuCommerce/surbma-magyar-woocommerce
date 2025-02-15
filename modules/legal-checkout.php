@@ -1,10 +1,16 @@
 <?php
 
+/**
+ * Module: Legal compliance
+ */
+
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
 add_action( 'woocommerce_register_form', function() {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$regacceptppValue = isset( $options['regacceptpp'] ) ? wp_kses_post( wp_unslash( $options['regacceptpp'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
 
 	if ( !is_checkout() && $regacceptppValue ) {
@@ -23,7 +29,8 @@ add_filter( 'woocommerce_registration_errors', function( $errors, $username, $em
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-register', 'woocommerce-register-nonce', false );
 
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
 
 	if ( !is_admin() && !is_checkout() && isset( $options['regacceptpp'] ) && $options['regacceptpp'] && empty( $_POST['reg_accept_pp'] ) ) {
 		$acceptregppError = __( 'Privacy Policy', 'surbma-magyar-woocommerce' );
@@ -39,11 +46,12 @@ add_action( 'user_register', function( $user_id ) {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-register', 'woocommerce-register-nonce', false );
 
-	$options = get_option( 'surbma_hc_fields' );
-
 	if ( !empty( $_POST['reg_accept_pp'] ) ) {
 		update_user_meta( $user_id, 'reg_accept_pp', 1 );
 	}
+
+	// Get the settings array
+	global $options;
 
 	$regipValue = isset( $options['regip'] ) ? $options['regip'] : 0;
 	if ( 1 == $regipValue ) {
@@ -121,13 +129,12 @@ add_action( 'woocommerce_edit_account_form', function() {
 // Disable WooCommerce default Terms & Conditions fields on Checkout page
 add_action( 'init', function() {
 	if ( ! is_admin() ) {
-		add_filter('woocommerce_checkout_show_terms', '__return_false');
+		add_filter( 'woocommerce_checkout_show_terms', '__return_false' );
 	}
 } );
 
 // Get the position for the Terms & Conditions fields on Checkout page
-$options = get_option( 'surbma_hc_fields' );
-$legalconfirmationsposition = isset( $options['legalconfirmationsposition'] ) ? $options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
+$legalconfirmationsposition = $options['legalconfirmationsposition'] ?? 'woocommerce_review_order_before_submit';
 
 // Show our Terms & Conditions fields on Checkout page
 add_action( $legalconfirmationsposition, function( $checkout = '' ) {
@@ -135,7 +142,9 @@ add_action( $legalconfirmationsposition, function( $checkout = '' ) {
 		$checkout = WC()->checkout();
 	}
 
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$legalcheckouttitleValue = isset( $options['legalcheckouttitle'] ) ? $options['legalcheckouttitle'] : esc_html__( 'Legal confirmations', 'surbma-magyar-woocommerce' );
 	$legalcheckouttextValue = isset( $options['legalcheckouttext'] ) ? $options['legalcheckouttext'] : '';
 	$legalconfirmationsposition = isset( $options['legalconfirmationsposition'] ) ? $options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
@@ -212,7 +221,9 @@ add_action( 'woocommerce_checkout_process', function() {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$legalcheckout_custom1optionalValue = isset( $options['legalcheckout-custom1optional'] ) && 1 == $options['legalcheckout-custom1optional'] ? false : true;
 	$legalcheckout_custom2optionalValue = isset( $options['legalcheckout-custom2optional'] ) && 1 == $options['legalcheckout-custom2optional'] ? false : true;
 
@@ -263,7 +274,9 @@ add_action( 'woocommerce_checkout_create_order', function( $order ) {
 } );
 
 add_action( 'woocommerce_admin_order_data_after_billing_address', function( $order ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$acceptcustom1labelValue = isset( $options['acceptcustom1label'] ) && $options['acceptcustom1label'] ? $options['acceptcustom1label'] : __( 'Custom 1 checkbox', 'surbma-magyar-woocommerce' );
 	$acceptcustom2labelValue = isset( $options['acceptcustom2label'] ) && $options['acceptcustom2label'] ? $options['acceptcustom2label'] : __( 'Custom 2 checkbox', 'surbma-magyar-woocommerce' );
 
@@ -287,16 +300,22 @@ add_action( 'woocommerce_admin_order_data_after_billing_address', function( $ord
 }, 10, 1 );
 
 add_action( 'woocommerce_review_order_before_submit', function() {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$beforeorderbuttonmessageValue = isset( $options['beforeorderbuttonmessage'] ) ? wp_unslash( $options['beforeorderbuttonmessage'] ) : '';
+
 	if ( $beforeorderbuttonmessageValue ) {
 		echo '<div class="surbma-hc-before-submit" style="margin: 0 0 1em;text-align: center;">' . wp_kses_post( $beforeorderbuttonmessageValue ) . '</div>';
 	}
 } );
 
 add_action( 'woocommerce_review_order_after_submit', function() {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$afterorderbuttonmessageValue = isset( $options['afterorderbuttonmessage'] ) ? wp_unslash( $options['afterorderbuttonmessage'] ) : '';
+
 	if ( $afterorderbuttonmessageValue ) {
 		echo '<div class="surbma-hc-before-submit" style="margin: 1em 0 0;text-align: center;">' . wp_kses_post( $afterorderbuttonmessageValue ) . '</div>';
 	}

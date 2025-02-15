@@ -1,8 +1,15 @@
 <?php
 
-$options = get_option( 'surbma_hc_fields' );
-$emptycartbutton_cartpageValue = isset( $options['emptycartbutton-cartpage'] ) ? $options['emptycartbutton-cartpage'] : 'none';
-$emptycartbutton_checkoutpageValue = isset( $options['emptycartbutton-checkoutpage'] ) ? $options['emptycartbutton-checkoutpage'] : 'none';
+/**
+ * Module: Empty Cart button
+ */
+
+// Prevent direct access to the plugin
+defined( 'ABSPATH' ) || exit;
+
+// Get the settings array and check, if option exists
+$emptycartbutton_cartpageValue = $options['emptycartbutton-cartpage'] ?? 'none';
+$emptycartbutton_checkoutpageValue = $options['emptycartbutton-checkoutpage'] ?? 'none';
 $emptycartbutton_checkoutpagePosition = 'woocommerce_before_checkout_form' == $emptycartbutton_checkoutpageValue ? 999 : 0;
 
 /*
@@ -13,18 +20,25 @@ $emptycartbutton_checkoutpagePosition = 'woocommerce_before_checkout_form' == $e
  * woocommerce_cart_coupon
  * woocommerce_cart_actions
  * woocommerce_before_cart_collaterals
+ * 
 */
-if ( 'none' != $emptycartbutton_cartpageValue ) {
+if ( 'none' != $emptycartbutton_cartpageValue ) :
+
 	add_action( $emptycartbutton_cartpageValue, function() {
 		if ( count( WC()->cart->get_cart() ) > 1 ) {
-			$options = get_option( 'surbma_hc_fields' );
-			$emptycartbutton_cartpagebuttontextValue = isset( $options['emptycartbutton-cartpagebuttontext'] ) ? $options['emptycartbutton-cartpagebuttontext'] : __( 'Empty cart', 'surbma-magyar-woocommerce' );
-			$emptycartbutton_checkoutpageconfirmationtextValue = isset( $options['emptycartbutton-confirmationtext'] ) ? $options['emptycartbutton-confirmationtext'] : __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
+			// Get the settings array
+			global $options;
+
+			// Get the settings
+			$emptycartbutton_cartpagebuttontextValue = $options['emptycartbutton-cartpagebuttontext'] ?? __( 'Empty cart', 'surbma-magyar-woocommerce' );
+			$emptycartbutton_checkoutpageconfirmationtextValue = $options['emptycartbutton-confirmationtext'] ?? __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
+
 			echo '<a href="' . esc_url( add_query_arg( 'hc-empty-cart', '1' ) ) . '" class="button alt hc-empty-cart-button">' . $emptycartbutton_cartpagebuttontextValue . '</a>';
 			echo "<script>jQuery('.hc-empty-cart-button').on('click', function () {return confirm('" . $emptycartbutton_checkoutpageconfirmationtextValue . "');});</script>";
 		}
 	} );
-}
+
+endif;
 
 /*
  *
@@ -33,14 +47,20 @@ if ( 'none' != $emptycartbutton_cartpageValue ) {
  * Possible hooks for Checkout page:
  * woocommerce_before_checkout_form
  * woocommerce_after_checkout_form
+ * 
 */
-if ( 'none' != $emptycartbutton_checkoutpageValue ) {
+if ( 'none' != $emptycartbutton_checkoutpageValue ) :
+
 	add_action( $emptycartbutton_checkoutpageValue, function() {
 		if ( count( WC()->cart->get_cart() ) > 1 ) {
-			$options = get_option( 'surbma_hc_fields' );
-			$emptycartbutton_checkoutpagemessageValue = isset( $options['emptycartbutton-checkoutpagemessage'] ) ? $options['emptycartbutton-checkoutpagemessage'] : __( 'Changed your mind?', 'surbma-magyar-woocommerce' );
-			$emptycartbutton_checkoutpagelinktextValue = isset( $options['emptycartbutton-checkoutpagelinktext'] ) ? $options['emptycartbutton-checkoutpagelinktext'] : __( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' );
-			$emptycartbutton_checkoutpageconfirmationtextValue = isset( $options['emptycartbutton-confirmationtext'] ) ? $options['emptycartbutton-confirmationtext'] : __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
+			// Get the settings array
+			global $options;
+
+			// Get the settings
+			$emptycartbutton_checkoutpagemessageValue = $options['emptycartbutton-checkoutpagemessage'] ?? __( 'Changed your mind?', 'surbma-magyar-woocommerce' );
+			$emptycartbutton_checkoutpagelinktextValue = $options['emptycartbutton-checkoutpagelinktext'] ?? __( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' );
+			$emptycartbutton_checkoutpageconfirmationtextValue = $options['emptycartbutton-confirmationtext'] ?? __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
+
 			$returnurl = esc_url( add_query_arg( 'hc-empty-cart', '1' ) );
 			$notice = sprintf( '%s <a href="%s" class="button wc-forward hc-empty-cart-button">%s</a>', $emptycartbutton_checkoutpagemessageValue, $returnurl, $emptycartbutton_checkoutpagelinktextValue );
 
@@ -48,7 +68,8 @@ if ( 'none' != $emptycartbutton_checkoutpageValue ) {
 			echo "<script>jQuery('.hc-empty-cart-button').on('click', function () {return confirm('" . $emptycartbutton_checkoutpageconfirmationtextValue . "');});</script>";
 		}
 	}, $emptycartbutton_checkoutpagePosition );
-}
+
+endif;
 
 // The redirection
 add_action( 'template_redirect', function() {

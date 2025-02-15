@@ -4,7 +4,6 @@
 defined( 'ABSPATH' ) || exit;
 
 // * HUCOMMERCE START
-$options = get_option( 'surbma_hc_fields' );
 $szamlazzhu_options = get_option( 'woocommerce_wc_szamlazz_settings' );
 $billingo_options = get_option( 'woocommerce_wc_billingo_plus_settings' );
 $pro_notice = SURBMA_HC_PREMIUM ? '' : '<div class="cps-alert uk-alert uk-alert-danger"><p><strong>Ha szeretnéd használni ezt a modult, előbb HuCommerce Pro előfizetést kell vásárolnod!</strong><br>A HuCommerce Pro előfizetés megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p><a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="uk-button uk-button-danger uk-button-small" target="_blank">HuCommerce Pro megvásárlása</a></div>';

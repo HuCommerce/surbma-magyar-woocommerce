@@ -7,6 +7,8 @@ defined( 'ABSPATH' ) || exit;
 defined( 'WP_UNINSTALL_PLUGIN' ) || die;
 
 delete_option( 'surbma_hc_fields' );
+delete_option( 'surbma_hc_license' );
+delete_option( 'surbma_hc_license_status' );
 delete_option( 'pand-' . md5( 'surbma-hc-notice-welcome' ) );
 // * HUCOMMERCE START
 delete_option( 'pand-' . md5( 'surbma-hc-notice-v3000' ) );

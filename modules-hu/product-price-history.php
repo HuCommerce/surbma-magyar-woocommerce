@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Module: Product price history
+ */
+
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
@@ -156,10 +160,9 @@ if ( is_plugin_active( 'wp-all-import-pro/wp-all-import-pro.php' ) ) {
 }
 */
 
-$options = get_option( 'surbma_hc_fields' );
-$module_productpricehistoryValue = isset( $options['module-productpricehistory'] ) ? $options['module-productpricehistory'] : 0;
+$module_productpricehistoryValue = $options['module-productpricehistory'] ?? 0;
 
-if ( 1 == $module_productpricehistoryValue ) {
+if ( 1 == $module_productpricehistoryValue ) :
 
 	// Add custom fields in the General tab of the Product data metabox
 	add_action( 'woocommerce_product_options_general_product_data', function() {
@@ -212,12 +215,12 @@ if ( 1 == $module_productpricehistoryValue ) {
 		woocommerce_wp_select(array(
 			'id' => '_hc_productpricehistory_statisticslinkdisplay',
 			'label' => __( 'Advanced statistics display settings', 'surbma-magyar-woocommerce' ),
-		    'options' => array(
-		        'global' => __( 'Use the global setting', 'surbma-magyar-woocommerce' ),
-		        'show' => __( 'Show advanced statistics, when Product is on Sale', 'surbma-magyar-woocommerce' ),
-		        'always' => __( 'Always show advanced statistics', 'surbma-magyar-woocommerce' ),
-		        'hide' => __( 'Hide advanced statistics', 'surbma-magyar-woocommerce' )
-		    ),
+			'options' => array(
+				'global' => __( 'Use the global setting', 'surbma-magyar-woocommerce' ),
+				'show' => __( 'Show advanced statistics, when Product is on Sale', 'surbma-magyar-woocommerce' ),
+				'always' => __( 'Always show advanced statistics', 'surbma-magyar-woocommerce' ),
+				'hide' => __( 'Hide advanced statistics', 'surbma-magyar-woocommerce' )
+			),
 			'wrapper_class' => 'form-field-wide',
 			'description' => __( 'With this option, you can overwrite the global setting for advanced statistics display.', 'surbma-magyar-woocommerce' ),
 			'desc_tip' => true
@@ -274,12 +277,12 @@ if ( 1 == $module_productpricehistoryValue ) {
 		woocommerce_wp_select(array(
 			'id' => '_hc_productpricehistory_statisticslinkdisplay[' . $loop . ']',
 			'label' => __( 'Advanced statistics display settings', 'surbma-magyar-woocommerce' ),
-		    'options' => array(
-		        'global' => __( 'Use the global setting', 'surbma-magyar-woocommerce' ),
-		        'show' => __( 'Show advanced statistics, when Product is on Sale', 'surbma-magyar-woocommerce' ),
-		        'always' => __( 'Always show advanced statistics', 'surbma-magyar-woocommerce' ),
-		        'hide' => __( 'Hide advanced statistics', 'surbma-magyar-woocommerce' )
-		    ),
+			'options' => array(
+				'global' => __( 'Use the global setting', 'surbma-magyar-woocommerce' ),
+				'show' => __( 'Show advanced statistics, when Product is on Sale', 'surbma-magyar-woocommerce' ),
+				'always' => __( 'Always show advanced statistics', 'surbma-magyar-woocommerce' ),
+				'hide' => __( 'Hide advanced statistics', 'surbma-magyar-woocommerce' )
+			),
 			'wrapper_class' => 'form-field-wide',
 			'description' => __( 'With this option, you can overwrite the global setting for advanced statistics display.', 'surbma-magyar-woocommerce' ),
 			'desc_tip' => true,
@@ -319,7 +322,9 @@ if ( 1 == $module_productpricehistoryValue ) {
 
 		$shortcode_has_product_id = $product_id ? true : false;
 
-		$options = get_option( 'surbma_hc_fields' );
+		// Get the settings array
+		global $options;
+
 		$productpricehistory_showlowestpriceValue = isset( $options['productpricehistory-showlowestprice'] ) && 1 == $options['productpricehistory-showlowestprice'] ? 1 : 0;
 		$productpricehistory_lowestpricetextValue = isset( $options['productpricehistory-lowestpricetext'] ) && $options['productpricehistory-lowestpricetext'] ? $options['productpricehistory-lowestpricetext'] : __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
 		$productpricehistory_nolowestpricetextValue = isset( $options['productpricehistory-nolowestpricetext'] ) && $options['productpricehistory-nolowestpricetext'] ? $options['productpricehistory-nolowestpricetext'] : false;
@@ -505,4 +510,15 @@ if ( 1 == $module_productpricehistoryValue ) {
 		<?php
 	} );
 
+endif;
+
+/**
+ * Overwrite iThemes Security plugin's PHP Execution settings to enable HuCommerce plugin's product-price-history-display.php file.
+ * Settings -> Advanced -> System Tweaks -> PHP Execution -> Disable PHP in Plugins
+**/
+if ( !has_filter( 'itsec_filter_apache_server_config_modification' ) ) {
+	add_filter( 'itsec_filter_apache_server_config_modification', function ( $modification ) {
+		$modification = str_replace( 'RewriteRule ^wp\-content/plugins/.*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]', 'RewriteRule ^wp\-content/plugins/(?!surbma\-magyar\-woocommerce/modules\-hu/product\-price\-history\-display\.php).*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]', $modification );
+		return $modification;
+	}, PHP_INT_MAX - 5 );
 }

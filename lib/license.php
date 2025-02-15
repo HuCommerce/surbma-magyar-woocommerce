@@ -63,7 +63,7 @@ if ( ( ( defined( 'SURBMA_HC_WHITELIST' ) && false !== SURBMA_HC_WHITELIST ) && 
 }
 
 // Do the stuff if website is not whitelisted
-if ( !isset( $whitelisted ) ) :
+if ( !isset( $whitelisted ) || !$whitelisted ) :
 
 	// Create the API request URL
 	function surbma_hc_license_create_url( $request_args ) {

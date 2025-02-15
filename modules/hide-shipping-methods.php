@@ -1,8 +1,17 @@
 <?php
 
+/**
+ * Module: Hide shipping methods
+ */
+
+// Prevent direct access to the plugin
+defined( 'ABSPATH' ) || exit;
+
 // Remove all Shipping methods on the Cart page
 add_filter( 'woocommerce_cart_ready_to_calc_shipping', function( $show_shipping ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$hideshippingmethodscartValue = isset( $options['hideshippingmethods-cart'] ) && 1 == $options['hideshippingmethods-cart'] ? 1 : 0;
 
 	if ( $hideshippingmethodscartValue && is_cart() ) {
@@ -13,7 +22,9 @@ add_filter( 'woocommerce_cart_ready_to_calc_shipping', function( $show_shipping 
 }, 99 );
 
 add_filter( 'woocommerce_package_rates', function( $available_shipping_methods, $package ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$shippingmethodstohideValue = isset( $options['shippingmethodstohide'] ) ? $options['shippingmethodstohide'] : 'showall';
 
 	if ( 'showall' == $shippingmethodstohideValue ) {

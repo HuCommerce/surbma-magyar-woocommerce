@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * Display the public Product price history
+ */
+
 $wp_root = dirname( dirname( __FILE__ ) );
 
 require_once( $wp_root . "../../../../wp-load.php" );

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Module: Hungarian translation fixes
+ */
+
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 

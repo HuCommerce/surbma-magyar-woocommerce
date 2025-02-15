@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Module: Plus/minus quantity buttons
+ */
+
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 

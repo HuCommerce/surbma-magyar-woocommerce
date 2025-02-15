@@ -1,17 +1,25 @@
 <?php
 
+/**
+ * Module: Custom Add To Cart Button
+ */
+
+// Prevent direct access to the plugin
+defined( 'ABSPATH' ) || exit;
+
 add_filter( 'woocommerce_product_add_to_cart_text' , 'cps_hc_wcgems_custom_addtocart_button', 10, 1 );
 add_filter( 'woocommerce_product_single_add_to_cart_text' , 'cps_hc_wcgems_custom_addtocart_button', 10, 1 );
 add_filter( 'woocommerce_booking_single_add_to_cart_text' , 'cps_hc_wcgems_custom_addtocart_button', 10, 1 );
 function cps_hc_wcgems_custom_addtocart_button( $text ) {
-	$options = get_option( 'surbma_hc_fields' );
 	global $product;
-
 	if ( !isset( $product ) || !is_object( $product ) ) {
 		return $text;
 	}
 
 	$product_type = $product->get_type();
+
+	// Get the settings array
+	global $options;
 
 	$custom_addtocart_button_single_simpleValue = isset( $options['custom-addtocart-button-single-simple'] ) && $options['custom-addtocart-button-single-simple'] ? $options['custom-addtocart-button-single-simple'] : $text;
 	$custom_addtocart_button_single_groupedValue = isset( $options['custom-addtocart-button-single-grouped'] ) && $options['custom-addtocart-button-single-grouped'] ? $options['custom-addtocart-button-single-grouped'] : $text;

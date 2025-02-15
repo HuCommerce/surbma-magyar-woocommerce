@@ -17,7 +17,7 @@ Text Domain: surbma-magyar-woocommerce
 Domain Path: /languages
 
 WC requires at least: 4.6
-WC tested up to: 9.4
+WC tested up to: 9.6
 
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -25,6 +25,11 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 // Prevent direct access
 defined( 'ABSPATH' ) || exit;
+
+// Localization
+add_action( 'init', function() {
+	load_plugin_textdomain( 'surbma-magyar-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+} );
 
 // Retrieve the plugin data to get the Version
 $plugin_data = get_file_data( __FILE__, array( 'Version' => 'Version' ), 'plugin' );
@@ -57,6 +62,7 @@ add_action( 'plugins_loaded', function() {
 } );
 
 // Declare compatibility: Custom order tables
+// https://developer.woocommerce.com/docs/hpos-extension-recipe-book/
 add_action( 'before_woocommerce_init', function() {
 	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
@@ -64,34 +70,9 @@ add_action( 'before_woocommerce_init', function() {
 } );
 
 // Declare incompatibility: Cart & Checkout blocks
+// https://developer.woocommerce.com/2023/11/06/faq-extending-cart-and-checkout-blocks/
 add_action( 'before_woocommerce_init', function() {
-
-    if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-
-        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, false );
-
-    }
-
-} );
-
-// Create a check for WooCommerce version. Used for deprecated functions for older WooCommerce versions.
-function surbma_hc_woocommerce_version_check( $version ) {
-	if ( class_exists( 'WooCommerce' ) ) {
-		global $woocommerce;
-		if ( version_compare( $woocommerce->version, $version, '>=' ) ) {
-			return true;
-		}
+	if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, false );
 	}
-	return false;
-}
-
-/**
- * Overwrite iThemes Security plugin's PHP Execution settings to enable HuCommerce plugin's product-price-history-display.php file.
- * Settings -> Advanced -> System Tweaks -> PHP Execution -> Disable PHP in Plugins
-**/
-if ( !has_filter( 'itsec_filter_apache_server_config_modification' ) ) {
-	add_filter( 'itsec_filter_apache_server_config_modification', function ( $modification ) {
-		$modification = str_replace( 'RewriteRule ^wp\-content/plugins/.*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]', 'RewriteRule ^wp\-content/plugins/(?!surbma\-magyar\-woocommerce/modules\-hu/product\-price\-history\-display\.php).*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]', $modification );
-		return $modification;
-	}, PHP_INT_MAX - 5 );
-}
+} );

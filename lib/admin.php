@@ -263,13 +263,13 @@ add_action( 'admin_init', array( 'PAnD', 'init' ) );
 
 // Welcome notice
 add_action( 'admin_notices', function() {
-	$options = get_option( 'surbma_hc_fields' );
-
 	if ( ! PAnD::is_admin_notice_active( 'surbma-hc-notice-welcome-forever' ) ) {
 		return;
 	}
 
-	if ( $options ) {
+	// Get the settings array
+	global $options;
+	if ( !empty( $options ) ) {
 		return;
 	}
 
@@ -299,8 +299,6 @@ add_action( 'admin_notices', function() {
 
 // HuCommerce Pro Promo notice
 add_action( 'admin_notices', function() {
-	$options = get_option( 'surbma_hc_fields' );
-
 	if ( PAnD::is_admin_notice_active( 'surbma-hc-notice-welcome-forever' ) ) {
 		return;
 	}
@@ -319,7 +317,9 @@ add_action( 'admin_notices', function() {
 		return;
 	}
 
-	if ( !$options ) {
+	// Get the settings array
+	global $options;
+	if ( empty( $options ) ) {
 		return;
 	}
 

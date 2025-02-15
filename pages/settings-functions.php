@@ -22,24 +22,26 @@ function cps_hc_wcgems_nav_item_header( $nav_item_title ) {
 }
 
 function cps_hc_wcgems_module_nav_item( $module_title, $module_option ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
 
 	$module = '';
-	$moduleValue = isset( $options[$module_option] ) ? $options[$module_option] : 0;
+	$moduleValue = $options[$module_option] ?? 0;
 	$module_class = 1 == $moduleValue ? '' : 'uk-hidden';
 
 	echo '<li class="' . esc_attr( $module_class ) . '"><a class="uk-offcanvas-close uk-modal-close-default"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: triangle-right; ratio: 1"></span> ' . esc_html__( $module_title, 'surbma-magyar-woocommerce' ) . '</a></li>';
 }
 
 function cps_hc_wcgems_form_accordion_title( $module_title, $module_option, $module_free = false, $module_new = false, $module_beta = false ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
 
 	$module = '';
 	$new = $module_new ? ' <span class="uk-badge">' . __( 'New', 'surbma-magyar-woocommerce' ) . '</span>' : '';
 	$beta = $module_beta ? ' <span class="uk-badge">' . __( 'Beta', 'surbma-magyar-woocommerce' ) . '</span>' : '';
 	$pro = $module_free ? '' : ' <span class="uk-badge" style="background: #fff;color: #ffd700 !important;font-weight: bold;">PRO</span>';
 
-	$moduleValue = isset( $options[$module_option] ) ? $options[$module_option] : 0;
+	$moduleValue = $options[$module_option] ?? 0;
 	$module_indicator = 1 == $moduleValue ? '<span class="module-indicator module-on" uk-tooltip="title: Aktív modul"></span>' : '<span class="module-indicator module-off" uk-tooltip="title: Kikapcsolt modul"></span>';
 
 	$allowed_html = array(
@@ -64,7 +66,9 @@ function cps_hc_wcgems_module_card_more( $href ) {
 }
 
 function cps_hc_wcgems_form_field_main( $field_label, $field_option, $field_free = false ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$field = '';
 	$disabled = $field_free || SURBMA_HC_PREMIUM || ( isset( $options[$field_option] ) && 1 == $options[$field_option] ) ? '' : ' disabled';
 
@@ -109,7 +113,9 @@ function cps_hc_wcgems_form_modal( $modal_title, $modal_content, $modal_id ) {
 }
 
 function cps_hc_wcgems_form_field_checkbox( $field_label, $field_option, $field_info = false, $field_new = false, $field_free = false, $field_default = 0 ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$field = '';
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : '';
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
@@ -168,7 +174,9 @@ function cps_hc_wcgems_form_field_select( $field_label, $field_option, $field_op
 	global $emptycartbutton_cartpage_options;
 	global $emptycartbutton_checkoutpage_options;
 
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$field = '';
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : '';
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
@@ -228,7 +236,9 @@ function cps_hc_wcgems_form_field_select( $field_label, $field_option, $field_op
 }
 
 function cps_hc_wcgems_form_field_text( $field_label, $field_option, $field_default = '', $field_info = false, $field_new = false, $field_free = false, $field_description = false, $field_icon = false ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$field = '';
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : '';
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
@@ -282,7 +292,9 @@ function cps_hc_wcgems_form_field_text( $field_label, $field_option, $field_defa
 }
 
 function cps_hc_wcgems_form_field_number( $field_label, $field_option, $field_default, $field_info = false, $field_new = false, $field_free = false, $field_description = false, $field_icon = false ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$field = '';
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : '';
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
@@ -336,7 +348,9 @@ function cps_hc_wcgems_form_field_number( $field_label, $field_option, $field_de
 }
 
 function cps_hc_wcgems_form_field_password( $field_label, $field_option, $field_default, $field_info = false, $field_new = false, $field_free = false, $field_description = false, $field_icon = false ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$field = '';
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : '';
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
@@ -390,7 +404,9 @@ function cps_hc_wcgems_form_field_password( $field_label, $field_option, $field_
 }
 
 function cps_hc_wcgems_form_field_textarea( $field_label, $field_option, $field_default, $field_info = false, $field_new = false, $field_free = false, $field_description = false ) {
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$field = '';
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : '';
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';

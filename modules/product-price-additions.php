@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Module: Product price additions
+ */
+
+// Prevent direct access to the plugin
+defined( 'ABSPATH' ) || exit;
+
 // Add custom fields in the General tab of the Product data metabox
 add_action( 'woocommerce_product_options_general_product_data', function() {
 	// We are on the edit product page, right? Let's get the product ID from the URL.
@@ -108,7 +115,9 @@ add_filter( 'woocommerce_get_price_html', function( $price, $product ) {
 		return $price;
 	}
 
-	$options = get_option( 'surbma_hc_fields' );
+	// Get the settings array
+	global $options;
+
 	$productpriceadditions_productprefixValue = isset( $options['productpriceadditions-product-prefix'] ) && $options['productpriceadditions-product-prefix'] ? $options['productpriceadditions-product-prefix'] : false;
 	$productpriceadditions_productsuffixValue = isset( $options['productpriceadditions-product-suffix'] ) && $options['productpriceadditions-product-suffix'] ? $options['productpriceadditions-product-suffix'] : false;
 	$productpriceadditions_archiveprefixValue = isset( $options['productpriceadditions-archive-prefix'] ) && $options['productpriceadditions-archive-prefix'] ? $options['productpriceadditions-archive-prefix'] : false;

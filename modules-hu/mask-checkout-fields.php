@@ -20,11 +20,8 @@ add_action( 'wp_footer', function() {
 		return;
 	}
 
-	// Get the settings array and stop the process, if settings are missing
-	$options = get_option( 'surbma_hc_fields' );
-	if ( !$options || !is_array( $options ) ) {
-		return;
-	}
+	// Get the settings array
+	global $options;
 
 	// Get the settings
 	$maskcheckoutfieldsplaceholderValue = $options['maskcheckoutfieldsplaceholder'] ?? 0;

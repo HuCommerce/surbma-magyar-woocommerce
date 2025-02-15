@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Module: Automatic Cart update
+ */
+
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 

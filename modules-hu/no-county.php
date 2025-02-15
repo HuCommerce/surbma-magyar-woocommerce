@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Module: Hide County field if Country is Hungary
+ */
+
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
