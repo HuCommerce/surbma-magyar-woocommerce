@@ -845,6 +845,13 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 
 			<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 			<p><?php esc_html_e( 'Adds translations for most popular premium plugins & themes. Supported softwares added regularly. Please let us know, what plugin or theme do you need to be translated next time!', 'surbma-magyar-woocommerce' ); ?></p>
+			<ul class="cps-form-fields uk-list uk-list-divider">
+				<?php cps_hc_wcgems_form_field_checkbox( 'Kestrel API Manager for WooCommerce', 'translations-woocommerceapimanager' ); ?>
+				<?php cps_hc_wcgems_form_field_checkbox( 'Restrict Content Pro', 'translations-restrictcontentpro' ); ?>
+				<?php cps_hc_wcgems_form_field_checkbox( 'WooCommerce Memberships', 'translations-woocommercememberships' ); ?>
+				<?php cps_hc_wcgems_form_field_checkbox( 'WooCommerce Subscriptions', 'translations-woocommercesubscriptions' ); ?>
+			</ul>
+
 			<div class="uk-overflow-auto uk-margin-large-top">
 				<table class="uk-table uk-table-divider uk-table-justify uk-table-small">
 					<thead>
@@ -857,9 +864,27 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 					</thead>
 					<tbody>
 						<tr>
+							<td>Kestrel API Manager for WooCommerce</td>
+							<td><span class="uk-label"><?php esc_html_e( 'Plugin', 'surbma-magyar-woocommerce' ); ?></span></td>
+							<td><a href="https://automattic.pxf.io/PO6mB6" target="_blank">https://woocommerce.com/products/woocommerce-api-manager/</a></td>
+							<td><code>HU</code></td>
+						</tr>
+						<tr>
+							<td>Restrict Content Pro</td>
+							<td><span class="uk-label"><?php esc_html_e( 'Plugin', 'surbma-magyar-woocommerce' ); ?></span></td>
+							<td><a href="https://restrictcontentpro.com/" target="_blank">https://restrictcontentpro.com/</a></td>
+							<td><code>HU</code></td>
+						</tr>
+						<tr>
+							<td>WooCommerce Memberships</td>
+							<td><span class="uk-label"><?php esc_html_e( 'Plugin', 'surbma-magyar-woocommerce' ); ?></span></td>
+							<td><a href="https://automattic.pxf.io/JKmRBQ" target="_blank">https://woocommerce.com/products/woocommerce-memberships/</a></td>
+							<td><code>HU</code></td>
+						</tr>
+						<tr>
 							<td>WooCommerce Subscriptions</td>
 							<td><span class="uk-label"><?php esc_html_e( 'Plugin', 'surbma-magyar-woocommerce' ); ?></span></td>
-							<td><a href="https://woocommerce.com/products/woocommerce-subscriptions/" target="_blank">https://woocommerce.com/products/woocommerce-subscriptions/</a></td>
+							<td><a href="https://automattic.pxf.io/OemyzA" target="_blank">https://woocommerce.com/products/woocommerce-subscriptions/</a></td>
 							<td><code>HU</code></td>
 						</tr>
 					</tbody>
