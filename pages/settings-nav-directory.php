@@ -17,7 +17,7 @@ if ( !is_wp_error( $rss_katalogus ) ) {
 
 if ( $maxitems_katalogus ) {
 	?>
-	<div uk-filter="target: .directory-filter">
+	<div id="hucommerce-directory" uk-filter="target: .directory-filter">
 
 		<ul class="uk-subnav uk-subnav-pill uk-text-small uk-hidden">
 			<li class="uk-active" uk-filter-control><a href="#"><?php esc_html_e( 'All post', 'surbma-magyar-woocommerce' ); ?></a></li>
@@ -28,7 +28,7 @@ if ( $maxitems_katalogus ) {
 			<li uk-filter-control="[data-tags*='ugyvedek']"><a href="#"><span uk-icon="icon: thumbnails;ratio: .7"></span> <?php esc_html_e( 'Lawyers', 'surbma-magyar-woocommerce' ); ?></a></li>
 		</ul>
 
-		<ul class="directory-filter uk-child-width-1-2@s uk-child-width-1-2@m uk-child-width-1-3@l uk-child-width-1-5@xl" uk-grid="masonry: true">
+		<ul class="directory-filter uk-flex uk-flex-center" uk-grid="masonry: false" uk-height-match="target: > li > .uk-card > .uk-card-body">
 		<?php
 		// Loop through each feed item and display each item as a hyperlink.
 		foreach ( $rss_katalogus_items as $item_katalogus ) :
