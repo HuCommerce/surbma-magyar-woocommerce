@@ -1,7 +1,7 @@
 <?php
 
 // CPS SDK Version.
-define( 'CPS_SDK_VERSION', '8.15.0' );
+define( 'CPS_SDK_VERSION', '8.15.2' );
 
 define( 'CPS_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'CPS_URL', plugins_url( '', __FILE__ ) );
