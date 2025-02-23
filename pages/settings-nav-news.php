@@ -22,7 +22,7 @@ if ( $maxitems_hirek ) {
 		<article>
 			<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 				<div class="uk-card-media-top">
-					<a href="<?php echo esc_url( $item_hirek->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_hirek->get_title() ); ?>&utm_content=hucommerce-news" target="_blank"><img src="<?php echo esc_url( $item_hirek->get_description() ); ?>" alt="<?php echo esc_html( $item_hirek->get_title() ); ?>" style="display: block;width: 100%;height: auto;"></a>
+					<a href="<?php echo esc_url( $item_hirek->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_hirek->get_title() ); ?>&utm_content=hucommerce-news" target="_blank"><img src="<?php echo esc_url( $item_hirek->get_description() ); ?>" alt="<?php echo esc_html( $item_hirek->get_title() ); ?>" style="display: block;width: 100%;height: auto;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 				</div>
 				<div class="uk-card-body">
 					<h2 class="uk-h5 uk-text-bold"><?php echo wp_kses_post( $item_hirek->get_title() ); ?></h2>

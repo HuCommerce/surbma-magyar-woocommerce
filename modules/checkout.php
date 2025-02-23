@@ -58,14 +58,14 @@ add_action( 'woocommerce_after_save_address_validation', function( $user_id, $ad
 // Billing Company check process
 function cps_wcgems_hc_billing_company_check() {
 	// Get the settings
-	$woocommercecheckoutcompanyfieldValue = false !== get_option( 'woocommerce_checkout_company_field' ) ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
+	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field', 'optional' );
 
-	if ( 'optional' == $woocommercecheckoutcompanyfieldValue && 1 == $_POST['billing_company_check'] && empty( $_POST['billing_company'] ) ) {
-		$field_label = __( 'Company name', 'woocommerce' );
+	if ( 'optional' == $woocommercecheckoutcompanyfieldValue && !empty( $_POST['billing_company_check'] ) && 1 == $_POST['billing_company_check'] && empty( $_POST['billing_company'] ) ) {
+		$field_label = __( 'Company name', 'woocommerce' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		/* translators: %s: Field label */
-		$field_label = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $field_label );
+		$field_label = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $field_label ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		/* translators: %s: Field label */
-		$noticeError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $field_label ) . '</strong>' );
+		$noticeError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $field_label ) . '</strong>' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		wc_add_notice( $noticeError, 'error' );
 	}
 }

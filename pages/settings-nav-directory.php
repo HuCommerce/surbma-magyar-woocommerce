@@ -33,11 +33,11 @@ if ( $maxitems_katalogus ) {
 		// Loop through each feed item and display each item as a hyperlink.
 		foreach ( $rss_katalogus_items as $item_katalogus ) :
 			?>
-			<li data-tags="<?php echo basename( esc_url( $item_katalogus->get_permalink() ) ); ?>">
+			<li data-tags="<?php echo esc_attr( basename( $item_katalogus->get_permalink() ) ); ?>">
 				<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 					<div class="uk-card-media-top">
 						<a href="<?php echo esc_url( $item_katalogus->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_katalogus->get_title() ); ?>&utm_content=hucommerce-directory" target="_blank">
-							<img src="<?php echo esc_url( $item_katalogus->get_description() ); ?>" alt="<?php echo esc_html( $item_katalogus->get_title() ); ?>" style="display: block;width: 100%;height: auto;">
+							<img src="<?php echo esc_url( $item_katalogus->get_description() ); ?>" alt="<?php echo esc_html( $item_katalogus->get_title() ); ?>" style="display: block;width: 100%;height: auto;"><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 						</a>
 					</div>
 					<div class="uk-card-body uk-text-center">

@@ -77,8 +77,8 @@ if ( $productsettings_productsubtitleValue ) :
 		}
 
 		// This sanitizes the data from the field and saves it into an array $products_meta.
-		$products_meta['surbma_hc_product_subtitle'] = sanitize_text_field( $_POST['surbma_hc_product_subtitle'] );
-		// $products_meta['surbma_hc_product_custom'] = sanitize_text_field( $_POST['surbma_hc_product_custom'] );
+		$products_meta['surbma_hc_product_subtitle'] = sanitize_text_field( wp_unslash( $_POST['surbma_hc_product_subtitle'] ) );
+		// $products_meta['surbma_hc_product_custom'] = sanitize_text_field( wp_unslash( $_POST['surbma_hc_product_custom'] ) );
 
 		// Cycle through the $products_meta array
 		foreach ( $products_meta as $key => $value ) :

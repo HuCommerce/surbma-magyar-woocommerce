@@ -8,8 +8,6 @@ $szamlazzhu_options = get_option( 'woocommerce_wc_szamlazz_settings' );
 $billingo_options = get_option( 'woocommerce_wc_billingo_plus_settings' );
 $pro_notice = SURBMA_HC_PREMIUM ? '' : '<div class="cps-alert uk-alert uk-alert-danger"><p><strong>Ha szeretnéd használni ezt a modult, előbb HuCommerce Pro előfizetést kell vásárolnod!</strong><br>A HuCommerce Pro előfizetés megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p><a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="uk-button uk-button-danger uk-button-small" target="_blank">HuCommerce Pro megvásárlása</a></div>';
 $no_options_notice = '<div class="uk-alert uk-alert-primary cps-alert uk-text-center"><p><strong>' . esc_html__( 'IMPORTANT!', 'surbma-magyar-woocommerce' ) . '</strong> ' . esc_html__( 'This Module has no options, but it is activated and already working.', 'surbma-magyar-woocommerce' ) . '</p></div>';
-
-
 // * HUCOMMERCE END
 
 global $couponfieldposition_options;
@@ -719,7 +717,7 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 				<li>
 					<label class="uk-form-label"><?php esc_html_e( 'Allowed HTML tags', 'surbma-magyar-woocommerce' ); ?></label>
 					<div class="uk-form-controls">
-						<pre><?php echo cps_wcgems_hc_allowed_post_tags(); ?></pre>
+						<pre><?php echo esc_html( cps_wcgems_hc_allowed_post_tags() ); ?></pre>
 					</div>
 				</li>
 			</ul>
@@ -778,7 +776,7 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 				<li>
 					<label class="uk-form-label"><?php esc_html_e( 'Allowed HTML tags', 'surbma-magyar-woocommerce' ); ?></label>
 					<div class="uk-form-controls">
-						<pre><?php echo cps_wcgems_hc_allowed_post_tags(); ?></pre>
+						<pre><?php echo esc_html( cps_wcgems_hc_allowed_post_tags() ); ?></pre>
 					</div>
 				</li>
 			</ul>
@@ -1038,8 +1036,8 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 
 			<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 			<ul class="cps-form-fields uk-list uk-list-divider">
-				<li><strong><?php _e( 'Single product pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
-				<li><p><?php _e( 'Give your custom texts to your Add to cart buttons on the product pages. You can set custom texts for different product types. If you leave them empty, the button texts will fall back to default WooCommerce texts.', 'surbma-magyar-woocommerce' ); ?></p></li>
+				<li><strong><?php esc_html_e( 'Single product pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
+				<li><p><?php esc_html_e( 'Give your custom texts to your Add to cart buttons on the product pages. You can set custom texts for different product types. If you leave them empty, the button texts will fall back to default WooCommerce texts.', 'surbma-magyar-woocommerce' ); ?></p></li>
 				<?php cps_hc_wcgems_form_field_text( 'Simple product', 'custom-addtocart-button-single-simple', '', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'Grouped product', 'custom-addtocart-button-single-grouped', '', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-single-external', '', false, false, true ); ?>
@@ -1047,8 +1045,8 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 				<?php cps_hc_wcgems_form_field_text( 'Subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-subscription', '', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'Variable subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-variable-subscription', '', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'Bookable product (WooCommerce Bookings)', 'custom-addtocart-button-single-booking', '', false, false, true ); ?>
-				<li><strong><?php _e( 'Product archive pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
-				<li><p><?php _e( 'Give your custom texts to your Add to cart buttons on the product archive pages. You can set custom texts for different product types. If you leave them empty, the button texts will inherit texts from single product settings or fall back to default WooCommerce texts, if those fields are also empty.', 'surbma-magyar-woocommerce' ); ?></p></li>
+				<li><strong><?php esc_html_e( 'Product archive pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
+				<li><p><?php esc_html_e( 'Give your custom texts to your Add to cart buttons on the product archive pages. You can set custom texts for different product types. If you leave them empty, the button texts will inherit texts from single product settings or fall back to default WooCommerce texts, if those fields are also empty.', 'surbma-magyar-woocommerce' ); ?></p></li>
 				<?php cps_hc_wcgems_form_field_text( 'Simple product', 'custom-addtocart-button-archive-simple', '', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'Grouped product', 'custom-addtocart-button-archive-grouped', '', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-archive-external', '', false, false, true ); ?>
@@ -1087,12 +1085,10 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 				<li><p><?php esc_html_e( 'SMTP service is a must have for all WooCommerce webshops, as it makes your transactional email delivery more stable and secure. Register a new account at a 3rd party SMTP service and set your credentials here to enable this feature.', 'surbma-magyar-woocommerce' ); ?></p></li>
 				<?php cps_hc_wcgems_form_field_select( 'SMTP port number', 'smtpport', $smtpport_options, '587', false, false, true ); ?>
 				<?php cps_hc_wcgems_form_field_select( 'Encryption type', 'smtpsecure', $smtpsecure_options, 'default', false, false, true ); ?>
-
 				<?php cps_hc_wcgems_form_field_text( 'SMTP From email address', 'smtpfrom', '', false, false, true, 'Optional' ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'SMTP From name', 'smtpfromname', '', false, false, true, 'Optional' ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'The hostname of the mail server', 'smtphost', '', false, false, true, false, 'world' ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'Username to use for SMTP authentication', 'smtpuser', '', false, false, true, false, 'user' ); ?>
-
 				<?php cps_hc_wcgems_form_field_password( 'Password to use for SMTP authentication', 'smtppassword', '', false, false, true, false, 'lock' ); ?>
 			</ul>
 		</li>
@@ -1105,5 +1101,5 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 			</ul>
 		</li>
 	</ul>
-	<div class="uk-text-center uk-margin-top"><input type="submit" class="uk-button uk-button-primary uk-button-large uk-width-large" value="<?php esc_attr_e( 'Save Changes' ); ?>" /></div>
+	<div class="uk-text-center uk-margin-top"><input type="submit" class="uk-button uk-button-primary uk-button-large uk-width-large" value="<?php esc_attr_e( 'Save Changes', 'surbma-magyar-woocommerce' ); ?>" /></div>
 </form>

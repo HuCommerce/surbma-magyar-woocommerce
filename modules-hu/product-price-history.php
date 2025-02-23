@@ -30,7 +30,7 @@ function surbma_hc_update_product_price_history( $product_id ) {
 	}
 
 	$current_time = current_datetime();
-	$current_time = strval( date( 'Y-m-d H:i:s', $current_time->getTimestamp() + $current_time->getOffset() ) );
+	$current_time = strval( gmdate( 'Y-m-d H:i:s', $current_time->getTimestamp() + $current_time->getOffset() ) );
 
 	/* I had to remove this condition to save price changes even, when the active and regular prices are equal
 	// Stop if there is no active sale
@@ -95,7 +95,7 @@ add_action( 'current_screen', function( $current_screen ) {
 	}
 
 	// We are on the edit product page, right? Let's get the product ID from the URL.
-	$product_id = ( isset( $_GET['post'] ) ) ? $_GET['post'] : false;
+	$product_id = isset( $_GET['post'] ) ? intval( $_GET['post'] ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 	if ( !$product_id || !is_int( $product_id ) ) {
 		return;
@@ -166,32 +166,36 @@ if ( 1 == $module_productpricehistoryValue ) :
 
 	// Add custom fields in the General tab of the Product data metabox
 	add_action( 'woocommerce_product_options_general_product_data', function() {
-		// We are on the edit product page, right? Let's get the product ID from the URL.
-		$product_id = ( isset( $_GET['post'] ) ) ? $_GET['post'] : false;
+		// Get the $product_object if we are editing an existing Product
+		global $product_object;
 
-		// If we are on the product edit page, get the product object. If it is not the product edit page, return.
-		if ( $product_id ) {
-			$product = wc_get_product( $product_id );
-		} else {
+		// If we are not editing an existing Product, return
+		if ( !$product_object ) {
 			return;
 		}
 
+		// Get the Product ID
+		$product_id = $product_object->get_id();
+
 		// This function has to run only for simple & external products
-		if ( !$product->is_type( 'simple' ) && !$product->is_type( 'external' ) ) {
+		if ( !$product_object->is_type( 'simple' ) && !$product_object->is_type( 'external' ) ) {
 			return;
 		}
 
 		echo '<div class="options_group productpricehistory">';
-		echo '<p class="form-field" style="margin-left: -150px;text-transform: uppercase;"><strong>' . __( 'HuCommerce module', 'surbma-magyar-woocommerce' ) . ': ' . __( 'Product price history', 'surbma-magyar-woocommerce' ) . '</strong></p>';
-		echo '<p class="form-field" style="margin: -18px 0 18px -150px;">' . __( 'Fields below will overwrite the global price history options set in HuCommerce settings.', 'surbma-magyar-woocommerce' ) . '</p>';
+		echo '<p class="form-field" style="margin-left: -150px;text-transform: uppercase;"><strong>' . esc_html__( 'HuCommerce module', 'surbma-magyar-woocommerce' ) . ': ' . esc_html__( 'Product price history', 'surbma-magyar-woocommerce' ) . '</strong></p>';
+		echo '<p class="form-field" style="margin: -18px 0 18px -150px;">' . esc_html__( 'Fields below will overwrite the global price history options set in HuCommerce settings.', 'surbma-magyar-woocommerce' ) . '</p>';
 
 		// Show a link to the product price history page
 		?>
 		<p class="form-field">
 			<label><?php esc_html_e( 'Price history', 'surbma-magyar-woocommerce' ); ?></label>
-			<a href="<?php echo SURBMA_HC_PLUGIN_URL; ?>/modules-hu/product-price-history-display.php?product_id=<?php echo $product_id; ?>" target="_blank"><?php esc_html_e( 'Show the price history of this product', 'surbma-magyar-woocommerce' ); ?></a> (<?php esc_html_e( 'Open on a new tab', 'surbma-magyar-woocommerce' ); ?>)
+			<a href="<?php echo esc_attr( SURBMA_HC_PLUGIN_URL ); ?>/modules-hu/product-price-history-display.php?product_id=<?php echo esc_attr( $product_id ); ?>" target="_blank"><?php esc_html_e( 'Show the price history of this product', 'surbma-magyar-woocommerce' ); ?></a> (<?php esc_html_e( 'Open on a new tab', 'surbma-magyar-woocommerce' ); ?>)
 		</p>
 		<?php
+
+		// Generate nonce field
+		wp_nonce_field( 'woocommerce_save_data', 'woocommerce_meta_nonce' );
 
 		// Textarea to set custom lowest price text
 		woocommerce_wp_textarea_input( array(
@@ -231,24 +235,33 @@ if ( 1 == $module_productpricehistoryValue ) :
 
 	// Save meta for simple products
 	add_action( 'woocommerce_process_product_meta', function( $product_id ) {
-		$lowestpricetextValue = isset( $_POST['_hc_product_lowest_price_text'] ) ? $_POST['_hc_product_lowest_price_text'] : '';
-		$hidelowestpricetextValue = isset( $_POST['_hc_product_hide_lowest_price_text'] ) ? $_POST['_hc_product_hide_lowest_price_text'] : '';
-		$statisticslinkdisplayValue = isset( $_POST['_hc_productpricehistory_statisticslinkdisplay'] ) ? $_POST['_hc_productpricehistory_statisticslinkdisplay'] : 'global';
+		// Check if nonce field exists
+		if ( !isset( $_POST['woocommerce_meta_nonce'] ) ) {
+			return;
+		}
 
-		update_post_meta( $product_id, '_hc_product_lowest_price_text', esc_attr( $lowestpricetextValue ) );
-		update_post_meta( $product_id, '_hc_product_hide_lowest_price_text', esc_attr( $hidelowestpricetextValue ) );
-		update_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay', esc_attr( $statisticslinkdisplayValue ) );
+		// Verify the nonce
+		if ( !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['woocommerce_meta_nonce'] ) ), 'woocommerce_save_data' ) ) {
+			return;
+		}
+		
+		$lowestpricetextValue = !empty( $_POST['_hc_product_lowest_price_text'] ) ? sanitize_textarea_field( wp_unslash( $_POST['_hc_product_lowest_price_text'] ) ) : '';
+		$hidelowestpricetextValue = !empty( $_POST['_hc_product_hide_lowest_price_text'] ) ? sanitize_text_field( wp_unslash( $_POST['_hc_product_hide_lowest_price_text'] ) ) : '';
+		$statisticslinkdisplayValue = !empty( $_POST['_hc_productpricehistory_statisticslinkdisplay'] ) ? sanitize_text_field(  wp_unslash( $_POST['_hc_productpricehistory_statisticslinkdisplay'] ) ) : 'global';
+
+		update_post_meta( $product_id, '_hc_product_lowest_price_text', sanitize_textarea_field( $lowestpricetextValue ) );
+		update_post_meta( $product_id, '_hc_product_hide_lowest_price_text', sanitize_text_field( $hidelowestpricetextValue ) );
+		update_post_meta( $product_id, '_hc_productpricehistory_statisticslinkdisplay', sanitize_text_field( $statisticslinkdisplayValue ) );
 	} );
 
 	// Add custom fields for variations
 	add_action( 'woocommerce_variation_options_pricing', function( $loop, $variation_data, $variation ) {
 		// Show a link to the product price history page
-		$product_id = ( isset( $_GET['post'] ) ) ? $_GET['post'] : false;
-		if ( $variation->ID ) {
+		if ( $variation && isset( $variation->ID ) ) {
 		?>
 		<p class="form-field form-field-wide form-row form-row-full">
 			<label><?php esc_html_e( 'Price history', 'surbma-magyar-woocommerce' ); ?></label>
-			<a href="<?php echo SURBMA_HC_PLUGIN_URL; ?>/modules-hu/product-price-history-display.php?product_id=<?php echo $variation->ID; ?>" target="_blank"><?php esc_html_e( 'Show the price history of this product', 'surbma-magyar-woocommerce' ); ?></a> (<?php esc_html_e( 'Open on a new tab', 'surbma-magyar-woocommerce' ); ?>)
+			<a href="<?php echo esc_attr( SURBMA_HC_PLUGIN_URL ); ?>/modules-hu/product-price-history-display.php?product_id=<?php echo esc_attr( $variation->ID ); ?>" target="_blank"><?php esc_html_e( 'Show the price history of this product', 'surbma-magyar-woocommerce' ); ?></a> (<?php esc_html_e( 'Open on a new tab', 'surbma-magyar-woocommerce' ); ?>)
 		</p>
 		<?php
 		}
@@ -292,13 +305,18 @@ if ( 1 == $module_productpricehistoryValue ) :
 
 	// Save meta for variable products
 	add_action( 'woocommerce_save_product_variation', function( $variation_id, $i ) {
-		$lowestpricetextValue = isset( $_POST['_hc_product_lowest_price_text'][$i] ) ? $_POST['_hc_product_lowest_price_text'][$i] : '';
-		$hidelowestpricetextValue = isset( $_POST['_hc_product_hide_lowest_price_text'][$i] ) ? $_POST['_hc_product_hide_lowest_price_text'][$i] : '';
-		$statisticslinkdisplayValue = isset( $_POST['_hc_productpricehistory_statisticslinkdisplay'][$i] ) ? $_POST['_hc_productpricehistory_statisticslinkdisplay'][$i] : 'global';
+		// Debug: Log the POST data to error log
+		// error_log( 'POST Data: ' . print_r( $_POST, true ) );
+		// error_log( 'Variation ID: ' . $variation_id );
+		// error_log( 'Loop: ' . $i );
+	
+		$lowestpricetextValue = isset( $_POST['_hc_product_lowest_price_text'][$i] ) ? sanitize_textarea_field( wp_unslash( $_POST['_hc_product_lowest_price_text'][$i] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$hidelowestpricetextValue = isset( $_POST['_hc_product_hide_lowest_price_text'][$i] ) ? sanitize_text_field( wp_unslash( $_POST['_hc_product_hide_lowest_price_text'][$i] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$statisticslinkdisplayValue = isset( $_POST['_hc_productpricehistory_statisticslinkdisplay'][$i] ) ? sanitize_text_field( wp_unslash( $_POST['_hc_productpricehistory_statisticslinkdisplay'][$i] ) ) : 'global'; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
-		update_post_meta( $variation_id, '_hc_product_lowest_price_text', esc_attr( $lowestpricetextValue ) );
-		update_post_meta( $variation_id, '_hc_product_hide_lowest_price_text', esc_attr( $hidelowestpricetextValue ) );
-		update_post_meta( $variation_id, '_hc_productpricehistory_statisticslinkdisplay', esc_attr( $statisticslinkdisplayValue ) );
+		update_post_meta( $variation_id, '_hc_product_lowest_price_text', sanitize_textarea_field( $lowestpricetextValue ) );
+		update_post_meta( $variation_id, '_hc_product_hide_lowest_price_text', sanitize_text_field( $hidelowestpricetextValue ) );
+		update_post_meta( $variation_id, '_hc_productpricehistory_statisticslinkdisplay', sanitize_text_field( $statisticslinkdisplayValue ) );
 	}, 10, 2 );
 
 	// Product price history display
@@ -427,26 +445,26 @@ if ( 1 == $module_productpricehistoryValue ) :
 				$discount = $product_price && $lowest_price ? number_format( round( ( ( 1 - ( $product_price / $lowest_price ) ) * 100 ), 2 ), 0 ) : false;
 				$actual_discount = number_format( round( ( ( 1 - ( $product_price / $product_regular_price ) ) * 100 ), 2 ), 0 );
 
-				echo '<div id="product-' . $product_id . '" class="hc-product-price-history product_meta">';
+				echo '<div id="product-' . esc_attr( $product_id ) . '" class="hc-product-price-history product_meta">';
 				// Custom text will overwrite the module's settings
 				if ( $sale && !$product_hidelowestpricetext ) {
 					if ( $product_lowestpricetext ) {
 						echo wp_kses_post( $product_lowestpricetext );
 					} else {
 						if ( $productpricehistory_showlowestpriceValue && $lowest_price ) {
-							echo '<div class="hc-product-price-history-price">' . wp_kses_post( $productpricehistory_lowestpricetextValue ) . ': <span>' . $lowest_price . ' ' . $curreny_symbol . '</span></div>';
+							echo '<div class="hc-product-price-history-price">' . wp_kses_post( $productpricehistory_lowestpricetextValue ) . ': <span>' . esc_html( $lowest_price ) . ' ' . esc_html( $curreny_symbol ) . '</span></div>';
 						} elseif ( $productpricehistory_showlowestpriceValue && $productpricehistory_nolowestpricetextValue ) {
 							echo '<div class="hc-product-price-history-no-lowest">' . wp_kses_post( $productpricehistory_nolowestpricetextValue ) . '</div>';
 						}
 						if ( $productpricehistory_showdiscountpriceValue && $discount && ( 0 <= $discount ) ) {
-							echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_discounttextValue ) . ': <span>' . $discount . '%</span></div>';
+							echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_discounttextValue ) . ': <span>' . esc_html( $discount ) . '%</span></div>';
 						} elseif ( $productpricehistory_showdiscountpriceValue && !$discount ) {
-							echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_nolowestpricediscounttextValue ) . ': <span>' . $actual_discount . '%</span></div>';
+							echo '<div class="hc-product-price-history-discount">' . wp_kses_post( $productpricehistory_nolowestpricediscounttextValue ) . ': <span>' . esc_html( $actual_discount ) . '%</span></div>';
 						}
 					}
 				}
 				if ( 'hide' != $productpricehistory_statisticslinkdisplayValue ) {
-					echo '<div class="hc-product-price-history-statistics"><a href="' . SURBMA_HC_PLUGIN_URL . '/modules-hu/product-price-history-display.php?product_id=' . $product_id . '" target="_blank">' . esc_html( $productpricehistory_statisticslinktextValue ) . '</a></div>';
+					echo '<div class="hc-product-price-history-statistics"><a href="' . esc_attr( SURBMA_HC_PLUGIN_URL ) . '/modules-hu/product-price-history-display.php?product_id=' . esc_attr( $product_id ) . '" target="_blank">' . esc_html( $productpricehistory_statisticslinktextValue ) . '</a></div>';
 				}
 				echo '</div>';
 			endforeach;

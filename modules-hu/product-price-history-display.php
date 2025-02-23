@@ -11,7 +11,7 @@ require_once( $wp_root . "../../../../wp-load.php" );
 // if ( ! current_user_can( 'manage_options' ) ) die();
 if ( ! defined( 'SURBMA_HC_PREMIUM' ) || ! SURBMA_HC_PREMIUM ) die();
 
-$product_id = isset( $_GET['product_id'] ) ? $_GET['product_id'] : 0;
+$product_id = isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $product = wc_get_product( $product_id );
 
 // Stop if we don't process a product
@@ -22,13 +22,13 @@ if ( $product ) {
 	$product_price = intval( $product->get_price() );
 
 	$current_time = current_datetime();
-	$current_time = strval( date( 'Y-m-d H:i:s', $current_time->getTimestamp() + $current_time->getOffset() ) );
+	$current_time = strval( gmdate( 'Y-m-d H:i:s', $current_time->getTimestamp() + $current_time->getOffset() ) );
 
-	$hc_params_delete = array_merge( $_GET, array( 'hc-product_price_history' => 'delete' ) );
+	$hc_params_delete = array_merge( $_GET, array( 'hc-product_price_history' => 'delete' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$hc_delete_query_string = http_build_query( $hc_params_delete );
 
 	// Remove query parameter from url
-	$hc_manual_request = isset( $_GET['hc-product_price_history'] ) ? $_GET['hc-product_price_history'] : false;
+	$hc_manual_request = isset( $_GET['hc-product_price_history'] ) ? wp_kses( wp_unslash( $_GET['hc-product_price_history'] ), 'strip' ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	if ( $hc_manual_request ) {
 		if ( current_user_can( 'manage_options' ) && 'delete' == $hc_manual_request ) {
 			delete_post_meta( $product_id, '_hc_product_price_history' );
@@ -85,19 +85,19 @@ if ( $product ) {
 	<head>
 		<meta charset="utf-8" />
 		<meta name="robots" content="noindex">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.14.3/css/uikit.min.css" integrity="sha512-iWrYv6nUp7gzf+Ut/gMjxZn+SWdaiJYn+ZZNq63t2JO6kBpDc40wQfBzC1eOAzlwIMvRyuS974D1R8p1BTdaUw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.14.3/js/uikit.min.js" integrity="sha512-wqamZDJQvRHCyy5j5dfHbqq0rUn31pS2fJeNL4vVjl0gnSVIZoHFqhwcoYWoJkVSdh5yORJt+T9lTdd8j9W4Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.14.3/css/uikit.min.css" integrity="sha512-iWrYv6nUp7gzf+Ut/gMjxZn+SWdaiJYn+ZZNq63t2JO6kBpDc40wQfBzC1eOAzlwIMvRyuS974D1R8p1BTdaUw==" crossorigin="anonymous" referrerpolicy="no-referrer" /><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet, PluginCheck.CodeAnalysis.Offloading.OffloadedContent ?>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.14.3/js/uikit.min.js" integrity="sha512-wqamZDJQvRHCyy5j5dfHbqq0rUn31pS2fJeNL4vVjl0gnSVIZoHFqhwcoYWoJkVSdh5yORJt+T9lTdd8j9W4Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript, PluginCheck.CodeAnalysis.Offloading.OffloadedContent ?>
 <?php if ( get_post_meta( $product_id, '_hc_product_price_history' ) ) { ?>
-		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript, PluginCheck.CodeAnalysis.Offloading.OffloadedContent ?>
 		<script type="text/javascript">
 			google.charts.load('current', {'packages':['corechart']});
 			google.charts.setOnLoadCallback(drawChart);
 
 			function drawChart() {
-				var data = google.visualization.arrayToDataTable(<?php echo $chart_data; ?>);
+				var data = google.visualization.arrayToDataTable(<?php echo esc_attr( $chart_data ); ?>);
 
 				var options = {
-					title: 'Termék ár történet: <?php echo $product->get_title(); ?>',
+					title: 'Termék ár történet: <?php echo esc_attr( $product->get_title() ); ?>',
 					curveType: 'function',
 					legend: { position: 'bottom' }
 				};
@@ -152,7 +152,7 @@ if ( $product ) {
 		<?php if ( $product ) { ?>
 			<div class="uk-section uk-section-default uk-section-xsmall">
 				<div class="uk-container uk-text-center">
-					<h1 class="uk-article-title"><?php echo $product->get_title(); ?></h1>
+					<h1 class="uk-article-title"><?php echo esc_html( $product->get_title() ); ?></h1>
 					<p class="uk-article-meta">Termék ár történet</p>
 				</div>
 			</div>
@@ -162,10 +162,10 @@ if ( $product ) {
 			<div class="uk-section uk-section-muted uk-section-xsmall">
 				<div class="uk-container">
 					<ul class="uk-subnav uk-subnav-divider uk-flex uk-flex-center" uk-margin>
-						<li><a href="<?php echo get_permalink( $product_id ); ?>" target="_blank">Termék oldal</a></li>
+						<li><a href="<?php echo esc_attr( get_permalink( $product_id ) ); ?>" target="_blank">Termék oldal</a></li>
 						<?php if ( current_user_can( 'manage_options' ) ) { ?>
 						<li><a href="/wp-admin/edit.php?post_type=product" target="_blank">Admin termékek listázása</a></li>
-						<li><a href="/wp-admin/post.php?post=<?php echo $product_id; ?>&action=edit" target="_blank">Termék szerkesztése</a></li>
+						<li><a href="/wp-admin/post.php?post=<?php echo esc_attr( $product_id ); ?>&action=edit" target="_blank">Termék szerkesztése</a></li>
 						<?php } ?>
 					</ul>
 				</div>
@@ -196,7 +196,7 @@ if ( $product ) {
 							<tbody>
 								<?php
 								$curreny_symbol = get_woocommerce_currency_symbol();
-								date_default_timezone_set('Europe/Budapest');
+								// date_default_timezone_set('Europe/Budapest');
 								for( $i = 0; $i < count( $product_price_history ) ; $i++ ) {
 									if ( 0 === $product_price_history[$i][2] || 0 === $product_price_history[$i][1] ) {
 										$product_price_discount = 0;
@@ -208,10 +208,10 @@ if ( $product ) {
 									} else {
 										echo '<tr style="border-left: 5px solid #32d296;border-right: 1px solid #e5e5e5;">';
 									}
-									echo '<td style="text-align: left;">' . $product_price_history[$i][0] . '</td>';
-									echo '<td>' . $product_price_history[$i][1] . ' ' . $curreny_symbol . '</td>';
-									echo '<td>' . $product_price_history[$i][2] . ' ' . $curreny_symbol . '</td>';
-									echo '<td>' . $product_price_discount . '%</td>';
+									echo '<td style="text-align: left;">' . esc_html( $product_price_history[$i][0] ) . '</td>';
+									echo '<td>' . esc_html( $product_price_history[$i][1] ) . ' ' . esc_html( $curreny_symbol ) . '</td>';
+									echo '<td>' . esc_html( $product_price_history[$i][2] ) . ' ' . esc_html( $curreny_symbol ) . '</td>';
+									echo '<td>' . esc_html( $product_price_discount ) . '%</td>';
 									echo '</tr>';
 								}
 								?>
@@ -247,14 +247,14 @@ if ( $product ) {
 						<div class="uk-margin">
 							<label class="uk-form-label" for="form-horizontal-text">JSON formátum</label>
 							<div class="uk-form-controls">
-								<textarea id="json-data" class="uk-textarea uk-background-muted" rows="10" style="font-family: Consolas,monaco,monospace;font-size: 12px;white-space: pre-wrap;word-break: break-all;" readonly><?php print_r( json_encode( $product_price_history ) ); ?></textarea>
+								<textarea id="json-data" class="uk-textarea uk-background-muted" rows="10" style="font-family: Consolas,monaco,monospace;font-size: 12px;white-space: pre-wrap;word-break: break-all;" readonly><?php print_r( json_encode( $product_price_history ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r ?></textarea>
 								<p class="uk-text-right"><button class="uk-button uk-button-secondary" onclick="copyJsonData()">JSON adatok másolása</button></p>
 							</div>
 						</div>
 						<div class="uk-margin">
 							<label class="uk-form-label" for="form-horizontal-select">CSV formátum</label>
 							<div class="uk-form-controls">
-								<textarea id="csv-data" class="uk-textarea uk-background-muted" rows="10" style="font-family: Consolas,monaco,monospace;font-size: 12px;white-space: pre-wrap;word-break: break-all;" readonly><?php echo $csv; ?></textarea>
+								<textarea id="csv-data" class="uk-textarea uk-background-muted" rows="10" style="font-family: Consolas,monaco,monospace;font-size: 12px;white-space: pre-wrap;word-break: break-all;" readonly><?php echo wp_kses( $csv, 'strip' ); ?></textarea>
 								<p class="uk-text-right uk-text-meta">CSV fejléc adatok jelentése: 0 = Dátum | 1 = Normál ár | 2 = Aktív ár</p>
 								<p class="uk-text-right"><button class="uk-button uk-button-secondary" onclick="copyCsvData()">CSV adatok másolása</button></p>
 							</div>
@@ -268,7 +268,7 @@ if ( $product ) {
 			<div class="uk-section uk-section-secondary">
 				<div class="uk-container uk-text-center">
 					<h3 class="uk-heading-line uk-text-center"><span>Termék ár történet adatok törlése</span></h3>
-					<a href="<?php echo SURBMA_HC_PLUGIN_URL; ?>/modules-hu/product-price-history-display.php?<?php echo $hc_delete_query_string; ?>" class="uk-button uk-button-danger" onclick="return confirm('Biztosan törlöd az összes ár történet adatot ennél a terméknél?')">Adatok törlése</a>
+					<a href="<?php echo esc_attr( SURBMA_HC_PLUGIN_URL ); ?>/modules-hu/product-price-history-display.php?<?php echo esc_attr( $hc_delete_query_string ); ?>" class="uk-button uk-button-danger" onclick="return confirm('Biztosan törlöd az összes ár történet adatot ennél a terméknél?')">Adatok törlése</a>
 				</div>
 			</div>
 			<?php } ?>

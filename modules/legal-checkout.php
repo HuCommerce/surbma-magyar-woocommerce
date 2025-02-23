@@ -35,7 +35,7 @@ add_filter( 'woocommerce_registration_errors', function( $errors, $username, $em
 	if ( !is_admin() && !is_checkout() && isset( $options['regacceptpp'] ) && $options['regacceptpp'] && empty( $_POST['reg_accept_pp'] ) ) {
 		$acceptregppError = __( 'Privacy Policy', 'surbma-magyar-woocommerce' );
 		/* translators: %s: Field label */
-		$acceptregppError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $acceptregppError ) . '</strong>' );
+		$acceptregppError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $acceptregppError ) . '</strong>' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		$errors->add( 'reg_accept_pp_error', $acceptregppError );
 	}
 	return $errors;
@@ -57,12 +57,12 @@ add_action( 'user_register', function( $user_id ) {
 	if ( 1 == $regipValue ) {
 		// Get real visitor IP behind CloudFlare network
 		if ( isset( $_SERVER['HTTP_CF_CONNECTING_IP'] ) ) {
-			$_SERVER['REMOTE_ADDR'] = filter_var( $_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP );
-			$_SERVER['HTTP_CLIENT_IP'] = filter_var( $_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP );
+			$_SERVER['REMOTE_ADDR'] = filter_var( wp_unslash( $_SERVER['HTTP_CF_CONNECTING_IP'] ), FILTER_VALIDATE_IP );
+			$_SERVER['HTTP_CLIENT_IP'] = filter_var( wp_unslash( $_SERVER['HTTP_CF_CONNECTING_IP'] ), FILTER_VALIDATE_IP );
 		}
-		$remote = isset( $_SERVER['REMOTE_ADDR'] ) ? filter_var( $_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP ) : '';
-		$client = isset( $_SERVER['HTTP_CLIENT_IP'] ) ? filter_var( $_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP ) : '';
-		$forward = isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ? filter_var( $_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP ) : '';
+		$remote = isset( $_SERVER['REMOTE_ADDR'] ) ? filter_var( wp_unslash( $_SERVER['REMOTE_ADDR'] ), FILTER_VALIDATE_IP ) : '';
+		$client = isset( $_SERVER['HTTP_CLIENT_IP'] ) ? filter_var( wp_unslash( $_SERVER['HTTP_CLIENT_IP'] ), FILTER_VALIDATE_IP ) : '';
+		$forward = isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ? filter_var( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ), FILTER_VALIDATE_IP ) : '';
 
 		if ( $remote ) {
 			$ip = $remote;
@@ -230,14 +230,14 @@ add_action( 'woocommerce_checkout_process', function() {
 	if ( isset( $options['accepttos'] ) && $options['accepttos'] && empty( $_POST['accept_tos'] ) ) {
 		$accepttosError = __( 'Terms of Service', 'surbma-magyar-woocommerce' );
 		/* translators: %s: Field label */
-		$accepttosError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $accepttosError ) . '</strong>' );
+		$accepttosError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $accepttosError ) . '</strong>' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		wc_add_notice( $accepttosError, 'error' );
 	}
 
 	if ( isset( $options['acceptpp'] ) && $options['acceptpp'] && empty( $_POST['accept_pp'] ) ) {
 		$acceptppError = __( 'Privacy Policy', 'surbma-magyar-woocommerce' );
 		/* translators: %s: Field label */
-		$acceptppError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $acceptppError ) . '</strong>' );
+		$acceptppError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $acceptppError ) . '</strong>' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		wc_add_notice( $acceptppError, 'error' );
 	}
 

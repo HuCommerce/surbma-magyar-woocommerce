@@ -14,7 +14,6 @@ function surbma_hc_mask( $str ) {
 }
 
 $license_status = get_option( 'surbma_hc_license_status', array() );
-$custom_product_id = $_GET['hc-product_id'] ?? false;
 
 ?>
 <p><?php esc_html_e( 'Here you need to enter and activate your HuCommerce Pro API key. After successful activation, all HuCommerce Pro features will be available to you during your active subscription. In case of an expired subscription, the Pro features will be disabled!', 'surbma-magyar-woocommerce' ); ?></p>
@@ -22,7 +21,7 @@ $custom_product_id = $_GET['hc-product_id'] ?? false;
 <form class="uk-form-stacked" method="post" action="options.php">
 	<?php settings_fields( 'surbma_hc_license_options' ); ?>
 	<?php $license_options = get_option( 'surbma_hc_license', array() ); ?>
-	<?php $home_url = parse_url( get_option( 'home' ) ); ?>
+	<?php $home_url = wp_parse_url( get_option( 'home' ) ); ?>
 	<?php $instance = $home_url['host'] ?? ''; ?>
 	<?php $licensekeyValue = $license_options['licensekey'] ?? ''; ?>
 	<?php $disabled = 'active' == SURBMA_HC_PLUGIN_LICENSE ? ' disabled' : ''; ?>
@@ -93,8 +92,8 @@ $custom_product_id = $_GET['hc-product_id'] ?? false;
 <p>A DEV mód, azaz fejlesztői mód lehetőséget arra, hogy egy nem élesített weboldalon az API kulcs aktiválása nélkül használhasd a HuCommerce Pro összes modulját és funkcióját.</p>
 	<p><strong>A következő módokon lehet aktiválni a HuCommerce DEV módot:</strong></p>
 	<ul class="uk-list uk-list-disc">
-		<li><strong>HA</strong> a webáruház domain végződése (TLD) <code>.local</code>, akkor automatikusan aktiválódik a DEV mód.</li>
-		<li><strong>HA</strong> aktiválod a <a href="<?php echo admin_url( 'admin.php?page=wc-settings&tab=site-visibility' ); ?>">WooCommerce "Coming Soon"</a> módját.</li>
+		<li><strong>HA</strong> a webáruház domain végződése (TLD) <code>.local</code> vagy <code>.dev</code>, akkor automatikusan aktiválódik a DEV mód.</li>
+		<li><strong>HA</strong> aktiválod a <a href="<?php echo esc_url( admin_url( 'admin.php?page=wc-settings&tab=site-visibility' ) ); ?>">WooCommerce "Coming Soon"</a> módját.</li>
 		<li><strong>VAGY</strong> ha a <code>WP_ENVIRONMENT_TYPE</code> globális változóval lett meghatározva az installáció típusa (ami nem 'production') a <code>wp-config.php</code> fájlban.</li>
 	</ul>
 </div>
@@ -111,10 +110,10 @@ $custom_product_id = $_GET['hc-product_id'] ?? false;
 if ( defined( 'WP_DEBUG' ) && 1 == WP_DEBUG ) {
 	echo '<h4>' . esc_html__( 'License options', 'surbma-magyar-woocommerce' ) . '</h4>';
 	echo '<pre>';
-	print_r( $license_options );
+	print_r( $license_options ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
 	echo '</pre>';
 	echo '<h4>' . esc_html__( 'License status', 'surbma-magyar-woocommerce' ) . '</h4>';
 	echo '<pre>';
-	print_r( $license_status );
+	print_r( $license_status ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
 	echo '</pre>';
 }

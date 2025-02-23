@@ -24,7 +24,7 @@ function cps_hc_wcgems_add_payment_methods_field( $user ) {
 		$checked = in_array( $gateway_id, (array) $selected_methods ) ? 'checked' : '';
 		echo '<tr>';
 		echo '<th><label for="cps_hc_wcgems_payment_methods_' . esc_attr( $gateway_id ) . '">' . esc_html( $gateway->get_title() ) . '</label></th>';
-		echo '<td><input type="checkbox" id="cps_hc_wcgems_payment_methods_' . esc_attr( $gateway_id ) . '" name="cps_hc_wcgems_payment_methods[]" value="' . esc_attr( $gateway_id ) . '" ' . $checked . '></td>';
+		echo '<td><input type="checkbox" id="cps_hc_wcgems_payment_methods_' . esc_attr( $gateway_id ) . '" name="cps_hc_wcgems_payment_methods[]" value="' . esc_attr( $gateway_id ) . '" ' . esc_attr( $checked ) . '></td>';
 		echo '</tr>';
 	}
 	echo '</table>';
@@ -40,7 +40,7 @@ function cps_hc_wcgems_save_payment_methods_field( $user_id ) {
 		return false;
 	}
 
-	$selected_methods = isset( $_POST['cps_hc_wcgems_payment_methods'] ) ? $_POST['cps_hc_wcgems_payment_methods'] : array();
+	$selected_methods = isset( $_POST['cps_hc_wcgems_payment_methods'] ) ? sanitize_text_field( wp_unslash( $_POST['cps_hc_wcgems_payment_methods'] ) ) : array();
 	update_user_meta( $user_id, 'cps_hc_wcgems_payment_methods', $selected_methods);
 }
 

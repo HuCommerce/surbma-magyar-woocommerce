@@ -33,8 +33,8 @@ if ( 'none' != $emptycartbutton_cartpageValue ) :
 			$emptycartbutton_cartpagebuttontextValue = $options['emptycartbutton-cartpagebuttontext'] ?? __( 'Empty cart', 'surbma-magyar-woocommerce' );
 			$emptycartbutton_checkoutpageconfirmationtextValue = $options['emptycartbutton-confirmationtext'] ?? __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 
-			echo '<a href="' . esc_url( add_query_arg( 'hc-empty-cart', '1' ) ) . '" class="button alt hc-empty-cart-button">' . $emptycartbutton_cartpagebuttontextValue . '</a>';
-			echo "<script>jQuery('.hc-empty-cart-button').on('click', function () {return confirm('" . $emptycartbutton_checkoutpageconfirmationtextValue . "');});</script>";
+			echo '<a href="' . esc_url( add_query_arg( 'hc-empty-cart', '1' ) ) . '" class="button alt hc-empty-cart-button">' . esc_html( $emptycartbutton_cartpagebuttontextValue ) . '</a>';
+			echo "<script>jQuery('.hc-empty-cart-button').on('click', function () {return confirm('" . esc_js( $emptycartbutton_checkoutpageconfirmationtextValue ) . "');});</script>";
 		}
 	} );
 
@@ -65,7 +65,7 @@ if ( 'none' != $emptycartbutton_checkoutpageValue ) :
 			$notice = sprintf( '%s <a href="%s" class="button wc-forward hc-empty-cart-button">%s</a>', $emptycartbutton_checkoutpagemessageValue, $returnurl, $emptycartbutton_checkoutpagelinktextValue );
 
 			wc_print_notice( $notice, 'notice' );
-			echo "<script>jQuery('.hc-empty-cart-button').on('click', function () {return confirm('" . $emptycartbutton_checkoutpageconfirmationtextValue . "');});</script>";
+			echo "<script>jQuery('.hc-empty-cart-button').on('click', function () {return confirm('" . esc_js( $emptycartbutton_checkoutpageconfirmationtextValue ) . "');});</script>";
 		}
 	}, $emptycartbutton_checkoutpagePosition );
 
@@ -73,7 +73,7 @@ endif;
 
 // The redirection
 add_action( 'template_redirect', function() {
-	if ( ( is_cart() || is_checkout() ) && isset( $_GET['hc-empty-cart'] ) && 1 == esc_html( $_GET['hc-empty-cart'] ) ) {
+	if ( ( is_cart() || is_checkout() ) && isset( $_GET['hc-empty-cart'] ) && 1 == sanitize_text_field( wp_unslash( $_GET['hc-empty-cart'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		WC()->cart->empty_cart();
 		$referer = esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) );
 		wp_safe_redirect( $referer );

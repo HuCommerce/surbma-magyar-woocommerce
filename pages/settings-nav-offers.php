@@ -23,7 +23,7 @@ if ( $maxitems_ajanlatok ) {
 			<div class="uk-card uk-card-default uk-card-small uk-card-hover">
 				<div class="uk-card-media-top">
 					<a href="<?php echo esc_url( $item_ajanlatok->get_permalink() ); ?>?utm_source=hucommerce-user&utm_medium=hucommerce-menu&utm_campaign=<?php echo urlencode( $item_ajanlatok->get_title() ); ?>&utm_content=hucommerce-offers" target="_blank">
-						<img src="<?php echo esc_url( $item_ajanlatok->get_description() ); ?>" alt="<?php echo esc_html( $item_ajanlatok->get_title() ); ?>" style="display: block;width: 100%;height: auto;">
+						<img src="<?php echo esc_url( $item_ajanlatok->get_description() ); ?>" alt="<?php echo esc_html( $item_ajanlatok->get_title() ); ?>" style="display: block;width: 100%;height: auto;"><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 					</a>
 				</div>
 				<div class="uk-card-body">

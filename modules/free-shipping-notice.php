@@ -89,7 +89,7 @@ function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
 		$message = $freeshippingnoticemessageValue . ': ' . wc_price( $min_amount - $current );
 		$returnurl = esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) );
 		if ( $returntoshop ) {
-			$notice = sprintf( '%s <a href="%s" class="button wc-forward">%s</a>', $message, $returnurl, esc_html__( 'Return to shop', 'woocommerce' ) );
+			$notice = sprintf( '%s <a href="%s" class="button wc-forward">%s</a>', $message, $returnurl, esc_html__( 'Return to shop', 'woocommerce' ) ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		} else {
 			$notice = $message;
 		}

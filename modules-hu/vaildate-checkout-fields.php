@@ -32,7 +32,7 @@ add_action( 'woocommerce_after_save_address_validation', function( $user_id, $ad
 // Validating fields
 function cps_wcgems_hc_validate_checkout_fields() {
 	// Check if Country is Hungary and stop the process, if not Hungary
-	$billing_country = $_POST['billing_country'] ?? '';
+	$billing_country = !empty( $_POST['billing_country'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_country'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 	if ( empty( $billing_country ) || 'HU' !== $billing_country ) {
 		return;
 	}
@@ -53,14 +53,14 @@ function cps_wcgems_hc_validate_checkout_fields() {
 	$validatecheckoutfields_mobileonly_value = $options['validatecheckoutfields-mobileonly'] ?? 0;
 
 	// Get the submitted fields
-	$billing_tax_number = $_POST['billing_tax_number'] ?? '';
-	// $billing_postcode = $_POST['billing_postcode'] ?? '';
-	$billing_city = $_POST['billing_city'] ?? '';
-	$billing_address_1 = $_POST['billing_address_1'] ?? '';
-	$billing_phone = $_POST['billing_phone'] ?? '';
-	$shipping_city = $_POST['shipping_city'] ?? '';
-	$ship_to_different_address = $_POST['ship_to_different_address'] ?? 0;
-	$shipping_address_1 = $_POST['shipping_address_1'] ?? '';
+	$billing_tax_number = !empty( $_POST['billing_tax_number'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_tax_number'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	// $billing_postcode = !empty( $_POST['billing_postcode'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_postcode'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$billing_city = !empty( $_POST['billing_city'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_city'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$billing_address_1 = !empty( $_POST['billing_address_1'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_address_1'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$billing_phone = !empty( $_POST['billing_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_phone'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$shipping_city = !empty( $_POST['shipping_city'] ) ? sanitize_text_field( wp_unslash( $_POST['shipping_city'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$ship_to_different_address = !empty( $_POST['ship_to_different_address'] ) ? sanitize_text_field( wp_unslash( $_POST['ship_to_different_address'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$shipping_address_1 = !empty( $_POST['shipping_address_1'] ) ? sanitize_text_field( wp_unslash( $_POST['shipping_address_1'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 	// Define area code arrays
 	$budapest_area_code = array( 1 );
@@ -103,7 +103,7 @@ function cps_wcgems_hc_validate_checkout_fields() {
 	}
 
 	// Address validation
-	if ( 1 == $validatebillingaddressfieldValue && $billing_address_1 && empty( $_POST['billing_address_2'] ) && !preg_match( $checkout_address_1_pattern, $billing_address_1 ) ) {
+	if ( 1 == $validatebillingaddressfieldValue && $billing_address_1 && empty( $_POST['billing_address_2'] ) && !preg_match( $checkout_address_1_pattern, $billing_address_1 ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$noticeError = __( '<strong>Billing Address</strong> field is invalid: must have at least one letter, one number and one space in the address.', 'surbma-magyar-woocommerce' );
 		wc_add_notice( $noticeError, 'error' );
 	}
@@ -185,7 +185,7 @@ function cps_wcgems_hc_validate_checkout_fields() {
 	}
 
 	// Shipping address validation
-	if ( 1 == $validateshippingaddressfieldValue && 1 == $ship_to_different_address && $shipping_address_1 && empty( $_POST['shipping_address_2'] ) && !preg_match( $checkout_address_1_pattern, $shipping_address_1 ) ) {
+	if ( 1 == $validateshippingaddressfieldValue && 1 == $ship_to_different_address && $shipping_address_1 && empty( $_POST['shipping_address_2'] ) && !preg_match( $checkout_address_1_pattern, $shipping_address_1 ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$noticeError = __( '<strong>Shipping Address</strong> field is invalid: must have at least one letter, one number and one space in the address.', 'surbma-magyar-woocommerce' );
 		wc_add_notice( $noticeError, 'error' );
 	}

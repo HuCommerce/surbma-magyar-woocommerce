@@ -53,12 +53,12 @@ add_action( $continueshoppingmessageHook, function() {
 	$returntoshopmessageValue = $options['returntoshopmessage'] ?? __( 'Would you like to continue shopping?', 'surbma-magyar-woocommerce' );
 
 	echo '<div class="woocommerce-message returntoshop">';
-	echo esc_html( $returntoshopmessageValue ) . ' <a href="' . esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ) . '" class="button wc-forward">' . esc_html__( 'Return to shop', 'woocommerce' ) . '</a>';
+	echo esc_html( $returntoshopmessageValue ) . ' <a href="' . esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ) . '" class="button wc-forward">' . esc_html__( 'Return to shop', 'woocommerce' ) . '</a>'; // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 	echo '</div>';
 }, $continueshoppingmessagePriority );
 
 add_action( $continueshoppingbuttonHook, function() {
 	echo '<a class="button wc-backward returntoshop" href="' . esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ) . '">';
-	echo esc_html__( 'Return to shop', 'woocommerce' );
+	echo esc_html__( 'Return to shop', 'woocommerce' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 	echo '</a>';
 }, $continueshoppingbuttonPriority );

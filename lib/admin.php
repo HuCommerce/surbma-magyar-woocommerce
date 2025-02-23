@@ -4,7 +4,7 @@
 defined( 'ABSPATH' ) || exit;
 
 add_action( 'init', function() {
-	$test_email_request = isset( $_GET['hc-test-email'] ) ? $_GET['hc-test-email'] : false;
+	$test_email_request = isset( $_GET['hc-test-email'] ) ? sanitize_text_field( wp_unslash( $_GET['hc-test-email'] ) ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	if ( $test_email_request ) {
 		$subject = esc_html__( 'HuCommerce test email', 'surbma-magyar-woocommerce' );
 		$body = esc_html__( 'Congratulations! The SMTP settings are correct.', 'surbma-magyar-woocommerce' );
@@ -117,7 +117,7 @@ add_action( 'admin_menu', function() {
 
 // * HUCOMMERCE START
 add_filter( 'plugin_action_links_' . plugin_basename( SURBMA_HC_PLUGIN_FILE ), function( $actions ) {
-	$actions[] = '<a href="'. esc_url( get_admin_url( null, 'admin.php?page=surbma-hucommerce-menu') ) .'">' . esc_html__( 'Settings' ) . '</a>';
+	$actions[] = '<a href="'. esc_url( get_admin_url( null, 'admin.php?page=surbma-hucommerce-menu') ) .'">' . esc_html__( 'Settings', 'surbma-magyar-woocommerce' ) . '</a>';
 	if ( !SURBMA_HC_PREMIUM ) {
 		$actions[] = '<a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank" style="color: #e22c2f;font-weight: bold;">HuCommerce Pro</a>';
 	}
@@ -166,17 +166,17 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 		}
 
 		// HC-WC-ORDERS-PRO
-		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-orders' ) {
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-orders' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$hs_beacon__ID = '634c7b27-24c2-42ee-822f-ee05c3a1db3e';
 		}
 
 		// HC-WC-PRODUCTS-PRO
-		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] === 'product' ) {
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] === 'product' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$hs_beacon__ID = '6eea179a-5225-4c2a-8c8a-b99ca9c6168a';
 		}
 
 		// HC-WC-SETTINGS-PRO
-		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' ) {
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$hs_beacon__ID = 'c36756c5-aa68-4a5e-b283-32797b8ca2b3';
 		}
 
@@ -196,17 +196,17 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 		}
 
 		// HC-WC-ORDERS-START
-		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-orders' ) {
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-orders' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$hs_beacon__ID = '56db0132-3d8d-4c1e-a5f6-8462b174de7a';
 		}
 
 		// HC-WC-PRODUCTS-START
-		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] === 'product' ) {
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] === 'product' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$hs_beacon__ID = 'a1c2316d-7891-4377-a2af-2569240332bd';
 		}
 
 		// HC-WC-SETTINGS-START
-		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' ) {
+		if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$hs_beacon__ID = '654fa50f-d1c3-465e-9be5-93bd6d601ae0';
 		}
 
@@ -214,7 +214,7 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 
 	ob_start();
 		echo '!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});' . PHP_EOL;
-		echo "window.Beacon('init', '" . $hs_beacon__ID . "')" . PHP_EOL;
+		echo "window.Beacon('init', '" . esc_js( $hs_beacon__ID ) . "')" . PHP_EOL;
 		if ( SURBMA_HC_PRO_USER && $hc_page ) {
 			$current_user = wp_get_current_user();
 			$email = $current_user->user_email;
@@ -227,7 +227,7 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 			} else {
 				$name = $current_user->display_name;
 			}
-			$website = parse_url( get_site_url(), PHP_URL_HOST );
+			$website = wp_parse_url( get_site_url(), PHP_URL_HOST );
 			echo "window.Beacon('identify', {name: '" . esc_js( $name ) . "',email: '" . esc_js( $email ) . "',signature: '" . esc_js( hash_hmac( 'sha256', $email, 'Uxg6ogSnpxhCb/0sH/5AIdHpKALTzMYOqYSlsk6xvcU=' ) ) . "'})" . PHP_EOL;
 			echo "window.Beacon('prefill', {subject: '[" . esc_js( $website ) . "]'})";
 		}
@@ -277,7 +277,7 @@ add_action( 'admin_notices', function() {
 	if ( 'index.php' == $pagenow || 'plugins.php' == $pagenow ) {
 		?>
 		<div data-dismissible="surbma-hc-notice-welcome-forever" class="notice notice-info notice-alt notice-large is-dismissible">
-			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a>
+			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 			<h3><?php esc_html_e( 'Thank you for installing HuCommerce plugin!', 'surbma-magyar-woocommerce' ); ?></h3>
 			<p><?php esc_html_e( 'First step is to activate the Modules you need and set the individual Module settings.', 'surbma-magyar-woocommerce' ); ?>
 			<br><?php esc_html_e( 'To activate Modules and adjust settings, go to this page', 'surbma-magyar-woocommerce' ); ?>: <a href="<?php admin_url(); ?>admin.php?page=surbma-hucommerce-menu">WooCommerce -> HuCommerce</a></p>
@@ -327,7 +327,7 @@ add_action( 'admin_notices', function() {
 	if ( 'index.php' == $pagenow || 'plugins.php' == $pagenow ) {
 		?>
 		<div data-dismissible="hucommerce-pro-promo-60" class="notice notice-info notice-alt notice-large is-dismissible">
-			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a>
+			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 			<h3>HuCommerce Pro</h3>
 			<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p>
 			<p><a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">HuCommerce Pro megismerése</a></p>
@@ -370,7 +370,7 @@ function surbma_hc_dashboard() {
 	$home_url = get_option( 'home' );
 	$current_user = wp_get_current_user();
 
-	echo '<a href="https://www.hucommerce.hu" target="_blank"><img src="' . esc_url( SURBMA_HC_PLUGIN_URL ) . '/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright"></a>';
+	echo '<a href="https://www.hucommerce.hu" target="_blank"><img src="' . esc_url( SURBMA_HC_PLUGIN_URL ) . '/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright"></a>'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
 
 	// HuCommerce Pro
 	if ( !SURBMA_HC_PREMIUM ) {

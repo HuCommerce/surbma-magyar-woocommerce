@@ -61,17 +61,17 @@ add_action( 'woocommerce_after_save_address_validation', function( $user_id, $ad
 // Billing Tax number check process
 function cps_wcgems_hc_billing_tax_number_check() {
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
-	$billing_company = $_POST['billing_company'] ?? '';
-	$billing_company_check = $_POST['billing_company_check'] ?? 0;
-	$billing_tax_number = $_POST['billing_tax_number'] ?? '';
+	$billing_company = !empty( $_POST['billing_company'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_company'] ) ) : '';
+	$billing_company_check = !empty( $_POST['billing_company_check'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_company_check'] ) ) : 0;
+	$billing_tax_number = !empty( $_POST['billing_tax_number'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_tax_number'] ) ) : '';
 
 	// Add error notice, if Tax number field is empty, but it should be filled out
 	if ( 'hidden' != $woocommercecheckoutcompanyfieldValue && ( !empty( $billing_company ) || 1 == $billing_company_check || 'required' == $woocommercecheckoutcompanyfieldValue ) && empty( $billing_tax_number ) ) {
 		$field_label = __( 'Tax number', 'surbma-magyar-woocommerce' );
 		/* translators: %s: Field label */
-		$field_label = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $field_label );
+		$field_label = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $field_label ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		/* translators: %s: Field label */
-		$noticeError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $field_label ) . '</strong>' );
+		$noticeError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $field_label ) . '</strong>' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		wc_add_notice( $noticeError, 'error' );
 	}
 }
@@ -81,7 +81,7 @@ add_action( 'woocommerce_checkout_update_user_meta', function( $customer_id ) {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
-	$billing_tax_number = !empty( $_POST['billing_tax_number'] ) ? sanitize_text_field( $_POST['billing_tax_number'] ) : '';
+	$billing_tax_number = !empty( $_POST['billing_tax_number'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_tax_number'] ) ) : '';
 	update_user_meta( $customer_id, 'billing_tax_number', $billing_tax_number );
 } );
 
