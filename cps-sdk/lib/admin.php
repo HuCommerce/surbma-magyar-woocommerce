@@ -7,8 +7,8 @@ include_once CPS_DIR . '/pages/plugins-page.php';
 function cps_add_menus() {
 	global $cps_plugins_page;
 	$cps_plugins_page = add_menu_page(
-		__( 'CPS Plugins', 'cps-sdk' ),
-		__( 'CPS Plugins', 'cps-sdk' ),
+		__( 'CPS Plugins', 'cps-sdk' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		__( 'CPS Plugins', 'cps-sdk' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		'manage_options',
 		'cps-plugins-menu',
 		'cps_plugins_page',
@@ -17,8 +17,8 @@ function cps_add_menus() {
 	);
 	$cps_plugins_page = add_submenu_page(
 		'cps-plugins-menu',
-		__( 'All plugins', 'cps-sdk' ),
-		__( 'All plugins', 'cps-sdk' ),
+		__( 'All plugins', 'cps-sdk' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		__( 'All plugins', 'cps-sdk' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		'manage_options',
 		'cps-plugins-menu',
 		'cps_plugins_page'

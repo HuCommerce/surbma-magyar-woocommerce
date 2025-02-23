@@ -1,7 +1,7 @@
 <?php
 
 // CPS SDK Version.
-define( 'CPS_SDK_VERSION', '8.15.2' );
+define( 'CPS_SDK_VERSION', '8.15.3' );
 
 define( 'CPS_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'CPS_URL', plugins_url( '', __FILE__ ) );
@@ -25,8 +25,9 @@ add_action( 'wp_enqueue_scripts', function() {
 
 // Custom styles and scripts for admin pages
 function cps_admin_scripts() {
-	wp_enqueue_script( 'uikit-js', CPS_URL . '/vendors/uikit/js/uikit.min.js', array( 'jquery' ), CPS_UIKIT_VERSION );
-	wp_enqueue_script( 'uikit-icons', CPS_URL . '/vendors/uikit/js/uikit-icons.min.js', array( 'jquery' ), CPS_UIKIT_VERSION );
+	$args = array( 'in_footer' => true );
+	wp_enqueue_script( 'uikit-js', CPS_URL . '/vendors/uikit/js/uikit.min.js', array( 'jquery' ), CPS_UIKIT_VERSION, $args );
+	wp_enqueue_script( 'uikit-icons', CPS_URL . '/vendors/uikit/js/uikit-icons.min.js', array( 'jquery' ), CPS_UIKIT_VERSION, $args );
 	wp_enqueue_style( 'uikit-css', CPS_URL . '/vendors/uikit/css/uikit.min.css', false, CPS_UIKIT_VERSION );
 	wp_enqueue_style( 'cps-admin', CPS_URL . '/assets/css/cps-admin.css', false, CPS_SDK_VERSION );
 }
@@ -50,22 +51,22 @@ function cps_admin_header( $plugin_file = '', $showfacebook = true, $showemail =
 	?><nav class="uk-navbar-container uk-margin" id="cps-header" uk-navbar>
 		<div class="uk-navbar-left">
 			<div class="uk-navbar-item uk-logo">
-				<img src="<?php echo esc_url( CPS_URL ); ?>/assets/images/cps-logo.svg" alt="CherryPick Studios">
+				<img src="<?php echo esc_url( CPS_URL ); ?>/assets/images/cps-logo.svg" alt="CherryPick Studios"><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 				<div><?php echo wp_kses_post( $headertitle ); ?></div>
 			</div>
 		</div>
 		<div class="uk-navbar-right">
 			<?php if ( true == $showfacebook ) { ?>
 			<div class="uk-navbar-item">
-				<a href="<?php echo esc_url( $fburl ); ?>" class="facebook-button uk-button uk-button-primary" title="<?php esc_attr_e( $fbtitle, 'cps-sdk' ); ?>" target="_blank"><span uk-icon="facebook"></span> <?php esc_html_e( $fbbuttontext, 'cps-sdk' ); ?></a>
+				<a href="<?php echo esc_url( $fburl ); ?>" class="facebook-button uk-button uk-button-primary" title="<?php esc_attr_e( $fbtitle, 'cps-sdk' ); ?>" target="_blank"><span uk-icon="facebook"></span> <?php esc_html_e( $fbbuttontext, 'cps-sdk' ); ?></a><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText, WordPress.WP.I18n.TextDomainMismatch ?>
 			</div>
 			<?php } ?>
 			<ul class="uk-navbar-nav">
 				<?php if (true == $showemail ) { ?>
-				<li><a href="<?php echo esc_url( 'mailto:' . $email ); ?>" title="<?php esc_attr_e( $emailtitle, 'cps-sdk' ); ?>" target="_blank" uk-icon="mail"></a></li>
+				<li><a href="<?php echo esc_url( 'mailto:' . $email ); ?>" title="<?php esc_attr_e( $emailtitle, 'cps-sdk' ); ?>" target="_blank" uk-icon="mail"></a></li><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText, WordPress.WP.I18n.TextDomainMismatch ?>
 				<?php } ?>
 				<?php if ( true == $showwebsite ) { ?>
-				<li><a href="<?php echo esc_url( $website ); ?>" title="<?php esc_attr_e( $websitetitle, 'cps-sdk' ); ?>" target="_blank" uk-icon="world"></a></li>
+				<li><a href="<?php echo esc_url( $website ); ?>" title="<?php esc_attr_e( $websitetitle, 'cps-sdk' ); ?>" target="_blank" uk-icon="world"></a></li><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText, WordPress.WP.I18n.TextDomainMismatch ?>
 				<?php } ?>
 			</ul>
 			<div class="uk-navbar-item"></div>
@@ -89,7 +90,7 @@ function cps_admin_footer( $plugin_file = '' ) {
 			<?php if ( $plugin_file ) { ?>
 			<strong><a class="uk-link-reset" href="<?php echo esc_url( $plugin_pluginURI ); ?>" target="_blank"><?php echo esc_html( $plugin_name ); ?></a></strong> - v.<?php echo esc_html( $plugin_version ); ?><br>
 			<?php } ?>
-			Made with &hearts; by <img src="<?php echo esc_url( CPS_URL ); ?>/assets/images/cps-logo.svg" alt="CherryPick Studios" width="20"> <a class="uk-link-reset" href="https://www.cherrypickstudios.com" target="_blank">CherryPick Studios</a>
+			Made with &hearts; by <img src="<?php echo esc_url( CPS_URL ); ?>/assets/images/cps-logo.svg" alt="CherryPick Studios" width="20"> <a class="uk-link-reset" href="https://www.cherrypickstudios.com" target="_blank">CherryPick Studios</a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 		</p>
 	</div>
 </div>

@@ -31,9 +31,9 @@ function cps_plugins_page() {
 				<div class="uk-card uk-card-default uk-card-hover">
 					<div class="uk-card-media-top uk-hidden" style="overflow: hidden;max-height: 200px;">
 						<?php if ( false != $img ) { ?>
-						<img src="<?php echo esc_url( $img ); ?>" alt="<?php echo esc_attr( $title ); ?>">
+						<img src="<?php echo esc_url( $img ); ?>" alt="<?php echo esc_attr( $title ); ?>"><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 						<?php } else { ?>
-						<img src="<?php echo esc_url( CPS_URL ); ?>/images/cps-logo.svg" alt="<?php echo esc_attr( $title ); ?>" style="width: 200px;display: block;margin: 0 auto;padding: 50px;">
+						<img src="<?php echo esc_url( CPS_URL ); ?>/images/cps-logo.svg" alt="<?php echo esc_attr( $title ); ?>" style="width: 200px;display: block;margin: 0 auto;padding: 50px;"><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 						<?php } ?>
 					</div>
 					<div class="uk-card-body">
@@ -51,11 +51,11 @@ function cps_plugins_page() {
 							<?php echo esc_html( $alert ); ?>
 						</div>
 						<?php } ?>
-						<a id="purchase" class="uk-button uk-button-primary uk-width-1-1 uk-hidden" href="<?php echo esc_url( $url ); ?>" target="_blank"><?php esc_html_e( $button, 'cps-sdk' ); ?></a>
+						<a id="purchase" class="uk-button uk-button-primary uk-width-1-1 uk-hidden" href="<?php echo esc_url( $url ); ?>" target="_blank"><?php esc_html_e( $button, 'cps-sdk' ); ?></a><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText, WordPress.WP.I18n.TextDomainMismatch ?>
 					</div>
 					<?php if ( false != $url ) { ?>
 					<div class="uk-card-footer uk-background-muted">
-						<a id="purchase" class="uk-button uk-button-primary uk-width-1-1" href="<?php echo esc_url( $url ); ?>" target="_blank"><?php esc_html_e( $button, 'cps-sdk' ); ?></a>
+						<a id="purchase" class="uk-button uk-button-primary uk-width-1-1" href="<?php echo esc_url( $url ); ?>" target="_blank"><?php esc_html_e( $button, 'cps-sdk' ); ?></a><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText, WordPress.WP.I18n.TextDomainMismatch ?>
 					</div>
 					<?php } ?>
 				</div>
