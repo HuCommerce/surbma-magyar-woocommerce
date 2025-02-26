@@ -17,6 +17,7 @@ $current_domain = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unsla
 // Extract the TLD
 $current_domain_parts = explode( '.', $current_domain );
 $current_tld = end( $current_domain_parts );
+$current_subdomain = reset( $current_domain_parts );
 
 // Force WooCommerce Coming Soon, if environment is not 'production'
 add_action( 'init', 'cps_hc_gems_set_woocommerce_coming_soon' );
@@ -39,7 +40,7 @@ $whitelisted = false;
 if ( 'www.hucommerce.hu' === $current_domain ) {
 	$status = 'active';
 	$whitelisted = true;
-} elseif ( 'local' === $current_tld || 'dev' === $current_tld || 'yes' === $woocommerce_coming_soon ) {
+} elseif ( 'local' === $current_tld || 'dev' === $current_tld || 'local' === $current_subdomain || 'dev' === $current_subdomain || 'yes' === $woocommerce_coming_soon ) {
 	$status = 'active';
 	$whitelisted = 'dev';
 } else {
