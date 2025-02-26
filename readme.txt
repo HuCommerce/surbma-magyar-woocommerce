@@ -70,9 +70,7 @@ A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő 
 
 **HuCommerce DEV mód:**
 
-```
-A DEV mód, azaz fejlesztői mód lehetőséget arra, hogy egy nem élesített weboldalon az API kulcs aktiválása nélkül használhasd a HuCommerce Pro összes modulját és funkcióját. A DEV mód bekapcsolásához szükséges feltételeket a HuCommerce -> Licensz kezelés menüpontban olvashatod el.
-```
+`A DEV mód, azaz fejlesztői mód lehetőséget arra, hogy egy nem élesített weboldalon az API kulcs aktiválása nélkül használhasd a HuCommerce Pro összes modulját és funkcióját. A DEV mód bekapcsolásához szükséges feltételeket a HuCommerce -> Licensz kezelés menüpontban olvashatod el.`
 
 **HuCommerce Pro további funkciói:**
 
@@ -355,7 +353,7 @@ Nagy és régóta várt változásokkal sikerült kiegészíteni a HuCommerce b�
 
 #### 2024.4.0
 
-**Kiadás dátuma: 2024-11-19**
+*Kiadás dátuma: 2024-11-19*
 
 Ez egy kisebb, gyors kiadás, mivel a WordPress 6.7 verzió szigorúbb a fordításokat kezelő meghívásra. Ezért a frissítés mindenképpen ajánlott! A Katalógus mód pedig kiegészült egy új funkcióval, hogy az árakat meg lehessen akár jeleníteni.
 
@@ -377,7 +375,7 @@ EGYÉB
 
 #### 2024.3.0
 
-**Kiadás dátuma: 2024-08-08**
+*Kiadás dátuma: 2024-08-08*
 
 JOGI MEGFELELÉS
 
@@ -386,7 +384,7 @@ JOGI MEGFELELÉS
 
 #### 2024.2.0
 
-**Kiadás dátuma: 2024-08-06**
+*Kiadás dátuma: 2024-08-06*
 
 FORDÍTÁSOK PRÉMIUM BŐVÍTMÉNYEKHEZ ÉS SABLONOKHOZ
 
@@ -410,7 +408,7 @@ JAVÍTÁS
 
 #### 2024.1.0
 
-**Kiadás dátuma: 2024-06-11**
+*Kiadás dátuma: 2024-06-11*
 
 TERMÉK ÁR TÖRTÉNET
 
@@ -424,7 +422,7 @@ EGYÉB
 
 #### 2023.3.1
 
-**Kiadás dátuma: 2024-02-12**
+*Kiadás dátuma: 2024-02-12*
 
 JAVÍTÁS
 
@@ -432,7 +430,7 @@ JAVÍTÁS
 
 #### 2023.3.0
 
-**Kiadás dátuma: 2023-12-31**
+*Kiadás dátuma: 2023-12-31*
 
 FIZETÉSI MÓDOK KORLÁTOZÁSA
 
@@ -440,7 +438,7 @@ FIZETÉSI MÓDOK KORLÁTOZÁSA
 
 #### 2023.2.5
 
-**Kiadás dátuma: 2023-11-30**
+*Kiadás dátuma: 2023-11-30*
 
 JAVÍTÁS
 
@@ -448,7 +446,7 @@ JAVÍTÁS
 
 #### 2023.2.4
 
-**Kiadás dátuma: 2023-11-29**
+*Kiadás dátuma: 2023-11-29*
 
 JAVÍTÁS
 
@@ -456,7 +454,7 @@ JAVÍTÁS
 
 #### 2023.2.3
 
-**Kiadás dátuma: 2023-11-29**
+*Kiadás dátuma: 2023-11-29*
 
 JAVÍTÁS
 
@@ -464,7 +462,7 @@ JAVÍTÁS
 
 #### 2023.2.2
 
-**Kiadás dátuma: 2023-11-28**
+*Kiadás dátuma: 2023-11-28*
 
 JAVÍTÁS
 
@@ -476,7 +474,7 @@ EGYÉB
 
 #### 2023.2.1
 
-**Kiadás dátuma: 2023-11-08**
+*Kiadás dátuma: 2023-11-08*
 
 Kisebb javítások és a kódok optimalizálása. Nincs új funkció, a frissítés biztonságos és mindenképpen ajánlott.
 
@@ -498,7 +496,7 @@ EGYÉB
 
 #### 2023.2.0
 
-**Kiadás dátuma: 2023-11-06**
+*Kiadás dátuma: 2023-11-06*
 
 Újabb nagy kiadás több új funkcióval és rengeteg javítással. Új ingyenes modullal bővült a kínálat, amivel a katalógus mód aktiválható, ha az értékesítéshez kapcsolódó funkciókat ki szeretnéd kapcsolni. A Pénztár oldalon pedig egy új opcióval a Cégnév és Adószám mezőket elrejtheted a nem magyarországi számlázási cím esetén.
 
@@ -532,7 +530,7 @@ EGYÉB
 
 #### 2023.1.0
 
-**Kiadás dátuma: 2023-07-24**
+*Kiadás dátuma: 2023-07-24*
 
 Ez egy nagy kiadás lett, rengeteg kisebb és nagyobb módosítással. A legfontosabb változás, hogy most már HPOS/COT kompatibilis lett a HuCommerce is. Az admin felületen új főmenüpontot kapott a bővítmény, így a beállítások és az egyéb menüpontok könnyebben elérhetők. A kezelő felület is teljesen megváltozott, új, modernebb megjelenést kapott, amivel a kezelés is egyszerűbb lesz. Vannak új opciók is a modulokhoz, most új modul nem került bele ebbe a verzióba. A fókusz a kódok optimalizálásán és az új fejlesztések előkészítésén volt. Kérlek olvasd el a részleteket is, biztosan találsz számodra is hasznos funkciót, változtatást.
 
