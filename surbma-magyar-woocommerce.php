@@ -6,7 +6,7 @@ Requires Plugins: woocommerce
 Plugin URI: https://www.hucommerce.hu/
 Description: Hasznos javítások a magyar nyelvű WooCommerce webáruházakhoz.
 
-Version: 2024.4.0
+Version: 2025.1.0
 
 Author: HuCommerce.hu
 Author URI: https://www.hucommerce.hu/
@@ -17,7 +17,7 @@ Text Domain: surbma-magyar-woocommerce
 Domain Path: /languages
 
 WC requires at least: 4.6
-WC tested up to: 9.6
+WC tested up to: 9.7
 
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html

@@ -3,10 +3,10 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 6.7
-Stable tag: 2024.4.0
+Stable tag: 2025.1.0
 Requires PHP: 7.4
-License: GPLv3 or later License
-URI: http://www.gnu.org/licenses/gpl-3.0.html
+License: GPL-3.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Hasznos javítások a magyar WooCommerce webáruházakhoz.
 
@@ -68,8 +68,15 @@ Több, mint 10000 webáruház tulajdonos választása Magyarországon. Rengeteg 
 
 A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő funkciókkal. Kérlek, támogasd a fejlesztést és a HuCommerce közösséget azzal, hogy megvásárolod a Pro verziót! Ezzel fedezni tudjuk a fejlesztési költségeket és több időt tudunk arra fordítani, hogy a HuCommerce bővítmény még jobb legyen és még több hasznod legyen belőle.
 
+**HuCommerce DEV mód:**
+
+```
+A DEV mód, azaz fejlesztői mód lehetőséget arra, hogy egy nem élesített weboldalon az API kulcs aktiválása nélkül használhasd a HuCommerce Pro összes modulját és funkcióját. A DEV mód bekapcsolásához szükséges feltételeket a HuCommerce -> Licensz kezelés menüpontban olvashatod el.
+```
+
 **HuCommerce Pro további funkciói:**
 
+- Fordítások prémium bővítményekhez és sablonokhoz
 - Pénztár mezők ellenőrzése
 - Ingyenes szállítás értesítés
 - Kosár ürítése gomb
@@ -99,17 +106,31 @@ A Pénztár oldalon a Cégnév mező alatt már Adószámot is be lehet kérni. 
 
 Maszkolás és validálás is beállítható az Adószám mezőhöz és placeholder megjelenítése is bekapcsolható, ami azoknál a sablonoknál nagyon jól jön, amiknél nem jelennek meg a mezők címkéi.
 
-#### Pénztár mezők ellenőrzése
+#### Pénztár és Fiók mezők ellenőrzése
 
-Beállítható, hogy a Pénztár oldalon a Számlázási adatoknál az Adószám, Irányítószám és Telefonszám mezőket, a Szállítási adatoknál pedig az Irányítószámot maszkolja, azaz formai szempontból validálja, illetve a megadott beviteli értéket ellenőrizze. Így a következő értékek lesznek érvényben:
+Beállítható, hogy a Pénztár és Fiók oldalakon a Számlázási adatoknál az Adószám, Irányítószám és Telefonszám mezőket, a Szállítási adatoknál pedig az Irányítószámot maszkolja, azaz formai szempontból validálja, illetve a megadott beviteli értéket ellenőrizze. Így a következő értékek lesznek érvényben:
 
 - Számlázási Adószám: 00000000-0-00 (13 karakter), 00000000000 (11 szám), HU00000000 (HU előtag és 8 szám)
 - Számlázási és Szállítási Irányítószám: 0000 (4 karakter)
-- Számlázási Telefonszám: +36000000000 (11-12 karakter)
+- Számlázási Telefonszám teljeskörű ellenőrzése a megadott körzetszám alapján.
+- Számlázási Telefonszám esetén megadható, hogy csak mobiltelefonszámot fogadjon el.
 
 #### Város automatikus kitöltése az irányítószám alapján
 
-A Pénztár oldalon az irányítószám mező kitöltése után automatikusan megjeleníti a várost. Ha már manuálisan lett módosítva a város, akkor nem módosítja az irányítószám alapján.
+A Pénztár és Fiók oldalakon az irányítószám mező kitöltése után automatikusan megjeleníti a várost. Ha már manuálisan lett módosítva a város, akkor nem módosítja az irányítószám alapján. Azoknál az irányítószámoknál, amikhez több település tartozik, megjeleníti a választási lehetőségeket.
+
+#### Fordítások prémium bővítményekhez és sablonokhoz
+
+A legnépszerűbb prémium bővítményekhez és sablonokhoz ad fordításokat. A támogatott szoftverek listája folyamatosan bővül. Jelezd nekünk, hogy melyik bővítmény vagy sablon fordítását szeretnéd legközelebb és mi lefordítjuk a legtöbbet kért szoftvereket.
+
+A "beta" verziókban kiadott fordítások nem teljeskörűen lettek még validálva, így azokban még lehetnek hibás fordítások vagy nem feltétlen kontextus alapján értelmezhetőek. Az esetleges hibákat kérlek küldjétek el és folyamatosan javítva lesznek.
+
+**Támogatott szoftverek:**
+
+- [Kestrel API Manager for WooCommerce](https://automattic.pxf.io/PO6mB6)
+- [Restrict Content Pro](https://restrictcontentpro.com/)
+- [WooCommerce Memberships](https://automattic.pxf.io/JKmRBQ)
+- [WooCommerce Subscriptions](https://automattic.pxf.io/OemyzA)
 
 #### Fordítási hiányosságok javítása
 
@@ -271,6 +292,66 @@ Először töröld a szerver oldali és a böngésző gyorsítótárát és fris
 Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van állítva a webáruház.
 
 == Changelog ==
+
+#### 2025.1.0
+
+*Kiadás dátuma: 2025-02-21*
+
+Nagy és régóta várt változásokkal sikerült kiegészíteni a HuCommerce bővítményt. Most főleg a meglévő modulok lettek tovább fejlesztve és rengeteg javítás történt a kódbázisban. Kérlek, olvassátok el részletesen a változtatásokat!
+
+**Város automatikus kitöltése az irányítószám alapján**
+
+- Frissített teljes Magyarország település lista.
+- Most már kezeli azokat az irányítószámokat is, amikhez több település tartozik.
+- Kód módosítása, hogy a Számlázási és Szállítási címeket is egy kódbázis kezelje.
+- Az automatikus kitöltés most már a Fiókom -> Címek alatt is működik.
+
+**Adószám megjelenítése**
+
+- Az Adószám mező ellenőrzés most már a Fiókom -> Címek alatt is működik.
+
+**Mezők formátumának ellenőrzése**
+
+- Tömörített JavaScript fájl használata.
+- A formátum ellenőrzés most már a Fiókom -> Címek alatt is működik.
+
+**Mezők értékének ellenőrzése**
+
+- Az érték ellenőrzés most már a Fiókom -> Címek alatt is működik.
+- Telefonszám ellenőrzésének a teljes átdolgozása. A megadott körzetszám alapján ellenőrzi a formátumot.
+- Beállítható, hogy csak mobiltelefonszámot fogadjon el.
+
+**Pénztár oldal módosítások**
+
+- A szabályok és beállítások átvezetése a Fiókom -> Címek oldalakon is.
+
+**Fordítások prémium bővítményekhez és sablonokhoz**
+
+- A fordítások új mappába kerültek: translations
+- Most már kezeli az új .l10n.php formátumokat is.
+- A modul kódjának a teljes átírása, előkészítés a skálázáshoz.
+- Új fordítás hozzáadása: Restrict Content Pro (beta)
+- Új fordítás hozzáadása: Kestrel API Manager for WooCommerce (beta)
+- Új fordítás hozzáadása: WooCommerce Memberships (beta)
+
+**EGYÉB**
+
+- HuCommerce DEV mód: A DEV mód, azaz fejlesztői mód lehetőséget arra, hogy egy nem élesített weboldalon az API kulcs aktiválása nélkül használhasd a HuCommerce Pro összes modulját és funkcióját.
+- További HuCommerce Pro verziók aktiválásának a lehetősége: Multi 2, Multi 5, Multi 10, havi előfizetés és az egyszeri, örökös használatú verzió.
+- A textdomain beállítása átkerült a bővítmény fő fájljába.
+- Kód optimalizálás: feltételek módosítása, hozzáadása, egyszerűsítése; ellenőrzések hozzáadása, konfliktusok kizárása.
+- Az $options globális kezelése.
+- A modulok kezelése átkerült egy külön fájlba.
+- A WooCommerce verziójának az ellenőrzését kezelő függvény átkerült a start.php fájlba.
+- Minden HuCommerce opció törlése az adatbázisból a bővítmény törlése után.
+- A HuCommerce katalógus megjelenítésének kisebb módosítása.
+- Kompatibilitás ellenőrzése a WooCommerce 9.7 verzióval.
+- CPS SDK frissítése a 8.15.3 verzióra.
+
+**JAVÍTÁS**
+
+- Az "Edit account form" template frissítése a 8.7.0 verzióra. (Köszönöm a jelzést @grapestain felhasználónak)
+- PHP_CodeSniffer + WordPress Coding Standards által jelzett hibák javításai.
 
 #### 2024.4.0
 
