@@ -51,7 +51,7 @@ $license_status = get_option( 'surbma_hc_license_status', array() );
 	</select>
 
 	<?php $instanceValue = isset( $license_options['instance'] ) && $license_options['instance'] ? $license_options['instance'] : $instance; ?>
-	<input id="surbma_hc_license[instance]" class="uk-input uk-form-large uk-margin-bottom" type="<?php echo esc_attr( $inputType ); ?>" name="surbma_hc_license[instance]" value="<?php echo esc_attr( $instanceValue ); ?>" placeholder="Instance" style="font-family: monospace;" disabled />
+	<input id="surbma_hc_license[instance]" class="uk-input uk-form-large uk-margin-bottom" type="<?php echo esc_attr( $inputType ); ?>" name="surbma_hc_license[instance]" value="<?php echo esc_attr( $instanceValue ); ?>" placeholder="Instance" style="font-family: monospace;" readonly />
 
 	<div class="uk-grid-small" uk-grid>
 
