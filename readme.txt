@@ -70,7 +70,8 @@ A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő 
 
 **HuCommerce DEV mód:**
 
-`A DEV mód, azaz fejlesztői mód lehetőséget arra, hogy egy nem élesített weboldalon az API kulcs aktiválása nélkül használhasd a HuCommerce Pro összes modulját és funkcióját. A DEV mód bekapcsolásához szükséges feltételeket a HuCommerce -> Licensz kezelés menüpontban olvashatod el.`
+`A DEV mód, azaz fejlesztői mód lehetőséget arra, hogy egy nem élesített weboldalon az API kulcs aktiválása nélkül használhasd a HuCommerce Pro összes modulját és funkcióját.`
+`A DEV mód bekapcsolásához szükséges feltételeket a HuCommerce -> Licensz kezelés menüpontban olvashatod el.`
 
 **HuCommerce Pro további funkciói:**
 
@@ -290,6 +291,22 @@ Először töröld a szerver oldali és a böngésző gyorsítótárát és fris
 Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van állítva a webáruház.
 
 == Changelog ==
+
+#### 2025.1.1
+
+*Kiadás dátuma: 2025-02-21*
+
+**SMTP szolgáltatás**
+
+- Most már beállítható titkosítás nélkül is az SMTP küldés a 25-ös porthoz.
+
+**HuCommerce DEV mód**
+
+- Most már a dev és local aldomainek esetén is automatikusan DEV módba kapcsol.
+
+**JAVÍTÁS**
+
+- A Licensz kezelés javítása, hogy minden szükséges adatot elmentsen az adatbázisba.
 
 #### 2025.1.0
 
