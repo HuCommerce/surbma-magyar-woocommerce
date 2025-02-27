@@ -113,13 +113,13 @@ add_action( 'init', function() {
 		'2525' => array(
 			'value' => '2525',
 			'label' => '2525'
-		),
+		)
 	);
 
 	$smtpsecure_options = array(
 		'default' => array(
-			'value' => 'default',
-			'label' => __( 'Default encryption', 'surbma-magyar-woocommerce' )
+			'value' => '',
+			'label' => __( 'No encryption', 'surbma-magyar-woocommerce' )
 		),
 		'tls' => array(
 			'value' => 'tls',
@@ -128,7 +128,7 @@ add_action( 'init', function() {
 		'ssl' => array(
 			'value' => 'ssl',
 			'label' => 'SSL'
-		),
+		)
 	);
 
 	$emptycartbutton_cartpage_options = array(

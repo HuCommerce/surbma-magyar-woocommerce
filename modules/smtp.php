@@ -14,18 +14,18 @@ add_action( 'phpmailer_init', function( $phpmailer ) {
 
 	// SMTP port number - likely to be 25, 465 or 587
 	$smtp_port = $options['smtpport'] ?? 587;
-	// Encryption system to use - ssl or tls
-	$smtp_secure = $options['smtpsecure'] ?? 0;
+	// Encryption system to use - ssl, tls, or empty string for no encryption
+	$smtp_secure = $options['smtpsecure'] ?? '';
 	// SMTP From email address
-	$smtp_from = $options['smtpfrom'] ?? 0;
+	$smtp_from = $options['smtpfrom'] ?? '';
 	// SMTP From name
-	$smtp_fromname = $options['smtpfromname'] ?? 0;
+	$smtp_fromname = $options['smtpfromname'] ?? '';
 	// The hostname of the mail server
-	$smtp_host = $options['smtphost'] ?? 0;
+	$smtp_host = $options['smtphost'] ?? '';
 	// Username to use for SMTP authentication
-	$smtp_user = $options['smtpuser'] ?? 0;
+	$smtp_user = $options['smtpuser'] ?? '';
 	// Password to use for SMTP authentication
-	$smtp_password = $options['smtppassword'] ?? 0;
+	$smtp_password = $options['smtppassword'] ?? '';
 
 	if ( $smtp_host && $smtp_user && $smtp_password ) {
 		$phpmailer->isSMTP();
@@ -36,9 +36,7 @@ add_action( 'phpmailer_init', function( $phpmailer ) {
 
 		// Additional settings
 		$phpmailer->Port = $smtp_port;
-		if ( $smtp_secure ) {
-			$phpmailer->SMTPSecure = $smtp_secure;
-		}
+		$phpmailer->SMTPSecure = $smtp_secure;
 		if ( $smtp_from ) {
 			$phpmailer->From = $smtp_from;
 		}
