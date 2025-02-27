@@ -73,6 +73,7 @@ A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő 
 `A DEV mód, azaz fejlesztői mód lehetőséget arra, hogy egy nem élesített`
 `weboldalon az API kulcs aktiválása nélkül használhasd a HuCommerce Pro`
 `összes modulját és funkcióját.`
+` `
 `A DEV mód bekapcsolásához szükséges feltételeket a HuCommerce -> Licensz`
 `kezelés menüpontban olvashatod el.`
 
@@ -92,7 +93,7 @@ A HuCommerce kibővített kiadása, további hasznos és folyamatosan bővülő 
 
 ---
 
-### 🚀 HuCommerce kiemelt moduljai és rövid leírása:
+### 🚀 HuCommerce kiemelt moduljai és rövid leírásai:
 
 #### ✅ Vezetéknév és keresztnév rendbetétele (WooCommerce 4.4 verzió fölött is)
 
