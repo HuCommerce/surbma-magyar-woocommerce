@@ -7,8 +7,8 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-$returntoshopcartpositionValue = $options['returntoshopcartposition'] ?? 'cartactions';
-$returntoshopcheckoutpositionValue = $options['returntoshopcheckoutposition'] ?? 'nocheckout';
+$returntoshopcartpositionValue = $hc_gems_options['returntoshopcartposition'] ?? 'cartactions';
+$returntoshopcheckoutpositionValue = $hc_gems_options['returntoshopcheckoutposition'] ?? 'nocheckout';
 
 $continueshoppingmessageHook = '';
 $continueshoppingmessagePriority = 10;
@@ -48,9 +48,9 @@ switch ( $returntoshopcheckoutpositionValue ) {
 
 add_action( $continueshoppingmessageHook, function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$returntoshopmessageValue = $options['returntoshopmessage'] ?? __( 'Would you like to continue shopping?', 'surbma-magyar-woocommerce' );
+	$returntoshopmessageValue = $hc_gems_options['returntoshopmessage'] ?? __( 'Would you like to continue shopping?', 'surbma-magyar-woocommerce' );
 
 	echo '<div class="woocommerce-message returntoshop">';
 	echo esc_html( $returntoshopmessageValue ) . ' <a href="' . esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ) . '" class="button wc-forward">' . esc_html__( 'Return to shop', 'woocommerce' ) . '</a>'; // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch

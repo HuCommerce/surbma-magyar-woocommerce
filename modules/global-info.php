@@ -23,112 +23,112 @@ add_shortcode( 'hc-mailto', function( $atts, $content = '' ) {
 
 add_shortcode( 'hc-nev', function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	if ( !isset( $options['globalinfoname'] ) ) {
+	if ( !isset( $hc_gems_options['globalinfoname'] ) ) {
 		return;
 	}
 
-	return $options['globalinfoname'];
+	return $hc_gems_options['globalinfoname'];
 } );
 
 add_shortcode( 'hc-ceg', function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	if ( !isset( $options['globalinfocompany'] ) ) {
+	if ( !isset( $hc_gems_options['globalinfocompany'] ) ) {
 		return;
 	}
 
-	return $options['globalinfocompany'];
+	return $hc_gems_options['globalinfocompany'];
 } );
 
 add_shortcode( 'hc-szekhely', function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	if ( !isset( $options['globalinfoheadquarters'] ) ) {
+	if ( !isset( $hc_gems_options['globalinfoheadquarters'] ) ) {
 		return;
 	}
 
-	return $options['globalinfoheadquarters'];
+	return $hc_gems_options['globalinfoheadquarters'];
 } );
 
 add_shortcode( 'hc-adoszam', function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	if ( !isset( $options['globalinfotaxnumber'] ) ) {
+	if ( !isset( $hc_gems_options['globalinfotaxnumber'] ) ) {
 		return;
 	}
 
-	return $options['globalinfotaxnumber'];
+	return $hc_gems_options['globalinfotaxnumber'];
 } );
 
 add_shortcode( 'hc-cegjegyzekszam', function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	if ( !isset( $options['globalinforegnumber'] ) ) {
+	if ( !isset( $hc_gems_options['globalinforegnumber'] ) ) {
 		return;
 	}
 
-	return $options['globalinforegnumber'];
+	return $hc_gems_options['globalinforegnumber'];
 } );
 
 add_shortcode( 'hc-cim', function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	if ( !isset( $options['globalinfoaddress'] ) ) {
+	if ( !isset( $hc_gems_options['globalinfoaddress'] ) ) {
 		return;
 	}
 
-	return $options['globalinfoaddress'];
+	return $hc_gems_options['globalinfoaddress'];
 } );
 
 add_shortcode( 'hc-bankszamlaszam', function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	if ( !isset( $options['globalinfobankaccount'] ) ) {
+	if ( !isset( $hc_gems_options['globalinfobankaccount'] ) ) {
 		return;
 	}
 
-	return $options['globalinfobankaccount'];
+	return $hc_gems_options['globalinfobankaccount'];
 } );
 
 add_shortcode( 'hc-mobiltelefon', function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	if ( !isset( $options['globalinfomobile'] ) ) {
+	if ( !isset( $hc_gems_options['globalinfomobile'] ) ) {
 		return;
 	}
 
-	return '<a href="tel:+' . preg_replace('/\D/', '', $options['globalinfomobile']) . '">' . $options['globalinfomobile'] . '</a>';
+	return '<a href="tel:+' . preg_replace('/\D/', '', $hc_gems_options['globalinfomobile']) . '">' . $hc_gems_options['globalinfomobile'] . '</a>';
 } );
 
 add_shortcode( 'hc-telefon', function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	if ( !isset( $options['globalinfophone'] ) ) {
+	if ( !isset( $hc_gems_options['globalinfophone'] ) ) {
 		return;
 	}
 
-	return '<a href="tel:+' . preg_replace('/\D/', '', $options['globalinfophone']) . '">' . $options['globalinfophone'] . '</a>';
+	return '<a href="tel:+' . preg_replace('/\D/', '', $hc_gems_options['globalinfophone']) . '">' . $hc_gems_options['globalinfophone'] . '</a>';
 } );
 
 add_shortcode( 'hc-email', function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	if ( !isset( $options['globalinfoemail'] ) ) {
+	if ( !isset( $hc_gems_options['globalinfoemail'] ) ) {
 		return;
 	}
 
-	$email = $options['globalinfoemail'];
+	$email = $hc_gems_options['globalinfoemail'];
 	$encodedemail = '';
 
 	for ( $i = 0; $i <strlen( $email ); $i++ ) {
@@ -140,11 +140,11 @@ add_shortcode( 'hc-email', function() {
 
 add_shortcode( 'hc-rolunk', function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	if ( !isset( $options['globalinfoaboutus'] ) ) {
+	if ( !isset( $hc_gems_options['globalinfoaboutus'] ) ) {
 		return;
 	}
 
-	return $options['globalinfoaboutus'];
+	return $hc_gems_options['globalinfoaboutus'];
 } );

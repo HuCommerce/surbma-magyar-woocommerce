@@ -4,10 +4,10 @@
 defined( 'ABSPATH' ) || exit;
 
 // Set the HuCommerce settings array globally
-global $options;
-$options = get_option( 'surbma_hc_fields', array() );
-if ( !is_array( $options ) ) {
-	$options = array();
+global $hc_gems_options;
+$hc_gems_options = get_option( 'surbma_hc_fields', array() );
+if ( !is_array( $hc_gems_options ) ) {
+	$hc_gems_options = array();
 }
 
 // CPS SDK

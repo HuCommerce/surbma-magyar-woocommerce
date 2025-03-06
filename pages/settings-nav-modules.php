@@ -744,7 +744,7 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 			<?php echo wp_kses_post( $pro_notice ); ?>
 
 			<?php // HuCommerce legacy users notice ?>
-			<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE && $options && !isset( $options['brandnewuser'] ) ) { ?>
+			<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE && $hc_gems_options && !isset( $hc_gems_options['brandnewuser'] ) ) { ?>
 				<div class="cps-alert uk-alert-danger" uk-alert>
 					<p><strong class="uk-text-uppercase">Figyelem!</strong> A "Jogi megfelelés" modul átkerült a HuCommerce fizetős, Pro verziójába. Minden eddigi beállítás továbbra is működik, de módosítani nem lehet a beállításokat. Mentés után is használhatod a modult korlátlan ideig, ha már egyszer beállítottad.</p>
 				</div>

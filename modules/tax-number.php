@@ -24,9 +24,9 @@ add_filter( 'woocommerce_billing_fields', function( $fields ) {
 // Adding placeholder to Tax number field conditionally
 add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$taxnumberplaceholderValue = $options['taxnumberplaceholder'] ?? 0;
+	$taxnumberplaceholderValue = $hc_gems_options['taxnumberplaceholder'] ?? 0;
 
 	if ( 1 == $taxnumberplaceholderValue ) {
 		$fields['billing']['billing_tax_number']['placeholder'] = __( 'Tax number', 'surbma-magyar-woocommerce' );
@@ -159,11 +159,11 @@ add_action( 'wp_footer', function() {
 	}
 
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$moduleCheckoutValue = $options['module-checkout'] ?? 0;
-	$billingcompanycheckValue = 1 == $moduleCheckoutValue && isset( $options['billingcompanycheck'] ) ? $options['billingcompanycheck'] : 0;
-	$companytaxnumberpairValue = 1 == $moduleCheckoutValue && isset( $options['companytaxnumberpair'] ) ? $options['companytaxnumberpair'] : 0;
+	$moduleCheckoutValue = $hc_gems_options['module-checkout'] ?? 0;
+	$billingcompanycheckValue = 1 == $moduleCheckoutValue && isset( $hc_gems_options['billingcompanycheck'] ) ? $hc_gems_options['billingcompanycheck'] : 0;
+	$companytaxnumberpairValue = 1 == $moduleCheckoutValue && isset( $hc_gems_options['companytaxnumberpair'] ) ? $hc_gems_options['companytaxnumberpair'] : 0;
 
 	?>
 <script id="cps-hc-wcgems-tax-number">

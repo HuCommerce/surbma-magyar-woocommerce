@@ -8,6 +8,10 @@ jQuery(document).ready(function($) {
 			
 			let cityFieldTouched = false;
 
+			// Add position relative to the city field's parent element
+			$cityField.parent().css('position', 'relative');
+			$cityField.parent().css('display', 'block');
+
 			// Create tooltip container
 			const $tooltip = $('<div>', {
 				class: 'city-tooltip',
@@ -101,10 +105,10 @@ jQuery(document).ready(function($) {
 						});
 
 						// Position and show tooltip
-						const fieldOffset = $cityField.offset();
+						const tooltipTop = $cityField.outerHeight() + 5;
 						$tooltip.css({
-							top: fieldOffset.top + $cityField.outerHeight() + 5,
-							left: fieldOffset.left
+							top: tooltipTop,
+							left: 0
 						}).show();
 
 						// Clear the text field if it doesn't match any city in the list
@@ -132,10 +136,10 @@ jQuery(document).ready(function($) {
 				const cities = surbma_hc_data[postcode];
 				
 				if (cities && cities.length > 1) {
-					const fieldOffset = $cityField.offset();
+					const tooltipTop = $cityField.outerHeight() + 5;
 					$tooltip.css({
-						top: fieldOffset.top + $cityField.outerHeight() + 5,
-						left: fieldOffset.left
+						top: tooltipTop,
+						left: 0
 					}).show();
 				}
 			});

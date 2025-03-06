@@ -160,7 +160,7 @@ if ( is_plugin_active( 'wp-all-import-pro/wp-all-import-pro.php' ) ) {
 }
 */
 
-$module_productpricehistoryValue = $options['module-productpricehistory'] ?? 0;
+$module_productpricehistoryValue = $hc_gems_options['module-productpricehistory'] ?? 0;
 
 if ( 1 == $module_productpricehistoryValue ) :
 
@@ -341,16 +341,16 @@ if ( 1 == $module_productpricehistoryValue ) :
 		$shortcode_has_product_id = $product_id ? true : false;
 
 		// Get the settings array
-		global $options;
+		global $hc_gems_options;
 
-		$productpricehistory_showlowestpriceValue = isset( $options['productpricehistory-showlowestprice'] ) && 1 == $options['productpricehistory-showlowestprice'] ? 1 : 0;
-		$productpricehistory_lowestpricetextValue = isset( $options['productpricehistory-lowestpricetext'] ) && $options['productpricehistory-lowestpricetext'] ? $options['productpricehistory-lowestpricetext'] : __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
-		$productpricehistory_nolowestpricetextValue = isset( $options['productpricehistory-nolowestpricetext'] ) && $options['productpricehistory-nolowestpricetext'] ? $options['productpricehistory-nolowestpricetext'] : false;
-		$productpricehistory_showdiscountpriceValue = isset( $options['productpricehistory-showdiscount'] ) && 1 == $options['productpricehistory-showdiscount'] ? 1 : 0;
-		$productpricehistory_discounttextValue = isset( $options['productpricehistory-discounttext'] ) && $options['productpricehistory-discounttext'] ? $options['productpricehistory-discounttext'] : __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
-		$productpricehistory_nolowestpricediscounttextValue = isset( $options['productpricehistory-nolowestpricediscounttext'] ) && $options['productpricehistory-nolowestpricediscounttext'] ? $options['productpricehistory-nolowestpricediscounttext'] : __( 'Actual discount', 'surbma-magyar-woocommerce' );
-		$productpricehistory_statisticslinkdisplayValue = isset( $options['productpricehistory-statisticslinkdisplay'] ) ? $options['productpricehistory-statisticslinkdisplay'] : 'show';
-		$productpricehistory_statisticslinktextValue = isset( $options['productpricehistory-statisticslinktext'] ) && $options['productpricehistory-statisticslinktext'] ? $options['productpricehistory-statisticslinktext'] : __( 'Advanced statistics', 'surbma-magyar-woocommerce' );
+		$productpricehistory_showlowestpriceValue = isset( $hc_gems_options['productpricehistory-showlowestprice'] ) && 1 == $hc_gems_options['productpricehistory-showlowestprice'] ? 1 : 0;
+		$productpricehistory_lowestpricetextValue = isset( $hc_gems_options['productpricehistory-lowestpricetext'] ) && $hc_gems_options['productpricehistory-lowestpricetext'] ? $hc_gems_options['productpricehistory-lowestpricetext'] : __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
+		$productpricehistory_nolowestpricetextValue = isset( $hc_gems_options['productpricehistory-nolowestpricetext'] ) && $hc_gems_options['productpricehistory-nolowestpricetext'] ? $hc_gems_options['productpricehistory-nolowestpricetext'] : false;
+		$productpricehistory_showdiscountpriceValue = isset( $hc_gems_options['productpricehistory-showdiscount'] ) && 1 == $hc_gems_options['productpricehistory-showdiscount'] ? 1 : 0;
+		$productpricehistory_discounttextValue = isset( $hc_gems_options['productpricehistory-discounttext'] ) && $hc_gems_options['productpricehistory-discounttext'] ? $hc_gems_options['productpricehistory-discounttext'] : __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
+		$productpricehistory_nolowestpricediscounttextValue = isset( $hc_gems_options['productpricehistory-nolowestpricediscounttext'] ) && $hc_gems_options['productpricehistory-nolowestpricediscounttext'] ? $hc_gems_options['productpricehistory-nolowestpricediscounttext'] : __( 'Actual discount', 'surbma-magyar-woocommerce' );
+		$productpricehistory_statisticslinkdisplayValue = isset( $hc_gems_options['productpricehistory-statisticslinkdisplay'] ) ? $hc_gems_options['productpricehistory-statisticslinkdisplay'] : 'show';
+		$productpricehistory_statisticslinktextValue = isset( $hc_gems_options['productpricehistory-statisticslinktext'] ) && $hc_gems_options['productpricehistory-statisticslinktext'] ? $hc_gems_options['productpricehistory-statisticslinktext'] : __( 'Advanced statistics', 'surbma-magyar-woocommerce' );
 
 		// If we have $product_id, let's get the $product object
 		if ( $product_id ) {

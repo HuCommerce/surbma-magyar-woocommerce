@@ -10,10 +10,10 @@ defined( 'ABSPATH' ) || exit;
 // Add new fields
 add_filter( 'woocommerce_billing_fields', function( $fields ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	// Get the settings
-	$billingcompanycheckValue = $options['billingcompanycheck'] ?? 0;
+	$billingcompanycheckValue = $hc_gems_options['billingcompanycheck'] ?? 0;
 	$woocommercecheckoutcompanyfieldValue = false !== get_option( 'woocommerce_checkout_company_field' ) ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
 
 	if ( 'optional' == $woocommercecheckoutcompanyfieldValue && 1 == $billingcompanycheckValue ) {
@@ -73,10 +73,10 @@ function cps_wcgems_hc_billing_company_check() {
 // Pre-populate billing_country field, if it's hidden
 add_filter( 'default_checkout_billing_country', function( $value ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	// Get the settings
-	$nocountryValue = $options['nocountry'] ?? 0;
+	$nocountryValue = $hc_gems_options['nocountry'] ?? 0;
 
 	if ( 1 == $nocountryValue ) {
 		// The country/state
@@ -95,12 +95,12 @@ add_filter( 'default_checkout_billing_country', function( $value ) {
 // Customize the Billing fields on the Checkout and My account -> Addresses pages
 add_filter( 'woocommerce_billing_fields', function( $address_fields ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	// Get the settings
-	$companytaxnumberpairValue = $options['companytaxnumberpair'] ?? 0;
-	$phoneemailpairValue = $options['phoneemailpair'] ?? 0;
-	$emailtothetopValue = $options['emailtothetop'] ?? 0;
+	$companytaxnumberpairValue = $hc_gems_options['companytaxnumberpair'] ?? 0;
+	$phoneemailpairValue = $hc_gems_options['phoneemailpair'] ?? 0;
+	$emailtothetopValue = $hc_gems_options['emailtothetop'] ?? 0;
 
 	// Inline Billing Company and Billing Tax number fields
 	if ( isset( $address_fields['billing_company'] ) && isset( $address_fields['billing_tax_number'] ) && 1 == $companytaxnumberpairValue ) {
@@ -127,10 +127,10 @@ add_filter( 'woocommerce_default_address_fields' , function( $address_fields ) {
 	$woocommercecheckoutaddress2fieldValue = false !== get_option( 'woocommerce_checkout_address_2_field' ) ? get_option( 'woocommerce_checkout_address_2_field' ) : 'optional';
 
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	// Get the settings
-	$postcodecitypairValue = $options['postcodecitypair'] ?? 0;
+	$postcodecitypairValue = $hc_gems_options['postcodecitypair'] ?? 0;
 
 	// Inline Postcode and City fields
 	if ( 1 == $postcodecitypairValue ) {
@@ -145,10 +145,10 @@ add_filter( 'woocommerce_default_address_fields' , function( $address_fields ) {
 // Customize the Checkout fields
 add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	// Get the settings
-	$noordercommentsValue = $options['noordercomments'] ?? 0;
+	$noordercommentsValue = $hc_gems_options['noordercomments'] ?? 0;
 
 	if ( isset( $fields['order']['order_comments'] ) && 1 == $noordercommentsValue ) {
 		unset( $fields['order']['order_comments'] );
@@ -160,9 +160,9 @@ add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
 // Remove Additional information section
 add_action( 'woocommerce_before_checkout_form' , function() {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$noadditionalinformationValue = $options['noadditionalinformation'] ?? 0;
+	$noadditionalinformationValue = $hc_gems_options['noadditionalinformation'] ?? 0;
 
 	if ( 1 == $noadditionalinformationValue ) {
 		add_filter( 'woocommerce_enable_order_notes_field', '__return_false', 9999 );
@@ -172,9 +172,9 @@ add_action( 'woocommerce_before_checkout_form' , function() {
 // Custom submit button text
 add_filter( 'woocommerce_order_button_text', function( $button_text ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$checkout_customsubmitbuttontextValue = $options['checkout-customsubmitbuttontext'] ?? false;
+	$checkout_customsubmitbuttontextValue = $hc_gems_options['checkout-customsubmitbuttontext'] ?? false;
 
 	if ( !empty( $checkout_customsubmitbuttontextValue ) ) {
 		$button_text = $checkout_customsubmitbuttontextValue;
@@ -191,14 +191,14 @@ add_action( 'wp_footer', function() {
 	}
 
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$billingcompanycheckValue = $options['billingcompanycheck'] ?? 0;
-	$checkout_hidecompanytaxfields_value = $options['checkout-hidecompanytaxfields'] ?? 0;
-	$checkout_hidecompanyfield_value = $options['checkout-hide_company_field_if_not_hungary'] ?? 0;
-	$checkout_hidetaxfield_value = $options['checkout-hide_tax_field_if_not_hungary'] ?? 0;
-	$nocountryValue = $options['nocountry'] ?? 0;
-	$companytaxnumberpairValue = $options['companytaxnumberpair'] ?? 0;
+	$billingcompanycheckValue = $hc_gems_options['billingcompanycheck'] ?? 0;
+	$checkout_hidecompanytaxfields_value = $hc_gems_options['checkout-hidecompanytaxfields'] ?? 0;
+	$checkout_hidecompanyfield_value = $hc_gems_options['checkout-hide_company_field_if_not_hungary'] ?? 0;
+	$checkout_hidetaxfield_value = $hc_gems_options['checkout-hide_tax_field_if_not_hungary'] ?? 0;
+	$nocountryValue = $hc_gems_options['nocountry'] ?? 0;
+	$companytaxnumberpairValue = $hc_gems_options['companytaxnumberpair'] ?? 0;
 
 	$woocommercecheckoutcompanyfieldValue = false !== get_option( 'woocommerce_checkout_company_field' ) ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
 

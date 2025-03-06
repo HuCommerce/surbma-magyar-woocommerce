@@ -6,19 +6,19 @@ defined( 'ABSPATH' ) || exit;
 // * HUCOMMERCE START
 
 // Free HU modules
-$module_huformatfixValue = $options['huformatfix'] ?? 0;
-$module_nocountyValue = $options['nocounty'] ?? 0;
-$module_autofillcityValue = $options['autofillcity'] ?? 0;
-$module_translationsValue = $options['translations'] ?? 0;
+$module_huformatfixValue = $hc_gems_options['huformatfix'] ?? 0;
+$module_nocountyValue = $hc_gems_options['nocounty'] ?? 0;
+$module_autofillcityValue = $hc_gems_options['autofillcity'] ?? 0;
+$module_translationsValue = $hc_gems_options['translations'] ?? 0;
 
 // New Pro HU modules
-$module_productpricehistoryValue = $options['module-productpricehistory'] ?? 0;
+$module_productpricehistoryValue = $hc_gems_options['module-productpricehistory'] ?? 0;
 // Force Product Price History module to load to save data for everyone
 $module_productpricehistoryValue = 1;
 
 // Legacy Pro HU modules
-$module_maskcheckoutfieldsValue = SURBMA_HC_PREMIUM || !isset( $options['brandnewuser'] ) || ( $options['legacyuser'] ?? 0 ) == 1 ? ( $options['maskcheckoutfields'] ?? 0 ) : 0;
-$module_validatecheckoutfieldsValue = SURBMA_HC_PREMIUM || !isset( $options['brandnewuser'] ) || ( $options['legacyuser'] ?? 0 ) == 1 ? ( $options['validatecheckoutfields'] ?? 0 ) : 0;
+$module_maskcheckoutfieldsValue = SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ? ( $hc_gems_options['maskcheckoutfields'] ?? 0 ) : 0;
+$module_validatecheckoutfieldsValue = SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ? ( $hc_gems_options['validatecheckoutfields'] ?? 0 ) : 0;
 
 if ( 1 == $module_huformatfixValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules-hu/hu-format-fix.php';
@@ -45,31 +45,31 @@ if ( 1 == $module_translationsValue && !is_admin() ) {
 // * HUCOMMERCE END
 
 // Free modules
-$module_taxnumberValue = $options['taxnumber'] ?? 0;
-$module_checkoutValue = $options['module-checkout'] ?? 0;
-$module_couponValue = $options['module-coupon'] ?? 0;
-$module_plusminusValue = $options['plusminus'] ?? 0;
-$module_updatecartValue = $options['updatecart'] ?? 0;
-$module_redirectcartValue = $options['module-redirectcart'] ?? 0;
-$module_oneproductincartValue = $options['module-oneproductincart'] ?? 0;
-$module_custom_addtocart_buttonValue = $options['module-custom-addtocart-button'] ?? 0;
-$module_returntoshopValue = $options['returntoshop'] ?? 0;
-$module_loginregistrationredirectValue = $options['loginregistrationredirect'] ?? 0;
-$module_hideshippingmethods = $options['module-hideshippingmethods'] ?? 0;
-$module_productsettingsValue = $options['module-productsettings'] ?? 0;
-$module_smtpValue = $options['module-smtp'] ?? 0;
-$module_catalogmodeValue = $options['module-catalogmode'] ?? 0;
+$module_taxnumberValue = $hc_gems_options['taxnumber'] ?? 0;
+$module_checkoutValue = $hc_gems_options['module-checkout'] ?? 0;
+$module_couponValue = $hc_gems_options['module-coupon'] ?? 0;
+$module_plusminusValue = $hc_gems_options['plusminus'] ?? 0;
+$module_updatecartValue = $hc_gems_options['updatecart'] ?? 0;
+$module_redirectcartValue = $hc_gems_options['module-redirectcart'] ?? 0;
+$module_oneproductincartValue = $hc_gems_options['module-oneproductincart'] ?? 0;
+$module_custom_addtocart_buttonValue = $hc_gems_options['module-custom-addtocart-button'] ?? 0;
+$module_returntoshopValue = $hc_gems_options['returntoshop'] ?? 0;
+$module_loginregistrationredirectValue = $hc_gems_options['loginregistrationredirect'] ?? 0;
+$module_hideshippingmethods = $hc_gems_options['module-hideshippingmethods'] ?? 0;
+$module_productsettingsValue = $hc_gems_options['module-productsettings'] ?? 0;
+$module_smtpValue = $hc_gems_options['module-smtp'] ?? 0;
+$module_catalogmodeValue = $hc_gems_options['module-catalogmode'] ?? 0;
 
 // New Pro modules
-$module_emptycartbuttonValue = SURBMA_HC_PREMIUM ? ( $options['module-emptycartbutton'] ?? 0 ) : 0;
-$module_productpriceadditionsValue = SURBMA_HC_PREMIUM ? ( $options['module-productpriceadditions'] ?? 0 ) : 0;
-$module_limitpaymentmethodsValue = SURBMA_HC_PREMIUM ? ( $options['module-limitpaymentmethods'] ?? 0 ) : 0;
-$module_translationsValue = SURBMA_HC_PREMIUM ? ( $options['module-translations'] ?? 0 ) : 0;
+$module_emptycartbuttonValue = SURBMA_HC_PREMIUM ? ( $hc_gems_options['module-emptycartbutton'] ?? 0 ) : 0;
+$module_productpriceadditionsValue = SURBMA_HC_PREMIUM ? ( $hc_gems_options['module-productpriceadditions'] ?? 0 ) : 0;
+$module_limitpaymentmethodsValue = SURBMA_HC_PREMIUM ? ( $hc_gems_options['module-limitpaymentmethods'] ?? 0 ) : 0;
+$module_translationsValue = SURBMA_HC_PREMIUM ? ( $hc_gems_options['module-translations'] ?? 0 ) : 0;
 
 // Legacy Pro modules
-$module_freeshippingnoticeValue = SURBMA_HC_PREMIUM || !isset( $options['brandnewuser'] ) || ( $options['legacyuser'] ?? 0 ) == 1 ? ( $options['freeshippingnotice'] ?? 0 ) : 0;
-$module_legalcheckoutValue = SURBMA_HC_PREMIUM || !isset( $options['brandnewuser'] ) || ( $options['legacyuser'] ?? 0 ) == 1 ? ( $options['legalcheckout'] ?? 0 ) : 0;
-$module_globalinfoValue = SURBMA_HC_PREMIUM || !isset( $options['brandnewuser'] ) || ( $options['legacyuser'] ?? 0 ) == 1 ? ( $options['module-globalinfo'] ?? 0 ) : 0;
+$module_freeshippingnoticeValue = SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ? ( $hc_gems_options['freeshippingnotice'] ?? 0 ) : 0;
+$module_legalcheckoutValue = SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ? ( $hc_gems_options['legalcheckout'] ?? 0 ) : 0;
+$module_globalinfoValue = SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ? ( $hc_gems_options['module-globalinfo'] ?? 0 ) : 0;
 
 if ( 1 == $module_taxnumberValue ) {
 	include_once SURBMA_HC_PLUGIN_DIR . '/modules/tax-number.php';

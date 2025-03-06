@@ -6,7 +6,7 @@ Requires Plugins: woocommerce
 Plugin URI: https://www.hucommerce.hu/
 Description: Hasznos javítások a magyar nyelvű WooCommerce webáruházakhoz.
 
-Version: 2025.1.2
+Version: 2025.1.3
 
 Author: HuCommerce.hu
 Author URI: https://www.hucommerce.hu/

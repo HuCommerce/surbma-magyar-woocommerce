@@ -8,6 +8,10 @@ defined( 'ABSPATH' ) || exit;
  */
 
 function surbma_hc_fields_validate( $input ) {
+	// Get the settings array
+	global $hc_gems_options;
+
+	// Get the select options
 	global $couponfieldposition_options;
 	global $returntoshopcartposition_options;
 	global $returntoshopcheckoutposition_options;
@@ -19,9 +23,6 @@ function surbma_hc_fields_validate( $input ) {
 	global $emptycartbutton_checkoutpage_options;
 	global $productpricehistory_statisticslinkdisplay_options;
 	global $catalogmode_productpricedisplay_options;
-
-	// Get the settings array
-	global $options;
 
 	// * HUCOMMERCE START
 
@@ -216,86 +217,86 @@ function surbma_hc_fields_validate( $input ) {
 	// If no valid license, check if field has any value. If yes, save it, if no, set to default.
 	if ( 'active' != SURBMA_HC_PLUGIN_LICENSE ) {
 		// Check field formats (Masking)
-		$input['maskcheckoutfieldsplaceholder'] = isset( $options['maskcheckoutfieldsplaceholder'] ) ? $options['maskcheckoutfieldsplaceholder'] : 0;
-		$input['maskbillingtaxfield'] = isset( $options['maskbillingtaxfield'] ) ? $options['maskbillingtaxfield'] : 0;
-		$input['maskbillingpostcodefield'] = isset( $options['maskbillingpostcodefield'] ) ? $options['maskbillingpostcodefield'] : 0;
-		$input['maskbillingphonefield'] = isset( $options['maskbillingphonefield'] ) ? $options['maskbillingphonefield'] : 0;
-		$input['maskshippingpostcodefield'] = isset( $options['maskshippingpostcodefield'] ) ? $options['maskshippingpostcodefield'] : 0;
+		$input['maskcheckoutfieldsplaceholder'] = isset( $hc_gems_options['maskcheckoutfieldsplaceholder'] ) ? $hc_gems_options['maskcheckoutfieldsplaceholder'] : 0;
+		$input['maskbillingtaxfield'] = isset( $hc_gems_options['maskbillingtaxfield'] ) ? $hc_gems_options['maskbillingtaxfield'] : 0;
+		$input['maskbillingpostcodefield'] = isset( $hc_gems_options['maskbillingpostcodefield'] ) ? $hc_gems_options['maskbillingpostcodefield'] : 0;
+		$input['maskbillingphonefield'] = isset( $hc_gems_options['maskbillingphonefield'] ) ? $hc_gems_options['maskbillingphonefield'] : 0;
+		$input['maskshippingpostcodefield'] = isset( $hc_gems_options['maskshippingpostcodefield'] ) ? $hc_gems_options['maskshippingpostcodefield'] : 0;
 
 		// Check field values
-		$input['validatebillingtaxfield'] = isset( $options['validatebillingtaxfield'] ) ? $options['validatebillingtaxfield'] : 0;
-		$input['validatebillingcityfield'] = isset( $options['validatebillingcityfield'] ) ? $options['validatebillingcityfield'] : 0;
-		$input['validatebillingaddressfield'] = isset( $options['validatebillingaddressfield'] ) ? $options['validatebillingaddressfield'] : 0;
-		$input['validatebillingphonefield'] = isset( $options['validatebillingphonefield'] ) ? $options['validatebillingphonefield'] : 0;
-		$input['validateshippingcityfield'] = isset( $options['validateshippingcityfield'] ) ? $options['validateshippingcityfield'] : 0;
-		$input['validateshippingaddressfield'] = isset( $options['validateshippingaddressfield'] ) ? $options['validateshippingaddressfield'] : 0;
+		$input['validatebillingtaxfield'] = isset( $hc_gems_options['validatebillingtaxfield'] ) ? $hc_gems_options['validatebillingtaxfield'] : 0;
+		$input['validatebillingcityfield'] = isset( $hc_gems_options['validatebillingcityfield'] ) ? $hc_gems_options['validatebillingcityfield'] : 0;
+		$input['validatebillingaddressfield'] = isset( $hc_gems_options['validatebillingaddressfield'] ) ? $hc_gems_options['validatebillingaddressfield'] : 0;
+		$input['validatebillingphonefield'] = isset( $hc_gems_options['validatebillingphonefield'] ) ? $hc_gems_options['validatebillingphonefield'] : 0;
+		$input['validateshippingcityfield'] = isset( $hc_gems_options['validateshippingcityfield'] ) ? $hc_gems_options['validateshippingcityfield'] : 0;
+		$input['validateshippingaddressfield'] = isset( $hc_gems_options['validateshippingaddressfield'] ) ? $hc_gems_options['validateshippingaddressfield'] : 0;
 
 		// Free shipping notification
-		$input['freeshippingnoticeshoploop'] = isset( $options['freeshippingnoticeshoploop'] ) ? $options['freeshippingnoticeshoploop'] : 0;
-		$input['freeshippingnoticecart'] = isset( $options['freeshippingnoticecart'] ) ? $options['freeshippingnoticecart'] : 0;
-		$input['freeshippingnoticecheckout'] = isset( $options['freeshippingnoticecheckout'] ) ? $options['freeshippingnoticecheckout'] : 0;
-		$input['freeshippingminimumorderamount'] = isset( $options['freeshippingminimumorderamount'] ) ? $options['freeshippingminimumorderamount'] : 0;
-		$input['freeshippingcouponsdiscounts'] = isset( $options['freeshippingcouponsdiscounts'] ) ? $options['freeshippingcouponsdiscounts'] : 0;
-		$input['freeshippingwithouttax'] = isset( $options['freeshippingwithouttax'] ) ? $options['freeshippingwithouttax'] : 0;
-		$input['freeshippingnoticemessage'] = isset( $options['freeshippingnoticemessage'] ) ? $options['freeshippingnoticemessage'] : __( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
-		$input['freeshippingsuccessfulmessage'] = isset( $options['freeshippingsuccessfulmessage'] ) ? $options['freeshippingsuccessfulmessage'] : '';
+		$input['freeshippingnoticeshoploop'] = isset( $hc_gems_options['freeshippingnoticeshoploop'] ) ? $hc_gems_options['freeshippingnoticeshoploop'] : 0;
+		$input['freeshippingnoticecart'] = isset( $hc_gems_options['freeshippingnoticecart'] ) ? $hc_gems_options['freeshippingnoticecart'] : 0;
+		$input['freeshippingnoticecheckout'] = isset( $hc_gems_options['freeshippingnoticecheckout'] ) ? $hc_gems_options['freeshippingnoticecheckout'] : 0;
+		$input['freeshippingminimumorderamount'] = isset( $hc_gems_options['freeshippingminimumorderamount'] ) ? $hc_gems_options['freeshippingminimumorderamount'] : 0;
+		$input['freeshippingcouponsdiscounts'] = isset( $hc_gems_options['freeshippingcouponsdiscounts'] ) ? $hc_gems_options['freeshippingcouponsdiscounts'] : 0;
+		$input['freeshippingwithouttax'] = isset( $hc_gems_options['freeshippingwithouttax'] ) ? $hc_gems_options['freeshippingwithouttax'] : 0;
+		$input['freeshippingnoticemessage'] = isset( $hc_gems_options['freeshippingnoticemessage'] ) ? $hc_gems_options['freeshippingnoticemessage'] : __( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
+		$input['freeshippingsuccessfulmessage'] = isset( $hc_gems_options['freeshippingsuccessfulmessage'] ) ? $hc_gems_options['freeshippingsuccessfulmessage'] : '';
 
 		// Empty Cart button
-		$input['emptycartbutton-cartpage'] = isset( $options['emptycartbutton-cartpage'] ) ? $options['emptycartbutton-cartpage'] : 'none';
-		$input['emptycartbutton-checkoutpage'] = isset( $options['emptycartbutton-checkoutpage'] ) ? $options['emptycartbutton-checkoutpage'] : 'none';
-		$input['emptycartbutton-checkoutpagemessage'] = isset( $options['emptycartbutton-checkoutpagemessage'] ) ? $options['emptycartbutton-checkoutpagemessage'] : __( 'Changed your mind?', 'surbma-magyar-woocommerce' );
-		$input['emptycartbutton-checkoutpagelinktext'] = isset( $options['emptycartbutton-checkoutpagelinktext'] ) ? $options['emptycartbutton-checkoutpagelinktext'] : __( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' );
-		$input['emptycartbutton-checkoutpageconfirmationtext'] = isset( $options['emptycartbutton-checkoutpageconfirmationtext'] ) ? $options['emptycartbutton-checkoutpageconfirmationtext'] : __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
+		$input['emptycartbutton-cartpage'] = isset( $hc_gems_options['emptycartbutton-cartpage'] ) ? $hc_gems_options['emptycartbutton-cartpage'] : 'none';
+		$input['emptycartbutton-checkoutpage'] = isset( $hc_gems_options['emptycartbutton-checkoutpage'] ) ? $hc_gems_options['emptycartbutton-checkoutpage'] : 'none';
+		$input['emptycartbutton-checkoutpagemessage'] = isset( $hc_gems_options['emptycartbutton-checkoutpagemessage'] ) ? $hc_gems_options['emptycartbutton-checkoutpagemessage'] : __( 'Changed your mind?', 'surbma-magyar-woocommerce' );
+		$input['emptycartbutton-checkoutpagelinktext'] = isset( $hc_gems_options['emptycartbutton-checkoutpagelinktext'] ) ? $hc_gems_options['emptycartbutton-checkoutpagelinktext'] : __( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' );
+		$input['emptycartbutton-checkoutpageconfirmationtext'] = isset( $hc_gems_options['emptycartbutton-checkoutpageconfirmationtext'] ) ? $hc_gems_options['emptycartbutton-checkoutpageconfirmationtext'] : __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
 
 		// Product price history
-		$input['productpricehistory-showlowestprice'] = isset( $options['productpricehistory-showlowestprice'] ) ? $options['productpricehistory-showlowestprice'] : 0;
-		$input['productpricehistory-lowestpricetext'] = isset( $options['productpricehistory-lowestpricetext'] ) ? $options['productpricehistory-lowestpricetext'] : __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
-		$input['productpricehistory-nolowestpricetext'] = isset( $options['productpricehistory-nolowestpricetext'] ) ? $options['productpricehistory-nolowestpricetext'] : __( 'Actual sale price is our lowest price recently', 'surbma-magyar-woocommerce' );
-		$input['productpricehistory-showdiscount'] = isset( $options['productpricehistory-showdiscount'] ) ? $options['productpricehistory-showdiscount'] : 0;
-		$input['productpricehistory-discounttext'] = isset( $options['productpricehistory-discounttext'] ) ? $options['productpricehistory-discounttext'] : __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
-		$input['productpricehistory-nolowestpricediscounttext'] = isset( $options['productpricehistory-nolowestpricediscounttext'] ) ? $options['productpricehistory-nolowestpricediscounttext'] : __( 'Actual discount', 'surbma-magyar-woocommerce' );
-		$input['productpricehistory-statisticslinkdisplay'] = isset( $options['productpricehistory-statisticslinkdisplay'] ) ? $options['productpricehistory-statisticslinkdisplay'] : 'show';
-		$input['productpricehistory-statisticslinktext'] = isset( $options['productpricehistory-statisticslinktext'] ) ? $options['productpricehistory-statisticslinktext'] : __( 'Advanced statistics', 'surbma-magyar-woocommerce' );
+		$input['productpricehistory-showlowestprice'] = isset( $hc_gems_options['productpricehistory-showlowestprice'] ) ? $hc_gems_options['productpricehistory-showlowestprice'] : 0;
+		$input['productpricehistory-lowestpricetext'] = isset( $hc_gems_options['productpricehistory-lowestpricetext'] ) ? $hc_gems_options['productpricehistory-lowestpricetext'] : __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
+		$input['productpricehistory-nolowestpricetext'] = isset( $hc_gems_options['productpricehistory-nolowestpricetext'] ) ? $hc_gems_options['productpricehistory-nolowestpricetext'] : __( 'Actual sale price is our lowest price recently', 'surbma-magyar-woocommerce' );
+		$input['productpricehistory-showdiscount'] = isset( $hc_gems_options['productpricehistory-showdiscount'] ) ? $hc_gems_options['productpricehistory-showdiscount'] : 0;
+		$input['productpricehistory-discounttext'] = isset( $hc_gems_options['productpricehistory-discounttext'] ) ? $hc_gems_options['productpricehistory-discounttext'] : __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
+		$input['productpricehistory-nolowestpricediscounttext'] = isset( $hc_gems_options['productpricehistory-nolowestpricediscounttext'] ) ? $hc_gems_options['productpricehistory-nolowestpricediscounttext'] : __( 'Actual discount', 'surbma-magyar-woocommerce' );
+		$input['productpricehistory-statisticslinkdisplay'] = isset( $hc_gems_options['productpricehistory-statisticslinkdisplay'] ) ? $hc_gems_options['productpricehistory-statisticslinkdisplay'] : 'show';
+		$input['productpricehistory-statisticslinktext'] = isset( $hc_gems_options['productpricehistory-statisticslinktext'] ) ? $hc_gems_options['productpricehistory-statisticslinktext'] : __( 'Advanced statistics', 'surbma-magyar-woocommerce' );
 
 		// Product price additions
-		$input['productpriceadditions-product-prefix'] = isset( $options['productpriceadditions-product-prefix'] ) ? $options['productpriceadditions-product-prefix'] : '';
-		$input['productpriceadditions-product-suffix'] = isset( $options['productpriceadditions-product-suffix'] ) ? $options['productpriceadditions-product-suffix'] : '';
-		$input['productpriceadditions-archive-prefix'] = isset( $options['productpriceadditions-archive-prefix'] ) ? $options['productpriceadditions-archive-prefix'] : '';
-		$input['productpriceadditions-archive-suffix'] = isset( $options['productpriceadditions-archive-suffix'] ) ? $options['productpriceadditions-archive-suffix'] : '';
+		$input['productpriceadditions-product-prefix'] = isset( $hc_gems_options['productpriceadditions-product-prefix'] ) ? $hc_gems_options['productpriceadditions-product-prefix'] : '';
+		$input['productpriceadditions-product-suffix'] = isset( $hc_gems_options['productpriceadditions-product-suffix'] ) ? $hc_gems_options['productpriceadditions-product-suffix'] : '';
+		$input['productpriceadditions-archive-prefix'] = isset( $hc_gems_options['productpriceadditions-archive-prefix'] ) ? $hc_gems_options['productpriceadditions-archive-prefix'] : '';
+		$input['productpriceadditions-archive-suffix'] = isset( $hc_gems_options['productpriceadditions-archive-suffix'] ) ? $hc_gems_options['productpriceadditions-archive-suffix'] : '';
 
 		// Legal compliance
-		$input['regip'] = isset( $options['regip'] ) ? $options['regip'] : 0;
-		$input['regacceptpp'] = isset( $options['regacceptpp'] ) ? $options['regacceptpp'] : __( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
+		$input['regip'] = isset( $hc_gems_options['regip'] ) ? $hc_gems_options['regip'] : 0;
+		$input['regacceptpp'] = isset( $hc_gems_options['regacceptpp'] ) ? $hc_gems_options['regacceptpp'] : __( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
 		// FIX for deprecated value (revieworderbeforesubmit) if used on old version of the plugin
-		$input['legalconfirmationsposition'] = isset( $options['legalconfirmationsposition'] ) && 'revieworderbeforesubmit' != $options['legalconfirmationsposition'] ? $options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
-		$input['legalcheckouttitle'] = isset( $options['legalcheckouttitle'] ) ? $options['legalcheckouttitle'] : __( 'Legal confirmations', 'surbma-magyar-woocommerce' );
-		$input['accepttos'] = isset( $options['accepttos'] ) ? $options['accepttos'] : __( 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'surbma-magyar-woocommerce' );
-		$input['acceptpp'] = isset( $options['acceptpp'] ) ? $options['acceptpp'] : __( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
-		$input['acceptcustom1label'] = isset( $options['acceptcustom1label'] ) ? $options['acceptcustom1label'] : '';
-		$input['acceptcustom1'] = isset( $options['acceptcustom1'] ) ? $options['acceptcustom1'] : '';
-		$input['legalcheckout-custom1optional'] = isset( $options['legalcheckout-custom1optional'] ) ? $options['legalcheckout-custom1optional'] : 0;
-		$input['acceptcustom2label'] = isset( $options['acceptcustom2label'] ) ? $options['acceptcustom2label'] : '';
-		$input['acceptcustom2'] = isset( $options['acceptcustom2'] ) ? $options['acceptcustom2'] : '';
-		$input['legalcheckout-custom2optional'] = isset( $options['legalcheckout-custom2optional'] ) ? $options['legalcheckout-custom2optional'] : 0;
-		$input['beforeorderbuttonmessage'] = isset( $options['beforeorderbuttonmessage'] ) ? $options['beforeorderbuttonmessage'] : '';
-		$input['afterorderbuttonmessage'] = isset( $options['afterorderbuttonmessage'] ) ? $options['afterorderbuttonmessage'] : '';
+		$input['legalconfirmationsposition'] = isset( $hc_gems_options['legalconfirmationsposition'] ) && 'revieworderbeforesubmit' != $hc_gems_options['legalconfirmationsposition'] ? $hc_gems_options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
+		$input['legalcheckouttitle'] = isset( $hc_gems_options['legalcheckouttitle'] ) ? $hc_gems_options['legalcheckouttitle'] : __( 'Legal confirmations', 'surbma-magyar-woocommerce' );
+		$input['accepttos'] = isset( $hc_gems_options['accepttos'] ) ? $hc_gems_options['accepttos'] : __( 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'surbma-magyar-woocommerce' );
+		$input['acceptpp'] = isset( $hc_gems_options['acceptpp'] ) ? $hc_gems_options['acceptpp'] : __( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
+		$input['acceptcustom1label'] = isset( $hc_gems_options['acceptcustom1label'] ) ? $hc_gems_options['acceptcustom1label'] : '';
+		$input['acceptcustom1'] = isset( $hc_gems_options['acceptcustom1'] ) ? $hc_gems_options['acceptcustom1'] : '';
+		$input['legalcheckout-custom1optional'] = isset( $hc_gems_options['legalcheckout-custom1optional'] ) ? $hc_gems_options['legalcheckout-custom1optional'] : 0;
+		$input['acceptcustom2label'] = isset( $hc_gems_options['acceptcustom2label'] ) ? $hc_gems_options['acceptcustom2label'] : '';
+		$input['acceptcustom2'] = isset( $hc_gems_options['acceptcustom2'] ) ? $hc_gems_options['acceptcustom2'] : '';
+		$input['legalcheckout-custom2optional'] = isset( $hc_gems_options['legalcheckout-custom2optional'] ) ? $hc_gems_options['legalcheckout-custom2optional'] : 0;
+		$input['beforeorderbuttonmessage'] = isset( $hc_gems_options['beforeorderbuttonmessage'] ) ? $hc_gems_options['beforeorderbuttonmessage'] : '';
+		$input['afterorderbuttonmessage'] = isset( $hc_gems_options['afterorderbuttonmessage'] ) ? $hc_gems_options['afterorderbuttonmessage'] : '';
 
 		// Global informations
-		$input['globalinfoname'] = isset( $options['globalinfoname'] ) ? $options['globalinfoname'] : '';
-		$input['globalinfocompany'] = isset( $options['globalinfocompany'] ) ? $options['globalinfocompany'] : '';
-		$input['globalinfoheadquarters'] = isset( $options['globalinfoheadquarters'] ) ? $options['globalinfoheadquarters'] : '';
-		$input['globalinfotaxnumber'] = isset( $options['globalinfotaxnumber'] ) ? $options['globalinfotaxnumber'] : '';
-		$input['globalinforegnumber'] = isset( $options['globalinforegnumber'] ) ? $options['globalinforegnumber'] : '';
-		$input['globalinfoaddress'] = isset( $options['globalinfoaddress'] ) ? $options['globalinfoaddress'] : '';
-		$input['globalinfobankaccount'] = isset( $options['globalinfobankaccount'] ) ? $options['globalinfobankaccount'] : '';
-		$input['globalinfomobile'] = isset( $options['globalinfomobile'] ) ? $options['globalinfomobile'] : '';
-		$input['globalinfophone'] = isset( $options['globalinfophone'] ) ? $options['globalinfophone'] : '';
-		$input['globalinfoemail'] = isset( $options['globalinfoemail'] ) ? $options['globalinfoemail'] : '';
-		$input['globalinfoaboutus'] = isset( $options['globalinfoaboutus'] ) ? $options['globalinfoaboutus'] : '';
+		$input['globalinfoname'] = isset( $hc_gems_options['globalinfoname'] ) ? $hc_gems_options['globalinfoname'] : '';
+		$input['globalinfocompany'] = isset( $hc_gems_options['globalinfocompany'] ) ? $hc_gems_options['globalinfocompany'] : '';
+		$input['globalinfoheadquarters'] = isset( $hc_gems_options['globalinfoheadquarters'] ) ? $hc_gems_options['globalinfoheadquarters'] : '';
+		$input['globalinfotaxnumber'] = isset( $hc_gems_options['globalinfotaxnumber'] ) ? $hc_gems_options['globalinfotaxnumber'] : '';
+		$input['globalinforegnumber'] = isset( $hc_gems_options['globalinforegnumber'] ) ? $hc_gems_options['globalinforegnumber'] : '';
+		$input['globalinfoaddress'] = isset( $hc_gems_options['globalinfoaddress'] ) ? $hc_gems_options['globalinfoaddress'] : '';
+		$input['globalinfobankaccount'] = isset( $hc_gems_options['globalinfobankaccount'] ) ? $hc_gems_options['globalinfobankaccount'] : '';
+		$input['globalinfomobile'] = isset( $hc_gems_options['globalinfomobile'] ) ? $hc_gems_options['globalinfomobile'] : '';
+		$input['globalinfophone'] = isset( $hc_gems_options['globalinfophone'] ) ? $hc_gems_options['globalinfophone'] : '';
+		$input['globalinfoemail'] = isset( $hc_gems_options['globalinfoemail'] ) ? $hc_gems_options['globalinfoemail'] : '';
+		$input['globalinfoaboutus'] = isset( $hc_gems_options['globalinfoaboutus'] ) ? $hc_gems_options['globalinfoaboutus'] : '';
 	}
 
 	// Check legacy HuCommerce users
-	$input['legacyuser'] = $options && ( !isset( $options['brandnewuser'] ) || ( isset( $options['legacyuser'] ) && 1 == $options['legacyuser'] ) ) ? 1 : 0;
+	$input['legacyuser'] = !isset( $hc_gems_options['brandnewuser'] ) || ( isset( $hc_gems_options['legacyuser'] ) && 1 == $hc_gems_options['legacyuser'] ) ? 1 : 0;
 
 	// Check brand new HuCommerce users (from HuCommerce 2022.1.0 version)
 	$input['brandnewuser'] = 1;

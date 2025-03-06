@@ -38,19 +38,19 @@ function cps_wcgems_hc_validate_checkout_fields() {
 	}
 
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	// Get the "Address line 2 field" setting
 	// $woocommercecheckoutaddress2fieldValue = false !== get_option( 'woocommerce_checkout_address_2_field' ) ? get_option( 'woocommerce_checkout_address_2_field' ) : '';
 
 	// Get the settings
-	$validatebillingtaxfieldValue = $options['validatebillingtaxfield'] ?? 0;
-	$validatebillingcityfieldValue = $options['validatebillingcityfield'] ?? 0;
-	$validatebillingaddressfieldValue = $options['validatebillingaddressfield'] ?? 0;
-	$validatebillingphonefieldValue = $options['validatebillingphonefield'] ?? 0;
-	$validateshippingcityfieldValue = $options['validateshippingcityfield'] ?? 0;
-	$validateshippingaddressfieldValue = $options['validateshippingaddressfield'] ?? 0;
-	$validatecheckoutfields_mobileonly_value = $options['validatecheckoutfields-mobileonly'] ?? 0;
+	$validatebillingtaxfieldValue = $hc_gems_options['validatebillingtaxfield'] ?? 0;
+	$validatebillingcityfieldValue = $hc_gems_options['validatebillingcityfield'] ?? 0;
+	$validatebillingaddressfieldValue = $hc_gems_options['validatebillingaddressfield'] ?? 0;
+	$validatebillingphonefieldValue = $hc_gems_options['validatebillingphonefield'] ?? 0;
+	$validateshippingcityfieldValue = $hc_gems_options['validateshippingcityfield'] ?? 0;
+	$validateshippingaddressfieldValue = $hc_gems_options['validateshippingaddressfield'] ?? 0;
+	$validatecheckoutfields_mobileonly_value = $hc_gems_options['validatecheckoutfields-mobileonly'] ?? 0;
 
 	// Get the submitted fields
 	$billing_tax_number = !empty( $_POST['billing_tax_number'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_tax_number'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
@@ -64,7 +64,7 @@ function cps_wcgems_hc_validate_checkout_fields() {
 
 	// Define area code arrays
 	$budapest_area_code = array( 1 );
-	$mobile_area_codes = array( 20, 30, 31, 70 );
+	$mobile_area_codes = array( 20, 30, 31, 50, 70 );
 	$six_digit_area_codes = array( 22, 23, 24, 25, 26, 27, 28, 29, 32, 33, 34, 35, 36, 37, 42, 44, 45, 46, 47, 48, 49, 52, 53, 54, 56, 57, 59, 62, 63, 66, 68, 69, 72, 73, 74, 75, 76, 77, 78, 79, 82, 83, 84, 85, 87, 88, 89, 92, 93, 94, 95, 96, 99 );
 
 	// Set patterns
@@ -199,10 +199,10 @@ add_action( 'wp_footer', function() {
 	}
 
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	// Get the settings
-	$validatebillingtaxfieldValue = $options['validatebillingtaxfield'] ?? 0;
+	$validatebillingtaxfieldValue = $hc_gems_options['validatebillingtaxfield'] ?? 0;
 
 	if ( 1 == $validatebillingtaxfieldValue ) {
 	?>

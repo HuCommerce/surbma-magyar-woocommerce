@@ -268,8 +268,8 @@ add_action( 'admin_notices', function() {
 	}
 
 	// Get the settings array
-	global $options;
-	if ( !empty( $options ) ) {
+	global $hc_gems_options;
+	if ( !empty( $hc_gems_options ) ) {
 		return;
 	}
 
@@ -318,8 +318,8 @@ add_action( 'admin_notices', function() {
 	}
 
 	// Get the settings array
-	global $options;
-	if ( empty( $options ) ) {
+	global $hc_gems_options;
+	if ( empty( $hc_gems_options ) ) {
 		return;
 	}
 

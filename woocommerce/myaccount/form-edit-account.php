@@ -27,8 +27,8 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 
 	<?php // * BEGIN HUCOMMERCE ?>
 	<?php
-		$options = get_option( 'surbma_hc_fields', array() );
-		$huformatfixValue = $options['huformatfix'] ?? 0;
+		$hc_gems_options = get_option( 'surbma_hc_fields', array() );
+		$huformatfixValue = $hc_gems_options['huformatfix'] ?? 0;
 	?>
 
 	<?php if ( 1 == $huformatfixValue && ( 'hu_HU' == get_locale() || 'hu' == get_locale() ) ) { ?>

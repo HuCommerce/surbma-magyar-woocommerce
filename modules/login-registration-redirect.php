@@ -9,9 +9,9 @@ defined( 'ABSPATH' ) || exit;
 
 add_filter( 'woocommerce_login_redirect', function( $redirect, $user ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$loginredirecturlValue = $options['loginredirecturl'] ?? wc_get_page_permalink( 'shop' );
+	$loginredirecturlValue = $hc_gems_options['loginredirecturl'] ?? wc_get_page_permalink( 'shop' );
 
 	$redirect_page_id = url_to_postid( $redirect );
 	$checkout_page_id = wc_get_page_id( 'checkout' );
@@ -29,9 +29,9 @@ add_filter( 'woocommerce_login_redirect', function( $redirect, $user ) {
 
 add_filter( 'woocommerce_registration_redirect', function( $var ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$registrationredirecturlValue = $options['registrationredirecturl'] ?? wc_get_page_permalink( 'shop' );
+	$registrationredirecturlValue = $hc_gems_options['registrationredirecturl'] ?? wc_get_page_permalink( 'shop' );
 
 	if ( '' == $registrationredirecturlValue ) {
 		return $var;

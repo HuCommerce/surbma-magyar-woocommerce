@@ -16,10 +16,10 @@ function cps_hc_wcgems_nav_item_header( $nav_item_title ) {
 
 function cps_hc_wcgems_module_nav_item( $module_title, $module_option ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	$module = '';
-	$moduleValue = $options[$module_option] ?? 0;
+	$moduleValue = $hc_gems_options[$module_option] ?? 0;
 	$module_class = 1 == $moduleValue ? '' : 'uk-hidden';
 
 	echo '<li class="' . esc_attr( $module_class ) . '"><a class="uk-offcanvas-close uk-modal-close-default"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: triangle-right; ratio: 1"></span> ' . esc_html__( $module_title, 'surbma-magyar-woocommerce' ) . '</a></li>'; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
@@ -27,14 +27,14 @@ function cps_hc_wcgems_module_nav_item( $module_title, $module_option ) {
 
 function cps_hc_wcgems_form_accordion_title( $module_title, $module_option, $module_free = false, $module_new = false, $module_beta = false ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	$module = '';
 	$new = $module_new ? ' <span class="uk-badge">' . __( 'New', 'surbma-magyar-woocommerce' ) . '</span>' : '';
 	$beta = $module_beta ? ' <span class="uk-badge">' . __( 'Beta', 'surbma-magyar-woocommerce' ) . '</span>' : '';
 	$pro = $module_free ? '' : ' <span class="uk-badge" style="background: #fff;color: #ffd700 !important;font-weight: bold;">PRO</span>';
 
-	$moduleValue = $options[$module_option] ?? 0;
+	$moduleValue = $hc_gems_options[$module_option] ?? 0;
 	$module_indicator = 1 == $moduleValue ? '<span class="module-indicator module-on" uk-tooltip="title: Aktív modul"></span>' : '<span class="module-indicator module-off" uk-tooltip="title: Kikapcsolt modul"></span>';
 
 	$allowed_html = array(
@@ -53,10 +53,10 @@ function cps_hc_wcgems_module_card_more( $href ) {
 
 function cps_hc_wcgems_form_field_main( $field_label, $field_option, $field_free = false ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	$field = '';
-	$disabled = $field_free || SURBMA_HC_PREMIUM || ( isset( $options[$field_option] ) && 1 == $options[$field_option] ) ? '' : ' disabled';
+	$disabled = $field_free || SURBMA_HC_PREMIUM || ( isset( $hc_gems_options[$field_option] ) && 1 == $hc_gems_options[$field_option] ) ? '' : ' disabled';
 
 	?>
 	<div class="cps-form-module cps-form-horizontal cps-form-checkbox<?php echo esc_html( $disabled ); ?>">
@@ -64,7 +64,7 @@ function cps_hc_wcgems_form_field_main( $field_label, $field_option, $field_free
 		<div class="uk-form-controls">
 			<div class="switch-wrap">
 				<label class="switch">
-					<?php $optionValue = isset( $options[$field_option] ) ? $options[$field_option] : 0; ?>
+					<?php $optionValue = isset( $hc_gems_options[$field_option] ) ? $hc_gems_options[$field_option] : 0; ?>
 					<input id="<?php echo esc_attr( $field_option ); ?>" name="surbma_hc_fields[<?php echo esc_attr( $field_option ); ?>]" type="checkbox" value="1" <?php checked( '1', $optionValue ); ?><?php echo esc_html( $disabled ); ?> />
 					<span class="slider round"></span>
 				</label>
@@ -88,7 +88,7 @@ function cps_hc_wcgems_form_modal( $modal_title, $modal_content, $modal_id ) {
 
 function cps_hc_wcgems_form_field_checkbox( $field_label, $field_option, $field_info = false, $field_new = false, $field_free = false, $field_default = 0 ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
@@ -121,7 +121,7 @@ function cps_hc_wcgems_form_field_checkbox( $field_label, $field_option, $field_
 		<div class="uk-form-controls">
 			<div class="switch-wrap">
 				<label class="switch">
-					<?php $optionValue = isset( $options[$field_option] ) ? $options[$field_option] : $field_default; ?>
+					<?php $optionValue = isset( $hc_gems_options[$field_option] ) ? $hc_gems_options[$field_option] : $field_default; ?>
 					<input id="<?php echo esc_attr( $field_option ); ?>" name="surbma_hc_fields[<?php echo esc_attr( $field_option ); ?>]" type="checkbox" value="1" <?php checked( '1', $optionValue ); ?><?php echo esc_html( $disabled ); ?> />
 					<span class="slider round"></span>
 				</label>
@@ -143,7 +143,7 @@ function cps_hc_wcgems_form_field_select( $field_label, $field_option, $field_op
 	global $emptycartbutton_checkoutpage_options;
 
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
@@ -176,7 +176,7 @@ function cps_hc_wcgems_form_field_select( $field_label, $field_option, $field_op
 		<div class="uk-form-controls">
 			<select class="uk-select" name="surbma_hc_fields[<?php echo esc_attr( $field_option ); ?>]"<?php echo esc_html( $disabled ); ?>>
 				<?php
-				$selected = isset( $options[$field_option] ) ? $options[$field_option] : $field_default;
+				$selected = isset( $hc_gems_options[$field_option] ) ? $hc_gems_options[$field_option] : $field_default;
 				$p = '';
 				$r = '';
 
@@ -199,7 +199,7 @@ function cps_hc_wcgems_form_field_select( $field_label, $field_option, $field_op
 
 function cps_hc_wcgems_form_field_text( $field_label, $field_option, $field_default = '', $field_info = false, $field_new = false, $field_free = false, $field_description = false, $field_icon = false ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
@@ -233,7 +233,7 @@ function cps_hc_wcgems_form_field_text( $field_label, $field_option, $field_defa
 		<label class="uk-form-label" for="surbma_hc_fields[<?php echo esc_attr( $field_option ); ?>]"><span><?php esc_html_e( $field_label, 'surbma-magyar-woocommerce' ); ?><?php echo wp_kses( $info, $allowed_html ); ?><?php echo wp_kses_post( $new ); ?></span></label><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
 		<div class="uk-form-controls">
 			<div class="uk-inline uk-width-1-1">
-				<?php $optionValue = isset( $options[$field_option] ) ? $options[$field_option] : __( $field_default, 'surbma-magyar-woocommerce' ); ?><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
+				<?php $optionValue = isset( $hc_gems_options[$field_option] ) ? $hc_gems_options[$field_option] : __( $field_default, 'surbma-magyar-woocommerce' ); ?><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
 				<?php if ( $field_icon ) { ?>
 				<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: <?php esc_attr( $field_icon ); ?>"></span>
 				<?php } ?>
@@ -249,7 +249,7 @@ function cps_hc_wcgems_form_field_text( $field_label, $field_option, $field_defa
 
 function cps_hc_wcgems_form_field_number( $field_label, $field_option, $field_default, $field_info = false, $field_new = false, $field_free = false, $field_description = false, $field_icon = false ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
@@ -283,7 +283,7 @@ function cps_hc_wcgems_form_field_number( $field_label, $field_option, $field_de
 		<label class="uk-form-label" for="surbma_hc_fields[<?php echo esc_attr( $field_option ); ?>]"><span><?php esc_html_e( $field_label, 'surbma-magyar-woocommerce' ); ?><?php echo wp_kses( $info, $allowed_html ); ?><?php echo wp_kses_post( $new ); ?></span></label><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
 		<div class="uk-form-controls">
 			<div class="uk-inline uk-width-1-1">
-				<?php $optionValue = isset( $options[$field_option] ) ? $options[$field_option] : __( $field_default, 'surbma-magyar-woocommerce' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
+				<?php $optionValue = isset( $hc_gems_options[$field_option] ) ? $hc_gems_options[$field_option] : __( $field_default, 'surbma-magyar-woocommerce' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
 				<?php if ( $field_icon ) { ?>
 				<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: <?php esc_attr( $field_icon ); ?>"></span>
 				<?php } ?>
@@ -299,7 +299,7 @@ function cps_hc_wcgems_form_field_number( $field_label, $field_option, $field_de
 
 function cps_hc_wcgems_form_field_password( $field_label, $field_option, $field_default, $field_info = false, $field_new = false, $field_free = false, $field_description = false, $field_icon = false ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
@@ -333,7 +333,7 @@ function cps_hc_wcgems_form_field_password( $field_label, $field_option, $field_
 		<label class="uk-form-label" for="surbma_hc_fields[<?php echo esc_attr( $field_option ); ?>]"><span><?php esc_html_e( $field_label, 'surbma-magyar-woocommerce' ); ?><?php echo wp_kses( $info, $allowed_html ); ?><?php echo wp_kses_post( $new ); ?></span></label><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
 		<div class="uk-form-controls">
 			<div class="uk-inline uk-width-1-1">
-				<?php $optionValue = isset( $options[$field_option] ) ? $options[$field_option] : __( $field_default, 'surbma-magyar-woocommerce' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
+				<?php $optionValue = isset( $hc_gems_options[$field_option] ) ? $hc_gems_options[$field_option] : __( $field_default, 'surbma-magyar-woocommerce' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
 				<?php if ( $field_icon ) { ?>
 				<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: <?php esc_attr( $field_icon ); ?>"></span>
 				<?php } ?>
@@ -349,7 +349,7 @@ function cps_hc_wcgems_form_field_password( $field_label, $field_option, $field_
 
 function cps_hc_wcgems_form_field_textarea( $field_label, $field_option, $field_default, $field_info = false, $field_new = false, $field_free = false, $field_description = false ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
 	$disabled = $field_free || SURBMA_HC_PREMIUM ? '' : ' disabled';
@@ -382,7 +382,7 @@ function cps_hc_wcgems_form_field_textarea( $field_label, $field_option, $field_
 	<li class="cps-form-textarea cps-form-horizontal cps-form-horizontal-large<?php echo esc_html( $disabled ); ?>">
 		<label class="uk-form-label" for="surbma_hc_fields[<?php echo esc_attr( $field_option ); ?>]"><span><?php esc_html_e( $field_label, 'surbma-magyar-woocommerce' ); ?><?php echo wp_kses( $info, $allowed_html ); ?><?php echo wp_kses_post( $new ); ?></span></label><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
 		<div class="uk-form-controls">
-			<?php $optionValue = isset( $options[$field_option] ) ? $options[$field_option] : __( $field_default, 'surbma-magyar-woocommerce' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
+			<?php $optionValue = isset( $hc_gems_options[$field_option] ) ? $hc_gems_options[$field_option] : __( $field_default, 'surbma-magyar-woocommerce' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
 			<textarea id="surbma_hc_fields[<?php echo esc_attr( $field_option ); ?>]" class="uk-textarea" cols="50" rows="5" name="surbma_hc_fields[<?php echo esc_attr( $field_option ); ?>]"<?php echo esc_html( $disabled ); ?>><?php echo esc_html( wp_unslash( $optionValue ) ); ?></textarea>
 			<div class="uk-text-meta"><?php esc_html_e( 'HTML tags are allowed', 'surbma-magyar-woocommerce' ); ?><?php echo wp_kses( __( $field_description, 'surbma-magyar-woocommerce' ), $allowed_html ); ?></div><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
 		</div>

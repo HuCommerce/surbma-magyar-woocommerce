@@ -21,14 +21,14 @@ add_action( 'wp_footer', function() {
 	}
 
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	// Get the settings
-	$maskcheckoutfieldsplaceholderValue = $options['maskcheckoutfieldsplaceholder'] ?? 0;
-	$maskbillingtaxfieldValue = $options['maskbillingtaxfield'] ?? 0;
-	$maskbillingpostcodefieldValue = $options['maskbillingpostcodefield'] ?? 0;
-	$maskbillingphonefieldValue = $options['maskbillingphonefield'] ?? 0;
-	$maskshippingpostcodefieldValue = $options['maskshippingpostcodefield'] ?? 0;
+	$maskcheckoutfieldsplaceholderValue = $hc_gems_options['maskcheckoutfieldsplaceholder'] ?? 0;
+	$maskbillingtaxfieldValue = $hc_gems_options['maskbillingtaxfield'] ?? 0;
+	$maskbillingpostcodefieldValue = $hc_gems_options['maskbillingpostcodefield'] ?? 0;
+	$maskbillingphonefieldValue = $hc_gems_options['maskbillingphonefield'] ?? 0;
+	$maskshippingpostcodefieldValue = $hc_gems_options['maskshippingpostcodefield'] ?? 0;
 	?>
 <script id="cps-hc-wcgems-mask-checkout-fields">
 jQuery(document).ready(function($){

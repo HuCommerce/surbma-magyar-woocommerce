@@ -25,13 +25,13 @@ add_filter( 'load_textdomain_mofile', function( $mofile, $domain ) {
 // Load custom translations for plugins and themes
 add_filter( 'load_translation_file', function( $file, $domain, $locale ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	// Get the settings
-	$translations_restrictcontentpro_value = $options['translations-restrictcontentpro'] ?? 0;
-	$translations_woocommerceapimanager_value = $options['translations-woocommerceapimanager'] ?? 0;
-	$translations_woocommercememberships_value = $options['translations-woocommercememberships'] ?? 0;
-	$translations_woocommercesubscriptions_value = $options['translations-woocommercesubscriptions'] ?? 0;
+	$translations_restrictcontentpro_value = $hc_gems_options['translations-restrictcontentpro'] ?? 0;
+	$translations_woocommerceapimanager_value = $hc_gems_options['translations-woocommerceapimanager'] ?? 0;
+	$translations_woocommercememberships_value = $hc_gems_options['translations-woocommercememberships'] ?? 0;
+	$translations_woocommercesubscriptions_value = $hc_gems_options['translations-woocommercesubscriptions'] ?? 0;
 
 	// Return, if no translations are actually activated
 	if ( !$translations_woocommerceapimanager_value && !$translations_restrictcontentpro_value && !$translations_woocommercememberships_value && !$translations_woocommercesubscriptions_value ) {
@@ -96,7 +96,7 @@ add_filter( 'load_translation_file', function( $file, $domain, $locale ) {
 // Load custom translations for plugins and themes
 add_filter( 'load_translation_file', function( $file, $domain, $locale ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
 	// Define translations with their settings key and file paths
 	$translations = [
@@ -123,8 +123,8 @@ add_filter( 'load_translation_file', function( $file, $domain, $locale ) {
 	];
 
 	// Return early if no translations are activated
-	$active_translations = array_filter( $translations, function( $translation ) use ( $options ) {
-		return !empty( $options[$translation['option_key']] );
+	$active_translations = array_filter( $translations, function( $translation ) use ( $hc_gems_options ) {
+		return !empty( $hc_gems_options[$translation['option_key']] );
 	} );
 	
 	if ( empty( $active_translations ) ) {
@@ -132,7 +132,7 @@ add_filter( 'load_translation_file', function( $file, $domain, $locale ) {
 	}
 
 	// Check if the requested domain has an active translation
-	if ( isset( $translations[$domain] ) && !empty( $options[$translations[$domain]['option_key']] ) ) {
+	if ( isset( $translations[$domain] ) && !empty( $hc_gems_options[$translations[$domain]['option_key']] ) ) {
 		if ( file_exists( $translations[$domain]['php_file'] ) ) {
 			return $translations[$domain]['php_file'];
 		}

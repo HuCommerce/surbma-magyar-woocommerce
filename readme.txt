@@ -3,7 +3,7 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 6.7
-Stable tag: 2025.1.2
+Stable tag: 2025.1.3
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -296,6 +296,22 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 
 == Changelog ==
 
+#### 2025.1.3
+
+*Kiadás dátuma: 2025-03-06*
+
+**Város automatikus kitöltése az irányítószám alapján**
+
+- Kisebb javítás, hogy a tooltip jól legyen pozicionálva.
+
+**Mezők értékének ellenőrzése**
+
+- Az 50-es mobil körzetszám hozzáadása a validáláshoz.
+
+**JAVÍTÁS**
+
+- Az `$options` globális változó átnevezése erre: `$hc_gems_options`
+
 #### 2025.1.2
 
 *Kiadás dátuma: 2025-02-27*
@@ -359,7 +375,7 @@ Nagy és régóta várt változásokkal sikerült kiegészíteni a HuCommerce b�
 - További HuCommerce Pro verziók aktiválásának a lehetősége: Multi 2, Multi 5, Multi 10, havi előfizetés és az egyszeri, örökös használatú verzió.
 - A textdomain beállítása átkerült a bővítmény fő fájljába.
 - Kód optimalizálás: feltételek módosítása, hozzáadása, egyszerűsítése; ellenőrzések hozzáadása, konfliktusok kizárása.
-- Az $options globális kezelése.
+- Az `$options` globális kezelése.
 - A modulok kezelése átkerült egy külön fájlba.
 - A WooCommerce verziójának az ellenőrzését kezelő függvény átkerült a start.php fájlba.
 - Minden HuCommerce opció törlése az adatbázisból a bővítmény törlése után.

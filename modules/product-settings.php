@@ -8,10 +8,10 @@
 defined( 'ABSPATH' ) || exit;
 
 // Get the module's settings
-$productsettings_productsubtitleValue = $options['productsubtitle'] ?? 0;
-$productsettings_removeimagezoomValue = $options['productsettings-removeimagezoom'] ?? false;
-$productsettings_addtocartonarchiveValue = $options['addtocartonarchive'] ?? false;
-$productsettings_norelatedproductsValue = $options['norelatedproducts'] ?? false;
+$productsettings_productsubtitleValue = $hc_gems_options['productsubtitle'] ?? 0;
+$productsettings_removeimagezoomValue = $hc_gems_options['productsettings-removeimagezoom'] ?? false;
+$productsettings_addtocartonarchiveValue = $hc_gems_options['addtocartonarchive'] ?? false;
+$productsettings_norelatedproductsValue = $hc_gems_options['norelatedproducts'] ?? false;
 
 /*
  ** Metabox for Products
@@ -163,9 +163,9 @@ endif;
 
 add_filter( 'loop_shop_per_page', function( $cols ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$productsettings_productsnumberValue = $options['productsnumber'] ?? false;
+	$productsettings_productsnumberValue = $hc_gems_options['productsnumber'] ?? false;
 
 	if ( $productsettings_productsnumberValue ) {
 		return $productsettings_productsnumberValue;
@@ -180,9 +180,9 @@ add_filter( 'loop_shop_per_page', function( $cols ) {
 
 add_filter( 'loop_shop_columns', function( $columns ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$productsettings_productsperrowValue = $options['productsperrow'] ?? false;
+	$productsettings_productsperrowValue = $hc_gems_options['productsperrow'] ?? false;
 
 	if ( $productsettings_productsperrowValue ) {
 		return $productsettings_productsperrowValue;
@@ -197,10 +197,10 @@ add_filter( 'loop_shop_columns', function( $columns ) {
 
 add_filter( 'woocommerce_upsell_display_args', function( $args ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$productsettings_upsellproductsnumberValue = $options['upsellproductsnumber'] ?? false;
-	$productsettings_upsellproductsperrowValue = $options['upsellproductsperrow'] ?? false;
+	$productsettings_upsellproductsnumberValue = $hc_gems_options['upsellproductsnumber'] ?? false;
+	$productsettings_upsellproductsperrowValue = $hc_gems_options['upsellproductsperrow'] ?? false;
 
 	if ( $productsettings_upsellproductsnumberValue ) {
 		$args['posts_per_page'] = $productsettings_upsellproductsnumberValue;
@@ -219,10 +219,10 @@ add_filter( 'woocommerce_upsell_display_args', function( $args ) {
 
 add_filter( 'woocommerce_output_related_products_args', function( $args ) {
 	// Get the settings array
-	global $options;
+	global $hc_gems_options;
 
-	$productsettings_relatedproductsnumberValue = $options['relatedproductsnumber'] ?? false;
-	$productsettings_relatedproductsperrowValue = $options['relatedproductsperrow'] ?? false;
+	$productsettings_relatedproductsnumberValue = $hc_gems_options['relatedproductsnumber'] ?? false;
+	$productsettings_relatedproductsperrowValue = $hc_gems_options['relatedproductsperrow'] ?? false;
 
 	if ( $productsettings_relatedproductsnumberValue ) {
 		$args['posts_per_page'] = $productsettings_relatedproductsnumberValue;
