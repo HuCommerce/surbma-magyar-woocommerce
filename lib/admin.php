@@ -22,7 +22,7 @@ include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-modules.php');
 // include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-offers.php');
 include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-directory.php');
 // include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-news.php');
-include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-informations.php');
+include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-information.php');
 include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-license.php');
 include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings.php');
 
@@ -97,10 +97,10 @@ add_action( 'admin_menu', function() {
 
 	$surbma_hc_information_page = add_submenu_page(
 		'surbma-hucommerce-menu',
-		__( 'HuCommerce Informations', 'surbma-magyar-woocommerce' ),
-		__( 'Informations', 'surbma-magyar-woocommerce' ),
+		__( 'HuCommerce Information', 'surbma-magyar-woocommerce' ),
+		__( 'Information', 'surbma-magyar-woocommerce' ),
 		'manage_options',
-		'surbma-hucommerce-informations-menu',
+		'surbma-hucommerce-information-menu',
 		'surbma_hc_information_page'
 	);
 

@@ -24,7 +24,7 @@ function surbma_hc_page_modules_nav() {
 			<?php cps_hc_wcgems_module_nav_item( 'Product price additions', 'module-productpriceadditions' ); ?>
 			<?php cps_hc_wcgems_module_nav_item( 'Legal compliance (GDPR, CCPA, ePrivacy)', 'legalcheckout' ); ?>
 			<?php cps_hc_wcgems_module_nav_item( 'Limit Payment Methods', 'module-limitpaymentmethods' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Global informations', 'module-globalinfo' ); ?>
+			<?php cps_hc_wcgems_module_nav_item( 'Global Information', 'module-globalinfo' ); ?>
 			<?php cps_hc_wcgems_module_nav_item( 'Translations', 'module-translations' ); ?>
 			<?php cps_hc_wcgems_module_nav_item( 'Fixes for Hungarian language', 'huformatfix' ); ?>
 			<?php cps_hc_wcgems_module_nav_item( 'Tax number field', 'taxnumber' ); ?>
@@ -60,7 +60,7 @@ function surbma_hc_pages_nav() {
 	$active_offers_menu = $surbma_hc_offers_page == $screen->base ? 'uk-active' : '';
 	$active_directory_menu = $surbma_hc_directory_page == $screen->base ? 'uk-active' : '';
 	$active_news_menu = $surbma_hc_news_page == $screen->base ? 'uk-active' : '';
-	$active_informations_menu = $surbma_hc_information_page == $screen->base ? 'uk-active' : '';
+	$active_information_menu = $surbma_hc_information_page == $screen->base ? 'uk-active' : '';
 
 	?>
 	<li class="<?php echo esc_attr( $active_offers_menu ); ?> uk-hidden"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-offers-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: star"></span> <?php esc_html_e( 'Offers', 'surbma-magyar-woocommerce' ); ?></a></li>
@@ -77,11 +77,11 @@ function surbma_hc_page_license_nav() {
 	$hc_pro_menu_icon = 'active' == SURBMA_HC_PLUGIN_LICENSE ? 'unlock' : 'lock';
 
 	$active_license_menu = $surbma_hc_license_page == $screen->base ? 'uk-active' : '';
-	$active_informations_menu = $surbma_hc_information_page == $screen->base ? 'uk-active' : '';
+	$active_information_menu = $surbma_hc_information_page == $screen->base ? 'uk-active' : '';
 
 	?>
 	<li class="<?php echo esc_attr( $active_license_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-license-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: <?php echo esc_attr( $hc_pro_menu_icon ); ?>"></span> <?php esc_html_e( 'License management', 'surbma-magyar-woocommerce' ); ?></a></li>
-	<li class="<?php echo esc_attr( $active_informations_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-informations-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: info"></span> <?php esc_html_e( 'Informations', 'surbma-magyar-woocommerce' ); ?></a></li>
+	<li class="<?php echo esc_attr( $active_information_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-information-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: info"></span> <?php esc_html_e( 'Information', 'surbma-magyar-woocommerce' ); ?></a></li>
 	<?php
 }
 

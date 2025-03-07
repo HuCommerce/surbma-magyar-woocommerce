@@ -281,7 +281,7 @@ function surbma_hc_fields_validate( $input ) {
 		$input['beforeorderbuttonmessage'] = isset( $hc_gems_options['beforeorderbuttonmessage'] ) ? $hc_gems_options['beforeorderbuttonmessage'] : '';
 		$input['afterorderbuttonmessage'] = isset( $hc_gems_options['afterorderbuttonmessage'] ) ? $hc_gems_options['afterorderbuttonmessage'] : '';
 
-		// Global informations
+		// Global Information
 		$input['globalinfoname'] = isset( $hc_gems_options['globalinfoname'] ) ? $hc_gems_options['globalinfoname'] : '';
 		$input['globalinfocompany'] = isset( $hc_gems_options['globalinfocompany'] ) ? $hc_gems_options['globalinfocompany'] : '';
 		$input['globalinfoheadquarters'] = isset( $hc_gems_options['globalinfoheadquarters'] ) ? $hc_gems_options['globalinfoheadquarters'] : '';

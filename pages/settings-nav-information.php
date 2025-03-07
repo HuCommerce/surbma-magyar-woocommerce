@@ -46,10 +46,10 @@ WP_Debug_Data::check_for_updates();
 $info = WP_Debug_Data::debug_data();
 echo '<textarea id="website-information" class="uk-textarea" cols="50" rows="10" style="background: #000;" readonly>' . esc_attr( WP_Debug_Data::format( $info, 'info' ) ) . '</textarea>';
 ?>
-<button class="uk-button uk-button-secondary uk-margin-top" onclick="copyWebsiteInformations()"><?php esc_html_e( 'Copy website information', 'surbma-magyar-woocommerce' ); ?></button>
+<button class="uk-button uk-button-secondary uk-margin-top" onclick="copyWebsiteInformation()"><?php esc_html_e( 'Copy website information', 'surbma-magyar-woocommerce' ); ?></button>
 
 <script>
-	function copyWebsiteInformations() {
+	function copyWebsiteInformation() {
 		/* Get the text field */
 		var copyText = document.getElementById("website-information");
 

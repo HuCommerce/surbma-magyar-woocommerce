@@ -330,8 +330,8 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 							<div class="uk-card-body">
 								<span class="uk-label uk-label-danger">Pro</span>
 								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Global informations', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Use these fields for your global informations and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles. Local data will be semantic for search engines.', 'surbma-magyar-woocommerce' ); ?></p>
+								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Global Information', 'surbma-magyar-woocommerce' ); ?></h5>
+								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Use these fields for your global information and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles. Local data will be semantic for search engines.', 'surbma-magyar-woocommerce' ); ?></p>
 								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'globalis-adatok' ); ?></p>
 							</div>
 							<div class="uk-card-footer uk-background-muted">
@@ -792,13 +792,13 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 			<?php echo wp_kses_post( $no_options_notice ); ?>
 		</li>
 		<li>
-			<h3 class="uk-card-title"><?php esc_html_e( 'Global informations', 'surbma-magyar-woocommerce' ); ?></h3>
+			<h3 class="uk-card-title"><?php esc_html_e( 'Global Information', 'surbma-magyar-woocommerce' ); ?></h3>
 
 			<?php echo wp_kses_post( $pro_notice ); ?>
 
 			<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 			<ul class="cps-form-fields uk-list uk-list-divider">
-				<li><p><?php esc_html_e( 'Use these fields for your global informations and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles.', 'surbma-magyar-woocommerce' ); ?></p></li>
+				<li><p><?php esc_html_e( 'Use these fields for your global information and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles.', 'surbma-magyar-woocommerce' ); ?></p></li>
 				<?php cps_hc_wcgems_form_field_text( 'Name', 'globalinfoname', '', false, false, false, 'Shortcode: <code>[hc-nev]</code>' ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'Company', 'globalinfocompany', '', false, false, false, 'Shortcode: <code>[hc-ceg]</code>' ); ?>
 				<?php cps_hc_wcgems_form_field_text( 'Headquarters', 'globalinfoheadquarters', '', false, false, false, 'Shortcode: <code>[hc-szekhely]</code>' ); ?>

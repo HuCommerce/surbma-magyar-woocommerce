@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Module: Global informations
+ * Module: Global Information
  */
 
 // Prevent direct access to the plugin

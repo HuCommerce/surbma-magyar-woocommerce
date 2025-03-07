@@ -83,7 +83,7 @@ add_action( 'personal_options', function( $profileuser ) {
 	?>
 	<table class="form-table">
 		<tr>
-			<th><?php esc_html_e( 'Registration informations', 'surbma-magyar-woocommerce' ); ?></th>
+			<th><?php esc_html_e( 'Registration information', 'surbma-magyar-woocommerce' ); ?></th>
 			<td>
 				<p><strong><?php esc_html_e( 'Privacy Policy', 'surbma-magyar-woocommerce' ); ?>:</strong> <?php echo esc_html( $regacceptpp ); ?></p>
 				<p><strong><?php esc_html_e( 'Registration date', 'surbma-magyar-woocommerce' ); ?>:</strong> <?php echo esc_html( $regdate ); ?></p>
@@ -108,7 +108,7 @@ add_action( 'woocommerce_edit_account_form', function() {
 	$regip = get_user_meta( $user_id, 'reg_ip', true ) ? get_user_meta( $user_id, 'reg_ip', true ) : esc_html__( 'IP address is not available', 'surbma-magyar-woocommerce' );
 	?>
 	<fieldset class="hc-reg-fields">
-		<legend><?php esc_html_e( 'Registration informations', 'surbma-magyar-woocommerce' ); ?></legend>
+		<legend><?php esc_html_e( 'Registration information', 'surbma-magyar-woocommerce' ); ?></legend>
 		<p><?php esc_html_e( 'These fields are read-only, you can not modify them.', 'surbma-magyar-woocommerce' ); ?></p>
 		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 			<label for="reg_accept_pp"><?php esc_html_e( 'Privacy Policy', 'surbma-magyar-woocommerce' ); ?>:</label>
