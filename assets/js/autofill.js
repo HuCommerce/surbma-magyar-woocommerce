@@ -75,8 +75,8 @@ jQuery(document).ready(function($) {
 				cityFieldTouched = true;
 			});
 
-			// Close tooltip when clicking outside
-			$(document).on('click', function(e) {
+			// Close tooltip when clicking outside or focusing on another field
+			$(document).on('click focusin', function(e) {
 				if (!$(e.target).closest('.city-tooltip').length && !$(e.target).is($cityField)) {
 					$tooltip.hide();
 				}
