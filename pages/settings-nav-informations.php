@@ -33,7 +33,7 @@ $plugin_pluginURI = $plugin_data['PluginURI'];
 	<li><span uk-icon="icon: check; ratio: 0.8"></span> Köszönő oldal egyedi módosítási lehetősége.</li>
 </ul>
 
-<h4 class="uk-heading-divider"><?php esc_html_e( 'Website informations', 'surbma-magyar-woocommerce' ); ?></h4>
+<h4 class="uk-heading-divider"><?php esc_html_e( 'Website information', 'surbma-magyar-woocommerce' ); ?></h4>
 <?php
 // global WP_Debug_Data
 if ( ! class_exists( 'WP_Debug_Data' ) ) {
@@ -44,14 +44,14 @@ if ( ! class_exists( 'WP_Site_Health' ) ) {
 }
 WP_Debug_Data::check_for_updates();
 $info = WP_Debug_Data::debug_data();
-echo '<textarea id="website-informations" class="uk-textarea" cols="50" rows="10" style="background: #000;" readonly>' . esc_attr( WP_Debug_Data::format( $info, 'info' ) ) . '</textarea>';
+echo '<textarea id="website-information" class="uk-textarea" cols="50" rows="10" style="background: #000;" readonly>' . esc_attr( WP_Debug_Data::format( $info, 'info' ) ) . '</textarea>';
 ?>
-<button class="uk-button uk-button-secondary uk-margin-top" onclick="copyWebsiteInformations()"><?php esc_html_e( 'Copy website informations', 'surbma-magyar-woocommerce' ); ?></button>
+<button class="uk-button uk-button-secondary uk-margin-top" onclick="copyWebsiteInformations()"><?php esc_html_e( 'Copy website information', 'surbma-magyar-woocommerce' ); ?></button>
 
 <script>
 	function copyWebsiteInformations() {
 		/* Get the text field */
-		var copyText = document.getElementById("website-informations");
+		var copyText = document.getElementById("website-information");
 
 		/* Select the text field */
 		copyText.select();
@@ -62,7 +62,7 @@ echo '<textarea id="website-informations" class="uk-textarea" cols="50" rows="10
 
 		/* Alert the copied text */
 		setTimeout(function() {
-			alert("<?php esc_html_e( 'Website informations are copied', 'surbma-magyar-woocommerce' ); ?>");
+			alert("<?php esc_html_e( 'Website information is copied', 'surbma-magyar-woocommerce' ); ?>");
 		}, 500);
 	}
 </script>
