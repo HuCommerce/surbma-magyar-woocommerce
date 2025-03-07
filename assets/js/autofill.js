@@ -150,6 +150,9 @@ jQuery(document).ready(function($) {
 							// Hide tooltip immediately
 							$tooltip.hide();
 							
+							// Focus the city field
+							$cityField.focus();
+							
 							// Update validation
 							updateCityValidation();
 							
