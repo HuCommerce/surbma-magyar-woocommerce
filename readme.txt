@@ -3,7 +3,7 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 6.7
-Stable tag: 2025.1.3
+Stable tag: 2025.1.4
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -295,6 +295,24 @@ Először töröld a szerver oldali és a böngésző gyorsítótárát és fris
 Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van állítva a webáruház.
 
 == Changelog ==
+
+#### 2025.1.4
+
+*Kiadás dátuma: 2025-03-07*
+
+**Város automatikus kitöltése az irányítószám alapján**
+
+- Tooltip kattintási lehetőségének a javítása.
+- Tooltip elrejtése akkor is, ha másik mező kap fókuszt.
+- Város kiválasztás után a város mező fókuszt kap.
+
+**EGYÉB**
+
+- Az "informations" lecserélése "information"-re minden előfordulási helyen.
+- A HuCommerce opciók megjelenítése az Információk menüpont alatt.
+- Kisebb módosítás az adatbázis elemek megjelenítésében a Licensz kezelés oldalon.
+- A Coming Soon mode kényszerítés kikapcsolása.
+- A whitelist feltétel kiegészítése az environment beállítás figyelésével.
 
 #### 2025.1.3
 
