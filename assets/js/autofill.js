@@ -7,6 +7,27 @@ jQuery(document).ready(function($) {
 			if (!$postcodeField.length) return;
 			
 			let cityFieldTouched = false;
+			let processingClick = false; // Flag to prevent multiple processing
+
+			// Disable WooCommerce's event handlers for postcode fields only
+			window.setTimeout(function() {
+				// Completely unbind all events from postcode field that might interfere
+				$postcodeField.off();
+				
+				// Re-bind necessary handlers manually
+				$postcodeField.on('blur input change focusout keyup', postcodeHandler);
+				
+				// Remove WooCommerce's queue_update_checkout handler from all relevant fields
+				$('form.checkout').off('input keydown change', '.address-field input.input-text, .update_totals_on_change input.input-text');
+				
+				// Re-bind handler for all other fields (excluding postcode)
+				$('form.checkout').on('input keydown change', 
+					'.address-field input.input-text:not(#billing_postcode, #shipping_postcode), .update_totals_on_change input.input-text:not(#billing_postcode, #shipping_postcode)', 
+					function() {
+						$('body').trigger('update_checkout');
+					}
+				);
+			}, 100); // Increased timeout to ensure WooCommerce has set up its handlers
 
 			// Add position relative to the city field's parent element
 			$cityField.parent().css('position', 'relative');
@@ -50,7 +71,7 @@ jQuery(document).ready(function($) {
 				.appendTo('head');
 
 			// If city is manually added, don't change it
-			$cityField.keyup(function() {
+			$cityField.on('keyup change', function() {
 				cityFieldTouched = true;
 			});
 
@@ -61,7 +82,10 @@ jQuery(document).ready(function($) {
 				}
 			});
 
-			$postcodeField.on('blur input change focusout keyup', function() {
+			// Handler function for postcode field
+			function postcodeHandler() {
+				if (processingClick) return; // Skip if we're already processing a click
+				
 				const postcode = $postcodeField.val();
 				const cities = surbma_hc_data[postcode];
 				
@@ -70,46 +94,10 @@ jQuery(document).ready(function($) {
 						// If there's only one city, set it directly
 						$cityField.val(cities[0]);
 						$tooltip.hide();
+						updateCityValidation();
 					} else {
 						// If there are multiple cities, show the tooltip
-						$tooltip.empty();
-						
-						// Add a header
-						$('<div>', {
-							text: 'Település választása:',
-							css: {
-								fontWeight: 'bold',
-								marginBottom: '8px',
-								padding: '0 8px'
-							}
-						}).appendTo($tooltip);
-
-						// Add city options
-						cities.forEach(city => {
-							$('<div>', {
-								class: 'city-option',
-								text: city,
-								css: optionStyle,
-								click: function() {
-									$cityField.val(city);
-									cityFieldTouched = true;
-									$tooltip.hide();
-									
-									const $cityFieldWrapper = $(`.woocommerce-checkout #${type}_city_field`);
-									$cityFieldWrapper.removeClass('woocommerce-invalid woocommerce-invalid-required-field');
-									$cityFieldWrapper.addClass('woocommerce-validated');
-									
-									$('body').trigger('update_checkout');
-								}
-							}).appendTo($tooltip);
-						});
-
-						// Position and show tooltip
-						const tooltipTop = $cityField.outerHeight() + 5;
-						$tooltip.css({
-							top: tooltipTop,
-							left: 0
-						}).show();
+						updateTooltip(cities);
 
 						// Clear the text field if it doesn't match any city in the list
 						if (!cities.includes($cityField.val())) {
@@ -118,29 +106,106 @@ jQuery(document).ready(function($) {
 					}
 					
 					// Handle validation classes
-					if ($cityField.val() !== '') {
-						const $cityFieldWrapper = $(`.woocommerce-checkout #${type}_city_field`);
-						$cityFieldWrapper.removeClass('woocommerce-invalid woocommerce-invalid-required-field');
-						$cityFieldWrapper.addClass('woocommerce-validated');
-					}
+					updateCityValidation();
 					
-					$('body').trigger('update_checkout');
+					// Only trigger update_checkout if the city field has a value
+					if ($cityField.val() !== '') {
+						triggerUpdateCheckout();
+					}
 				} else {
 					$tooltip.hide();
 				}
-			});
+			}
+			
+			// Function to update tooltip with city options
+			function updateTooltip(cities) {
+				$tooltip.empty();
+				
+				// Add a header
+				$('<div>', {
+					text: 'Település választása:',
+					css: {
+						fontWeight: 'bold',
+						marginBottom: '8px',
+						padding: '0 8px'
+					}
+				}).appendTo($tooltip);
 
-			// Show tooltip when clicking on city field if there are multiple options
-			$cityField.on('click', function() {
+				// Add city options with enhanced click handler
+				cities.forEach(city => {
+					$('<div>', {
+						class: 'city-option',
+						text: city,
+						css: optionStyle,
+						mousedown: function(e) { // Using mousedown instead of click
+							e.preventDefault();
+							e.stopPropagation();
+							
+							processingClick = true;
+							
+							// Set the city value immediately
+							$cityField.val(city);
+							cityFieldTouched = true;
+							
+							// Hide tooltip immediately
+							$tooltip.hide();
+							
+							// Update validation
+							updateCityValidation();
+							
+							// Force trigger events in a specific sequence with timeouts
+							setTimeout(function() {
+								$cityField.trigger('change');
+								
+								setTimeout(function() {
+									// Force blur from postcode field
+									$postcodeField.blur();
+									
+									// Move focus elsewhere (to a safe element)
+									$('body').focus();
+									
+									// Trigger update checkout
+									triggerUpdateCheckout();
+									
+									// Reset processing flag
+									processingClick = false;
+								}, 50);
+							}, 50);
+						}
+					}).appendTo($tooltip);
+				});
+
+				// Position and show tooltip
+				const tooltipTop = $cityField.outerHeight() + 5;
+				$tooltip.css({
+					top: tooltipTop,
+					left: 0
+				}).show();
+			}
+			
+			// Function to update city field validation classes
+			function updateCityValidation() {
+				if ($cityField.val() !== '') {
+					const $cityFieldWrapper = $(`.woocommerce-checkout #${type}_city_field`);
+					$cityFieldWrapper.removeClass('woocommerce-invalid woocommerce-invalid-required-field');
+					$cityFieldWrapper.addClass('woocommerce-validated');
+				}
+			}
+			
+			// Function to trigger update checkout with delay
+			function triggerUpdateCheckout() {
+				setTimeout(function() {
+					$('body').trigger('update_checkout');
+				}, 200);
+			}
+
+			// Show tooltip when city field is active and there are multiple options
+			$cityField.on('click focus', function() {
 				const postcode = $postcodeField.val();
 				const cities = surbma_hc_data[postcode];
 				
 				if (cities && cities.length > 1) {
-					const tooltipTop = $cityField.outerHeight() + 5;
-					$tooltip.css({
-						top: tooltipTop,
-						left: 0
-					}).show();
+					updateTooltip(cities);
 				}
 			});
 		}
