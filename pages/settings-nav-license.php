@@ -109,11 +109,11 @@ $license_status = get_option( 'surbma_hc_license_status', array() );
 
 if ( defined( 'WP_DEBUG' ) && 1 == WP_DEBUG ) {
 	echo '<h4>' . esc_html__( 'License options', 'surbma-magyar-woocommerce' ) . '</h4>';
-	echo '<pre>';
+	echo '<textarea id="hc-gems-license-options" class="uk-textarea" cols="50" rows="8" style="background: #000;" readonly>';
 	print_r( $license_options ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
-	echo '</pre>';
+	echo '</textarea>';
 	echo '<h4>' . esc_html__( 'License status', 'surbma-magyar-woocommerce' ) . '</h4>';
-	echo '<pre>';
+	echo '<textarea id="hc-gems-license-status" class="uk-textarea" cols="50" rows="12" style="background: #000;" readonly>';
 	print_r( $license_status ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
-	echo '</pre>';
+	echo '</textarea>';
 }

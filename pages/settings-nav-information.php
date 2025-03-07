@@ -3,6 +3,8 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
+global $hc_gems_options;
+
 $plugin_file = SURBMA_HC_PLUGIN_FILE;
 $plugin_data = get_plugin_data( $plugin_file );
 $plugin_version = $plugin_data['Version'];
@@ -33,9 +35,13 @@ $plugin_pluginURI = $plugin_data['PluginURI'];
 	<li><span uk-icon="icon: check; ratio: 0.8"></span> Köszönő oldal egyedi módosítási lehetősége.</li>
 </ul>
 
+<h4 class="uk-heading-divider"><?php esc_html_e( 'HuCommerce options', 'surbma-magyar-woocommerce' ); ?></h4>
+<textarea id="hc-gems-options" class="uk-textarea" cols="50" rows="10" style="background: #000;" readonly><?php print_r( $hc_gems_options ); ?></textarea>
+<button class="uk-button uk-button-secondary uk-margin-top" onclick="copyHuCommerceOptions()"><?php esc_html_e( 'Copy HuCommerce options', 'surbma-magyar-woocommerce' ); ?></button>
+
 <h4 class="uk-heading-divider"><?php esc_html_e( 'Website information', 'surbma-magyar-woocommerce' ); ?></h4>
 <?php
-// global WP_Debug_Data
+// Global WP_Debug_Data
 if ( ! class_exists( 'WP_Debug_Data' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php';
 }
@@ -49,6 +55,23 @@ echo '<textarea id="website-information" class="uk-textarea" cols="50" rows="10"
 <button class="uk-button uk-button-secondary uk-margin-top" onclick="copyWebsiteInformation()"><?php esc_html_e( 'Copy website information', 'surbma-magyar-woocommerce' ); ?></button>
 
 <script>
+	function copyHuCommerceOptions() {
+		/* Get the text field */
+		var copyText = document.getElementById("hc-gems-options");
+
+		/* Select the text field */
+		copyText.select();
+		copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+		/* Copy the text inside the text field */
+		navigator.clipboard.writeText(copyText.value);
+
+		/* Alert the copied text */
+		setTimeout(function() {
+			alert("<?php esc_html_e( 'HuCommerce options are copied', 'surbma-magyar-woocommerce' ); ?>");
+		}, 500);
+	}
+
 	function copyWebsiteInformation() {
 		/* Get the text field */
 		var copyText = document.getElementById("website-information");
