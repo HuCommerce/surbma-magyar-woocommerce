@@ -14,24 +14,10 @@ defined( 'ABSPATH' ) || exit;
 // Get the current website's domain
 $current_domain = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : wp_parse_url( get_site_url(), PHP_URL_HOST );
 
-// Extract the TLD
+// Extract the TLD & subdomain
 $current_domain_parts = explode( '.', $current_domain );
 $current_tld = end( $current_domain_parts );
 $current_subdomain = reset( $current_domain_parts );
-
-// Get the current environment
-$current_env = wp_get_environment_type();
-
-// Force WooCommerce Coming Soon, if environment is not 'production'
-// add_action( 'init', 'cps_hc_gems_set_woocommerce_coming_soon' );
-// Fires when the woocommerce_coming_soon option is updated with new values
-// add_action( 'update_option_woocommerce_coming_soon', 'cps_hc_gems_set_woocommerce_coming_soon' );
-function cps_hc_gems_set_woocommerce_coming_soon() {
-	$current_env = wp_get_environment_type();
-	if ( 'production' !== $current_env ) {
-		update_option( 'woocommerce_coming_soon', 'yes' );
-	}
-}
 
 // Check if WooCommerce Coming Soon is enabled
 $woocommerce_coming_soon = get_option( 'woocommerce_coming_soon', 'no' );
@@ -43,7 +29,7 @@ $whitelisted = false;
 if ( 'www.hucommerce.hu' === $current_domain ) {
 	$status = 'active';
 	$whitelisted = true;
-} elseif ( 'local' === $current_tld || 'dev' === $current_tld || 'local' === $current_subdomain || 'dev' === $current_subdomain || 'yes' === $woocommerce_coming_soon || 'production' !== $current_env ) {
+} elseif ( 'local' === $current_tld || 'dev' === $current_tld || 'local' === $current_subdomain || 'dev' === $current_subdomain || 'yes' === $woocommerce_coming_soon ) {
 	$status = 'active';
 	$whitelisted = 'dev';
 } else {

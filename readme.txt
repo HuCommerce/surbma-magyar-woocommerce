@@ -3,12 +3,12 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 6.7
-Stable tag: 2025.1.4
+Stable tag: 2025.1.5
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Hasznos javítások a magyar WooCommerce webáruházakhoz.
+Hasznos javítások és kiegészítések a magyar WooCommerce webáruházakhoz.
 
 == Description ==
 
@@ -295,6 +295,18 @@ Először töröld a szerver oldali és a böngésző gyorsítótárát és fris
 Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van állítva a webáruház.
 
 == Changelog ==
+
+#### 2025.1.5
+
+*Kiadás dátuma: 2025-03-14*
+
+**HuCommerce DEV mód**
+
+- Az environment beállítás figyelésének a törlése.
+
+**EGYÉB**
+
+- Az ingyenes teszt verzió opció hozzáadása a Licensz kezeléshez.
 
 #### 2025.1.4
 

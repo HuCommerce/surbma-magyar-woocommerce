@@ -34,7 +34,8 @@ $license_status = get_option( 'surbma_hc_license_status', array() );
 			'1568' => esc_attr__( 'HuCommerce Pro – Multi 5 (annual subscription)', 'surbma-magyar-woocommerce' ),
 			'1567' => esc_attr__( 'HuCommerce Pro – Multi 10 (annual subscription)', 'surbma-magyar-woocommerce' ),
 			'2856' => esc_attr__( 'HuCommerce Pro (monthly subscription)', 'surbma-magyar-woocommerce' ),
-			'4437' => esc_attr__( 'HuCommerce Pro (lifetime)', 'surbma-magyar-woocommerce' )
+			'4437' => esc_attr__( 'HuCommerce Pro (lifetime)', 'surbma-magyar-woocommerce' ),
+			'1324' => esc_attr__( 'HuCommerce Pro - FREE TRIAL', 'surbma-magyar-woocommerce' )
 		);
 
 		if ( isset( $license_options['product_id'] ) && $license_options['product_id'] ) {
