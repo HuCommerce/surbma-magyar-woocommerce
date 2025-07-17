@@ -14,10 +14,12 @@ defined( 'ABSPATH' ) || exit;
 // Get the current website's domain
 $current_domain = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : wp_parse_url( get_site_url(), PHP_URL_HOST );
 
-// Extract the TLD & subdomain
+// Get the parts of the domain
 $current_domain_parts = explode( '.', $current_domain );
 $current_tld = end( $current_domain_parts );
 $current_subdomain = reset( $current_domain_parts );
+$domain_parts_count = count( $current_domain_parts );
+$staging_domain = $domain_parts_count >= 2 ? $current_domain_parts[$domain_parts_count - 2] . '.' . $current_domain_parts[$domain_parts_count - 1] : '';
 
 // Check if WooCommerce Coming Soon is enabled
 $woocommerce_coming_soon = get_option( 'woocommerce_coming_soon', 'no' );
@@ -25,11 +27,48 @@ $woocommerce_coming_soon = get_option( 'woocommerce_coming_soon', 'no' );
 global $whitelisted;
 $whitelisted = false;
 
+// Define allowed TLDs and subdomains
+$allowed_domains = array(
+	'tlds' => array(
+		'dev',
+		'local',
+		'test'
+	),
+	'subdomains' => array( 
+		'dev', 
+		'stage',
+		'test', 
+		'testing', 
+		'local'
+	),
+	'staging_domains' => array(
+		'bigscoots-staging.com',
+		'cloudwaysapp.com',
+		'closte.com',
+		'e.wpstage.net',
+		'flywheelstaging.com',
+		'instawp.xyz',
+		'kinsta.cloud',
+		'onrocket.site',
+		'pantheonsite.io',
+		'pressdns.com',
+		'runcloud.link',
+		'servebolt.com',
+		'sg-host.com',
+		'stacks.run',
+		'tastewp.com',
+		'updraftclone.com',
+		'wpdns.site',
+		'wpengine.com',
+		'zipwp.link'
+	)
+);
+
 // Whitelist enabled domains
 if ( 'www.hucommerce.hu' === $current_domain ) {
 	$status = 'active';
 	$whitelisted = true;
-} elseif ( 'local' === $current_tld || 'dev' === $current_tld || 'local' === $current_subdomain || 'dev' === $current_subdomain || 'yes' === $woocommerce_coming_soon ) {
+} elseif ( in_array( $current_tld, $allowed_domains['tlds'] ) || preg_match( '/^staging\d*$/', $current_subdomain ) || in_array( $current_subdomain, $allowed_domains['subdomains'] ) || in_array( $staging_domain, $allowed_domains['staging_domains'] ) || 'yes' === $woocommerce_coming_soon ) {
 	$status = 'active';
 	$whitelisted = 'dev';
 } else {
@@ -473,7 +512,7 @@ add_action( 'admin_notices', function() {
 			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 			<h3>Érvénytelen vagy lejárt licensz kulcs a HuCommerce Pro beállításánál!</h3>
 			<p>Kérlek ellenőrizd az emailben küldött licensz kulcsot és add meg újra vagy frissítsd és aktiváld újra a HuCommerce beállításánál!
-			<br>A licensz kulcsot a <strong>"Licensz kezelés"</strong> almenüpontban tudod megadni a következő oldalon: <a href="<?php admin_url(); ?>admin.php?page=surbma-hucommerce-license-menu">HuCommerce -> Licensz kezelés</a></p>
+			<br>A licensz kulcsot a <strong>"Licensz kezelés"</strong> almenüpontban tudod megadni a következő oldalon: <a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-license-menu' ) ); ?>">HuCommerce -> Licensz kezelés</a></p>
 		</div>
 		<?php
 	}

@@ -4,11 +4,13 @@
 defined( 'ABSPATH' ) || exit;
 
 // Set the HuCommerce settings array globally
-global $hc_gems_options;
-$hc_gems_options = get_option( 'surbma_hc_fields', array() );
-if ( !is_array( $hc_gems_options ) ) {
-	$hc_gems_options = array();
-}
+add_action( 'init', function() {
+	global $hc_gems_options;
+	$hc_gems_options = get_option( 'surbma_hc_fields', array() );
+	if ( !is_array( $hc_gems_options ) ) {
+		$hc_gems_options = array();
+	}
+}, 0 );
 
 // CPS SDK
 if ( !function_exists( 'cps' ) ) {

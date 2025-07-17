@@ -6,7 +6,7 @@ Requires Plugins: woocommerce
 Plugin URI: https://www.hucommerce.hu/
 Description: Hasznos javítások és kiegészítések a magyar nyelvű WooCommerce webáruházakhoz.
 
-Version: 2025.1.5
+Version: 2025.1.6
 
 Author: HuCommerce.hu
 Author URI: https://www.hucommerce.hu/
@@ -53,7 +53,7 @@ add_action( 'plugins_loaded', function() {
 					<p><strong><?php esc_html_e( 'Thank you for installing HuCommerce plugin!', 'surbma-magyar-woocommerce' ); ?></strong></p>
 					<p><?php esc_html_e( 'To use HuCommerce plugin, you must activate WooCommerce also.', 'surbma-magyar-woocommerce' ); ?>
 					<br><?php esc_html_e( 'If you don\'t want to use WooCommerce, please deactivate HuCommerce plugin!', 'surbma-magyar-woocommerce' ); ?></p>
-					<p><a href="<?php admin_url(); ?>plugins.php" class="button button-primary button-large"><span class="dashicons dashicons-admin-plugins" style="position: relative;top: 5px;left: -3px;"></span> <?php esc_html_e( 'Plugins', 'surbma-magyar-woocommerce' ); ?></a></p>
+					<p><a href="<?php echo esc_url( admin_url( 'plugins.php' ) ); ?>" class="button button-primary button-large"><span class="dashicons dashicons-admin-plugins" style="position: relative;top: 5px;left: -3px;"></span> <?php esc_html_e( 'Plugins', 'surbma-magyar-woocommerce' ); ?></a></p>
 				</div>
 			</div>
 			<?php

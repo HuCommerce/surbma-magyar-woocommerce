@@ -90,6 +90,10 @@ add_action( 'woocommerce_update_product', function( $product_id ) {
 
 // Trigger surbma_hc_update_product_price_history when a product is edited. This is only needed, if _hc_product_price_history is still not saved.
 add_action( 'current_screen', function( $current_screen ) {
+	if ( did_action( 'current_screen' ) ) {
+		return;
+	}
+
 	if ( 'product' != $current_screen->post_type && 'post' === $current_screen->base ) {
 		return;
 	}

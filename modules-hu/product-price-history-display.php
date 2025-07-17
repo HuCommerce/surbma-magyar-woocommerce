@@ -43,7 +43,7 @@ if ( $product ) {
 		$product_price_history = array(
 			array( $current_time, $product_regular_price, $product_price )
 		);
-		add_post_meta( $product_id, '_hc_product_price_history', $product_price_history );
+		update_post_meta( $product_id, '_hc_product_price_history', $product_price_history );
 	}
 
 	$product_price_history = get_post_meta( $product_id, '_hc_product_price_history', true );
@@ -56,8 +56,6 @@ if ( $product ) {
 	// Add heading to chart
 	$chart_heading = array( 'Dátum', 'Normál ár', 'Aktív ár' );
 	array_unshift( $chart_array, $chart_heading );
-	// Convert array to json
-	$chart_data = json_encode( $chart_array );
 
 	// Convert data to CSV
 	$csv = '';
@@ -94,10 +92,10 @@ if ( $product ) {
 			google.charts.setOnLoadCallback(drawChart);
 
 			function drawChart() {
-				var data = google.visualization.arrayToDataTable(<?php echo esc_attr( $chart_data ); ?>);
+				var data = google.visualization.arrayToDataTable(<?php echo wp_json_encode( $chart_array ); ?>);
 
 				var options = {
-					title: 'Termék ár történet: <?php echo esc_attr( $product->get_title() ); ?>',
+					title: 'Termék ár történet: <?php echo esc_js( $product->get_title() ); ?>',
 					curveType: 'function',
 					legend: { position: 'bottom' }
 				};
@@ -247,7 +245,7 @@ if ( $product ) {
 						<div class="uk-margin">
 							<label class="uk-form-label" for="form-horizontal-text">JSON formátum</label>
 							<div class="uk-form-controls">
-								<textarea id="json-data" class="uk-textarea uk-background-muted" rows="10" style="font-family: Consolas,monaco,monospace;font-size: 12px;white-space: pre-wrap;word-break: break-all;" readonly><?php print_r( json_encode( $product_price_history ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r ?></textarea>
+								<textarea id="json-data" class="uk-textarea uk-background-muted" rows="10" style="font-family: Consolas,monaco,monospace;font-size: 12px;white-space: pre-wrap;word-break: break-all;" readonly><?php print_r( wp_json_encode( $product_price_history ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r ?></textarea>
 								<p class="uk-text-right"><button class="uk-button uk-button-secondary" onclick="copyJsonData()">JSON adatok másolása</button></p>
 							</div>
 						</div>
