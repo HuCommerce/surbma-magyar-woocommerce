@@ -295,6 +295,27 @@ add_action( 'admin_notices', function() {
 	}
 } );
 
+// Missing Company name setting notification
+add_action( 'admin_notices', function() {
+	// Get the settings array
+	global $hc_gems_options;
+	$module_taxnumberValue = $hc_gems_options['taxnumber'] ?? 0;
+	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' );
+
+	if ( 1 == $module_taxnumberValue && false == $woocommercecheckoutcompanyfieldValue ) {
+		?>
+		<div class="notice notice-warning notice-alt notice-large is--dismissible">
+			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+			<h3 class="uk-margin-remove-top">HuCommerce értesítés</h3>
+			<p>⚠️ <strong>FONTOS!</strong> Ezt az értesítést azért látod, mert a HuCommerce Adószám megjelenítését használod és a WooCommerce Cégnév megjelenítésének a beállítása hiányzik. Ezért az Adószám mező nem jelenik meg a Pénztár oldalon.</p>
+			<p>✅ <strong>MEGOLDÁS:</strong> Az alábbi gombra kattintva nyisd meg a Testreszabást! Ez egy új fülön fog megnyílni. Ott a WooCommerce → Péntrár fülön találod a "Cégnév mező" opciót. Bármin van éppen, azt változtasd meg, kattints a "Közzététel" gombra, majd állítsd be arra, amire szeretnéd és kattints megint a "Közzététel" gombra!</p>
+			<p>👍 Ezután az Adószám már meg fog újra jelenni és ez az értesítés eltűnik.</p>
+			<p><a href="<?php echo esc_url( admin_url( 'customize.php' ) ); ?>" class="button button-primary button-large" target="_blank"><span class="dashicons dashicons-admin-customizer" style="position: relative;top: 4px;left: -3px;"></span> Testreszabás megnyitása</a></p>
+		</div>
+		<?php
+	}
+} );
+
 // * HUCOMMERCE START
 
 // HuCommerce Pro Promo notice

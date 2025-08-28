@@ -9,7 +9,16 @@ defined( 'ABSPATH' ) || exit;
 
 // Adding Tax number field
 add_filter( 'woocommerce_billing_fields', function( $fields ) {
+	// Get the Checkout Company field value
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' );
+
+	// Set the Checkout Company field value to 'optional' if it does not exist
+	if ( false == $woocommercecheckoutcompanyfieldValue ) {
+		update_option( 'woocommerce_checkout_company_field', 'optional' );
+		$woocommercecheckoutcompanyfieldValue = 'optional';
+	}
+
+	// Initialize Tax number field
 	if ( 'optional' == $woocommercecheckoutcompanyfieldValue || 'required' == $woocommercecheckoutcompanyfieldValue ) {
 		$fields['billing_tax_number'] = array(
 			'label' 		=> __( 'Tax number', 'surbma-magyar-woocommerce' ),

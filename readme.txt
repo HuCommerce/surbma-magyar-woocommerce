@@ -3,7 +3,7 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 6.7
-Stable tag: 2025.1.6
+Stable tag: 2025.1.7
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -296,9 +296,18 @@ Figyelem! A nevek cseréje csak akkor történik meg, ha magyar nyelvre van áll
 
 == Changelog ==
 
+#### 2025.1.7
+
+*Kiadás dátuma: 2025-08-28*
+
+**JAVÍTÁS**
+
+- Az Adószám mező megjelenítése akkor is, ha a Cégnév beállítás hiányzik.
+- Az "Official Integration for Billingo" bővítmény támogatása, hogy az adószám mezőt helyesen kezelje.
+
 #### 2025.1.6
 
-*Kiadás dátuma: 2025-07-17*
+*Kiadás dátuma: 2025-08-24*
 
 **EGYÉB**
 

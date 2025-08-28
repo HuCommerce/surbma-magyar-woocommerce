@@ -6,7 +6,7 @@ Requires Plugins: woocommerce
 Plugin URI: https://www.hucommerce.hu/
 Description: Hasznos javítások és kiegészítések a magyar nyelvű WooCommerce webáruházakhoz.
 
-Version: 2025.1.6
+Version: 2025.1.7
 
 Author: HuCommerce.hu
 Author URI: https://www.hucommerce.hu/
@@ -37,6 +37,9 @@ define( 'SURBMA_HC_PLUGIN_VERSION', isset( $plugin_data['Version'] ) ? $plugin_d
 define( 'SURBMA_HC_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'SURBMA_HC_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SURBMA_HC_PLUGIN_FILE', __FILE__ );
+
+// Define HuCommerce class for future use
+class HuCommerce {}
 
 // Check if WooCommerce is active
 add_action( 'plugins_loaded', function() {
