@@ -1,6 +1,9 @@
-/.wordpress-org
+/.agent-os
+/.claude
 /.git
 /.github
+/.wordpress-org
 
 .distignore
 .gitignore
+CLAUDE.md
