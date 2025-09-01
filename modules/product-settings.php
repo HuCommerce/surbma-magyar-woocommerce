@@ -7,155 +7,146 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-// Get the module's settings
-$productsettings_productsubtitleValue = $hc_gems_options['productsubtitle'] ?? 0;
-$productsettings_removeimagezoomValue = $hc_gems_options['productsettings-removeimagezoom'] ?? false;
-$productsettings_addtocartonarchiveValue = $hc_gems_options['addtocartonarchive'] ?? false;
-$productsettings_norelatedproductsValue = $hc_gems_options['norelatedproducts'] ?? false;
+// Get the module's settings - moved to a function for better performance
+function surbma_hc_get_product_settings() {
+	static $settings = null;
+	if ( $settings === null ) {
+		global $hc_gems_options;
+		$settings = [
+			'productsubtitle' => $hc_gems_options['productsubtitle'] ?? 0,
+			'removeimagezoom' => $hc_gems_options['productsettings-removeimagezoom'] ?? false,
+			'addtocartonarchive' => $hc_gems_options['addtocartonarchive'] ?? false,
+			'norelatedproducts' => $hc_gems_options['norelatedproducts'] ?? false,
+		];
+	}
+	return $settings;
+}
 
 /*
- ** Metabox for Products
+ ** Metabox for Products - Admin only
  */
 
-if ( $productsettings_productsubtitleValue ) :
+// Admin functionality - use admin_init for proper admin context
+add_action( 'admin_init', function() {
+	$settings = surbma_hc_get_product_settings();
+	if ( $settings['productsubtitle'] ) {
+		// Registering Metabox for Products
+		add_action( 'add_meta_boxes', 'surbma_hc_register_product_metabox' );
+		add_action( 'save_post', 'surbma_hc_save_product_metabox', 1, 2 );
+	}
+} );
 
-	// Registering Metabox for Products
-	add_action( 'add_meta_boxes', function() {
-		add_meta_box(
-			'surbma_hc_product_metabox',
-			'HuCommerce ' . __( 'Product Settings', 'surbma-magyar-woocommerce' ),
-			'surbma_hc_product_metabox',
-			'product',
-			'normal',
-			'high'
-		);
-	} );
+function surbma_hc_register_product_metabox() {
+	add_meta_box(
+		'surbma_hc_product_metabox',
+		'HuCommerce ' . __( 'Product Settings', 'surbma-magyar-woocommerce' ),
+		'surbma_hc_product_metabox',
+		'product',
+		'normal',
+		'high'
+	);
+}
 
-	// Metabox on the Product edit page
-	function surbma_hc_product_metabox() {
-		global $post;
+// Metabox on the Product edit page
+function surbma_hc_product_metabox() {
+	global $post;
 
-		// Nonce field to validate form request came from current site
-		wp_nonce_field( basename( __FILE__ ), 'surbma_hc_product_settings_nonce' );
+	// Nonce field to validate form request came from current site
+	wp_nonce_field( basename( __FILE__ ), 'surbma_hc_product_settings_nonce' );
 
-		// Get the field data if it's already been entered
-		$productsubtitle = get_post_meta( $post->ID, 'surbma_hc_product_subtitle', true );
-		// $productcustom = get_post_meta( $post->ID, 'surbma_hc_product_custom', true );
+	// Get the field data if it's already been entered
+	$productsubtitle = get_post_meta( $post->ID, 'surbma_hc_product_subtitle', true );
 
-		// Output the fields
-		echo '<p>';
-		echo '<label for="surbma_hc_product_subtitle">' . esc_html__( 'Product Subtitle', 'surbma-magyar-woocommerce' ) . '</label>';
-		echo '<input id="surbma_hc_product_subtitle" name="surbma_hc_product_subtitle" type="text" value="' . esc_textarea( $productsubtitle ) . '" class="widefat">';
-		echo '</p>';
+	// Output the fields
+	echo '<p>';
+	echo '<label for="surbma_hc_product_subtitle">' . esc_html__( 'Product Subtitle', 'surbma-magyar-woocommerce' ) . '</label>';
+	echo '<input id="surbma_hc_product_subtitle" name="surbma_hc_product_subtitle" type="text" value="' . esc_textarea( $productsubtitle ) . '" class="widefat">';
+	echo '</p>';
 
-		/*
-		echo '<p>';
-		echo '<label for="surbma_hc_product_custom">Product Custom</label>';
-		echo '<input id="surbma_hc_product_custom" name="surbma_hc_product_custom" type="text" value="' . esc_textarea( $productcustom )  . '" class="widefat">';
-		echo '</p>';
-		*/
+	echo '<hr><p style="text-align: center;font-size: smaller;">' . esc_html__( 'These settings are added by the HuCommerce plugin.', 'surbma-magyar-woocommerce' ) . '</p>';
+}
 
-		echo '<hr><p style="text-align: center;font-size: smaller;">' . esc_html__( 'These settings are added by the HuCommerce plugin.', 'surbma-magyar-woocommerce' ) . '</p>';
+// Saving the fields in the Metabox
+function surbma_hc_save_product_metabox( $post_id, $post ) {
+	// Return if the user doesn't have edit permissions
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return $post_id;
 	}
 
-	// Saving the fields in the Metabox
-	add_action( 'save_post', function( $post_id, $post ) {
+	// Don't store meta data, if this is a revision
+	if ( wp_is_post_revision( $post_id ) ) {
+		return;
+	}
 
-		// Return if the user doesn't have edit permissions
-		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			return $post_id;
-		}
+	// Verify this came from our screen and with proper authorization
+	if ( ! isset( $_POST['surbma_hc_product_subtitle'] ) || ! isset( $_POST['surbma_hc_product_settings_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['surbma_hc_product_settings_nonce'] ), basename(__FILE__) ) ) {
+		return $post_id;
+	}
 
-		// Don't store meta data, if this is a revision
-		if ( wp_is_post_revision( $post_id ) ) {
-			return;
-		}
-
-		// Verify this came from our screen and with proper authorization, because save_post can be triggered at other times
-		if ( ! isset( $_POST['surbma_hc_product_subtitle'] ) /*|| ! isset( $_POST['surbma_hc_product_custom'] ) */|| ( ! isset( $_POST['surbma_hc_product_settings_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['surbma_hc_product_settings_nonce'] ), basename(__FILE__) ) ) ) {
-			return $post_id;
-		}
-
-		// This sanitizes the data from the field and saves it into an array $products_meta.
-		$products_meta['surbma_hc_product_subtitle'] = sanitize_text_field( wp_unslash( $_POST['surbma_hc_product_subtitle'] ) );
-		// $products_meta['surbma_hc_product_custom'] = sanitize_text_field( wp_unslash( $_POST['surbma_hc_product_custom'] ) );
-
-		// Cycle through the $products_meta array
-		foreach ( $products_meta as $key => $value ) :
-
-			if ( $value ) {
-				// Update or add meta data to the post
-				update_post_meta( $post_id, $key, $value );
-			} else {
-				// Delete the meta key if there's no value
-				delete_post_meta( $post_id, $key );
-			}
-
-		endforeach;
-
-	}, 1, 2 );
-
-endif;
+	// Sanitize and save the data
+	$productsubtitle = sanitize_text_field( wp_unslash( $_POST['surbma_hc_product_subtitle'] ) );
+	
+	if ( $productsubtitle ) {
+		update_post_meta( $post_id, 'surbma_hc_product_subtitle', $productsubtitle );
+	} else {
+		delete_post_meta( $post_id, 'surbma_hc_product_subtitle' );
+	}
+}
 
 /*
- ** Product Subtitle
+ ** Product Subtitle - Frontend only
  */
 
-if ( $productsettings_productsubtitleValue ) :
+// Frontend functionality - use template_redirect for proper frontend context
+add_action( 'template_redirect', function() {
+	$settings = surbma_hc_get_product_settings();
+	if ( $settings['productsubtitle'] ) {
+		// The Title filter
+		add_filter( 'the_title', 'surbma_hc_add_product_subtitle', 10, 2 );
+		// Custom style for the Subtitle
+		add_action( 'wp_head', 'surbma_hc_product_subtitle_styles' );
+	}
+} );
 
-	// The Title filter
-	add_filter( 'the_title', function( $title, $id ) {
-		$productsubtitle = get_post_meta( $id, 'surbma_hc_product_subtitle', true );
+function surbma_hc_add_product_subtitle( $title, $id ) {
+	$productsubtitle = get_post_meta( $id, 'surbma_hc_product_subtitle', true );
 
-		if ( 'product' == get_post_type( $id ) && in_the_loop() && $productsubtitle ) {
-			$title = $title . ' <span class="product_subtitle" itemprop="description">' . $productsubtitle . '</span>';
-		}
+	if ( 'product' == get_post_type( $id ) && in_the_loop() && $productsubtitle ) {
+		$title = $title . ' <span class="product_subtitle" itemprop="description">' . $productsubtitle . '</span>';
+	}
 
-		return $title;
-	}, 10, 2 );
+	return $title;
+}
 
-	// Custom style for the Subtitle
-	add_action( 'wp_head', function() {
-		echo '<style>.product .product_subtitle {display: block;font-size: smaller;opacity: .75;}</style>';
-	} );
-
-endif;
+function surbma_hc_product_subtitle_styles() {
+	echo '<style>.product .product_subtitle {display: block;font-size: smaller;opacity: .75;}</style>';
+}
 
 /*
- ** Remove Image Zoom
+ ** Other Product Settings - Frontend only
  */
 
-if ( $productsettings_removeimagezoomValue ) :
-
-	add_action( 'wp', function() {
+// Frontend product settings - use template_redirect for proper frontend context
+add_action( 'template_redirect', function() {
+	$settings = surbma_hc_get_product_settings();
+	
+	// Remove Image Zoom
+	if ( $settings['removeimagezoom'] ) {
 		remove_theme_support( 'wc-product-gallery-zoom' );
-	}, 100 );
-
-endif;
-
-/*
- ** Add to cart button on archive pages
- */
-
-if ( $productsettings_addtocartonarchiveValue ) :
-
-	add_action( 'after_setup_theme', function() {
+	}
+	
+	// Add to cart button on archive pages
+	if ( $settings['addtocartonarchive'] ) {
 		add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_add_to_cart', 10 );
-	} );
-
-endif;
-
-/*
- ** Remove related products output
- */
-
-if ( $productsettings_norelatedproductsValue ) :
-
-	add_action( 'woocommerce_after_single_product_summary', function() {
-		remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
-	}, 0 );
-
-endif;
+	}
+	
+	// Remove related products output
+	if ( $settings['norelatedproducts'] ) {
+		add_action( 'woocommerce_after_single_product_summary', function() {
+			remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+		}, 0 );
+	}
+} );
 
 /*
  ** Products per page
