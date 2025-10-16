@@ -1,9 +1,11 @@
-/.agent-os
 /.claude
 /.git
 /.github
+/.idea
 /.wordpress-org
+/agent-os
 
 .distignore
 .gitignore
+AGENTS.md
 CLAUDE.md
