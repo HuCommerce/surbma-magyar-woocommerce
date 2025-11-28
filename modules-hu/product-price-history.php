@@ -538,9 +538,27 @@ endif;
  * Overwrite iThemes Security plugin's PHP Execution settings to enable HuCommerce plugin's product-price-history-display.php file.
  * Settings -> Advanced -> System Tweaks -> PHP Execution -> Disable PHP in Plugins
 **/
+
+// Apache server config modification
 if ( !has_filter( 'itsec_filter_apache_server_config_modification' ) ) {
 	add_filter( 'itsec_filter_apache_server_config_modification', function ( $modification ) {
-		$modification = str_replace( 'RewriteRule ^wp\-content/plugins/.*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]', 'RewriteRule ^wp\-content/plugins/(?!surbma\-magyar\-woocommerce/modules\-hu/product\-price\-history\-display\.php).*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]', $modification );
+		$modification = str_replace( "\t\tRewriteRule ^wp-content/plugins/.*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]\n", "\t\tRewriteRule ^wp-content/plugins/(?!surbma-magyar-woocommerce/modules-hu/product-price-history-display\.php).*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]\n", $modification );
+		return $modification;
+	}, PHP_INT_MAX - 5 );
+}
+
+// Nginx server config modification
+if ( !has_filter( 'itsec_filter_nginx_server_config_modification' ) ) {
+	add_filter( 'itsec_filter_nginx_server_config_modification', function ( $modification ) {
+		$modification = str_replace( "\tlocation ~ ^/wp-content/plugins/.*\.(?:php[1-7]?|pht|phtml?|phps)$ { deny all; }\n", "\tlocation ~ ^/wp-content/plugins/(?!surbma-magyar-woocommerce/modules-hu/product-price-history-display\.php).*\.(?:php[1-7]?|pht|phtml?|phps)$ { deny all; }\n", $modification );
+		return $modification;
+	}, PHP_INT_MAX - 5 );
+}
+
+// LiteSpeed server config modification (uses same format as Apache)
+if ( !has_filter( 'itsec_filter_litespeed_server_config_modification' ) ) {
+	add_filter( 'itsec_filter_litespeed_server_config_modification', function ( $modification ) {
+		$modification = str_replace( "\t\tRewriteRule ^wp-content/plugins/.*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]\n", "\t\tRewriteRule ^wp-content/plugins/(?!surbma-magyar-woocommerce/modules-hu/product-price-history-display\.php).*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]\n", $modification );
 		return $modification;
 	}, PHP_INT_MAX - 5 );
 }
