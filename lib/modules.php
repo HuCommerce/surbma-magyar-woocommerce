@@ -6,135 +6,220 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'init', function() {
 	// Get the settings array
 	global $hc_gems_options;
-	// * HUCOMMERCE START
 
-	// Free HU modules
-	$module_huformatfixValue = $hc_gems_options['huformatfix'] ?? 0;
-	$module_nocountyValue = $hc_gems_options['nocounty'] ?? 0;
-	$module_autofillcityValue = $hc_gems_options['autofillcity'] ?? 0;
-	$module_translationsValue = $hc_gems_options['translations'] ?? 0;
+	// Define all modules with their properties
+	$modules = [
+		// Free HU modules
+		'hu-format-fix' => [
+			'option_key' => 'huformatfix',
+			'type' => 'free_hu',
+			'directory' => 'modules-hu',
+		],
+		'no-county' => [
+			'option_key' => 'nocounty',
+			'type' => 'free_hu',
+			'directory' => 'modules-hu',
+		],
+		'autofill-city' => [
+			'option_key' => 'autofillcity',
+			'type' => 'free_hu',
+			'directory' => 'modules-hu',
+		],
+		'translations-hu' => [
+			'option_key' => 'translations',
+			'type' => 'free_hu',
+			'directory' => 'modules-hu',
+			'file' => 'translations.php',
+			'frontend_only' => true,
+		],
 
-	// New Pro HU modules
-	$module_productpricehistoryValue = $hc_gems_options['module-productpricehistory'] ?? 0;
-	// Force Product Price History module to load to save data for everyone
-	$module_productpricehistoryValue = 1;
+		// Pro HU modules
+		'product-price-history' => [
+			'option_key' => 'module-productpricehistory',
+			'type' => 'pro_hu',
+			'directory' => 'modules-hu',
+			'force_enable' => true, // Force Product Price History module to load to save data for everyone
+		],
 
-	// Legacy Pro HU modules
-	$module_maskcheckoutfieldsValue = SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ? ( $hc_gems_options['maskcheckoutfields'] ?? 0 ) : 0;
-	$module_validatecheckoutfieldsValue = SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ? ( $hc_gems_options['validatecheckoutfields'] ?? 0 ) : 0;
+		// Legacy HU modules
+		'mask-checkout-fields' => [
+			'option_key' => 'maskcheckoutfields',
+			'type' => 'legacy_hu',
+			'directory' => 'modules-hu',
+		],
+		'validate-checkout-fields' => [
+			'option_key' => 'validatecheckoutfields',
+			'type' => 'legacy_hu',
+			'directory' => 'modules-hu',
+			'file' => 'validate-checkout-fields.php',
+		],
 
-	if ( 1 == $module_huformatfixValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules-hu/hu-format-fix.php';
-	}
-	if ( 1 == $module_nocountyValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules-hu/no-county.php';
-	}
-	if ( 1 == $module_autofillcityValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules-hu/autofill-city.php';
-	}
-	if ( 1 == $module_maskcheckoutfieldsValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules-hu/mask-checkout-fields.php';
-	}
-	if ( 1 == $module_validatecheckoutfieldsValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules-hu/vaildate-checkout-fields.php';
-	}
-	if ( 1 == $module_productpricehistoryValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules-hu/product-price-history.php';
-	}
-	if ( 1 == $module_translationsValue && !is_admin() ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules-hu/translations.php';
-	}
+		// Free modules
+		'tax-number' => [
+			'option_key' => 'taxnumber',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'checkout' => [
+			'option_key' => 'module-checkout',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'coupon' => [
+			'option_key' => 'module-coupon',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'plus-minus-buttons' => [
+			'option_key' => 'plusminus',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'update-cart' => [
+			'option_key' => 'updatecart',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'redirect-cart' => [
+			'option_key' => 'module-redirectcart',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'one-product-in-cart' => [
+			'option_key' => 'module-oneproductincart',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'custom-addtocart-button' => [
+			'option_key' => 'module-custom-addtocart-button',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'return-to-shop' => [
+			'option_key' => 'returntoshop',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'login-registration-redirect' => [
+			'option_key' => 'loginregistrationredirect',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'hide-shipping-methods' => [
+			'option_key' => 'module-hideshippingmethods',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'product-settings' => [
+			'option_key' => 'module-productsettings',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'smtp' => [
+			'option_key' => 'module-smtp',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
+		'catalog-mode' => [
+			'option_key' => 'module-catalogmode',
+			'type' => 'free',
+			'directory' => 'modules',
+		],
 
-	// * HUCOMMERCE END
+		// Pro modules
+		'empty-cart-button' => [
+			'option_key' => 'module-emptycartbutton',
+			'type' => 'pro',
+			'directory' => 'modules',
+		],
+		'product-price-additions' => [
+			'option_key' => 'module-productpriceadditions',
+			'type' => 'pro',
+			'directory' => 'modules',
+		],
+		'limit-payment-methods' => [
+			'option_key' => 'module-limitpaymentmethods',
+			'type' => 'pro',
+			'directory' => 'modules',
+		],
+		'translations' => [
+			'option_key' => 'module-translations',
+			'type' => 'pro',
+			'directory' => 'modules',
+		],
 
-	// Free modules
-	$module_taxnumberValue = $hc_gems_options['taxnumber'] ?? 0;
-	$module_checkoutValue = $hc_gems_options['module-checkout'] ?? 0;
-	$module_couponValue = $hc_gems_options['module-coupon'] ?? 0;
-	$module_plusminusValue = $hc_gems_options['plusminus'] ?? 0;
-	$module_updatecartValue = $hc_gems_options['updatecart'] ?? 0;
-	$module_redirectcartValue = $hc_gems_options['module-redirectcart'] ?? 0;
-	$module_oneproductincartValue = $hc_gems_options['module-oneproductincart'] ?? 0;
-	$module_custom_addtocart_buttonValue = $hc_gems_options['module-custom-addtocart-button'] ?? 0;
-	$module_returntoshopValue = $hc_gems_options['returntoshop'] ?? 0;
-	$module_loginregistrationredirectValue = $hc_gems_options['loginregistrationredirect'] ?? 0;
-	$module_hideshippingmethods = $hc_gems_options['module-hideshippingmethods'] ?? 0;
-	$module_productsettingsValue = $hc_gems_options['module-productsettings'] ?? 0;
-	$module_smtpValue = $hc_gems_options['module-smtp'] ?? 0;
-	$module_catalogmodeValue = $hc_gems_options['module-catalogmode'] ?? 0;
+		// Legacy modules
+		'free-shipping-notice' => [
+			'option_key' => 'freeshippingnotice',
+			'type' => 'legacy',
+			'directory' => 'modules',
+		],
+		'legal-checkout' => [
+			'option_key' => 'legalcheckout',
+			'type' => 'legacy',
+			'directory' => 'modules',
+		],
+		'global-info' => [
+			'option_key' => 'module-globalinfo',
+			'type' => 'legacy',
+			'directory' => 'modules',
+		],
+	];
 
-	// New Pro modules
-	$module_emptycartbuttonValue = SURBMA_HC_PREMIUM ? ( $hc_gems_options['module-emptycartbutton'] ?? 0 ) : 0;
-	$module_productpriceadditionsValue = SURBMA_HC_PREMIUM ? ( $hc_gems_options['module-productpriceadditions'] ?? 0 ) : 0;
-	$module_limitpaymentmethodsValue = SURBMA_HC_PREMIUM ? ( $hc_gems_options['module-limitpaymentmethods'] ?? 0 ) : 0;
-	$module_translationsValue = SURBMA_HC_PREMIUM ? ( $hc_gems_options['module-translations'] ?? 0 ) : 0;
+	// Loop through modules and load them
+	foreach ( $modules as $module_key => $module_config ) {
+		// Determine the module value based on type and special conditions
+		$module_value = 0;
 
-	// Legacy Pro modules
-	$module_freeshippingnoticeValue = SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ? ( $hc_gems_options['freeshippingnotice'] ?? 0 ) : 0;
-	$module_legalcheckoutValue = SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ? ( $hc_gems_options['legalcheckout'] ?? 0 ) : 0;
-	$module_globalinfoValue = SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ? ( $hc_gems_options['module-globalinfo'] ?? 0 ) : 0;
+		// Handle force_enable first
+		if ( isset( $module_config['force_enable'] ) && $module_config['force_enable'] ) {
+			$module_value = 1;
+		} else {
+			// Get value based on module type
+			switch ( $module_config['type'] ) {
+				case 'free_hu':
+				case 'free':
+					// Free modules: get from options directly
+					$module_value = $hc_gems_options[ $module_config['option_key'] ] ?? 0;
+					break;
 
-	if ( 1 == $module_taxnumberValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/tax-number.php';
-	}
-	if ( 1 == $module_checkoutValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/checkout.php';
-	}
-	if ( 1 == $module_couponValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/coupon.php';
-	}
-	if ( 1 == $module_plusminusValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/plus-minus-buttons.php';
-	}
-	if ( 1 == $module_updatecartValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/update-cart.php';
-	}
-	if ( 1 == $module_redirectcartValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/redirect-cart.php';
-	}
-	if ( 1 == $module_emptycartbuttonValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/empty-cart-button.php';
-	}
-	if ( 1 == $module_oneproductincartValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/one-product-in-cart.php';
-	}
-	if ( 1 == $module_custom_addtocart_buttonValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/custom-addtocart-button.php';
-	}
-	if ( 1 == $module_returntoshopValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/return-to-shop.php';
-	}
-	if ( 1 == $module_loginregistrationredirectValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/login-registration-redirect.php';
-	}
-	if ( 1 == $module_freeshippingnoticeValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/free-shipping-notice.php';
-	}
-	if ( 1 == $module_hideshippingmethods ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/hide-shipping-methods.php';
-	}
-	if ( 1 == $module_legalcheckoutValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/legal-checkout.php';
-	}
-	if ( 1 == $module_productsettingsValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/product-settings.php';
-	}
-	if ( 1 == $module_limitpaymentmethodsValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/limit-payment-methods.php';
-	}
-	if ( 1 == $module_globalinfoValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/global-info.php';
-	}
-	if ( 1 == $module_smtpValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/smtp.php';
-	}
-	if ( 1 == $module_productpriceadditionsValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/product-price-additions.php';
-	}
-	if ( 1 == $module_catalogmodeValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/catalog-mode.php';
-	}
-	if ( 1 == $module_translationsValue ) {
-		include_once SURBMA_HC_PLUGIN_DIR . '/modules/translations.php';
+				case 'pro_hu':
+				case 'pro':
+					// Pro modules: check SURBMA_HC_PREMIUM first
+					if ( SURBMA_HC_PREMIUM ) {
+						$module_value = $hc_gems_options[ $module_config['option_key'] ] ?? 0;
+					} else {
+						$module_value = 0;
+					}
+					break;
+
+				case 'legacy_hu':
+				case 'legacy':
+					// Legacy modules: check premium OR legacy user condition
+					if ( SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ) {
+						$module_value = $hc_gems_options[ $module_config['option_key'] ] ?? 0;
+					} else {
+						$module_value = 0;
+					}
+					break;
+			}
+		}
+
+		// Load module if value is 1
+		if ( 1 == $module_value ) {
+			// Check frontend_only condition
+			if ( isset( $module_config['frontend_only'] ) && $module_config['frontend_only'] ) {
+				if ( is_admin() ) {
+					continue;
+				}
+			}
+
+			// Determine file path
+			$file_name = isset( $module_config['file'] ) ? $module_config['file'] : $module_key . '.php';
+			$file_path = SURBMA_HC_PLUGIN_DIR . '/' . $module_config['directory'] . '/' . $file_name;
+
+			// Include the module file
+			include_once $file_path;
+		}
 	}
 } );
