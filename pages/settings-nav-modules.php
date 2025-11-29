@@ -229,26 +229,28 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 					?>
 					<li data-license="<?php echo esc_attr( $data_license ); ?>"<?php echo $is_new ? ' data-age="new"' : ''; ?> data-tags="<?php echo esc_attr( $data_tags ); ?>">
 						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<?php if ( $is_new ) : ?>
-									<span class="uk-label uk-label-default"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
-								<?php endif; ?>
+							<div class="uk-card-body uk-flex uk-flex-column">
+								<div class="uk-flex uk-flex-wrap uk-margin-bottom">
+									<?php if ( $is_new ) : ?>
+										<span class="uk-label uk-label-default uk-margin-xsmall-right"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
+									<?php endif; ?>
 
-								<?php if ( $data_license === 'pro' ) : ?>
-									<span class="uk-label uk-label-danger">Pro</span>
-								<?php else : ?>
-									<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<?php endif; ?>
+									<?php if ( $data_license === 'pro' ) : ?>
+										<span class="uk-label uk-label-danger uk-margin-xsmall-right">Pro</span>
+									<?php else : ?>
+										<span class="uk-label uk-label-success uk-margin-xsmall-right"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
+									<?php endif; ?>
 
-								<?php foreach ( $module['tags'] as $tag ) : ?>
-									<span class="uk-label uk-label-warning"><?php echo esc_html( $tag_translations[ $tag ] ?? ucfirst( $tag ) ); ?></span>
-								<?php endforeach; ?>
+									<?php foreach ( $module['tags'] as $tag ) : ?>
+										<span class="uk-label uk-label-warning uk-margin-xsmall-right"><?php echo esc_html( $tag_translations[ $tag ] ?? ucfirst( $tag ) ); ?></span>
+									<?php endforeach; ?>
+								</div>
 
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php echo esc_html( $module['title'] ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php echo esc_html( $module['description'] ); ?></p>
+								<h5 class="uk-text-bold uk-margin-remove-top uk-margin-remove-bottom"><?php echo esc_html( $module['title'] ); ?></h5>
+								<p class="uk-margin-small-top"><?php echo esc_html( $module['description'] ); ?></p>
 
 								<?php if ( ! empty( $module['doc_slug'] ) ) : ?>
-									<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( $module['doc_slug'] ); ?></p>
+									<p class="uk-margin-auto-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( $module['doc_slug'] ); ?></p>
 								<?php endif; ?>
 							</div>
 							<div class="uk-card-footer uk-background-muted">
