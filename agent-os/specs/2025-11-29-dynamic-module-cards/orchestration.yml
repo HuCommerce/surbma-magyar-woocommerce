@@ -1,0 +1,9 @@
+task_groups:
+  - name: Helper Functions
+    claude_code_subagent: implementer
+  - name: Module Array Extension
+    claude_code_subagent: implementer
+  - name: Dynamic Card Rendering
+    claude_code_subagent: implementer
+  - name: Verification
+    claude_code_subagent: implementation-verifier

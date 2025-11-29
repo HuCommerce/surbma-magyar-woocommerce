@@ -201,425 +201,62 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 					</div>
 				</div>
 
+				<?php
+				// Get modules configuration and helper data
+				$modules = hc_get_modules_config();
+				$sorted_modules = hc_sort_modules_for_display( $modules );
+				$new_module_keys = hc_get_new_module_keys( $modules );
+				$tag_translations = hc_get_tag_translations();
+				?>
 				<ul class="js-filter uk-margin-large-bottom uk-flex uk-flex-center" uk-grid uk-height-match="target: > li > .uk-card > .uk-card-body">
-					<li data-license="pro" data-tags="checkout conversion">
+					<?php foreach ( $sorted_modules as $module_key => $module ) :
+						// Skip modules without required UI properties
+						if ( ! isset( $module['title'] ) || ! isset( $module['description'] ) || ! isset( $module['tags'] ) ) {
+							continue;
+						}
+
+						// Determine license type for data attribute
+						$data_license = hc_is_pro_module_type( $module['type'] ) ? 'pro' : 'free';
+
+						// Determine if this is a "new" module
+						$is_new = in_array( $module_key, $new_module_keys, true );
+
+						// Build data-tags attribute
+						$data_tags = implode( ' ', $module['tags'] );
+
+						// Determine if this is a free module (for form field)
+						$is_free = hc_is_free_module_type( $module['type'] );
+					?>
+					<li data-license="<?php echo esc_attr( $data_license ); ?>"<?php echo $is_new ? ' data-age="new"' : ''; ?> data-tags="<?php echo esc_attr( $data_tags ); ?>">
 						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
 							<div class="uk-card-body">
-								<span class="uk-label uk-label-danger">Pro</span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Check field formats (Masking)', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Masking these fields: Billing VAT number, Billing Postcode, Billing Phone, Shipping Postcode', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'mezok-formatumanak-ellenorzese-maszkolas' ); ?></p>
+								<?php if ( $is_new ) : ?>
+									<span class="uk-label uk-label-default"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
+								<?php endif; ?>
+
+								<?php if ( $data_license === 'pro' ) : ?>
+									<span class="uk-label uk-label-danger">Pro</span>
+								<?php else : ?>
+									<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
+								<?php endif; ?>
+
+								<?php foreach ( $module['tags'] as $tag ) : ?>
+									<span class="uk-label uk-label-warning"><?php echo esc_html( $tag_translations[ $tag ] ?? ucfirst( $tag ) ); ?></span>
+								<?php endforeach; ?>
+
+								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php echo esc_html( $module['title'] ); ?></h5>
+								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php echo esc_html( $module['description'] ); ?></p>
+
+								<?php if ( ! empty( $module['doc_slug'] ) ) : ?>
+									<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( $module['doc_slug'] ); ?></p>
+								<?php endif; ?>
 							</div>
 							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'maskcheckoutfields' ); ?>
+								<?php cps_hc_wcgems_form_field_main( __( 'Activate module', 'surbma-magyar-woocommerce' ), $module['option_key'], $is_free ); ?>
 							</div>
 						</div>
 					</li>
-					<li data-license="pro" data-tags="checkout conversion">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-danger">Pro</span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Check field values', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Checking these fields: Billing VAT number, Billing Postcode, Billing Phone, Shipping Postcode', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'mezok-ertekenek-ellenorzese' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'validatecheckoutfields' ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="pro" data-tags="cart conversion">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-danger">Pro</span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Free shipping notification', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'A notification on the Cart page to let customer know, how much total purchase is missing to get free shipping.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'ingyenes-szallitas-ertesites' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'freeshippingnotice' ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="pro" data-tags="cart checkout">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-danger">Pro</span> <span class="uk-label uk-label-warning"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Empty Cart button', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'It will display buttons, that can empty the entire Cart with one click. You can also add a custom link to your navigation with a special parameter, so it is possible to have an Empty Cart link in your menu. Read more about this option in our Documentation.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'kosar-uritese-gomb' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-emptycartbutton' ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="pro" data-tags="product conversion legal">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-danger">Pro</span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Legal', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Product price history', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Saves all Product price changes and can display the lowest price from the previous term. This is a Hungarian legal requirement to protect customers rights.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'termek-ar-tortenet' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-productpricehistory' ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="pro" data-tags="product conversion legal">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-danger">Pro</span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Legal', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Product price additions', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Set a default prefix or suffix for your prices. You can use this feature to give a unit of measure for your product prices or give a general information, that is specific for your webshop and your products. With the above settings you can give your default, global prefix and suffix, but you can customize these fields per product also. Even, you can remove it, when you edit your products.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'termek-ar-kiegeszitesek' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-productpriceadditions' ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="pro" data-tags="checkout conversion legal">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-danger">Pro</span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Legal', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Legal compliance (GDPR, CCPA, ePrivacy)', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Custom Terms & Conditions and Privacy Policy checkboxes on Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'jogi-megfeleles' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'legalcheckout' ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="pro" data-age="new" data-tags="checkout payments">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-default"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-danger">Pro</span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Payments', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Limit Payment Methods', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Disable any Payment Methods for a particular user. The disabled Payment Method will not be shown to the Customer on the Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'fizetesi-modok-korlatozasa' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-limitpaymentmethods' ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="pro" data-tags="other">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-danger">Pro</span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Global Information', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Use these fields for your global information and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles. Local data will be semantic for search engines.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'globalis-adatok' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-globalinfo' ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="pro" data-tags="other">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-danger">Pro</span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Translations for premium plugins & themes', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Adds translations for most popular premium plugins & themes. Supported softwares added regularly. Please let us know, what plugin or theme do you need to be translated next time!', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'forditasok' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-translations' ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="other">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Fixes for Hungarian language', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Fixes the name formats in Hungarian. Changes the order of Last name and First name.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'magyar-formatum-javitasok' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'huformatfix', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="checkout legal">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Legal', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Tax number field', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Additional Tax field for Company details at Checkout.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'adoszam-megjelenitese' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'taxnumber', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="other">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Hungarian translation fixes', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Temporary fixes for Hungarian translations, till the official translation doesn\’t include or missing some strings.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'forditasi-hianyossagok-javitasa' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'translations', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="checkout conversion">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Hide County field if Country is Hungary', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Using County for Hungarian addresses is very uncommon in Hungary.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'megye-mezo-elrejtese-magyar-cim-eseten' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'nocounty', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="checkout conversion">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Autofill City after Postcode is given', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'On the Checkout page the City field be automatically filled, when Postcode is entered by the customer.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'varos-automatikus-kitoltese-az-iranyitoszam-alapjan' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'autofillcity', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="product conversion">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Product customizations', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Extra fields and other customizations for Products.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'termek-modositasok' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-productsettings', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="checkout conversion">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Checkout page customizations', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Extra fields and other customizations on the Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'penztar-oldal-modositasok' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-checkout', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="product cart">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Plus/minus quantity buttons', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Shows plus/minus quantity buttons for products.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'plusz-minusz-mennyisegi-gombok' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'plusminus', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="cart">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Automatic Cart update', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'It will automatically update the cart, when customer changes the quantity on the Cart page.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'kosar-automatikus-frissitese-darabszam-modositas-utan' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'updatecart', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="cart checkout">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Continue shopping buttons', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'A Continue shopping button on Cart and/or Checkout pages, that will bring customer to Shop page.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'vasarlas-folytatasa-gombok' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'returntoshop', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="other">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Login and registration redirection', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Set custom landing pages after login and/or registration.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'belepes-es-regisztracio-utani-atiranyitas' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'loginregistrationredirect', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="checkout">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Coupon field customizations', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Useful settings for the Coupon field on the Checkout page.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'kupon-mezo-modositasok' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-coupon', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="cart checkout conversion">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Redirect Cart page to Checkout page', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'It will redirect the Cart page to Checkout page, so visitors can finish the purchase faster.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'kosar-atiranyitasa-a-penztar-oldalra' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-redirectcart', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="product checkout">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'One product per purchase', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'It will allow only one product in the cart. If cart has a product already, it will be replaced by the new product.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'egy-termek-vasarlasonkent' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-oneproductincart', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="product conversion">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Custom Add To Cart Button', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Customize the Add to cart buttons for your webhop.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'egyedi-kosarba-teszem-gombok' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-custom-addtocart-button', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="cart checkout conversion">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Cart', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Checkout', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Conversion', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Hide shipping methods', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'It will hide all shipping methods, except free shipping, local pickup and other pickup points, when free shipping is available for customers.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'szallitasi-modok-elrejtese' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-hideshippingmethods', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-tags="other">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'SMTP service', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Send emails from a 3rd party SMTP service, instead of using webserver\'s mail() function.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'smtp-szolgaltatas' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-smtp', true ); ?>
-							</div>
-						</div>
-					</li>
-					<li data-license="free" data-age="new" data-tags="product other">
-						<div class="cps-card uk-card uk-card-default uk-card-small uk-card-hover">
-							<div class="uk-card-body">
-								<span class="uk-label uk-label-default"><?php esc_html_e( 'New', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-success"><?php esc_html_e( 'Free', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Product', 'surbma-magyar-woocommerce' ); ?></span>
-								<span class="uk-label uk-label-warning"><?php esc_html_e( 'Other', 'surbma-magyar-woocommerce' ); ?></span>
-								<h5 class="uk-text-bold uk-margin-top uk-margin-remove-bottom"><?php esc_html_e( 'Catalog mode', 'surbma-magyar-woocommerce' ); ?></h5>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php esc_html_e( 'Disables all functions regarding purchasing products. Cart, Checkout and Account pages will be redirected to Shop page.', 'surbma-magyar-woocommerce' ); ?></p>
-								<p class="uk-margin-small-top uk-margin-remove-bottom"><?php cps_hc_wcgems_module_card_more( 'katalogus-mod' ); ?></p>
-							</div>
-							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_wcgems_form_field_main( 'Activate module', 'module-catalogmode', true ); ?>
-							</div>
-						</div>
-					</li>
+					<?php endforeach; ?>
 				</ul>
 			</div>
 		</li>
