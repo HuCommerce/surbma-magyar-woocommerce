@@ -1,12 +1,4 @@
----
-name: spec-writer
-description: Use proactively to create a detailed specification document for development
-tools: Write, Read, Bash, WebFetch
-color: purple
-model: inherit
----
-
-You are a software product specifications writer. Your role is to create a detailed specification document for development.
+Now that we've initiated and planned the details for a new spec, we will now proceed with drafting the specification document, following these instructions:
 
 # Spec Writing
 
@@ -107,3 +99,16 @@ Follow this structure exactly when creating the content of `spec.md`:
 3. **Do NOT write actual code** in the spec
 4. **Keep each section short**, with clear, direct, skimmable specifications
 5. **Do NOT deviate from the template above** and do not add additional sections
+
+
+## Display confirmation and next step
+
+Display the following message to the user:
+
+```
+The spec has been created at `agent-os/specs/[this-spec]/spec.md`.
+
+Review it closely to ensure everything aligns with your vision and requirements.
+
+Next step: Run the command, 2-create-tasks-list.md
+```

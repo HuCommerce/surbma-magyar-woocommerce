@@ -1,122 +1,242 @@
 # HuCommerce Product Roadmap
 
-> Last Updated: 2025-08-24
-> Current Plugin Version: 2025.1.6
-> Status: Mature Product - Active Development
+## Roadmap Overview
 
-## Phase 0: Foundation & Core Features (COMPLETED)
+This roadmap outlines the strategic development phases for HuCommerce, prioritizing features that deliver maximum value to Hungarian WooCommerce store owners while maintaining legal compliance and code quality.
 
-**Duration:** 2014-2025 (11+ years)
-**Status:** ✅ Complete
-**Goal:** Establish HuCommerce as the essential Hungarian WooCommerce plugin
+## Development Philosophy
 
-### Core Localization (✅ Implemented)
-- [x] Hungarian name order formatting (family name first) - WooCommerce 4.4+ compatible
-- [x] Tax number field collection during checkout with validation
-- [x] Postal code-based city auto-fill with complete Hungarian postal database
-- [x] Hungarian-specific checkout page modifications and field masking
-- [x] County field hiding (not used in Hungarian addresses)
-- [x] Telephone number validation with Hungarian format checking
+- **User-Driven**: Features are prioritized based on user feedback and real-world needs
+- **Compliance-First**: Legal and regulatory requirements take priority
+- **Incremental Value**: Each release should provide tangible improvements
+- **Backward Compatible**: Maintain compatibility with existing installations
+- **Quality Over Speed**: Ensure stability and reliability in every release
 
-### User Experience Enhancements (✅ Implemented)
-- Plus/minus quantity buttons for product pages
-- Advanced cart management (auto-update, redirect options, empty cart)
-- Product display settings and modifications
-- Catalog mode for non-selling sites
-- Checkout page improvements and customizations
+---
 
-### Technical Infrastructure (✅ Implemented)
-- Complete admin interface with modular settings
-- Pro license management system
-- HPOS/COT compatibility for WooCommerce
-- WPML and Polylang compatibility
-- Translation system for premium plugins
-- SMTP email configuration
+## Phase 1: Foundation & Core Features ✅ (Completed)
 
-### Legal Compliance (✅ Implemented)
-- Price history tracking for EU regulation compliance
-- Tax number validation and storage
-- GDPR-compliant data handling
+**Status**: Completed  
+**Focus**: Establishing core Hungarian-specific functionality
 
-## Phase 1: Modernization & Developer Experience (IN PROGRESS)
+### Completed Features
+- ✅ Name order fix (surname, first name) for Hungarian locale
+- ✅ Tax number (adószám) field integration
+- ✅ County field hiding
+- ✅ City auto-fill from postal code
+- ✅ Basic checkout modifications
+- ✅ Coupon field enhancements
+- ✅ Plus/minus quantity buttons
+- ✅ Automatic cart updates
+- ✅ One product per cart option
+- ✅ Cart redirect to checkout
+- ✅ Login/registration redirects
+- ✅ Shipping method hiding
+- ✅ Custom add-to-cart buttons
+- ✅ Product settings enhancements
+- ✅ SMTP configuration
+- ✅ Catalog mode
+- ✅ Basic translations
 
-**Duration:** Q3 2025 - Q1 2026 (6 months)
-**Status:** 🔄 Planning
-**Goal:** Modernize development workflow while maintaining backward compatibility
+---
 
-### Must-Have Features
-- [ ] Agent OS integration for better development workflow
-- [ ] Comprehensive documentation system
-- [ ] Automated testing framework
-- [ ] CI/CD pipeline setup
-- [ ] Code quality improvements and refactoring
-- [ ] Performance optimization audit
+## Phase 2: Legal Compliance & Pro Features ✅ (Completed)
 
-### Success Criteria
-- 100% backward compatibility maintained
-- Development workflow improved by 50%
-- Code coverage above 80%
-- Performance benchmarks improved by 20%
+**Status**: Completed  
+**Focus**: Legal compliance and premium functionality
 
-## Phase 2: Advanced Features & Market Expansion (PLANNED)
+### Completed Features
+- ✅ GDPR and ePrivacy compliance tools
+- ✅ Legal checkout checkboxes
+- ✅ Consumer protection compliance
+- ✅ Product price history tracking (EU regulation)
+- ✅ Checkout field validation and masking
+- ✅ Free shipping notice
+- ✅ Empty cart button (Pro)
+- ✅ Product price additions (Pro)
+- ✅ Payment method restrictions (Pro)
+- ✅ Premium plugin translations (Pro)
+- ✅ Global info shortcodes (Pro)
 
-**Duration:** Q2 2026 - Q4 2026 (6 months)
-**Status:** 📋 Planned
-**Goal:** Expand feature set and explore new market opportunities
+---
 
-### Advanced E-commerce Features
-- [ ] Advanced inventory management integrations
-- [ ] Multi-currency support improvements
-- [ ] Enhanced reporting and analytics
-- [ ] Advanced shipping calculator for Hungarian carriers
-- [ ] Integration with Hungarian payment gateways
+## Phase 3: Enhancement & Optimization 🔄 (Current)
 
-### Market Expansion
-- [ ] Czech Republic localization variant
-- [ ] Slovakia localization variant
-- [ ] Regional Central European features
+**Status**: In Progress  
+**Focus**: Improving existing features, performance, and user experience
 
-### Success Criteria
-- 25% increase in active installations
-- Successful launch of at least one regional variant
-- Advanced features adoption rate >40%
+### Current Priorities (2025)
 
-## Phase 3: AI & Automation (FUTURE)
+#### Q1 2025 (Completed)
+- ✅ Enhanced city auto-fill with multiple city support
+- ✅ Improved field validation (phone, postal code, tax number)
+- ✅ Account page integration for all checkout features
+- ✅ Translation system modernization (.l10n.php support)
+- ✅ DEV mode for development environments
+- ✅ Code optimization and refactoring
 
-**Duration:** Q1 2027 - Q2 2027 (6 months)
-**Status:** 💭 Concept
-**Goal:** Integrate AI-powered features for enhanced automation
+#### Q2-Q4 2025 (Planned)
+- 🔄 **Performance Optimization**
+  - Module loading optimization
+  - Database query improvements
+  - Caching strategies for price history
+  - JavaScript bundle optimization
 
-### AI-Powered Features
-- [ ] Intelligent product categorization
-- [ ] Automated Hungarian translation suggestions
-- [ ] Smart pricing recommendations
-- [ ] Customer behavior analytics
-- [ ] Automated compliance checking
+- 🔄 **User Experience Improvements**
+  - Enhanced admin interface
+  - Better module documentation
+  - Improved error messages
+  - User onboarding improvements
 
-### Automation Enhancements
-- [ ] Auto-update postal code database
-- [ ] Intelligent checkout optimization
-- [ ] Smart upselling suggestions
-- [ ] Automated A/B testing framework
+- 🔄 **Feature Enhancements**
+  - Advanced price history analytics
+  - Enhanced checkout field customization
+  - Improved translation coverage
+  - Better WPML/Polylang integration
 
-## Long-term Vision (2027+)
+---
 
-### Strategic Goals
-- Maintain market leadership in Hungarian WooCommerce localization
-- Expand to become the go-to Central European e-commerce plugin
-- Establish partnerships with major Hungarian e-commerce platforms
-- Build ecosystem of complementary plugins and services
+## Phase 4: Advanced Features & Integrations 📅 (Planned)
 
-### Technology Evolution
-- Explore headless commerce compatibility
-- Modern JavaScript framework integration options
-- API-first architecture for better integrations
-- Cloud-based services for advanced features
+**Status**: Planned  
+**Focus**: Advanced functionality and third-party integrations
 
-## Release Cycle
+### Planned Features
 
-- **Major Versions**: Annual (new features, architecture improvements)
-- **Minor Versions**: Quarterly (feature additions, enhancements)
-- **Patch Versions**: As needed (bug fixes, compatibility updates)
-- **WordPress/WooCommerce Compatibility**: Within 2 weeks of major releases
+#### 2026 Q1-Q2
+- 📅 **Advanced Analytics**
+  - Price history dashboard improvements
+  - Checkout abandonment analytics
+  - User behavior tracking (GDPR compliant)
+  - Conversion optimization insights
+
+- 📅 **Enhanced Integrations**
+  - Billingo integration improvements
+  - Additional accounting software integrations
+  - Payment gateway enhancements
+  - Shipping provider integrations
+
+- 📅 **New Compliance Features**
+  - Enhanced GDPR tools
+  - Cookie consent integration
+  - Data export/import improvements
+  - Privacy policy generator
+
+#### 2026 Q3-Q4
+- 📅 **Mobile Optimization**
+  - Enhanced mobile checkout experience
+  - Progressive Web App (PWA) support
+  - Mobile-specific features
+
+- 📅 **AI & Automation**
+  - Smart field suggestions
+  - Automated compliance checks
+  - Intelligent translation suggestions
+
+---
+
+## Phase 5: Ecosystem & Community 📅 (Future)
+
+**Status**: Future Vision  
+**Focus**: Building a complete ecosystem
+
+### Long-Term Vision
+
+- 📅 **Developer Tools**
+  - REST API for custom integrations
+  - Webhook support
+  - Developer documentation portal
+  - Code snippets library
+
+- 📅 **Community Features**
+  - User forum enhancements
+  - Feature request voting system
+  - Community translations
+  - Beta testing program
+
+- 📅 **Marketplace**
+  - Third-party module marketplace
+  - Template compatibility testing
+  - Integration directory
+
+---
+
+## Feature Prioritization Framework
+
+Features are prioritized using the following criteria:
+
+1. **Legal/Compliance Requirements** (Highest Priority)
+   - New regulations
+   - Compliance gaps
+   - Security issues
+
+2. **User-Requested Features** (High Priority)
+   - High-demand features from community
+   - Pain points identified in support
+   - Feature requests with strong user backing
+
+3. **Technical Debt** (Medium Priority)
+   - Code refactoring
+   - Performance improvements
+   - Compatibility updates
+
+4. **Nice-to-Have Features** (Lower Priority)
+   - Quality of life improvements
+   - Advanced features
+   - Experimental functionality
+
+---
+
+## Release Strategy
+
+### Versioning
+- **Major versions** (2025.x.x): Significant feature additions or breaking changes
+- **Minor versions** (x.1.x): New features, enhancements
+- **Patch versions** (x.x.8): Bug fixes, security updates
+
+### Release Cadence
+- **Major releases**: Quarterly or as needed
+- **Minor releases**: Monthly or bi-monthly
+- **Patch releases**: As needed (security, critical bugs)
+
+### Testing Strategy
+- Manual testing on WordPress 5.3+ and WooCommerce 4.6+
+- Compatibility testing with popular themes and plugins
+- Hungarian locale testing
+- User beta testing for major features
+
+---
+
+## Success Metrics
+
+### Adoption Metrics
+- Active installations growth
+- Pro subscription conversion rate
+- Module activation rates
+- User retention
+
+### Quality Metrics
+- Bug report frequency
+- Support ticket volume
+- Code quality scores
+- Test coverage (future)
+
+### User Satisfaction
+- WordPress.org rating
+- User feedback sentiment
+- Community engagement
+- Feature request fulfillment rate
+
+---
+
+## Notes
+
+- This roadmap is a living document and may be adjusted based on:
+  - User feedback and feature requests
+  - Regulatory changes
+  - WordPress/WooCommerce updates
+  - Market conditions
+  - Technical constraints
+
+- Regular reviews and updates ensure the roadmap remains aligned with user needs and business goals.
+
