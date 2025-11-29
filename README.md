@@ -1,11 +1,17 @@
 HuCommerce - Magyar WooCommerce kiegészítések
 =============================================
 
-Hasznos javítások a magyar WooCommerce webáruházakhoz.
+Hasznos javítások és kiegészítések a magyar WooCommerce webáruházakhoz.
 
 ## Project Overview
 
 HuCommerce (surbma-magyar-woocommerce) is a WordPress plugin that provides Hungarian WooCommerce extensions and enhancements. The plugin offers both free and Pro versions with various modules for e-commerce functionality tailored to Hungarian businesses.
+
+## Project Standards
+
+### PHP Coding Standards
+
+- Use the `cps_hc_wcgems_` prefix for all non-anonymous functions.
 
 ## Project Mission
 
