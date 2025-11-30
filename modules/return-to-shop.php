@@ -46,7 +46,7 @@ switch ( $returntoshopcheckoutpositionValue ) {
 		break;
 }
 
-add_action( $continueshoppingmessageHook, function() {
+add_action( $continueshoppingmessageHook, static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -57,7 +57,7 @@ add_action( $continueshoppingmessageHook, function() {
 	echo '</div>';
 }, $continueshoppingmessagePriority );
 
-add_action( $continueshoppingbuttonHook, function() {
+add_action( $continueshoppingbuttonHook, static function() {
 	echo '<a class="button wc-backward returntoshop" href="' . esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ) . '">';
 	echo esc_html__( 'Return to shop', 'woocommerce' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 	echo '</a>';

@@ -27,7 +27,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 defined( 'ABSPATH' ) || exit;
 
 // Localization
-add_action( 'init', function() {
+add_action( 'init', static function() {
 	load_plugin_textdomain( 'surbma-magyar-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 } );
 
@@ -42,13 +42,13 @@ define( 'SURBMA_HC_PLUGIN_FILE', __FILE__ );
 class HuCommerce {}
 
 // Check if WooCommerce is active
-add_action( 'plugins_loaded', function() {
+add_action( 'plugins_loaded', static function() {
 	if ( class_exists( 'WooCommerce' ) ) {
 		// Start the engines.
 		require_once SURBMA_HC_PLUGIN_DIR . '/lib/start.php';
 	} else {
 		// Notify user, that WooCommerce is not active.
-		add_action( 'admin_notices', function() {
+		add_action( 'admin_notices', static function() {
 			?>
 			<div class="notice notice-error">
 				<div style="padding: 20px;">
@@ -66,7 +66,7 @@ add_action( 'plugins_loaded', function() {
 
 // Declare compatibility: Custom order tables
 // https://developer.woocommerce.com/docs/hpos-extension-recipe-book/
-add_action( 'before_woocommerce_init', function() {
+add_action( 'before_woocommerce_init', static function() {
 	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 	}
@@ -74,7 +74,7 @@ add_action( 'before_woocommerce_init', function() {
 
 // Declare incompatibility: Cart & Checkout blocks
 // https://developer.woocommerce.com/2023/11/06/faq-extending-cart-and-checkout-blocks/
-add_action( 'before_woocommerce_init', function() {
+add_action( 'before_woocommerce_init', static function() {
 	if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
 		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, false );
 	}

@@ -391,7 +391,7 @@ function cps_hc_gems_is_free_module_type( $type ) {
 }
 
 // Load modules on init
-add_action( 'init', function() {
+add_action( 'init', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 

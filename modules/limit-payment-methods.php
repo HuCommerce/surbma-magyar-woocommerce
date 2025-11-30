@@ -45,7 +45,7 @@ function cps_hc_gems_save_payment_methods_field( $user_id ) {
 }
 
 // Filter available payment methods by user
-add_filter( 'woocommerce_available_payment_gateways', function( $available_gateways ) {
+add_filter( 'woocommerce_available_payment_gateways', static function( $available_gateways ) {
 	if ( is_user_logged_in() ) {
 		$user_payment_methods = get_user_meta( get_current_user_id(), 'cps_hc_gems_payment_methods', true );
 

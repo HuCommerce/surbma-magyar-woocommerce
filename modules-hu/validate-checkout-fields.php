@@ -7,7 +7,7 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-add_action( 'woocommerce_checkout_process', function() {
+add_action( 'woocommerce_checkout_process', static function() {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce' );
 
@@ -16,7 +16,7 @@ add_action( 'woocommerce_checkout_process', function() {
 } );
 
 // Adding custom validation message for Billing Company field on My Account -> Addresses page
-add_action( 'woocommerce_after_save_address_validation', function( $user_id, $address_type ) {
+add_action( 'woocommerce_after_save_address_validation', static function( $user_id, $address_type ) {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-edit_address', 'woocommerce-edit-address-nonce', false );
 
@@ -192,7 +192,7 @@ function cps_hc_gems_validate_checkout_fields() {
 }
 
 // Custom JavaScript codes
-add_action( 'wp_footer', function() {
+add_action( 'wp_footer', static function() {
 	// Make sure, we are on the right page
 	if ( !is_checkout() && !is_wc_endpoint_url( 'edit-address' ) ) {
 		return;

@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 // Code reference: https://stackoverflow.com/questions/52367826/custom-plus-and-minus-quantity-buttons-in-woocommerce-3
 
-add_action( 'woocommerce_before_quantity_input_field', function() {
+add_action( 'woocommerce_before_quantity_input_field', static function() {
 	if ( is_product() ) {
 		global $product;
 		if ( $product && $product instanceof WC_Product && $product->get_max_purchase_quantity() != 1 ) {
@@ -18,7 +18,7 @@ add_action( 'woocommerce_before_quantity_input_field', function() {
 	}
 } );
 
-add_action( 'woocommerce_after_quantity_input_field', function() {
+add_action( 'woocommerce_after_quantity_input_field', static function() {
 	if ( is_product() ) {
 		global $product;
 		if ( $product && $product instanceof WC_Product && $product->get_max_purchase_quantity() != 1 ) {
@@ -27,7 +27,7 @@ add_action( 'woocommerce_after_quantity_input_field', function() {
 	}
 } );
 
-add_filter( 'woocommerce_cart_item_quantity', function( $product_quantity, $cart_item_key, $cart_item ) {
+add_filter( 'woocommerce_cart_item_quantity', static function( $product_quantity, $cart_item_key, $cart_item ) {
 	$product_data = $cart_item['data'];
 	if ( is_object( $product_data ) ) {
 		$product_properties = $product_data->get_data();
@@ -43,7 +43,7 @@ add_filter( 'woocommerce_cart_item_quantity', function( $product_quantity, $cart
 	return $product_quantity;
 }, 10, 3 );
 
-add_action( 'wp_footer', function() {
+add_action( 'wp_footer', static function() {
 	if ( is_product() || is_cart() ) {
 	?>
 <script>
@@ -105,7 +105,7 @@ jQuery( function( $ ) {
 	}
 } );
 
-add_action( 'wp_head', function() {
+add_action( 'wp_head', static function() {
 	if ( is_product() || is_cart() ) {
 		?>
 <style id="plus-minus-buttons-style">

@@ -7,11 +7,11 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-add_shortcode( 'hc-tel', function( $atts, $content = '' ) {
+add_shortcode( 'hc-tel', static function( $atts, $content = '' ) {
 	return '<a href="tel:+' . preg_replace('/\D/', '', $content) . '">' . $content . '</a>';
 } );
 
-add_shortcode( 'hc-mailto', function( $atts, $content = '' ) {
+add_shortcode( 'hc-mailto', static function( $atts, $content = '' ) {
 	$encodedemail = '';
 
 	for ( $i = 0; $i <strlen( $content ); $i++ ) {
@@ -21,7 +21,7 @@ add_shortcode( 'hc-mailto', function( $atts, $content = '' ) {
 	return '<a href="mailto:' . $encodedemail . '">' . $encodedemail . '</a>';
 } );
 
-add_shortcode( 'hc-nev', function() {
+add_shortcode( 'hc-nev', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -32,7 +32,7 @@ add_shortcode( 'hc-nev', function() {
 	return $cps_hc_gems_options['globalinfoname'];
 } );
 
-add_shortcode( 'hc-ceg', function() {
+add_shortcode( 'hc-ceg', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -43,7 +43,7 @@ add_shortcode( 'hc-ceg', function() {
 	return $cps_hc_gems_options['globalinfocompany'];
 } );
 
-add_shortcode( 'hc-szekhely', function() {
+add_shortcode( 'hc-szekhely', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -54,7 +54,7 @@ add_shortcode( 'hc-szekhely', function() {
 	return $cps_hc_gems_options['globalinfoheadquarters'];
 } );
 
-add_shortcode( 'hc-adoszam', function() {
+add_shortcode( 'hc-adoszam', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -65,7 +65,7 @@ add_shortcode( 'hc-adoszam', function() {
 	return $cps_hc_gems_options['globalinfotaxnumber'];
 } );
 
-add_shortcode( 'hc-cegjegyzekszam', function() {
+add_shortcode( 'hc-cegjegyzekszam', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -76,7 +76,7 @@ add_shortcode( 'hc-cegjegyzekszam', function() {
 	return $cps_hc_gems_options['globalinforegnumber'];
 } );
 
-add_shortcode( 'hc-cim', function() {
+add_shortcode( 'hc-cim', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -87,7 +87,7 @@ add_shortcode( 'hc-cim', function() {
 	return $cps_hc_gems_options['globalinfoaddress'];
 } );
 
-add_shortcode( 'hc-bankszamlaszam', function() {
+add_shortcode( 'hc-bankszamlaszam', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -98,7 +98,7 @@ add_shortcode( 'hc-bankszamlaszam', function() {
 	return $cps_hc_gems_options['globalinfobankaccount'];
 } );
 
-add_shortcode( 'hc-mobiltelefon', function() {
+add_shortcode( 'hc-mobiltelefon', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -109,7 +109,7 @@ add_shortcode( 'hc-mobiltelefon', function() {
 	return '<a href="tel:+' . preg_replace('/\D/', '', $cps_hc_gems_options['globalinfomobile']) . '">' . $cps_hc_gems_options['globalinfomobile'] . '</a>';
 } );
 
-add_shortcode( 'hc-telefon', function() {
+add_shortcode( 'hc-telefon', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -120,7 +120,7 @@ add_shortcode( 'hc-telefon', function() {
 	return '<a href="tel:+' . preg_replace('/\D/', '', $cps_hc_gems_options['globalinfophone']) . '">' . $cps_hc_gems_options['globalinfophone'] . '</a>';
 } );
 
-add_shortcode( 'hc-email', function() {
+add_shortcode( 'hc-email', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -138,7 +138,7 @@ add_shortcode( 'hc-email', function() {
 	return '<a href="mailto:' . $encodedemail . '">' . $encodedemail . '</a>';
 } );
 
-add_shortcode( 'hc-rolunk', function() {
+add_shortcode( 'hc-rolunk', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 

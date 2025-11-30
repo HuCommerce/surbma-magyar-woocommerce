@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 /* Ezt még tesztelnem kell, hogy egyáltalán szükség van-e erre a javításra. Most úgy tűnik, hogy nem kell.
 /*
 // Fix locale if WPML is active.
-add_filter( 'locale', function( $locale ) {
+add_filter( 'locale', static function( $locale ) {
 	if( !is_admin() && defined( 'ICL_LANGUAGE_CODE' ) ) {
 		$languages = icl_get_languages( 'skip_missing=0' );
 		$locale = $languages[ICL_LANGUAGE_CODE]['default_locale'];
@@ -23,7 +23,7 @@ add_filter( 'locale', function( $locale ) {
 
 /*
 // Activated only for debug! Displays WPML variables and values.
-add_action( 'wp_footer', function() {
+add_action( 'wp_footer', static function() {
 	echo 'ICL_LANGUAGE_CODE: ' . ICL_LANGUAGE_CODE;
 	echo '<br>';
 	echo 'get_locale: ' . get_locale();
@@ -45,7 +45,7 @@ add_action( 'wp_footer', function() {
 */
 
 // CSS fixes for themes
-add_action( 'wp_head', function() {
+add_action( 'wp_head', static function() {
 	?>
 <style id="hucommerce-theme-fix">
 <?php if ( is_checkout() && wp_basename( get_bloginfo( 'template_directory' ) ) == 'Avada' ) { ?>
@@ -58,7 +58,7 @@ add_action( 'wp_head', function() {
 }, 999 );
 
 // Customize the checkout default address fields
-add_filter( 'woocommerce_default_address_fields' , function( $address_fields ) {
+add_filter( 'woocommerce_default_address_fields' , static function( $address_fields ) {
 	// Deprecated function since WooCommerce 4.4
 	if ( !cps_hc_gems_woocommerce_version_check( '4.4' ) ) {
 		// Modifications only if language is Hungarian
@@ -85,13 +85,13 @@ add_filter( 'woocommerce_default_address_fields' , function( $address_fields ) {
 } );
 
 // Fixed Hungarian address format
-add_filter( 'woocommerce_localisation_address_formats', function( $format ) {
+add_filter( 'woocommerce_localisation_address_formats', static function( $format ) {
 	$format['HU']="{name}\n{company}\n{postcode} {city}\n{address_1}\n{address_2}\n{country}";
 	return $format;
 } );
 
 // Change the name order if language is Hungarian
-add_filter( 'woocommerce_formatted_address_replacements', function( $replacements, $args ) {
+add_filter( 'woocommerce_formatted_address_replacements', static function( $replacements, $args ) {
 	if ( get_locale() == 'hu_HU' || get_locale() == 'hu' ) {
 		$replacements['{name}'] = $args['last_name'] . ' ' . $args['first_name'];
 	}
@@ -99,7 +99,7 @@ add_filter( 'woocommerce_formatted_address_replacements', function( $replacement
 }, 10, 2 );
 
 // Change the name order on edit order screen
-add_filter( 'woocommerce_admin_billing_fields', function( $billing_fields ) {
+add_filter( 'woocommerce_admin_billing_fields', static function( $billing_fields ) {
 	if ( get_locale() == 'hu_HU' || get_locale() == 'hu' ) {
 		// Save and remove first_name from the array
 		$first_name = $billing_fields['first_name'];
@@ -124,7 +124,7 @@ add_filter( 'woocommerce_admin_billing_fields', function( $billing_fields ) {
 } );
 
 // CSS fixes for admin
-add_action( 'admin_head', function() {
+add_action( 'admin_head', static function() {
 	if ( get_locale() == 'hu_HU' || get_locale() == 'hu' ) {
 	?>
 <style id="hc-admin-hu-format-fix">

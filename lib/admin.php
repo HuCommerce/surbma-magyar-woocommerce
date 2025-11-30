@@ -3,7 +3,7 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-add_action( 'init', function() {
+add_action( 'init', static function() {
 	$test_email_request = isset( $_GET['hc-test-email'] ) ? sanitize_text_field( wp_unslash( $_GET['hc-test-email'] ) ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	if ( $test_email_request ) {
 		$subject = esc_html__( 'HuCommerce test email', 'surbma-magyar-woocommerce' );
@@ -24,7 +24,7 @@ include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings.php');
 include_once( SURBMA_HC_PLUGIN_DIR . '/lib/pages.php');
 
 // Admin options menu - auto-generated from pages config
-add_action( 'admin_menu', function() {
+add_action( 'admin_menu', static function() {
 	$pages = cps_hc_gems_get_registerable_pages();
 	$page_hooks = [];
 	$is_first = true;
@@ -76,7 +76,7 @@ add_action( 'admin_menu', function() {
 }, 98 );
 
 // * HUCOMMERCE START
-add_filter( 'plugin_action_links_' . plugin_basename( SURBMA_HC_PLUGIN_FILE ), function( $actions ) {
+add_filter( 'plugin_action_links_' . plugin_basename( SURBMA_HC_PLUGIN_FILE ), static function( $actions ) {
 	$actions[] = '<a href="'. esc_url( get_admin_url( null, 'admin.php?page=cps_hc_gems_modules') ) .'">' . esc_html__( 'Settings', 'surbma-magyar-woocommerce' ) . '</a>';
 	if ( !SURBMA_HC_PREMIUM ) {
 		$actions[] = '<a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank" style="color: #e22c2f;font-weight: bold;">HuCommerce Pro</a>';
@@ -86,7 +86,7 @@ add_filter( 'plugin_action_links_' . plugin_basename( SURBMA_HC_PLUGIN_FILE ), f
 // * HUCOMMERCE END
 
 // Custom styles and scripts for admin pages
-add_action( 'admin_enqueue_scripts', function( $hook ) {
+add_action( 'admin_enqueue_scripts', static function( $hook ) {
 	$page_hooks = $GLOBALS['cps_hc_gems_page_hooks'] ?? [];
 	$cps_hc_gems_page = in_array( $hook, $page_hooks, true );
 
@@ -211,7 +211,7 @@ function cps_hc_gems_allowed_post_tags() {
 add_action( 'admin_init', array( 'PAnD', 'init' ) );
 
 // Welcome notice
-add_action( 'admin_notices', function() {
+add_action( 'admin_notices', static function() {
 	if ( ! PAnD::is_admin_notice_active( 'surbma-hc-notice-welcome-forever' ) ) {
 		return;
 	}
@@ -245,7 +245,7 @@ add_action( 'admin_notices', function() {
 } );
 
 // Missing Company name setting notification
-add_action( 'admin_notices', function() {
+add_action( 'admin_notices', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 	$module_taxnumberValue = $cps_hc_gems_options['taxnumber'] ?? 0;
@@ -268,7 +268,7 @@ add_action( 'admin_notices', function() {
 // * HUCOMMERCE START
 
 // HuCommerce Pro Promo notice
-add_action( 'admin_notices', function() {
+add_action( 'admin_notices', static function() {
 	if ( PAnD::is_admin_notice_active( 'surbma-hc-notice-welcome-forever' ) ) {
 		return;
 	}
@@ -310,12 +310,12 @@ add_action( 'admin_notices', function() {
 } );
 
 // Purge feed cache after 24 hours
-add_filter( 'wp_feed_cache_transient_lifetime', function( $seconds ) {
+add_filter( 'wp_feed_cache_transient_lifetime', static function( $seconds ) {
 	return 86400;
 } );
 
 // Dashboard widget
-add_action( 'wp_dashboard_setup', function() {
+add_action( 'wp_dashboard_setup', static function() {
 	global $wp_meta_boxes;
 	$user_id = get_current_user_id();
 

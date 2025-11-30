@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Adding Tax number field
-add_filter( 'woocommerce_billing_fields', function( $fields ) {
+add_filter( 'woocommerce_billing_fields', static function( $fields ) {
 	// Get the Checkout Company field value
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' );
 
@@ -32,7 +32,7 @@ add_filter( 'woocommerce_billing_fields', function( $fields ) {
 } );
 
 // Adding placeholder to Tax number field conditionally
-add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
+add_filter( 'woocommerce_checkout_fields' , static function( $fields ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -46,7 +46,7 @@ add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
 }, 20, 1 );
 
 // Adding custom validation message for Tax number field on Checkout page
-add_action( 'woocommerce_checkout_process', function() {
+add_action( 'woocommerce_checkout_process', static function() {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
@@ -55,7 +55,7 @@ add_action( 'woocommerce_checkout_process', function() {
 } );
 
 // Adding custom validation message for Tax number field on My Account -> Addresses page
-add_action( 'woocommerce_after_save_address_validation', function( $user_id, $address_type ) {
+add_action( 'woocommerce_after_save_address_validation', static function( $user_id, $address_type ) {
 	// Only proceed if this is the billing address form
 	if ( 'billing' !== $address_type ) {
 		return;
@@ -87,7 +87,7 @@ function cps_hc_gems_billing_tax_number_check() {
 }
 
 // Saving billing_tax_number field value to user meta on Checkout page for logged in users
-add_action( 'woocommerce_checkout_update_user_meta', function( $customer_id ) {
+add_action( 'woocommerce_checkout_update_user_meta', static function( $customer_id ) {
 	// Only proceed if this is a valid customer ID
 	if ( empty( $customer_id ) ) {
 		return;
@@ -124,7 +124,7 @@ add_filter( 'default_checkout_billing_tax_number', static function( $value ) {
 } );
 
 // Adding editable Tax number field on edit order page
-add_filter( 'woocommerce_admin_billing_fields' , function( $fields ) {
+add_filter( 'woocommerce_admin_billing_fields' , static function( $fields ) {
 	global $the_order;
 
 	$fields['tax_number'] = array(
@@ -138,13 +138,13 @@ add_filter( 'woocommerce_admin_billing_fields' , function( $fields ) {
 } );
 
 // Replacement value for Billing & Shipping address on Thank you page.
-// add_filter( 'woocommerce_get_order_address', function( $address, $type, $order ) {
+// add_filter( 'woocommerce_get_order_address', static function( $address, $type, $order ) {
 // 	$address['tax_number'] = __( 'Tax number', 'surbma-magyar-woocommerce' ) . ': ' . $order->get_meta( '_billing_tax_number' );
 // 	return $address;
 // }, 10, 3 );
 
 // Adding {tax_number} as a new "replacement" field
-add_filter( 'woocommerce_localisation_address_formats', function( $formats ) {
+add_filter( 'woocommerce_localisation_address_formats', static function( $formats ) {
 	foreach ( $formats as $key => &$format ) {
 		$format .= "\n{tax_number}";
 	}
@@ -152,34 +152,34 @@ add_filter( 'woocommerce_localisation_address_formats', function( $formats ) {
 } );
 
 // Replacement for the new {tax_number} field
-add_filter( 'woocommerce_formatted_address_replacements', function( $replacements, $args ) {
+add_filter( 'woocommerce_formatted_address_replacements', static function( $replacements, $args ) {
 	$taxnumber = isset( $args['tax_number'] ) ? $args['tax_number'] : '';
 	$replacements['{tax_number}'] = $taxnumber;
 	return $replacements;
 }, 10, 2 );
 
 // Adding Tax number to My Account -> Addresses page
-add_filter( 'woocommerce_my_account_my_address_formatted_address', function( $address, $customer_id, $address_type ) {
+add_filter( 'woocommerce_my_account_my_address_formatted_address', static function( $address, $customer_id, $address_type ) {
 	$taxnumber = get_user_meta( $customer_id, 'billing_tax_number', true );
 	$address['tax_number'] = 'billing' == $address_type && '' != $taxnumber ? __( 'Tax number', 'surbma-magyar-woocommerce' ) . ': ' . $taxnumber : '';
 	return $address;
 }, 10, 3 );
 
 // Adding Tax number to Billing address on Thank you page and admin Preview
-add_filter( 'woocommerce_order_formatted_billing_address', function( $address, $wc_order ) {
+add_filter( 'woocommerce_order_formatted_billing_address', static function( $address, $wc_order ) {
 	$taxnumber = $wc_order->get_meta( '_billing_tax_number' );
 	$address['tax_number'] = '' != $taxnumber ? __( 'Tax number', 'surbma-magyar-woocommerce' ) . ': ' . $taxnumber : '';
 	return $address;
 }, 10, 2 );
 
 // Removing Tax number from Shipping address on Thank you page
-add_filter( 'woocommerce_order_formatted_shipping_address', function( $address ) {
+add_filter( 'woocommerce_order_formatted_shipping_address', static function( $address ) {
 	$address['tax_number'] = '';
 	return $address;
 } );
 
 // Adding Tax number to user profile
-add_filter( 'woocommerce_customer_meta_fields', function( $profileFieldArray ) {
+add_filter( 'woocommerce_customer_meta_fields', static function( $profileFieldArray ) {
 	$fieldData = array(
 		'label'			=> __( 'Tax number', 'surbma-magyar-woocommerce' ),
 		'description'   => ''
@@ -189,7 +189,7 @@ add_filter( 'woocommerce_customer_meta_fields', function( $profileFieldArray ) {
 } );
 
 // Custom JavaScript codes
-add_action( 'wp_footer', function() {
+add_action( 'wp_footer', static function() {
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
 
 	if ( 'hidden' == $woocommercecheckoutcompanyfieldValue || ( ! is_checkout() && ! is_wc_endpoint_url( 'edit-address' ) ) ) {

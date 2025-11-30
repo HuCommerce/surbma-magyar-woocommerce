@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Configures WordPress PHPMailer
-add_action( 'phpmailer_init', function( $phpmailer ) {
+add_action( 'phpmailer_init', static function( $phpmailer ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 

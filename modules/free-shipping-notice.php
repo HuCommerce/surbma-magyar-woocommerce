@@ -110,7 +110,7 @@ $freeshippingnoticecheckoutValue = $cps_hc_gems_options['freeshippingnoticecheck
 
 if ( 1 === $freeshippingnoticeshoploopValue ) :
 
-	add_action( 'woocommerce_before_shop_loop', function() {
+	add_action( 'woocommerce_before_shop_loop', static function() {
 		$notice = cps_hc_gems_free_shipping_notice( $returntoshop = false );
 		if ( $notice ) {
 			wc_print_notice( $notice, 'notice' );
@@ -121,7 +121,7 @@ endif;
 
 if ( 1 === $freeshippingnoticecartValue ) :
 
-	add_action( 'woocommerce_before_cart', function() {
+	add_action( 'woocommerce_before_cart', static function() {
 		$notice = cps_hc_gems_free_shipping_notice();
 		if ( $notice ) {
 			wc_print_notice( $notice, 'notice' );
@@ -132,7 +132,7 @@ endif;
 
 if ( 1 === $freeshippingnoticecheckoutValue ) :
 
-	add_action( 'woocommerce_before_checkout_form', function() {
+	add_action( 'woocommerce_before_checkout_form', static function() {
 		$notice = cps_hc_gems_free_shipping_notice();
 		if ( $notice ) {
 			wc_print_notice( $notice, 'notice' );

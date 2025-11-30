@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Show Coupons in upper case
-add_action( 'init', function() {
+add_action( 'init', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -21,7 +21,7 @@ add_action( 'init', function() {
 } );
 
 // Remove coupon field
-add_filter( 'woocommerce_coupons_enabled', function( $enabled ) {
+add_filter( 'woocommerce_coupons_enabled', static function( $enabled ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -40,7 +40,7 @@ add_filter( 'woocommerce_coupons_enabled', function( $enabled ) {
 } );
 
 // Coupon field always visible
-add_action( 'wp_head', function() {
+add_action( 'wp_head', static function() {
 	if ( is_checkout() ) {
 		// Get the settings array
 		global $cps_hc_gems_options;
@@ -54,7 +54,7 @@ add_action( 'wp_head', function() {
 } );
 
 // Coupon field reposition
-add_action( 'woocommerce_before_checkout_form', function() {
+add_action( 'woocommerce_before_checkout_form', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 

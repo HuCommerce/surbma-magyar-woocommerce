@@ -1,0 +1,12 @@
+task_groups:
+  - name: phase-1-lib-directory
+    claude_code_subagent: implementer
+  - name: phase-2-modules-directory
+    claude_code_subagent: implementer
+  - name: phase-3-modules-hu-directory
+    claude_code_subagent: implementer
+  - name: phase-4-pages-directory
+    claude_code_subagent: implementer
+  - name: phase-5-final-verification
+    claude_code_subagent: implementation-verifier
+

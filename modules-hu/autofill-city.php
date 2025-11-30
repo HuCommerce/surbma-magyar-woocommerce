@@ -7,7 +7,7 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-add_action( 'wp_enqueue_scripts', function() {
+add_action( 'wp_enqueue_scripts', static function() {
 	// Make sure, we are on the right page
 	if ( !is_checkout() && !is_wc_endpoint_url( 'edit-address' ) ) {
 		return;

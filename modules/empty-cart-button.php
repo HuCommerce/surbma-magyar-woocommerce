@@ -24,7 +24,7 @@ $emptycartbutton_checkoutpagePosition = 'woocommerce_before_checkout_form' == $e
 */
 if ( 'none' != $emptycartbutton_cartpageValue ) :
 
-	add_action( $emptycartbutton_cartpageValue, function() {
+	add_action( $emptycartbutton_cartpageValue, static function() {
 		if ( count( WC()->cart->get_cart() ) > 1 ) {
 			// Get the settings array
 			global $cps_hc_gems_options;
@@ -51,7 +51,7 @@ endif;
 */
 if ( 'none' != $emptycartbutton_checkoutpageValue ) :
 
-	add_action( $emptycartbutton_checkoutpageValue, function() {
+	add_action( $emptycartbutton_checkoutpageValue, static function() {
 		if ( count( WC()->cart->get_cart() ) > 1 ) {
 			// Get the settings array
 			global $cps_hc_gems_options;
@@ -72,7 +72,7 @@ if ( 'none' != $emptycartbutton_checkoutpageValue ) :
 endif;
 
 // The redirection
-add_action( 'template_redirect', function() {
+add_action( 'template_redirect', static function() {
 	if ( ( is_cart() || is_checkout() ) && isset( $_GET['hc-empty-cart'] ) && 1 == sanitize_text_field( wp_unslash( $_GET['hc-empty-cart'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		WC()->cart->empty_cart();
 		$referer = esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) );

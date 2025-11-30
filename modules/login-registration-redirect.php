@@ -7,7 +7,7 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-add_filter( 'woocommerce_login_redirect', function( $redirect, $user ) {
+add_filter( 'woocommerce_login_redirect', static function( $redirect, $user ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -27,7 +27,7 @@ add_filter( 'woocommerce_login_redirect', function( $redirect, $user ) {
 	}
 }, 10, 2 );
 
-add_filter( 'woocommerce_registration_redirect', function( $var ) {
+add_filter( 'woocommerce_registration_redirect', static function( $var ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 

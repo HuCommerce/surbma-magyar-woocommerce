@@ -8,13 +8,13 @@
 defined( 'ABSPATH' ) || exit;
 
 // jQuery Mask Plugin: https://igorescobar.github.io/jQuery-Mask-Plugin/
-add_action( 'wp_enqueue_scripts', function() {
+add_action( 'wp_enqueue_scripts', static function() {
 	if ( is_checkout() || is_wc_endpoint_url( 'edit-address' ) ) {
 		wp_enqueue_script( 'surbma_hc_jquery_mask', SURBMA_HC_PLUGIN_URL . '/assets/js/jquery.mask.min.js', array( 'jquery' ), '1.14.16', true );
 	}
 } );
 
-add_action( 'wp_footer', function() {
+add_action( 'wp_footer', static function() {
 	// Make sure, we are on the right page
 	if ( !is_checkout() && !is_wc_endpoint_url( 'edit-address' ) ) {
 		return;

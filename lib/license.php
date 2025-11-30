@@ -201,7 +201,7 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 	}
 
 	// Everyday I'm shuffling...I mean updating the status
-	add_action( 'init', function() {
+	add_action( 'init', static function() {
 		$license_status = get_option( 'surbma_hc_license_status', array() );
 		$last_check = isset( $license_status['last_check'] ) && $license_status['last_check'] ? $license_status['last_check'] : false;
 		$current_time = current_datetime();
@@ -271,7 +271,7 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 	}
 
 	// License management page actions
-	add_action( 'current_screen', function() {
+	add_action( 'current_screen', static function() {
 		$screen = get_current_screen();
 		$page_hooks = $GLOBALS['cps_hc_gems_page_hooks'] ?? [];
 		$license_hook = $page_hooks['license'] ?? '';
@@ -326,7 +326,7 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 	} );
 
 	// Fires when the surbma_hc_license option is added
-	add_action( 'add_option_surbma_hc_license', function( $name, $value ) {
+	add_action( 'add_option_surbma_hc_license', static function( $name, $value ) {
 		// update_option( 'surbma_hc_license_test', $value['licensekey'] );
 		$home_url = wp_parse_url( get_option( 'home' ) );
 
@@ -352,7 +352,7 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 	}, 10, 2 );
 
 	// Fires when the surbma_hc_license option is updated with new values
-	add_action( 'update_option_surbma_hc_license', function( $old_value, $value ) {
+	add_action( 'update_option_surbma_hc_license', static function( $old_value, $value ) {
 		$home_url = wp_parse_url( get_option( 'home' ) );
 
 		// API variables
@@ -397,7 +397,7 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 endif;
 
 // Add HuCommerce DEV admin bar button
-add_action( 'admin_bar_menu', function( WP_Admin_Bar $wp_admin_bar ) {
+add_action( 'admin_bar_menu', static function( WP_Admin_Bar $wp_admin_bar ) {
 	global $whitelisted;
 	if ( isset( $whitelisted ) && 'dev' === $whitelisted ) {
 		$args = array(
@@ -497,7 +497,7 @@ if ( 'free' != $status ) {
 }
 
 // License notices
-add_action( 'admin_notices', function() {
+add_action( 'admin_notices', static function() {
 	global $whitelisted;
 	if ( isset( $whitelisted ) && 'dev' === $whitelisted && ( isset( $_GET['page'] ) && 'cps_hc_gems_license' === $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		?>

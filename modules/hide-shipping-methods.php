@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Remove all Shipping methods on the Cart page
-add_filter( 'woocommerce_cart_ready_to_calc_shipping', function( $show_shipping ) {
+add_filter( 'woocommerce_cart_ready_to_calc_shipping', static function( $show_shipping ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -21,7 +21,7 @@ add_filter( 'woocommerce_cart_ready_to_calc_shipping', function( $show_shipping 
 	return $show_shipping;
 }, 99 );
 
-add_filter( 'woocommerce_package_rates', function( $available_shipping_methods, $package ) {
+add_filter( 'woocommerce_package_rates', static function( $available_shipping_methods, $package ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 

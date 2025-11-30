@@ -27,7 +27,7 @@ function cps_hc_gems_get_product_settings() {
  */
 
 // Admin functionality - use admin_init for proper admin context
-add_action( 'admin_init', function() {
+add_action( 'admin_init', static function() {
 	$settings = cps_hc_gems_get_product_settings();
 	if ( $settings['productsubtitle'] ) {
 		// Registering Metabox for Products
@@ -98,7 +98,7 @@ function cps_hc_gems_save_product_metabox( $post_id, $post ) {
  */
 
 // Frontend functionality - use template_redirect for proper frontend context
-add_action( 'template_redirect', function() {
+add_action( 'template_redirect', static function() {
 	$settings = cps_hc_gems_get_product_settings();
 	if ( $settings['productsubtitle'] ) {
 		// The Title filter
@@ -127,7 +127,7 @@ function cps_hc_gems_product_subtitle_styles() {
  */
 
 // Frontend product settings - use template_redirect for proper frontend context
-add_action( 'template_redirect', function() {
+add_action( 'template_redirect', static function() {
 	$settings = cps_hc_gems_get_product_settings();
 	
 	// Remove Image Zoom
@@ -142,7 +142,7 @@ add_action( 'template_redirect', function() {
 	
 	// Remove related products output
 	if ( $settings['norelatedproducts'] ) {
-		add_action( 'woocommerce_after_single_product_summary', function() {
+		add_action( 'woocommerce_after_single_product_summary', static function() {
 			remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 		}, 0 );
 	}
@@ -152,7 +152,7 @@ add_action( 'template_redirect', function() {
  ** Products per page
  */
 
-add_filter( 'loop_shop_per_page', function( $cols ) {
+add_filter( 'loop_shop_per_page', static function( $cols ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -169,7 +169,7 @@ add_filter( 'loop_shop_per_page', function( $cols ) {
  ** Products per row
  */
 
-add_filter( 'loop_shop_columns', function( $columns ) {
+add_filter( 'loop_shop_columns', static function( $columns ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -186,7 +186,7 @@ add_filter( 'loop_shop_columns', function( $columns ) {
  * Change upsell products output
  */
 
-add_filter( 'woocommerce_upsell_display_args', function( $args ) {
+add_filter( 'woocommerce_upsell_display_args', static function( $args ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -208,7 +208,7 @@ add_filter( 'woocommerce_upsell_display_args', function( $args ) {
  ** Change related products output
  */
 
-add_filter( 'woocommerce_output_related_products_args', function( $args ) {
+add_filter( 'woocommerce_output_related_products_args', static function( $args ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 

@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // https://gist.github.com/mikaelz/f41e29c6a99a595602e4
-add_action( 'wp_enqueue_scripts', function() {
+add_action( 'wp_enqueue_scripts', static function() {
 	if ( is_cart() ) {
 		ob_start();
 		?>

@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /*
-add_action( 'after_setup_theme', function() {
+add_action( 'after_setup_theme', static function() {
 	add_filter( 'woocommerce_is_purchasable', '__return_false', 999999 );
 	add_filter( 'woocommerce_get_price_html', '__return_false', 999999 );
 
@@ -27,7 +27,7 @@ add_action( 'after_setup_theme', function() {
 
 add_filter( 'woocommerce_is_purchasable', '__return_false', 999999 );
 
-add_filter( 'woocommerce_get_price_html', function( $price ) {
+add_filter( 'woocommerce_get_price_html', static function( $price ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -51,7 +51,7 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 remove_action( 'woocommerce_single_product_summary', 'cps_hc_gems_show_termekartortenet_single', 11 );
 remove_action( 'woocommerce_single_variation', 'cps_hc_gems_show_termekartortenet_variation', 11 );
 
-add_action( 'template_redirect', function() {
+add_action( 'template_redirect', static function() {
 	if ( is_cart() || is_checkout() || is_account_page() ) {
 		wp_safe_redirect( wc_get_page_permalink( 'shop' ) );
 		exit;

@@ -7,7 +7,7 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-add_filter( 'woocommerce_add_to_cart_validation', function( $passed, $added_product_id ) {
+add_filter( 'woocommerce_add_to_cart_validation', static function( $passed, $added_product_id ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 

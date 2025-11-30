@@ -7,7 +7,7 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-add_action( 'woocommerce_register_form', function() {
+add_action( 'woocommerce_register_form', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -25,7 +25,7 @@ add_action( 'woocommerce_register_form', function() {
 	}
 }, 21 ); // With priority 20, it will be shown above Privacy Policy text.
 
-add_filter( 'woocommerce_registration_errors', function( $errors, $username, $email ) {
+add_filter( 'woocommerce_registration_errors', static function( $errors, $username, $email ) {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-register', 'woocommerce-register-nonce', false );
 
@@ -42,7 +42,7 @@ add_filter( 'woocommerce_registration_errors', function( $errors, $username, $em
 }, 10, 3 );
 
 // Extra user metas to save after registration.
-add_action( 'user_register', function( $user_id ) {
+add_action( 'user_register', static function( $user_id ) {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-register', 'woocommerce-register-nonce', false );
 
@@ -76,7 +76,7 @@ add_action( 'user_register', function( $user_id ) {
 }, 10, 1 );
 
 // Let's show the registration extra user meta values in admin.
-add_action( 'personal_options', function( $profileuser ) {
+add_action( 'personal_options', static function( $profileuser ) {
 	$regacceptpp = get_the_author_meta( 'reg_accept_pp', $profileuser->ID ) == 1 ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : esc_html__( 'Not accepted', 'surbma-magyar-woocommerce' );
 	$regdate = gmdate( 'r', strtotime( $profileuser->user_registered ) ) ? gmdate( 'r', strtotime( $profileuser->user_registered ) ) : esc_html__( 'Date is not available', 'surbma-magyar-woocommerce' );
 	$regip = get_the_author_meta( 'reg_ip', $profileuser->ID ) ? get_the_author_meta( 'reg_ip', $profileuser->ID ) : esc_html__( 'IP address is not available', 'surbma-magyar-woocommerce' );
@@ -95,7 +95,7 @@ add_action( 'personal_options', function( $profileuser ) {
 }, 99, 1 );
 
 // Let's show the registration extra user meta values on front-end account page.
-add_action( 'woocommerce_edit_account_form', function() {
+add_action( 'woocommerce_edit_account_form', static function() {
 	$user_id = get_current_user_id();
 	$user = get_userdata( $user_id );
 
@@ -127,7 +127,7 @@ add_action( 'woocommerce_edit_account_form', function() {
 }, 10 );
 
 // Disable WooCommerce default Terms & Conditions fields on Checkout page
-add_action( 'init', function() {
+add_action( 'init', static function() {
 	if ( ! is_admin() ) {
 		add_filter( 'woocommerce_checkout_show_terms', '__return_false' );
 	}
@@ -137,7 +137,7 @@ add_action( 'init', function() {
 $legalconfirmationsposition = $cps_hc_gems_options['legalconfirmationsposition'] ?? 'woocommerce_review_order_before_submit';
 
 // Show our Terms & Conditions fields on Checkout page
-add_action( $legalconfirmationsposition, function( $checkout = '' ) {
+add_action( $legalconfirmationsposition, static function( $checkout = '' ) {
 	if ( ! $checkout ) {
 		$checkout = WC()->checkout();
 	}
@@ -217,7 +217,7 @@ add_action( $legalconfirmationsposition, function( $checkout = '' ) {
 	echo '</div>';
 } );
 
-add_action( 'woocommerce_checkout_process', function() {
+add_action( 'woocommerce_checkout_process', static function() {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
@@ -252,7 +252,7 @@ add_action( 'woocommerce_checkout_process', function() {
 	}
 } );
 
-add_action( 'woocommerce_checkout_create_order', function( $order ) {
+add_action( 'woocommerce_checkout_create_order', static function( $order ) {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
@@ -273,7 +273,7 @@ add_action( 'woocommerce_checkout_create_order', function( $order ) {
 	}
 } );
 
-add_action( 'woocommerce_admin_order_data_after_billing_address', function( $order ) {
+add_action( 'woocommerce_admin_order_data_after_billing_address', static function( $order ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -299,7 +299,7 @@ add_action( 'woocommerce_admin_order_data_after_billing_address', function( $ord
 	}
 }, 10, 1 );
 
-add_action( 'woocommerce_review_order_before_submit', function() {
+add_action( 'woocommerce_review_order_before_submit', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -310,7 +310,7 @@ add_action( 'woocommerce_review_order_before_submit', function() {
 	}
 } );
 
-add_action( 'woocommerce_review_order_after_submit', function() {
+add_action( 'woocommerce_review_order_after_submit', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 

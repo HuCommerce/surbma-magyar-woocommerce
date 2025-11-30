@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 /*
 // Load custom mo translations for plugins and themes
-add_filter( 'load_textdomain_mofile', function( $mofile, $domain ) {
+add_filter( 'load_textdomain_mofile', static function( $mofile, $domain ) {
 	$custom_mofile = SURBMA_HC_PLUGIN_DIR . '/translations/' . $domain . '-' . get_locale() . '.mo';
 
 	// Check if the custom translation file exists
@@ -23,7 +23,7 @@ add_filter( 'load_textdomain_mofile', function( $mofile, $domain ) {
 
 /*
 // Load custom translations for plugins and themes
-add_filter( 'load_translation_file', function( $file, $domain, $locale ) {
+add_filter( 'load_translation_file', static function( $file, $domain, $locale ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -94,7 +94,7 @@ add_filter( 'load_translation_file', function( $file, $domain, $locale ) {
 */
 
 // Load custom translations for plugins and themes
-add_filter( 'load_translation_file', function( $file, $domain, $locale ) {
+add_filter( 'load_translation_file', static function( $file, $domain, $locale ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 

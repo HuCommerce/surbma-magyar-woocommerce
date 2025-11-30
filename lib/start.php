@@ -4,7 +4,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Set the HuCommerce settings array globally
-add_action( 'init', function() {
+add_action( 'init', static function() {
 	global $cps_hc_gems_options;
 	$cps_hc_gems_options = get_option( 'surbma_hc_fields', array() );
 	if ( !is_array( $cps_hc_gems_options ) ) {
@@ -44,7 +44,7 @@ function cps_hc_gems_woocommerce_version_check( $version ) {
 }
 
 // Add plugin WooCommerce templates if exist
-add_filter( 'woocommerce_locate_template', function( $template, $template_name, $template_path ) {
+add_filter( 'woocommerce_locate_template', static function( $template, $template_name, $template_path ) {
 	global $woocommerce;
 	$_template = $template;
 

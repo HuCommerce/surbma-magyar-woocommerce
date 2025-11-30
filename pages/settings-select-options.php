@@ -4,7 +4,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Wrap the array definitions in a function that runs on 'init' hook to prevent "Function _load_textdomain_just_in_time was called incorrectly" notice.
-add_action( 'init', function() {
+add_action( 'init', static function() {
 	// Declare the globals
 	global $couponfieldposition_options;
 	global $returntoshopcartposition_options;

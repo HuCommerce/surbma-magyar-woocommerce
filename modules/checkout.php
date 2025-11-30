@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Add new fields
-add_filter( 'woocommerce_billing_fields', function( $fields ) {
+add_filter( 'woocommerce_billing_fields', static function( $fields ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -33,7 +33,7 @@ add_filter( 'woocommerce_billing_fields', function( $fields ) {
 } );
 
 // Adding custom validation message for Billing Company field on Checkout page
-add_action( 'woocommerce_checkout_process', function() {
+add_action( 'woocommerce_checkout_process', static function() {
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
@@ -42,7 +42,7 @@ add_action( 'woocommerce_checkout_process', function() {
 } );
 
 // Adding custom validation message for Billing Company field on My Account -> Addresses page
-add_action( 'woocommerce_after_save_address_validation', function( $user_id, $address_type ) {
+add_action( 'woocommerce_after_save_address_validation', static function( $user_id, $address_type ) {
 	// Only proceed if this is the billing address form
 	if ( 'billing' !== $address_type ) {
 		return;
@@ -71,7 +71,7 @@ function cps_hc_gems_billing_company_check() {
 }
 
 // Saving billing_company_check field value to user meta on Checkout page for logged in users
-add_action( 'woocommerce_checkout_update_user_meta', function( $customer_id ) {
+add_action( 'woocommerce_checkout_update_user_meta', static function( $customer_id ) {
 	// Only proceed if this is a valid customer ID
 	if ( empty( $customer_id ) ) {
 		return;
@@ -108,7 +108,7 @@ add_filter( 'default_checkout_billing_company_check', static function( $value ) 
 } );
 
 // Pre-populate billing_country field, if it's hidden
-add_filter( 'default_checkout_billing_country', function( $value ) {
+add_filter( 'default_checkout_billing_country', static function( $value ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -130,7 +130,7 @@ add_filter( 'default_checkout_billing_country', function( $value ) {
 } );
 
 // Customize the Billing fields on the Checkout and My account -> Addresses pages
-add_filter( 'woocommerce_billing_fields', function( $address_fields ) {
+add_filter( 'woocommerce_billing_fields', static function( $address_fields ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -160,7 +160,7 @@ add_filter( 'woocommerce_billing_fields', function( $address_fields ) {
 }, 10, 1 );
 
 // Customize the default address fields on the Checkout and My account -> Addresses pages
-add_filter( 'woocommerce_default_address_fields' , function( $address_fields ) {
+add_filter( 'woocommerce_default_address_fields' , static function( $address_fields ) {
 	$woocommercecheckoutaddress2fieldValue = false !== get_option( 'woocommerce_checkout_address_2_field' ) ? get_option( 'woocommerce_checkout_address_2_field' ) : 'optional';
 
 	// Get the settings array
@@ -180,7 +180,7 @@ add_filter( 'woocommerce_default_address_fields' , function( $address_fields ) {
 } );
 
 // Customize the Checkout fields
-add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
+add_filter( 'woocommerce_checkout_fields' , static function( $fields ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -195,7 +195,7 @@ add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
 }, 9999 );
 
 // Remove Additional information section
-add_action( 'woocommerce_before_checkout_form' , function() {
+add_action( 'woocommerce_before_checkout_form' , static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -207,7 +207,7 @@ add_action( 'woocommerce_before_checkout_form' , function() {
 } );
 
 // Custom submit button text
-add_filter( 'woocommerce_order_button_text', function( $button_text ) {
+add_filter( 'woocommerce_order_button_text', static function( $button_text ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -221,7 +221,7 @@ add_filter( 'woocommerce_order_button_text', function( $button_text ) {
 } );
 
 // Custom JavaScript codes
-add_action( 'wp_footer', function() {
+add_action( 'wp_footer', static function() {
 	// Make sure, we are on the right page
 	if ( !is_checkout() && !is_wc_endpoint_url( 'edit-address' ) ) {
 		return;
