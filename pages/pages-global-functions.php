@@ -6,13 +6,14 @@ defined( 'ABSPATH' ) || exit;
 // Modules page navigation
 function cps_hc_gems_page_modules_nav() {
 	$screen = get_current_screen();
-	global $cps_hc_gems_modules_page;
+	$page_hooks = $GLOBALS['cps_hc_gems_page_hooks'] ?? [];
+	$modules_hook = $page_hooks['modules'] ?? '';
 
-	$active_modules_menu = $cps_hc_gems_modules_page == $screen->base ? 'uk-active' : '';
+	$active_modules_menu = $modules_hook == $screen->base ? 'uk-active' : '';
 
 	?>
 	<li class="<?php echo esc_attr( $active_modules_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_modules' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> HuCommerce <?php esc_html_e( 'Modules', 'surbma-magyar-woocommerce' ); ?></a></li>
-	<?php if ( $cps_hc_gems_modules_page == $screen->base ) { ?>
+	<?php if ( $modules_hook == $screen->base ) { ?>
 	<li class="cps-settings-subnav">
 		<ul class="uk-nav-sub uk-padding-remove-left uk-padding-remove-bottom" uk-switcher="connect: #surbma-hc-modules; animation: uk-animation-fade">
 			<li><a class="uk-offcanvas-close uk-modal-close-default"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: chevron-double-right; ratio: 1"></span> <?php esc_html_e( 'All modules', 'surbma-magyar-woocommerce' ); ?></a></li>
@@ -51,41 +52,70 @@ function cps_hc_gems_page_modules_nav() {
 	<?php
 }
 
-// Pages navigation
+/**
+ * Render the pages navigation items in sidebar
+ * Uses pages config for dynamic generation
+ */
 function cps_hc_gems_pages_nav() {
 	$screen = get_current_screen();
-	global $cps_hc_gems_offers_page;
-	global $cps_hc_gems_directory_page;
-	global $cps_hc_gems_news_page;
-	global $cps_hc_gems_information_page;
+	$page_hooks = $GLOBALS['cps_hc_gems_page_hooks'] ?? [];
+	$pages = cps_hc_gems_get_visible_pages();
 
-	$active_offers_menu = $cps_hc_gems_offers_page == $screen->base ? 'uk-active' : '';
-	$active_directory_menu = $cps_hc_gems_directory_page == $screen->base ? 'uk-active' : '';
-	$active_news_menu = $cps_hc_gems_news_page == $screen->base ? 'uk-active' : '';
-	$active_information_menu = $cps_hc_gems_information_page == $screen->base ? 'uk-active' : '';
+	// Skip first page (modules) as it has its own nav function
+	$is_first = true;
+	foreach ( $pages as $page_key => $page ) {
+		if ( $is_first ) {
+			$is_first = false;
+			continue; // Skip modules page
+		}
 
-	?>
-	<li class="<?php echo esc_attr( $active_offers_menu ); ?> uk-hidden"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_offers' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: star"></span> <?php esc_html_e( 'Offers', 'surbma-magyar-woocommerce' ); ?></a></li>
-	<li class="<?php echo esc_attr( $active_directory_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_directory' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: list"></span> HuCommerce <?php esc_html_e( 'Directory', 'surbma-magyar-woocommerce' ); ?></a></li>
-	<li class="<?php echo esc_attr( $active_news_menu ); ?> uk-hidden"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_news' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: rss"></span> <?php esc_html_e( 'Latest News', 'surbma-magyar-woocommerce' ); ?></a></li>
-	<?php
+		// Skip license and information - they have their own nav section
+		if ( in_array( $page_key, ['license', 'information'], true ) ) {
+			continue;
+		}
+
+		$hook = $page_hooks[ $page_key ] ?? '';
+		$active_class = ( $hook === $screen->base ) ? 'uk-active' : '';
+		$icon = cps_hc_gems_get_page_icon( $page );
+
+		printf(
+			'<li class="%s"><a href="%s"><span class="uk-margin-small-right" uk-icon="icon: %s"></span> %s</a></li>',
+			esc_attr( $active_class ),
+			esc_url( admin_url( 'admin.php?page=' . $page['menu_slug'] ) ),
+			esc_attr( $icon ),
+			esc_html( $page['card_title'] )
+		);
+	}
 }
 
-// License page navigation
+/**
+ * Render the license and information navigation items
+ */
 function cps_hc_gems_page_license_nav() {
 	$screen = get_current_screen();
-	global $cps_hc_gems_license_page;
-	global $cps_hc_gems_information_page;
+	$page_hooks = $GLOBALS['cps_hc_gems_page_hooks'] ?? [];
+	$pages = cps_hc_gems_get_pages_config();
 
-	$cps_hc_gems_pro_menu_icon = 'active' == SURBMA_HC_PLUGIN_LICENSE ? 'unlock' : 'lock';
+	$nav_pages = ['license', 'information'];
 
-	$active_license_menu = $cps_hc_gems_license_page == $screen->base ? 'uk-active' : '';
-	$active_information_menu = $cps_hc_gems_information_page == $screen->base ? 'uk-active' : '';
+	foreach ( $nav_pages as $page_key ) {
+		if ( ! isset( $pages[ $page_key ] ) || $pages[ $page_key ]['status'] !== 'active' ) {
+			continue;
+		}
 
-	?>
-	<li class="<?php echo esc_attr( $active_license_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_license' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: <?php echo esc_attr( $cps_hc_gems_pro_menu_icon ); ?>"></span> <?php esc_html_e( 'License management', 'surbma-magyar-woocommerce' ); ?></a></li>
-	<li class="<?php echo esc_attr( $active_information_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_information' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: info"></span> <?php esc_html_e( 'Information', 'surbma-magyar-woocommerce' ); ?></a></li>
-	<?php
+		$page = $pages[ $page_key ];
+		$hook = $page_hooks[ $page_key ] ?? '';
+		$active_class = ( $hook === $screen->base ) ? 'uk-active' : '';
+		$icon = cps_hc_gems_get_page_icon( $page );
+
+		printf(
+			'<li class="%s"><a href="%s"><span class="uk-margin-small-right" uk-icon="icon: %s"></span> %s</a></li>',
+			esc_attr( $active_class ),
+			esc_url( admin_url( 'admin.php?page=' . $page['menu_slug'] ) ),
+			esc_attr( $icon ),
+			esc_html( $page['title'] )
+		);
+	}
 }
 
 // Social page navigation
@@ -118,7 +148,8 @@ function cps_hc_gems_page_header() {
 // Notifications
 function cps_hc_gems_page_notifications() {
 	$screen = get_current_screen();
-	global $cps_hc_gems_license_page;
+	$page_hooks = $GLOBALS['cps_hc_gems_page_hooks'] ?? [];
+	$license_hook = $page_hooks['license'] ?? '';
 
 	?>
 	<?php if ( isset( $_GET['settings-updated'] ) && true == $_GET['settings-updated'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
@@ -140,7 +171,7 @@ function cps_hc_gems_page_notifications() {
 	<?php } ?>
 
 	<?php // Free notification ?>
-	<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE && $cps_hc_gems_license_page != $screen->base ) { ?>
+	<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE && $license_hook != $screen->base ) { ?>
 		<div class="notice notice-info is-dismissible">
 			<p><strong class="uk-text-uppercase">Figyelem!</strong> Nézd meg, mivel nyújt többet a <a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">HuCommerce Pro</a> verzió!</p>
 		</div>

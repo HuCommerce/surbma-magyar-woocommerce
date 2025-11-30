@@ -273,10 +273,11 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 	// License management page actions
 	add_action( 'current_screen', function() {
 		$screen = get_current_screen();
-		global $cps_hc_gems_license_page;
+		$page_hooks = $GLOBALS['cps_hc_gems_page_hooks'] ?? [];
+		$license_hook = $page_hooks['license'] ?? '';
 
 		// Stop if we are not on the License Management page
-		if ( $cps_hc_gems_license_page != $screen->base ) {
+		if ( $license_hook != $screen->base ) {
 			return;
 		}
 

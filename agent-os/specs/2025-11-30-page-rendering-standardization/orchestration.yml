@@ -1,0 +1,12 @@
+task_groups:
+  - name: phase-1-create-pages-configuration-system
+    claude_code_subagent: implementer
+  - name: phase-2-update-admin-menu-registration
+    claude_code_subagent: implementer
+  - name: phase-3-refactor-navigation-functions
+    claude_code_subagent: implementer
+  - name: phase-4-testing-and-verification
+    claude_code_subagent: implementation-verifier
+  - name: phase-5-cleanup
+    claude_code_subagent: implementer
+

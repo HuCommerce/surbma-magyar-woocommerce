@@ -20,92 +20,50 @@ add_action( 'init', function() {
 // Initialize settings
 include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings.php');
 
-// Initialize pages
-include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-modules.php');
-// include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-offers.php');
-include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-directory.php');
-// include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-news.php');
-include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-information.php');
-include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-license.php');
+// Initialize pages configuration
+include_once( SURBMA_HC_PLUGIN_DIR . '/lib/pages.php');
 
-// Admin options menu
+// Admin options menu - auto-generated from pages config
 add_action( 'admin_menu', function() {
-	global $cps_hc_gems_main_page;
-	global $cps_hc_gems_modules_page;
-	global $cps_hc_gems_offers_page;
-	global $cps_hc_gems_directory_page;
-	global $cps_hc_gems_news_page;
-	global $cps_hc_gems_license_page;
-	global $cps_hc_gems_information_page;
+	$pages = cps_hc_gems_get_registerable_pages();
+	$page_hooks = [];
+	$is_first = true;
+	$parent_slug = '';
 
-	$cps_hc_gems_main_page = add_menu_page(
-		'HuCommerce',
-		'HuCommerce',
-		'manage_options',
-		'cps_hc_gems_modules',
-		'cps_hc_gems_modules_page',
-		'dashicons-welcome-widgets-menus',
-		'58'
-	);
+	foreach ( $pages as $page_key => $page ) {
+		// Create callback once per page
+		$callback = cps_hc_gems_get_page_callback( $page_key );
 
-	$cps_hc_gems_modules_page = add_submenu_page(
-		'cps_hc_gems_modules',
-		__( 'HuCommerce Modules', 'surbma-magyar-woocommerce' ),
-		__( 'Modules', 'surbma-magyar-woocommerce' ),
-		'manage_options',
-		'cps_hc_gems_modules',
-		'cps_hc_gems_modules_page'
-	);
+		if ( $is_first ) {
+			// First page becomes the main menu (no callback here - submenu handles it)
+			add_menu_page(
+				'HuCommerce',
+				'HuCommerce',
+				'manage_options',
+				$page['menu_slug'],
+				'', // Empty callback - submenu entry will handle rendering
+				'dashicons-welcome-widgets-menus',
+				'58'
+			);
+			$parent_slug = $page['menu_slug'];
+			$is_first = false;
+		}
 
-	/*
-	$cps_hc_gems_offers_page = add_submenu_page(
-		'cps_hc_gems_modules',
-		__( 'HuCommerce Offers', 'surbma-magyar-woocommerce' ),
-		__( 'Offers', 'surbma-magyar-woocommerce' ),
-		'manage_options',
-		'cps_hc_gems_offers',
-		'cps_hc_gems_offers_page'
-	);
-	*/
+		// All pages (including first) get a submenu entry with the callback
+		$page_hooks[ $page_key ] = add_submenu_page(
+			$parent_slug,
+			$page['page_title'],
+			$page['title'],
+			'manage_options',
+			$page['menu_slug'],
+			$callback
+		);
+	}
 
-	$cps_hc_gems_directory_page = add_submenu_page(
-		'cps_hc_gems_modules',
-		__( 'HuCommerce Directory', 'surbma-magyar-woocommerce' ),
-		__( 'Directory', 'surbma-magyar-woocommerce' ),
-		'manage_options',
-		'cps_hc_gems_directory',
-		'cps_hc_gems_directory_page'
-	);
+	// Store page hooks globally for navigation and script loading
+	$GLOBALS['cps_hc_gems_page_hooks'] = $page_hooks;
 
-	/*
-	$cps_hc_gems_news_page = add_submenu_page(
-		'cps_hc_gems_modules',
-		__( 'HuCommerce Latest News', 'surbma-magyar-woocommerce' ),
-		__( 'Latest News', 'surbma-magyar-woocommerce' ),
-		'manage_options',
-		'cps_hc_gems_news',
-		'cps_hc_gems_news_page'
-	);
-	*/
-
-	$cps_hc_gems_license_page = add_submenu_page(
-		'cps_hc_gems_modules',
-		__( 'HuCommerce License Management', 'surbma-magyar-woocommerce' ),
-		__( 'License management', 'surbma-magyar-woocommerce' ),
-		'manage_options',
-		'cps_hc_gems_license',
-		'cps_hc_gems_license_page'
-	);
-
-	$cps_hc_gems_information_page = add_submenu_page(
-		'cps_hc_gems_modules',
-		__( 'HuCommerce Information', 'surbma-magyar-woocommerce' ),
-		__( 'Information', 'surbma-magyar-woocommerce' ),
-		'manage_options',
-		'cps_hc_gems_information',
-		'cps_hc_gems_information_page'
-	);
-
+	// WooCommerce admin page connection
 	if ( function_exists( 'wc_admin_connect_page' ) ) {
 		wc_admin_connect_page(
 			array(
@@ -129,19 +87,8 @@ add_filter( 'plugin_action_links_' . plugin_basename( SURBMA_HC_PLUGIN_FILE ), f
 
 // Custom styles and scripts for admin pages
 add_action( 'admin_enqueue_scripts', function( $hook ) {
-	global $cps_hc_gems_main_page;
-	global $cps_hc_gems_modules_page;
-	global $cps_hc_gems_offers_page;
-	global $cps_hc_gems_directory_page;
-	global $cps_hc_gems_news_page;
-	global $cps_hc_gems_license_page;
-	global $cps_hc_gems_information_page;
-
-	if ( $hook == $cps_hc_gems_main_page || $hook == $cps_hc_gems_modules_page || $hook == $cps_hc_gems_offers_page || $hook == $cps_hc_gems_directory_page || $hook == $cps_hc_gems_news_page || $hook == $cps_hc_gems_license_page || $hook == $cps_hc_gems_information_page ) {
-		$cps_hc_gems_page = true;
-	} else {
-		$cps_hc_gems_page = false;
-	}
+	$page_hooks = $GLOBALS['cps_hc_gems_page_hooks'] ?? [];
+	$cps_hc_gems_page = in_array( $hook, $page_hooks, true );
 
 	// Load plugin scripts & styles for plugin pages
 	if ( $cps_hc_gems_page ) {
