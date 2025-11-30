@@ -70,6 +70,43 @@ function cps_hc_gems_billing_company_check() {
 	}
 }
 
+// Saving billing_company_check field value to user meta on Checkout page for logged in users
+add_action( 'woocommerce_checkout_update_user_meta', function( $customer_id ) {
+	// Only proceed if this is a valid customer ID
+	if ( empty( $customer_id ) ) {
+		return;
+	}
+
+	// Nonce verification before doing anything
+	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
+
+	$billing_company_check = isset( $_POST['billing_company_check'] ) && $_POST['billing_company_check'] == '1' ? '1' : '0';
+	update_user_meta( $customer_id, 'billing_company_check', $billing_company_check );
+} );
+
+// Saving billing_company_check field value to session on Checkout page for not logged in users
+add_action( 'woocommerce_checkout_update_order_review', static function ( $posted_data ) {
+	// Parse the serialized posted data
+	$posted = array();
+	parse_str( $posted_data, $posted );
+
+	$billing_company_check = isset( $posted['billing_company_check'] ) && $posted['billing_company_check'] == '1' ? '1' : '0';
+	WC()->session->set( 'billing_company_check', $billing_company_check );
+} );
+
+// Pre-populate billing_company_check field, if it's empty and session has a value
+add_filter( 'default_checkout_billing_company_check', static function( $value ) {
+	// Get the session value
+	$session_value = WC()->session->get( 'billing_company_check' );
+
+	// Pre-populate the field if the session value is not empty and the field value is empty
+	if ( !empty( $session_value ) && empty( $value ) ) {
+		$value = $session_value;
+	}
+
+	return $value;
+} );
+
 // Pre-populate billing_country field, if it's hidden
 add_filter( 'default_checkout_billing_country', function( $value ) {
 	// Get the settings array
@@ -203,7 +240,7 @@ add_action( 'wp_footer', function() {
 	$woocommercecheckoutcompanyfieldValue = false !== get_option( 'woocommerce_checkout_company_field' ) ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
 
 	?>
-<script id="cps-hc-wcgems-checkout">
+<script id="cps-hc-gems-checkout">
 jQuery(document).ready(function($){
 	// Fix for previous version, that saved '- N/A -'' value if billing_company was empty
 	if ( $('#billing_company').val() == '- N/A -' ){
