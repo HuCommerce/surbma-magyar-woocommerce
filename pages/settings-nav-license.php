@@ -3,7 +3,7 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-function surbma_hc_mask( $str ) {
+function cps_hc_gems_mask( $str ) {
 	if ( !$str || 'active' != SURBMA_HC_PLUGIN_LICENSE ) {
 		return $str;
 	}
@@ -60,7 +60,7 @@ $license_status = get_option( 'surbma_hc_license_status', array() );
 		<div class="uk-form-controls uk-width-expand@xl">
 			<div class="uk-inline uk-width-expand">
 				<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-				<input id="surbma_hc_license[licensekey]" class="uk-input uk-form-large" type="text" name="surbma_hc_license[licensekey]" value="<?php echo esc_attr( wp_unslash( surbma_hc_mask( $licensekeyValue ) ) ); ?>" placeholder="<?php esc_attr_e( 'API key', 'surbma-magyar-woocommerce' ); ?>" style="font-family: monospace;"<?php echo esc_html( $disabled ); ?> />
+				<input id="surbma_hc_license[licensekey]" class="uk-input uk-form-large" type="text" name="surbma_hc_license[licensekey]" value="<?php echo esc_attr( wp_unslash( cps_hc_gems_mask( $licensekeyValue ) ) ); ?>" placeholder="<?php esc_attr_e( 'API key', 'surbma-magyar-woocommerce' ); ?>" style="font-family: monospace;"<?php echo esc_html( $disabled ); ?> />
 			</div>
 		</div>
 

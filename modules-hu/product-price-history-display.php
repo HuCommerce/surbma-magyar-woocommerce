@@ -24,13 +24,13 @@ if ( $product ) {
 	$current_time = current_datetime();
 	$current_time = strval( gmdate( 'Y-m-d H:i:s', $current_time->getTimestamp() + $current_time->getOffset() ) );
 
-	$hc_params_delete = array_merge( $_GET, array( 'hc-product_price_history' => 'delete' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	$hc_delete_query_string = http_build_query( $hc_params_delete );
+	$cps_hc_gems_params_delete = array_merge( $_GET, array( 'hc-product_price_history' => 'delete' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$cps_hc_gems_delete_query_string = http_build_query( $cps_hc_gems_params_delete );
 
 	// Remove query parameter from url
-	$hc_manual_request = isset( $_GET['hc-product_price_history'] ) ? wp_kses( wp_unslash( $_GET['hc-product_price_history'] ), 'strip' ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	if ( $hc_manual_request ) {
-		if ( current_user_can( 'manage_options' ) && 'delete' == $hc_manual_request ) {
+	$cps_hc_gems_manual_request = isset( $_GET['hc-product_price_history'] ) ? wp_kses( wp_unslash( $_GET['hc-product_price_history'] ), 'strip' ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( $cps_hc_gems_manual_request ) {
+		if ( current_user_can( 'manage_options' ) && 'delete' == $cps_hc_gems_manual_request ) {
 			delete_post_meta( $product_id, '_hc_product_price_history' );
 		}
 
@@ -266,7 +266,7 @@ if ( $product ) {
 			<div class="uk-section uk-section-secondary">
 				<div class="uk-container uk-text-center">
 					<h3 class="uk-heading-line uk-text-center"><span>Termék ár történet adatok törlése</span></h3>
-					<a href="<?php echo esc_attr( SURBMA_HC_PLUGIN_URL ); ?>/modules-hu/product-price-history-display.php?<?php echo esc_attr( $hc_delete_query_string ); ?>" class="uk-button uk-button-danger" onclick="return confirm('Biztosan törlöd az összes ár történet adatot ennél a terméknél?')">Adatok törlése</a>
+					<a href="<?php echo esc_attr( SURBMA_HC_PLUGIN_URL ); ?>/modules-hu/product-price-history-display.php?<?php echo esc_attr( $cps_hc_gems_delete_query_string ); ?>" class="uk-button uk-button-danger" onclick="return confirm('Biztosan törlöd az összes ár történet adatot ennél a terméknél?')">Adatok törlése</a>
 				</div>
 			</div>
 			<?php } ?>

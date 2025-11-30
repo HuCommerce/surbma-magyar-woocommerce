@@ -29,9 +29,9 @@ add_filter( 'woocommerce_is_purchasable', '__return_false', 999999 );
 
 add_filter( 'woocommerce_get_price_html', function( $price ) {
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$productpricedisplayValue = $hc_gems_options['catalogmode-productpricedisplay'] ?? 'hide_prices';
+	$productpricedisplayValue = $cps_hc_gems_options['catalogmode-productpricedisplay'] ?? 'hide_prices';
 
 	if ( 'hide_prices' == $productpricedisplayValue || ( 'show_only_single' == $productpricedisplayValue && ! is_product() ) || ( 'show_only_archive' == $productpricedisplayValue && is_product() ) ) {
 		return false;

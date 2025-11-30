@@ -10,22 +10,22 @@ defined( 'ABSPATH' ) || exit;
 // Configures WordPress PHPMailer
 add_action( 'phpmailer_init', function( $phpmailer ) {
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
 	// SMTP port number - likely to be 25, 465 or 587
-	$smtp_port = $hc_gems_options['smtpport'] ?? 587;
+	$smtp_port = $cps_hc_gems_options['smtpport'] ?? 587;
 	// Encryption system to use - ssl, tls, or empty string for no encryption
-	$smtp_secure = $hc_gems_options['smtpsecure'] ?? '';
+	$smtp_secure = $cps_hc_gems_options['smtpsecure'] ?? '';
 	// SMTP From email address
-	$smtp_from = $hc_gems_options['smtpfrom'] ?? '';
+	$smtp_from = $cps_hc_gems_options['smtpfrom'] ?? '';
 	// SMTP From name
-	$smtp_fromname = $hc_gems_options['smtpfromname'] ?? '';
+	$smtp_fromname = $cps_hc_gems_options['smtpfromname'] ?? '';
 	// The hostname of the mail server
-	$smtp_host = $hc_gems_options['smtphost'] ?? '';
+	$smtp_host = $cps_hc_gems_options['smtphost'] ?? '';
 	// Username to use for SMTP authentication
-	$smtp_user = $hc_gems_options['smtpuser'] ?? '';
+	$smtp_user = $cps_hc_gems_options['smtpuser'] ?? '';
 	// Password to use for SMTP authentication
-	$smtp_password = $hc_gems_options['smtppassword'] ?? '';
+	$smtp_password = $cps_hc_gems_options['smtppassword'] ?? '';
 
 	if ( $smtp_host && $smtp_user && $smtp_password ) {
 		$phpmailer->isSMTP();

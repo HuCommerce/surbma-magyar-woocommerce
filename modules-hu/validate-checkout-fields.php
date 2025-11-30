@@ -12,7 +12,7 @@ add_action( 'woocommerce_checkout_process', function() {
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce' );
 
 	// Init the Validating fields function
-	cps_wcgems_hc_validate_checkout_fields();
+	cps_hc_gems_validate_checkout_fields();
 } );
 
 // Adding custom validation message for Billing Company field on My Account -> Addresses page
@@ -26,11 +26,11 @@ add_action( 'woocommerce_after_save_address_validation', function( $user_id, $ad
 	}
 
 	// Init the Validating fields function
-	cps_wcgems_hc_validate_checkout_fields();
+	cps_hc_gems_validate_checkout_fields();
 }, 10, 2 );
 
 // Validating fields
-function cps_wcgems_hc_validate_checkout_fields() {
+function cps_hc_gems_validate_checkout_fields() {
 	// Check if Country is Hungary and stop the process, if not Hungary
 	$billing_country = !empty( $_POST['billing_country'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_country'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 	if ( empty( $billing_country ) || 'HU' !== $billing_country ) {
@@ -38,19 +38,19 @@ function cps_wcgems_hc_validate_checkout_fields() {
 	}
 
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
 	// Get the "Address line 2 field" setting
 	// $woocommercecheckoutaddress2fieldValue = false !== get_option( 'woocommerce_checkout_address_2_field' ) ? get_option( 'woocommerce_checkout_address_2_field' ) : '';
 
 	// Get the settings
-	$validatebillingtaxfieldValue = $hc_gems_options['validatebillingtaxfield'] ?? 0;
-	$validatebillingcityfieldValue = $hc_gems_options['validatebillingcityfield'] ?? 0;
-	$validatebillingaddressfieldValue = $hc_gems_options['validatebillingaddressfield'] ?? 0;
-	$validatebillingphonefieldValue = $hc_gems_options['validatebillingphonefield'] ?? 0;
-	$validateshippingcityfieldValue = $hc_gems_options['validateshippingcityfield'] ?? 0;
-	$validateshippingaddressfieldValue = $hc_gems_options['validateshippingaddressfield'] ?? 0;
-	$validatecheckoutfields_mobileonly_value = $hc_gems_options['validatecheckoutfields-mobileonly'] ?? 0;
+	$validatebillingtaxfieldValue = $cps_hc_gems_options['validatebillingtaxfield'] ?? 0;
+	$validatebillingcityfieldValue = $cps_hc_gems_options['validatebillingcityfield'] ?? 0;
+	$validatebillingaddressfieldValue = $cps_hc_gems_options['validatebillingaddressfield'] ?? 0;
+	$validatebillingphonefieldValue = $cps_hc_gems_options['validatebillingphonefield'] ?? 0;
+	$validateshippingcityfieldValue = $cps_hc_gems_options['validateshippingcityfield'] ?? 0;
+	$validateshippingaddressfieldValue = $cps_hc_gems_options['validateshippingaddressfield'] ?? 0;
+	$validatecheckoutfields_mobileonly_value = $cps_hc_gems_options['validatecheckoutfields-mobileonly'] ?? 0;
 
 	// Get the submitted fields
 	$billing_tax_number = !empty( $_POST['billing_tax_number'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_tax_number'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
@@ -199,10 +199,10 @@ add_action( 'wp_footer', function() {
 	}
 
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
 	// Get the settings
-	$validatebillingtaxfieldValue = $hc_gems_options['validatebillingtaxfield'] ?? 0;
+	$validatebillingtaxfieldValue = $cps_hc_gems_options['validatebillingtaxfield'] ?? 0;
 
 	if ( 1 == $validatebillingtaxfieldValue ) {
 	?>

@@ -34,9 +34,9 @@ add_filter( 'woocommerce_billing_fields', function( $fields ) {
 // Adding placeholder to Tax number field conditionally
 add_filter( 'woocommerce_checkout_fields' , function( $fields ) {
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$taxnumberplaceholderValue = $hc_gems_options['taxnumberplaceholder'] ?? 0;
+	$taxnumberplaceholderValue = $cps_hc_gems_options['taxnumberplaceholder'] ?? 0;
 
 	if ( 1 == $taxnumberplaceholderValue ) {
 		$fields['billing']['billing_tax_number']['placeholder'] = __( 'Tax number', 'surbma-magyar-woocommerce' );
@@ -51,7 +51,7 @@ add_action( 'woocommerce_checkout_process', function() {
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
 	// Init the Billing Tax number check process
-	cps_wcgems_hc_billing_tax_number_check();
+	cps_hc_gems_billing_tax_number_check();
 } );
 
 // Adding custom validation message for Tax number field on My Account -> Addresses page
@@ -65,11 +65,11 @@ add_action( 'woocommerce_after_save_address_validation', function( $user_id, $ad
 	check_ajax_referer( 'woocommerce-edit_address', 'woocommerce-edit-address-nonce', false );
 
 	// Init the Billing Tax number check process
-	cps_wcgems_hc_billing_tax_number_check();
+	cps_hc_gems_billing_tax_number_check();
 }, 10, 2 );
 
 // Billing Tax number check process
-function cps_wcgems_hc_billing_tax_number_check() {
+function cps_hc_gems_billing_tax_number_check() {
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
 	$billing_company = !empty( $_POST['billing_company'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_company'] ) ) : '';
 	$billing_company_check = !empty( $_POST['billing_company_check'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_company_check'] ) ) : 0;
@@ -169,11 +169,11 @@ add_action( 'wp_footer', function() {
 	}
 
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$moduleCheckoutValue = $hc_gems_options['module-checkout'] ?? 0;
-	$billingcompanycheckValue = 1 == $moduleCheckoutValue && isset( $hc_gems_options['billingcompanycheck'] ) ? $hc_gems_options['billingcompanycheck'] : 0;
-	$companytaxnumberpairValue = 1 == $moduleCheckoutValue && isset( $hc_gems_options['companytaxnumberpair'] ) ? $hc_gems_options['companytaxnumberpair'] : 0;
+	$moduleCheckoutValue = $cps_hc_gems_options['module-checkout'] ?? 0;
+	$billingcompanycheckValue = 1 == $moduleCheckoutValue && isset( $cps_hc_gems_options['billingcompanycheck'] ) ? $cps_hc_gems_options['billingcompanycheck'] : 0;
+	$companytaxnumberpairValue = 1 == $moduleCheckoutValue && isset( $cps_hc_gems_options['companytaxnumberpair'] ) ? $cps_hc_gems_options['companytaxnumberpair'] : 0;
 
 	?>
 <script id="cps-hc-wcgems-tax-number">

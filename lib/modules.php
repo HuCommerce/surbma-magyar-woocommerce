@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return array The modules configuration array
  */
-function hc_get_modules_config() {
+function cps_hc_gems_get_modules_config() {
 	return [
 		// Free HU modules
 		'hu-format-fix' => [
@@ -294,7 +294,7 @@ function hc_get_modules_config() {
  * @param array $modules The modules array
  * @return array Array of module keys that should show "New" badge
  */
-function hc_get_new_module_keys( $modules ) {
+function cps_hc_gems_get_new_module_keys( $modules ) {
 	$versions = [];
 
 	// Collect all version_added values
@@ -336,7 +336,7 @@ function hc_get_new_module_keys( $modules ) {
  * @param array $modules The modules array
  * @return array Sorted modules array with PRO modules first
  */
-function hc_sort_modules_for_display( $modules ) {
+function cps_hc_gems_sort_modules_for_display( $modules ) {
 	$pro_types = ['pro', 'pro_hu', 'legacy', 'legacy_hu'];
 
 	$pro_modules = [];
@@ -358,7 +358,7 @@ function hc_sort_modules_for_display( $modules ) {
  *
  * @return array Associative array of tag => translated label
  */
-function hc_get_tag_translations() {
+function cps_hc_gems_get_tag_translations() {
 	return [
 		'product' => __( 'Product', 'surbma-magyar-woocommerce' ),
 		'cart' => __( 'Cart', 'surbma-magyar-woocommerce' ),
@@ -376,7 +376,7 @@ function hc_get_tag_translations() {
  * @param string $type The module type
  * @return bool True if PRO type, false if Free type
  */
-function hc_is_pro_module_type( $type ) {
+function cps_hc_gems_is_pro_module_type( $type ) {
 	return in_array( $type, ['pro', 'pro_hu', 'legacy', 'legacy_hu'], true );
 }
 
@@ -386,17 +386,17 @@ function hc_is_pro_module_type( $type ) {
  * @param string $type The module type
  * @return bool True if Free type, false otherwise
  */
-function hc_is_free_module_type( $type ) {
+function cps_hc_gems_is_free_module_type( $type ) {
 	return in_array( $type, ['free', 'free_hu'], true );
 }
 
 // Load modules on init
 add_action( 'init', function() {
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
 	// Get modules configuration
-	$modules = hc_get_modules_config();
+	$modules = cps_hc_gems_get_modules_config();
 
 	// Loop through modules and load them
 	foreach ( $modules as $module_key => $module_config ) {
@@ -412,14 +412,14 @@ add_action( 'init', function() {
 				case 'free_hu':
 				case 'free':
 					// Free modules: get from options directly
-					$module_value = $hc_gems_options[ $module_config['option_key'] ] ?? 0;
+					$module_value = $cps_hc_gems_options[ $module_config['option_key'] ] ?? 0;
 					break;
 
 				case 'pro_hu':
 				case 'pro':
 					// Pro modules: check SURBMA_HC_PREMIUM first
 					if ( SURBMA_HC_PREMIUM ) {
-						$module_value = $hc_gems_options[ $module_config['option_key'] ] ?? 0;
+						$module_value = $cps_hc_gems_options[ $module_config['option_key'] ] ?? 0;
 					} else {
 						$module_value = 0;
 					}
@@ -428,8 +428,8 @@ add_action( 'init', function() {
 				case 'legacy_hu':
 				case 'legacy':
 					// Legacy modules: check premium OR legacy user condition
-					if ( SURBMA_HC_PREMIUM || !isset( $hc_gems_options['brandnewuser'] ) || ( $hc_gems_options['legacyuser'] ?? 0 ) == 1 ) {
-						$module_value = $hc_gems_options[ $module_config['option_key'] ] ?? 0;
+					if ( SURBMA_HC_PREMIUM || !isset( $cps_hc_gems_options['brandnewuser'] ) || ( $cps_hc_gems_options['legacyuser'] ?? 0 ) == 1 ) {
+						$module_value = $cps_hc_gems_options[ $module_config['option_key'] ] ?? 0;
 					} else {
 						$module_value = 0;
 					}

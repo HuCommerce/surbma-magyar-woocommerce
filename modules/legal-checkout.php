@@ -9,9 +9,9 @@ defined( 'ABSPATH' ) || exit;
 
 add_action( 'woocommerce_register_form', function() {
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$regacceptppValue = isset( $hc_gems_options['regacceptpp'] ) ? wp_kses_post( wp_unslash( $hc_gems_options['regacceptpp'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
+	$regacceptppValue = isset( $cps_hc_gems_options['regacceptpp'] ) ? wp_kses_post( wp_unslash( $cps_hc_gems_options['regacceptpp'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
 
 	if ( !is_checkout() && $regacceptppValue ) {
 		woocommerce_form_field( 'reg_accept_pp', array(
@@ -30,9 +30,9 @@ add_filter( 'woocommerce_registration_errors', function( $errors, $username, $em
 	check_ajax_referer( 'woocommerce-register', 'woocommerce-register-nonce', false );
 
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	if ( !is_admin() && !is_checkout() && isset( $hc_gems_options['regacceptpp'] ) && $hc_gems_options['regacceptpp'] && empty( $_POST['reg_accept_pp'] ) ) {
+	if ( !is_admin() && !is_checkout() && isset( $cps_hc_gems_options['regacceptpp'] ) && $cps_hc_gems_options['regacceptpp'] && empty( $_POST['reg_accept_pp'] ) ) {
 		$acceptregppError = __( 'Privacy Policy', 'surbma-magyar-woocommerce' );
 		/* translators: %s: Field label */
 		$acceptregppError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $acceptregppError ) . '</strong>' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
@@ -51,9 +51,9 @@ add_action( 'user_register', function( $user_id ) {
 	}
 
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$regipValue = isset( $hc_gems_options['regip'] ) ? $hc_gems_options['regip'] : 0;
+	$regipValue = isset( $cps_hc_gems_options['regip'] ) ? $cps_hc_gems_options['regip'] : 0;
 	if ( 1 == $regipValue ) {
 		// Get real visitor IP behind CloudFlare network
 		if ( isset( $_SERVER['HTTP_CF_CONNECTING_IP'] ) ) {
@@ -134,7 +134,7 @@ add_action( 'init', function() {
 } );
 
 // Get the position for the Terms & Conditions fields on Checkout page
-$legalconfirmationsposition = $hc_gems_options['legalconfirmationsposition'] ?? 'woocommerce_review_order_before_submit';
+$legalconfirmationsposition = $cps_hc_gems_options['legalconfirmationsposition'] ?? 'woocommerce_review_order_before_submit';
 
 // Show our Terms & Conditions fields on Checkout page
 add_action( $legalconfirmationsposition, function( $checkout = '' ) {
@@ -143,17 +143,17 @@ add_action( $legalconfirmationsposition, function( $checkout = '' ) {
 	}
 
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$legalcheckouttitleValue = isset( $hc_gems_options['legalcheckouttitle'] ) ? $hc_gems_options['legalcheckouttitle'] : esc_html__( 'Legal confirmations', 'surbma-magyar-woocommerce' );
-	$legalcheckouttextValue = isset( $hc_gems_options['legalcheckouttext'] ) ? $hc_gems_options['legalcheckouttext'] : '';
-	$legalconfirmationsposition = isset( $hc_gems_options['legalconfirmationsposition'] ) ? $hc_gems_options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
-	$accepttosValue = isset( $hc_gems_options['accepttos'] ) ? wp_kses_post( wp_unslash( $hc_gems_options['accepttos'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'surbma-magyar-woocommerce' );
-	$acceptppValue = isset( $hc_gems_options['acceptpp'] ) ? wp_kses_post( wp_unslash( $hc_gems_options['acceptpp'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
-	$acceptcustom1Value = isset( $hc_gems_options['acceptcustom1'] ) ? wp_kses_post( wp_unslash( $hc_gems_options['acceptcustom1'] ) ) : '';
-	$legalcheckout_custom1optionalValue = isset( $hc_gems_options['legalcheckout-custom1optional'] ) && 1 == $hc_gems_options['legalcheckout-custom1optional'] ? false : true;
-	$acceptcustom2Value = isset( $hc_gems_options['acceptcustom2'] ) ? wp_kses_post( wp_unslash( $hc_gems_options['acceptcustom2'] ) ) : '';
-	$legalcheckout_custom2optionalValue = isset( $hc_gems_options['legalcheckout-custom2optional'] ) && 1 == $hc_gems_options['legalcheckout-custom2optional'] ? false : true;
+	$legalcheckouttitleValue = isset( $cps_hc_gems_options['legalcheckouttitle'] ) ? $cps_hc_gems_options['legalcheckouttitle'] : esc_html__( 'Legal confirmations', 'surbma-magyar-woocommerce' );
+	$legalcheckouttextValue = isset( $cps_hc_gems_options['legalcheckouttext'] ) ? $cps_hc_gems_options['legalcheckouttext'] : '';
+	$legalconfirmationsposition = isset( $cps_hc_gems_options['legalconfirmationsposition'] ) ? $cps_hc_gems_options['legalconfirmationsposition'] : 'woocommerce_review_order_before_submit';
+	$accepttosValue = isset( $cps_hc_gems_options['accepttos'] ) ? wp_kses_post( wp_unslash( $cps_hc_gems_options['accepttos'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'surbma-magyar-woocommerce' );
+	$acceptppValue = isset( $cps_hc_gems_options['acceptpp'] ) ? wp_kses_post( wp_unslash( $cps_hc_gems_options['acceptpp'] ) ) : esc_html__( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' );
+	$acceptcustom1Value = isset( $cps_hc_gems_options['acceptcustom1'] ) ? wp_kses_post( wp_unslash( $cps_hc_gems_options['acceptcustom1'] ) ) : '';
+	$legalcheckout_custom1optionalValue = isset( $cps_hc_gems_options['legalcheckout-custom1optional'] ) && 1 == $cps_hc_gems_options['legalcheckout-custom1optional'] ? false : true;
+	$acceptcustom2Value = isset( $cps_hc_gems_options['acceptcustom2'] ) ? wp_kses_post( wp_unslash( $cps_hc_gems_options['acceptcustom2'] ) ) : '';
+	$legalcheckout_custom2optionalValue = isset( $cps_hc_gems_options['legalcheckout-custom2optional'] ) && 1 == $cps_hc_gems_options['legalcheckout-custom2optional'] ? false : true;
 
 	echo '<div id="surbma_hc_legal_checkout">';
 
@@ -222,32 +222,32 @@ add_action( 'woocommerce_checkout_process', function() {
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$legalcheckout_custom1optionalValue = isset( $hc_gems_options['legalcheckout-custom1optional'] ) && 1 == $hc_gems_options['legalcheckout-custom1optional'] ? false : true;
-	$legalcheckout_custom2optionalValue = isset( $hc_gems_options['legalcheckout-custom2optional'] ) && 1 == $hc_gems_options['legalcheckout-custom2optional'] ? false : true;
+	$legalcheckout_custom1optionalValue = isset( $cps_hc_gems_options['legalcheckout-custom1optional'] ) && 1 == $cps_hc_gems_options['legalcheckout-custom1optional'] ? false : true;
+	$legalcheckout_custom2optionalValue = isset( $cps_hc_gems_options['legalcheckout-custom2optional'] ) && 1 == $cps_hc_gems_options['legalcheckout-custom2optional'] ? false : true;
 
-	if ( isset( $hc_gems_options['accepttos'] ) && $hc_gems_options['accepttos'] && empty( $_POST['accept_tos'] ) ) {
+	if ( isset( $cps_hc_gems_options['accepttos'] ) && $cps_hc_gems_options['accepttos'] && empty( $_POST['accept_tos'] ) ) {
 		$accepttosError = __( 'Terms of Service', 'surbma-magyar-woocommerce' );
 		/* translators: %s: Field label */
 		$accepttosError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $accepttosError ) . '</strong>' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		wc_add_notice( $accepttosError, 'error' );
 	}
 
-	if ( isset( $hc_gems_options['acceptpp'] ) && $hc_gems_options['acceptpp'] && empty( $_POST['accept_pp'] ) ) {
+	if ( isset( $cps_hc_gems_options['acceptpp'] ) && $cps_hc_gems_options['acceptpp'] && empty( $_POST['accept_pp'] ) ) {
 		$acceptppError = __( 'Privacy Policy', 'surbma-magyar-woocommerce' );
 		/* translators: %s: Field label */
 		$acceptppError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $acceptppError ) . '</strong>' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		wc_add_notice( $acceptppError, 'error' );
 	}
 
-	if ( $legalcheckout_custom1optionalValue && isset( $hc_gems_options['acceptcustom1'] ) && $hc_gems_options['acceptcustom1'] && isset( $hc_gems_options['acceptcustom1label'] ) && $hc_gems_options['acceptcustom1label'] && empty( $_POST['accept_custom1'] ) ) {
-		$custom1errormessage = '<strong>' . $hc_gems_options['acceptcustom1label'] . '</strong> ' . esc_html__( 'is a required field.', 'surbma-magyar-woocommerce' );
+	if ( $legalcheckout_custom1optionalValue && isset( $cps_hc_gems_options['acceptcustom1'] ) && $cps_hc_gems_options['acceptcustom1'] && isset( $cps_hc_gems_options['acceptcustom1label'] ) && $cps_hc_gems_options['acceptcustom1label'] && empty( $_POST['accept_custom1'] ) ) {
+		$custom1errormessage = '<strong>' . $cps_hc_gems_options['acceptcustom1label'] . '</strong> ' . esc_html__( 'is a required field.', 'surbma-magyar-woocommerce' );
 		wc_add_notice( $custom1errormessage, 'error' );
 	}
 
-	if ( $legalcheckout_custom2optionalValue && isset( $hc_gems_options['acceptcustom2'] ) && $hc_gems_options['acceptcustom2'] && isset( $hc_gems_options['acceptcustom2label'] ) && $hc_gems_options['acceptcustom2label'] && empty( $_POST['accept_custom2'] ) ) {
-		$custom2errormessage = '<strong>' . $hc_gems_options['acceptcustom2label'] . '</strong> ' . esc_html__( 'is a required field.', 'surbma-magyar-woocommerce' );
+	if ( $legalcheckout_custom2optionalValue && isset( $cps_hc_gems_options['acceptcustom2'] ) && $cps_hc_gems_options['acceptcustom2'] && isset( $cps_hc_gems_options['acceptcustom2label'] ) && $cps_hc_gems_options['acceptcustom2label'] && empty( $_POST['accept_custom2'] ) ) {
+		$custom2errormessage = '<strong>' . $cps_hc_gems_options['acceptcustom2label'] . '</strong> ' . esc_html__( 'is a required field.', 'surbma-magyar-woocommerce' );
 		wc_add_notice( $custom2errormessage, 'error' );
 	}
 } );
@@ -275,10 +275,10 @@ add_action( 'woocommerce_checkout_create_order', function( $order ) {
 
 add_action( 'woocommerce_admin_order_data_after_billing_address', function( $order ) {
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$acceptcustom1labelValue = isset( $hc_gems_options['acceptcustom1label'] ) && $hc_gems_options['acceptcustom1label'] ? $hc_gems_options['acceptcustom1label'] : __( 'Custom 1 checkbox', 'surbma-magyar-woocommerce' );
-	$acceptcustom2labelValue = isset( $hc_gems_options['acceptcustom2label'] ) && $hc_gems_options['acceptcustom2label'] ? $hc_gems_options['acceptcustom2label'] : __( 'Custom 2 checkbox', 'surbma-magyar-woocommerce' );
+	$acceptcustom1labelValue = isset( $cps_hc_gems_options['acceptcustom1label'] ) && $cps_hc_gems_options['acceptcustom1label'] ? $cps_hc_gems_options['acceptcustom1label'] : __( 'Custom 1 checkbox', 'surbma-magyar-woocommerce' );
+	$acceptcustom2labelValue = isset( $cps_hc_gems_options['acceptcustom2label'] ) && $cps_hc_gems_options['acceptcustom2label'] ? $cps_hc_gems_options['acceptcustom2label'] : __( 'Custom 2 checkbox', 'surbma-magyar-woocommerce' );
 
 	$accepttos = $order->get_meta( 'accept_tos', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
 	$acceptpp = $order->get_meta( 'accept_pp', true ) ? esc_html__( 'Accepted', 'surbma-magyar-woocommerce' ) : false;
@@ -301,9 +301,9 @@ add_action( 'woocommerce_admin_order_data_after_billing_address', function( $ord
 
 add_action( 'woocommerce_review_order_before_submit', function() {
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$beforeorderbuttonmessageValue = isset( $hc_gems_options['beforeorderbuttonmessage'] ) ? wp_unslash( $hc_gems_options['beforeorderbuttonmessage'] ) : '';
+	$beforeorderbuttonmessageValue = isset( $cps_hc_gems_options['beforeorderbuttonmessage'] ) ? wp_unslash( $cps_hc_gems_options['beforeorderbuttonmessage'] ) : '';
 
 	if ( $beforeorderbuttonmessageValue ) {
 		echo '<div class="surbma-hc-before-submit" style="margin: 0 0 1em;text-align: center;">' . wp_kses_post( $beforeorderbuttonmessageValue ) . '</div>';
@@ -312,9 +312,9 @@ add_action( 'woocommerce_review_order_before_submit', function() {
 
 add_action( 'woocommerce_review_order_after_submit', function() {
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$afterorderbuttonmessageValue = isset( $hc_gems_options['afterorderbuttonmessage'] ) ? wp_unslash( $hc_gems_options['afterorderbuttonmessage'] ) : '';
+	$afterorderbuttonmessageValue = isset( $cps_hc_gems_options['afterorderbuttonmessage'] ) ? wp_unslash( $cps_hc_gems_options['afterorderbuttonmessage'] ) : '';
 
 	if ( $afterorderbuttonmessageValue ) {
 		echo '<div class="surbma-hc-before-submit" style="margin: 1em 0 0;text-align: center;">' . wp_kses_post( $afterorderbuttonmessageValue ) . '</div>';

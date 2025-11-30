@@ -119,14 +119,14 @@ if ( 'www.hucommerce.hu' === $current_domain ) {
 if ( !isset( $whitelisted ) || !$whitelisted ) :
 
 	// Create the API request URL
-	function surbma_hc_license_create_url( $request_args ) {
+	function cps_hc_gems_license_create_url( $request_args ) {
 		$base_url = 'https://www.hucommerce.hu/';
 		$base_url = add_query_arg( 'wc-api', 'wc-am-api', $base_url );
 		return $base_url . '&' . http_build_query( $request_args );
 	}
 
 	// Update the surbma_hc_license_status option
-	function surbma_hc_license_status_update() {
+	function cps_hc_gems_license_status_update() {
 		$license_options = get_option( 'surbma_hc_license', array() );
 
 		// API variables
@@ -146,7 +146,7 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 				'product_id'   => $product_id,
 				'instance' 	   => $instance
 			);
-			$request_url = surbma_hc_license_create_url( $request_args );
+			$request_url = cps_hc_gems_license_create_url( $request_args );
 			$request_response = wp_remote_get( $request_url );
 			$request_response_array = array();
 
@@ -209,12 +209,12 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 		$last_check_diff = $last_check ? $current_time - $last_check : '259201';
 
 		if ( $last_check_diff > ( 3 * 24 * 60 * 60 ) ) {
-			surbma_hc_license_status_update();
+			cps_hc_gems_license_status_update();
 		}
 	} );
 
 	// Send the requested action to the API Manager
-	function surbma_hc_license_api_manager_action( $action ) {
+	function cps_hc_gems_license_api_manager_action( $action ) {
 		// Stop if action is not valid
 		if ( 'activate' != $action && 'deactivate' != $action && 'status' != $action ) {
 			return;
@@ -266,17 +266,17 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 		}
 
 		// Execute request
-		$request_url = surbma_hc_license_create_url( $request_args );
+		$request_url = cps_hc_gems_license_create_url( $request_args );
 		$request_response = wp_remote_get( $request_url );
 	}
 
 	// License management page actions
 	add_action( 'current_screen', function() {
 		$screen = get_current_screen();
-		global $surbma_hc_license_page;
+		global $cps_hc_gems_license_page;
 
 		// Stop if we are not on the License Management page
-		if ( $surbma_hc_license_page != $screen->base ) {
+		if ( $cps_hc_gems_license_page != $screen->base ) {
 			return;
 		}
 
@@ -285,7 +285,7 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 
 		// Update license status if License Management page settings are updated
 		if ( $update_request ) {
-			surbma_hc_license_status_update();
+			cps_hc_gems_license_status_update();
 		}
 
 		// Stop if there is no manual request
@@ -302,21 +302,21 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 
 		// Activate request sent from HuCommerce Pro menu with the "Frissítés & Újra aktiválás" button
 		if ( 'activate' == $manual_request ) {
-			surbma_hc_license_api_manager_action( 'activate' );
+			cps_hc_gems_license_api_manager_action( 'activate' );
 		}
 
 		// Dectivate request sent from HuCommerce Pro menu with the "Megtartás & deaktiválás" button
 		if ( 'deactivate' == $manual_request ) {
-			surbma_hc_license_api_manager_action( 'deactivate' );
+			cps_hc_gems_license_api_manager_action( 'deactivate' );
 		}
 
 		// Status request sent from HuCommerce Pro menu with the "API szinkronizálás" link
 		if ( 'status' == $manual_request ) {
-			surbma_hc_license_api_manager_action( 'status' );
+			cps_hc_gems_license_api_manager_action( 'status' );
 		}
 
 		// Update license status
-		surbma_hc_license_status_update();
+		cps_hc_gems_license_status_update();
 
 		// Remove query parameter from url
 		$url = esc_url_raw( remove_query_arg( 'hc-request' ) );
@@ -343,11 +343,11 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 			'object'		=> $object
 		);
 
-		$request_url = surbma_hc_license_create_url( $request_args );
+		$request_url = cps_hc_gems_license_create_url( $request_args );
 		$request_response = wp_remote_get( $request_url );
 
 		// Update license status
-		surbma_hc_license_status_update();
+		cps_hc_gems_license_status_update();
 	}, 10, 2 );
 
 	// Fires when the surbma_hc_license option is updated with new values
@@ -372,7 +372,7 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 				'product_id'	=> $old_product_id,
 				'instance'		=> $old_instance
 			);
-			$deactivate_request_url = surbma_hc_license_create_url( $deactivate_request_args );
+			$deactivate_request_url = cps_hc_gems_license_create_url( $deactivate_request_args );
 			$deactivate_request_response = wp_remote_get( $deactivate_request_url );
 		}
 
@@ -385,12 +385,12 @@ if ( !isset( $whitelisted ) || !$whitelisted ) :
 				'instance'		=> $instance,
 				'object'		=> $object
 			);
-			$activate_request_url = surbma_hc_license_create_url( $activate_request_args );
+			$activate_request_url = cps_hc_gems_license_create_url( $activate_request_args );
 			$activate_request_response = wp_remote_get( $activate_request_url );
 		}
 
 		// Update license status
-		surbma_hc_license_status_update();
+		cps_hc_gems_license_status_update();
 	}, 10, 2 );
 
 endif;

@@ -3,64 +3,64 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-function surbma_hc_page_modules_nav() {
+function cps_hc_gems_page_modules_nav() {
 	$screen = get_current_screen();
-	global $surbma_hc_modules_page;
+	global $cps_hc_gems_modules_page;
 
-	$active_modules_menu = $surbma_hc_modules_page == $screen->base ? 'uk-active' : '';
+	$active_modules_menu = $cps_hc_gems_modules_page == $screen->base ? 'uk-active' : '';
 
 	?>
 	<li class="<?php echo esc_attr( $active_modules_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> HuCommerce <?php esc_html_e( 'Modules', 'surbma-magyar-woocommerce' ); ?></a></li>
-	<?php if ( $surbma_hc_modules_page == $screen->base ) { ?>
+	<?php if ( $cps_hc_gems_modules_page == $screen->base ) { ?>
 	<li class="cps-settings-subnav">
 		<ul class="uk-nav-sub uk-padding-remove-left uk-padding-remove-bottom" uk-switcher="connect: #surbma-hc-modules; animation: uk-animation-fade">
 			<li><a class="uk-offcanvas-close uk-modal-close-default"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: chevron-double-right; ratio: 1"></span> <?php esc_html_e( 'All modules', 'surbma-magyar-woocommerce' ); ?></a></li>
 			<li class="uk-nav-header"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: settings; ratio: 1"></span> <?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?>:</li>
-			<?php cps_hc_wcgems_module_nav_item( 'Check field formats (Masking)', 'maskcheckoutfields' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Check field values', 'validatecheckoutfields' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Free shipping notification', 'freeshippingnotice' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Empty Cart button', 'module-emptycartbutton' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Product price history', 'module-productpricehistory' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Product price additions', 'module-productpriceadditions' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Legal compliance (GDPR, CCPA, ePrivacy)', 'legalcheckout' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Limit Payment Methods', 'module-limitpaymentmethods' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Global Information', 'module-globalinfo' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Translations', 'module-translations' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Fixes for Hungarian language', 'huformatfix' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Tax number field', 'taxnumber' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Hungarian translation fixes', 'translations' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Hide County field if Country is Hungary', 'nocounty' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Autofill City after Postcode is given', 'autofillcity' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Product customizations', 'module-productsettings' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Checkout page customizations', 'module-checkout' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Plus/minus quantity buttons', 'plusminus' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Automatic Cart update', 'updatecart' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Continue shopping buttons', 'returntoshop' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Login and registration redirection', 'loginregistrationredirect' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Coupon field customizations', 'module-coupon' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Redirect Cart page to Checkout page', 'module-redirectcart' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'One product per purchase', 'module-oneproductincart' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Custom Add To Cart Button', 'module-custom-addtocart-button' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Hide shipping methods', 'module-hideshippingmethods' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'SMTP service', 'module-smtp' ); ?>
-			<?php cps_hc_wcgems_module_nav_item( 'Catalog mode', 'module-catalogmode' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Check field formats (Masking)', 'maskcheckoutfields' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Check field values', 'validatecheckoutfields' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Free shipping notification', 'freeshippingnotice' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Empty Cart button', 'module-emptycartbutton' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Product price history', 'module-productpricehistory' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Product price additions', 'module-productpriceadditions' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Legal compliance (GDPR, CCPA, ePrivacy)', 'legalcheckout' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Limit Payment Methods', 'module-limitpaymentmethods' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Global Information', 'module-globalinfo' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Translations', 'module-translations' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Fixes for Hungarian language', 'huformatfix' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Tax number field', 'taxnumber' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Hungarian translation fixes', 'translations' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Hide County field if Country is Hungary', 'nocounty' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Autofill City after Postcode is given', 'autofillcity' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Product customizations', 'module-productsettings' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Checkout page customizations', 'module-checkout' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Plus/minus quantity buttons', 'plusminus' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Automatic Cart update', 'updatecart' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Continue shopping buttons', 'returntoshop' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Login and registration redirection', 'loginregistrationredirect' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Coupon field customizations', 'module-coupon' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Redirect Cart page to Checkout page', 'module-redirectcart' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'One product per purchase', 'module-oneproductincart' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Custom Add To Cart Button', 'module-custom-addtocart-button' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Hide shipping methods', 'module-hideshippingmethods' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'SMTP service', 'module-smtp' ); ?>
+			<?php cps_hc_gems_module_nav_item( 'Catalog mode', 'module-catalogmode' ); ?>
 		</ul>
 	</li>
 	<?php } ?>
 	<?php
 }
 
-function surbma_hc_pages_nav() {
+function cps_hc_gems_pages_nav() {
 	$screen = get_current_screen();
-	global $surbma_hc_offers_page;
-	global $surbma_hc_directory_page;
-	global $surbma_hc_news_page;
-	global $surbma_hc_information_page;
+	global $cps_hc_gems_offers_page;
+	global $cps_hc_gems_directory_page;
+	global $cps_hc_gems_news_page;
+	global $cps_hc_gems_information_page;
 
-	$active_offers_menu = $surbma_hc_offers_page == $screen->base ? 'uk-active' : '';
-	$active_directory_menu = $surbma_hc_directory_page == $screen->base ? 'uk-active' : '';
-	$active_news_menu = $surbma_hc_news_page == $screen->base ? 'uk-active' : '';
-	$active_information_menu = $surbma_hc_information_page == $screen->base ? 'uk-active' : '';
+	$active_offers_menu = $cps_hc_gems_offers_page == $screen->base ? 'uk-active' : '';
+	$active_directory_menu = $cps_hc_gems_directory_page == $screen->base ? 'uk-active' : '';
+	$active_news_menu = $cps_hc_gems_news_page == $screen->base ? 'uk-active' : '';
+	$active_information_menu = $cps_hc_gems_information_page == $screen->base ? 'uk-active' : '';
 
 	?>
 	<li class="<?php echo esc_attr( $active_offers_menu ); ?> uk-hidden"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-offers-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: star"></span> <?php esc_html_e( 'Offers', 'surbma-magyar-woocommerce' ); ?></a></li>
@@ -69,23 +69,23 @@ function surbma_hc_pages_nav() {
 	<?php
 }
 
-function surbma_hc_page_license_nav() {
+function cps_hc_gems_page_license_nav() {
 	$screen = get_current_screen();
-	global $surbma_hc_license_page;
-	global $surbma_hc_information_page;
+	global $cps_hc_gems_license_page;
+	global $cps_hc_gems_information_page;
 
-	$hc_pro_menu_icon = 'active' == SURBMA_HC_PLUGIN_LICENSE ? 'unlock' : 'lock';
+	$cps_hc_gems_pro_menu_icon = 'active' == SURBMA_HC_PLUGIN_LICENSE ? 'unlock' : 'lock';
 
-	$active_license_menu = $surbma_hc_license_page == $screen->base ? 'uk-active' : '';
-	$active_information_menu = $surbma_hc_information_page == $screen->base ? 'uk-active' : '';
+	$active_license_menu = $cps_hc_gems_license_page == $screen->base ? 'uk-active' : '';
+	$active_information_menu = $cps_hc_gems_information_page == $screen->base ? 'uk-active' : '';
 
 	?>
-	<li class="<?php echo esc_attr( $active_license_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-license-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: <?php echo esc_attr( $hc_pro_menu_icon ); ?>"></span> <?php esc_html_e( 'License management', 'surbma-magyar-woocommerce' ); ?></a></li>
+	<li class="<?php echo esc_attr( $active_license_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-license-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: <?php echo esc_attr( $cps_hc_gems_pro_menu_icon ); ?>"></span> <?php esc_html_e( 'License management', 'surbma-magyar-woocommerce' ); ?></a></li>
 	<li class="<?php echo esc_attr( $active_information_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-information-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: info"></span> <?php esc_html_e( 'Information', 'surbma-magyar-woocommerce' ); ?></a></li>
 	<?php
 }
 
-function surbma_hc_page_social_nav() {
+function cps_hc_gems_page_social_nav() {
 	$home_url = get_option( 'home' );
 	$current_user = wp_get_current_user();
 
@@ -103,16 +103,16 @@ function surbma_hc_page_social_nav() {
 	<?php
 }
 
-function surbma_hc_page_header() {
+function cps_hc_gems_page_header() {
 	?>
 	<div class="cps-admin cps-admin-2">
 		<div class="wrap">
 	<?php
 }
 
-function surbma_hc_page_notifications() {
+function cps_hc_gems_page_notifications() {
 	$screen = get_current_screen();
-	global $surbma_hc_license_page;
+	global $cps_hc_gems_license_page;
 
 	?>
 	<?php if ( isset( $_GET['settings-updated'] ) && true == $_GET['settings-updated'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
@@ -134,7 +134,7 @@ function surbma_hc_page_notifications() {
 	<?php } ?>
 
 	<?php // Free notification ?>
-	<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE && $surbma_hc_license_page != $screen->base ) { ?>
+	<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE && $cps_hc_gems_license_page != $screen->base ) { ?>
 		<div class="notice notice-info is-dismissible">
 			<p><strong class="uk-text-uppercase">Figyelem!</strong> Nézd meg, mivel nyújt többet a <a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">HuCommerce Pro</a> verzió!</p>
 		</div>
@@ -166,37 +166,37 @@ function surbma_hc_page_notifications() {
 	<?php
 }
 
-function surbma_hc_page_sidebar() {
+function cps_hc_gems_page_sidebar() {
 	?>
 	<div class="uk-text-center uk-margin-top uk-margin-medium-bottom"><a href="/wp-admin/admin.php?page=surbma-hucommerce-menu"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo-2023-dark.png" alt="HuCommerce" width="150" height="27"></a></div><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 	<ul class="cps-settings-nav uk-nav uk-nav-default">
-		<?php surbma_hc_page_modules_nav(); ?>
+		<?php cps_hc_gems_page_modules_nav(); ?>
 		<li class="uk-nav-divider"><a></a></li>
-		<?php surbma_hc_pages_nav(); ?>
+		<?php cps_hc_gems_pages_nav(); ?>
 		<li class="uk-nav-divider"><a></a></li>
-		<?php surbma_hc_page_license_nav(); ?>
+		<?php cps_hc_gems_page_license_nav(); ?>
 		<li class="uk-nav-divider"><a></a></li>
-		<?php surbma_hc_page_social_nav(); ?>
+		<?php cps_hc_gems_page_social_nav(); ?>
 		<li class="uk-nav-divider"><a></a></li>
 	</ul>
 	<?php
 }
 
-function surbma_hc_page_mobile_nav() {
+function cps_hc_gems_page_mobile_nav() {
 	?>
 	<div class="uk-width-auto uk-hidden@m">
 		<a class="uk-text-secondary" href="#cps-settings-mobile-nav" uk-toggle><span uk-navbar-toggle-icon></span></a>
 		<div id="cps-settings-mobile-nav" uk-modal="container: .cps-admin">
 			<div class="uk-modal-dialog uk-modal-body">
 				<button class="uk-modal-close-default" type="button" uk-close></button>
-				<?php surbma_hc_page_sidebar(); ?>
+				<?php cps_hc_gems_page_sidebar(); ?>
 			</div>
 		</div>
 	</div>
 	<?php
 }
 
-function surbma_hc_page_card_footer() {
+function cps_hc_gems_page_card_footer() {
 	$home_url = get_option( 'home' );
 	$current_user = wp_get_current_user();
 
@@ -226,7 +226,7 @@ function surbma_hc_page_card_footer() {
 	<?php
 }
 
-function surbma_hc_page_footer() {
+function cps_hc_gems_page_footer() {
 	?>
 		</div>
 	</div>

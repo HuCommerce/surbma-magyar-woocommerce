@@ -3,7 +3,7 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-global $hc_gems_options;
+global $cps_hc_gems_options;
 
 $plugin_file = SURBMA_HC_PLUGIN_FILE;
 $plugin_data = get_plugin_data( $plugin_file );
@@ -36,7 +36,7 @@ $plugin_pluginURI = $plugin_data['PluginURI'];
 </ul>
 
 <h4 class="uk-heading-divider"><?php esc_html_e( 'HuCommerce options', 'surbma-magyar-woocommerce' ); ?></h4>
-<textarea id="hc-gems-options" class="uk-textarea" cols="50" rows="10" style="background: #000;" readonly><?php print_r( $hc_gems_options ); ?></textarea>
+<textarea id="hc-gems-options" class="uk-textarea" cols="50" rows="10" style="background: #000;" readonly><?php print_r( $cps_hc_gems_options ); ?></textarea>
 <button class="uk-button uk-button-secondary uk-margin-top" onclick="copyHuCommerceOptions()"><?php esc_html_e( 'Copy HuCommerce options', 'surbma-magyar-woocommerce' ); ?></button>
 
 <h4 class="uk-heading-divider"><?php esc_html_e( 'Website information', 'surbma-magyar-woocommerce' ); ?></h4>

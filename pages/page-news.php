@@ -3,7 +3,7 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-function surbma_hc_news_page() {
+function cps_hc_gems_news_page() {
 	surbma_hc_page_header();
 	?>
 	<div id="cps-settings">

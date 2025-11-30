@@ -123,12 +123,12 @@ add_filter( 'woocommerce_get_price_html', function( $price, $product ) {
 	}
 
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$productpriceadditions_productprefixValue = isset( $hc_gems_options['productpriceadditions-product-prefix'] ) && $hc_gems_options['productpriceadditions-product-prefix'] ? $hc_gems_options['productpriceadditions-product-prefix'] : false;
-	$productpriceadditions_productsuffixValue = isset( $hc_gems_options['productpriceadditions-product-suffix'] ) && $hc_gems_options['productpriceadditions-product-suffix'] ? $hc_gems_options['productpriceadditions-product-suffix'] : false;
-	$productpriceadditions_archiveprefixValue = isset( $hc_gems_options['productpriceadditions-archive-prefix'] ) && $hc_gems_options['productpriceadditions-archive-prefix'] ? $hc_gems_options['productpriceadditions-archive-prefix'] : false;
-	$productpriceadditions_archivesuffixValue = isset( $hc_gems_options['productpriceadditions-archive-suffix'] ) && $hc_gems_options['productpriceadditions-archive-suffix'] ? $hc_gems_options['productpriceadditions-archive-suffix'] : false;
+	$productpriceadditions_productprefixValue = isset( $cps_hc_gems_options['productpriceadditions-product-prefix'] ) && $cps_hc_gems_options['productpriceadditions-product-prefix'] ? $cps_hc_gems_options['productpriceadditions-product-prefix'] : false;
+	$productpriceadditions_productsuffixValue = isset( $cps_hc_gems_options['productpriceadditions-product-suffix'] ) && $cps_hc_gems_options['productpriceadditions-product-suffix'] ? $cps_hc_gems_options['productpriceadditions-product-suffix'] : false;
+	$productpriceadditions_archiveprefixValue = isset( $cps_hc_gems_options['productpriceadditions-archive-prefix'] ) && $cps_hc_gems_options['productpriceadditions-archive-prefix'] ? $cps_hc_gems_options['productpriceadditions-archive-prefix'] : false;
+	$productpriceadditions_archivesuffixValue = isset( $cps_hc_gems_options['productpriceadditions-archive-suffix'] ) && $cps_hc_gems_options['productpriceadditions-archive-suffix'] ? $cps_hc_gems_options['productpriceadditions-archive-suffix'] : false;
 
 	// Get the parent product object if product is variable
 	if ( $product->get_parent_id() ) {

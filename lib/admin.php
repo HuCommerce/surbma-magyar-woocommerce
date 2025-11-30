@@ -28,80 +28,80 @@ include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings.php');
 
 // Admin options menu
 add_action( 'admin_menu', function() {
-	global $surbma_hc_main_page;
-	global $surbma_hc_modules_page;
-	global $surbma_hc_offers_page;
-	global $surbma_hc_directory_page;
-	global $surbma_hc_news_page;
-	global $surbma_hc_license_page;
-	global $surbma_hc_information_page;
+	global $cps_hc_gems_main_page;
+	global $cps_hc_gems_modules_page;
+	global $cps_hc_gems_offers_page;
+	global $cps_hc_gems_directory_page;
+	global $cps_hc_gems_news_page;
+	global $cps_hc_gems_license_page;
+	global $cps_hc_gems_information_page;
 
-	$surbma_hc_main_page = add_menu_page(
+	$cps_hc_gems_main_page = add_menu_page(
 		'HuCommerce',
 		'HuCommerce',
 		'manage_options',
 		'surbma-hucommerce-menu',
-		'surbma_hc_modules_page',
+		'cps_hc_gems_modules_page',
 		'dashicons-welcome-widgets-menus',
 		'58'
 	);
 
-	$surbma_hc_modules_page = add_submenu_page(
+	$cps_hc_gems_modules_page = add_submenu_page(
 		'surbma-hucommerce-menu',
 		__( 'HuCommerce Modules', 'surbma-magyar-woocommerce' ),
 		__( 'Modules', 'surbma-magyar-woocommerce' ),
 		'manage_options',
 		'surbma-hucommerce-menu',
-		'surbma_hc_modules_page'
+		'cps_hc_gems_modules_page'
 	);
 
 	/*
-	$surbma_hc_offers_page = add_submenu_page(
+	$cps_hc_gems_offers_page = add_submenu_page(
 		'surbma-hucommerce-menu',
 		__( 'HuCommerce Offers', 'surbma-magyar-woocommerce' ),
 		__( 'Offers', 'surbma-magyar-woocommerce' ),
 		'manage_options',
 		'surbma-hucommerce-offers-menu',
-		'surbma_hc_offers_page'
+		'cps_hc_gems_offers_page'
 	);
 	*/
 
-	$surbma_hc_directory_page = add_submenu_page(
+	$cps_hc_gems_directory_page = add_submenu_page(
 		'surbma-hucommerce-menu',
 		__( 'HuCommerce Directory', 'surbma-magyar-woocommerce' ),
 		__( 'Directory', 'surbma-magyar-woocommerce' ),
 		'manage_options',
 		'surbma-hucommerce-directory-menu',
-		'surbma_hc_directory_page'
+		'cps_hc_gems_directory_page'
 	);
 
 	/*
-	$surbma_hc_news_page = add_submenu_page(
+	$cps_hc_gems_news_page = add_submenu_page(
 		'surbma-hucommerce-menu',
 		__( 'HuCommerce Latest News', 'surbma-magyar-woocommerce' ),
 		__( 'Latest News', 'surbma-magyar-woocommerce' ),
 		'manage_options',
 		'surbma-hucommerce-news-menu',
-		'surbma_hc_news_page'
+		'cps_hc_gems_news_page'
 	);
 	*/
 
-	$surbma_hc_license_page = add_submenu_page(
+	$cps_hc_gems_license_page = add_submenu_page(
 		'surbma-hucommerce-menu',
 		__( 'HuCommerce License Management', 'surbma-magyar-woocommerce' ),
 		__( 'License management', 'surbma-magyar-woocommerce' ),
 		'manage_options',
 		'surbma-hucommerce-license-menu',
-		'surbma_hc_license_page'
+		'cps_hc_gems_license_page'
 	);
 
-	$surbma_hc_information_page = add_submenu_page(
+	$cps_hc_gems_information_page = add_submenu_page(
 		'surbma-hucommerce-menu',
 		__( 'HuCommerce Information', 'surbma-magyar-woocommerce' ),
 		__( 'Information', 'surbma-magyar-woocommerce' ),
 		'manage_options',
 		'surbma-hucommerce-information-menu',
-		'surbma_hc_information_page'
+		'cps_hc_gems_information_page'
 	);
 
 	if ( function_exists( 'wc_admin_connect_page' ) ) {
@@ -127,22 +127,22 @@ add_filter( 'plugin_action_links_' . plugin_basename( SURBMA_HC_PLUGIN_FILE ), f
 
 // Custom styles and scripts for admin pages
 add_action( 'admin_enqueue_scripts', function( $hook ) {
-	global $surbma_hc_main_page;
-	global $surbma_hc_modules_page;
-	global $surbma_hc_offers_page;
-	global $surbma_hc_directory_page;
-	global $surbma_hc_news_page;
-	global $surbma_hc_license_page;
-	global $surbma_hc_information_page;
+	global $cps_hc_gems_main_page;
+	global $cps_hc_gems_modules_page;
+	global $cps_hc_gems_offers_page;
+	global $cps_hc_gems_directory_page;
+	global $cps_hc_gems_news_page;
+	global $cps_hc_gems_license_page;
+	global $cps_hc_gems_information_page;
 
-	if ( $hook == $surbma_hc_main_page || $hook == $surbma_hc_modules_page || $hook == $surbma_hc_offers_page || $hook == $surbma_hc_directory_page || $hook == $surbma_hc_news_page || $hook == $surbma_hc_license_page || $hook == $surbma_hc_information_page ) {
-		$hc_page = true;
+	if ( $hook == $cps_hc_gems_main_page || $hook == $cps_hc_gems_modules_page || $hook == $cps_hc_gems_offers_page || $hook == $cps_hc_gems_directory_page || $hook == $cps_hc_gems_news_page || $hook == $cps_hc_gems_license_page || $hook == $cps_hc_gems_information_page ) {
+		$cps_hc_gems_page = true;
 	} else {
-		$hc_page = false;
+		$cps_hc_gems_page = false;
 	}
 
 	// Load plugin scripts & styles for plugin pages
-	if ( $hc_page ) {
+	if ( $cps_hc_gems_page ) {
 		add_action( 'admin_enqueue_scripts', 'cps_admin_scripts', 9999 );
 		wp_enqueue_style( 'surbma-hc-admin', SURBMA_HC_PLUGIN_URL . '/assets/css/admin.css', array(), SURBMA_HC_PLUGIN_VERSION );
 	}
@@ -156,7 +156,7 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 		$hs_beacon__ID = '8343e517-6ce5-408e-b9b7-194ed15224dc';
 
 		// HC-HC-PRO
-		if ( $hc_page ) {
+		if ( $cps_hc_gems_page ) {
 			$hs_beacon__ID = 'ab57a81e-5722-44ec-9f95-10d6ed71593e';
 		}
 
@@ -186,7 +186,7 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 		$hs_beacon__ID = 'bdba10a4-0230-4f42-ac98-0af5f013ad4e';
 
 		// HC-HC-START
-		if ( $hc_page ) {
+		if ( $cps_hc_gems_page ) {
 			$hs_beacon__ID = 'cc6686f3-4089-42a7-ab45-01a797527267';
 		}
 
@@ -215,7 +215,7 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 	ob_start();
 		echo '!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});' . PHP_EOL;
 		echo "window.Beacon('init', '" . esc_js( $hs_beacon__ID ) . "')" . PHP_EOL;
-		if ( SURBMA_HC_PRO_USER && $hc_page ) {
+		if ( SURBMA_HC_PRO_USER && $cps_hc_gems_page ) {
 			$current_user = wp_get_current_user();
 			$email = $current_user->user_email;
 			if ( $current_user->first_name ) {
@@ -239,7 +239,7 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 } );
 
 // Get allowed post tags
-function cps_wcgems_hc_allowed_post_tags() {
+function cps_hc_gems_allowed_post_tags() {
 	global $allowedposttags;
 	$allowed = '';
 	foreach ( (array) $allowedposttags as $tag => $attributes ) {
@@ -268,8 +268,8 @@ add_action( 'admin_notices', function() {
 	}
 
 	// Get the settings array
-	global $hc_gems_options;
-	if ( !empty( $hc_gems_options ) ) {
+	global $cps_hc_gems_options;
+	if ( !empty( $cps_hc_gems_options ) ) {
 		return;
 	}
 
@@ -298,8 +298,8 @@ add_action( 'admin_notices', function() {
 // Missing Company name setting notification
 add_action( 'admin_notices', function() {
 	// Get the settings array
-	global $hc_gems_options;
-	$module_taxnumberValue = $hc_gems_options['taxnumber'] ?? 0;
+	global $cps_hc_gems_options;
+	$module_taxnumberValue = $cps_hc_gems_options['taxnumber'] ?? 0;
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' );
 
 	if ( 1 == $module_taxnumberValue && false == $woocommercecheckoutcompanyfieldValue ) {
@@ -339,8 +339,8 @@ add_action( 'admin_notices', function() {
 	}
 
 	// Get the settings array
-	global $hc_gems_options;
-	if ( empty( $hc_gems_options ) ) {
+	global $cps_hc_gems_options;
+	if ( empty( $cps_hc_gems_options ) ) {
 		return;
 	}
 
@@ -375,19 +375,19 @@ add_action( 'wp_dashboard_setup', function() {
 		update_user_meta( $user_id, 'surbma_hc_new_dashboard', true );
 	}
 
-	wp_add_dashboard_widget( 'surbma_hc_dashboard_widget', esc_html__( 'HuCommerce', 'surbma-magyar-woocommerce' ), 'surbma_hc_dashboard' );
+	wp_add_dashboard_widget( 'cps_hc_gems_dashboard_widget', esc_html__( 'HuCommerce', 'surbma-magyar-woocommerce' ), 'cps_hc_gems_dashboard' );
 
 	$dashboard_widgets = $wp_meta_boxes['dashboard']['normal']['core'];
-	$hc_widget = array( 'surbma_hc_dashboard_widget' => $dashboard_widgets['surbma_hc_dashboard_widget'] );
+	$cps_hc_gems_widget = array( 'cps_hc_gems_dashboard_widget' => $dashboard_widgets['cps_hc_gems_dashboard_widget'] );
 
-	unset( $wp_meta_boxes['dashboard']['normal']['core']['surbma_hc_dashboard_widget'] );
+	unset( $wp_meta_boxes['dashboard']['normal']['core']['cps_hc_gems_dashboard_widget'] );
 
-	$new_dashboard_widgets = array_merge( $hc_widget, $dashboard_widgets );
+	$new_dashboard_widgets = array_merge( $cps_hc_gems_widget, $dashboard_widgets );
 	// phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 	$wp_meta_boxes['dashboard']['normal']['core'] = $new_dashboard_widgets;
 }, 0 );
 
-function surbma_hc_dashboard() {
+function cps_hc_gems_dashboard() {
 	$home_url = get_option( 'home' );
 	$current_user = wp_get_current_user();
 

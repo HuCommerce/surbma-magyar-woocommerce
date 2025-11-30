@@ -11,11 +11,11 @@ add_action( 'admin_init', function() {
 	register_setting(
 		'surbma_hc_options',
 		'surbma_hc_fields',
-		'surbma_hc_fields_validate'
+		'cps_hc_gems_fields_validate'
 	);
 	register_setting(
 		'surbma_hc_license_options',
 		'surbma_hc_license',
-		'surbma_hc_license_validate'
+		'cps_hc_gems_license_validate'
 	);
 } );

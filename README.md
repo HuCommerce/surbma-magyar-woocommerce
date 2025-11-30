@@ -11,7 +11,7 @@ HuCommerce (surbma-magyar-woocommerce) is a WordPress plugin that provides Hunga
 
 ### PHP Coding Standards
 
-- Use the `cps_hc_wcgems_` prefix for all non-anonymous functions.
+- Use the `cps_hc_gems_` prefix for all non-anonymous functions.
 
 ## Project Mission
 

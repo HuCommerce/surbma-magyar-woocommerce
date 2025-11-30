@@ -15,13 +15,13 @@ function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
 	}
 
 	// Get the settings array
-	global $hc_gems_options;
+	global $cps_hc_gems_options;
 
-	$freeshippingminimumorderamountValue = $hc_gems_options['freeshippingminimumorderamount'] ?? 0;
-	$freeshippingcouponsdiscountsValue = $hc_gems_options['freeshippingcouponsdiscounts'] ?? 0;
-	$freeshippingwithouttaxValue = $hc_gems_options['freeshippingwithouttax'] ?? 0;
-	$freeshippingnoticemessageValue = $hc_gems_options['freeshippingnoticemessage'] ?? __( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
-	$freeshippingsuccessfulmessageValue = $hc_gems_options['freeshippingsuccessfulmessage'] ?? '';
+	$freeshippingminimumorderamountValue = $cps_hc_gems_options['freeshippingminimumorderamount'] ?? 0;
+	$freeshippingcouponsdiscountsValue = $cps_hc_gems_options['freeshippingcouponsdiscounts'] ?? 0;
+	$freeshippingwithouttaxValue = $cps_hc_gems_options['freeshippingwithouttax'] ?? 0;
+	$freeshippingnoticemessageValue = $cps_hc_gems_options['freeshippingnoticemessage'] ?? __( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
+	$freeshippingsuccessfulmessageValue = $cps_hc_gems_options['freeshippingsuccessfulmessage'] ?? '';
 
 	global $woocommerce;
 
@@ -104,9 +104,9 @@ function cps_hc_gems_free_shipping_notice( $returntoshop = true ) {
 }
 
 // Get the settings to display the free shipping notice
-$freeshippingnoticeshoploopValue = $hc_gems_options['freeshippingnoticeshoploop'] ?? 0;
-$freeshippingnoticecartValue = $hc_gems_options['freeshippingnoticecart'] ?? 1;
-$freeshippingnoticecheckoutValue = $hc_gems_options['freeshippingnoticecheckout'] ?? 0;
+$freeshippingnoticeshoploopValue = $cps_hc_gems_options['freeshippingnoticeshoploop'] ?? 0;
+$freeshippingnoticecartValue = $cps_hc_gems_options['freeshippingnoticecart'] ?? 1;
+$freeshippingnoticecheckoutValue = $cps_hc_gems_options['freeshippingnoticecheckout'] ?? 0;
 
 if ( 1 === $freeshippingnoticeshoploopValue ) :
 
