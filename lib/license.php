@@ -402,7 +402,7 @@ add_action( 'admin_bar_menu', function( WP_Admin_Bar $wp_admin_bar ) {
 		$args = array(
 			'id'    => 'hucommerce-whitelisted-badge',
 			'title' => __( 'HuCommerce DEV', 'surbma-magyar-woocommerce' ),
-			'href'  => admin_url( 'admin.php?page=surbma-hucommerce-license-menu' ),
+			'href'  => admin_url( 'admin.php?page=cps_hc_gems_license' ),
 			'meta'  => array(
 				'class' => 'hucommerce-whitelisted-status-badge',
 			),
@@ -498,7 +498,7 @@ if ( 'free' != $status ) {
 // License notices
 add_action( 'admin_notices', function() {
 	global $whitelisted;
-	if ( isset( $whitelisted ) && 'dev' === $whitelisted && ( isset( $_GET['page'] ) && 'surbma-hucommerce-license-menu' === $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( isset( $whitelisted ) && 'dev' === $whitelisted && ( isset( $_GET['page'] ) && 'cps_hc_gems_license' === $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		?>
 		<div class="notice notice-warning notice-alt notice-large is--dismissible">
 			<p><strong>HuCommerce DEV mód aktiválva!</strong> Az API kulcs megadásához előbb élesítened kell a weboldalt!</p>
@@ -506,19 +506,19 @@ add_action( 'admin_notices', function() {
 		<?php
 	}
 	// Invalid notice
-	if ( 'invalid' == SURBMA_HC_PLUGIN_LICENSE && ( !isset( $_GET['page'] ) || ( isset( $_GET['page'] ) && 'surbma-hucommerce-menu' != $_GET['page'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( 'invalid' == SURBMA_HC_PLUGIN_LICENSE && ( !isset( $_GET['page'] ) || ( isset( $_GET['page'] ) && 'cps_hc_gems_modules' != $_GET['page'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		?>
 		<div class="notice notice-error notice-alt notice-large is-dismissible">
 			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 			<h3>Érvénytelen vagy lejárt licensz kulcs a HuCommerce Pro beállításánál!</h3>
 			<p>Kérlek ellenőrizd az emailben küldött licensz kulcsot és add meg újra vagy frissítsd és aktiváld újra a HuCommerce beállításánál!
-			<br>A licensz kulcsot a <strong>"Licensz kezelés"</strong> almenüpontban tudod megadni a következő oldalon: <a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-license-menu' ) ); ?>">HuCommerce -> Licensz kezelés</a></p>
+			<br>A licensz kulcsot a <strong>"Licensz kezelés"</strong> almenüpontban tudod megadni a következő oldalon: <a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_license' ) ); ?>">HuCommerce -> Licensz kezelés</a></p>
 		</div>
 		<?php
 	}
 
 	// Inactive notice
-	if ( 'inactive' == SURBMA_HC_PLUGIN_LICENSE && ( !isset( $_GET['page'] ) || ( isset( $_GET['page'] ) && 'surbma-hucommerce-menu' != $_GET['page'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( 'inactive' == SURBMA_HC_PLUGIN_LICENSE && ( !isset( $_GET['page'] ) || ( isset( $_GET['page'] ) && 'cps_hc_gems_modules' != $_GET['page'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		?>
 		<div class="notice notice-info notice-alt notice-large is-dismissible">
 			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>

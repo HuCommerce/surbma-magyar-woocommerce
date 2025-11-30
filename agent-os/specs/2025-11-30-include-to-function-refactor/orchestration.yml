@@ -1,0 +1,16 @@
+task_groups:
+  - name: Add pages-global-functions.php Include to Active Page Files
+    claude_code_subagent: implementer
+    status: completed
+  - name: Add pages-global-functions.php Include to Inactive Page Files
+    claude_code_subagent: implementer
+    status: completed
+  - name: Update lib/admin.php and Delete pages.php
+    claude_code_subagent: implementer
+    status: completed
+  - name: Manual Verification
+    claude_code_subagent: implementation-verifier
+    status: completed
+
+orchestration_complete: true
+completed_at: 2025-11-30

@@ -4,15 +4,18 @@
 defined( 'ABSPATH' ) || exit;
 
 function cps_hc_gems_news_page() {
-	surbma_hc_page_header();
+	include_once( SURBMA_HC_PLUGIN_DIR . '/pages/pages-global-functions.php');
+	include_once( SURBMA_HC_PLUGIN_DIR . '/pages/menu-news.php');
+
+	cps_hc_gems_page_header();
 	?>
 	<div id="cps-settings">
 		<div class="uk-grid-small" uk-grid>
 			<div class="uk-width-medium uk-visible@m">
-				<?php surbma_hc_page_sidebar(); ?>
+				<?php cps_hc_gems_page_sidebar(); ?>
 			</div>
 			<div class="uk-width-expand">
-				<?php surbma_hc_page_notifications(); ?>
+				<?php cps_hc_gems_page_notifications(); ?>
 				<div class="cps-card uk-card uk-card-default uk-card-hover uk-margin-bottom">
 					<div class="uk-card-header">
 						<div class="uk-grid-small uk-flex-middle" uk-grid>
@@ -20,18 +23,18 @@ function cps_hc_gems_news_page() {
 								<h3 class="uk-card-title uk-margin-remove-bottom"><?php esc_html_e( 'Latest News', 'surbma-magyar-woocommerce' ); ?></h3>
 								<p class="uk-text-meta uk-margin-remove-top">Legújabb híreink a HuCommerce bővítménnyel kapcsolatban.</p>
 							</div>
-							<?php surbma_hc_page_mobile_nav(); ?>
+							<?php cps_hc_gems_page_mobile_nav(); ?>
 						</div>
 					</div>
 					<div class="uk-card-body uk-background-muted">
-						<?php include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings-nav-news.php'); ?>
+						<?php cps_hc_gems_render_menu_news(); ?>
 					</div>
-					<?php surbma_hc_page_card_footer(); ?>
+					<?php cps_hc_gems_page_card_footer(); ?>
 				</div>
 				<?php cps_admin_footer( SURBMA_HC_PLUGIN_FILE ); ?>
 			</div>
 		</div>
 	</div>
 	<?php
-	surbma_hc_page_footer();
+	cps_hc_gems_page_footer();
 }

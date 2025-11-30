@@ -4,6 +4,9 @@
 defined( 'ABSPATH' ) || exit;
 
 function cps_hc_gems_license_page() {
+	include_once( SURBMA_HC_PLUGIN_DIR . '/pages/pages-global-functions.php');
+	include_once( SURBMA_HC_PLUGIN_DIR . '/pages/menu-license.php');
+
 	cps_hc_gems_page_header();
 	?>
 	<div id="cps-settings">
@@ -24,7 +27,7 @@ function cps_hc_gems_license_page() {
 						</div>
 					</div>
 					<div class="uk-card-body uk-background-muted">
-						<?php include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings-nav-license.php'); ?>
+						<?php cps_hc_gems_render_menu_license(); ?>
 					</div>
 					<?php cps_hc_gems_page_card_footer(); ?>
 				</div>

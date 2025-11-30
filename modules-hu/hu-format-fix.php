@@ -60,7 +60,7 @@ add_action( 'wp_head', function() {
 // Customize the checkout default address fields
 add_filter( 'woocommerce_default_address_fields' , function( $address_fields ) {
 	// Deprecated function since WooCommerce 4.4
-	if ( !surbma_hc_woocommerce_version_check( '4.4' ) ) {
+	if ( !cps_hc_gems_woocommerce_version_check( '4.4' ) ) {
 		// Modifications only if language is Hungarian
 		if ( get_locale() == 'hu_HU' || get_locale() == 'hu' ) {
 			$address_fields['last_name']['priority'] = 10;

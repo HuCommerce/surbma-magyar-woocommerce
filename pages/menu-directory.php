@@ -3,20 +3,26 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-// Directory Feed
-$rss_katalogus = fetch_feed( 'https://www.hucommerce.hu/katalogus/feed/' );
-$rss_katalogus_woocommerce_kiegeszitok = fetch_feed( 'https://www.hucommerce.hu/katalogus-kategoria/woocommerce-kiegeszitok/feed/' );
+/**
+ * Render the directory menu content.
+ *
+ * @return void
+ */
+function cps_hc_gems_render_menu_directory() {
+	// Directory Feed
+	$rss_katalogus = fetch_feed( 'https://www.hucommerce.hu/katalogus/feed/' );
+	$rss_katalogus_woocommerce_kiegeszitok = fetch_feed( 'https://www.hucommerce.hu/katalogus-kategoria/woocommerce-kiegeszitok/feed/' );
 
-$maxitems_katalogus = false;
-$maxitems_katalogus_woocommerce_kiegeszitok = false;
+	$maxitems_katalogus = false;
+	$maxitems_katalogus_woocommerce_kiegeszitok = false;
 
-if ( !is_wp_error( $rss_katalogus ) ) {
-	$maxitems_katalogus = $rss_katalogus->get_item_quantity( 99999 );
-	$rss_katalogus_items = $rss_katalogus->get_items( 0, $maxitems_katalogus );
-}
+	if ( !is_wp_error( $rss_katalogus ) ) {
+		$maxitems_katalogus = $rss_katalogus->get_item_quantity( 99999 );
+		$rss_katalogus_items = $rss_katalogus->get_items( 0, $maxitems_katalogus );
+	}
 
-if ( $maxitems_katalogus ) {
-	?>
+	if ( $maxitems_katalogus ) {
+		?>
 	<div id="hucommerce-directory" uk-filter="target: .directory-filter">
 
 		<ul class="uk-subnav uk-subnav-pill uk-text-small uk-hidden">
@@ -53,11 +59,14 @@ if ( $maxitems_katalogus ) {
 		</ul>
 	</div>
 	<p class="uk-text-center uk-margin-medium-top"><a class="cps-button uk-button uk-button-primary uk-button-large" href="https://www.hucommerce.hu/katalogus/" target="_blank"><?php esc_html_e( 'Check all posts in HuCommerce Directory', 'surbma-magyar-woocommerce' ); ?></a></p>
-	<?php
-} else {
-	?>
+		<?php
+	} else {
+		?>
 	<div class="uk-alert-danger uk-text-center" uk-alert>
 		<p><?php esc_html_e( 'There is no post in the HuCommerce Directory yet.', 'surbma-magyar-woocommerce' ); ?></p>
 	</div>
-	<?php
+		<?php
+	}
 }
+
+

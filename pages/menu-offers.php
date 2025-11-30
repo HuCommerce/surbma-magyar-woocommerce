@@ -3,17 +3,23 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
-// Offers Feed
-$rss_ajanlatok = fetch_feed( 'https://www.hucommerce.hu/kategoria/ajanlatok/feed/' );
-$maxitems_ajanlatok = false;
+/**
+ * Render the offers menu content.
+ *
+ * @return void
+ */
+function cps_hc_gems_render_menu_offers() {
+	// Offers Feed
+	$rss_ajanlatok = fetch_feed( 'https://www.hucommerce.hu/kategoria/ajanlatok/feed/' );
+	$maxitems_ajanlatok = false;
 
-if ( !is_wp_error( $rss_ajanlatok ) ) {
-	$maxitems_ajanlatok = $rss_ajanlatok->get_item_quantity( 3 );
-	$rss_ajanlatok_items = $rss_ajanlatok->get_items( 0, $maxitems_ajanlatok );
-}
+	if ( !is_wp_error( $rss_ajanlatok ) ) {
+		$maxitems_ajanlatok = $rss_ajanlatok->get_item_quantity( 3 );
+		$rss_ajanlatok_items = $rss_ajanlatok->get_items( 0, $maxitems_ajanlatok );
+	}
 
-if ( $maxitems_ajanlatok ) {
-	?>
+	if ( $maxitems_ajanlatok ) {
+		?>
 	<div class="uk-child-width-1-2@s uk-child-width-1-1@m uk-child-width-1-3@l uk-child-width-1-4@xl" uk-grid="masonry: true">
 	<?php
 	// Loop through each feed item and display each item as a hyperlink.
@@ -40,11 +46,14 @@ if ( $maxitems_ajanlatok ) {
 	?>
 	</div>
 	<p class="uk-text-center uk-margin-medium-top"><a class="uk-button uk-button-danger" href="https://www.hucommerce.hu/kategoria/ajanlatok/" target="_blank"><?php esc_html_e( 'Check all offers', 'surbma-magyar-woocommerce' ); ?></a></p>
-	<?php
-} else {
-	?>
+		<?php
+	} else {
+		?>
 	<div class="uk-alert-danger uk-text-center" uk-alert>
 		<p><?php esc_html_e( 'There is no current special offer yet.', 'surbma-magyar-woocommerce' ); ?></p>
 	</div>
-	<?php
+		<?php
+	}
 }
+
+

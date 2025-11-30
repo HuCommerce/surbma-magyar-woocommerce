@@ -17,14 +17,16 @@ add_action( 'init', function() {
 	}
 } );
 
-include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-globals.php');
+// Initialize settings
+include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings.php');
+
+// Initialize pages
 include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-modules.php');
 // include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-offers.php');
 include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-directory.php');
 // include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-news.php');
 include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-information.php');
 include_once( SURBMA_HC_PLUGIN_DIR . '/pages/page-license.php');
-include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings.php');
 
 // Admin options menu
 add_action( 'admin_menu', function() {
@@ -40,75 +42,75 @@ add_action( 'admin_menu', function() {
 		'HuCommerce',
 		'HuCommerce',
 		'manage_options',
-		'surbma-hucommerce-menu',
+		'cps_hc_gems_modules',
 		'cps_hc_gems_modules_page',
 		'dashicons-welcome-widgets-menus',
 		'58'
 	);
 
 	$cps_hc_gems_modules_page = add_submenu_page(
-		'surbma-hucommerce-menu',
+		'cps_hc_gems_modules',
 		__( 'HuCommerce Modules', 'surbma-magyar-woocommerce' ),
 		__( 'Modules', 'surbma-magyar-woocommerce' ),
 		'manage_options',
-		'surbma-hucommerce-menu',
+		'cps_hc_gems_modules',
 		'cps_hc_gems_modules_page'
 	);
 
 	/*
 	$cps_hc_gems_offers_page = add_submenu_page(
-		'surbma-hucommerce-menu',
+		'cps_hc_gems_modules',
 		__( 'HuCommerce Offers', 'surbma-magyar-woocommerce' ),
 		__( 'Offers', 'surbma-magyar-woocommerce' ),
 		'manage_options',
-		'surbma-hucommerce-offers-menu',
+		'cps_hc_gems_offers',
 		'cps_hc_gems_offers_page'
 	);
 	*/
 
 	$cps_hc_gems_directory_page = add_submenu_page(
-		'surbma-hucommerce-menu',
+		'cps_hc_gems_modules',
 		__( 'HuCommerce Directory', 'surbma-magyar-woocommerce' ),
 		__( 'Directory', 'surbma-magyar-woocommerce' ),
 		'manage_options',
-		'surbma-hucommerce-directory-menu',
+		'cps_hc_gems_directory',
 		'cps_hc_gems_directory_page'
 	);
 
 	/*
 	$cps_hc_gems_news_page = add_submenu_page(
-		'surbma-hucommerce-menu',
+		'cps_hc_gems_modules',
 		__( 'HuCommerce Latest News', 'surbma-magyar-woocommerce' ),
 		__( 'Latest News', 'surbma-magyar-woocommerce' ),
 		'manage_options',
-		'surbma-hucommerce-news-menu',
+		'cps_hc_gems_news',
 		'cps_hc_gems_news_page'
 	);
 	*/
 
 	$cps_hc_gems_license_page = add_submenu_page(
-		'surbma-hucommerce-menu',
+		'cps_hc_gems_modules',
 		__( 'HuCommerce License Management', 'surbma-magyar-woocommerce' ),
 		__( 'License management', 'surbma-magyar-woocommerce' ),
 		'manage_options',
-		'surbma-hucommerce-license-menu',
+		'cps_hc_gems_license',
 		'cps_hc_gems_license_page'
 	);
 
 	$cps_hc_gems_information_page = add_submenu_page(
-		'surbma-hucommerce-menu',
+		'cps_hc_gems_modules',
 		__( 'HuCommerce Information', 'surbma-magyar-woocommerce' ),
 		__( 'Information', 'surbma-magyar-woocommerce' ),
 		'manage_options',
-		'surbma-hucommerce-information-menu',
+		'cps_hc_gems_information',
 		'cps_hc_gems_information_page'
 	);
 
 	if ( function_exists( 'wc_admin_connect_page' ) ) {
 		wc_admin_connect_page(
 			array(
-				'id'        => 'surbma-hucommerce-menu',
-				'screen_id' => 'woocommerce_page_surbma-hucommerce-menu',
+				'id'        => 'cps_hc_gems_modules',
+				'screen_id' => 'woocommerce_page_cps_hc_gems_modules',
 				'title'     => 'HuCommerce'
 			)
 		);
@@ -117,7 +119,7 @@ add_action( 'admin_menu', function() {
 
 // * HUCOMMERCE START
 add_filter( 'plugin_action_links_' . plugin_basename( SURBMA_HC_PLUGIN_FILE ), function( $actions ) {
-	$actions[] = '<a href="'. esc_url( get_admin_url( null, 'admin.php?page=surbma-hucommerce-menu') ) .'">' . esc_html__( 'Settings', 'surbma-magyar-woocommerce' ) . '</a>';
+	$actions[] = '<a href="'. esc_url( get_admin_url( null, 'admin.php?page=cps_hc_gems_modules') ) .'">' . esc_html__( 'Settings', 'surbma-magyar-woocommerce' ) . '</a>';
 	if ( !SURBMA_HC_PREMIUM ) {
 		$actions[] = '<a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank" style="color: #e22c2f;font-weight: bold;">HuCommerce Pro</a>';
 	}
@@ -280,8 +282,8 @@ add_action( 'admin_notices', function() {
 			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 			<h3><?php esc_html_e( 'Thank you for installing HuCommerce plugin!', 'surbma-magyar-woocommerce' ); ?></h3>
 			<p><?php esc_html_e( 'First step is to activate the Modules you need and set the individual Module settings.', 'surbma-magyar-woocommerce' ); ?>
-			<br><?php esc_html_e( 'To activate Modules and adjust settings, go to this page', 'surbma-magyar-woocommerce' ); ?>: <a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-menu' ) ); ?>">WooCommerce -> HuCommerce</a></p>
-			<p style="display: none;"><a class="button button-primary button-large" href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-menu' ) ); ?>"><span class="dashicons dashicons-admin-generic" style="position: relative;top: 4px;left: -3px;"></span> <?php esc_html_e( 'HuCommerce Settings', 'surbma-magyar-woocommerce' ); ?></a></p>
+			<br><?php esc_html_e( 'To activate Modules and adjust settings, go to this page', 'surbma-magyar-woocommerce' ); ?>: <a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_modules' ) ); ?>">WooCommerce -> HuCommerce</a></p>
+			<p style="display: none;"><a class="button button-primary button-large" href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_modules' ) ); ?>"><span class="dashicons dashicons-admin-generic" style="position: relative;top: 4px;left: -3px;"></span> <?php esc_html_e( 'HuCommerce Settings', 'surbma-magyar-woocommerce' ); ?></a></p>
 			<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE ) { ?>
 			<h3>HuCommerce Pro</h3>
 			<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p>

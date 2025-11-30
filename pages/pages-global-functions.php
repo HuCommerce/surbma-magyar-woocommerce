@@ -3,6 +3,7 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
+// Modules page navigation
 function cps_hc_gems_page_modules_nav() {
 	$screen = get_current_screen();
 	global $cps_hc_gems_modules_page;
@@ -10,7 +11,7 @@ function cps_hc_gems_page_modules_nav() {
 	$active_modules_menu = $cps_hc_gems_modules_page == $screen->base ? 'uk-active' : '';
 
 	?>
-	<li class="<?php echo esc_attr( $active_modules_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> HuCommerce <?php esc_html_e( 'Modules', 'surbma-magyar-woocommerce' ); ?></a></li>
+	<li class="<?php echo esc_attr( $active_modules_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_modules' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> HuCommerce <?php esc_html_e( 'Modules', 'surbma-magyar-woocommerce' ); ?></a></li>
 	<?php if ( $cps_hc_gems_modules_page == $screen->base ) { ?>
 	<li class="cps-settings-subnav">
 		<ul class="uk-nav-sub uk-padding-remove-left uk-padding-remove-bottom" uk-switcher="connect: #surbma-hc-modules; animation: uk-animation-fade">
@@ -50,6 +51,7 @@ function cps_hc_gems_page_modules_nav() {
 	<?php
 }
 
+// Pages navigation
 function cps_hc_gems_pages_nav() {
 	$screen = get_current_screen();
 	global $cps_hc_gems_offers_page;
@@ -63,12 +65,13 @@ function cps_hc_gems_pages_nav() {
 	$active_information_menu = $cps_hc_gems_information_page == $screen->base ? 'uk-active' : '';
 
 	?>
-	<li class="<?php echo esc_attr( $active_offers_menu ); ?> uk-hidden"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-offers-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: star"></span> <?php esc_html_e( 'Offers', 'surbma-magyar-woocommerce' ); ?></a></li>
-	<li class="<?php echo esc_attr( $active_directory_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-directory-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: list"></span> HuCommerce <?php esc_html_e( 'Directory', 'surbma-magyar-woocommerce' ); ?></a></li>
-	<li class="<?php echo esc_attr( $active_news_menu ); ?> uk-hidden"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-news-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: rss"></span> <?php esc_html_e( 'Latest News', 'surbma-magyar-woocommerce' ); ?></a></li>
+	<li class="<?php echo esc_attr( $active_offers_menu ); ?> uk-hidden"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_offers' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: star"></span> <?php esc_html_e( 'Offers', 'surbma-magyar-woocommerce' ); ?></a></li>
+	<li class="<?php echo esc_attr( $active_directory_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_directory' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: list"></span> HuCommerce <?php esc_html_e( 'Directory', 'surbma-magyar-woocommerce' ); ?></a></li>
+	<li class="<?php echo esc_attr( $active_news_menu ); ?> uk-hidden"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_news' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: rss"></span> <?php esc_html_e( 'Latest News', 'surbma-magyar-woocommerce' ); ?></a></li>
 	<?php
 }
 
+// License page navigation
 function cps_hc_gems_page_license_nav() {
 	$screen = get_current_screen();
 	global $cps_hc_gems_license_page;
@@ -80,11 +83,12 @@ function cps_hc_gems_page_license_nav() {
 	$active_information_menu = $cps_hc_gems_information_page == $screen->base ? 'uk-active' : '';
 
 	?>
-	<li class="<?php echo esc_attr( $active_license_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-license-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: <?php echo esc_attr( $cps_hc_gems_pro_menu_icon ); ?>"></span> <?php esc_html_e( 'License management', 'surbma-magyar-woocommerce' ); ?></a></li>
-	<li class="<?php echo esc_attr( $active_information_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=surbma-hucommerce-information-menu' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: info"></span> <?php esc_html_e( 'Information', 'surbma-magyar-woocommerce' ); ?></a></li>
+	<li class="<?php echo esc_attr( $active_license_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_license' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: <?php echo esc_attr( $cps_hc_gems_pro_menu_icon ); ?>"></span> <?php esc_html_e( 'License management', 'surbma-magyar-woocommerce' ); ?></a></li>
+	<li class="<?php echo esc_attr( $active_information_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_information' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: info"></span> <?php esc_html_e( 'Information', 'surbma-magyar-woocommerce' ); ?></a></li>
 	<?php
 }
 
+// Social page navigation
 function cps_hc_gems_page_social_nav() {
 	$home_url = get_option( 'home' );
 	$current_user = wp_get_current_user();
@@ -103,6 +107,7 @@ function cps_hc_gems_page_social_nav() {
 	<?php
 }
 
+// Header
 function cps_hc_gems_page_header() {
 	?>
 	<div class="cps-admin cps-admin-2">
@@ -110,6 +115,7 @@ function cps_hc_gems_page_header() {
 	<?php
 }
 
+// Notifications
 function cps_hc_gems_page_notifications() {
 	$screen = get_current_screen();
 	global $cps_hc_gems_license_page;
@@ -166,9 +172,10 @@ function cps_hc_gems_page_notifications() {
 	<?php
 }
 
+// Sidebar
 function cps_hc_gems_page_sidebar() {
 	?>
-	<div class="uk-text-center uk-margin-top uk-margin-medium-bottom"><a href="/wp-admin/admin.php?page=surbma-hucommerce-menu"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo-2023-dark.png" alt="HuCommerce" width="150" height="27"></a></div><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+	<div class="uk-text-center uk-margin-top uk-margin-medium-bottom"><a href="/wp-admin/admin.php?page=cps_hc_gems_modules"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo-2023-dark.png" alt="HuCommerce" width="150" height="27"></a></div><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 	<ul class="cps-settings-nav uk-nav uk-nav-default">
 		<?php cps_hc_gems_page_modules_nav(); ?>
 		<li class="uk-nav-divider"><a></a></li>
@@ -182,6 +189,7 @@ function cps_hc_gems_page_sidebar() {
 	<?php
 }
 
+// Mobile navigation
 function cps_hc_gems_page_mobile_nav() {
 	?>
 	<div class="uk-width-auto uk-hidden@m">
@@ -196,6 +204,7 @@ function cps_hc_gems_page_mobile_nav() {
 	<?php
 }
 
+// Card footer
 function cps_hc_gems_page_card_footer() {
 	$home_url = get_option( 'home' );
 	$current_user = wp_get_current_user();
@@ -226,6 +235,7 @@ function cps_hc_gems_page_card_footer() {
 	<?php
 }
 
+// Footer
 function cps_hc_gems_page_footer() {
 	?>
 		</div>
