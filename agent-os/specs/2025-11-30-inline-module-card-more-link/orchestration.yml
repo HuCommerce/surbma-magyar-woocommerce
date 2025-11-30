@@ -1,0 +1,9 @@
+task_groups:
+  - name: inline-code-in-settings-nav-modules
+    claude_code_subagent: implementer
+    # Tasks 1, 2, 3: Add global + inline both functions
+    # File: pages/settings-nav-modules.php
+  - name: delete-functions-from-settings-functions
+    claude_code_subagent: implementer
+    # Task 4: Remove the now-unused functions
+    # File: pages/settings-functions.php

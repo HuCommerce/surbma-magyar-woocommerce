@@ -21,6 +21,7 @@ global $emptycartbutton_cartpage_options;
 global $emptycartbutton_checkoutpage_options;
 global $productpricehistory_statisticslinkdisplay_options;
 global $catalogmode_productpricedisplay_options;
+global $cps_hc_gems_options;
 
 // Translation fixes
 __( 'Add placeholder to this field', 'surbma-magyar-woocommerce' );
@@ -250,11 +251,25 @@ __( 'Translations', 'surbma-magyar-woocommerce' );
 								<p class="uk-margin-small-top"><?php echo esc_html( $module['description'] ); ?></p>
 
 								<?php if ( ! empty( $module['doc_slug'] ) ) : ?>
-									<p class="uk-margin-auto-top uk-margin-remove-bottom"><?php cps_hc_gems_module_card_more( $module['doc_slug'] ); ?></p>
+									<p class="uk-margin-auto-top uk-margin-remove-bottom"><a class="cps-more uk-button uk-button-text uk-button-small uk-padding-remove-horizontal uk-animation-toggle" href="https://www.hucommerce.hu/modul/<?php echo esc_attr( $module['doc_slug'] ); ?>/" target="_blank"><?php esc_html_e( 'Read more', 'surbma-magyar-woocommerce' ); ?> <span class="uk-animation-slide-left-small" uk-icon="icon: arrow-right"></span></a></p>
 								<?php endif; ?>
 							</div>
 							<div class="uk-card-footer uk-background-muted">
-								<?php cps_hc_gems_form_field_main( __( 'Activate module', 'surbma-magyar-woocommerce' ), $module['option_key'], $is_free ); ?>
+								<?php
+								$disabled = $is_free || SURBMA_HC_PREMIUM || ( isset( $cps_hc_gems_options[ $module['option_key'] ] ) && 1 == $cps_hc_gems_options[ $module['option_key'] ] ) ? '' : ' disabled';
+								$optionValue = isset( $cps_hc_gems_options[ $module['option_key'] ] ) ? $cps_hc_gems_options[ $module['option_key'] ] : 0;
+								?>
+								<div class="cps-form-module cps-form-horizontal cps-form-checkbox<?php echo esc_html( $disabled ); ?>">
+									<div class="uk-form-label uk-text-bold"><span><?php esc_html_e( 'Activate module', 'surbma-magyar-woocommerce' ); ?>:</span></div>
+									<div class="uk-form-controls">
+										<div class="switch-wrap">
+											<label class="switch">
+												<input id="<?php echo esc_attr( $module['option_key'] ); ?>" name="surbma_hc_fields[<?php echo esc_attr( $module['option_key'] ); ?>]" type="checkbox" value="1" <?php checked( '1', $optionValue ); ?><?php echo esc_html( $disabled ); ?> />
+												<span class="slider round"></span>
+											</label>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</li>

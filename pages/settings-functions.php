@@ -47,33 +47,6 @@ function cps_hc_gems_form_accordion_title( $module_title, $module_option, $modul
 	echo '<a class="uk-accordion-title" href="#">' . wp_kses( $module_indicator, $allowed_html ) . ' ' . esc_html__( $module_title, 'surbma-magyar-woocommerce' ) . wp_kses_post( $new ) . wp_kses_post( $pro ) . wp_kses_post( $beta ) . '</a>'; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
 }
 
-function cps_hc_gems_module_card_more( $href ) {
-	echo '<a class="cps-more uk-button uk-button-text uk-button-small uk-padding-remove-horizontal uk-animation-toggle" href="https://www.hucommerce.hu/modul/' . esc_attr( $href ) . '/" target="_blank">' . esc_html__( 'Read more', 'surbma-magyar-woocommerce' ) . ' <span class="uk-animation-slide-left-small" uk-icon="icon: arrow-right"></span></a>';
-}
-
-function cps_hc_gems_form_field_main( $field_label, $field_option, $field_free = false ) {
-	// Get the settings array
-	global $cps_hc_gems_options;
-
-	$field = '';
-	$disabled = $field_free || SURBMA_HC_PREMIUM || ( isset( $cps_hc_gems_options[$field_option] ) && 1 == $cps_hc_gems_options[$field_option] ) ? '' : ' disabled';
-
-	?>
-	<div class="cps-form-module cps-form-horizontal cps-form-checkbox<?php echo esc_html( $disabled ); ?>">
-		<div class="uk-form-label uk-text-bold"><span><?php esc_html_e( $field_label, 'surbma-magyar-woocommerce' ); ?>:</span></div><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
-		<div class="uk-form-controls">
-			<div class="switch-wrap">
-				<label class="switch">
-					<?php $optionValue = isset( $cps_hc_gems_options[$field_option] ) ? $cps_hc_gems_options[$field_option] : 0; ?>
-					<input id="<?php echo esc_attr( $field_option ); ?>" name="surbma_hc_fields[<?php echo esc_attr( $field_option ); ?>]" type="checkbox" value="1" <?php checked( '1', $optionValue ); ?><?php echo esc_html( $disabled ); ?> />
-					<span class="slider round"></span>
-				</label>
-			</div>
-		</div>
-	</div>
-	<?php
-}
-
 function cps_hc_gems_form_modal( $modal_title, $modal_content, $modal_id ) {
 	?>
 	<div id="modal-<?php echo esc_attr( $modal_id ); ?>" class="uk-flex-top" uk-modal>
