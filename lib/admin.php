@@ -319,9 +319,15 @@ add_action( 'wp_dashboard_setup', function() {
 	global $wp_meta_boxes;
 	$user_id = get_current_user_id();
 
-	if ( !get_user_meta( $user_id, 'surbma_hc_new_dashboard' ) ) {
+	// Migration: Transfer old meta key to new one
+	if ( get_user_meta( $user_id, 'surbma_hc_new_dashboard', true ) ) {
+		update_user_meta( $user_id, 'cps_hc_gems_new_dashboard', true );
+		delete_user_meta( $user_id, 'surbma_hc_new_dashboard' );
+	}
+
+	if ( !get_user_meta( $user_id, 'cps_hc_gems_new_dashboard' ) ) {
 		delete_user_meta( $user_id, 'meta-box-order_dashboard' );
-		update_user_meta( $user_id, 'surbma_hc_new_dashboard', true );
+		update_user_meta( $user_id, 'cps_hc_gems_new_dashboard', true );
 	}
 
 	wp_add_dashboard_widget( 'cps_hc_gems_dashboard_widget', esc_html__( 'HuCommerce', 'surbma-magyar-woocommerce' ), 'cps_hc_gems_dashboard' );
