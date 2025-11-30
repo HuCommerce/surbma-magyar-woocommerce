@@ -86,13 +86,41 @@ function cps_hc_gems_billing_tax_number_check() {
 	}
 }
 
-// Updating Tax number user meta on Checkout page
+// Saving billing_tax_number field value to user meta on Checkout page for logged in users
 add_action( 'woocommerce_checkout_update_user_meta', function( $customer_id ) {
+	// Only proceed if this is a valid customer ID
+	if ( empty( $customer_id ) ) {
+		return;
+	}
+
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce', false );
 
 	$billing_tax_number = !empty( $_POST['billing_tax_number'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_tax_number'] ) ) : '';
 	update_user_meta( $customer_id, 'billing_tax_number', $billing_tax_number );
+} );
+
+// Saving billing_tax_number field value to session on Checkout page for not logged in users
+add_action( 'woocommerce_checkout_update_order_review', static function ( $posted_data ) {
+	// Parse the serialized posted data
+	$posted = array();
+	parse_str( $posted_data, $posted );
+
+	$billing_tax_number = !empty( $posted['billing_tax_number'] ) ? sanitize_text_field( wp_unslash( $posted['billing_tax_number'] ) ) : '';
+	WC()->session->set( 'billing_tax_number', $billing_tax_number );
+} );
+
+// Pre-populate billing_tax_number field, if it's empty and session has a value
+add_filter( 'default_checkout_billing_tax_number', static function( $value ) {
+	// Get the session value
+	$session_value = WC()->session->get( 'billing_tax_number' );
+
+	// Pre-populate the field if the session value is not empty and the field value is empty
+	if ( !empty( $session_value ) && empty( $value ) ) {
+		$value = $session_value;
+	}
+
+	return $value;
 } );
 
 // Adding editable Tax number field on edit order page
