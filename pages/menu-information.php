@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 function cps_hc_gems_render_menu_information() {
 	global $cps_hc_gems_options;
 
-	$plugin_file = SURBMA_HC_PLUGIN_FILE;
+	$plugin_file = CPS_HC_GEMS_FILE;
 	$plugin_data = get_plugin_data( $plugin_file );
 	$plugin_version = $plugin_data['Version'];
 	$plugin_name = $plugin_data['Name'];

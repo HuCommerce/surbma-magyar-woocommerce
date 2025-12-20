@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 // jQuery Mask Plugin: https://igorescobar.github.io/jQuery-Mask-Plugin/
 add_action( 'wp_enqueue_scripts', static function() {
 	if ( is_checkout() || is_wc_endpoint_url( 'edit-address' ) ) {
-		wp_enqueue_script( 'surbma_hc_jquery_mask', SURBMA_HC_PLUGIN_URL . '/assets/js/jquery.mask.min.js', array( 'jquery' ), '1.14.16', true );
+		wp_enqueue_script( 'surbma_hc_jquery_mask', CPS_HC_GEMS_URL . '/assets/js/jquery.mask.min.js', array( 'jquery' ), '1.14.16', true );
 	}
 } );
 

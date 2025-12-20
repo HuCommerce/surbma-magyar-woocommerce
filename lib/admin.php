@@ -17,12 +17,6 @@ add_action( 'init', static function() {
 	}
 } );
 
-// Initialize settings
-include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings.php');
-
-// Initialize pages configuration
-include_once( SURBMA_HC_PLUGIN_DIR . '/lib/pages.php');
-
 // Admin options menu - auto-generated from pages config
 add_action( 'admin_menu', static function() {
 	$pages = cps_hc_gems_get_registerable_pages();
@@ -76,9 +70,9 @@ add_action( 'admin_menu', static function() {
 }, 98 );
 
 // * HUCOMMERCE START
-add_filter( 'plugin_action_links_' . plugin_basename( SURBMA_HC_PLUGIN_FILE ), static function( $actions ) {
+add_filter( 'plugin_action_links_' . plugin_basename( CPS_HC_GEMS_FILE ), static function( $actions ) {
 	$actions[] = '<a href="'. esc_url( get_admin_url( null, 'admin.php?page=cps_hc_gems_modules') ) .'">' . esc_html__( 'Settings', 'surbma-magyar-woocommerce' ) . '</a>';
-	if ( !SURBMA_HC_PREMIUM ) {
+	if ( 'free' == HC_LICENSE ) {
 		$actions[] = '<a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank" style="color: #e22c2f;font-weight: bold;">HuCommerce Pro</a>';
 	}
 	return $actions;
@@ -93,13 +87,13 @@ add_action( 'admin_enqueue_scripts', static function( $hook ) {
 	// Load plugin scripts & styles for plugin pages
 	if ( $cps_hc_gems_page ) {
 		add_action( 'admin_enqueue_scripts', 'cps_admin_scripts', 9999 );
-		wp_enqueue_style( 'surbma-hc-admin', SURBMA_HC_PLUGIN_URL . '/assets/css/admin.css', array(), SURBMA_HC_PLUGIN_VERSION );
+		wp_enqueue_style( 'surbma-hc-admin', CPS_HC_GEMS_URL . '/assets/css/admin.css', array(), CPS_HC_GEMS_VERSION );
 	}
 
 	// * HUCOMMERCE START
 
 	// Load page specific Help Scout Beacons
-	if ( SURBMA_HC_PRO_USER ) {
+	if ( 'free' != HC_LICENSE ) {
 
 		// HC-ALL-PRO
 		$hs_beacon__ID = '8343e517-6ce5-408e-b9b7-194ed15224dc';
@@ -164,7 +158,7 @@ add_action( 'admin_enqueue_scripts', static function( $hook ) {
 	ob_start();
 		echo '!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});' . PHP_EOL;
 		echo "window.Beacon('init', '" . esc_js( $hs_beacon__ID ) . "')" . PHP_EOL;
-		if ( SURBMA_HC_PRO_USER && $cps_hc_gems_page ) {
+		if ( 'free' != HC_LICENSE && $cps_hc_gems_page ) {
 			$current_user = wp_get_current_user();
 			$email = $current_user->user_email;
 			if ( $current_user->first_name ) {
@@ -226,12 +220,12 @@ add_action( 'admin_notices', static function() {
 	if ( 'index.php' == $pagenow || 'plugins.php' == $pagenow ) {
 		?>
 		<div data-dismissible="surbma-hc-notice-welcome-forever" class="notice notice-info notice-alt notice-large is-dismissible">
-			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( CPS_HC_GEMS_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 			<h3><?php esc_html_e( 'Thank you for installing HuCommerce plugin!', 'surbma-magyar-woocommerce' ); ?></h3>
 			<p><?php esc_html_e( 'First step is to activate the Modules you need and set the individual Module settings.', 'surbma-magyar-woocommerce' ); ?>
 			<br><?php esc_html_e( 'To activate Modules and adjust settings, go to this page', 'surbma-magyar-woocommerce' ); ?>: <a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_modules' ) ); ?>">WooCommerce -> HuCommerce</a></p>
 			<p style="display: none;"><a class="button button-primary button-large" href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_modules' ) ); ?>"><span class="dashicons dashicons-admin-generic" style="position: relative;top: 4px;left: -3px;"></span> <?php esc_html_e( 'HuCommerce Settings', 'surbma-magyar-woocommerce' ); ?></a></p>
-			<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE ) { ?>
+			<?php if ( 'free' == HC_LICENSE ) { ?>
 			<h3>HuCommerce Pro</h3>
 			<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p>
 			<p><a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">HuCommerce Pro megismerése</a></p>
@@ -254,7 +248,7 @@ add_action( 'admin_notices', static function() {
 	if ( 1 == $module_taxnumberValue && false == $woocommercecheckoutcompanyfieldValue ) {
 		?>
 		<div class="notice notice-warning notice-alt notice-large is--dismissible">
-			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( CPS_HC_GEMS_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 			<h3 class="uk-margin-remove-top">HuCommerce értesítés</h3>
 			<p>⚠️ <strong>FONTOS!</strong> Ezt az értesítést azért látod, mert a HuCommerce Adószám megjelenítését használod és a WooCommerce Cégnév megjelenítésének a beállítása hiányzik. Ezért az Adószám mező nem jelenik meg a Pénztár oldalon.</p>
 			<p>✅ <strong>MEGOLDÁS:</strong> Az alábbi gombra kattintva nyisd meg a Testreszabást! Ez egy új fülön fog megnyílni. Ott a WooCommerce → Péntrár fülön találod a "Cégnév mező" opciót. Bármin van éppen, azt változtasd meg, kattints a "Közzététel" gombra, majd állítsd be arra, amire szeretnéd és kattints megint a "Közzététel" gombra!</p>
@@ -283,7 +277,7 @@ add_action( 'admin_notices', static function() {
 		return;
 	}
 
-	if ( 'free' != SURBMA_HC_PLUGIN_LICENSE ) {
+	if ( 'free' != HC_LICENSE ) {
 		return;
 	}
 
@@ -297,7 +291,7 @@ add_action( 'admin_notices', static function() {
 	if ( 'index.php' == $pagenow || 'plugins.php' == $pagenow ) {
 		?>
 		<div data-dismissible="hucommerce-pro-promo-60" class="notice notice-info notice-alt notice-large is-dismissible">
-			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( CPS_HC_GEMS_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 			<h3>HuCommerce Pro</h3>
 			<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p>
 			<p><a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">HuCommerce Pro megismerése</a></p>
@@ -346,10 +340,10 @@ function cps_hc_gems_dashboard() {
 	$home_url = get_option( 'home' );
 	$current_user = wp_get_current_user();
 
-	echo '<a href="https://www.hucommerce.hu" target="_blank"><img src="' . esc_url( SURBMA_HC_PLUGIN_URL ) . '/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright"></a>'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+	echo '<a href="https://www.hucommerce.hu" target="_blank"><img src="' . esc_url( CPS_HC_GEMS_URL ) . '/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright"></a>'; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
 
 	// HuCommerce Pro
-	if ( !SURBMA_HC_PREMIUM ) {
+	if ( 'active' != HC_LICENSE ) {
 		echo '<h3><strong>' . esc_html__( 'HuCommerce Pro', 'surbma-magyar-woocommerce' ) . '</strong></h3>';
 		echo '<p>Aktiváld a HuCommerce bővítmény összes lehetőségét! A HuCommerce Pro verzió megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p>';
 		echo '<p><a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">' . esc_html__( 'More about HuCommerce Pro', 'surbma-magyar-woocommerce' ) . '</a></p>';

@@ -3,6 +3,17 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
+// CPS SDK
+if ( !function_exists( 'cps' ) ) {
+	function cps() {
+		// Include CPS SDK.
+		require_once CPS_HC_GEMS_DIR . '/cps-sdk/start.php';
+	}
+
+	// Init CPS.
+	cps();
+}
+
 // Set the HuCommerce settings array globally
 add_action( 'init', static function() {
 	global $cps_hc_gems_options;
@@ -12,27 +23,18 @@ add_action( 'init', static function() {
 	}
 }, 0 );
 
-// CPS SDK
-if ( !function_exists( 'cps' ) ) {
-	function cps() {
-		// Include CPS SDK.
-		require_once SURBMA_HC_PLUGIN_DIR . '/cps-sdk/start.php';
-	}
-
-	// Init CPS.
-	cps();
-}
-
-// Include files.
+// Include files
 // * HUCOMMERCE START
-include_once SURBMA_HC_PLUGIN_DIR . '/lib/license.php';
+include_once CPS_HC_GEMS_DIR . '/lib/license.php';
 // * HUCOMMERCE END
-include_once SURBMA_HC_PLUGIN_DIR . '/lib/modules.php';
+include_once CPS_HC_GEMS_DIR . '/lib/modules.php';
 if ( is_admin() ) {
-	include_once SURBMA_HC_PLUGIN_DIR . '/lib/admin.php';
+	include_once CPS_HC_GEMS_DIR . '/lib/admin.php';
+	include_once CPS_HC_GEMS_DIR . '/lib/settings.php';
+	include_once CPS_HC_GEMS_DIR . '/lib/pages.php';
 }
 
-// Create a check for WooCommerce version. Used for deprecated functions for older WooCommerce versions.
+// Create a check for WooCommerce version. Used for deprecated functions for older WooCommerce versions
 function cps_hc_gems_woocommerce_version_check( $version ) {
 	if ( class_exists( 'WooCommerce' ) ) {
 		global $woocommerce;
@@ -51,7 +53,7 @@ add_filter( 'woocommerce_locate_template', static function( $template, $template
 	if ( !$template_path ) {
 		$template_path = $woocommerce->template_url;
 	}
-		$plugin_path = SURBMA_HC_PLUGIN_DIR . '/woocommerce/';
+		$plugin_path = CPS_HC_GEMS_DIR . '/woocommerce/';
 
 	// Look within passed path within the theme – this is priority
 	$template = locate_template(

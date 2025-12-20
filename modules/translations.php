@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 /*
 // Load custom mo translations for plugins and themes
 add_filter( 'load_textdomain_mofile', static function( $mofile, $domain ) {
-	$custom_mofile = SURBMA_HC_PLUGIN_DIR . '/translations/' . $domain . '-' . get_locale() . '.mo';
+	$custom_mofile = CPS_HC_GEMS_DIR . '/translations/' . $domain . '-' . get_locale() . '.mo';
 
 	// Check if the custom translation file exists
 	if ( file_exists( $custom_mofile ) ) {
@@ -39,17 +39,17 @@ add_filter( 'load_translation_file', static function( $file, $domain, $locale ) 
 	}
 
 	// Define the custom translation files for each plugin/theme
-	$restrictcontentpro_php_file = SURBMA_HC_PLUGIN_DIR . '/translations/restrict-content-pro-' . $locale . '.l10n.php';
-	$restrictcontentpro_mo_file  = SURBMA_HC_PLUGIN_DIR . '/translations/restrict-content-pro-' . $locale . '.mo';
+	$restrictcontentpro_php_file = CPS_HC_GEMS_DIR . '/translations/restrict-content-pro-' . $locale . '.l10n.php';
+	$restrictcontentpro_mo_file  = CPS_HC_GEMS_DIR . '/translations/restrict-content-pro-' . $locale . '.mo';
 
-	$woocommerceapimanager_php_file = SURBMA_HC_PLUGIN_DIR . '/translations/woocommerce-api-manager-' . $locale . '.l10n.php';
-	$woocommerceapimanager_mo_file  = SURBMA_HC_PLUGIN_DIR . '/translations/woocommerce-api-manager-' . $locale . '.mo';
+	$woocommerceapimanager_php_file = CPS_HC_GEMS_DIR . '/translations/woocommerce-api-manager-' . $locale . '.l10n.php';
+	$woocommerceapimanager_mo_file  = CPS_HC_GEMS_DIR . '/translations/woocommerce-api-manager-' . $locale . '.mo';
 
-	$woocommercememberships_php_file = SURBMA_HC_PLUGIN_DIR . '/translations/woocommerce-memberships-' . $locale . '.l10n.php';
-	$woocommercememberships_mo_file  = SURBMA_HC_PLUGIN_DIR . '/translations/woocommerce-memberships-' . $locale . '.mo';
+	$woocommercememberships_php_file = CPS_HC_GEMS_DIR . '/translations/woocommerce-memberships-' . $locale . '.l10n.php';
+	$woocommercememberships_mo_file  = CPS_HC_GEMS_DIR . '/translations/woocommerce-memberships-' . $locale . '.mo';
 
-	$woocommercesubscriptions_php_file = SURBMA_HC_PLUGIN_DIR . '/translations/woocommerce-subscriptions-' . $locale . '.l10n.php';
-	$woocommercesubscriptions_mo_file  = SURBMA_HC_PLUGIN_DIR . '/translations/woocommerce-subscriptions-' . $locale . '.mo';
+	$woocommercesubscriptions_php_file = CPS_HC_GEMS_DIR . '/translations/woocommerce-subscriptions-' . $locale . '.l10n.php';
+	$woocommercesubscriptions_mo_file  = CPS_HC_GEMS_DIR . '/translations/woocommerce-subscriptions-' . $locale . '.mo';
 
 	// Check for each domain individually
 	if ( $translations_restrictcontentpro_value && 'restrict-content-pro' === $domain ) {
@@ -102,23 +102,23 @@ add_filter( 'load_translation_file', static function( $file, $domain, $locale ) 
 	$translations = [
 		'restrict-content-pro' => [
 			'option_key' => 'translations-restrictcontentpro',
-			'php_file'   => SURBMA_HC_PLUGIN_DIR . "/translations/restrict-content-pro-{$locale}.l10n.php",
-			'mo_file'    => SURBMA_HC_PLUGIN_DIR . "/translations/restrict-content-pro-{$locale}.mo"
+			'php_file'   => CPS_HC_GEMS_DIR . "/translations/restrict-content-pro-{$locale}.l10n.php",
+			'mo_file'    => CPS_HC_GEMS_DIR . "/translations/restrict-content-pro-{$locale}.mo"
 		],
 		'woocommerce-api-manager' => [
 			'option_key' => 'translations-woocommerceapimanager',
-			'php_file'   => SURBMA_HC_PLUGIN_DIR . "/translations/woocommerce-api-manager-{$locale}.l10n.php",
-			'mo_file'    => SURBMA_HC_PLUGIN_DIR . "/translations/woocommerce-api-manager-{$locale}.mo"
+			'php_file'   => CPS_HC_GEMS_DIR . "/translations/woocommerce-api-manager-{$locale}.l10n.php",
+			'mo_file'    => CPS_HC_GEMS_DIR . "/translations/woocommerce-api-manager-{$locale}.mo"
 		],
 		'woocommerce-memberships' => [
 			'option_key' => 'translations-woocommercememberships',
-			'php_file'   => SURBMA_HC_PLUGIN_DIR . "/translations/woocommerce-memberships-{$locale}.l10n.php",
-			'mo_file'    => SURBMA_HC_PLUGIN_DIR . "/translations/woocommerce-memberships-{$locale}.mo"
+			'php_file'   => CPS_HC_GEMS_DIR . "/translations/woocommerce-memberships-{$locale}.l10n.php",
+			'mo_file'    => CPS_HC_GEMS_DIR . "/translations/woocommerce-memberships-{$locale}.mo"
 		],
 		'woocommerce-subscriptions' => [
 			'option_key' => 'translations-woocommercesubscriptions',
-			'php_file'   => SURBMA_HC_PLUGIN_DIR . "/translations/woocommerce-subscriptions-{$locale}.l10n.php",
-			'mo_file'    => SURBMA_HC_PLUGIN_DIR . "/translations/woocommerce-subscriptions-{$locale}.mo"
+			'php_file'   => CPS_HC_GEMS_DIR . "/translations/woocommerce-subscriptions-{$locale}.l10n.php",
+			'mo_file'    => CPS_HC_GEMS_DIR . "/translations/woocommerce-subscriptions-{$locale}.mo"
 		]
 	];
 

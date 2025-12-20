@@ -194,7 +194,7 @@ if ( 1 == $module_productpricehistoryValue ) :
 		?>
 		<p class="form-field">
 			<label><?php esc_html_e( 'Price history', 'surbma-magyar-woocommerce' ); ?></label>
-			<a href="<?php echo esc_attr( SURBMA_HC_PLUGIN_URL ); ?>/modules-hu/product-price-history-display.php?product_id=<?php echo esc_attr( $product_id ); ?>" target="_blank"><?php esc_html_e( 'Show the price history of this product', 'surbma-magyar-woocommerce' ); ?></a> (<?php esc_html_e( 'Open on a new tab', 'surbma-magyar-woocommerce' ); ?>)
+			<a href="<?php echo esc_attr( CPS_HC_GEMS_URL ); ?>/modules-hu/product-price-history-display.php?product_id=<?php echo esc_attr( $product_id ); ?>" target="_blank"><?php esc_html_e( 'Show the price history of this product', 'surbma-magyar-woocommerce' ); ?></a> (<?php esc_html_e( 'Open on a new tab', 'surbma-magyar-woocommerce' ); ?>)
 		</p>
 		<?php
 
@@ -265,7 +265,7 @@ if ( 1 == $module_productpricehistoryValue ) :
 		?>
 		<p class="form-field form-field-wide form-row form-row-full">
 			<label><?php esc_html_e( 'Price history', 'surbma-magyar-woocommerce' ); ?></label>
-			<a href="<?php echo esc_attr( SURBMA_HC_PLUGIN_URL ); ?>/modules-hu/product-price-history-display.php?product_id=<?php echo esc_attr( $variation->ID ); ?>" target="_blank"><?php esc_html_e( 'Show the price history of this product', 'surbma-magyar-woocommerce' ); ?></a> (<?php esc_html_e( 'Open on a new tab', 'surbma-magyar-woocommerce' ); ?>)
+			<a href="<?php echo esc_attr( CPS_HC_GEMS_URL ); ?>/modules-hu/product-price-history-display.php?product_id=<?php echo esc_attr( $variation->ID ); ?>" target="_blank"><?php esc_html_e( 'Show the price history of this product', 'surbma-magyar-woocommerce' ); ?></a> (<?php esc_html_e( 'Open on a new tab', 'surbma-magyar-woocommerce' ); ?>)
 		</p>
 		<?php
 		}
@@ -326,7 +326,7 @@ if ( 1 == $module_productpricehistoryValue ) :
 	// Product price history display
 	add_shortcode( 'hc-termekartortenet', static function( $atts ) {
 		// Abort function if HuCommerce Pro is not active
-		if ( !SURBMA_HC_PREMIUM ) {
+		if ( 'active' != HC_LICENSE ) {
 			return;
 		}
 
@@ -468,7 +468,7 @@ if ( 1 == $module_productpricehistoryValue ) :
 					}
 				}
 				if ( 'hide' != $productpricehistory_statisticslinkdisplayValue ) {
-					echo '<div class="hc-product-price-history-statistics"><a href="' . esc_attr( SURBMA_HC_PLUGIN_URL ) . '/modules-hu/product-price-history-display.php?product_id=' . esc_attr( $product_id ) . '" target="_blank">' . esc_html( $productpricehistory_statisticslinktextValue ) . '</a></div>';
+					echo '<div class="hc-product-price-history-statistics"><a href="' . esc_attr( CPS_HC_GEMS_URL ) . '/modules-hu/product-price-history-display.php?product_id=' . esc_attr( $product_id ) . '" target="_blank">' . esc_html( $productpricehistory_statisticslinktextValue ) . '</a></div>';
 				}
 				echo '</div>';
 			endforeach;

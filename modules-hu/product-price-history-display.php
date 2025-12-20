@@ -9,7 +9,7 @@ $wp_root = dirname( dirname( __FILE__ ) );
 require_once( $wp_root . "../../../../wp-load.php" );
 
 // if ( ! current_user_can( 'manage_options' ) ) die();
-if ( ! defined( 'SURBMA_HC_PREMIUM' ) || ! SURBMA_HC_PREMIUM ) die();
+if ( ! defined( 'HC_LICENSE' ) || 'active' != HC_LICENSE ) die();
 
 $product_id = isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $product = wc_get_product( $product_id );
@@ -266,7 +266,7 @@ if ( $product ) {
 			<div class="uk-section uk-section-secondary">
 				<div class="uk-container uk-text-center">
 					<h3 class="uk-heading-line uk-text-center"><span>Termék ár történet adatok törlése</span></h3>
-					<a href="<?php echo esc_attr( SURBMA_HC_PLUGIN_URL ); ?>/modules-hu/product-price-history-display.php?<?php echo esc_attr( $cps_hc_gems_delete_query_string ); ?>" class="uk-button uk-button-danger" onclick="return confirm('Biztosan törlöd az összes ár történet adatot ennél a terméknél?')">Adatok törlése</a>
+					<a href="<?php echo esc_attr( CPS_HC_GEMS_URL ); ?>/modules-hu/product-price-history-display.php?<?php echo esc_attr( $cps_hc_gems_delete_query_string ); ?>" class="uk-button uk-button-danger" onclick="return confirm('Biztosan törlöd az összes ár történet adatot ennél a terméknél?')">Adatok törlése</a>
 				</div>
 			</div>
 			<?php } ?>

@@ -33,26 +33,35 @@ add_action( 'init', static function() {
 
 // Retrieve the plugin data to get the Version
 $plugin_data = get_file_data( __FILE__, array( 'Version' => 'Version' ), 'plugin' );
-define( 'SURBMA_HC_PLUGIN_VERSION', isset( $plugin_data['Version'] ) ? $plugin_data['Version'] : '1.0' );
-define( 'SURBMA_HC_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
-define( 'SURBMA_HC_PLUGIN_URL', plugins_url( '', __FILE__ ) );
-define( 'SURBMA_HC_PLUGIN_FILE', __FILE__ );
 
+// Define the dynamic constants
+define( 'CPS_HC_GEMS_VERSION', isset( $plugin_data['Version'] ) ? $plugin_data['Version'] : '1.0' );
+define( 'CPS_HC_GEMS_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+define( 'CPS_HC_GEMS_URL', plugins_url( '', __FILE__ ) );
+define( 'CPS_HC_GEMS_FILE', __FILE__ );
+define( 'CPS_HC_GEMS_DIRNAME', dirname( plugin_basename( __FILE__ ) ) ); // surbma-magyar-woocommerce or cps-wc-gems
+
+// Define the static constants
+define( 'CPS_HC_GEMS_PLUGIN_NAME', 'HuCommerce' ); // HuCommerce or Gems for WooCommerce
+define( 'CPS_HC_GEMS_PLUGIN_URL', 'https://www.hucommerce.hu' ); // https://www.hucommerce.hu or https://www.cherrypickstudios.com
+
+// * HUCOMMERCE START
 // Define HuCommerce class for future use
 class HuCommerce {}
+// * HUCOMMERCE END
 
 // Check if WooCommerce is active
 add_action( 'plugins_loaded', static function() {
 	if ( class_exists( 'WooCommerce' ) ) {
-		// Start the engines.
-		require_once SURBMA_HC_PLUGIN_DIR . '/lib/start.php';
+		// Start the engines
+		require_once CPS_HC_GEMS_DIR . '/lib/start.php';
 	} else {
-		// Notify user, that WooCommerce is not active.
+		// Notify user, that WooCommerce is not active
 		add_action( 'admin_notices', static function() {
 			?>
 			<div class="notice notice-error">
 				<div style="padding: 20px;">
-					<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+					<a href="<?php echo esc_url( CPS_HC_GEMS_PLUGIN_URL ); ?>" target="_blank"><img src="<?php echo esc_url( CPS_HC_GEMS_URL ); ?>/assets/images/<?php echo strtolower( esc_attr( CPS_HC_GEMS_PLUGIN_NAME ) ); ?>-logo.png" alt="<?php echo esc_attr( CPS_HC_GEMS_PLUGIN_NAME ); ?>" class="alignright"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 					<p><strong><?php esc_html_e( 'Thank you for installing HuCommerce plugin!', 'surbma-magyar-woocommerce' ); ?></strong></p>
 					<p><?php esc_html_e( 'To use HuCommerce plugin, you must activate WooCommerce also.', 'surbma-magyar-woocommerce' ); ?>
 					<br><?php esc_html_e( 'If you don\'t want to use WooCommerce, please deactivate HuCommerce plugin!', 'surbma-magyar-woocommerce' ); ?></p>

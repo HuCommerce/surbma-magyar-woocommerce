@@ -215,7 +215,7 @@ function cps_hc_gems_fields_validate( $input ) {
 
 	// * HUCOMMERCE START
 	// If no valid license, check if field has any value. If yes, save it, if no, set to default.
-	if ( 'active' != SURBMA_HC_PLUGIN_LICENSE ) {
+	if ( 'active' != HC_LICENSE ) {
 		// Check field formats (Masking)
 		$input['maskcheckoutfieldsplaceholder'] = isset( $cps_hc_gems_options['maskcheckoutfieldsplaceholder'] ) ? $cps_hc_gems_options['maskcheckoutfieldsplaceholder'] : 0;
 		$input['maskbillingtaxfield'] = isset( $cps_hc_gems_options['maskbillingtaxfield'] ) ? $cps_hc_gems_options['maskbillingtaxfield'] : 0;

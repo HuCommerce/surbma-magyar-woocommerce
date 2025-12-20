@@ -12,7 +12,7 @@ function cps_hc_gems_render_menu_modules() {
 	// * HUCOMMERCE START
 	$szamlazzhu_options = get_option( 'woocommerce_wc_szamlazz_settings' );
 	$billingo_options = get_option( 'woocommerce_wc_billingo_plus_settings' );
-	$pro_notice = SURBMA_HC_PREMIUM ? '' : '<div class="cps-alert uk-alert uk-alert-danger"><p><strong>Ha szeretnéd használni ezt a modult, előbb HuCommerce Pro előfizetést kell vásárolnod!</strong><br>A HuCommerce Pro előfizetés megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p><a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="uk-button uk-button-danger uk-button-small" target="_blank">HuCommerce Pro megvásárlása</a></div>';
+	$pro_notice = 'active' == HC_LICENSE ? '' : '<div class="cps-alert uk-alert uk-alert-danger"><p><strong>Ha szeretnéd használni ezt a modult, előbb HuCommerce Pro előfizetést kell vásárolnod!</strong><br>A HuCommerce Pro előfizetés megvásárlásával további fantasztikus funkciókat és kiemelt ügyfélszolgálati segítséget kapsz.</p><a href="https://www.hucommerce.hu/hc/vasarlas/hc-pro/" class="uk-button uk-button-danger uk-button-small" target="_blank">HuCommerce Pro megvásárlása</a></div>';
 	$no_options_notice = '<div class="uk-alert uk-alert-primary cps-alert uk-text-center"><p><strong>' . esc_html__( 'IMPORTANT!', 'surbma-magyar-woocommerce' ) . '</strong> ' . esc_html__( 'This Module has no options, but it is activated and already working.', 'surbma-magyar-woocommerce' ) . '</p></div>';
 	// * HUCOMMERCE END
 
@@ -177,10 +177,10 @@ function cps_hc_gems_render_menu_modules() {
 	<form class="uk-form-stacked" method="post" action="options.php">
 		<?php settings_fields( 'cps_hc_gems_fields_options' ); ?>
 
-		<ul id="surbma-hc-modules" class="uk-switcher">
+		<ul id="cps-hc-gems-modules" class="uk-switcher">
 			<li id="hucommerce-modules">
 				<div uk-filter="target: .js-filter">
-					<div class="uk-grid-small uk-grid-divider uk-child-width-auto uk-flex uk-flex-center" uk-grid>
+					<div class="uk-grid uk-grid-small uk-grid-divider uk-child-width-auto uk-flex uk-flex-center" uk-grid>
 						<div>
 							<ul class="uk-subnav uk-subnav-pill" uk-margin>
 								<li class="uk-active" uk-filter-control><a href="#"><?php esc_html_e( 'All', 'surbma-magyar-woocommerce' ); ?></a></li>
@@ -217,7 +217,7 @@ function cps_hc_gems_render_menu_modules() {
 					$new_module_keys = cps_hc_gems_get_new_module_keys( $modules );
 					$tag_translations = cps_hc_gems_get_tag_translations();
 					?>
-					<ul class="js-filter uk-margin-large-bottom uk-flex uk-flex-center" uk-grid uk-height-match="target: > li > .uk-card > .uk-card-body">
+					<ul class="js-filter uk-grid uk-margin-large-bottom uk-flex uk-flex-center" uk-grid uk-height-match="target: > li > .uk-card > .uk-card-body">
 						<?php foreach ( $sorted_modules as $module_key => $module ) :
 							// Skip modules without required UI properties
 							if ( ! isset( $module['title'] ) || ! isset( $module['description'] ) || ! isset( $module['tags'] ) ) {
@@ -264,7 +264,7 @@ function cps_hc_gems_render_menu_modules() {
 								</div>
 								<div class="uk-card-footer uk-background-muted">
 									<?php
-									$disabled = $is_free || SURBMA_HC_PREMIUM || ( isset( $cps_hc_gems_options[ $module['option_key'] ] ) && 1 == $cps_hc_gems_options[ $module['option_key'] ] ) ? '' : ' disabled';
+									$disabled = $is_free || 'active' == HC_LICENSE || ( isset( $cps_hc_gems_options[ $module['option_key'] ] ) && 1 == $cps_hc_gems_options[ $module['option_key'] ] ) ? '' : ' disabled';
 									$optionValue = isset( $cps_hc_gems_options[ $module['option_key'] ] ) ? $cps_hc_gems_options[ $module['option_key'] ] : 0;
 									?>
 									<div class="cps-form-module cps-form-horizontal cps-form-checkbox<?php echo esc_html( $disabled ); ?>">
@@ -406,7 +406,7 @@ function cps_hc_gems_render_menu_modules() {
 				<?php echo wp_kses_post( $pro_notice ); ?>
 
 				<?php // HuCommerce legacy users notice ?>
-				<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE && $cps_hc_gems_options && !isset( $cps_hc_gems_options['brandnewuser'] ) ) { ?>
+				<?php if ( 'free' == HC_LICENSE && $cps_hc_gems_options && !isset( $cps_hc_gems_options['brandnewuser'] ) ) { ?>
 					<div class="cps-alert uk-alert-danger" uk-alert>
 						<p><strong class="uk-text-uppercase">Figyelem!</strong> A "Jogi megfelelés" modul átkerült a HuCommerce fizetős, Pro verziójába. Minden eddigi beállítás továbbra is működik, de módosítani nem lehet a beállításokat. Mentés után is használhatod a modult korlátlan ideig, ha már egyszer beállítottad.</p>
 					</div>

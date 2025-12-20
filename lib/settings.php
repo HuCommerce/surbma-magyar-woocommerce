@@ -4,9 +4,9 @@
 defined( 'ABSPATH' ) || exit;
 
 // Initialize settings
-include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings-select-options.php');
-include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings-functions.php');
-include_once( SURBMA_HC_PLUGIN_DIR . '/pages/settings-validate.php');
+include_once( CPS_HC_GEMS_DIR . '/settings/settings-select-options.php');
+include_once( CPS_HC_GEMS_DIR . '/settings/settings-functions.php');
+include_once( CPS_HC_GEMS_DIR . '/settings/settings-validate.php');
 
 // Register settings
 add_action( 'admin_init', static function() {

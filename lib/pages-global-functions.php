@@ -15,7 +15,7 @@ function cps_hc_gems_page_modules_nav() {
 	<li class="<?php echo esc_attr( $active_modules_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_modules' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> HuCommerce <?php esc_html_e( 'Modules', 'surbma-magyar-woocommerce' ); ?></a></li>
 	<?php if ( $modules_hook == $screen->base ) { ?>
 	<li class="cps-settings-subnav">
-		<ul class="uk-nav-sub uk-padding-remove-left uk-padding-remove-bottom" uk-switcher="connect: #surbma-hc-modules; animation: uk-animation-fade">
+		<ul class="uk-nav-sub uk-padding-remove-left uk-padding-remove-bottom" uk-switcher="connect: #cps-hc-gems-modules; animation: uk-animation-fade">
 			<li><a class="uk-offcanvas-close uk-modal-close-default"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: chevron-double-right; ratio: 1"></span> <?php esc_html_e( 'All modules', 'surbma-magyar-woocommerce' ); ?></a></li>
 			<li class="uk-nav-header"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: settings; ratio: 1"></span> <?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?>:</li>
 			<?php cps_hc_gems_module_nav_item( 'Check field formats (Masking)', 'maskcheckoutfields' ); ?>
@@ -125,7 +125,7 @@ function cps_hc_gems_page_social_nav() {
 
 	?>
 	<li><a class="uk-inline" href="https://hucommerce.us20.list-manage.com/subscribe?u=8e6a039140be449ecebeb5264&id=2f5c70bc50&EMAIL=<?php echo urlencode( $current_user->user_email ); ?>&FNAME=<?php echo urlencode( $current_user->user_firstname ); ?>&LNAME=<?php echo urlencode( $current_user->user_lastname ); ?>&URL=<?php echo urlencode( $home_url ); ?>" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: mail"></span> <?php esc_html_e( 'Newsletter', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
-	<?php if ( SURBMA_HC_PRO_USER ) { ?>
+	<?php if ( 'free' != HC_LICENSE ) { ?>
 	<li><a class="uk-inline" href="#" onclick="Beacon('open'); Beacon('navigate', '/ask/message')"><span class="uk-margin-small-right" uk-icon="icon: lifesaver"></span> <?php esc_html_e( 'Support', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
 	<?php } else { ?>
 	<li><a class="uk-inline" href="https://www.hucommerce.hu/ugyfelszolgalat/" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: lifesaver"></span> <?php esc_html_e( 'Support', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
@@ -171,28 +171,28 @@ function cps_hc_gems_page_notifications() {
 	<?php } ?>
 
 	<?php // Free notification ?>
-	<?php if ( 'free' == SURBMA_HC_PLUGIN_LICENSE && $license_hook != $screen->base ) { ?>
+	<?php if ( 'free' == HC_LICENSE && $license_hook != $screen->base ) { ?>
 		<div class="notice notice-info is-dismissible">
 			<p><strong class="uk-text-uppercase">Figyelem!</strong> Nézd meg, mivel nyújt többet a <a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">HuCommerce Pro</a> verzió!</p>
 		</div>
 	<?php } ?>
 
 	<?php // Inactive notification ?>
-	<?php if ( 'inactive' == SURBMA_HC_PLUGIN_LICENSE ) { ?>
+	<?php if ( 'inactive' == HC_LICENSE ) { ?>
 		<div class="notice notice-error is-dismissible">
 			<p><strong class="uk-text-uppercase">Még nem aktivált HuCommerce Pro licensz kulcs!</strong> <br>A megadott licensz kulcsod nincs aktiválva. A <strong>"HuCommerce → Licensz kezelés"</strong> menüpont alatt tudod a megadott licensz kulcsot frissíteni vagy újra aktiválni.</p>
 		</div>
 	<?php } ?>
 
 	<?php // Invalid notification ?>
-	<?php if ( 'invalid' == SURBMA_HC_PLUGIN_LICENSE ) { ?>
+	<?php if ( 'invalid' == HC_LICENSE ) { ?>
 		<div class="notice notice-error is-dismissible">
 			<p><strong class="uk-text-uppercase">Érvénytelen vagy lejárt HuCommerce Pro licensz kulcs!</strong> <br>Kérlek ellenőrizd az emailben küldött licensz kulcsot és add meg újra vagy frissítsd és aktiváld újra a <strong>"HuCommerce → Licensz kezelés"</strong> menüpont alatt!</p>
 		</div>
 	<?php } ?>
 
 	<?php // Expired notification ?>
-	<?php if ( 'expired' == SURBMA_HC_PLUGIN_LICENSE ) { ?>
+	<?php if ( 'expired' == HC_LICENSE ) { ?>
 		<div class="notice notice-error is-dismissible">
 			<p><strong class="uk-text-uppercase">Lejárt HuCommerce Pro licensz kulcs!</strong> <br>Amennyiben szeretnéd tovább használni a HuCommerce Pro funkciókat vedd fel az <a href="https://www.hucommerce.hu/ugyfelszolgalat/" target="_blank"><strong>ügyfélszolgálattal</strong></a> a kapcsolatot.</p>
 		</div>
@@ -206,7 +206,7 @@ function cps_hc_gems_page_notifications() {
 // Sidebar
 function cps_hc_gems_page_sidebar() {
 	?>
-	<div class="uk-text-center uk-margin-top uk-margin-medium-bottom"><a href="/wp-admin/admin.php?page=cps_hc_gems_modules"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo-2023-dark.png" alt="HuCommerce" width="150" height="27"></a></div><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+	<div class="uk-text-center uk-margin-top uk-margin-medium-bottom"><a href="/wp-admin/admin.php?page=cps_hc_gems_modules"><img src="<?php echo esc_url( CPS_HC_GEMS_URL ); ?>/assets/images/hucommerce-logo-2023-dark.png" alt="HuCommerce" width="150" height="27"></a></div><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 	<ul class="cps-settings-nav uk-nav uk-nav-default">
 		<?php cps_hc_gems_page_modules_nav(); ?>
 		<li class="uk-nav-divider"><a></a></li>
@@ -251,7 +251,7 @@ function cps_hc_gems_page_card_footer() {
 			<div class="uk-navbar-right">
 				<ul class="uk-navbar-nav">
 					<li><a href="https://hucommerce.us20.list-manage.com/subscribe?u=8e6a039140be449ecebeb5264&id=2f5c70bc50&EMAIL=<?php echo urlencode( $current_user->user_email ); ?>&FNAME=<?php echo urlencode( $current_user->user_firstname ); ?>&LNAME=<?php echo urlencode( $current_user->user_lastname ); ?>&URL=<?php echo urlencode( $home_url ); ?>" target="_blank"><span uk-icon="icon: mail"></span></a></li>
-					<?php if ( SURBMA_HC_PRO_USER ) { ?>
+					<?php if ( 'free' != HC_LICENSE ) { ?>
 					<li><a href="#" onclick="Beacon('open'); Beacon('navigate', '/ask/message')"><span uk-icon="icon: lifesaver"></span></a></li>
 					<?php } else { ?>
 					<li><a href="https://www.hucommerce.hu/ugyfelszolgalat/" target="_blank"><span uk-icon="icon: lifesaver"></span></a></li>

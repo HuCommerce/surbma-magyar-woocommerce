@@ -417,8 +417,8 @@ add_action( 'init', static function() {
 
 				case 'pro_hu':
 				case 'pro':
-					// Pro modules: check SURBMA_HC_PREMIUM first
-					if ( SURBMA_HC_PREMIUM ) {
+					// Pro modules: check HC_LICENSE first
+					if ( 'active' == HC_LICENSE ) {
 						$module_value = $cps_hc_gems_options[ $module_config['option_key'] ] ?? 0;
 					} else {
 						$module_value = 0;
@@ -428,7 +428,7 @@ add_action( 'init', static function() {
 				case 'legacy_hu':
 				case 'legacy':
 					// Legacy modules: check premium OR legacy user condition
-					if ( SURBMA_HC_PREMIUM || !isset( $cps_hc_gems_options['brandnewuser'] ) || ( $cps_hc_gems_options['legacyuser'] ?? 0 ) == 1 ) {
+					if ( 'active' == HC_LICENSE || !isset( $cps_hc_gems_options['brandnewuser'] ) || ( $cps_hc_gems_options['legacyuser'] ?? 0 ) == 1 ) {
 						$module_value = $cps_hc_gems_options[ $module_config['option_key'] ] ?? 0;
 					} else {
 						$module_value = 0;
@@ -448,7 +448,7 @@ add_action( 'init', static function() {
 
 			// Determine file path
 			$file_name = isset( $module_config['file'] ) ? $module_config['file'] : $module_key . '.php';
-			$file_path = SURBMA_HC_PLUGIN_DIR . '/' . $module_config['directory'] . '/' . $file_name;
+			$file_path = CPS_HC_GEMS_DIR . '/' . $module_config['directory'] . '/' . $file_name;
 
 			// Include the module file
 			include_once $file_path;

@@ -127,7 +127,7 @@ function cps_hc_gems_get_page_icon( $page_config ) {
 	// Handle dynamic license icon
 	if ( isset( $page_config['icon_dynamic'] ) && $page_config['icon_dynamic'] ) {
 		if ( $page_config['menu_slug'] === 'cps_hc_gems_license' ) {
-			return 'active' === SURBMA_HC_PLUGIN_LICENSE ? 'unlock' : 'lock';
+			return 'active' === HC_LICENSE ? 'unlock' : 'lock';
 		}
 	}
 	return $page_config['icon'];
@@ -161,13 +161,13 @@ function cps_hc_gems_render_page( $page_key ) {
 	$page = $pages[ $page_key ];
 
 	// Load required files
-	include_once SURBMA_HC_PLUGIN_DIR . '/pages/pages-global-functions.php';
-	include_once SURBMA_HC_PLUGIN_DIR . '/pages/' . $page['menu_file'];
+	include_once CPS_HC_GEMS_DIR . '/lib/pages-global-functions.php';
+	include_once CPS_HC_GEMS_DIR . '/pages/' . $page['menu_file'];
 
 	cps_hc_gems_page_header();
 	?>
 	<div id="cps-settings">
-		<div class="uk-grid-small" uk-grid>
+		<div class="uk-grid uk-grid-small" uk-grid>
 			<div class="uk-width-medium uk-visible@m">
 				<?php cps_hc_gems_page_sidebar(); ?>
 			</div>
@@ -192,7 +192,7 @@ function cps_hc_gems_render_page( $page_key ) {
 					</div>
 					<?php cps_hc_gems_page_card_footer(); ?>
 				</div>
-				<?php cps_admin_footer( SURBMA_HC_PLUGIN_FILE ); ?>
+				<?php cps_admin_footer( CPS_HC_GEMS_FILE ); ?>
 			</div>
 		</div>
 	</div>

@@ -306,7 +306,7 @@ add_action( 'woocommerce_review_order_before_submit', static function() {
 	$beforeorderbuttonmessageValue = isset( $cps_hc_gems_options['beforeorderbuttonmessage'] ) ? wp_unslash( $cps_hc_gems_options['beforeorderbuttonmessage'] ) : '';
 
 	if ( $beforeorderbuttonmessageValue ) {
-		echo '<div class="surbma-hc-before-submit" style="margin: 0 0 1em;text-align: center;">' . wp_kses_post( $beforeorderbuttonmessageValue ) . '</div>';
+		echo '<div class="cps-hc-gems-before-submit" style="margin: 0 0 1em;text-align: center;">' . wp_kses_post( $beforeorderbuttonmessageValue ) . '</div>';
 	}
 } );
 
@@ -317,6 +317,6 @@ add_action( 'woocommerce_review_order_after_submit', static function() {
 	$afterorderbuttonmessageValue = isset( $cps_hc_gems_options['afterorderbuttonmessage'] ) ? wp_unslash( $cps_hc_gems_options['afterorderbuttonmessage'] ) : '';
 
 	if ( $afterorderbuttonmessageValue ) {
-		echo '<div class="surbma-hc-before-submit" style="margin: 1em 0 0;text-align: center;">' . wp_kses_post( $afterorderbuttonmessageValue ) . '</div>';
+		echo '<div class="cps-hc-gems-after-submit" style="margin: 1em 0 0;text-align: center;">' . wp_kses_post( $afterorderbuttonmessageValue ) . '</div>';
 	}
 } );

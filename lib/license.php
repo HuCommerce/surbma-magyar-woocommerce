@@ -419,36 +419,36 @@ function cps_hc_gems_custom_css() {
 	if ( is_user_logged_in() ) {
 		global $whitelisted;
 		if ( isset( $whitelisted ) && 'dev' === $whitelisted ) {
-?>
-<style id="wp-admin-bar-hucommerce-whitelisted-badge-css">
-#wpadminbar .quicklinks #wp-admin-bar-hucommerce-whitelisted-badge {
-	margin: 0 7px;
-	padding: 7px 0;
-}
+			?>
+			<style id="wp-admin-bar-hucommerce-whitelisted-badge-css">
+			#wpadminbar .quicklinks #wp-admin-bar-hucommerce-whitelisted-badge {
+				margin: 0 7px;
+				padding: 7px 0;
+			}
 
-#wpadminbar .quicklinks #wp-admin-bar-hucommerce-whitelisted-badge a.ab-item {
-	background-color:rgb(255, 121, 18);
-	border-radius: 2px;
-	display: flex;
-	height: 18px;
-	padding: 0px 6px;
-	align-items: center;
-	gap: 8px;
-	color: #3c434a;
-	color: #fff;
-	font-size: 12px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 16px;
-}
+			#wpadminbar .quicklinks #wp-admin-bar-hucommerce-whitelisted-badge a.ab-item {
+				background-color:rgb(255, 121, 18);
+				border-radius: 2px;
+				display: flex;
+				height: 18px;
+				padding: 0px 6px;
+				align-items: center;
+				gap: 8px;
+				color: #3c434a;
+				color: #fff;
+				font-size: 12px;
+				font-style: normal;
+				font-weight: 500;
+				line-height: 16px;
+			}
 
-#wpadminbar .quicklinks #wp-admin-bar-hucommerce-whitelisted-badge a.ab-item:hover,
-#wpadminbar .quicklinks #wp-admin-bar-hucommerce-whitelisted-badge a.ab-item:focus {
-	background-color: #faa05a;
-	color: #fff;
-}
-</style>
-<?php
+			#wpadminbar .quicklinks #wp-admin-bar-hucommerce-whitelisted-badge a.ab-item:hover,
+			#wpadminbar .quicklinks #wp-admin-bar-hucommerce-whitelisted-badge a.ab-item:focus {
+				background-color: #faa05a;
+				color: #fff;
+			}
+			</style>
+			<?php
 		}
 	}
 }
@@ -460,41 +460,13 @@ endif;
 
 /*
  *
- * SURBMA_HC_PLUGIN_LICENSE
+ * HC_LICENSE
  *
  * This global is to check license status, if user has rights to use premium features.
  * Values can be: active, inactive, invalid, free
  *
 */
-define( 'SURBMA_HC_PLUGIN_LICENSE', $status );
-
-/*
- *
- * SURBMA_HC_PREMIUM
- *
- * This global is for plugin functions to easily set conditions for free and premium features.
- * Values can be: true, false (BUT php uses it to be 1 or none)
- *
-*/
-if ( 'active' == $status ) {
-	define( 'SURBMA_HC_PREMIUM', true );
-} else {
-	define( 'SURBMA_HC_PREMIUM', false );
-}
-
-/*
- *
- * SURBMA_HC_PRO_USER
- *
- * This global is to set conditions for users, who have given a license key, even if it is expired or invalid.
- * Values can be: true, false (BUT php uses it to be 1 or none)
- *
-*/
-if ( 'free' != $status ) {
-	define( 'SURBMA_HC_PRO_USER', true );
-} else {
-	define( 'SURBMA_HC_PRO_USER', false );
-}
+define( 'HC_LICENSE', $status );
 
 // License notices
 add_action( 'admin_notices', static function() {
@@ -507,10 +479,10 @@ add_action( 'admin_notices', static function() {
 		<?php
 	}
 	// Invalid notice
-	if ( 'invalid' == SURBMA_HC_PLUGIN_LICENSE && ( !isset( $_GET['page'] ) || ( isset( $_GET['page'] ) && 'cps_hc_gems_modules' != $_GET['page'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( 'invalid' == HC_LICENSE && ( !isset( $_GET['page'] ) || ( isset( $_GET['page'] ) && 'cps_hc_gems_modules' != $_GET['page'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		?>
 		<div class="notice notice-error notice-alt notice-large is-dismissible">
-			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( CPS_HC_GEMS_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 			<h3>Érvénytelen vagy lejárt licensz kulcs a HuCommerce Pro beállításánál!</h3>
 			<p>Kérlek ellenőrizd az emailben küldött licensz kulcsot és add meg újra vagy frissítsd és aktiváld újra a HuCommerce beállításánál!
 			<br>A licensz kulcsot a <strong>"Licensz kezelés"</strong> almenüpontban tudod megadni a következő oldalon: <a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_license' ) ); ?>">HuCommerce -> Licensz kezelés</a></p>
@@ -519,10 +491,10 @@ add_action( 'admin_notices', static function() {
 	}
 
 	// Inactive notice
-	if ( 'inactive' == SURBMA_HC_PLUGIN_LICENSE && ( !isset( $_GET['page'] ) || ( isset( $_GET['page'] ) && 'cps_hc_gems_modules' != $_GET['page'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( 'inactive' == HC_LICENSE && ( !isset( $_GET['page'] ) || ( isset( $_GET['page'] ) && 'cps_hc_gems_modules' != $_GET['page'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		?>
 		<div class="notice notice-info notice-alt notice-large is-dismissible">
-			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( SURBMA_HC_PLUGIN_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+			<a href="https://www.hucommerce.hu" target="_blank"><img src="<?php echo esc_url( CPS_HC_GEMS_URL ); ?>/assets/images/hucommerce-logo.png" alt="HuCommerce" class="alignright" style="margin: 1em;"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 			<h3>Még nem aktivált HuCommerce Pro licensz kulcs!</h3>
 			<p>A megadott HuCommerce Pro licensz kulcsod nincs aktiválva. A HuCommerce Pro almenüpont alatt tudod a megadott licensz kulcsot frissíteni vagy újra aktiválni.
 			<br>Amennyiben bármi probléma merül fel az újra aktiválás során vedd fel az ügyfélszolgálattal a kapcsolatot: <a href="https://www.hucommerce.hu/ugyfelszolgalat/" target="_blank">HuCommerce Ügyfélszolgálat</a></p>

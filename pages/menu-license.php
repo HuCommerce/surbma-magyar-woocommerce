@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * @return string The masked string.
  */
 function cps_hc_gems_mask( $str ) {
-	if ( !$str || 'active' != SURBMA_HC_PLUGIN_LICENSE ) {
+	if ( !$str || 'active' != HC_LICENSE ) {
 		return $str;
 	}
 	$str_length = strlen( $str );
@@ -36,7 +36,7 @@ function cps_hc_gems_render_menu_license() {
 		<?php $home_url = wp_parse_url( get_option( 'home' ) ); ?>
 		<?php $instance = $home_url['host'] ?? ''; ?>
 		<?php $licensekeyValue = $license_options['licensekey'] ?? ''; ?>
-		<?php $disabled = 'active' == SURBMA_HC_PLUGIN_LICENSE ? ' disabled' : ''; ?>
+		<?php $disabled = 'active' == HC_LICENSE ? ' disabled' : ''; ?>
 		<?php $inputType = defined( 'WP_DEBUG' ) && 1 == WP_DEBUG ? 'text' : 'hidden'; ?>
 
 		<?php
@@ -77,7 +77,7 @@ function cps_hc_gems_render_menu_license() {
 			</div>
 
 			<div class="uk-width-auto@xl">
-				<?php if ( 'active' == SURBMA_HC_PLUGIN_LICENSE ) { ?>
+				<?php if ( 'active' == HC_LICENSE ) { ?>
 					<input type="submit" class="uk-button uk-button-danger uk-button-large uk-width-auto@l" value="<?php esc_attr_e( 'Deactivating', 'surbma-magyar-woocommerce' ); ?>" />
 				<?php } else { ?>
 					<input type="submit" class="uk-button uk-button-primary uk-button-large uk-width-auto@l" value="<?php esc_attr_e( 'Activating', 'surbma-magyar-woocommerce' ); ?>" />
@@ -88,9 +88,9 @@ function cps_hc_gems_render_menu_license() {
 	</form>
 
 	<?php
-		if ( 'active' == SURBMA_HC_PLUGIN_LICENSE ) {
+		if ( 'active' == HC_LICENSE ) {
 			$licensestatus = '<span class="uk-label uk-label-success">' . esc_html__( 'Active', 'surbma-magyar-woocommerce' ) . '</span>';
-		} elseif ( 'invalid' == SURBMA_HC_PLUGIN_LICENSE || ( $licensekeyValue ) ) {
+		} elseif ( 'invalid' == HC_LICENSE || ( $licensekeyValue ) ) {
 			$licensestatus = '<span class="uk-label uk-label-danger">' . esc_html__( 'Invalid API key', 'surbma-magyar-woocommerce' ) . '</span>';
 		} else {
 			$licensestatus = '<span class="uk-label">' . esc_html__( 'Not activated', 'surbma-magyar-woocommerce' ) . '</span>';
