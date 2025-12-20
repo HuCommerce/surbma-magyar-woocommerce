@@ -100,7 +100,7 @@ surbma-magyar-woocommerce/
 **Loading Logic**:
 - Modules are loaded conditionally based on:
   - User settings (`$hc_gems_options`)
-  - Pro license status (`SURBMA_HC_PREMIUM` constant)
+  - Pro license status (`HC_LICENSE` constant)
   - Legacy user compatibility
   - Admin vs frontend context
 
@@ -166,11 +166,14 @@ surbma-magyar-woocommerce/
 
 ### Plugin Constants
 ```php
-SURBMA_HC_PLUGIN_VERSION    // Plugin version
-SURBMA_HC_PLUGIN_DIR        // Plugin directory path
-SURBMA_HC_PLUGIN_URL        // Plugin URL
-SURBMA_HC_PLUGIN_FILE       // Main plugin file path
-SURBMA_HC_PREMIUM           // Pro license status (boolean)
+CPS_HC_GEMS_VERSION         // Plugin version
+CPS_HC_GEMS_DIR             // Plugin directory path
+CPS_HC_GEMS_URL             // Plugin URL
+CPS_HC_GEMS_FILE            // Main plugin file path
+CPS_HC_GEMS_DIRNAME         // Plugin folder 
+CPS_HC_GEMS_PLUGIN_NAME     // Plugin name
+CPS_HC_GEMS_PLUGIN_URL      // Plugin URL
+HC_LICENSE                  // License status (active, inactive, invalid, free)
 ```
 
 ### Global Variables
