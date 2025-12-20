@@ -4,8 +4,11 @@
 /.idea
 /.wordpress-org
 /agent-os
+/vendor
 
 .distignore
 .gitignore
 AGENTS.md
 CLAUDE.md
+composer.json
+composer.lock
