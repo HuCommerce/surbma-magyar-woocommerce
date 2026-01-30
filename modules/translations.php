@@ -94,54 +94,79 @@ add_filter( 'load_translation_file', static function( $file, $domain, $locale ) 
 }, 10, 3 );
 */
 
+/**
+ * Returns the list of translation domains for plugins and themes (single source of truth for other code).
+ *
+ * @return array{plugins: string[], themes: string[]} Keys 'plugins' and 'themes', each an array of text domain strings.
+ */
+function cps_hc_gems_get_translation_domains() {
+	return [
+		'plugins' => [
+			'restrict-content-pro',
+			'woocommerce-api-manager',
+			'woocommerce-memberships',
+			'woocommerce-subscriptions',
+		],
+		'themes' => [
+			// e.g. 'storefront',
+		],
+	];
+}
+
+/**
+ * Returns the option key for a translation domain (used by settings and load_translation_file).
+ *
+ * @param string $domain Text domain (e.g. 'restrict-content-pro').
+ * @return string Option key (e.g. 'translations-restrictcontentpro').
+ */
+function cps_hc_gems_translation_domain_to_option_key( $domain ) {
+	return 'translations-' . str_replace( '-', '', $domain );
+}
+
 // Load custom translations for plugins and themes
 add_filter( 'load_translation_file', static function( $file, $domain, $locale ) {
-	// Get the settings array
 	global $cps_hc_gems_options;
 
-	// Define translations with their settings key and file paths (plugins and themes in separate top-level folders, each domain in its own subfolder).
-	$translations = [
-		'restrict-content-pro' => [
-			'option_key' => 'translations-restrictcontentpro',
-			'php_file'   => CPS_HC_GEMS_DIR . "/translations/plugins/restrict-content-pro/restrict-content-pro-{$locale}.l10n.php",
-			'mo_file'    => CPS_HC_GEMS_DIR . "/translations/plugins/restrict-content-pro/restrict-content-pro-{$locale}.mo"
-		],
-		'woocommerce-api-manager' => [
-			'option_key' => 'translations-woocommerceapimanager',
-			'php_file'   => CPS_HC_GEMS_DIR . "/translations/plugins/woocommerce-api-manager/woocommerce-api-manager-{$locale}.l10n.php",
-			'mo_file'    => CPS_HC_GEMS_DIR . "/translations/plugins/woocommerce-api-manager/woocommerce-api-manager-{$locale}.mo"
-		],
-		'woocommerce-memberships' => [
-			'option_key' => 'translations-woocommercememberships',
-			'php_file'   => CPS_HC_GEMS_DIR . "/translations/plugins/woocommerce-memberships/woocommerce-memberships-{$locale}.l10n.php",
-			'mo_file'    => CPS_HC_GEMS_DIR . "/translations/plugins/woocommerce-memberships/woocommerce-memberships-{$locale}.mo"
-		],
-		'woocommerce-subscriptions' => [
-			'option_key' => 'translations-woocommercesubscriptions',
-			'php_file'   => CPS_HC_GEMS_DIR . "/translations/plugins/woocommerce-subscriptions/woocommerce-subscriptions-{$locale}.l10n.php",
-			'mo_file'    => CPS_HC_GEMS_DIR . "/translations/plugins/woocommerce-subscriptions/woocommerce-subscriptions-{$locale}.mo"
-		]
-	];
+	$domains           = cps_hc_gems_get_translation_domains();
+	$plugin_translations = $domains['plugins'];
+	$theme_translations  = $domains['themes'];
 
-	// Return early if no translations are activated
-	$active_translations = array_filter( $translations, function( $translation ) use ( $cps_hc_gems_options ) {
-		return !empty( $cps_hc_gems_options[$translation['option_key']] );
-	} );
-	
-	if ( empty( $active_translations ) ) {
+	// Return early if no translations are activated.
+	$has_active = false;
+	foreach ( array_merge( $plugin_translations, $theme_translations ) as $d ) {
+		$option_key = cps_hc_gems_translation_domain_to_option_key( $d );
+		if ( ! empty( $cps_hc_gems_options[ $option_key ] ) ) {
+			$has_active = true;
+			break;
+		}
+	}
+	if ( ! $has_active ) {
 		return $file;
 	}
 
-	// Check if the requested domain has an active translation
-	if ( isset( $translations[$domain] ) && !empty( $cps_hc_gems_options[$translations[$domain]['option_key']] ) ) {
-		if ( file_exists( $translations[$domain]['php_file'] ) ) {
-			return $translations[$domain]['php_file'];
-		}
-		if ( file_exists( $translations[$domain]['mo_file'] ) ) {
-			return $translations[$domain]['mo_file'];
-		}
+	// Resolve folder for requested domain.
+	if ( in_array( $domain, $plugin_translations, true ) ) {
+		$folder = 'plugins';
+	} elseif ( in_array( $domain, $theme_translations, true ) ) {
+		$folder = 'themes';
+	} else {
+		return $file;
 	}
 
-	// Return the original translation file if no custom translation exists
+	if ( empty( $cps_hc_gems_options[ cps_hc_gems_translation_domain_to_option_key( $domain ) ] ) ) {
+		return $file;
+	}
+
+	$base     = CPS_HC_GEMS_DIR . '/translations/' . $folder . '/' . $domain;
+	$php_file = $base . '/' . $domain . '-' . $locale . '.l10n.php';
+	$mo_file  = $base . '/' . $domain . '-' . $locale . '.mo';
+
+	if ( file_exists( $php_file ) ) {
+		return $php_file;
+	}
+	if ( file_exists( $mo_file ) ) {
+		return $mo_file;
+	}
+
 	return $file;
 }, 10, 3 );
