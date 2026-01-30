@@ -1,4 +1,5 @@
 .DS_Store
-/translations/*.po
-/translations/*.pot
+/translations/*/.gitkeep
+/translations/*/*.po
+/translations/*/*.pot
 /vendor/
