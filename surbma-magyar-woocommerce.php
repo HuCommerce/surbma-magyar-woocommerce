@@ -1,33 +1,33 @@
 <?php
-
-/*
-Plugin Name: HuCommerce | Magyar WooCommerce kiegészítések
-Requires Plugins: woocommerce
-Plugin URI: https://www.hucommerce.hu/
-Description: Hasznos javítások és kiegészítések a magyar nyelvű WooCommerce webáruházakhoz.
-
-Version: 2025.1.8
-
-Author: HuCommerce.hu
-Author URI: https://www.hucommerce.hu/
-Developer: Surbma
-Developer URI: https://surbma.com/
-
-Text Domain: surbma-magyar-woocommerce
-Domain Path: /languages
-
-WC requires at least: 4.6
-WC tested up to: 10.1
-
-License: GPL-3.0-or-later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
-*/
+/**
+ * Plugin Name: HuCommerce | Magyar WooCommerce kiegészítések
+ * Plugin URI: https://www.hucommerce.hu/
+ * Description: Hasznos kiegészítések a magyar WooCommerce webáruházakhoz.
+ * 
+ * Version: 2025.1.8
+ * 
+ * Author: HuCommerce.hu
+ * Author URI: https://www.hucommerce.hu/
+ * Developer: Surbma
+ * Developer URI: https://surbma.com/
+ * 
+ * Requires Plugins: woocommerce
+ * 
+ * Text Domain: surbma-magyar-woocommerce
+ * Domain Path: /languages
+ * 
+ * WC requires at least: 4.6
+ * WC tested up to: 10.1
+ * 
+ * License: GPL-3.0-or-later
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ */
 
 // Prevent direct access
 defined( 'ABSPATH' ) || exit;
 
 // Localization
-add_action( 'init', static function() {
+add_action( 'init', static function () {
 	load_plugin_textdomain( 'surbma-magyar-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 } );
 
@@ -51,17 +51,17 @@ class HuCommerce {}
 // * HUCOMMERCE END
 
 // Check if WooCommerce is active
-add_action( 'plugins_loaded', static function() {
+add_action( 'plugins_loaded', static function () {
 	if ( class_exists( 'WooCommerce' ) ) {
 		// Start the engines
 		require_once CPS_HC_GEMS_DIR . '/lib/start.php';
 	} else {
 		// Notify user, that WooCommerce is not active
-		add_action( 'admin_notices', static function() {
+		add_action( 'admin_notices', static function () {
 			?>
 			<div class="notice notice-error">
 				<div style="padding: 20px;">
-					<a href="<?php echo esc_url( CPS_HC_GEMS_PLUGIN_URL ); ?>" target="_blank"><img src="<?php echo esc_url( CPS_HC_GEMS_URL ); ?>/assets/images/<?php echo strtolower( esc_attr( CPS_HC_GEMS_PLUGIN_NAME ) ); ?>-logo.png" alt="<?php echo esc_attr( CPS_HC_GEMS_PLUGIN_NAME ); ?>" class="alignright"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+					<a href="<?php echo esc_url( CPS_HC_GEMS_PLUGIN_URL ); ?>" target="_blank"><img src="<?php echo esc_url( CPS_HC_GEMS_URL ); ?>/assets/images/<?php echo esc_attr( strtolower( CPS_HC_GEMS_PLUGIN_NAME ) ); ?>-logo.png" alt="<?php echo esc_attr( CPS_HC_GEMS_PLUGIN_NAME ); ?>" class="alignright"></a><?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 					<p><strong><?php esc_html_e( 'Thank you for installing HuCommerce plugin!', 'surbma-magyar-woocommerce' ); ?></strong></p>
 					<p><?php esc_html_e( 'To use HuCommerce plugin, you must activate WooCommerce also.', 'surbma-magyar-woocommerce' ); ?>
 					<br><?php esc_html_e( 'If you don\'t want to use WooCommerce, please deactivate HuCommerce plugin!', 'surbma-magyar-woocommerce' ); ?></p>
@@ -75,7 +75,7 @@ add_action( 'plugins_loaded', static function() {
 
 // Declare compatibility: Custom order tables
 // https://developer.woocommerce.com/docs/hpos-extension-recipe-book/
-add_action( 'before_woocommerce_init', static function() {
+add_action( 'before_woocommerce_init', static function () {
 	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 	}
@@ -83,7 +83,7 @@ add_action( 'before_woocommerce_init', static function() {
 
 // Declare incompatibility: Cart & Checkout blocks
 // https://developer.woocommerce.com/2023/11/06/faq-extending-cart-and-checkout-blocks/
-add_action( 'before_woocommerce_init', static function() {
+add_action( 'before_woocommerce_init', static function () {
 	if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
 		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, false );
 	}
