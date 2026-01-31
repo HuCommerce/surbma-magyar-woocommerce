@@ -87,6 +87,15 @@ function cps_hc_gems_get_modules_config() {
 		],
 
 		// Free modules
+		'translations' => [
+			'option_key' => 'module-translations',
+			'type' => 'free',
+			'directory' => 'modules',
+			'title' => __( 'Translations for premium plugins & themes', 'surbma-magyar-woocommerce' ),
+			'description' => __( 'Adds translations for hundreds of the most popular premium plugins & themes. Supported softwares added regularly.', 'surbma-magyar-woocommerce' ),
+			'tags' => ['other'],
+			'doc_slug' => 'forditasok',
+		],
 		'tax-number' => [
 			'option_key' => 'taxnumber',
 			'type' => 'free',
@@ -243,15 +252,6 @@ function cps_hc_gems_get_modules_config() {
 			'tags' => ['checkout', 'payments'],
 			'doc_slug' => 'fizetesi-modok-korlatozasa',
 			'version_added' => '3.5.0',
-		],
-		'translations' => [
-			'option_key' => 'module-translations',
-			'type' => 'pro',
-			'directory' => 'modules',
-			'title' => __( 'Translations for premium plugins & themes', 'surbma-magyar-woocommerce' ),
-			'description' => __( 'Adds translations for most popular premium plugins & themes. Supported softwares added regularly. Please let us know, what plugin or theme do you need to be translated next time!', 'surbma-magyar-woocommerce' ),
-			'tags' => ['other'],
-			'doc_slug' => 'forditasok',
 		],
 
 		// Legacy modules

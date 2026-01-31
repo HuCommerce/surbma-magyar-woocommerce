@@ -59,7 +59,7 @@ function cps_hc_gems_form_modal( $modal_title, $modal_content, $modal_id ) {
 	<?php
 }
 
-function cps_hc_gems_form_field_checkbox( $field_label, $field_option, $field_info = false, $field_new = false, $field_free = false, $field_default = 0 ) {
+function cps_hc_gems_form_field_checkbox( $field_label, $field_option, $field_info = false, $field_new = false, $field_free = false, $field_default = 0, $field_li_attrs = [] ) {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
@@ -88,8 +88,15 @@ function cps_hc_gems_form_field_checkbox( $field_label, $field_option, $field_in
 		),
 	);
 
+	$li_attrs = '';
+	if ( ! empty( $field_li_attrs ) && is_array( $field_li_attrs ) ) {
+		foreach ( $field_li_attrs as $attr_name => $attr_value ) {
+			$li_attrs .= ' ' . esc_attr( $attr_name ) . '="' . esc_attr( (string) $attr_value ) . '"';
+		}
+	}
+
 	?>
-	<li class="cps-form-checkbox cps-form-horizontal<?php echo esc_html( $disabled ); ?>">
+	<li class="cps-form-checkbox cps-form-horizontal<?php echo esc_html( $disabled ); ?>"<?php echo $li_attrs; ?>>
 		<div class="uk-form-label"><span><?php esc_html_e( $field_label, 'surbma-magyar-woocommerce' ); ?><?php echo wp_kses( $info, $allowed_html ); ?><?php echo wp_kses_post( $new ); ?></span></div><?php // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>
 		<div class="uk-form-controls">
 			<div class="switch-wrap">

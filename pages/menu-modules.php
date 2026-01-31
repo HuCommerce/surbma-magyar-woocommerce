@@ -499,58 +499,81 @@ function cps_hc_gems_render_menu_modules() {
 					</li>
 				</ul>
 			</li>
-			<li>
+			<li class="cps-hc-gems-translations-section">
 				<h3 class="uk-card-title"><?php esc_html_e( 'Translations for premium plugins & themes', 'surbma-magyar-woocommerce' ); ?></h3>
 
 				<?php echo wp_kses_post( $pro_notice ); ?>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
-				<p><?php esc_html_e( 'Adds translations for most popular premium plugins & themes. Supported softwares added regularly. Please let us know, what plugin or theme do you need to be translated next time!', 'surbma-magyar-woocommerce' ); ?></p>
-				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_checkbox( 'Kestrel API Manager for WooCommerce', 'translations-woocommerceapimanager' ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Restrict Content Pro', 'translations-restrictcontentpro' ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'WooCommerce Memberships', 'translations-woocommercememberships' ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'WooCommerce Subscriptions', 'translations-woocommercesubscriptions' ); ?>
-				</ul>
-
-				<div class="uk-overflow-auto uk-margin-large-top">
-					<table class="uk-table uk-table-divider uk-table-justify uk-table-small">
-						<thead>
-							<tr>
-								<th><?php esc_html_e( 'Supported softwares', 'surbma-magyar-woocommerce' ); ?></th>
-								<th><?php esc_html_e( 'Type', 'surbma-magyar-woocommerce' ); ?></th>
-								<th><?php esc_html_e( 'Link', 'surbma-magyar-woocommerce' ); ?></th>
-								<th><?php esc_html_e( 'Languages', 'surbma-magyar-woocommerce' ); ?></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Kestrel API Manager for WooCommerce</td>
-								<td><span class="uk-label"><?php esc_html_e( 'Plugin', 'surbma-magyar-woocommerce' ); ?></span></td>
-								<td><a href="https://automattic.pxf.io/PO6mB6" target="_blank">https://woocommerce.com/products/woocommerce-api-manager/</a></td>
-								<td><code>HU</code></td>
-							</tr>
-							<tr>
-								<td>Restrict Content Pro</td>
-								<td><span class="uk-label"><?php esc_html_e( 'Plugin', 'surbma-magyar-woocommerce' ); ?></span></td>
-								<td><a href="https://restrictcontentpro.com/" target="_blank">https://restrictcontentpro.com/</a></td>
-								<td><code>HU</code></td>
-							</tr>
-							<tr>
-								<td>WooCommerce Memberships</td>
-								<td><span class="uk-label"><?php esc_html_e( 'Plugin', 'surbma-magyar-woocommerce' ); ?></span></td>
-								<td><a href="https://automattic.pxf.io/JKmRBQ" target="_blank">https://woocommerce.com/products/woocommerce-memberships/</a></td>
-								<td><code>HU</code></td>
-							</tr>
-							<tr>
-								<td>WooCommerce Subscriptions</td>
-								<td><span class="uk-label"><?php esc_html_e( 'Plugin', 'surbma-magyar-woocommerce' ); ?></span></td>
-								<td><a href="https://automattic.pxf.io/OemyzA" target="_blank">https://woocommerce.com/products/woocommerce-subscriptions/</a></td>
-								<td><code>HU</code></td>
-							</tr>
-						</tbody>
-					</table>
+				<p><?php esc_html_e( 'Adds translations for hundreds of the most popular premium plugins & themes. Supported softwares added regularly.', 'surbma-magyar-woocommerce' ); ?></p>
+				<div class="uk-alert-primary" uk-alert>
+					<p><strong><?php esc_html_e( '🙏 Big thank you for the HelloWP team!', 'surbma-magyar-woocommerce' ); ?></strong></p>
+					<p><?php esc_html_e( 'The "WordPress Translations Collections" repository is an open source project started, created and maintained by HelloWP.io that allows you to contribute to the translation of hundreds of Premium WordPress plugins and themes. You can find the repository here: https://github.com/hellowpio/wordpress-translations', 'surbma-magyar-woocommerce' ); ?></p>
 				</div>
+
+				<div class="uk-margin">
+					<label class="uk-form-label uk-hidden" for="cps-hc-gems-translations-filter"><?php esc_html_e( 'Filter for Plugins & Themes', 'surbma-magyar-woocommerce' ); ?>:</label>
+					<div class="uk-inline uk-width-1-1">
+					<span class="uk-form-icon" uk-icon="icon: search"></span>
+						<input type="text" id="cps-hc-gems-translations-filter" class="uk-input uk-form-large" placeholder="<?php esc_attr_e( 'Start typing to filter the list of plugins and themes...', 'surbma-magyar-woocommerce' ); ?>" aria-label="<?php esc_attr_e( 'Filter translation list by name or domain', 'surbma-magyar-woocommerce' ); ?>">
+					</div>
+				</div>
+
+				<?php
+				$translation_domains = cps_hc_gems_get_translation_domains();
+				$translation_names = cps_hc_gems_get_translation_domain_names();
+				$plugins_count = count( $translation_domains['plugins'] );
+				$themes_count = count( $translation_domains['themes'] );
+				?>
+				<div class="uk-card uk-card-default uk-card-body uk-margin-small-bottom">
+					<h5 class="uk-text-bold"><?php esc_html_e( 'Plugins' ); ?> (<?php echo (int) $plugins_count; ?>)</h5>
+					<div class="uk-overflow-auto cps-hc-gems-translations-scroll" style="max-height: 294px;">
+						<ul class="cps-form-fields uk-list uk-list-divider uk-margin-right cps-hc-gems-translations-list" data-type="plugins">
+							<?php foreach ( $translation_domains['plugins'] as $domain ) : ?>
+								<?php
+								$name = $translation_names[ $domain ] ?? $domain;
+								cps_hc_gems_form_field_checkbox( $name, cps_hc_gems_translation_domain_to_option_key( $domain ), false, false, false, 0, [ 'data-domain' => $domain ] );
+								?>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				</div>
+				<div class="uk-card uk-card-default uk-card-body uk-margin-small-bottom">
+					<h5 class="uk-text-bold"><?php esc_html_e( 'Themes' ); ?> (<?php echo (int) $themes_count; ?>)</h5>
+					<div class="uk-overflow-auto cps-hc-gems-translations-scroll" style="max-height: 294px;">
+						<ul class="cps-form-fields uk-list uk-list-divider uk-margin-right cps-hc-gems-translations-list" data-type="themes">
+							<?php foreach ( $translation_domains['themes'] as $domain ) : ?>
+								<?php
+								$name = $translation_names[ $domain ] ?? $domain;
+								cps_hc_gems_form_field_checkbox( $name, cps_hc_gems_translation_domain_to_option_key( $domain ), false, false, false, 0, [ 'data-domain' => $domain ] );
+								?>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				</div>
+				<script>
+				(function() {
+					var filterEl = document.getElementById( 'cps-hc-gems-translations-filter' );
+					var lists = document.querySelectorAll( '.cps-hc-gems-translations-list' );
+					if ( ! filterEl || ! lists.length ) { return; }
+					function filterTranslations() {
+						var q = ( filterEl.value || '' ).trim().toLowerCase();
+						lists.forEach( function( ul ) {
+							var items = ul.querySelectorAll( 'li.cps-form-checkbox' );
+							items.forEach( function( li ) {
+								var label = li.querySelector( '.uk-form-label span' );
+								var labelText = label ? ( label.textContent || '' ).trim().toLowerCase() : '';
+								var domain = ( li.getAttribute && li.getAttribute( 'data-domain' ) ) || '';
+								var domainLower = domain.toLowerCase();
+								var show = ! q || labelText.indexOf( q ) !== -1 || domainLower.indexOf( q ) !== -1;
+								li.classList.toggle( 'uk-hidden', ! show );
+							});
+						});
+					}
+					filterEl.addEventListener( 'input', filterTranslations );
+					filterEl.addEventListener( 'keyup', filterTranslations );
+				})();
+				</script>
 			</li>
 			<?php // * HUCOMMERCE START ?>
 			<li>

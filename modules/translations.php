@@ -94,42 +94,13 @@ add_filter( 'load_translation_file', static function( $file, $domain, $locale ) 
 }, 10, 3 );
 */
 
-/**
- * Returns the list of translation domains for plugins and themes (single source of truth for other code).
- *
- * @return array{plugins: string[], themes: string[]} Keys 'plugins' and 'themes', each an array of text domain strings.
- */
-function cps_hc_gems_get_translation_domains() {
-	return [
-		'plugins' => [
-			'restrict-content-pro',
-			'woocommerce-api-manager',
-			'woocommerce-memberships',
-			'woocommerce-subscriptions',
-		],
-		'themes' => [
-			// e.g. 'storefront',
-		],
-	];
-}
-
-/**
- * Returns the option key for a translation domain (used by settings and load_translation_file).
- *
- * @param string $domain Text domain (e.g. 'restrict-content-pro').
- * @return string Option key (e.g. 'translations-restrictcontentpro').
- */
-function cps_hc_gems_translation_domain_to_option_key( $domain ) {
-	return 'translations-' . str_replace( '-', '', $domain );
-}
-
 // Load custom translations for plugins and themes
 add_filter( 'load_translation_file', static function( $file, $domain, $locale ) {
 	global $cps_hc_gems_options;
 
-	$domains           = cps_hc_gems_get_translation_domains();
+	$domains = cps_hc_gems_get_translation_domains();
 	$plugin_translations = $domains['plugins'];
-	$theme_translations  = $domains['themes'];
+	$theme_translations = $domains['themes'];
 
 	// Return early if no translations are activated.
 	$has_active = false;

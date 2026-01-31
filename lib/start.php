@@ -28,6 +28,7 @@ add_action( 'init', static function() {
 include_once CPS_HC_GEMS_DIR . '/lib/license.php';
 // * HUCOMMERCE END
 include_once CPS_HC_GEMS_DIR . '/lib/modules.php';
+include_once CPS_HC_GEMS_DIR . '/lib/helpers.php';
 if ( is_admin() ) {
 	include_once CPS_HC_GEMS_DIR . '/lib/admin.php';
 	include_once CPS_HC_GEMS_DIR . '/lib/settings.php';
