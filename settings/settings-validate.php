@@ -305,6 +305,20 @@ function cps_hc_gems_fields_validate( $input ) {
 
 	// * HUCOMMERCE END
 
+	// Filter out default values to reduce option size
+	$defaults = cps_hc_gems_get_defaults();
+	foreach ( $input as $key => $value ) {
+		// Remove translation keys with value 0 (disabled is the default)
+		if ( strpos( $key, 'translations-' ) === 0 && 0 === $value ) {
+			unset( $input[ $key ] );
+			continue;
+		}
+		// Remove keys that match their default values
+		if ( isset( $defaults[ $key ] ) && $defaults[ $key ] === $value ) {
+			unset( $input[ $key ] );
+		}
+	}
+
 	return $input;
 }
 

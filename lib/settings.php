@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 // Initialize settings
 include_once( CPS_HC_GEMS_DIR . '/settings/settings-select-options.php');
 include_once( CPS_HC_GEMS_DIR . '/settings/settings-functions.php');
+include_once( CPS_HC_GEMS_DIR . '/settings/settings-defaults.php' );
 include_once( CPS_HC_GEMS_DIR . '/settings/settings-validate.php');
 
 // Register settings
