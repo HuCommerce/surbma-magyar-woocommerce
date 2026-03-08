@@ -1,4 +1,5 @@
 .DS_Store
+/.cursor
 /translations/*/*/.gitkeep
 /translations/*/*/*.po
 /translations/*/*/*.pot
