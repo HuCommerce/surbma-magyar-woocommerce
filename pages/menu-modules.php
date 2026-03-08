@@ -788,6 +788,36 @@ function cps_hc_gems_render_menu_modules() {
 		</ul>
 		<div class="uk-text-center uk-margin-top"><input type="submit" class="uk-button uk-button-primary uk-button-large uk-width-large" value="<?php esc_attr_e( 'Save Changes', 'surbma-magyar-woocommerce' ); ?>" /></div>
 	</form>
+	<script>
+	document.addEventListener( 'DOMContentLoaded', function() {
+		var contentEl = document.getElementById( 'cps-hc-gems-modules' );
+		var navEl = document.getElementById( 'hc-modules-nav' );
+		if ( ! contentEl || ! navEl || typeof UIkit === 'undefined' ) { return; }
+
+		// Update URL and _wp_http_referer when tab changes
+		navEl.addEventListener( 'click', function( e ) {
+			var li = e.target.closest( '#hc-modules-nav > li' );
+			if ( ! li || li.classList.contains( 'uk-nav-header' ) ) { return; }
+			var items = navEl.querySelectorAll( ':scope > li' );
+			var index = Array.prototype.indexOf.call( items, li );
+			if ( index < 0 ) { return; }
+
+			var url = new URL( window.location.href );
+			if ( index > 0 ) {
+				url.searchParams.set( 'tab', index );
+			} else {
+				url.searchParams.delete( 'tab' );
+			}
+			history.replaceState( null, '', url.toString() );
+
+			var refererField = document.querySelector( 'input[name="_wp_http_referer"]' );
+			if ( refererField ) {
+				refererField.value = url.pathname + url.search;
+			}
+		});
+
+	});
+	</script>
 	<?php
 }
 

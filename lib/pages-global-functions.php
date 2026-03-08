@@ -15,7 +15,8 @@ function cps_hc_gems_page_modules_nav() {
 	<li class="<?php echo esc_attr( $active_modules_menu ); ?>"><a href="<?php echo esc_url( admin_url( 'admin.php?page=cps_hc_gems_modules' ) ); ?>"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> HuCommerce <?php esc_html_e( 'Modules', 'surbma-magyar-woocommerce' ); ?></a></li>
 	<?php if ( $modules_hook == $screen->base ) { ?>
 	<li class="cps-settings-subnav">
-		<ul class="uk-nav-sub uk-padding-remove-left uk-padding-remove-bottom" uk-switcher="connect: #cps-hc-gems-modules; animation: uk-animation-fade">
+		<?php $hc_active_tab = isset( $_GET['tab'] ) ? absint( $_GET['tab'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+		<ul id="hc-modules-nav" class="uk-nav-sub uk-padding-remove-left uk-padding-remove-bottom" uk-switcher="connect: #cps-hc-gems-modules; animation: uk-animation-fade; active: <?php echo esc_attr( $hc_active_tab ); ?>">
 			<li><a class="uk-offcanvas-close uk-modal-close-default"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: chevron-double-right; ratio: 1"></span> <?php esc_html_e( 'All modules', 'surbma-magyar-woocommerce' ); ?></a></li>
 			<li class="uk-nav-header"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: settings; ratio: 1"></span> <?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?>:</li>
 			<?php cps_hc_gems_module_nav_item( 'Check field formats (Masking)', 'maskcheckoutfields' ); ?>
