@@ -29,149 +29,7 @@ function cps_hc_gems_render_menu_modules() {
 	// Get the settings array
 	global $cps_hc_gems_options;
 
-	// Translation fixes
-	__( 'Add placeholder to this field', 'surbma-magyar-woocommerce' );
-	__( 'Masking with placeholder', 'surbma-magyar-woocommerce' );
-	__( 'The masking scheme will be displayed as a placeholder in the field. This will override the default placeholder.', 'surbma-magyar-woocommerce' );
-	__( 'Billing Tax field', 'surbma-magyar-woocommerce' );
-	__( 'Allowed formats: 00000000-0-00, 00000000000, HU00000000', 'surbma-magyar-woocommerce' );
-	__( 'Billing Postcode field', 'surbma-magyar-woocommerce' );
-	__( 'Allows only 4 numbers.', 'surbma-magyar-woocommerce' );
-	__( 'Billing Phone field', 'surbma-magyar-woocommerce' );
-	__( 'Shipping Postcode field', 'surbma-magyar-woocommerce' );
-	__( 'Billing City field', 'surbma-magyar-woocommerce' );
-	__( 'Allows only letters and space.', 'surbma-magyar-woocommerce' );
-	__( 'Billing Address field', 'surbma-magyar-woocommerce' );
-	__( 'Must have at least one letter, one number and one space in the address.', 'surbma-magyar-woocommerce' );
-	__( 'Shipping City field', 'surbma-magyar-woocommerce' );
-	__( 'Shipping Address field', 'surbma-magyar-woocommerce' );
-	__( 'Show lowest price on Product pages', 'surbma-magyar-woocommerce' );
-	__( 'It will show the lowest price from the product price history log automatically.', 'surbma-magyar-woocommerce' );
-	__( 'Text before the lowest price', 'surbma-magyar-woocommerce' );
-	__( 'Text when actual sale price is the only sale price recently', 'surbma-magyar-woocommerce' );
-	__( 'Actual sale price is our lowest price recently', 'surbma-magyar-woocommerce' );
-	__( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' );
-	__( 'Show the calculated discount on Product pages', 'surbma-magyar-woocommerce' );
-	__( 'It will show the discount, that is calculated from the lowest price automatically.', 'surbma-magyar-woocommerce' );
-	__( 'Text before the discount', 'surbma-magyar-woocommerce' );
-	__( 'Text before the discount, when actual sale price is the only sale price recently', 'surbma-magyar-woocommerce' );
-	__( 'Actual discount', 'surbma-magyar-woocommerce' );
-	__( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' );
-	__( 'Product subtitle', 'surbma-magyar-woocommerce' );
-	__( 'Remove image zoom on single product pages', 'surbma-magyar-woocommerce' );
-	__( 'Add to cart button on archive pages', 'surbma-magyar-woocommerce' );
-	__( 'Remove related products on single product pages', 'surbma-magyar-woocommerce' );
-	__( 'Number of products on archive pages', 'surbma-magyar-woocommerce' );
-	__( 'Products per row on archive pages', 'surbma-magyar-woocommerce' );
-	__( 'Number of upsell products on single product pages', 'surbma-magyar-woocommerce' );
-	__( 'Upsell products per row on single product pages', 'surbma-magyar-woocommerce' );
-	__( 'Number of related products on single product pages', 'surbma-magyar-woocommerce' );
-	__( 'Related products per row on single product pages', 'surbma-magyar-woocommerce' );
-	__( 'Conditional display of Company fields', 'surbma-magyar-woocommerce' );
-	__( 'Hide Company and Tax number fields, if billing country is not Hungary', 'surbma-magyar-woocommerce' );
-	__( 'Hide Country field', 'surbma-magyar-woocommerce' );
-	__( 'Hide Order notes field', 'surbma-magyar-woocommerce' );
-	__( 'Hide Additional information section', 'surbma-magyar-woocommerce' );
-	__( 'It will hide Order notes field also.', 'surbma-magyar-woocommerce' );
-	__( 'Inline Company and Tax number fields', 'surbma-magyar-woocommerce' );
-	__( 'Inline Postcode and City fields', 'surbma-magyar-woocommerce' );
-	__( 'Inline Phone and Email fields', 'surbma-magyar-woocommerce' );
-	__( 'Make Email field the first field', 'surbma-magyar-woocommerce' );
-	__( 'Custom submit button text', 'surbma-magyar-woocommerce' );
-	__( 'Button position on Cart page', 'surbma-magyar-woocommerce' );
-	__( 'Button position on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'Message text', 'surbma-magyar-woocommerce' );
-	__( 'Redirection URL after Login', 'surbma-magyar-woocommerce' );
-	__( 'Absolute URL path. If empty, then default WooCommerce redirection will be set.', 'surbma-magyar-woocommerce' );
-	__( 'Redirection URL after Registration', 'surbma-magyar-woocommerce' );
-	__( 'Show on Product listing pages', 'surbma-magyar-woocommerce' );
-	__( 'Show on Cart page', 'surbma-magyar-woocommerce' );
-	__( 'Show on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'Save customer IP address on registration', 'surbma-magyar-woocommerce' );
-	__( 'If enabled, the customer\'s IP address will be saved in profile after registration.', 'surbma-magyar-woocommerce' );
-	__( 'Privacy Policy checkbox text on Registration form', 'surbma-magyar-woocommerce' );
-	__( 'If empty, then this checkbox will not be displayed.', 'surbma-magyar-woocommerce' );
-	__( 'Legal confirmation checkboxes position on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'Section title on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'Title above the checkbox. If empty, then no title will be displayed.', 'surbma-magyar-woocommerce' );
-	__( 'Terms of Service checkbox text on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'Privacy Policy checkbox text on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'Custom 1 checkbox label on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'The label of the custom checkbox field. Used by the error message, if checkbox is not accepted. If empty, then no error message will be displayed.', 'surbma-magyar-woocommerce' );
-	__( 'Custom 1 checkbox text on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'Custom 2 checkbox label on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'Custom 2 checkbox text on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'Custom text before Place order button', 'surbma-magyar-woocommerce' );
-	__( 'This text will be displayed just above the Place order button on Checkout page. If empty, then no text will be displayed.', 'surbma-magyar-woocommerce' );
-	__( 'Custom text after Place order button', 'surbma-magyar-woocommerce' );
-	__( 'This text will be displayed just under the Place order button on Checkout page. If empty, then no text will be displayed.', 'surbma-magyar-woocommerce' );
-	__( 'Show Coupons in upper case', 'surbma-magyar-woocommerce' );
-	__( 'Show Coupons in upper case in both admin and front-end, instead of lower case, which is the default setting for WooCommerce.', 'surbma-magyar-woocommerce' );
-	__( 'Hide Coupon field on Cart page', 'surbma-magyar-woocommerce' );
-	__( 'It will hide the Coupon field completely from the Cart page.', 'surbma-magyar-woocommerce' );
-	__( 'Hide Coupon field on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'It will hide the Coupon field completely from the Checkout page.', 'surbma-magyar-woocommerce' );
-	__( 'Coupon field always visible on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'It will hide the Coupon field toggle and makes the Coupon field always visible for customers.', 'surbma-magyar-woocommerce' );
-	__( 'Reposition the Coupon field', 'surbma-magyar-woocommerce' );
-	__( 'Simple product', 'surbma-magyar-woocommerce' );
-	__( 'Grouped product', 'surbma-magyar-woocommerce' );
-	__( 'External/Affiliate product', 'surbma-magyar-woocommerce' );
-	__( 'Variable product', 'surbma-magyar-woocommerce' );
-	__( 'Subscription product (WooCommerce Subscriptions)', 'surbma-magyar-woocommerce' );
-	__( 'Variable subscription product (WooCommerce Subscriptions)', 'surbma-magyar-woocommerce' );
-	__( 'Bookable product (WooCommerce Bookings)', 'surbma-magyar-woocommerce' );
-	__( 'Shipping methods to hide, when free shipping is available', 'surbma-magyar-woocommerce' );
-	__( 'Name', 'surbma-magyar-woocommerce' );
-	__( 'Company', 'surbma-magyar-woocommerce' );
-	__( 'Headquarters', 'surbma-magyar-woocommerce' );
-	__( 'Company registration number', 'surbma-magyar-woocommerce' );
-	__( 'Address of store', 'surbma-magyar-woocommerce' );
-	__( 'Bank account number', 'surbma-magyar-woocommerce' );
-	__( 'Mobile phone number', 'surbma-magyar-woocommerce' );
-	__( 'Telephone number', 'surbma-magyar-woocommerce' );
-	__( 'About Us', 'surbma-magyar-woocommerce' );
-	__( 'SMTP port number', 'surbma-magyar-woocommerce' );
-	__( 'Encryption type', 'surbma-magyar-woocommerce' );
-	__( 'SMTP From email address', 'surbma-magyar-woocommerce' );
-	__( 'Optional', 'surbma-magyar-woocommerce' );
-	__( 'SMTP From name', 'surbma-magyar-woocommerce' );
-	__( 'The hostname of the mail server', 'surbma-magyar-woocommerce' );
-	__( 'Username to use for SMTP authentication', 'surbma-magyar-woocommerce' );
-	__( 'Password to use for SMTP authentication', 'surbma-magyar-woocommerce' );
-	__( 'Show the link for advanced statistics on Product pages', 'surbma-magyar-woocommerce' );
-	__( 'It will show a link also on the Product pages, where visitors can see a more detailed Product price history for the actual Product.', 'surbma-magyar-woocommerce' );
-	__( 'Text for the advanced statistics link', 'surbma-magyar-woocommerce' );
-	__( 'Show Empty Cart button on Cart page', 'surbma-magyar-woocommerce' );
-	__( 'Show Empty Cart button on Checkout page', 'surbma-magyar-woocommerce' );
-	__( 'Button text', 'surbma-magyar-woocommerce' );
-	__( 'Link text', 'surbma-magyar-woocommerce' );
-	__( 'Confirmation text', 'surbma-magyar-woocommerce' );
-	__( 'Empty cart', 'surbma-magyar-woocommerce' );
-	__( 'Changed your mind?', 'surbma-magyar-woocommerce' );
-	__( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' );
-	__( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' );
-	__( 'Minimum order amount', 'surbma-magyar-woocommerce' );
-	__( 'Users will need to spend this amount to get free shipping.', 'surbma-magyar-woocommerce' );
-	__( 'Apply minimum order rule before coupon discount', 'surbma-magyar-woocommerce' );
-	__( 'If checked, free shipping would be available based on pre-discount order amount.', 'surbma-magyar-woocommerce' );
-	__( 'Apply minimum order rule without tax', 'surbma-magyar-woocommerce' );
-	__( 'If checked, free shipping would be available based on order amount exclusive of tax.', 'surbma-magyar-woocommerce' );
-	__( 'Message before minimum order amount reached', 'surbma-magyar-woocommerce' );
-	__( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' );
-	__( 'Message when minimum order amount reached', 'surbma-magyar-woocommerce' );
-	__( 'If you would like to show a message, when minimum order amount reached. Leave empty if you do not want to show this notice to customers.', 'surbma-magyar-woocommerce' );
-	__( 'Make Custom 1 checkbox optional', 'surbma-magyar-woocommerce' );
-	__( 'Make Custom 2 checkbox optional', 'surbma-magyar-woocommerce' );
-	__( 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.', 'surbma-magyar-woocommerce' );
-	__( 'Activate module', 'surbma-magyar-woocommerce' );
-	__( 'Price prefix on Product page', 'surbma-magyar-woocommerce' );
-	__( 'Price suffix on Product page', 'surbma-magyar-woocommerce' );
-	__( 'Price prefix on Archive pages', 'surbma-magyar-woocommerce' );
-	__( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' );
-	__( 'Translations', 'surbma-magyar-woocommerce' );
 	?>
-
 	<form class="uk-form-stacked" method="post" action="options.php">
 		<?php settings_fields( 'cps_hc_gems_fields_options' ); ?>
 
@@ -291,11 +149,11 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_checkbox( 'Masking with placeholder', 'maskcheckoutfieldsplaceholder', 'The masking scheme will be displayed as a placeholder in the field. This will override the default placeholder.' ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Billing Tax field', 'maskbillingtaxfield', 'Allowed formats: 00000000-0-00, 00000000000, HU00000000', false, false, 1 ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Billing Postcode field', 'maskbillingpostcodefield', 'Allows only 4 numbers.', false, false, 1 ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Billing Phone field', 'maskbillingphonefield', false, false, false, 1 ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Shipping Postcode field', 'maskshippingpostcodefield', 'Allows only 4 numbers.', false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Masking with placeholder', 'surbma-magyar-woocommerce' ), 'maskcheckoutfieldsplaceholder', __( 'The masking scheme will be displayed as a placeholder in the field. This will override the default placeholder.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Billing Tax field', 'surbma-magyar-woocommerce' ), 'maskbillingtaxfield', __( 'Allowed formats: 00000000-0-00, 00000000000, HU00000000', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Billing Postcode field', 'surbma-magyar-woocommerce' ), 'maskbillingpostcodefield', __( 'Allows only 4 numbers.', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Billing Phone field', 'surbma-magyar-woocommerce' ), 'maskbillingphonefield', false, false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Shipping Postcode field', 'surbma-magyar-woocommerce' ), 'maskshippingpostcodefield', __( 'Allows only 4 numbers.', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
 				</ul>
 			</li>
 			<li>
@@ -305,13 +163,13 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_checkbox( 'Billing Tax field', 'validatebillingtaxfield', 'Allowed formats: 00000000-0-00, 00000000000, HU00000000', false, false, 1 ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Billing City field', 'validatebillingcityfield', 'Allows only letters and space.', false, false, 1 ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Billing Address field', 'validatebillingaddressfield', 'Must have at least one letter, one number and one space in the address.', false, false, 1 ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Billing Phone field', 'validatebillingphonefield', false, false, false, 1 ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Accept mobile only', 'validatecheckoutfields-mobileonly', false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Shipping City field', 'validateshippingcityfield', 'Allows only letters and space.', false, false, 1 ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Shipping Address field', 'validateshippingaddressfield', 'Must have at least one letter, one number and one space in the address.', false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Billing Tax field', 'surbma-magyar-woocommerce' ), 'validatebillingtaxfield', __( 'Allowed formats: 00000000-0-00, 00000000000, HU00000000', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Billing City field', 'surbma-magyar-woocommerce' ), 'validatebillingcityfield', __( 'Allows only letters and space.', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Billing Address field', 'surbma-magyar-woocommerce' ), 'validatebillingaddressfield', __( 'Must have at least one letter, one number and one space in the address.', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Billing Phone field', 'surbma-magyar-woocommerce' ), 'validatebillingphonefield', false, false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Accept mobile only', 'surbma-magyar-woocommerce' ), 'validatecheckoutfields-mobileonly', false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Shipping City field', 'surbma-magyar-woocommerce' ), 'validateshippingcityfield', __( 'Allows only letters and space.', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Shipping Address field', 'surbma-magyar-woocommerce' ), 'validateshippingaddressfield', __( 'Must have at least one letter, one number and one space in the address.', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
 				</ul>
 			</li>
 			<li>
@@ -321,14 +179,14 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_checkbox( 'Show on Product listing pages', 'freeshippingnoticeshoploop' ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Show on Cart page', 'freeshippingnoticecart' ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Show on Checkout page', 'freeshippingnoticecheckout' ); ?>
-					<?php cps_hc_gems_form_field_number( 'Minimum order amount', 'freeshippingminimumorderamount', '', 'Users will need to spend this amount to get free shipping.' ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Apply minimum order rule before coupon discount', 'freeshippingcouponsdiscounts', 'If checked, free shipping would be available based on pre-discount order amount.' ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Apply minimum order rule without tax', 'freeshippingwithouttax', 'If checked, free shipping would be available based on order amount exclusive of tax.' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Message before minimum order amount reached', 'freeshippingnoticemessage', 'The remaining amount to get FREE shipping' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Message when minimum order amount reached', 'freeshippingsuccessfulmessage', '', 'If you would like to show a message, when minimum order amount reached. Leave empty if you do not want to show this notice to customers.' ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Show on Product listing pages', 'surbma-magyar-woocommerce' ), 'freeshippingnoticeshoploop' ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Show on Cart page', 'surbma-magyar-woocommerce' ), 'freeshippingnoticecart' ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Show on Checkout page', 'surbma-magyar-woocommerce' ), 'freeshippingnoticecheckout' ); ?>
+					<?php cps_hc_gems_form_field_number( __( 'Minimum order amount', 'surbma-magyar-woocommerce' ), 'freeshippingminimumorderamount', '', __( 'Users will need to spend this amount to get free shipping.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Apply minimum order rule before coupon discount', 'surbma-magyar-woocommerce' ), 'freeshippingcouponsdiscounts', __( 'If checked, free shipping would be available based on pre-discount order amount.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Apply minimum order rule without tax', 'surbma-magyar-woocommerce' ), 'freeshippingwithouttax', __( 'If checked, free shipping would be available based on order amount exclusive of tax.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Message before minimum order amount reached', 'surbma-magyar-woocommerce' ), 'freeshippingnoticemessage', __( 'The remaining amount to get FREE shipping', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Message when minimum order amount reached', 'surbma-magyar-woocommerce' ), 'freeshippingsuccessfulmessage', '', __( 'If you would like to show a message, when minimum order amount reached. Leave empty if you do not want to show this notice to customers.', 'surbma-magyar-woocommerce' ) ); ?>
 				</ul>
 			</li>
 			<li>
@@ -338,12 +196,12 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_select( 'Button position on Cart page', 'emptycartbutton-cartpage', $emptycartbutton_cartpage_options, 'none' ); ?>
-					<?php cps_hc_gems_form_field_select( 'Button position on Checkout page', 'emptycartbutton-checkoutpage', $emptycartbutton_checkoutpage_options, 'none' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Button text', 'emptycartbutton-cartpagebuttontext', 'Empty cart' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Message text', 'emptycartbutton-checkoutpagemessage', 'Changed your mind?' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Link text', 'emptycartbutton-checkoutpagelinktext', 'Empty cart & continue shopping' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Confirmation text', 'emptycartbutton-confirmationtext', 'Are you sure you want to empty the Cart?' ); ?>
+					<?php cps_hc_gems_form_field_select( __( 'Button position on Cart page', 'surbma-magyar-woocommerce' ), 'emptycartbutton-cartpage', $emptycartbutton_cartpage_options, 'none' ); ?>
+					<?php cps_hc_gems_form_field_select( __( 'Button position on Checkout page', 'surbma-magyar-woocommerce' ), 'emptycartbutton-checkoutpage', $emptycartbutton_checkoutpage_options, 'none' ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Button text', 'surbma-magyar-woocommerce' ), 'emptycartbutton-cartpagebuttontext', __( 'Empty cart', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Message text', 'surbma-magyar-woocommerce' ), 'emptycartbutton-checkoutpagemessage', __( 'Changed your mind?', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Link text', 'surbma-magyar-woocommerce' ), 'emptycartbutton-checkoutpagelinktext', __( 'Empty cart & continue shopping', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Confirmation text', 'surbma-magyar-woocommerce' ), 'emptycartbutton-confirmationtext', __( 'Are you sure you want to empty the Cart?', 'surbma-magyar-woocommerce' ) ); ?>
 				</ul>
 			</li>
 			<li>
@@ -358,12 +216,12 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_checkbox( 'Show lowest price on Product pages', 'productpricehistory-showlowestprice', 'It will show the lowest price from the product price history log automatically.', true ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Text before the lowest price', 'productpricehistory-lowestpricetext', 'Our lowest price from previous term' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Text when actual sale price is the only sale price recently', 'productpricehistory-nolowestpricetext', 'Actual sale price is our lowest price recently' ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Show the calculated discount on Product pages', 'productpricehistory-showdiscount', 'It will show the discount, that is calculated from the lowest price automatically.', true ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Text before the discount', 'productpricehistory-discounttext', 'Current discount based on the lowest price' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Text before the discount, when actual sale price is the only sale price recently', 'productpricehistory-nolowestpricediscounttext', 'Actual discount', 'Show actual discount based on the regular price' ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Show lowest price on Product pages', 'surbma-magyar-woocommerce' ), 'productpricehistory-showlowestprice', __( 'It will show the lowest price from the product price history log automatically.', 'surbma-magyar-woocommerce' ), true ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Text before the lowest price', 'surbma-magyar-woocommerce' ), 'productpricehistory-lowestpricetext', __( 'Our lowest price from previous term', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Text when actual sale price is the only sale price recently', 'surbma-magyar-woocommerce' ), 'productpricehistory-nolowestpricetext', __( 'Actual sale price is our lowest price recently', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Show the calculated discount on Product pages', 'surbma-magyar-woocommerce' ), 'productpricehistory-showdiscount', __( 'It will show the discount, that is calculated from the lowest price automatically.', 'surbma-magyar-woocommerce' ), true ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Text before the discount', 'surbma-magyar-woocommerce' ), 'productpricehistory-discounttext', __( 'Current discount based on the lowest price', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Text before the discount, when actual sale price is the only sale price recently', 'surbma-magyar-woocommerce' ), 'productpricehistory-nolowestpricediscounttext', __( 'Actual discount', 'surbma-magyar-woocommerce' ), __( 'Show actual discount based on the regular price', 'surbma-magyar-woocommerce' ) ); ?>
 
 					<li>
 						<div class="uk-alert-primary cps-alert" uk-alert>
@@ -371,8 +229,8 @@ function cps_hc_gems_render_menu_modules() {
 						</div>
 					</li>
 
-					<?php cps_hc_gems_form_field_select( 'Show the link for advanced statistics on Product pages', 'productpricehistory-statisticslinkdisplay', $productpricehistory_statisticslinkdisplay_options, 'show', 'It will show a link also on the Product pages, where visitors can see a more detailed Product price history for the actual Product.', true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Text for the advanced statistics link', 'productpricehistory-statisticslinktext', 'Advanced statistics', false, true ); ?>
+					<?php cps_hc_gems_form_field_select( __( 'Show the link for advanced statistics on Product pages', 'surbma-magyar-woocommerce' ), 'productpricehistory-statisticslinkdisplay', $productpricehistory_statisticslinkdisplay_options, 'show', __( 'It will show a link also on the Product pages, where visitors can see a more detailed Product price history for the actual Product.', 'surbma-magyar-woocommerce' ), true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Text for the advanced statistics link', 'surbma-magyar-woocommerce' ), 'productpricehistory-statisticslinktext', __( 'Advanced statistics', 'surbma-magyar-woocommerce' ), false, true ); ?>
 
 					<li>
 						<label class="uk-form-label"><?php esc_html_e( 'Allowed HTML tags', 'surbma-magyar-woocommerce' ); ?></label>
@@ -392,10 +250,10 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_text( 'Price prefix on Product page', 'productpriceadditions-product-prefix' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Price suffix on Product page', 'productpriceadditions-product-suffix' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Price prefix on Archive pages', 'productpriceadditions-archive-prefix' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Price suffix on Archive pages', 'productpriceadditions-archive-suffix' ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Price prefix on Product page', 'surbma-magyar-woocommerce' ), 'productpriceadditions-product-prefix' ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Price suffix on Product page', 'surbma-magyar-woocommerce' ), 'productpriceadditions-product-suffix' ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Price prefix on Archive pages', 'surbma-magyar-woocommerce' ), 'productpriceadditions-archive-prefix' ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Price suffix on Archive pages', 'surbma-magyar-woocommerce' ), 'productpriceadditions-archive-suffix' ); ?>
 				</ul>
 			</li>
 			<li>
@@ -407,24 +265,24 @@ function cps_hc_gems_render_menu_modules() {
 				<ul class="cps-form-fields uk-list uk-list-divider">
 					<li><strong><?php esc_html_e( 'Registration settings', 'surbma-magyar-woocommerce' ); ?></strong></li>
 
-					<?php cps_hc_gems_form_field_checkbox( 'Save customer IP address on registration', 'regip', 'If enabled, the customer\'s IP address will be saved in profile after registration.' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Privacy Policy checkbox text on Registration form', 'regacceptpp', 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'If empty, then this checkbox will not be displayed.' ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Save customer IP address on registration', 'surbma-magyar-woocommerce' ), 'regip', __( 'If enabled, the customer\'s IP address will be saved in profile after registration.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Privacy Policy checkbox text on Registration form', 'surbma-magyar-woocommerce' ), 'regacceptpp', __( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' ), __( 'If empty, then this checkbox will not be displayed.', 'surbma-magyar-woocommerce' ) ); ?>
 
 					<li><strong><?php esc_html_e( 'Checkout settings', 'surbma-magyar-woocommerce' ); ?></strong></li>
 
-					<?php cps_hc_gems_form_field_select( 'Legal confirmation checkboxes position on Checkout page', 'legalconfirmationsposition', $legalconfirmationsposition_options, 'woocommerce_review_order_before_submit' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Section title on Checkout page', 'legalcheckouttitle', 'Legal confirmations', 'Title above the checkbox. If empty, then no title will be displayed.' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Section text on Checkout page', 'legalcheckouttext', '', 'General description of the legal section. If empty, then this text will not be displayed.' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Terms of Service checkbox text on Checkout page', 'accepttos', 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'If empty, then this checkbox will not be displayed.' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Privacy Policy checkbox text on Checkout page', 'acceptpp', 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'If empty, then this checkbox will not be displayed.' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Custom 1 checkbox label on Checkout page', 'acceptcustom1label', '', 'The label of the custom checkbox field. Used by the error message, if checkbox is not accepted. If empty, then no error message will be displayed.' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Custom 1 checkbox text on Checkout page', 'acceptcustom1', '', 'If empty, then this checkbox will not be displayed.' ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Make Custom 1 checkbox optional', 'legalcheckout-custom1optional', 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Custom 2 checkbox label on Checkout page', 'acceptcustom2label', '', 'The label of the custom checkbox field. Used by the error message, if checkbox is not accepted. If empty, then no error message will be displayed.' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Custom 2 checkbox text on Checkout page', 'acceptcustom2', '', 'If empty, then this checkbox will not be displayed.' ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Make Custom 2 checkbox optional', 'legalcheckout-custom2optional', 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Custom text before Place order button', 'beforeorderbuttonmessage', '', 'This text will be displayed just above the Place order button on Checkout page. If empty, then no text will be displayed.' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'Custom text after Place order button', 'afterorderbuttonmessage', '', 'This text will be displayed just under the Place order button on Checkout page. If empty, then no text will be displayed.' ); ?>
+					<?php cps_hc_gems_form_field_select( __( 'Legal confirmation checkboxes position on Checkout page', 'surbma-magyar-woocommerce' ), 'legalconfirmationsposition', $legalconfirmationsposition_options, 'woocommerce_review_order_before_submit' ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Section title on Checkout page', 'surbma-magyar-woocommerce' ), 'legalcheckouttitle', __( 'Legal confirmations', 'surbma-magyar-woocommerce' ), __( 'Title above the checkbox. If empty, then no title will be displayed.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Section text on Checkout page', 'surbma-magyar-woocommerce' ), 'legalcheckouttext', '', __( 'General description of the legal section. If empty, then this text will not be displayed.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Terms of Service checkbox text on Checkout page', 'surbma-magyar-woocommerce' ), 'accepttos', __( 'I\'ve read and accept the <a href="/tos/" target="_blank">Terms of Service</a>', 'surbma-magyar-woocommerce' ), __( 'If empty, then this checkbox will not be displayed.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Privacy Policy checkbox text on Checkout page', 'surbma-magyar-woocommerce' ), 'acceptpp', __( 'I\'ve read and accept the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>', 'surbma-magyar-woocommerce' ), __( 'If empty, then this checkbox will not be displayed.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Custom 1 checkbox label on Checkout page', 'surbma-magyar-woocommerce' ), 'acceptcustom1label', '', __( 'The label of the custom checkbox field. Used by the error message, if checkbox is not accepted. If empty, then no error message will be displayed.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Custom 1 checkbox text on Checkout page', 'surbma-magyar-woocommerce' ), 'acceptcustom1', '', __( 'If empty, then this checkbox will not be displayed.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Make Custom 1 checkbox optional', 'surbma-magyar-woocommerce' ), 'legalcheckout-custom1optional', __( 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Custom 2 checkbox label on Checkout page', 'surbma-magyar-woocommerce' ), 'acceptcustom2label', '', __( 'The label of the custom checkbox field. Used by the error message, if checkbox is not accepted. If empty, then no error message will be displayed.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Custom 2 checkbox text on Checkout page', 'surbma-magyar-woocommerce' ), 'acceptcustom2', '', __( 'If empty, then this checkbox will not be displayed.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Make Custom 2 checkbox optional', 'surbma-magyar-woocommerce' ), 'legalcheckout-custom2optional', __( 'If this option is enabled, the checkbox on the Checkout page won\'t be required anymore.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Custom text before Place order button', 'surbma-magyar-woocommerce' ), 'beforeorderbuttonmessage', '', __( 'This text will be displayed just above the Place order button on Checkout page. If empty, then no text will be displayed.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'Custom text after Place order button', 'surbma-magyar-woocommerce' ), 'afterorderbuttonmessage', '', __( 'This text will be displayed just under the Place order button on Checkout page. If empty, then no text will be displayed.', 'surbma-magyar-woocommerce' ) ); ?>
 
 					<li>
 						<label class="uk-form-label"><?php esc_html_e( 'Allowed HTML tags', 'surbma-magyar-woocommerce' ); ?></label>
@@ -452,17 +310,17 @@ function cps_hc_gems_render_menu_modules() {
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
 					<li><p><?php esc_html_e( 'Use these fields for your global information and show them with shortcodes. Your email will be safe from bots and your phone number will be active to call you with one tap on mobiles.', 'surbma-magyar-woocommerce' ); ?></p></li>
-					<?php cps_hc_gems_form_field_text( 'Name', 'globalinfoname', '', false, false, false, 'Shortcode: <code>[hc-nev]</code>' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Company', 'globalinfocompany', '', false, false, false, 'Shortcode: <code>[hc-ceg]</code>' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Headquarters', 'globalinfoheadquarters', '', false, false, false, 'Shortcode: <code>[hc-szekhely]</code>' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Tax number', 'globalinfotaxnumber', '', false, false, false, 'Shortcode: <code>[hc-adoszam]</code>' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Company registration number', 'globalinforegnumber', '', false, false, false, 'Shortcode: <code>[hc-cegjegyzekszam]</code>' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Address of store', 'globalinfoaddress', '', false, false, false, 'Shortcode: <code>[hc-cim]</code>' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Bank account number', 'globalinfobankaccount', '', false, false, false, 'Shortcode: <code>[hc-bankszamlaszam]</code>' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Mobile phone number', 'globalinfomobile', '', false, false, false, 'Shortcode: <code>[hc-mobiltelefon]</code>' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Telephone number', 'globalinfophone', '', false, false, false, 'Shortcode: <code>[hc-telefon]</code>' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Email', 'globalinfoemail', '', false, false, false, 'Shortcode: <code>[hc-email]</code>' ); ?>
-					<?php cps_hc_gems_form_field_textarea( 'About Us', 'globalinfoaboutus', '', false, false, false, ' | Shortcode: <code>[hc-rolunk]</code>' ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Name', 'surbma-magyar-woocommerce' ), 'globalinfoname', '', false, false, false, __( 'Shortcode: <code>[hc-nev]</code>', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Company', 'surbma-magyar-woocommerce' ), 'globalinfocompany', '', false, false, false, __( 'Shortcode: <code>[hc-ceg]</code>', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Headquarters', 'surbma-magyar-woocommerce' ), 'globalinfoheadquarters', '', false, false, false, __( 'Shortcode: <code>[hc-szekhely]</code>', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Tax number', 'surbma-magyar-woocommerce' ), 'globalinfotaxnumber', '', false, false, false, __( 'Shortcode: <code>[hc-adoszam]</code>', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Company registration number', 'surbma-magyar-woocommerce' ), 'globalinforegnumber', '', false, false, false, __( 'Shortcode: <code>[hc-cegjegyzekszam]</code>', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Address of store', 'surbma-magyar-woocommerce' ), 'globalinfoaddress', '', false, false, false, __( 'Shortcode: <code>[hc-cim]</code>', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Bank account number', 'surbma-magyar-woocommerce' ), 'globalinfobankaccount', '', false, false, false, __( 'Shortcode: <code>[hc-bankszamlaszam]</code>', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Mobile phone number', 'surbma-magyar-woocommerce' ), 'globalinfomobile', '', false, false, false, __( 'Shortcode: <code>[hc-mobiltelefon]</code>', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Telephone number', 'surbma-magyar-woocommerce' ), 'globalinfophone', '', false, false, false, __( 'Shortcode: <code>[hc-telefon]</code>', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Email', 'surbma-magyar-woocommerce' ), 'globalinfoemail', '', false, false, false, __( 'Shortcode: <code>[hc-email]</code>', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_textarea( __( 'About Us', 'surbma-magyar-woocommerce' ), 'globalinfoaboutus', '', false, false, false, __( ' | Shortcode: <code>[hc-rolunk]</code>', 'surbma-magyar-woocommerce' ) ); ?>
 
 					<li><strong><?php esc_html_e( 'Extra shortcodes', 'surbma-magyar-woocommerce' ); ?></strong></li>
 					<li class="uk-overflow-auto">
@@ -606,7 +464,7 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_checkbox( 'Add placeholder to this field', 'taxnumberplaceholder', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Add placeholder to this field', 'surbma-magyar-woocommerce' ), 'taxnumberplaceholder', false, false, true ); ?>
 				</ul>
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Disclaimer', 'surbma-magyar-woocommerce' ); ?></h5>
@@ -631,16 +489,16 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_checkbox( 'Product subtitle', 'productsubtitle', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Remove image zoom on single product pages', 'productsettings-removeimagezoom', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Add to cart button on archive pages', 'addtocartonarchive', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Remove related products on single product pages', 'norelatedproducts', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_number( 'Number of products on archive pages', 'productsnumber', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_number( 'Products per row on archive pages', 'productsperrow', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_number( 'Number of upsell products on single product pages', 'upsellproductsnumber', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_number( 'Upsell products per row on single product pages', 'upsellproductsperrow', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_number( 'Number of related products on single product pages', 'relatedproductsnumber', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_number( 'Related products per row on single product pages', 'relatedproductsperrow', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Product subtitle', 'surbma-magyar-woocommerce' ), 'productsubtitle', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Remove image zoom on single product pages', 'surbma-magyar-woocommerce' ), 'productsettings-removeimagezoom', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Add to cart button on archive pages', 'surbma-magyar-woocommerce' ), 'addtocartonarchive', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Remove related products on single product pages', 'surbma-magyar-woocommerce' ), 'norelatedproducts', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_number( __( 'Number of products on archive pages', 'surbma-magyar-woocommerce' ), 'productsnumber', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_number( __( 'Products per row on archive pages', 'surbma-magyar-woocommerce' ), 'productsperrow', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_number( __( 'Number of upsell products on single product pages', 'surbma-magyar-woocommerce' ), 'upsellproductsnumber', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_number( __( 'Upsell products per row on single product pages', 'surbma-magyar-woocommerce' ), 'upsellproductsperrow', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_number( __( 'Number of related products on single product pages', 'surbma-magyar-woocommerce' ), 'relatedproductsnumber', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_number( __( 'Related products per row on single product pages', 'surbma-magyar-woocommerce' ), 'relatedproductsperrow', '', false, false, true ); ?>
 				</ul>
 			</li>
 			<li>
@@ -648,16 +506,16 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_checkbox( 'Conditional display of Company fields', 'billingcompanycheck', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Hide Company and Tax number fields, if billing country is not Hungary', 'checkout-hidecompanytaxfields', false, true, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Hide Country field', 'nocountry', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Hide Order notes field', 'noordercomments', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Hide Additional information section', 'noadditionalinformation', 'It will hide Order notes field also.', false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Inline Company and Tax number fields', 'companytaxnumberpair', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Inline Postcode and City fields', 'postcodecitypair', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Inline Phone and Email fields', 'phoneemailpair', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Make Email field the first field', 'emailtothetop', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Custom submit button text', 'checkout-customsubmitbuttontext', '', false, true, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Conditional display of Company fields', 'surbma-magyar-woocommerce' ), 'billingcompanycheck', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Hide Company and Tax number fields, if billing country is not Hungary', 'surbma-magyar-woocommerce' ), 'checkout-hidecompanytaxfields', false, true, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Hide Country field', 'surbma-magyar-woocommerce' ), 'nocountry', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Hide Order notes field', 'surbma-magyar-woocommerce' ), 'noordercomments', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Hide Additional information section', 'surbma-magyar-woocommerce' ), 'noadditionalinformation', __( 'It will hide Order notes field also.', 'surbma-magyar-woocommerce' ), false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Inline Company and Tax number fields', 'surbma-magyar-woocommerce' ), 'companytaxnumberpair', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Inline Postcode and City fields', 'surbma-magyar-woocommerce' ), 'postcodecitypair', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Inline Phone and Email fields', 'surbma-magyar-woocommerce' ), 'phoneemailpair', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Make Email field the first field', 'surbma-magyar-woocommerce' ), 'emailtothetop', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Custom submit button text', 'surbma-magyar-woocommerce' ), 'checkout-customsubmitbuttontext', '', false, true, true ); ?>
 				</ul>
 			</li>
 			<li>
@@ -673,9 +531,9 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_select( 'Button position on Cart page', 'returntoshopcartposition', $returntoshopcartposition_options, 'cartactions', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_select( 'Button position on Checkout page', 'returntoshopcheckoutposition', $returntoshopcheckoutposition_options, 'nocheckout', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Message text', 'returntoshopmessage', 'Would you like to continue shopping?', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_select( __( 'Button position on Cart page', 'surbma-magyar-woocommerce' ), 'returntoshopcartposition', $returntoshopcartposition_options, 'cartactions', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_select( __( 'Button position on Checkout page', 'surbma-magyar-woocommerce' ), 'returntoshopcheckoutposition', $returntoshopcheckoutposition_options, 'nocheckout', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Message text', 'surbma-magyar-woocommerce' ), 'returntoshopmessage', __( 'Would you like to continue shopping?', 'surbma-magyar-woocommerce' ), false, false, true ); ?>
 				</ul>
 			</li>
 			<li>
@@ -683,8 +541,8 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_text( 'Redirection URL after Login', 'loginredirecturl', '', 'Absolute URL path. If empty, then default WooCommerce redirection will be set.', false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Redirection URL after Registration', 'registrationredirecturl', '', 'Absolute URL path. If empty, then default WooCommerce redirection will be set.', false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Redirection URL after Login', 'surbma-magyar-woocommerce' ), 'loginredirecturl', '', __( 'Absolute URL path. If empty, then default WooCommerce redirection will be set.', 'surbma-magyar-woocommerce' ), false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Redirection URL after Registration', 'surbma-magyar-woocommerce' ), 'registrationredirecturl', '', __( 'Absolute URL path. If empty, then default WooCommerce redirection will be set.', 'surbma-magyar-woocommerce' ), false, true ); ?>
 				</ul>
 			</li>
 			<li>
@@ -692,11 +550,11 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_checkbox( 'Show Coupons in upper case', 'couponuppercase', 'Show Coupons in upper case in both admin and front-end, instead of lower case, which is the default setting for WooCommerce.', false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Hide Coupon field on Cart page', 'couponfieldhiddenoncart', 'It will hide the Coupon field completely from the Cart page.', false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Hide Coupon field on Checkout page', 'couponfieldhiddenoncheckout', 'It will hide the Coupon field completely from the Checkout page.', false, true ); ?>
-					<?php cps_hc_gems_form_field_checkbox( 'Coupon field always visible on Checkout page', 'couponfieldalwaysvisible', 'It will hide the Coupon field toggle and makes the Coupon field always visible for customers.', false, true ); ?>
-					<?php cps_hc_gems_form_field_select( 'Reposition the Coupon field', 'couponfieldposition', $couponfieldposition_options, 'beforecheckoutform', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Show Coupons in upper case', 'surbma-magyar-woocommerce' ), 'couponuppercase', __( 'Show Coupons in upper case in both admin and front-end, instead of lower case, which is the default setting for WooCommerce.', 'surbma-magyar-woocommerce' ), false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Hide Coupon field on Cart page', 'surbma-magyar-woocommerce' ), 'couponfieldhiddenoncart', __( 'It will hide the Coupon field completely from the Cart page.', 'surbma-magyar-woocommerce' ), false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Hide Coupon field on Checkout page', 'surbma-magyar-woocommerce' ), 'couponfieldhiddenoncheckout', __( 'It will hide the Coupon field completely from the Checkout page.', 'surbma-magyar-woocommerce' ), false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Coupon field always visible on Checkout page', 'surbma-magyar-woocommerce' ), 'couponfieldalwaysvisible', __( 'It will hide the Coupon field toggle and makes the Coupon field always visible for customers.', 'surbma-magyar-woocommerce' ), false, true ); ?>
+					<?php cps_hc_gems_form_field_select( __( 'Reposition the Coupon field', 'surbma-magyar-woocommerce' ), 'couponfieldposition', $couponfieldposition_options, 'beforecheckoutform', false, false, true ); ?>
 				</ul>
 			</li>
 			<li>
@@ -714,22 +572,22 @@ function cps_hc_gems_render_menu_modules() {
 				<ul class="cps-form-fields uk-list uk-list-divider">
 					<li><strong><?php esc_html_e( 'Single product pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
 					<li><p><?php esc_html_e( 'Give your custom texts to your Add to cart buttons on the product pages. You can set custom texts for different product types. If you leave them empty, the button texts will fall back to default WooCommerce texts.', 'surbma-magyar-woocommerce' ); ?></p></li>
-					<?php cps_hc_gems_form_field_text( 'Simple product', 'custom-addtocart-button-single-simple', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Grouped product', 'custom-addtocart-button-single-grouped', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-single-external', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Variable product', 'custom-addtocart-button-single-variable', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-subscription', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Variable subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-single-variable-subscription', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Bookable product (WooCommerce Bookings)', 'custom-addtocart-button-single-booking', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Simple product', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-single-simple', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Grouped product', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-single-grouped', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'External/Affiliate product', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-single-external', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Variable product', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-single-variable', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Subscription product (WooCommerce Subscriptions)', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-single-subscription', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Variable subscription product (WooCommerce Subscriptions)', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-single-variable-subscription', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Bookable product (WooCommerce Bookings)', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-single-booking', '', false, false, true ); ?>
 					<li><strong><?php esc_html_e( 'Product archive pages', 'surbma-magyar-woocommerce' ); ?></strong></li>
 					<li><p><?php esc_html_e( 'Give your custom texts to your Add to cart buttons on the product archive pages. You can set custom texts for different product types. If you leave them empty, the button texts will inherit texts from single product settings or fall back to default WooCommerce texts, if those fields are also empty.', 'surbma-magyar-woocommerce' ); ?></p></li>
-					<?php cps_hc_gems_form_field_text( 'Simple product', 'custom-addtocart-button-archive-simple', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Grouped product', 'custom-addtocart-button-archive-grouped', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'External/Affiliate product', 'custom-addtocart-button-archive-external', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Variable product', 'custom-addtocart-button-archive-variable', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-archive-subscription', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Variable subscription product (WooCommerce Subscriptions)', 'custom-addtocart-button-archive-variable-subscription', '', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'Bookable product (WooCommerce Bookings)', 'custom-addtocart-button-archive-booking', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Simple product', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-archive-simple', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Grouped product', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-archive-grouped', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'External/Affiliate product', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-archive-external', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Variable product', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-archive-variable', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Subscription product (WooCommerce Subscriptions)', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-archive-subscription', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Variable subscription product (WooCommerce Subscriptions)', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-archive-variable-subscription', '', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Bookable product (WooCommerce Bookings)', 'surbma-magyar-woocommerce' ), 'custom-addtocart-button-archive-booking', '', false, false, true ); ?>
 				</ul>
 			</li>
 			<li>
@@ -737,8 +595,8 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_checkbox( 'Hide Shipping methods on Cart page', 'hideshippingmethods-cart', 'It will hide all Shipping methods on the Cart page.', true, true ); ?>
-					<?php cps_hc_gems_form_field_select( 'Shipping methods to hide, when free shipping is available', 'shippingmethodstohide', $shippingmethodstohide_options, 'showall', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Hide Shipping methods on Cart page', 'surbma-magyar-woocommerce' ), 'hideshippingmethods-cart', __( 'It will hide all Shipping methods on the Cart page.', 'surbma-magyar-woocommerce' ), true, true ); ?>
+					<?php cps_hc_gems_form_field_select( __( 'Shipping methods to hide, when free shipping is available', 'surbma-magyar-woocommerce' ), 'shippingmethodstohide', $shippingmethodstohide_options, 'showall', false, false, true ); ?>
 					<li>
 						<div class="uk-alert-primary cps-alert" uk-alert>
 							<p><strong><?php esc_html_e( 'Compatible shipping plugins (Pickup methods)', 'surbma-magyar-woocommerce' ); ?>:</strong> <br>Hungarian Pickup Points for WooCommerce, Pont shipping for Woocommerce (Szathmári), Foxpost, Foxpost Parcel, Postapont</p>
@@ -759,13 +617,13 @@ function cps_hc_gems_render_menu_modules() {
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
 					<li><p><?php esc_html_e( 'SMTP service is a must have for all WooCommerce webshops, as it makes your transactional email delivery more stable and secure. Register a new account at a 3rd party SMTP service and set your credentials here to enable this feature.', 'surbma-magyar-woocommerce' ); ?></p></li>
-					<?php cps_hc_gems_form_field_select( 'SMTP port number', 'smtpport', $smtpport_options, '587', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_select( 'Encryption type', 'smtpsecure', $smtpsecure_options, 'default', false, false, true ); ?>
-					<?php cps_hc_gems_form_field_text( 'SMTP From email address', 'smtpfrom', '', false, false, true, 'Optional' ); ?>
-					<?php cps_hc_gems_form_field_text( 'SMTP From name', 'smtpfromname', '', false, false, true, 'Optional' ); ?>
-					<?php cps_hc_gems_form_field_text( 'The hostname of the mail server', 'smtphost', '', false, false, true, false, 'world' ); ?>
-					<?php cps_hc_gems_form_field_text( 'Username to use for SMTP authentication', 'smtpuser', '', false, false, true, false, 'user' ); ?>
-					<?php cps_hc_gems_form_field_password( 'Password to use for SMTP authentication', 'smtppassword', '', false, false, true, false, 'lock' ); ?>
+					<?php cps_hc_gems_form_field_select( __( 'SMTP port number', 'surbma-magyar-woocommerce' ), 'smtpport', $smtpport_options, '587', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_select( __( 'Encryption type', 'surbma-magyar-woocommerce' ), 'smtpsecure', $smtpsecure_options, 'default', false, false, true ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'SMTP From email address', 'surbma-magyar-woocommerce' ), 'smtpfrom', '', false, false, true, __( 'Optional', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'SMTP From name', 'surbma-magyar-woocommerce' ), 'smtpfromname', '', false, false, true, __( 'Optional', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'The hostname of the mail server', 'surbma-magyar-woocommerce' ), 'smtphost', '', false, false, true, false, 'world' ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Username to use for SMTP authentication', 'surbma-magyar-woocommerce' ), 'smtpuser', '', false, false, true, false, 'user' ); ?>
+					<?php cps_hc_gems_form_field_password( __( 'Password to use for SMTP authentication', 'surbma-magyar-woocommerce' ), 'smtppassword', '', false, false, true, false, 'lock' ); ?>
 				</ul>
 			</li>
 			<li>
@@ -773,7 +631,7 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_select( 'Product price display', 'catalogmode-productpricedisplay', $catalogmode_productpricedisplay_options, 'none', false, true, true ); ?>
+					<?php cps_hc_gems_form_field_select( __( 'Product price display', 'surbma-magyar-woocommerce' ), 'catalogmode-productpricedisplay', $catalogmode_productpricedisplay_options, 'none', false, true, true ); ?>
 				</ul>
 			</li>
 		</ul>

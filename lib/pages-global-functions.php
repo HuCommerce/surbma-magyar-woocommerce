@@ -19,34 +19,34 @@ function cps_hc_gems_page_modules_nav() {
 		<ul id="hc-modules-nav" class="uk-nav-sub uk-padding-remove-left uk-padding-remove-bottom" uk-switcher="connect: #cps-hc-gems-modules; animation: uk-animation-fade; active: <?php echo esc_attr( $hc_active_tab ); ?>">
 			<li><a class="uk-offcanvas-close uk-modal-close-default"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: chevron-double-right; ratio: 1"></span> <?php esc_html_e( 'All modules', 'surbma-magyar-woocommerce' ); ?></a></li>
 			<li class="uk-nav-header"><span class="uk-margin-small-right" style="width: 100%;max-width: 20px;" uk-icon="icon: settings; ratio: 1"></span> <?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?>:</li>
-			<?php cps_hc_gems_module_nav_item( 'Check field formats (Masking)', 'maskcheckoutfields' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Check field values', 'validatecheckoutfields' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Free shipping notification', 'freeshippingnotice' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Empty Cart button', 'module-emptycartbutton' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Product price history', 'module-productpricehistory' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Product price additions', 'module-productpriceadditions' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Legal compliance (GDPR, CCPA, ePrivacy)', 'legalcheckout' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Limit Payment Methods', 'module-limitpaymentmethods' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Global Information', 'module-globalinfo' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Translations', 'module-translations' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Fixes for Hungarian language', 'huformatfix' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Tax number field', 'taxnumber' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Hungarian translation fixes', 'translations' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Hide County field if Country is Hungary', 'nocounty' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Autofill City after Postcode is given', 'autofillcity' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Product customizations', 'module-productsettings' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Checkout page customizations', 'module-checkout' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Plus/minus quantity buttons', 'plusminus' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Automatic Cart update', 'updatecart' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Continue shopping buttons', 'returntoshop' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Login and registration redirection', 'loginregistrationredirect' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Coupon field customizations', 'module-coupon' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Redirect Cart page to Checkout page', 'module-redirectcart' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'One product per purchase', 'module-oneproductincart' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Custom Add To Cart Button', 'module-custom-addtocart-button' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Hide shipping methods', 'module-hideshippingmethods' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'SMTP service', 'module-smtp' ); ?>
-			<?php cps_hc_gems_module_nav_item( 'Catalog mode', 'module-catalogmode' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Check field formats (Masking)', 'surbma-magyar-woocommerce' ), 'maskcheckoutfields' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Check field values', 'surbma-magyar-woocommerce' ), 'validatecheckoutfields' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Free shipping notification', 'surbma-magyar-woocommerce' ), 'freeshippingnotice' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Empty Cart button', 'surbma-magyar-woocommerce' ), 'module-emptycartbutton' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Product price history', 'surbma-magyar-woocommerce' ), 'module-productpricehistory' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Product price additions', 'surbma-magyar-woocommerce' ), 'module-productpriceadditions' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Legal compliance (GDPR, CCPA, ePrivacy)', 'surbma-magyar-woocommerce' ), 'legalcheckout' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Limit Payment Methods', 'surbma-magyar-woocommerce' ), 'module-limitpaymentmethods' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Global Information', 'surbma-magyar-woocommerce' ), 'module-globalinfo' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Translations', 'surbma-magyar-woocommerce' ), 'module-translations' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Fixes for Hungarian language', 'surbma-magyar-woocommerce' ), 'huformatfix' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Tax number field', 'surbma-magyar-woocommerce' ), 'taxnumber' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Hungarian translation fixes', 'surbma-magyar-woocommerce' ), 'translations' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Hide County field if Country is Hungary', 'surbma-magyar-woocommerce' ), 'nocounty' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Autofill City after Postcode is given', 'surbma-magyar-woocommerce' ), 'autofillcity' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Product customizations', 'surbma-magyar-woocommerce' ), 'module-productsettings' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Checkout page customizations', 'surbma-magyar-woocommerce' ), 'module-checkout' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Plus/minus quantity buttons', 'surbma-magyar-woocommerce' ), 'plusminus' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Automatic Cart update', 'surbma-magyar-woocommerce' ), 'updatecart' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Continue shopping buttons', 'surbma-magyar-woocommerce' ), 'returntoshop' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Login and registration redirection', 'surbma-magyar-woocommerce' ), 'loginregistrationredirect' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Coupon field customizations', 'surbma-magyar-woocommerce' ), 'module-coupon' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Redirect Cart page to Checkout page', 'surbma-magyar-woocommerce' ), 'module-redirectcart' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'One product per purchase', 'surbma-magyar-woocommerce' ), 'module-oneproductincart' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Custom Add To Cart Button', 'surbma-magyar-woocommerce' ), 'module-custom-addtocart-button' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Hide shipping methods', 'surbma-magyar-woocommerce' ), 'module-hideshippingmethods' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'SMTP service', 'surbma-magyar-woocommerce' ), 'module-smtp' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Catalog mode', 'surbma-magyar-woocommerce' ), 'module-catalogmode' ); ?>
 		</ul>
 	</li>
 	<?php } ?>

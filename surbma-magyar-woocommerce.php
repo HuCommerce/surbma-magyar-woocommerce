@@ -4,7 +4,7 @@
  * Plugin URI: https://www.hucommerce.hu/
  * Description: Hasznos kiegészítések és javítások a magyar WooCommerce webáruházakhoz.
  * 
- * Version: 2026.1.1
+ * Version: 2026.1.2
  * 
  * Author: HuCommerce.hu
  * Author URI: https://www.hucommerce.hu/
