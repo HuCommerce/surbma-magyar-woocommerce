@@ -60,18 +60,6 @@ function cps_hc_gems_get_pages_config() {
 			'renderer' => 'cps_hc_gems_render_menu_news',
 			'status' => 'inactive',
 		],
-		'license' => [
-			'title' => __( 'License management', 'surbma-magyar-woocommerce' ),
-			'page_title' => __( 'HuCommerce License Management', 'surbma-magyar-woocommerce' ),
-			'card_title' => __( 'License management', 'surbma-magyar-woocommerce' ),
-			'description' => 'HuCommerce Pro aktiválása az API kulccsal.',
-			'icon' => 'lock',
-			'icon_dynamic' => true,
-			'menu_slug' => 'cps_hc_gems_license',
-			'menu_file' => 'menu-license.php',
-			'renderer' => 'cps_hc_gems_render_menu_license',
-			'status' => 'active',
-		],
 		'information' => [
 			'title' => __( 'Information', 'surbma-magyar-woocommerce' ),
 			'page_title' => __( 'HuCommerce Information', 'surbma-magyar-woocommerce' ),
@@ -124,12 +112,6 @@ function cps_hc_gems_get_visible_pages() {
  * @return string The icon name
  */
 function cps_hc_gems_get_page_icon( $page_config ) {
-	// Handle dynamic license icon
-	if ( isset( $page_config['icon_dynamic'] ) && $page_config['icon_dynamic'] ) {
-		if ( $page_config['menu_slug'] === 'cps_hc_gems_license' ) {
-			return 'active' === HC_LICENSE ? 'unlock' : 'lock';
-		}
-	}
 	return $page_config['icon'];
 }
 

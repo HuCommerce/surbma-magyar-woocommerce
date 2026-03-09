@@ -417,22 +417,12 @@ add_action( 'init', static function() {
 
 				case 'pro_hu':
 				case 'pro':
-					// Pro modules: check HC_LICENSE first
-					if ( 'active' == HC_LICENSE ) {
-						$module_value = $cps_hc_gems_options[ $module_config['option_key'] ] ?? 0;
-					} else {
-						$module_value = 0;
-					}
+					$module_value = $cps_hc_gems_options[ $module_config['option_key'] ] ?? 0;
 					break;
 
 				case 'legacy_hu':
 				case 'legacy':
-					// Legacy modules: check premium OR legacy user condition
-					if ( 'active' == HC_LICENSE || !isset( $cps_hc_gems_options['brandnewuser'] ) || ( $cps_hc_gems_options['legacyuser'] ?? 0 ) == 1 ) {
-						$module_value = $cps_hc_gems_options[ $module_config['option_key'] ] ?? 0;
-					} else {
-						$module_value = 0;
-					}
+					$module_value = $cps_hc_gems_options[ $module_config['option_key'] ] ?? 0;
 					break;
 			}
 		}

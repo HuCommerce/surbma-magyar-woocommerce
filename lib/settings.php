@@ -12,5 +12,4 @@ include_once( CPS_HC_GEMS_DIR . '/settings/settings-validate.php');
 // Register settings
 add_action( 'admin_init', static function() {
 	register_setting( 'cps_hc_gems_fields_options', 'surbma_hc_fields', 'cps_hc_gems_fields_validate' );
-	register_setting( 'cps_hc_gems_license_options', 'surbma_hc_license', 'cps_hc_gems_license_validate' );
 } );

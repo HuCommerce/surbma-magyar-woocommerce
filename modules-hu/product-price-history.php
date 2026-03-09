@@ -325,11 +325,6 @@ if ( 1 == $module_productpricehistoryValue ) :
 
 	// Product price history display
 	add_shortcode( 'hc-termekartortenet', static function( $atts ) {
-		// Abort function if HuCommerce Pro is not active
-		if ( 'active' != HC_LICENSE ) {
-			return;
-		}
-
 		extract( shortcode_atts( array(
 			'product_id' => ''
 		), $atts ) );

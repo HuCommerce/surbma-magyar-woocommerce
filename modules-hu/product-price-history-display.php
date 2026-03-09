@@ -9,7 +9,6 @@ $wp_root = dirname( dirname( __FILE__ ) );
 require_once( $wp_root . "../../../../wp-load.php" );
 
 // if ( ! current_user_can( 'manage_options' ) ) die();
-if ( ! defined( 'HC_LICENSE' ) || 'active' != HC_LICENSE ) die();
 
 $product_id = isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $product = wc_get_product( $product_id );

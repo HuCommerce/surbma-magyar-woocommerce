@@ -64,7 +64,7 @@ function cps_hc_gems_form_field_checkbox( $field_label, $field_option, $field_in
 	global $cps_hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
-	$disabled = $field_free || 'active' == HC_LICENSE ? '' : ' disabled';
+	$disabled = '';
 	$new = $field_new ? ' <span class="uk-badge">' . __( 'New', 'surbma-magyar-woocommerce' ) . '</span>' : '';
 
 	$allowed_html = array(
@@ -126,7 +126,7 @@ function cps_hc_gems_form_field_select( $field_label, $field_option, $field_opti
 	global $cps_hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
-	$disabled = $field_free || 'active' == HC_LICENSE ? '' : ' disabled';
+	$disabled = '';
 	$new = $field_new ? ' <span class="uk-badge">' . __( 'New', 'surbma-magyar-woocommerce' ) . '</span>' : '';
 
 	$allowed_html = array(
@@ -182,7 +182,7 @@ function cps_hc_gems_form_field_text( $field_label, $field_option, $field_defaul
 	global $cps_hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
-	$disabled = $field_free || 'active' == HC_LICENSE ? '' : ' disabled';
+	$disabled = '';
 	$new = $field_new ? ' <span class="uk-badge">' . __( 'New', 'surbma-magyar-woocommerce' ) . '</span>' : '';
 
 	$allowed_html = array(
@@ -232,7 +232,7 @@ function cps_hc_gems_form_field_number( $field_label, $field_option, $field_defa
 	global $cps_hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
-	$disabled = $field_free || 'active' == HC_LICENSE ? '' : ' disabled';
+	$disabled = '';
 	$new = $field_new ? ' <span class="uk-badge">' . __( 'New', 'surbma-magyar-woocommerce' ) . '</span>' : '';
 
 	$allowed_html = array(
@@ -282,7 +282,7 @@ function cps_hc_gems_form_field_password( $field_label, $field_option, $field_de
 	global $cps_hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
-	$disabled = $field_free || 'active' == HC_LICENSE ? '' : ' disabled';
+	$disabled = '';
 	$new = $field_new ? ' <span class="uk-badge">' . __( 'New', 'surbma-magyar-woocommerce' ) . '</span>' : '';
 
 	$allowed_html = array(
@@ -332,7 +332,7 @@ function cps_hc_gems_form_field_textarea( $field_label, $field_option, $field_de
 	global $cps_hc_gems_options;
 
 	$info = $field_info ? ' <span uk-icon="icon: info; ratio: 1" uk-tooltip="title: ' . __( $field_info, 'surbma-magyar-woocommerce' ) . '; pos: right"></span>' : ''; // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
-	$disabled = $field_free || 'active' == HC_LICENSE ? '' : ' disabled';
+	$disabled = '';
 	$new = $field_new ? ' <span class="uk-badge">' . __( 'New', 'surbma-magyar-woocommerce' ) . '</span>' : '';
 
 	$allowed_html = array(

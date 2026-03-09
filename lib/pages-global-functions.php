@@ -97,7 +97,7 @@ function cps_hc_gems_page_license_nav() {
 	$page_hooks = $GLOBALS['cps_hc_gems_page_hooks'] ?? [];
 	$pages = cps_hc_gems_get_pages_config();
 
-	$nav_pages = ['license', 'information'];
+	$nav_pages = ['information'];
 
 	foreach ( $nav_pages as $page_key ) {
 		if ( ! isset( $pages[ $page_key ] ) || $pages[ $page_key ]['status'] !== 'active' ) {
@@ -126,11 +126,7 @@ function cps_hc_gems_page_social_nav() {
 
 	?>
 	<li><a class="uk-inline" href="https://hucommerce.us20.list-manage.com/subscribe?u=8e6a039140be449ecebeb5264&id=2f5c70bc50&EMAIL=<?php echo urlencode( $current_user->user_email ); ?>&FNAME=<?php echo urlencode( $current_user->user_firstname ); ?>&LNAME=<?php echo urlencode( $current_user->user_lastname ); ?>&URL=<?php echo urlencode( $home_url ); ?>" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: mail"></span> <?php esc_html_e( 'Newsletter', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
-	<?php if ( 'free' != HC_LICENSE ) { ?>
-	<li><a class="uk-inline" href="#" onclick="Beacon('open'); Beacon('navigate', '/ask/message')"><span class="uk-margin-small-right" uk-icon="icon: lifesaver"></span> <?php esc_html_e( 'Support', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
-	<?php } else { ?>
 	<li><a class="uk-inline" href="https://www.hucommerce.hu/ugyfelszolgalat/" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: lifesaver"></span> <?php esc_html_e( 'Support', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
-	<?php } ?>
 	<li><a class="uk-inline" href="https://www.facebook.com/groups/HuCommerce.hu/" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: facebook"></span> <?php esc_html_e( 'Facebook group', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
 	<li><a class="uk-inline" href="https://hu.wordpress.org/plugins/surbma-magyar-woocommerce/" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: wordpress"></span> <?php esc_html_e( 'WordPress.org', 'surbma-magyar-woocommerce' ); ?> <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
 	<li><a class="uk-inline" href="https://www.hucommerce.hu" target="_blank"><span class="uk-margin-small-right" uk-icon="icon: world"></span> HuCommerce.hu <span class="uk-position-center-right" uk-icon="icon: sign-out; ratio: .8"></span></a></li>
@@ -148,10 +144,6 @@ function cps_hc_gems_page_header() {
 
 // Notifications
 function cps_hc_gems_page_notifications() {
-	$screen = get_current_screen();
-	$page_hooks = $GLOBALS['cps_hc_gems_page_hooks'] ?? [];
-	$license_hook = $page_hooks['license'] ?? '';
-
 	?>
 	<?php if ( isset( $_GET['settings-updated'] ) && true == $_GET['settings-updated'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
 		<div class="updated notice is-dismissible">
@@ -171,33 +163,10 @@ function cps_hc_gems_page_notifications() {
 		</div>
 	<?php } ?>
 
-	<?php // Free notification ?>
-	<?php if ( 'free' == HC_LICENSE && $license_hook != $screen->base ) { ?>
-		<div class="notice notice-info is-dismissible">
-			<p><strong class="uk-text-uppercase">Figyelem!</strong> Nézd meg, mivel nyújt többet a <a href="https://www.hucommerce.hu/bovitmenyek/hucommerce/" target="_blank">HuCommerce Pro</a> verzió!</p>
-		</div>
-	<?php } ?>
-
-	<?php // Inactive notification ?>
-	<?php if ( 'inactive' == HC_LICENSE ) { ?>
-		<div class="notice notice-error is-dismissible">
-			<p><strong class="uk-text-uppercase">Még nem aktivált HuCommerce Pro licensz kulcs!</strong> <br>A megadott licensz kulcsod nincs aktiválva. A <strong>"HuCommerce → Licensz kezelés"</strong> menüpont alatt tudod a megadott licensz kulcsot frissíteni vagy újra aktiválni.</p>
-		</div>
-	<?php } ?>
-
-	<?php // Invalid notification ?>
-	<?php if ( 'invalid' == HC_LICENSE ) { ?>
-		<div class="notice notice-error is-dismissible">
-			<p><strong class="uk-text-uppercase">Érvénytelen vagy lejárt HuCommerce Pro licensz kulcs!</strong> <br>Kérlek ellenőrizd az emailben küldött licensz kulcsot és add meg újra vagy frissítsd és aktiváld újra a <strong>"HuCommerce → Licensz kezelés"</strong> menüpont alatt!</p>
-		</div>
-	<?php } ?>
-
-	<?php // Expired notification ?>
-	<?php if ( 'expired' == HC_LICENSE ) { ?>
-		<div class="notice notice-error is-dismissible">
-			<p><strong class="uk-text-uppercase">Lejárt HuCommerce Pro licensz kulcs!</strong> <br>Amennyiben szeretnéd tovább használni a HuCommerce Pro funkciókat vedd fel az <a href="https://www.hucommerce.hu/ugyfelszolgalat/" target="_blank"><strong>ügyfélszolgálattal</strong></a> a kapcsolatot.</p>
-		</div>
-	<?php } ?>
+	<?php // Permanent pro features notice (non-dismissible) ?>
+	<div class="notice notice-warning">
+		<p><strong>FIGYELEM!</strong> A HuCommerce Pro funkciók ideiglenesen ingyenesen elérhetőek ebben a bővítményben. Egy hamarosan érkező újabb verzióban ezek a funkciók átkerülnek egy különálló Pro bővítménybe. Így a Pro verzió megvásárlása nélkül a következő verziótól már nem tudod használni ezeket a funkciókat.</p>
+	</div>
 
 	<h2 class="uk-hidden"></h2>
 
@@ -252,11 +221,7 @@ function cps_hc_gems_page_card_footer() {
 			<div class="uk-navbar-right">
 				<ul class="uk-navbar-nav">
 					<li><a href="https://hucommerce.us20.list-manage.com/subscribe?u=8e6a039140be449ecebeb5264&id=2f5c70bc50&EMAIL=<?php echo urlencode( $current_user->user_email ); ?>&FNAME=<?php echo urlencode( $current_user->user_firstname ); ?>&LNAME=<?php echo urlencode( $current_user->user_lastname ); ?>&URL=<?php echo urlencode( $home_url ); ?>" target="_blank"><span uk-icon="icon: mail"></span></a></li>
-					<?php if ( 'free' != HC_LICENSE ) { ?>
-					<li><a href="#" onclick="Beacon('open'); Beacon('navigate', '/ask/message')"><span uk-icon="icon: lifesaver"></span></a></li>
-					<?php } else { ?>
 					<li><a href="https://www.hucommerce.hu/ugyfelszolgalat/" target="_blank"><span uk-icon="icon: lifesaver"></span></a></li>
-					<?php } ?>
 					<li><a href="https://www.facebook.com/groups/HuCommerce.hu/" target="_blank"><span uk-icon="icon: facebook"></span></a></li>
 					<li><a href="https://hu.wordpress.org/plugins/surbma-magyar-woocommerce/" target="_blank"><span uk-icon="icon: wordpress"></span></a></li>
 					<li><a href="https://www.hucommerce.hu" target="_blank"><span uk-icon="icon: world"></span></a></li>
