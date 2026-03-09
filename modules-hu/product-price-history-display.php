@@ -82,27 +82,58 @@ if ( $product ) {
 	<head>
 		<meta charset="utf-8" />
 		<meta name="robots" content="noindex">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.14.3/css/uikit.min.css" integrity="sha512-iWrYv6nUp7gzf+Ut/gMjxZn+SWdaiJYn+ZZNq63t2JO6kBpDc40wQfBzC1eOAzlwIMvRyuS974D1R8p1BTdaUw==" crossorigin="anonymous" referrerpolicy="no-referrer" /><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet, PluginCheck.CodeAnalysis.Offloading.OffloadedContent ?>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.14.3/js/uikit.min.js" integrity="sha512-wqamZDJQvRHCyy5j5dfHbqq0rUn31pS2fJeNL4vVjl0gnSVIZoHFqhwcoYWoJkVSdh5yORJt+T9lTdd8j9W4Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript, PluginCheck.CodeAnalysis.Offloading.OffloadedContent ?>
-<?php if ( get_post_meta( $product_id, '_hc_product_price_history' ) ) { ?>
-		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript, PluginCheck.CodeAnalysis.Offloading.OffloadedContent ?>
+		<link rel="stylesheet" href="<?php echo esc_url( CPS_HC_GEMS_URL . '/cps-sdk/vendors/uikit/css/uikit.min.css' ); ?>"><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- Standalone HTML page, no wp_head enqueue. ?>
+		<script src="<?php echo esc_url( CPS_HC_GEMS_URL . '/cps-sdk/vendors/uikit/js/uikit.min.js' ); ?>"></script><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Standalone HTML page, no wp_head enqueue. ?>
+<?php if ( get_post_meta( $product_id, '_hc_product_price_history', true ) ) { ?>
+		<script src="<?php echo esc_url( CPS_HC_GEMS_URL . '/assets/vendor/chartjs/chart.umd.min.js' ); ?>"></script><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Standalone HTML page, no wp_head enqueue. ?>
 		<script type="text/javascript">
-			google.charts.load('current', {'packages':['corechart']});
-			google.charts.setOnLoadCallback(drawChart);
-
-			function drawChart() {
-				var data = google.visualization.arrayToDataTable(<?php echo wp_json_encode( $chart_array ); ?>);
-
-				var options = {
-					title: 'Termék ár történet: <?php echo esc_js( $product->get_title() ); ?>',
-					curveType: 'function',
-					legend: { position: 'bottom' }
-				};
-
-				var chart = new google.visualization.LineChart(document.getElementById('product_price_history_chart'));
-
-				chart.draw(data, options);
-			}
+			(function() {
+				var chartArray = <?php echo wp_json_encode( $chart_array ); ?>;
+				var labels = [];
+				var normalAr = [];
+				var activeAr = [];
+				for (var i = 1; i < chartArray.length; i++) {
+					labels.push(chartArray[i][0]);
+					normalAr.push(chartArray[i][1]);
+					activeAr.push(chartArray[i][2]);
+				}
+				function initPriceHistoryChart() {
+					var canvas = document.getElementById('product_price_history_chart');
+					if (!canvas) { return; }
+					var wrapper = canvas.parentElement;
+					if (wrapper) {
+						canvas.width = wrapper.clientWidth;
+						canvas.height = wrapper.clientHeight;
+					}
+					// Chart.js 4.x: first argument is canvas element or 2d context (docs use canvas).
+					new Chart(canvas, {
+						type: 'line',
+						data: {
+							labels: labels,
+							datasets: [
+								{ label: 'Normál ár', data: normalAr, borderColor: 'rgb(75, 192, 192)', tension: 0.3, fill: false },
+								{ label: 'Aktív ár', data: activeAr, borderColor: 'rgb(255, 99, 132)', tension: 0.3, fill: false }
+							]
+						},
+						options: {
+							responsive: false,
+							maintainAspectRatio: false,
+							plugins: {
+								title: { display: true, text: 'Termék ár történet: <?php echo esc_js( $product->get_title() ); ?>' },
+								legend: { position: 'bottom' }
+							},
+							scales: {
+								y: { beginAtZero: true }
+							}
+						}
+					});
+				}
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', initPriceHistoryChart);
+				} else {
+					initPriceHistoryChart();
+				}
+			})();
 		</script>
 <?php } ?>
 <?php if ( $product ) { ?>
@@ -225,12 +256,13 @@ if ( $product ) {
 
 			<hr class="uk-margin-remove">
 
-			<?php if ( get_post_meta( $product_id, '_hc_product_price_history' ) ) { ?>
+			<?php if ( get_post_meta( $product_id, '_hc_product_price_history', true ) ) { ?>
 			<div class="uk-section uk-section-muted">
 				<div class="uk-container">
 					<h3 class="uk-heading-line uk-text-center"><span>Termék ár történet diagram</span></h3>
-					<!-- https://developers.google.com/chart/interactive/docs/gallery/linechart?hl=hu -->
-					<div id="product_price_history_chart" style="width: 100%; height: 500px"></div>
+					<div class="product-price-history-chart-wrapper" style="position: relative; height: 500px; width: 100%;">
+						<canvas id="product_price_history_chart" style="display: block; box-sizing: border-box; width: 100%; height: 100%;"></canvas>
+					</div>
 				</div>
 			</div>
 

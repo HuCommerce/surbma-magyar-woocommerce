@@ -3,7 +3,7 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 7.0
-Stable tag: 2026.1.0
+Stable tag: 2026.1.1
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -152,9 +152,20 @@ A HuCommerce bővítmény forráskódjában talált hibákat a [Patchstack Vulne
 
 Please report security bugs found in the source code of the HuCommerce | Magyar kiegészítések WooCommerce webáruházakhoz plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/9e5fb7b8-9915-4060-9779-a133aa5e46b2). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
+== Külső szolgáltatások ==
+
+A HuCommerce bővítmény a következő külső szolgáltatást használja a támogatáshoz és a dokumentációhoz:
+
+**Help Scout Beacon** (https://beacon-v2.helpscout.net)
+
+- Cél: Admin támogatási widget, hogy az adminisztrátorok hozzáférhessenek a támogatáshoz a WordPress admin felületéről.
+- Futás ideje: Csak a WordPress admin felületén. Nem töltődik be a frontendre vagy a webáruház látogatói számára.
+- Adatok: A Beacon script a Help Scout kiszolgálóiról töltődik be, amikor megnyitod a kapcsolódó admin oldalakat. A szolgáltatás nem igényel fiókot vagy API kulcsot; csak a támogatási widget megjelenítéséhez kell.
+- Adatvédelem: A Help Scout adatkezelésével kapcsolatos részletekért lásd a Help Scout adatvédelmi irányelveit és dokumentációját.
+
 == Changelog ==
 
-#### 2026.1.0
+#### 2026.1.1
 
 *Kiadás dátuma: 2026-03-09*
 
@@ -202,6 +213,7 @@ Please report security bugs found in the source code of the HuCommerce | Magyar 
 - Új konstansok meghatározása.
 - Licensz kezeléshez kapcsolódó konstansok egyszerűsítése, feltételek módosítása.
 - Fájlok és kódok szerkezeti és logikai újrarendezése.
+- Távoli fájlok kezelésének a javítása.
 - Régi változások törlése a readme.txt fájlból.
 - CPS SDK frissítése a 8.16.0 verzióra.
 - Kisebb módosítás a README.md fájlban.
