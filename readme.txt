@@ -3,7 +3,7 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 7.0
-Stable tag: 2026.1.3
+Stable tag: 2026.1.4
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -82,7 +82,7 @@ A HuCommerce Pro verzió további funkciókkal bővíti a bővítményt.
 - **Adószám bekérése vásárlásnál** – Adószám mező a Pénztár oldalon, a Cégnév kitöltésekor jelenik meg.
 - **Pénztár és Fiók mezők ellenőrzése** – Adószám, irányítószám és telefonszám formai validálása. *(Pro)*
 - **Város automatikus kitöltése** – Város mező kitöltése az irányítószám alapján, több település esetén választási lehetőség.
-- **Fordítások prémium bővítményekhez** – Magyar fordítások prémium bővítményekhez és sablonokhoz.
+- **Fordítások prémium bővítményekhez** – Magyar fordítások több, mint 400 prémium bővítményhez és sablonhoz.
 - **Fordítási hiányosságok javítása** – WooCommerce és sablonok ideiglenes fordítási javításai.
 - **Jogi megfelelés** – ÁSZF és Adatkezelési tájékoztató elfogadtatása, GDPR megfelelés. *(Pro)*
 - **Termék ár történet** – Az EU árcsökkentési rendeletnek való megfelelés biztosítása. *(Pro)*
@@ -165,7 +165,7 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 
 == Changelog ==
 
-#### 2026.1.3
+#### 2026.1.4
 
 *Kiadás dátuma: 2026-03-09*
 
