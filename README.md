@@ -1,5 +1,5 @@
-HuCommerce - Magyar WooCommerce kiegészítések
-=============================================
+HuCommerce - Magyar kiegészítések WooCommerce webáruházakhoz
+============================================================
 
 Hasznos javítások és kiegészítések a magyar WooCommerce webáruházakhoz.
 

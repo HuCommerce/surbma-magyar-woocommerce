@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: HuCommerce | Magyar WooCommerce kiegészítések
+ * Plugin Name: HuCommerce | Magyar kiegészítések WooCommerce webáruházakhoz
  * Plugin URI: https://www.hucommerce.hu/
- * Description: Hasznos kiegészítések a magyar WooCommerce webáruházakhoz.
+ * Description: Hasznos kiegészítések és javítások a magyar WooCommerce webáruházakhoz.
  * 
- * Version: 2025.1.8
+ * Version: 2026.1.0
  * 
  * Author: HuCommerce.hu
  * Author URI: https://www.hucommerce.hu/
@@ -17,7 +17,7 @@
  * Domain Path: /languages
  * 
  * WC requires at least: 4.6
- * WC tested up to: 10.1
+ * WC tested up to: 10.5
  * 
  * License: GPL-3.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
