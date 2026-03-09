@@ -260,7 +260,7 @@ if ( $product ) {
 			<div class="uk-section uk-section-muted">
 				<div class="uk-container">
 					<h3 class="uk-heading-line uk-text-center"><span>Termék ár történet diagram</span></h3>
-					<div class="product-price-history-chart-wrapper" style="position: relative; height: 500px; width: 100%;">
+					<div class="product-price-history-chart-wrapper" style="position: relative; height: 500px; width: 100%; background-color: #fff;">
 						<canvas id="product_price_history_chart" style="display: block; box-sizing: border-box; width: 100%; height: 100%;"></canvas>
 					</div>
 				</div>

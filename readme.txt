@@ -3,7 +3,7 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 7.0
-Stable tag: 2026.1.2
+Stable tag: 2026.1.3
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -165,7 +165,7 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 
 == Changelog ==
 
-#### 2026.1.2
+#### 2026.1.3
 
 *Kiadás dátuma: 2026-03-09*
 
@@ -214,6 +214,8 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 - Licensz kezeléshez kapcsolódó konstansok egyszerűsítése, feltételek módosítása.
 - Fájlok és kódok szerkezeti és logikai újrarendezése.
 - Távoli fájlok kezelésének a javítása.
+- A Termék ár történet diagram lecserélése a Google Charts-ról a Chart.js-re.
+- A Termék ár történet diagram kisebb módosítása.
 - Fordítások kezelésének az optimalizálása.
 - Régi változások törlése a readme.txt fájlból.
 - CPS SDK frissítése a 8.16.0 verzióra.
