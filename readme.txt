@@ -3,7 +3,7 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 7.0
-Stable tag: 2026.1.4
+Stable tag: 2026.1.5
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -164,6 +164,15 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 - Adatvédelem: A Help Scout adatkezelésével kapcsolatos részletekért lásd a Help Scout adatvédelmi irányelveit és dokumentációját.
 
 == Changelog ==
+
+#### 2026.1.5
+
+*Kiadás dátuma: 2026-03-14*
+
+**EGYÉB**
+
+- Kompatibilitás javítása a Billingo Plus és a Számlázz.hu integráció bővítményekhez.
+- Kompatibilitás ellenőrzése a WooCommerce 10.6 verzióval.
 
 #### 2026.1.4
 

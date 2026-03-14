@@ -4,7 +4,7 @@
  * Plugin URI: https://www.hucommerce.hu/
  * Description: Hasznos kiegészítések és javítások a magyar WooCommerce webáruházakhoz.
  * 
- * Version: 2026.1.4
+ * Version: 2026.1.5
  * 
  * Author: HuCommerce.hu
  * Author URI: https://www.hucommerce.hu/
@@ -17,7 +17,7 @@
  * Domain Path: /languages
  * 
  * WC requires at least: 4.6
- * WC tested up to: 10.5
+ * WC tested up to: 10.6
  * 
  * License: GPL-3.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -33,6 +33,10 @@ add_action( 'init', static function () {
 
 // Retrieve the plugin data to get the Version
 $plugin_data = get_file_data( __FILE__, array( 'Version' => 'Version' ), 'plugin' );
+
+// Compatibility with plugins by Viszt Péter
+define( 'SURBMA_HC_PLUGIN_VERSION_NUMBER', true );
+define( 'SURBMA_HC_PLUGIN_VERSION', true );
 
 // Define the dynamic constants
 define( 'CPS_HC_GEMS_VERSION', isset( $plugin_data['Version'] ) ? $plugin_data['Version'] : '1.0' );
