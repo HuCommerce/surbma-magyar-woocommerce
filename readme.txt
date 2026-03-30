@@ -3,7 +3,7 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 7.0
-Stable tag: 2026.1.5
+Stable tag: 2026.2.1
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -165,6 +165,14 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 
 == Changelog ==
 
+#### 2026.2.1
+
+*Kiadás dátuma: 2026-03-30*
+
+**EGYÉB**
+
+- Véletlen kiadás felülírása.
+
 #### 2026.1.5
 
 *Kiadás dátuma: 2026-03-14*
@@ -229,165 +237,5 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 - Régi változások törlése a readme.txt fájlból.
 - CPS SDK frissítése a 8.16.0 verzióra.
 - Kisebb módosítás a README.md fájlban.
-
-#### 2025.1.8
-
-*Kiadás dátuma: 2025-09-01*
-
-**JAVÍTÁS**
-
-- Termék módosítások modul javítása és optimalizálása.
-
-**EGYÉB**
-
-- Kompatibilitás ellenőrzése a WordPress 6.8 verzióval.
-- Kompatibilitás ellenőrzése a WooCommerce 10.1 verzióval.
-
-#### 2025.1.7
-
-*Kiadás dátuma: 2025-08-28*
-
-**JAVÍTÁS**
-
-- Az Adószám mező megjelenítése akkor is, ha a Cégnév beállítás hiányzik.
-- Az "Official Integration for Billingo" bővítmény támogatása, hogy az adószám mezőt helyesen kezelje.
-
-#### 2025.1.6
-
-*Kiadás dátuma: 2025-08-24*
-
-**EGYÉB**
-
-- A DEV mód kiegészítése új aldomainekkel és új domainekkel.
-
-**JAVÍTÁS**
-
-- Az Adószám mező megjelenítésénél a feltételek módosítása.
-- A "Termék ár történet" kijelzés javítása, hogy minden diagram megfelelően jelenjen meg.
-- A "Termék ár történet" többszörös mentésének a kizárása.
-- A globális options betöltésének a javítása, hogy a fordításokat is megfelelően kezelje.
-- Az admin URL lekérések javításai, hogy a linkek megfelelően jelenjenek meg.
-
-#### 2025.1.5
-
-*Kiadás dátuma: 2025-03-14*
-
-**HuCommerce DEV mód**
-
-- Az environment beállítás figyelésének a törlése.
-
-**EGYÉB**
-
-- Az ingyenes teszt verzió opció hozzáadása a Licensz kezeléshez.
-
-#### 2025.1.4
-
-*Kiadás dátuma: 2025-03-07*
-
-**Város automatikus kitöltése az irányítószám alapján**
-
-- Tooltip kattintási lehetőségének a javítása.
-- Tooltip elrejtése akkor is, ha másik mező kap fókuszt.
-- Város kiválasztás után a város mező fókuszt kap.
-
-**EGYÉB**
-
-- Az "informations" lecserélése "information"-re minden előfordulási helyen.
-- A HuCommerce opciók megjelenítése az Információk menüpont alatt.
-- Kisebb módosítás az adatbázis elemek megjelenítésében a Licensz kezelés oldalon.
-- A Coming Soon mode kényszerítés kikapcsolása.
-- A whitelist feltétel kiegészítése az environment beállítás figyelésével.
-
-#### 2025.1.3
-
-*Kiadás dátuma: 2025-03-06*
-
-**Város automatikus kitöltése az irányítószám alapján**
-
-- Kisebb javítás, hogy a tooltip jól legyen pozicionálva.
-
-**Mezők értékének ellenőrzése**
-
-- Az 50-es mobil körzetszám hozzáadása a validáláshoz.
-
-**JAVÍTÁS**
-
-- Az `$options` globális változó átnevezése erre: `$hc_gems_options`
-
-#### 2025.1.2
-
-*Kiadás dátuma: 2025-02-27*
-
-**SMTP szolgáltatás**
-
-- Most már beállítható titkosítás nélkül is az SMTP küldés a 25-ös porthoz.
-
-**HuCommerce DEV mód**
-
-- Most már a dev és local aldomainek esetén is automatikusan DEV módba kapcsol.
-
-**JAVÍTÁS**
-
-- A Licensz kezelés javítása, hogy minden szükséges adatot elmentsen az adatbázisba.
-
-#### 2025.1.0
-
-*Kiadás dátuma: 2025-02-25*
-
-Nagy és régóta várt változásokkal sikerült kiegészíteni a HuCommerce bővítményt. Most főleg a meglévő modulok lettek tovább fejlesztve és rengeteg javítás történt a kódbázisban. Kérlek, olvassátok el részletesen a változtatásokat!
-
-**Város automatikus kitöltése az irányítószám alapján**
-
-- Frissített teljes Magyarország település lista.
-- Most már kezeli azokat az irányítószámokat is, amikhez több település tartozik.
-- Kód módosítása, hogy a Számlázási és Szállítási címeket is egy kódbázis kezelje.
-- Az automatikus kitöltés most már a Fiókom -> Címek alatt is működik.
-
-**Adószám megjelenítése**
-
-- Az Adószám mező ellenőrzés most már a Fiókom -> Címek alatt is működik.
-
-**Mezők formátumának ellenőrzése**
-
-- Tömörített JavaScript fájl használata.
-- A formátum ellenőrzés most már a Fiókom -> Címek alatt is működik.
-
-**Mezők értékének ellenőrzése**
-
-- Az érték ellenőrzés most már a Fiókom -> Címek alatt is működik.
-- Telefonszám ellenőrzésének a teljes átdolgozása. A megadott körzetszám alapján ellenőrzi a formátumot.
-- Beállítható, hogy csak mobiltelefonszámot fogadjon el.
-
-**Pénztár oldal módosítások**
-
-- A szabályok és beállítások átvezetése a Fiókom -> Címek oldalakon is.
-
-**Fordítások prémium bővítményekhez és sablonokhoz**
-
-- A fordítások új mappába kerültek: translations
-- Most már kezeli az új .l10n.php formátumokat is.
-- A modul kódjának a teljes átírása, előkészítés a skálázáshoz.
-- Új fordítás hozzáadása: Restrict Content Pro (beta)
-- Új fordítás hozzáadása: Kestrel API Manager for WooCommerce (beta)
-- Új fordítás hozzáadása: WooCommerce Memberships (beta)
-
-**EGYÉB**
-
-- HuCommerce DEV mód: A DEV mód, azaz fejlesztői mód lehetőséget arra, hogy egy nem élesített weboldalon az API kulcs aktiválása nélkül használhasd a HuCommerce Pro összes modulját és funkcióját.
-- További HuCommerce Pro verziók aktiválásának a lehetősége: Multi 2, Multi 5, Multi 10, havi előfizetés és az egyszeri, örökös használatú verzió.
-- A textdomain beállítása átkerült a bővítmény fő fájljába.
-- Kód optimalizálás: feltételek módosítása, hozzáadása, egyszerűsítése; ellenőrzések hozzáadása, konfliktusok kizárása.
-- Az `$options` globális kezelése.
-- A modulok kezelése átkerült egy külön fájlba.
-- A WooCommerce verziójának az ellenőrzését kezelő függvény átkerült a start.php fájlba.
-- Minden HuCommerce opció törlése az adatbázisból a bővítmény törlése után.
-- A HuCommerce katalógus megjelenítésének kisebb módosítása.
-- Kompatibilitás ellenőrzése a WooCommerce 9.7 verzióval.
-- CPS SDK frissítése a 8.15.3 verzióra.
-
-**JAVÍTÁS**
-
-- Az "Edit account form" template frissítése a 8.7.0 verzióra. (Köszönöm a jelzést @grapestain felhasználónak)
-- PHP_CodeSniffer + WordPress Coding Standards által jelzett hibák javításai.
 
 [HuCommerce teljes változási napló →](https://www.hucommerce.hu/changelog/)
