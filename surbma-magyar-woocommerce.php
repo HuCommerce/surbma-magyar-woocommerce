@@ -4,7 +4,7 @@
  * Plugin URI: https://www.hucommerce.hu/
  * Description: Hasznos kiegészítések és javítások a magyar WooCommerce webáruházakhoz.
  * 
- * Version: 2026.2.1
+ * Version: 2026.2.3
  * 
  * Author: HuCommerce.hu
  * Author URI: https://www.hucommerce.hu/
@@ -17,7 +17,7 @@
  * Domain Path: /languages
  * 
  * WC requires at least: 4.6
- * WC tested up to: 10.6
+ * WC tested up to: 10.7
  * 
  * License: GPL-3.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
