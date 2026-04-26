@@ -3,7 +3,7 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 7.0
-Stable tag: 2026.2.2
+Stable tag: 2026.2.3
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -164,6 +164,14 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 - Adatvédelem: A Help Scout adatkezelésével kapcsolatos részletekért lásd a Help Scout adatvédelmi irányelveit és dokumentációját.
 
 == Changelog ==
+
+#### 2026.2.3
+
+*Kiadás dátuma: 2026-04-26*
+
+**JOGI MEGFELELÉS MODUL**
+
+- Javítás: Egységesítve lett a sanitization a Regisztráció és Pénztár oldali jogi checkbox alapértelmezett (fordított) és mentett szövegeinél (`regacceptpp`, `accepttos`, `acceptpp`), így minden esetben `wp_kses_post()` szűrés érvényesül.
 
 #### 2026.2.2
 
