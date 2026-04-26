@@ -221,12 +221,24 @@ function cps_hc_gems_fields_validate( $input ) {
 	// Check brand new HuCommerce users (from HuCommerce 2022.1.0 version)
 	$input['brandnewuser'] = 1;
 
+	// Keep explicit empty overrides for legal checkout text fields.
+	$keep_empty_value_keys = array(
+		'regacceptpp',
+		'legalcheckouttitle',
+		'accepttos',
+		'acceptpp',
+	);
+
 	// Filter out default values to reduce option size
 	$defaults = cps_hc_gems_get_defaults();
 	foreach ( $input as $key => $value ) {
 		// Remove translation keys with value 0 (disabled is the default)
 		if ( strpos( $key, 'translations-' ) === 0 && 0 === $value ) {
 			unset( $input[ $key ] );
+			continue;
+		}
+		// Keep explicitly saved empty values for specific legal texts.
+		if ( in_array( $key, $keep_empty_value_keys, true ) && '' === $value ) {
 			continue;
 		}
 		// Remove keys that match their default values
