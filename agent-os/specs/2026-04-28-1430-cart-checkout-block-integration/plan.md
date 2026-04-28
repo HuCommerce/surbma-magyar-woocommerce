@@ -16,7 +16,7 @@ Létrehozva: `agent-os/specs/2026-04-28-1430-cart-checkout-block-integration/`
 
 ---
 
-## Task 2: Infrastruktúra — block integration bootstrap
+## Task 2: Infrastruktúra — block integration bootstrap ✅
 
 **Cél:** Globális helper függvények és integration class létrehozása, amit minden modul használhat.
 
@@ -24,18 +24,18 @@ Létrehozva: `agent-os/specs/2026-04-28-1430-cart-checkout-block-integration/`
 
 **`lib/blocks.php`** — block detection helpers
 ```php
-function hc_is_block_checkout(): bool {
+function cps_hc_gems_is_block_checkout(): bool {
     $checkout_page_id = wc_get_page_id( 'checkout' );
     return $checkout_page_id && has_block( 'woocommerce/checkout', $checkout_page_id );
 }
 
-function hc_is_block_cart(): bool {
+function cps_hc_gems_is_block_cart(): bool {
     $cart_page_id = wc_get_page_id( 'cart' );
     return $cart_page_id && has_block( 'woocommerce/cart', $cart_page_id );
 }
 ```
 
-**`lib/class-blocks-integration.php`** — `IntegrationInterface` implementáció
+**`lib/class-blocks-integration.php`** — `CPS_HC_Gems_Blocks_Integration` implementáció
 - Implementálja: `Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface`
 - Regisztrálja a modul-specifikus frontend JS-t a checkout/cart block számára
 - Metódusok: `get_name()`, `get_script_handles()`, `get_editor_script_handles()`, `get_script_data()`
