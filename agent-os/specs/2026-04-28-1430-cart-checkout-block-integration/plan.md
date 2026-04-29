@@ -107,7 +107,17 @@ woocommerce_register_additional_checkout_field( array(
 
 ---
 
-## Task 4: HC-223 — Block integration: Legal compliance
+## Task 4: HC-226 — Block integration: Checkout page customizations
+
+**Linear:** https://linear.app/surbma/issue/HC-226
+**Modul fájl:** `modules/checkout.php`
+
+Modul részletes átnézése szükséges implementáció előtt. Érintett funkciók:
+- Névrend csere, company checkbox, mező sorrend, e-mail mező előre hozása
+
+---
+
+## Task 5: HC-223 — Block integration: Legal compliance
 
 **Linear:** https://linear.app/surbma/issue/HC-223
 **Modul fájl:** `modules/legal-checkout.php`
@@ -140,7 +150,7 @@ woocommerce_register_additional_checkout_field( array(
 
 ---
 
-## Task 5: HC-224 — Block integration: Hide County field
+## Task 6: HC-224 — Block integration: Hide County field
 
 **Linear:** https://linear.app/surbma/issue/HC-224
 
@@ -155,7 +165,7 @@ woocommerce_register_additional_checkout_field( array(
 
 ---
 
-## Task 6: HC-225 — Block integration: Autofill City after Postcode
+## Task 7: HC-225 — Block integration: Autofill City after Postcode
 
 **Linear:** https://linear.app/surbma/issue/HC-225
 **JS fájl:** `assets/js/autofill.js`
@@ -167,16 +177,6 @@ woocommerce_register_additional_checkout_field( array(
 
 **Tesztelési kritériumok:**
 - [ ] Irányítószám → város automatikusan kitöltődik (block checkout)
-
----
-
-## Task 7: HC-226 — Block integration: Checkout page customizations
-
-**Linear:** https://linear.app/surbma/issue/HC-226
-**Modul fájl:** `modules/checkout.php`
-
-Modul részletes átnézése szükséges implementáció előtt. Érintett funkciók:
-- Névrend csere, company checkbox, mező sorrend, e-mail mező előre hozása
 
 ---
 
