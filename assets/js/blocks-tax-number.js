@@ -1,3 +1,7 @@
+/**
+ * Block Checkout: place Additional Fields tax number after Company (DOM order).
+ * Required-state UX follows server validation (billing company / WC setting); classic jQuery pairing is not mirrored here.
+ */
 ( function() {
 	'use strict';
 

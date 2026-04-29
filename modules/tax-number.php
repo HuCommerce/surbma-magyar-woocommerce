@@ -246,24 +246,38 @@ add_filter( 'woocommerce_customer_meta_fields', static function( $profileFieldAr
 	return $profileFieldArray;
 } );
 
-// Block checkout: Register Tax number as an additional checkout field
-// Called directly — module loads at init priority 10, after WC::init() (priority 0) has run.
-if (
-	function_exists( 'woocommerce_register_additional_checkout_field' ) &&
-	version_compare( WC()->version, '8.6.0', '>=' )
-) {
+// Block checkout: Register Tax number as an additional checkout field (WC 8.6+ Additional Fields API).
+add_action( 'woocommerce_init', static function() {
+	if ( ! function_exists( 'woocommerce_register_additional_checkout_field' ) ) {
+		return;
+	}
+
+	if ( ! function_exists( 'WC' ) || ! WC() || version_compare( WC()->version, '8.6.0', '<' ) ) {
+		return;
+	}
+
 	$cps_hc_gems_tax_number_company_field = get_option( 'woocommerce_checkout_company_field', 'optional' );
 
-	if ( 'hidden' !== $cps_hc_gems_tax_number_company_field ) {
-		woocommerce_register_additional_checkout_field( array(
-			'id'         => 'cps-hc-gems/billing-tax-number',
-			'label'      => __( 'Tax number', 'surbma-magyar-woocommerce' ),
-			'location'   => 'address',
-			'required'   => false,
-			'attributes' => array( 'autocomplete' => 'off' ),
-		) );
+	if ( 'hidden' === $cps_hc_gems_tax_number_company_field ) {
+		return;
 	}
-}
+
+	$options              = get_option( 'surbma_hc_fields', array() );
+	$placeholder_enabled  = is_array( $options ) && 1 === (int) ( $options['taxnumberplaceholder'] ?? 0 );
+	$attributes           = array( 'autocomplete' => 'off' );
+
+	if ( $placeholder_enabled ) {
+		$attributes['placeholder'] = __( 'Tax number', 'surbma-magyar-woocommerce' );
+	}
+
+	woocommerce_register_additional_checkout_field( array(
+		'id'         => 'cps-hc-gems/billing-tax-number',
+		'label'      => __( 'Tax number', 'surbma-magyar-woocommerce' ),
+		'location'   => 'address',
+		'required'   => false,
+		'attributes' => $attributes,
+	) );
+}, 20 );
 
 // Block checkout + block My Account: Validate Tax number for billing and shipping address.
 // JSON Schema conditional required is not used because location:'address' would apply it incorrectly.
@@ -329,24 +343,11 @@ function cps_hc_gems_sync_billing_tax_number( $meta_id, $user_id, $meta_key, $me
 add_action( 'added_user_meta', 'cps_hc_gems_sync_billing_tax_number', 10, 4 );
 add_action( 'updated_user_meta', 'cps_hc_gems_sync_billing_tax_number', 10, 4 );
 
-// Block checkout: Move Tax number field after Company field via JS
-add_action( 'wp_enqueue_scripts', static function() {
-	if ( ! cps_hc_gems_is_block_checkout() ) {
-		return;
-	}
-
-	wp_enqueue_script(
-		'cps-hc-gems-blocks-tax-number',
-		CPS_HC_GEMS_URL . '/assets/js/blocks-tax-number.js',
-		array(),
-		CPS_HC_GEMS_VERSION,
-		true
-	);
-} );
+// Block checkout: Move Tax number field after Company field via JS — enqueue via CPS_HC_Gems_Blocks_Integration::get_script_handles().
 
 // Custom JavaScript codes
 add_action( 'wp_footer', static function() {
-	// Block checkout handles its own JS via IntegrationInterface
+	// Block checkout: blocks-tax-number.js is loaded via WooCommerce Blocks integration (IntegrationInterface).
 	if ( cps_hc_gems_is_block_checkout() ) {
 		return;
 	}
