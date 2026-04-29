@@ -8,6 +8,13 @@ A HuCommerce plugin jelenleg `false`-szal deklarálja a WooCommerce Cart & Check
 **Technikai megközelítés:** WooCommerce Additional Fields API (PHP + vanilla JS, build rendszer nélkül)
 **Megvalósítás elve:** modulonként haladunk, csak akkor lépünk tovább, ha az adott modul teljesen kompatibilis. Globális segédfüggvények előre kerülnek kialakításra, hogy a modulok ezekre épüljenek.
 
+**Linear frissítés:** Minden task elvégzése után frissíteni kell a kapcsolódó Linear issue-t és a projektet. Szabályok:
+- **Nyelv:** Minden Linear tartalom angolul írandó (comment, leírás, dokumentum).
+- **Comment:** Az elvégzett munkák összefoglalója, döntések, eltérések a spectől.
+- **Státusz:** Ha a task elvégzésre kerül, az issue státuszát "In Review"-ra kell állítani.
+- **Leírás módosítása:** Ha a terv közben változott, a specben és/vagy az issue leírásában is frissíteni kell.
+- **Projekt dokumentum:** A projekt szintű haladást dokumentumban kell nyomon követni a Linear projektben.
+
 ---
 
 ## Task 1: Save spec documentation ✅

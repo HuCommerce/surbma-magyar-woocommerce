@@ -35,7 +35,7 @@ Hasznos funkciók a magyar WooCommerce webáruházakhoz.
 **HuCommerce ingyenes funkciói:**
 
 - Vezetéknév és keresztnév rendbetétele (WooCommerce 4.4 verzió fölött is)
-- Adószám bekérése vásárlásnál
+- Adószám megjelenítése
 - Megye mező elrejtése
 - Város automatikus kitöltése az irányítószám alapján
 - Pénztár oldal módosítások
@@ -79,7 +79,7 @@ A HuCommerce Pro verzió további funkciókkal bővíti a bővítményt.
 ### 🚀 HuCommerce modulok rövid leírásai:
 
 - **Vezetéknév és keresztnév rendbetétele** – Név sorrend megfordítása magyar nyelven, WPML kompatibilis.
-- **Adószám bekérése vásárlásnál** – Adószám mező a Pénztár oldalon, a Cégnév kitöltésekor jelenik meg.
+- **Adószám megjelenítése** – Adószám mező a Pénztár oldalon, a Cégnév kitöltésekor jelenik meg.
 - **Pénztár és Fiók mezők ellenőrzése** – Adószám, irányítószám és telefonszám formai validálása. *(Pro)*
 - **Város automatikus kitöltése** – Város mező kitöltése az irányítószám alapján, több település esetén választási lehetőség.
 - **Fordítások prémium bővítményekhez** – Magyar fordítások több, mint 400 prémium bővítményhez és sablonhoz.
@@ -169,7 +169,7 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 
 *Kiadás dátuma: 2026-04-26*
 
-**JOGI MEGFELELÉS MODUL**
+**Jogi megfelelés**
 
 - Javítás: Egységesítve lett a sanitization a Regisztráció és Pénztár oldali jogi checkbox alapértelmezett (fordított) és mentett szövegeinél (`regacceptpp`, `accepttos`, `acceptpp`), így minden esetben `wp_kses_post()` szűrés érvényesül.
 
@@ -177,7 +177,7 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 
 *Kiadás dátuma: 2026-04-26*
 
-**JOGI MEGFELELÉS MODUL**
+**Jogi megfelelés**
 
 - Javítás: A Regisztráció és Pénztár oldali jogi checkbox szövegmezők (`regacceptpp`, `legalcheckouttitle`, `accepttos`, `acceptpp`) mostantól explicit üres értékkel is menthetők, így nem állnak vissza automatikusan alapértelmezett értékre.
 - Javítás: A Pénztár oldali alapértelmezett ÁSZF/Adatkezelési tájékoztató checkbox szövegekben a HTML (pl. linkek) már helyesen renderelődik, és nem escaped kódként jelenik meg.
