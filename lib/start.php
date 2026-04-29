@@ -27,7 +27,6 @@ add_action( 'init', static function() {
 include_once CPS_HC_GEMS_DIR . '/lib/modules.php';
 include_once CPS_HC_GEMS_DIR . '/lib/helpers.php';
 include_once CPS_HC_GEMS_DIR . '/lib/blocks.php';
-include_once CPS_HC_GEMS_DIR . '/lib/checkout-block-fields.php';
 include_once CPS_HC_GEMS_DIR . '/lib/class-blocks-integration.php';
 
 // Register blocks integration
