@@ -390,10 +390,16 @@ function cps_hc_gems_is_free_module_type( $type ) {
 	return in_array( $type, ['free', 'free_hu'], true );
 }
 
-// Load modules on init
-add_action( 'init', static function() {
+// Load modules on WooCommerce init
+add_action( 'woocommerce_init', static function() {
 	// Get the settings array
 	global $cps_hc_gems_options;
+	if ( ! is_array( $cps_hc_gems_options ) ) {
+		$cps_hc_gems_options = get_option( 'surbma_hc_fields', array() );
+		if ( ! is_array( $cps_hc_gems_options ) ) {
+			$cps_hc_gems_options = array();
+		}
+	}
 
 	// Get modules configuration
 	$modules = cps_hc_gems_get_modules_config();
@@ -439,9 +445,8 @@ add_action( 'init', static function() {
 			// Determine file path
 			$file_name = isset( $module_config['file'] ) ? $module_config['file'] : $module_key . '.php';
 			$file_path = CPS_HC_GEMS_DIR . '/' . $module_config['directory'] . '/' . $file_name;
-
 			// Include the module file
 			include_once $file_path;
 		}
 	}
-} );
+}, 0 );
