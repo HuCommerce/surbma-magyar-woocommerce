@@ -7,7 +7,7 @@ A HuCommerce plugin jelenleg `false`-szal deklarálja a WooCommerce Cart & Check
 **Linear projekt:** "Integrate Cart & Checkout features with the new block layout" (HC, In Progress)
 **Technikai megközelítés:** WooCommerce Additional Fields API (PHP + vanilla JS, build rendszer nélkül)
 **Megvalósítás elve:** modulonként haladunk, csak akkor lépünk tovább, ha az adott modul teljesen kompatibilis. Globális segédfüggvények előre kerülnek kialakításra, hogy a modulok ezekre épüljenek.
-**Aktuális állapot:** A projekt implementációja újraindult. Csak a Task 1 tekintendő késznek, a folytatás a Task 2-től történik.
+**Aktuális állapot:** A projekt implementációja újraindult. A Task 1 és Task 2 kész, a folytatás a Task 3-tól történik.
 
 **Linear frissítés:** Minden task elvégzése után frissíteni kell a kapcsolódó Linear issue-t és a projektet. Szabályok:
 - **Nyelv:** Minden Linear tartalom angolul írandó (comment, leírás, dokumentum).
@@ -24,7 +24,7 @@ Létrehozva: `agent-os/specs/2026-04-28-1430-cart-checkout-block-integration/`
 
 ---
 
-## Task 2: Infrastruktúra — block integration bootstrap
+## Task 2: Infrastruktúra — block integration bootstrap ✅
 
 **Cél:** Globális helper függvények és integration class létrehozása, amit minden modul használhat.
 
