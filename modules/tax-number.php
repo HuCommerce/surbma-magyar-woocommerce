@@ -20,16 +20,6 @@ add_filter( 'woocommerce_billing_fields', static function( $fields ) {
 
 	// Initialize Tax number field
 	if ( 'optional' == $woocommercecheckoutcompanyfieldValue || 'required' == $woocommercecheckoutcompanyfieldValue ) {
-		// WC Additional Fields API handles this field in My Account and block checkout.
-		// Keep the classic field only for the shortcode checkout page.
-		if (
-			! is_checkout() &&
-			function_exists( 'woocommerce_register_additional_checkout_field' ) &&
-			version_compare( WC()->version, '8.6.0', '>=' )
-		) {
-			return $fields;
-		}
-
 		$fields['billing_tax_number'] = array(
 			'label' 		=> __( 'Tax number', 'surbma-magyar-woocommerce' ),
 			'required' 		=> false,
@@ -66,51 +56,33 @@ add_action( 'woocommerce_checkout_process', static function() {
 
 // Adding custom validation message for Tax number field on My Account -> Addresses page
 add_action( 'woocommerce_after_save_address_validation', static function( $user_id, $address_type ) {
-	// Block My Account saves via REST API — $_POST is empty in that context.
-	// woocommerce_blocks_validate_location_address_fields handles that path.
-	if (
-		function_exists( 'woocommerce_register_additional_checkout_field' ) &&
-		version_compare( WC()->version, '8.6.0', '>=' ) &&
-		! isset( $_POST['save_address'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
-	) {
+	// Only proceed if this is the billing address form
+	if ( 'billing' !== $address_type ) {
 		return;
 	}
 
 	// Nonce verification before doing anything
 	check_ajax_referer( 'woocommerce-edit_address', 'woocommerce-edit-address-nonce', false );
 
-	// Init the Tax number check process for the current address type
-	cps_hc_gems_billing_tax_number_check( $address_type );
+	// Init the Billing Tax number check process
+	cps_hc_gems_billing_tax_number_check();
 }, 10, 2 );
 
-// Tax number check process for billing or shipping address
-function cps_hc_gems_billing_tax_number_check( $address_type = 'billing' ) {
+// Billing Tax number check process
+function cps_hc_gems_billing_tax_number_check() {
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
-	$company_key   = 'billing' === $address_type ? 'billing_company' : 'shipping_company';
-	$company       = ! empty( $_POST[ $company_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $company_key ] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
-	$company_check = 'billing' === $address_type && ! empty( $_POST['billing_company_check'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['billing_company_check'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$billing_company = !empty( $_POST['billing_company'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_company'] ) ) : '';
+	$billing_company_check = !empty( $_POST['billing_company_check'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_company_check'] ) ) : 0;
+	$billing_tax_number = !empty( $_POST['billing_tax_number'] ) ? sanitize_text_field( wp_unslash( $_POST['billing_tax_number'] ) ) : '';
 
-	// WC AF My Account: _wc_{address_type}/{namespace}/{field}. Classic checkout: billing_tax_number.
-	$tax_number = '';
-	$wc_af_key  = '_wc_' . $address_type . '/cps-hc-gems/billing-tax-number';
-	foreach ( array( 'billing_tax_number', $wc_af_key, 'cps-hc-gems/billing-tax-number', 'cps-hc-gems_billing-tax-number' ) as $tax_key ) {
-		if ( ! empty( $_POST[ $tax_key ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$tax_number = sanitize_text_field( wp_unslash( $_POST[ $tax_key ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
-			break;
-		}
-	}
-
-	if ( 'hidden' !== $woocommercecheckoutcompanyfieldValue && ( ! empty( $company ) || 1 == $company_check || 'required' == $woocommercecheckoutcompanyfieldValue ) && empty( $tax_number ) ) {
+	// Add error notice, if Tax number field is empty, but it should be filled out
+	if ( 'hidden' != $woocommercecheckoutcompanyfieldValue && ( !empty( $billing_company ) || 1 == $billing_company_check || 'required' == $woocommercecheckoutcompanyfieldValue ) && empty( $billing_tax_number ) ) {
 		$field_label = __( 'Tax number', 'surbma-magyar-woocommerce' );
-		if ( 'billing' === $address_type ) {
-			/* translators: %s: Field label */
-			$field_label = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $field_label ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-		} else {
-			/* translators: %s: Field label */
-			$field_label = sprintf( _x( 'Shipping %s', 'checkout-validation', 'woocommerce' ), $field_label ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-		}
 		/* translators: %s: Field label */
-		wc_add_notice( sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $field_label ) . '</strong>' ), 'error' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		$field_label = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $field_label ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		/* translators: %s: Field label */
+		$noticeError = sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $field_label ) . '</strong>' ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		wc_add_notice( $noticeError, 'error' );
 	}
 }
 
@@ -155,19 +127,6 @@ add_filter( 'default_checkout_billing_tax_number', static function( $value ) {
 add_filter( 'woocommerce_admin_billing_fields' , static function( $fields ) {
 	global $the_order;
 
-	// Block checkout orders: WC Additional Fields API already renders the field in admin.
-	// $the_order may be null under HPOS; fall back to URL params.
-	$order = $the_order instanceof WC_Order ? $the_order : null;
-	if ( ! $order ) {
-		$order_id = absint( isset( $_GET['id'] ) ? $_GET['id'] : ( isset( $_GET['post'] ) ? $_GET['post'] : 0 ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( $order_id ) {
-			$order = wc_get_order( $order_id );
-		}
-	}
-	if ( $order instanceof WC_Order && 'store-api' === $order->get_created_via() ) {
-		return $fields;
-	}
-
 	$fields['tax_number'] = array(
 		'label' => __( 'Tax number', 'surbma-magyar-woocommerce' ),
 		'show'  => true,
@@ -201,30 +160,13 @@ add_filter( 'woocommerce_formatted_address_replacements', static function( $repl
 
 // Adding Tax number to My Account -> Addresses page
 add_filter( 'woocommerce_my_account_my_address_formatted_address', static function( $address, $customer_id, $address_type ) {
-	if ( 'billing' !== $address_type ) {
-		$address['tax_number'] = '';
-		return $address;
-	}
-
-	// WC Additional Fields API stores and displays the value itself; avoid duplicate.
-	if ( metadata_exists( 'user', $customer_id, '_wc_billing/cps-hc-gems/billing-tax-number' ) ) {
-		$address['tax_number'] = '';
-		return $address;
-	}
-
 	$taxnumber = get_user_meta( $customer_id, 'billing_tax_number', true );
-	$address['tax_number'] = '' != $taxnumber ? __( 'Tax number', 'surbma-magyar-woocommerce' ) . ': ' . $taxnumber : '';
+	$address['tax_number'] = 'billing' == $address_type && '' != $taxnumber ? __( 'Tax number', 'surbma-magyar-woocommerce' ) . ': ' . $taxnumber : '';
 	return $address;
 }, 10, 3 );
 
 // Adding Tax number to Billing address on Thank you page and admin Preview
 add_filter( 'woocommerce_order_formatted_billing_address', static function( $address, $wc_order ) {
-	// Block checkout orders: WC Additional Fields API handles display in all contexts.
-	if ( $wc_order instanceof WC_Order && 'store-api' === $wc_order->get_created_via() ) {
-		$address['tax_number'] = '';
-		return $address;
-	}
-
 	$taxnumber = $wc_order->get_meta( '_billing_tax_number' );
 	$address['tax_number'] = '' != $taxnumber ? __( 'Tax number', 'surbma-magyar-woocommerce' ) . ': ' . $taxnumber : '';
 	return $address;
@@ -246,112 +188,8 @@ add_filter( 'woocommerce_customer_meta_fields', static function( $profileFieldAr
 	return $profileFieldArray;
 } );
 
-// Block checkout: Register Tax number as an additional checkout field (WC 8.6+ Additional Fields API).
-add_action( 'woocommerce_init', static function() {
-	if ( ! function_exists( 'woocommerce_register_additional_checkout_field' ) ) {
-		return;
-	}
-
-	if ( ! function_exists( 'WC' ) || ! WC() || version_compare( WC()->version, '8.6.0', '<' ) ) {
-		return;
-	}
-
-	$cps_hc_gems_tax_number_company_field = get_option( 'woocommerce_checkout_company_field', 'optional' );
-
-	if ( 'hidden' === $cps_hc_gems_tax_number_company_field ) {
-		return;
-	}
-
-	$options              = get_option( 'surbma_hc_fields', array() );
-	$placeholder_enabled  = is_array( $options ) && 1 === (int) ( $options['taxnumberplaceholder'] ?? 0 );
-	$attributes           = array( 'autocomplete' => 'off' );
-
-	if ( $placeholder_enabled ) {
-		$attributes['placeholder'] = __( 'Tax number', 'surbma-magyar-woocommerce' );
-	}
-
-	woocommerce_register_additional_checkout_field( array(
-		'id'         => 'cps-hc-gems/billing-tax-number',
-		'label'      => __( 'Tax number', 'surbma-magyar-woocommerce' ),
-		'location'   => 'address',
-		'required'   => false,
-		'attributes' => $attributes,
-	) );
-}, 20 );
-
-// Block checkout + block My Account: Validate Tax number for billing and shipping address.
-// JSON Schema conditional required is not used because location:'address' would apply it incorrectly.
-add_action( 'woocommerce_blocks_validate_location_address_fields', static function( $errors, $fields, $group ) {
-	$company_field_setting = get_option( 'woocommerce_checkout_company_field', 'optional' );
-
-	if ( 'hidden' === $company_field_setting ) {
-		return;
-	}
-
-	$company    = $fields['company'] ?? '';
-	$tax_number = $fields['cps-hc-gems/billing-tax-number'] ?? '';
-
-	$requires_tax_number = ( 'required' === $company_field_setting ) || ! empty( $company );
-
-	if ( $requires_tax_number && empty( $tax_number ) ) {
-		$field_label = __( 'Tax number', 'surbma-magyar-woocommerce' );
-		if ( 'billing' === $group ) {
-			/* translators: %s: Field label */
-			$field_label = sprintf( _x( 'Billing %s', 'checkout-validation', 'woocommerce' ), $field_label ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-		} else {
-			/* translators: %s: Field label */
-			$field_label = sprintf( _x( 'Shipping %s', 'checkout-validation', 'woocommerce' ), $field_label ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-		}
-		/* translators: %s: Field label */
-		$errors->add(
-			'cps_hc_gems_' . $group . '_tax_number_required',
-			sprintf( __( '%s is a required field.', 'woocommerce' ), '<strong>' . esc_html( $field_label ) . '</strong>' ) // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-		);
-	}
-}, 10, 3 );
-
-// Block checkout: Save Tax number to order meta and user meta
-add_action( 'woocommerce_store_api_checkout_update_order_from_request', static function( WC_Order $order, WP_REST_Request $request ) {
-	$billing    = $request->get_param( 'billing_address' ) ?? array();
-	$tax_number = sanitize_text_field( $billing['cps-hc-gems/billing-tax-number'] ?? '' );
-
-	$order->update_meta_data( '_billing_tax_number', $tax_number );
-
-	$customer_id = $order->get_customer_id();
-	if ( $customer_id ) {
-		update_user_meta( $customer_id, 'billing_tax_number', $tax_number );
-	}
-}, 10, 2 );
-
-// Bidirectional sync between billing_tax_number and WC Additional Fields API meta key.
-// Static flag prevents infinite loop between the two directions.
-function cps_hc_gems_sync_billing_tax_number( $meta_id, $user_id, $meta_key, $meta_value ) {
-	static $syncing = false;
-	if ( $syncing ) {
-		return;
-	}
-	$syncing = true;
-
-	if ( '_wc_billing/cps-hc-gems/billing-tax-number' === $meta_key ) {
-		update_user_meta( $user_id, 'billing_tax_number', $meta_value );
-	} elseif ( 'billing_tax_number' === $meta_key && function_exists( 'woocommerce_register_additional_checkout_field' ) ) {
-		update_user_meta( $user_id, '_wc_billing/cps-hc-gems/billing-tax-number', $meta_value );
-	}
-
-	$syncing = false;
-}
-add_action( 'added_user_meta', 'cps_hc_gems_sync_billing_tax_number', 10, 4 );
-add_action( 'updated_user_meta', 'cps_hc_gems_sync_billing_tax_number', 10, 4 );
-
-// Block checkout: Move Tax number field after Company field via JS — enqueue via CPS_HC_Gems_Blocks_Integration::get_script_handles().
-
 // Custom JavaScript codes
 add_action( 'wp_footer', static function() {
-	// Block checkout: blocks-tax-number.js is loaded via WooCommerce Blocks integration (IntegrationInterface).
-	if ( cps_hc_gems_is_block_checkout() ) {
-		return;
-	}
-
 	$woocommercecheckoutcompanyfieldValue = get_option( 'woocommerce_checkout_company_field' ) != false ? get_option( 'woocommerce_checkout_company_field' ) : 'optional';
 
 	if ( 'hidden' == $woocommercecheckoutcompanyfieldValue || ( ! is_checkout() && ! is_wc_endpoint_url( 'edit-address' ) ) ) {

@@ -26,18 +26,6 @@ add_action( 'init', static function() {
 // Include files
 include_once CPS_HC_GEMS_DIR . '/lib/modules.php';
 include_once CPS_HC_GEMS_DIR . '/lib/helpers.php';
-include_once CPS_HC_GEMS_DIR . '/lib/blocks.php';
-include_once CPS_HC_GEMS_DIR . '/lib/class-blocks-integration.php';
-
-// Register blocks integration
-add_action( 'woocommerce_blocks_checkout_block_registration', static function( $integration_registry ) {
-	$integration_registry->register( new CPS_HC_Gems_Blocks_Integration() );
-} );
-
-add_action( 'woocommerce_blocks_cart_block_registration', static function( $integration_registry ) {
-	$integration_registry->register( new CPS_HC_Gems_Blocks_Integration() );
-} );
-
 if ( is_admin() ) {
 	include_once CPS_HC_GEMS_DIR . '/lib/admin.php';
 	include_once CPS_HC_GEMS_DIR . '/lib/settings.php';
