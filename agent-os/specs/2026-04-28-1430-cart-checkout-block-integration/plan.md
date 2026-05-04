@@ -7,6 +7,7 @@ A HuCommerce plugin jelenleg `false`-szal deklarálja a WooCommerce Cart & Check
 **Linear projekt:** "Integrate Cart & Checkout features with the new block layout" (HC, In Progress)
 **Technikai megközelítés:** WooCommerce Additional Fields API (PHP + vanilla JS, build rendszer nélkül)
 **Megvalósítás elve:** modulonként haladunk, csak akkor lépünk tovább, ha az adott modul teljesen kompatibilis. Globális segédfüggvények előre kerülnek kialakításra, hogy a modulok ezekre épüljenek.
+**Aktuális állapot:** A projekt implementációja újraindult. Csak a Task 1 tekintendő késznek, a folytatás a Task 2-től történik.
 
 **Linear frissítés:** Minden task elvégzése után frissíteni kell a kapcsolódó Linear issue-t és a projektet. Szabályok:
 - **Nyelv:** Minden Linear tartalom angolul írandó (comment, leírás, dokumentum).
@@ -23,7 +24,7 @@ Létrehozva: `agent-os/specs/2026-04-28-1430-cart-checkout-block-integration/`
 
 ---
 
-## Task 2: Infrastruktúra — block integration bootstrap ✅
+## Task 2: Infrastruktúra — block integration bootstrap
 
 **Cél:** Globális helper függvények és integration class létrehozása, amit minden modul használhat.
 
@@ -66,22 +67,22 @@ if ( version_compare( WC()->version, '8.6.0', '>=' ) ) {
 
 ---
 
-## Task 3: HC-26 — Block integration: Tax number field ✅ (implemented)
+## Task 3: HC-26 — Block integration: Tax number field
 
-**Linear:** https://linear.app/surbma/issue/HC-26 — After review: set issue to **In Review** and post the summary comment below (English).
+**Linear:** https://linear.app/surbma/issue/HC-26
 
 **Modul fájl:** [`modules/tax-number.php`](../../../modules/tax-number.php)
 
-### Implemented field id and hooks (source of truth)
+### Tervezett field id és hookok (for implementation)
 
 - **Additional field id:** `cps-hc-gems/billing-tax-number` (not `hc/billing-tax-number`).
-- **Registration:** `woocommerce_init` → `woocommerce_register_additional_checkout_field()` (WC 8.6+). Skipped when WooCommerce **Company** field is `hidden`.
-- **Placeholder (D2):** When option `taxnumberplaceholder` is enabled, `attributes['placeholder']` is set on the additional field (same label string as classic).
-- **Validation:** `woocommerce_blocks_validate_location_address_fields` — validates **billing and shipping groups (D4)**; requires tax number when WC company setting is `required` or the current address group `company` is non-empty.
-- **Classic parity (D3):** **Simplified** on block checkout: no hide/show pairing JS like classic `wp_footer` jQuery; server-side rules match billing company/required setting. Full pairing/`billing_company_check` parity deferred until Checkout block module (Task 4) defines checkbox behavior.
-- **Persistence:** `woocommerce_store_api_checkout_update_order_from_request` → `_billing_tax_number` + logged-in `billing_tax_number` user meta.
-- **Guest session prefill (D5):** Classic uses session + `default_checkout_billing_tax_number`; block Store API flow does **not** replicate guest session prefill — accepted limitation unless WooCommerce exposes a dedicated prefill hook later.
-- **Frontend JS:** [`assets/js/blocks-tax-number.js`](../../../assets/js/blocks-tax-number.js) moves the tax field after Company in block address forms. Script is **`wp_register_script` in `CPS_HC_Gems_Blocks_Integration::initialize()`** and exposed via **`get_script_handles()`** when the Tax number module is enabled (`taxnumber` option) **(D6)**.
+- **Registration (planned):** `woocommerce_init` → `woocommerce_register_additional_checkout_field()` (WC 8.6+). Skip when WooCommerce **Company** field is `hidden`.
+- **Placeholder (planned):** when option `taxnumberplaceholder` is enabled, set `attributes['placeholder']` on the additional field (same label string as classic).
+- **Validation (planned):** `woocommerce_blocks_validate_location_address_fields` for **billing and shipping groups**; require tax number when WC company setting is `required` or the current address group `company` is non-empty.
+- **Classic parity note:** Block checkout first iteration can stay server-side equivalent; full hide/show pairing parity can follow Task 4 decision on checkbox behavior.
+- **Persistence (planned):** `woocommerce_store_api_checkout_update_order_from_request` → `_billing_tax_number` + logged-in `billing_tax_number` user meta.
+- **Guest prefill note:** Store API guest prefill parity depends on available WooCommerce hooks and may need explicit limitation note.
+- **Frontend JS (planned):** [`assets/js/blocks-tax-number.js`](../../../assets/js/blocks-tax-number.js) moves the tax field after Company in block address forms. Register via `CPS_HC_Gems_Blocks_Integration` and expose through `get_script_handles()` when the Tax number module is enabled (`taxnumber` option).
 
 ### Jelenlegi működés (klasszikus checkout)
 
@@ -90,10 +91,10 @@ if ( version_compare( WC()->version, '8.6.0', '>=' ) ) {
 - `woocommerce_checkout_update_user_meta` → user meta mentés
 - `wp_footer` inline JS → field láthatóság kezelés (company mező alapján)
 
-### Linear comment template (copy-paste)
+### Linear comment template (after implementation, copy-paste)
 
 ```
-HC-26 Tax number + Checkout Blocks: Done for review.
+HC-26 Tax number + Checkout Blocks: implemented and ready for review.
 
 Implementation:
 - Additional field id: cps-hc-gems/billing-tax-number (woocommerce_register_additional_checkout_field on woocommerce_init, WC 8.6+).
@@ -102,7 +103,7 @@ Implementation:
 - Placeholder: optional attribute when taxnumberplaceholder is on.
 - JS: blocks-tax-number.js registered via CPS_HC_Gems_Blocks_Integration (get_script_handles when taxnumber module enabled).
 
-Decisions vs exploratory plan: D3 simplified UX on blocks (no classic pairing jQuery parity); D5 guest session prefill not mirrored on Store API; D6 uses IntegrationInterface script handles.
+Decisions vs implementation: D3 simplified UX on blocks (no classic pairing jQuery parity); D5 guest session prefill not mirrored on Store API; D6 uses IntegrationInterface script handles.
 
 Please regression-test block + shortcode checkout.
 ```
