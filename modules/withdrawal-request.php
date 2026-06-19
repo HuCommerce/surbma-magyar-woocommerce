@@ -23,9 +23,13 @@ if ( ! defined( 'CPS_HC_GEMS_WITHDRAWAL_DEFAULT_SLUG' ) ) {
 
 /**
  * Custom post type name for stored withdrawal requests.
+ *
+ * Must stay within WordPress's 20-character post type name limit, so this is the
+ * shortened slug (the full "withdrawal" word would be 22 chars and silently fail
+ * to register).
  */
 if ( ! defined( 'CPS_HC_GEMS_WITHDRAWAL_CPT' ) ) {
-	define( 'CPS_HC_GEMS_WITHDRAWAL_CPT', 'cps_hc_gems_withdrawal' );
+	define( 'CPS_HC_GEMS_WITHDRAWAL_CPT', 'cps_hc_gems_withdraw' );
 }
 
 /**

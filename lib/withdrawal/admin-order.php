@@ -40,31 +40,40 @@ add_action( 'admin_menu', static function () {
 	$our_slug    = cps_hc_gems_withdrawal_menu_slug();
 	$order_slugs = array( 'wc-orders', 'edit.php?post_type=shop_order' );
 
-	$our_item  = null;
-	$our_index = null;
+	// Pull out our entry (and drop any duplicates), keeping the rest in order.
+	$our_item = null;
+	$rest     = array();
 
-	foreach ( $submenu['woocommerce'] as $index => $item ) {
+	foreach ( $submenu['woocommerce'] as $item ) {
 		if ( isset( $item[2] ) && $item[2] === $our_slug ) {
-			$our_item  = $item;
-			$our_index = $index;
-			break;
+			if ( null === $our_item ) {
+				$our_item = $item;
+			}
+			continue;
 		}
+
+		$rest[] = $item;
 	}
 
 	if ( null === $our_item ) {
 		return;
 	}
 
-	unset( $submenu['woocommerce'][ $our_index ] ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- reordering WooCommerce admin submenu.
-
+	// Re-insert exactly once, directly after the first Orders entry; append if none.
 	$reordered = array();
+	$inserted  = false;
 
-	foreach ( $submenu['woocommerce'] as $item ) {
+	foreach ( $rest as $item ) {
 		$reordered[] = $item;
 
-		if ( isset( $item[2] ) && in_array( $item[2], $order_slugs, true ) ) {
+		if ( ! $inserted && isset( $item[2] ) && in_array( $item[2], $order_slugs, true ) ) {
 			$reordered[] = $our_item;
+			$inserted    = true;
 		}
+	}
+
+	if ( ! $inserted ) {
+		$reordered[] = $our_item;
 	}
 
 	$submenu['woocommerce'] = array_values( $reordered ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- reordering WooCommerce admin submenu.
