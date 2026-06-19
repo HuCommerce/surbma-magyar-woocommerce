@@ -7,6 +7,90 @@
 // Prevent direct access to the plugin
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * The CPT list-table menu slug used under the WooCommerce menu.
+ *
+ * @return string
+ */
+function cps_hc_gems_withdrawal_menu_slug() {
+	return 'edit.php?post_type=' . CPS_HC_GEMS_WITHDRAWAL_CPT;
+}
+
+// Register the withdrawal list as a WooCommerce submenu. Done manually (instead of
+// the CPT's show_in_menu) so the WooCommerce parent menu is guaranteed to exist,
+// matching how WooCommerce registers its own order screens.
+add_action( 'admin_menu', static function () {
+	add_submenu_page(
+		'woocommerce',
+		__( 'Elállási kérelmek', 'surbma-magyar-woocommerce' ),
+		__( 'Elállási kérelmek', 'surbma-magyar-woocommerce' ),
+		'edit_shop_orders',
+		cps_hc_gems_withdrawal_menu_slug()
+	);
+}, 60 );
+
+// Move the withdrawal submenu to directly after the Orders item.
+add_action( 'admin_menu', static function () {
+	global $submenu;
+
+	if ( empty( $submenu['woocommerce'] ) || ! is_array( $submenu['woocommerce'] ) ) {
+		return;
+	}
+
+	$our_slug    = cps_hc_gems_withdrawal_menu_slug();
+	$order_slugs = array( 'wc-orders', 'edit.php?post_type=shop_order' );
+
+	$our_item  = null;
+	$our_index = null;
+
+	foreach ( $submenu['woocommerce'] as $index => $item ) {
+		if ( isset( $item[2] ) && $item[2] === $our_slug ) {
+			$our_item  = $item;
+			$our_index = $index;
+			break;
+		}
+	}
+
+	if ( null === $our_item ) {
+		return;
+	}
+
+	unset( $submenu['woocommerce'][ $our_index ] ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- reordering WooCommerce admin submenu.
+
+	$reordered = array();
+
+	foreach ( $submenu['woocommerce'] as $item ) {
+		$reordered[] = $item;
+
+		if ( isset( $item[2] ) && in_array( $item[2], $order_slugs, true ) ) {
+			$reordered[] = $our_item;
+		}
+	}
+
+	$submenu['woocommerce'] = array_values( $reordered ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- reordering WooCommerce admin submenu.
+}, 100 );
+
+// Keep the WooCommerce top menu highlighted on the withdrawal screens.
+add_filter( 'parent_file', static function ( $parent_file ) {
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+
+	if ( $screen && CPS_HC_GEMS_WITHDRAWAL_CPT === $screen->post_type ) {
+		return 'woocommerce';
+	}
+
+	return $parent_file;
+} );
+
+add_filter( 'submenu_file', static function ( $submenu_file ) {
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+
+	if ( $screen && CPS_HC_GEMS_WITHDRAWAL_CPT === $screen->post_type ) {
+		return cps_hc_gems_withdrawal_menu_slug();
+	}
+
+	return $submenu_file;
+} );
+
 // Custom columns for the withdrawal CPT list.
 add_filter( 'manage_' . CPS_HC_GEMS_WITHDRAWAL_CPT . '_posts_columns', static function ( $columns ) {
 	$new = array(

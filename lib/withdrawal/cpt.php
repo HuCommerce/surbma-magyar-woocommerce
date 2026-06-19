@@ -69,7 +69,7 @@ add_action( 'init', static function () {
 		'labels'              => $labels,
 		'public'              => false,
 		'show_ui'             => true,
-		'show_in_menu'        => 'woocommerce',
+		'show_in_menu'        => false, // Registered manually under the WooCommerce menu (see admin-order.php) to guarantee the parent exists and to control position.
 		'show_in_rest'        => false,
 		'exclude_from_search' => true,
 		'publicly_queryable'  => false,
