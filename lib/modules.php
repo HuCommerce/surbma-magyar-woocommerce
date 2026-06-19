@@ -64,6 +64,16 @@ function cps_hc_gems_get_modules_config() {
 			'tags' => ['product', 'conversion', 'legal'],
 			'doc_slug' => 'termek-ar-tortenet',
 		],
+		'withdrawal-request' => [
+			'option_key' => 'module-withdrawalrequest',
+			'type' => 'pro_hu',
+			'directory' => 'modules',
+			'title' => __( 'Withdrawal request', 'surbma-magyar-woocommerce' ),
+			'description' => __( 'EU-compliant withdrawal request handling for WooCommerce orders, including request storage and an admin list for shop managers.', 'surbma-magyar-woocommerce' ),
+			'tags' => ['checkout', 'legal'],
+			'doc_slug' => 'elallasi-kerelem',
+			'version_added' => '2026.2.4',
+		],
 
 		// Legacy HU modules
 		'mask-checkout-fields' => [

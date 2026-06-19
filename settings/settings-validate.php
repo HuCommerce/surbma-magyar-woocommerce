@@ -81,6 +81,7 @@ function cps_hc_gems_fields_validate( $input ) {
 	$input['module-smtp'] = isset( $input['module-smtp'] ) && 1 == $input['module-smtp'] ? 1 : 0;
 	$input['module-catalogmode'] = isset( $input['module-catalogmode'] ) && 1 == $input['module-catalogmode'] ? 1 : 0;
 	$input['module-translations'] = isset( $input['module-translations'] ) && 1 == $input['module-translations'] ? 1 : 0;
+	$input['module-withdrawalrequest'] = isset( $input['module-withdrawalrequest'] ) && 1 == $input['module-withdrawalrequest'] ? 1 : 0;
 
 	$input['taxnumberplaceholder'] = isset( $input['taxnumberplaceholder'] ) && 1 == $input['taxnumberplaceholder'] ? 1 : 0;
 	$input['billingcompanycheck'] = isset( $input['billingcompanycheck'] ) && 1 == $input['billingcompanycheck'] ? 1 : 0;

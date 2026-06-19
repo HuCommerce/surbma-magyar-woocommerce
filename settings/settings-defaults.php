@@ -59,6 +59,7 @@ function cps_hc_gems_get_defaults() {
 		'module-smtp'                        => 0,
 		'module-catalogmode'                 => 0,
 		'module-translations'                => 0,
+		'module-withdrawalrequest'           => 0,
 
 		// Checkout options
 		'taxnumberplaceholder'               => 0,
