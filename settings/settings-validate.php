@@ -81,6 +81,9 @@ function cps_hc_gems_fields_validate( $input ) {
 	$input['module-smtp'] = isset( $input['module-smtp'] ) && 1 == $input['module-smtp'] ? 1 : 0;
 	$input['module-catalogmode'] = isset( $input['module-catalogmode'] ) && 1 == $input['module-catalogmode'] ? 1 : 0;
 	$input['module-translations'] = isset( $input['module-translations'] ) && 1 == $input['module-translations'] ? 1 : 0;
+	$input['module-withdrawalrequest'] = isset( $input['module-withdrawalrequest'] ) && 1 == $input['module-withdrawalrequest'] ? 1 : 0;
+	$input['withdrawalrequest-emailprocessing'] = isset( $input['withdrawalrequest-emailprocessing'] ) && 1 == $input['withdrawalrequest-emailprocessing'] ? 1 : 0;
+	$input['withdrawalrequest-emailcompleted'] = isset( $input['withdrawalrequest-emailcompleted'] ) && 1 == $input['withdrawalrequest-emailcompleted'] ? 1 : 0;
 
 	$input['taxnumberplaceholder'] = isset( $input['taxnumberplaceholder'] ) && 1 == $input['taxnumberplaceholder'] ? 1 : 0;
 	$input['billingcompanycheck'] = isset( $input['billingcompanycheck'] ) && 1 == $input['billingcompanycheck'] ? 1 : 0;
@@ -185,6 +188,10 @@ function cps_hc_gems_fields_validate( $input ) {
 	$input['smtphost'] = wp_filter_nohtml_kses( $input['smtphost'] );
 	$input['smtpuser'] = wp_filter_nohtml_kses( $input['smtpuser'] );
 	$input['smtppassword'] = wp_filter_nohtml_kses( $input['smtppassword'] );
+	$input['withdrawalrequest-slug'] = isset( $input['withdrawalrequest-slug'] ) ? sanitize_title( $input['withdrawalrequest-slug'] ) : 'elallas';
+	$input['withdrawalrequest-buttonlabel'] = isset( $input['withdrawalrequest-buttonlabel'] ) ? wp_filter_nohtml_kses( $input['withdrawalrequest-buttonlabel'] ) : '';
+	$input['withdrawalrequest-emailsubject'] = isset( $input['withdrawalrequest-emailsubject'] ) ? wp_filter_nohtml_kses( $input['withdrawalrequest-emailsubject'] ) : '';
+	$input['withdrawalrequest-emailheading'] = isset( $input['withdrawalrequest-emailheading'] ) ? wp_filter_nohtml_kses( $input['withdrawalrequest-emailheading'] ) : '';
 	$input['productpricehistory-statisticslinktext'] = wp_filter_nohtml_kses( $input['productpricehistory-statisticslinktext'] );
 	$input['productpriceadditions-product-prefix'] = wp_filter_nohtml_kses( $input['productpriceadditions-product-prefix'] );
 	$input['productpriceadditions-product-suffix'] = wp_filter_nohtml_kses( $input['productpriceadditions-product-suffix'] );

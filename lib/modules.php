@@ -223,6 +223,16 @@ function cps_hc_gems_get_modules_config() {
 			'doc_slug' => 'katalogus-mod',
 			'version_added' => '3.5.0',
 		],
+		'withdrawal-request' => [
+			'option_key' => 'module-withdrawalrequest',
+			'type' => 'free_hu',
+			'directory' => 'modules',
+			'title' => __( 'Withdrawal request (EU 2023/2673)', 'surbma-magyar-woocommerce' ),
+			'description' => __( 'Online withdrawal button: lets customers exercise their statutory right of withdrawal without logging in, recorded as a status-tracked request.', 'surbma-magyar-woocommerce' ),
+			'tags' => ['checkout', 'legal'],
+			'doc_slug' => 'elallasi-kerelem',
+			'version_added' => '2026.3.0',
+		],
 
 		// Pro modules
 		'empty-cart-button' => [
