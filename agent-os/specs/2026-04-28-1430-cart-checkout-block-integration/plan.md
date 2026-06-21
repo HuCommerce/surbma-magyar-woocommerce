@@ -4,10 +4,10 @@
 
 A HuCommerce plugin jelenleg `false`-szal deklarálja a WooCommerce Cart & Checkout Blocks kompatibilitást (`cart_checkout_blocks`). Minden cart/checkout modul klasszikus WordPress hookokat és jQuery-t használ, ami a block alapú checkout/cart esetén nem működik. A cél: minden érintett modult kompatibilissé tenni a WooCommerce Cart & Checkout blokk alapú renderelésével.
 
-**Linear projekt:** "Integrate Cart & Checkout features with the new block layout" (HC, In Progress)
+**Linear projekt:** [\[HuCommerce\] Kosár & Pénztár funkciók integrálása a blokk szerkesztővel](https://linear.app/surbma/project/hucommerce-kosar-and-penztar-funkciok-integralasa-a-blokk-373a83cf3c97) (DEV team, In Progress)
 **Technikai megközelítés:** WooCommerce Additional Fields API (PHP + vanilla JS, build rendszer nélkül)
 **Megvalósítás elve:** modulonként haladunk, csak akkor lépünk tovább, ha az adott modul teljesen kompatibilis. Globális segédfüggvények előre kerülnek kialakításra, hogy a modulok ezekre épüljenek.
-**Aktuális állapot:** A projekt implementációja újraindult. A Task 1 és Task 2 kész, a folytatás a Task 3-tól történik.
+**Aktuális állapot:** Task 1–2 kész. Task 3 (DEV-26) folyamatban: additional field regisztráció és order meta mentés működik block checkouton; hiányzik a validáció, a mező pozíció (company után), a placeholder, és a billing-only megjelenítés (jelenleg shipping címnél is látszik).
 
 **Linear frissítés:** Minden task elvégzése után frissíteni kell a kapcsolódó Linear issue-t és a projektet. Szabályok:
 - **Nyelv:** Minden Linear tartalom angolul írandó (comment, leírás, dokumentum).
@@ -67,9 +67,9 @@ if ( version_compare( WC()->version, '8.6.0', '>=' ) ) {
 
 ---
 
-## Task 3: HC-26 — Block integration: Tax number field
+## Task 3: DEV-26 — Block integration: Tax number field 🔄
 
-**Linear:** https://linear.app/surbma/issue/HC-26
+**Linear:** https://linear.app/surbma/issue/DEV-26/block-integration-tax-number-field
 
 **Modul fájl:** [`modules/tax-number.php`](../../../modules/tax-number.php)
 
@@ -80,7 +80,7 @@ if ( version_compare( WC()->version, '8.6.0', '>=' ) ) {
 - **Placeholder (planned):** when option `taxnumberplaceholder` is enabled, set `attributes['placeholder']` on the additional field (same label string as classic).
 - **Validation (planned):** `woocommerce_blocks_validate_location_address_fields` for **billing and shipping groups**; require tax number when WC company setting is `required` or the current address group `company` is non-empty.
 - **Classic parity note:** Block checkout first iteration can stay server-side equivalent; full hide/show pairing parity can follow Task 4 decision on checkbox behavior.
-- **Persistence (planned):** `woocommerce_store_api_checkout_update_order_from_request` → `_billing_tax_number` + logged-in `billing_tax_number` user meta.
+- **Persistence:** WooCommerce Additional Fields API alapból menti az értéket; explicit `woocommerce_store_api_checkout_update_order_from_request` hook szükséges lehet `_billing_tax_number` user meta és billing-only megjelenítés biztosításához.
 - **Guest prefill note:** Store API guest prefill parity depends on available WooCommerce hooks and may need explicit limitation note.
 - **Frontend JS (planned):** [`assets/js/blocks-tax-number.js`](../../../assets/js/blocks-tax-number.js) moves the tax field after Company in block address forms. Register via `CPS_HC_Gems_Blocks_Integration` and expose through `get_script_handles()` when the Tax number module is enabled (`taxnumber` option).
 
@@ -94,32 +94,37 @@ if ( version_compare( WC()->version, '8.6.0', '>=' ) ) {
 ### Linear comment template (after implementation, copy-paste)
 
 ```
-HC-26 Tax number + Checkout Blocks: implemented and ready for review.
+DEV-26 Tax number + Checkout Blocks: partial implementation — validation and field position still open.
 
-Implementation:
+Done:
 - Additional field id: cps-hc-gems/billing-tax-number (woocommerce_register_additional_checkout_field on woocommerce_init, WC 8.6+).
-- Block validation: woocommerce_blocks_validate_location_address_fields — billing and shipping groups; required when company setting is required or the current address group company is non-empty.
-- Save: woocommerce_store_api_checkout_update_order_from_request → _billing_tax_number + user meta for logged-in customers.
+- Order meta saved on block checkout; visible in admin order edit.
+
+Still to do:
+- Block validation: woocommerce_blocks_validate_location_address_fields — billing and shipping groups.
+- Field position: blocks-tax-number.js — move field after Company (currently last in address form).
+- Billing-only display: field currently appears on shipping address too.
 - Placeholder: optional attribute when taxnumberplaceholder is on.
-- JS: blocks-tax-number.js registered via CPS_HC_Gems_Blocks_Integration (get_script_handles when taxnumber module enabled).
+- Explicit save hook if needed for _billing_tax_number + logged-in user meta parity.
 
 Decisions vs implementation: D3 simplified UX on blocks (no classic pairing jQuery parity); D5 guest session prefill not mirrored on Store API; D6 uses IntegrationInterface script handles.
 
-Please regression-test block + shortcode checkout.
+Please regression-test block + shortcode checkout after remaining items are done.
 ```
 
 **Tesztelési kritériumok:**
 
-- [ ] Mező megjelenik billing address szekcióban (block checkout)
-- [ ] Validáció működik (billing vagy shipping company kitöltve / WC company required → tax number kötelező)
-- [ ] Order meta mentés működik
-- [ ] Klasszikus checkout változatlanul működik
+- [x] Mező megjelenik billing address szekcióban (block checkout) — 2026-06-21
+- [ ] Validáció működik (billing vagy shipping company kitöltve / WC company required → tax number kötelező) — nincs hibaüzenet
+- [x] Order meta mentés működik — admin rendelés szerkesztésben látszik; shipping címnél is megjelenik (javítandó)
+- [ ] Mező pozíció: company mező után (jelenleg utolsó helyen)
+- [ ] Klasszikus checkout változatlanul működik — még nem tesztelve
 
 ---
 
-## Task 4: HC-226 — Block integration: Checkout page customizations
+## Task 4: DEV-226 — Block integration: Checkout page customizations
 
-**Linear:** https://linear.app/surbma/issue/HC-226
+**Linear:** https://linear.app/surbma/issue/DEV-226/block-integration-checkout-page-customizations
 **Modul fájl:** `modules/checkout.php`
 
 Modul részletes átnézése szükséges implementáció előtt. Érintett funkciók:
@@ -127,9 +132,9 @@ Modul részletes átnézése szükséges implementáció előtt. Érintett funkc
 
 ---
 
-## Task 5: HC-223 — Block integration: Legal compliance
+## Task 5: DEV-223 — Block integration: Legal compliance
 
-**Linear:** https://linear.app/surbma/issue/HC-223
+**Linear:** https://linear.app/surbma/issue/DEV-223/block-integration-legal-compliance
 **Modul fájl:** `modules/legal-checkout.php`
 
 ### Block checkout implementáció
@@ -160,9 +165,9 @@ woocommerce_register_additional_checkout_field( array(
 
 ---
 
-## Task 6: HC-224 — Block integration: Hide County field
+## Task 6: DEV-224 — Block integration: Hide County field
 
-**Linear:** https://linear.app/surbma/issue/HC-224
+**Linear:** https://linear.app/surbma/issue/DEV-224/block-integration-hide-county-field-if-country-is-hungary
 
 ### Block checkout implementáció
 - JS (vanilla, enqueue via `IntegrationInterface`)
@@ -175,9 +180,9 @@ woocommerce_register_additional_checkout_field( array(
 
 ---
 
-## Task 7: HC-225 — Block integration: Autofill City after Postcode
+## Task 7: DEV-225 — Block integration: Autofill City after Postcode
 
-**Linear:** https://linear.app/surbma/issue/HC-225
+**Linear:** https://linear.app/surbma/issue/DEV-225/block-integration-autofill-city-after-postcode-is-given
 **JS fájl:** `assets/js/autofill.js`
 
 ### Block checkout implementáció
@@ -190,10 +195,10 @@ woocommerce_register_additional_checkout_field( array(
 
 ---
 
-## Task 8: HC-219/220 — Block integration: Check field formats/values (Pro)
+## Task 8: DEV-219/220 — Block integration: Check field formats/values (Pro)
 
-**HC-219:** https://linear.app/surbma/issue/HC-219
-**HC-220:** https://linear.app/surbma/issue/HC-220
+**DEV-219:** https://linear.app/surbma/issue/DEV-219/block-integration-check-field-formats
+**DEV-220:** https://linear.app/surbma/issue/DEV-220/block-integration-check-field-values
 
 ### Block checkout implementáció
 - `woocommerce_store_api_checkout_validate_order_from_request`
@@ -201,16 +206,16 @@ woocommerce_register_additional_checkout_field( array(
 
 ---
 
-## Task 9: HC-221/222/227/228/229/230 — Cart block features
+## Task 9: DEV-221/222/227/228/229/230 — Cart block features
 
 | Issue | Funkció | Megközelítés |
 |-------|---------|--------------|
-| HC-221 | Empty Cart button | JS slot fill vagy DOM manipulation |
-| HC-222 | Limit Payment Methods | `woocommerce_available_payment_gateways` filter (vizsgálandó) |
-| HC-227 | Coupon field customizations | Block-specifikus hook vizsgálandó |
-| HC-228 | Automatic Cart update | N/A — Cart block auto-frissül, modul letiltja magát |
-| HC-229 | Continue shopping buttons | JS DOM manipulation |
-| HC-230 | Hide shipping methods | `woocommerce_package_rates` filter (vizsgálandó) |
+| [DEV-221](https://linear.app/surbma/issue/DEV-221/block-integration-empty-cart-button) | Empty Cart button | JS slot fill vagy DOM manipulation |
+| [DEV-222](https://linear.app/surbma/issue/DEV-222/block-integration-limit-payment-methods) | Limit Payment Methods | `woocommerce_available_payment_gateways` filter (vizsgálandó) |
+| [DEV-227](https://linear.app/surbma/issue/DEV-227/block-integration-coupon-field-customizations) | Coupon field customizations | Block-specifikus hook vizsgálandó |
+| [DEV-228](https://linear.app/surbma/issue/DEV-228/block-integration-automatic-cart-update) | Automatic Cart update | N/A — Cart block auto-frissül, modul letiltja magát |
+| [DEV-229](https://linear.app/surbma/issue/DEV-229/block-integration-continue-shopping-buttons) | Continue shopping buttons | JS DOM manipulation |
+| [DEV-230](https://linear.app/surbma/issue/DEV-230/block-integration-hide-shipping-methods) | Hide shipping methods | `woocommerce_package_rates` filter (vizsgálandó) |
 
 ---
 
