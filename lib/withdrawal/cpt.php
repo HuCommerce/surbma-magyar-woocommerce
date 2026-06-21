@@ -4,7 +4,7 @@
  * Withdrawal request: custom post type, custom statuses and meta.
  *
  * Data model decision DEV-234: a dedicated, non-public CPT
- * `cps_hc_gems_withdrawal` with an auditable lifecycle.
+ * `cps_hc_gems_withdraw` with an auditable lifecycle.
  */
 
 // Prevent direct access to the plugin

@@ -2,7 +2,8 @@
 
 EU 2023/2673 online withdrawal button as a HuCommerce module.
 
-- **Data model (DEV-234):** dedicated CPT `cps_hc_gems_withdrawal`, statuses
+- **Data model (DEV-234):** dedicated CPT `cps_hc_gems_withdraw` (20-char slug;
+  `CPS_HC_GEMS_WITHDRAWAL_CPT`), statuses
   `wd_pending → wd_accepted/wd_rejected → wd_refunded`, meta `_order_id`, `_scope`
   (whole/partial), `_items`, `_reason`, `_requested_at`, `_processed_at`,
   `_refund_status`.
@@ -16,6 +17,7 @@ EU 2023/2673 online withdrawal button as a HuCommerce module.
   immediately on confirm via WC mailer.
 - **Order email link (DEV-238):** inject tokenized button into processing/completed
   order emails while window open.
-- **Admin (DEV-239):** CPT list with columns + status transitions; order-edit metabox.
+- **Admin (DEV-239):** WooCommerce submenu CPT list (manual `add_submenu_page`, after
+  Orders) with columns + status transitions; order-edit metabox; HPOS-safe order links.
 - Module registered in `cps_hc_gems_get_modules_config()` (`module-withdrawalrequest`,
   type `free_hu` — MVP free; Pro features in DEV-240). WPCS + HPOS-safe.

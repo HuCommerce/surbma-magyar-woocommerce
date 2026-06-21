@@ -1,9 +1,9 @@
 # Specification: Withdrawal Request Module (Elállási kérelem)
 
 > Linear project: [HuCommerce] Modul: Elállási kérelem (team DEV)
-> Branch: `feature/withdrawal-request` (off `develop`)
+> Branch: `cursor/withdrawal-request-storage-3941` (off `develop`; supersedes `feature/withdrawal-request`)
 > Legal basis: EU Directive 2023/2673 (online withdrawal button)
-> Data-model decision: DEV-234 — dedicated CPT `cps_hc_gems_withdrawal`
+> Data-model decision: DEV-234 — dedicated CPT `cps_hc_gems_withdraw`
 
 ## 1. Overview
 
@@ -17,7 +17,7 @@ requirements of EU Directive 2023/2673 ("withdrawal button").
 - **Compliance**: meet all six directive requirements (clear label, no login,
   two-step, immediate automated confirmation, available for the full 14-day window,
   reachable from the order confirmation email).
-- **Auditability**: every request is a `cps_hc_gems_withdrawal` post with a tracked
+- **Auditability**: every request is a `cps_hc_gems_withdraw` post with a tracked
   lifecycle (`pending → accepted/rejected → refunded`).
 - **Convention-fit**: ship as a standard module registered in
   `cps_hc_gems_get_modules_config()`, gated by an option, following the existing
@@ -65,7 +65,7 @@ lib/withdrawal/frontend.php              # endpoint + identification (link/login
 lib/withdrawal/order-lookup.php          # logged-in order list + guest order#+email lookup (window-filtered)
 lib/withdrawal/email-link.php            # inject withdrawal button into order emails
 lib/withdrawal/class-wc-email-withdrawal.php  # WC_Email subclass (confirmation)
-lib/withdrawal/admin-order.php           # order-edit metabox showing linked withdrawals
+lib/withdrawal/admin-order.php           # WooCommerce submenu list + status transitions + order metabox
 templates/withdrawal/form-step-1.php     # identify + per-item checkboxes / whole-order
 templates/withdrawal/form-step-2.php     # explicit confirmation (scope summary)
 templates/withdrawal/confirmation.php    # post-submit thank-you
@@ -76,8 +76,15 @@ The single `modules/withdrawal-request.php` is the only file the loader includes
 intact while allowing internal separation.
 
 ### 3.2 Data model (DEV-234)
-Custom post type **`cps_hc_gems_withdrawal`** (`public => false`, `show_ui => true`,
-`capability_type => shop_order`-style restricted, no front-end single view).
+Custom post type **`cps_hc_gems_withdraw`** (`public => false`, `show_ui => true`,
+`show_in_menu => false`, `capability_type => shop_order`-style restricted, no front-end
+single view).
+
+> **Slug constraint:** WordPress allows post type names up to 20 characters. The
+> conceptual name is “withdrawal”, but the registered slug is shortened to
+> `cps_hc_gems_withdraw` (exactly 20 chars). The longer form
+> `cps_hc_gems_withdrawal` (22 chars) silently fails `register_post_type()` and
+> must not be used. Constant: `CPS_HC_GEMS_WITHDRAWAL_CPT`.
 
 | Meta key | Meaning |
 |----------|---------|
@@ -129,7 +136,7 @@ chosen scope/items, with a single unambiguous confirm action (no silent/auto sub
 Nonce-protected POST.
 
 **On confirm:** re-validate identification + window, compute `_scope`/`_items`, create
-the `cps_hc_gems_withdrawal` post (`wd_pending`), persist meta, fire the confirmation
+the `cps_hc_gems_withdraw` post (`wd_pending`), persist meta, fire the confirmation
 email, show the thank-you template. Duplicate guard: one open request per order; if a
 partial request already exists, only the not-yet-withdrawn items are offered.
 
@@ -148,13 +155,17 @@ partial request already exists, only the not-yet-withdrawn items are offered.
   window is open.
 
 ### 3.7 Admin (DEV-239)
-- CPT admin list with custom columns: order (link), consumer, requested_at, scope
-  (whole/partial), status.
+- CPT admin list under **WooCommerce → Elállási kérelmek**, registered via explicit
+  `add_submenu_page` (not `show_in_menu => 'woocommerce'`), positioned directly after
+  the first Orders entry (`wc-orders` or legacy `edit.php?post_type=shop_order`). Duplicate
+  submenu entries must be avoided when HPOS is enabled.
+- Custom columns: order (link), consumer, requested_at, scope (whole/partial), status.
 - Status transitions from the list/edit screen (accept/reject/refunded), writing
   `_processed_at` / `_refund_status`.
 - Metabox on the order edit screen
   (`woocommerce_admin_order_data_after_order_details`) listing linked withdrawals
   and, for partial requests, the specific withdrawn items + quantities.
+- Order edit links must use `$order->get_edit_order_url()` (HPOS-safe).
 
 ### 3.8 Settings (`$cps_hc_gems_options`)
 `option_key` base `module-withdrawalrequest` plus: button label text, endpoint slug

@@ -8,7 +8,7 @@ Build order is dependency-driven. Linear issue IDs in brackets.
 - [ ] Add module settings to the settings system + `wpml-config.xml` entries.
 
 ## 1. Data model [DEV-234 done → implement]
-- [ ] `lib/withdrawal/cpt.php`: register CPT `cps_hc_gems_withdrawal` (non-public, admin UI).
+- [ ] `lib/withdrawal/cpt.php`: register CPT `cps_hc_gems_withdraw` (non-public, admin UI; max 20-char slug).
 - [ ] Register custom statuses `wd_pending/wd_accepted/wd_rejected/wd_refunded` with localized labels.
 - [ ] Define meta keys `_order_id`, `_reason`, `_requested_at`, `_processed_at`, `_refund_status` (+ email, IP, window-end audit fields).
 
@@ -32,8 +32,8 @@ Build order is dependency-driven. Linear issue IDs in brackets.
 - [ ] `lib/withdrawal/email-link.php`: inject tokenized button into `customer_processing_order`/`customer_completed_order` emails while window open.
 
 ## 6. Admin / persistence [DEV-239]
-- [ ] CPT admin list columns (order, consumer, requested_at, status) + status-transition actions writing `_processed_at`/`_refund_status`.
-- [ ] `lib/withdrawal/admin-order.php`: order-edit metabox listing linked withdrawals.
+- [ ] WooCommerce submenu (`add_submenu_page`, after Orders; dedupe HPOS slugs) + CPT admin list columns (order, consumer, requested_at, status) + status-transition actions writing `_processed_at`/`_refund_status`.
+- [ ] `lib/withdrawal/admin-order.php`: order-edit metabox listing linked withdrawals; HPOS-safe order URLs.
 
 ## 7. Verification
 - [ ] PHPCS clean (`phpcs.xml`).
@@ -43,6 +43,8 @@ Build order is dependency-driven. Linear issue IDs in brackets.
 
 ## Decisions (resolved 2026-06-19)
 - Module `type` = `free_hu` (MVP free; Pro features tracked in DEV-240).
+- CPT slug = `cps_hc_gems_withdraw` (not `cps_hc_gems_withdrawal` — WordPress 20-char limit).
+- Canonical branch = `cursor/withdrawal-request-storage-3941` (supersedes `feature/withdrawal-request`).
 - Endpoint slug default `elallas`; window = 14 days from **delivery date**, fixed in MVP.
 - No admin notification copy in MVP (the CPT log captures it).
 - Identification: 3 paths (link / logged-in order-select / guest order#+email). Partial (per-item) withdrawal is **in the MVP**.
