@@ -633,6 +633,29 @@ function cps_hc_gems_render_menu_modules() {
 				<ul class="cps-form-fields uk-list uk-list-divider">
 					<?php cps_hc_gems_form_field_select( __( 'Product price display', 'surbma-magyar-woocommerce' ), 'catalogmode-productpricedisplay', $catalogmode_productpricedisplay_options, 'none', false, true, true ); ?>
 				</ul>
+			<li>
+				<h3 class="uk-card-title"><?php esc_html_e( 'Withdrawal request (EU 2023/2673)', 'surbma-magyar-woocommerce' ); ?></h3>
+
+				<?php echo wp_kses_post( $pro_notice ); ?>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
+				<ul class="cps-form-fields uk-list uk-list-divider">
+					<?php cps_hc_gems_form_field_text( __( 'Withdrawal button label', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-buttonlabel', __( 'Elállás a szerződéstől', 'surbma-magyar-woocommerce' ), __( 'Label of the withdrawal button shown in order emails.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Endpoint slug', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-slug', 'elallas', __( 'The URL slug of the public withdrawal page (e.g. /elallas/). Save permalinks if links do not resolve.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Add link to Processing order email', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-emailprocessing', __( 'Inject the withdrawal button into the customer Processing order email.', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_checkbox( __( 'Add link to Completed order email', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-emailcompleted', __( 'Inject the withdrawal button into the customer Completed order email.', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Confirmation email subject', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-emailsubject', '', __( 'If empty, a default subject is used.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Confirmation email heading', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-emailheading', '', __( 'If empty, a default heading is used.', 'surbma-magyar-woocommerce' ) ); ?>
+					<li>
+						<div class="uk-alert-primary cps-alert" uk-alert>
+							<p><?php esc_html_e( 'A 14 napos elállási határidő a kézbesítéstől (a rendelés teljesítésének dátumától) számít. A részleges, tételenkénti elállás támogatott. A visszatérítés állapotát az admin felületen kézzel kell beállítani.', 'surbma-magyar-woocommerce' ); ?></p>
+						</div>
+					</li>
+				</ul>
+
+				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Disclaimer', 'surbma-magyar-woocommerce' ); ?></h5>
+				<p><?php esc_html_e( 'HuCommerce modules are tools to comply with local and/or international rules and laws, but it is the webshop owner\'s duty to make sure to comply with all rules and laws! Developers and the owners of HuCommerce take no responsibility for any legal compliance. However our mission is to provide all necessary tools for these challenges.', 'surbma-magyar-woocommerce' ); ?></p>
+			</li>
 			</li>
 		</ul>
 		<div class="uk-text-center uk-margin-top"><input type="submit" class="uk-button uk-button-primary uk-button-large uk-width-large" value="<?php esc_attr_e( 'Save Changes', 'surbma-magyar-woocommerce' ); ?>" /></div>

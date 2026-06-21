@@ -1,0 +1,96 @@
+/* HuCommerce - Withdrawal request (Elállási kérelem) front-end */
+
+.cps-hc-withdrawal {
+	max-width: 760px;
+	margin: 2em auto;
+	padding: 0 1em;
+}
+
+.cps-hc-withdrawal__title {
+	margin-bottom: 0.5em;
+}
+
+.cps-hc-withdrawal__subtitle {
+	margin-top: 1.5em;
+	font-size: 1.2em;
+}
+
+.cps-hc-withdrawal__intro {
+	margin-bottom: 1em;
+}
+
+.cps-hc-withdrawal__notice {
+	margin: 1em 0;
+	padding: 0.75em 1em;
+	border-radius: 4px;
+}
+
+.cps-hc-withdrawal__form .form-row {
+	margin: 0 0 1em;
+}
+
+.cps-hc-withdrawal__form label {
+	display: block;
+	margin-bottom: 0.25em;
+	font-weight: 600;
+}
+
+.cps-hc-withdrawal__form input[type="text"],
+.cps-hc-withdrawal__form input[type="email"],
+.cps-hc-withdrawal__form select,
+.cps-hc-withdrawal__form textarea {
+	width: 100%;
+	max-width: 420px;
+	box-sizing: border-box;
+}
+
+.cps-hc-withdrawal__items {
+	width: 100%;
+	margin: 1em 0;
+	border-collapse: collapse;
+}
+
+.cps-hc-withdrawal__items th,
+.cps-hc-withdrawal__items td {
+	padding: 0.5em;
+	border-bottom: 1px solid #e3e3e3;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.cps-hc-withdrawal__items label {
+	margin: 0;
+	font-weight: 400;
+}
+
+.cps-hc-withdrawal__qty {
+	width: 5em;
+}
+
+.cps-hc-withdrawal__qty-max {
+	margin-left: 0.5em;
+	color: #767676;
+	font-size: 0.9em;
+}
+
+.cps-hc-withdrawal__whole {
+	margin: 1em 0;
+}
+
+.cps-hc-withdrawal__whole label {
+	font-weight: 600;
+}
+
+.cps-hc-withdrawal__legal {
+	margin: 1em 0;
+	color: #555;
+	font-size: 0.95em;
+}
+
+.cps-hc-withdrawal__summary {
+	margin: 1em 0;
+}
+
+.cps-hc-withdrawal__submit--confirm {
+	font-weight: 700;
+}

@@ -64,16 +64,6 @@ function cps_hc_gems_get_modules_config() {
 			'tags' => ['product', 'conversion', 'legal'],
 			'doc_slug' => 'termek-ar-tortenet',
 		],
-		'withdrawal-request' => [
-			'option_key' => 'module-withdrawalrequest',
-			'type' => 'pro_hu',
-			'directory' => 'modules',
-			'title' => __( 'Withdrawal request', 'surbma-magyar-woocommerce' ),
-			'description' => __( 'EU-compliant withdrawal request handling for WooCommerce orders, including request storage and an admin list for shop managers.', 'surbma-magyar-woocommerce' ),
-			'tags' => ['checkout', 'legal'],
-			'doc_slug' => 'elallasi-kerelem',
-			'version_added' => '2026.2.4',
-		],
 
 		// Legacy HU modules
 		'mask-checkout-fields' => [
@@ -232,6 +222,16 @@ function cps_hc_gems_get_modules_config() {
 			'tags' => ['product', 'other'],
 			'doc_slug' => 'katalogus-mod',
 			'version_added' => '3.5.0',
+		],
+		'withdrawal-request' => [
+			'option_key' => 'module-withdrawalrequest',
+			'type' => 'free_hu',
+			'directory' => 'modules',
+			'title' => __( 'Withdrawal request (EU 2023/2673)', 'surbma-magyar-woocommerce' ),
+			'description' => __( 'Online withdrawal button: lets customers exercise their statutory right of withdrawal without logging in, recorded as a status-tracked request.', 'surbma-magyar-woocommerce' ),
+			'tags' => ['checkout', 'legal'],
+			'doc_slug' => 'elallasi-kerelem',
+			'version_added' => '2026.3.0',
 		],
 
 		// Pro modules
