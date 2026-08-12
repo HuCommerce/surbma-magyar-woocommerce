@@ -30,7 +30,11 @@ function cps_hc_gems_withdrawal_load_template( $name, $args = array() ) {
 }
 
 /**
- * Compute the items still withdrawable for an order, honoring existing requests.
+ * Compute the items still withdrawable for an order.
+ *
+ * Interim (task A1): the CPT data layer is gone, the custom-table data layer
+ * (task A3) is not built yet, so every ordered item counts as available. The
+ * duplicate guard returns with the B2 flow rewrite on top of A3.
  *
  * @param WC_Order $order Order object.
  * @return array {
@@ -48,29 +52,13 @@ function cps_hc_gems_withdrawal_get_withdrawable_items( $order ) {
 		return $result;
 	}
 
-	$withdrawn = array();
-
-	foreach ( cps_hc_gems_withdrawal_get_by_order( $order->get_id(), array( 'wd_pending', 'wd_accepted', 'wd_refunded' ) ) as $wd ) {
-		if ( 'whole' === get_post_meta( $wd->ID, '_scope', true ) ) {
-			$result['whole_blocked'] = true;
-			continue;
-		}
-
-		foreach ( cps_hc_gems_withdrawal_get_items( $wd->ID ) as $item_id => $qty ) {
-			$item_id               = absint( $item_id );
-			$withdrawn[ $item_id ] = ( isset( $withdrawn[ $item_id ] ) ? $withdrawn[ $item_id ] : 0 ) + absint( $qty );
-		}
-	}
-
 	foreach ( $order->get_items() as $item_id => $item ) {
-		$ordered   = (int) $item->get_quantity();
-		$already   = isset( $withdrawn[ $item_id ] ) ? $withdrawn[ $item_id ] : 0;
-		$available = $result['whole_blocked'] ? 0 : max( 0, $ordered - $already );
+		$ordered = (int) $item->get_quantity();
 
 		$result['items'][ $item_id ] = array(
 			'name'      => $item->get_name(),
 			'ordered'   => $ordered,
-			'available' => $available,
+			'available' => $ordered,
 		);
 	}
 
@@ -125,7 +113,7 @@ function cps_hc_gems_withdrawal_render() {
 
 		if ( ! $nonce_ok ) {
 			$action = '';
-			$notice = __( 'A munkamenet lejárt. Kérjük, próbálja újra.', 'surbma-magyar-woocommerce' );
+			$notice = __( 'Your session has expired. Please try again.', 'surbma-magyar-woocommerce' );
 		}
 	}
 
@@ -142,8 +130,8 @@ function cps_hc_gems_withdrawal_render() {
 		if ( $candidate instanceof WC_Order && cps_hc_gems_withdrawal_verify_token( $candidate, $link_key ) ) {
 			if ( ! cps_hc_gems_withdrawal_window_is_open( $candidate ) ) {
 				cps_hc_gems_withdrawal_render_message(
-					__( 'Az elállási időszak lejárt', 'surbma-magyar-woocommerce' ),
-					__( 'Erre a rendelésre már lejárt a 14 napos elállási határidő, ezért elállási kérelem nem rögzíthető.', 'surbma-magyar-woocommerce' )
+					__( 'Withdrawal period expired', 'surbma-magyar-woocommerce' ),
+					__( 'The 14-day withdrawal period for this order has expired, so a withdrawal request can no longer be submitted.', 'surbma-magyar-woocommerce' )
 				);
 				return;
 			}
@@ -152,8 +140,8 @@ function cps_hc_gems_withdrawal_render() {
 			$source = 'link';
 		} else {
 			cps_hc_gems_withdrawal_render_message(
-				__( 'Érvénytelen hivatkozás', 'surbma-magyar-woocommerce' ),
-				__( 'Ez az elállási hivatkozás érvénytelen vagy lejárt.', 'surbma-magyar-woocommerce' )
+				__( 'Invalid link', 'surbma-magyar-woocommerce' ),
+				__( 'This withdrawal link is invalid or has expired.', 'surbma-magyar-woocommerce' )
 			);
 			return;
 		}
@@ -170,11 +158,11 @@ function cps_hc_gems_withdrawal_render() {
 				if ( $order ) {
 					$source = 'login';
 				} else {
-					$notice = __( 'A kiválasztott rendelés nem érhető el elálláshoz.', 'surbma-magyar-woocommerce' );
+					$notice = __( 'The selected order is not available for withdrawal.', 'surbma-magyar-woocommerce' );
 				}
 			} elseif ( 'guest' === $src ) {
 				if ( cps_hc_gems_withdrawal_guest_lookup_is_rate_limited() ) {
-					$notice = __( 'Túl sok próbálkozás. Kérjük, próbálja meg később.', 'surbma-magyar-woocommerce' );
+					$notice = __( 'Too many attempts. Please try again later.', 'surbma-magyar-woocommerce' );
 				} else {
 					cps_hc_gems_withdrawal_guest_lookup_register_attempt();
 
@@ -186,7 +174,7 @@ function cps_hc_gems_withdrawal_render() {
 					if ( $order ) {
 						$source = 'guest';
 					} else {
-						$notice = __( 'Nem találtunk a megadott adatokkal elállásra jogosult rendelést.', 'surbma-magyar-woocommerce' );
+						$notice = __( 'We could not find an eligible order matching the details provided.', 'surbma-magyar-woocommerce' );
 					}
 				}
 			}
@@ -205,7 +193,7 @@ function cps_hc_gems_withdrawal_render() {
 
 			if ( ! $order ) {
 				$action = '';
-				$notice = __( 'A munkamenet lejárt. Kérjük, kezdje újra.', 'surbma-magyar-woocommerce' );
+				$notice = __( 'Your session has expired. Please start again.', 'surbma-magyar-woocommerce' );
 			}
 		}
 	}
@@ -213,7 +201,7 @@ function cps_hc_gems_withdrawal_render() {
 	// Open the themed page.
 	get_header();
 	echo '<div class="cps-hc-withdrawal woocommerce">';
-	echo '<h1 class="cps-hc-withdrawal__title">' . esc_html__( 'Elállás a szerződéstől', 'surbma-magyar-woocommerce' ) . '</h1>';
+	echo '<h1 class="cps-hc-withdrawal__title">' . esc_html__( 'Withdraw from contract', 'surbma-magyar-woocommerce' ) . '</h1>';
 
 	if ( $notice ) {
 		echo '<div class="cps-hc-withdrawal__notice woocommerce-error">' . esc_html( $notice ) . '</div>';
@@ -229,7 +217,7 @@ function cps_hc_gems_withdrawal_render() {
 		$identity     = cps_hc_gems_withdrawal_identity_fields( $order, $source );
 
 		if ( ! cps_hc_gems_withdrawal_has_available_items( $withdrawable ) ) {
-			echo '<div class="cps-hc-withdrawal__notice woocommerce-info">' . esc_html__( 'Erre a rendelésre már nincs elállásra jelölhető tétel.', 'surbma-magyar-woocommerce' ) . '</div>';
+			echo '<div class="cps-hc-withdrawal__notice woocommerce-info">' . esc_html__( 'There are no items left to withdraw on this order.', 'surbma-magyar-woocommerce' ) . '</div>';
 		} elseif ( 'confirm' === $action ) {
 			cps_hc_gems_withdrawal_process_confirm( $order, $source, $withdrawable, $identity );
 		} elseif ( 'select' === $action ) {
@@ -295,7 +283,7 @@ function cps_hc_gems_withdrawal_parse_selection( $withdrawable ) {
 		// A whole-order request is only valid when nothing has been withdrawn yet.
 		foreach ( $withdrawable['items'] as $item_id => $item ) {
 			if ( $item['available'] !== $item['ordered'] ) {
-				$result['error'] = __( 'Erre a rendelésre már létezik részleges elállási kérelem, ezért a teljes rendelésre nem nyújtható be.', 'surbma-magyar-woocommerce' );
+				$result['error'] = __( 'A partial withdrawal request already exists for this order, so a whole-order withdrawal cannot be submitted.', 'surbma-magyar-woocommerce' );
 				return $result;
 			}
 		}
@@ -329,7 +317,7 @@ function cps_hc_gems_withdrawal_parse_selection( $withdrawable ) {
 	}
 
 	if ( empty( $result['items'] ) ) {
-		$result['error'] = __( 'Kérjük, jelöljön ki legalább egy terméket, vagy válassza a teljes rendelést.', 'surbma-magyar-woocommerce' );
+		$result['error'] = __( 'Please select at least one product, or choose the whole order.', 'surbma-magyar-woocommerce' );
 	}
 
 	return $result;
@@ -395,7 +383,15 @@ function cps_hc_gems_withdrawal_process_confirm( $order, $source, $withdrawable,
 		return;
 	}
 
-	$post_id = cps_hc_gems_withdrawal_create( array(
+	// Interim (task A1): the CPT data layer is gone and the custom-table data
+	// layer (task A3) is not built yet, so the request cannot be stored. The
+	// full confirm handler (create + confirm + email) returns in task B2.
+	if ( ! function_exists( 'cps_hc_gems_withdrawal_create_case' ) ) {
+		echo '<div class="cps-hc-withdrawal__notice woocommerce-error">' . esc_html__( 'We could not save your request. Please try again.', 'surbma-magyar-woocommerce' ) . '</div>';
+		return;
+	}
+
+	$case_id = cps_hc_gems_withdrawal_create_case( array(
 		'order_id'        => $order->get_id(),
 		'scope'           => $selection['scope'],
 		'items'           => $selection['items'],
@@ -403,11 +399,10 @@ function cps_hc_gems_withdrawal_process_confirm( $order, $source, $withdrawable,
 		'consumer_email'  => $order->get_billing_email(),
 		'consumer_ip'     => cps_hc_gems_withdrawal_get_remote_ip(),
 		'identify_method' => $source,
-		'window_end'      => gmdate( 'Y-m-d H:i:s', cps_hc_gems_withdrawal_get_window_end( $order ) ),
 	) );
 
-	if ( is_wp_error( $post_id ) ) {
-		echo '<div class="cps-hc-withdrawal__notice woocommerce-error">' . esc_html__( 'A kérelem rögzítése nem sikerült. Kérjük, próbálja újra.', 'surbma-magyar-woocommerce' ) . '</div>';
+	if ( is_wp_error( $case_id ) || ! $case_id ) {
+		echo '<div class="cps-hc-withdrawal__notice woocommerce-error">' . esc_html__( 'We could not save your request. Please try again.', 'surbma-magyar-woocommerce' ) . '</div>';
 		return;
 	}
 
@@ -416,13 +411,13 @@ function cps_hc_gems_withdrawal_process_confirm( $order, $source, $withdrawable,
 	 *
 	 * @since 2026.3.0
 	 *
-	 * @param int $post_id The stored withdrawal post ID.
+	 * @param int $case_id The stored withdrawal case ID.
 	 */
-	do_action( 'cps_hc_gems_withdrawal_send_confirmation', $post_id );
+	do_action( 'cps_hc_gems_withdrawal_send_confirmation', $case_id );
 
 	cps_hc_gems_withdrawal_load_template( 'confirmation.php', array(
 		'order'     => $order,
-		'post_id'   => $post_id,
+		'case_id'   => $case_id,
 		'selection' => $selection,
 	) );
 }

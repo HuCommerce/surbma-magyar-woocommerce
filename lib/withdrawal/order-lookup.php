@@ -77,15 +77,38 @@ function cps_hc_gems_withdrawal_get_user_orders( $user_id ) {
 		return array();
 	}
 
-	$orders = wc_get_orders( array(
+	$statuses = array_map( static function ( $status ) {
+		return 'wc-' . $status;
+	}, cps_hc_gems_withdrawal_eligible_order_statuses() );
+
+	$query_args = array(
+		'status'  => $statuses,
+		'limit'   => 50,
+		'orderby' => 'date',
+		'order'   => 'DESC',
+	);
+
+	$by_id = wc_get_orders( array_merge( $query_args, array(
 		'customer_id' => $user_id,
-		'status'      => array_map( static function ( $status ) {
-			return 'wc-' . $status;
-		}, cps_hc_gems_withdrawal_eligible_order_statuses() ),
-		'limit'       => 50,
-		'orderby'     => 'date',
-		'order'       => 'DESC',
-	) );
+	) ) );
+
+	$orders = array();
+
+	foreach ( $by_id as $order ) {
+		$orders[ $order->get_id() ] = $order;
+	}
+
+	$user = get_userdata( $user_id );
+
+	if ( $user instanceof WP_User && is_email( $user->user_email ) ) {
+		$by_email = wc_get_orders( array_merge( $query_args, array(
+			'billing_email' => $user->user_email,
+		) ) );
+
+		foreach ( $by_email as $order ) {
+			$orders[ $order->get_id() ] = $order;
+		}
+	}
 
 	$eligible = array();
 
@@ -94,6 +117,22 @@ function cps_hc_gems_withdrawal_get_user_orders( $user_id ) {
 			$eligible[] = $order;
 		}
 	}
+
+	usort(
+		$eligible,
+		static function ( $a, $b ) {
+			$a_date = $a->get_date_created();
+			$b_date = $b->get_date_created();
+			$a_ts   = $a_date ? $a_date->getTimestamp() : 0;
+			$b_ts   = $b_date ? $b_date->getTimestamp() : 0;
+
+			if ( $a_ts === $b_ts ) {
+				return 0;
+			}
+
+			return ( $b_ts < $a_ts ) ? -1 : 1;
+		}
+	);
 
 	return $eligible;
 }
@@ -120,7 +159,15 @@ function cps_hc_gems_withdrawal_resolve_login_order( $order_id, $user_id ) {
 	}
 
 	if ( (int) $order->get_customer_id() !== $user_id ) {
-		return null;
+		$user = get_userdata( $user_id );
+
+		if ( ! $user instanceof WP_User || ! is_email( $user->user_email ) ) {
+			return null;
+		}
+
+		if ( strtolower( $order->get_billing_email() ) !== strtolower( $user->user_email ) ) {
+			return null;
+		}
 	}
 
 	if ( ! cps_hc_gems_withdrawal_order_is_eligible( $order ) ) {

@@ -1,205 +1,434 @@
 # Specification: Withdrawal Request Module (Elállási kérelem)
 
 > Linear project: [HuCommerce] Modul: Elállási kérelem (team DEV)
-> Branch: `cursor/withdrawal-request-storage-3941` (off `develop`; supersedes `feature/withdrawal-request`)
+> Branch: `cursor/withdrawal-request-storage-3941` (off `develop`)
 > Legal basis: EU Directive 2023/2673 (online withdrawal button)
-> Data-model decision: DEV-234 — dedicated CPT `cps_hc_gems_withdraw`
+> Reference implementation (logic/structure only, NO code copying):
+> https://github.com/uptools-io/elallas-for-woo (v1.0.12, inspected 2026-07-08)
+> Data-model decision (2026-07-08, supersedes DEV-234 CPT decision): **custom DB
+> tables** with own `cps_hc_gems_wd_*` prefix, column-identical to the reference
+> schema. The previous CPT (`cps_hc_gems_withdraw`) data layer is removed.
 
 ## 1. Overview
 
 ### 1.1 Purpose
-Add a self-contained HuCommerce module that lets a consumer exercise their statutory
-right of withdrawal entirely online, without logging in, and that records each
-request as a first-class, status-tracked entity. This implements the six technical
-requirements of EU Directive 2023/2673 ("withdrawal button").
+A self-contained HuCommerce module that lets a consumer exercise their statutory
+right of withdrawal entirely online, without logging in, and records each request
+as a first-class, status-tracked **case** with an order snapshot, an append-only
+audit log and privacy controls. Implements the six technical requirements of EU
+Directive 2023/2673 and is designed for painless migration from the reference
+plugin "Elállás for WooCommerce".
 
-### 1.2 Goals
-- **Compliance**: meet all six directive requirements (clear label, no login,
-  two-step, immediate automated confirmation, available for the full 14-day window,
-  reachable from the order confirmation email).
-- **Auditability**: every request is a `cps_hc_gems_withdraw` post with a tracked
-  lifecycle (`pending → accepted/rejected → refunded`).
-- **Convention-fit**: ship as a standard module registered in
-  `cps_hc_gems_get_modules_config()`, gated by an option, following the existing
-  `cps_hc_gems_` prefix, `$cps_hc_gems_options` settings, WPCS, and HPOS-safe order
-  access.
+### 1.2 Goals (MVP / round 1)
+- **Compliance**: clear label ("Elállás a szerződéstől"), no login required,
+  two-step flow with explicit confirmation, immediate automated durable-medium
+  email, available for the full withdrawal window, reachable from the order
+  confirmation email.
+- **Case management**: dedicated withdrawal page + `[elallas_form]` /
+  `[elallas_button]` shortcodes, My Account `withdrawals` endpoint, order-page
+  button, `?order=ID` preselection, tokenized email link.
+- **Full / partial / per-item / per-quantity withdrawal** with an order snapshot
+  (names, SKUs, quantities, totals frozen at submission).
+- **Deadline marking, never blocking**: the window (default 14 days) is computed
+  and flagged (`within` / `expired` / `unknown`); expired or unknown cases are
+  still accepted and routed to manual review — the merchant decides.
+- **Neutral identification**: wrong order number / email / rate-limit all return
+  one identical generic message (no enumeration).
+- **Admin case manager** under WooCommerce: filterable list, detail view
+  (summary incl. encrypted bank account, declaration, snapshot, audit log,
+  decision), bulk actions, CSV export, order-edit panel.
+- **Privacy controls**: IP/UA full|hash|off, email hash + optional encryption,
+  encrypted bank account (AES-256-GCM), configurable retention with scheduled
+  anonymization.
+- **Competing-plugin guard**: detect installed withdrawal plugins (first:
+  elallas-for-woo) and warn **even while this module is disabled**; mutual
+  exclusion with a one-click deactivate button when both are active.
+- Multilingual-ready (translatable option strings, translated page ID),
+  HPOS-compatible (plugin already declares compatibility; all order access via
+  CRUD).
 
-### 1.3 Non-Goals
-- Automated refund execution in the payment gateway (status `refunded` is set
-  manually by the shop in v1; gateway automation is a later iteration).
-- Integration with external return services (that is the parked DEV-232 track).
-- Cart & Checkout Blocks UI (plugin uses traditional templates).
-
-> **Note:** Per-line-item (partial) withdrawal **is in the MVP** — see §3.4. Only the
-> automated gateway refund of the selected items is deferred.
+### 1.3 Non-Goals (round 2 — separate projects, roughly weekly cadence)
+- PDF withdrawal statement (dompdf, SHA-256, token-protected download) — the
+  `documents` table ships now but stays empty; the My Account PDF column appears
+  with this round.
+- Gutenberg block + Elementor widget (both delegate to `[elallas_form]`).
+- B2B detection and product/category/tag withdrawal exceptions.
+- Onboarding wizard (auto-create the withdrawal page etc.).
+- REST API endpoints.
+- Billing (Számlázz.hu / Billingo / NAV) and carrier delivery-date integrations.
+- Importer from other withdrawal plugins (`lw_elallas_*` tables → our tables;
+  by design a plain row copy, see §3.9).
+- Automated gateway refunds; Cart/Checkout Blocks UI.
 
 ## 2. Current State Analysis
 
-### 2.1 Relevant conventions (from the existing codebase)
-| Concern | Existing pattern | Source |
-|---------|------------------|--------|
-| Module registration | entry in `cps_hc_gems_get_modules_config()` (`option_key`, `type`, `directory`, `title`, `description`, `tags`, `doc_slug`) | `lib/modules.php` |
-| Module loading | `include_once CPS_HC_GEMS_DIR . '/' . directory . '/' . file` when option enabled; `frontend_only` / `is_admin()` gating | `lib/modules.php` |
-| Settings | global `$cps_hc_gems_options` array keyed by `option_key` | all modules |
-| Hooks | static anonymous functions, named `cps_hc_gems_*` for reusable functions | `modules/*.php` |
-| Order meta (admin display) | `woocommerce_admin_order_data_after_billing_address`, `$order->get_meta()` | `modules/legal-checkout.php` |
-| Order meta (write) | `$order->add_meta_data()` on `woocommerce_checkout_create_order` | `modules/legal-checkout.php` |
-| Nonces | `check_ajax_referer()` before reads of `$_POST` | `modules/legal-checkout.php` |
-| Text domain | `surbma-magyar-woocommerce` | all |
-| HPOS | declared compatible; use CRUD (`wc_get_order`, `$order->get_meta`) | `agent-os/product/tech-stack.md` |
+The branch contains a working CPT-based first iteration. Disposition:
 
-### 2.2 New ground (no internal precedent)
-This is the first module to introduce a **custom post type**, **custom post
-statuses**, a **transactional `WC_Email` subclass**, and a **login-free front-end
-endpoint**. These are standard WordPress/WooCommerce APIs; the spec defines the
-patterns the module establishes for the plugin.
+| Existing file | Disposition |
+|---|---|
+| `lib/withdrawal/cpt.php` | **Delete.** Replaced by `schema.php` + `data.php` (custom tables). |
+| `modules/withdrawal-request.php` | **Rewrite.** Remove the `CPS_HC_GEMS_WITHDRAWAL_DEBUG_LEVEL` bisection scaffold; add guard check + schema check. |
+| `lib/withdrawal/token.php` | **Keep.** HMAC email-link token (the reference has no equivalent; this is our extra directive-compliance path). Meta key `_cps_hc_gems_withdrawal_token` unchanged. |
+| `lib/withdrawal/order-lookup.php` | **Rework.** Neutral errors, option-driven eligible statuses, never-block window handling. |
+| `lib/withdrawal/frontend.php` | **Rewrite.** Stateless 3-step flow (identify → select → confirm), consents, bank account, honeypot; writes to the new data layer. |
+| `lib/withdrawal/email-link.php` | **Keep** (minor: read new settings). |
+| `lib/withdrawal/class-wc-email-withdrawal.php` | **Extend.** Becomes the customer confirmation; two new email classes added (admin notification, status update). |
+| `lib/withdrawal/admin-order.php` | **Replace** with `admin.php` (WP_List_Table on custom tables). The CPT columns/metabox code goes away; the order-edit panel concept stays. |
+| `templates/withdrawal/*`, `assets/css/withdrawal.css` | **Rework/extend** (new steps + my-account template). |
+| Settings keys in `settings-defaults.php` / `settings-validate.php` / `pages/menu-modules.php` | **Extend** per §6. Default slug changes `cps-hc-gems-withdraw` → `elallas`. |
+
+Removed behaviors: "window closed → no record" hard block (now: never block,
+flag + manual review); CPT statuses `wd_*`; the stale Pro-notice on the module
+card (module is `free_hu`).
 
 ## 3. Architecture
 
 ### 3.1 Files
 ```
-modules/withdrawal-request.php          # module entry: option-gated bootstrap
-lib/withdrawal/cpt.php                   # CPT + custom statuses + admin columns
-lib/withdrawal/token.php                 # tokenized-link generation + validation (14-day window)
-lib/withdrawal/frontend.php              # endpoint + identification (link/login/guest) + item-select + submit
-lib/withdrawal/order-lookup.php          # logged-in order list + guest order#+email lookup (window-filtered)
-lib/withdrawal/email-link.php            # inject withdrawal button into order emails
-lib/withdrawal/class-wc-email-withdrawal.php  # WC_Email subclass (confirmation)
-lib/withdrawal/admin-order.php           # WooCommerce submenu list + status transitions + order metabox
-templates/withdrawal/form-step-1.php     # identify + per-item checkboxes / whole-order
-templates/withdrawal/form-step-2.php     # explicit confirmation (scope summary)
-templates/withdrawal/confirmation.php    # post-submit thank-you
-assets/css/withdrawal.css                # minimal front-end styling
+modules/withdrawal-request.php        # bootstrap: guard check, schema check, require parts
+lib/withdrawal/guard.php              # competing-plugin detection + mutual exclusion (loaded ALWAYS in admin, see §3.8)
+lib/withdrawal/schema.php             # table names, dbDelta SQL, install/upgrade (db-version option)
+lib/withdrawal/data.php               # case/item/event/document CRUD ($wpdb, prepared statements)
+lib/withdrawal/security.php           # encrypt/decrypt/hash + rate limiter + honeypot
+lib/withdrawal/deadline.php           # deadline calculation (never blocks) + case-number generator
+lib/withdrawal/token.php              # KEPT: per-order HMAC token for the email link
+lib/withdrawal/order-lookup.php       # identification helpers (login/guest), eligibility
+lib/withdrawal/frontend.php           # page rendering, shortcodes, stateless 3-step flow
+lib/withdrawal/my-account.php         # NEW: `withdrawals` My Account endpoint + order-page button
+lib/withdrawal/emails.php             # registers the 3 WC_Email classes + trigger wiring
+lib/withdrawal/class-wc-email-withdrawal.php         # customer confirmation (id cps_hc_gems_withdrawal)
+lib/withdrawal/class-wc-email-withdrawal-admin.php   # admin notification
+lib/withdrawal/class-wc-email-withdrawal-status.php  # status update
+lib/withdrawal/email-link.php         # KEPT: tokenized button in order emails
+lib/withdrawal/admin.php              # cases list (WP_List_Table), case detail, bulk, CSV, order-edit panel
+lib/withdrawal/privacy.php            # retention cron + anonymization
+templates/withdrawal/identify.php     # entry: prefilled email / order picker / guest lookup
+templates/withdrawal/select.php       # step 1: per-item qty selection or whole order
+templates/withdrawal/confirm.php      # step 2: summary + 3 consents + bank account + note
+templates/withdrawal/success.php      # case number + received-at confirmation
+templates/withdrawal/denied.php       # single neutral error view
+templates/withdrawal/my-account.php   # case list for the endpoint
+templates/withdrawal/email-*.php      # HTML+plain templates for the 3 emails
+assets/css/withdrawal.css             # front-end styling (kept, extended)
 ```
-The single `modules/withdrawal-request.php` is the only file the loader includes; it
-`require_once`s the `lib/withdrawal/*` parts. This keeps the module-registry contract
-intact while allowing internal separation.
+`modules/withdrawal-request.php` is the only file the module loader includes
+(registry contract intact); it `require_once`s the parts, splitting on
+`is_admin()` where appropriate. Function prefix stays `cps_hc_gems_withdrawal_`.
 
-### 3.2 Data model (DEV-234)
-Custom post type **`cps_hc_gems_withdraw`** (`public => false`, `show_ui => true`,
-`show_in_menu => false`, `capability_type => shop_order`-style restricted, no front-end
-single view).
+### 3.2 Data model — 4 custom tables
+Names via `$wpdb->prefix`:
+`cps_hc_gems_wd_cases`, `cps_hc_gems_wd_case_items`, `cps_hc_gems_wd_events`,
+`cps_hc_gems_wd_documents`. Columns, types, defaults and indexes are
+**column-identical to the reference schema** (so the round-2 importer is a row
+copy):
 
-> **Slug constraint:** WordPress allows post type names up to 20 characters. The
-> conceptual name is “withdrawal”, but the registered slug is shortened to
-> `cps_hc_gems_withdraw` (exactly 20 chars). The longer form
-> `cps_hc_gems_withdrawal` (22 chars) silently fails `register_post_type()` and
-> must not be used. Constant: `CPS_HC_GEMS_WITHDRAWAL_CPT`.
+**`cps_hc_gems_wd_cases`**
+```
+id BIGINT(20) UNSIGNED AUTO_INCREMENT PK
+case_number VARCHAR(32) NOT NULL, UNIQUE KEY
+order_id BIGINT(20) UNSIGNED NOT NULL, KEY
+order_number VARCHAR(64) NOT NULL DEFAULT ''
+customer_id BIGINT(20) UNSIGNED NOT NULL DEFAULT 0, KEY
+customer_email_hash CHAR(64) NOT NULL DEFAULT ''
+customer_email_encrypted TEXT NULL
+status VARCHAR(32) NOT NULL DEFAULT 'received', KEY
+withdrawal_type VARCHAR(10) NOT NULL DEFAULT 'full'
+submitted_at DATETIME NULL
+confirmed_at DATETIME NULL
+deadline_status VARCHAR(16) NOT NULL DEFAULT 'unknown', KEY
+order_created_at DATETIME NULL
+order_completed_at DATETIME NULL
+delivery_date DATETIME NULL
+ip_hash VARCHAR(64) NOT NULL DEFAULT ''
+user_agent_hash VARCHAR(64) NOT NULL DEFAULT ''
+source_url VARCHAR(255) NOT NULL DEFAULT ''
+language VARCHAR(12) NOT NULL DEFAULT ''
+assigned_admin_id BIGINT(20) UNSIGNED NOT NULL DEFAULT 0
+customer_note TEXT NULL
+bank_account_encrypted TEXT NULL
+created_at DATETIME NOT NULL
+updated_at DATETIME NOT NULL
+```
 
-| Meta key | Meaning |
-|----------|---------|
-| `_order_id` | linked WooCommerce order ID |
-| `_scope` | `whole` or `partial` |
-| `_items` | for `partial`: map of `order_item_id => qty` being withdrawn (empty/all for `whole`) |
-| `_reason` | optional consumer-stated reason |
-| `_requested_at` | submission timestamp (GMT) |
-| `_processed_at` | timestamp of accept/reject |
-| `_refund_status` | free/short status string for the refund step |
+**`cps_hc_gems_wd_case_items`** — the order snapshot:
+```
+id PK; case_id BIGINT UNSIGNED NOT NULL, KEY
+order_item_id, product_id, variation_id BIGINT UNSIGNED DEFAULT 0
+product_name_snapshot VARCHAR(255) DEFAULT ''
+sku_snapshot VARCHAR(100) DEFAULT ''
+qty_ordered INT DEFAULT 0; qty_withdrawn INT DEFAULT 0
+line_total_snapshot DECIMAL(19,4) DEFAULT 0
+tax_total_snapshot DECIMAL(19,4) DEFAULT 0
+eligibility_flag VARCHAR(20) DEFAULT 'eligible'
+eligibility_note VARCHAR(255) DEFAULT ''
+```
 
-Additional stored fields for the audit trail: consumer email (from order),
-submission IP, the identification method used (link / logged-in / guest-lookup), and
-the order's withdrawal-window end date.
+**`cps_hc_gems_wd_events`** — append-only audit log (no UPDATE/DELETE ever):
+```
+id PK; case_id KEY; event_type VARCHAR(50) NOT NULL
+actor_type VARCHAR(20) DEFAULT 'system'   # system|customer|admin
+actor_id BIGINT UNSIGNED DEFAULT 0
+message TEXT NULL; metadata_json LONGTEXT NULL; created_at DATETIME NOT NULL
+```
+Event types in MVP: `case_created`, `case_confirmed`, `status_changed`,
+`anonymized`.
 
-Custom post statuses (via `register_post_status`):
-`wd_pending` → `wd_accepted` / `wd_rejected` → `wd_refunded`.
-(Internal slugs are prefixed to avoid collisions; UI labels are localized.)
+**`cps_hc_gems_wd_documents`** — created now, populated in round 2 (PDF):
+```
+id PK; case_id KEY; document_type VARCHAR(50) DEFAULT 'withdrawal_statement'
+file_path VARCHAR(255) DEFAULT ''; file_hash CHAR(64) DEFAULT ''
+token VARCHAR(64) DEFAULT ''; created_at DATETIME NOT NULL
+```
 
-### 3.3 Tokenized access (DEV-236)
-- On order creation (or first email render), generate a per-order token:
-  `hash_hmac('sha256', $order_id . '|' . $order->get_date_created(), wp_salt('auth'))`,
-  stored as order meta `_cps_hc_gems_withdrawal_token` (stable, regenerable).
-- Public URL: front-end rewrite endpoint, e.g. `/{slug}/?order={id}&key={token}`
-  (`slug` configurable, default `elallas`). Resolved on `template_redirect`.
-- **Validity window**: 14 days measured from the **delivery date** (fixed in the
-  MVP). Configurable window length/start is a Pro feature (DEV-240). Expired tokens
-  render a clear "withdrawal period ended" message; no record is created.
+**Install/upgrade**: `dbDelta()` in `schema.php`, run from `admin_init` when
+option `cps_hc_gems_wd_db_version` (standalone `wp_options` row) is missing or
+older than the code constant (start at `1.0.0`). No activation hook is available
+(modules toggle via settings), so the version check is the install trigger.
+Multisite: `$wpdb->prefix` is per-site; tables are created per site on first
+admin load with the module enabled.
 
-### 3.4 Front-end flow & identification (DEV-235)
+**Standalone options**: `cps_hc_gems_wd_db_version`,
+`cps_hc_gems_wd_case_counter` (array `[ 'YYYY' => int ]`).
 
-**Identification — three entry paths, all resolving to one order + its items:**
-1. **Tokenized email link** (§3.3): the order is pre-identified by `order` + `key`;
-   no further lookup needed. Works for guests and logged-in users.
-2. **Logged-in customer**: on the withdrawal page, a `select` lists the current
-   user's own orders that are still inside the withdrawal window; the customer picks
-   one. (Restricted to the user's own orders.)
-3. **Guest customer**: order number + billing email act as the identification; on
-   match (and within window) the order's items are shown. Rate-limited + nonce to
-   resist enumeration; generic error on mismatch.
+**Order meta** (all via WC CRUD, HPOS-safe): `_cps_hc_gems_wd_has_case` (`yes`),
+`_cps_hc_gems_wd_case_ids` (int[]), `_cps_hc_gems_wd_deadline_status`,
+`_cps_hc_gems_wd_delivery_date` (deadline input), plus the kept
+`_cps_hc_gems_withdrawal_token`.
 
-**Step 1 — select what to withdraw:** show the order's line items, each with a
-checkbox (and quantity where >1), plus a clearly-labelled **"Withdraw from the whole
-order"** option. Optional reason textarea. Clear labelling throughout
-("Elállás a szerződéstől"). At least one item (or whole-order) must be selected.
+### 3.3 Case lifecycle
+Statuses (same string enums as the reference): `received`, `auto_confirmed`,
+`manual_review`, `accepted`, `rejected`, `awaiting_return`, `goods_received`,
+`refund_pending`, `closed`, `cancelled`. Terminal: `closed`, `rejected`,
+`cancelled`.
 
-**Step 2 — explicit confirmation:** a distinct confirmation screen summarizing the
-chosen scope/items, with a single unambiguous confirm action (no silent/auto submit).
-Nonce-protected POST.
+- Create → `received`; on successful customer confirmation → `auto_confirmed`
+  when `deadline_status = within`, else `manual_review`.
+- Admin may set any valid status (no rigid transition matrix); each change
+  writes a `status_changed` event and fires
+  `do_action( 'cps_hc_gems_withdrawal_status_changed', $case_id, $old, $new, $message )`.
+- `withdrawal_type`: `full` when every order item's full quantity is selected,
+  else `partial`.
+- Case number: `EL-%04d-%06d` (year, per-year sequence from
+  `cps_hc_gems_wd_case_counter`) — same format as the reference so imported and
+  native case numbers form one continuous, unique series.
 
-**On confirm:** re-validate identification + window, compute `_scope`/`_items`, create
-the `cps_hc_gems_withdraw` post (`wd_pending`), persist meta, fire the confirmation
-email, show the thank-you template. Duplicate guard: one open request per order; if a
-partial request already exists, only the not-yet-withdrawn items are offered.
+### 3.4 Deadline — marks, never blocks
+`deadline_status` ∈ `within|expired|unknown`.
+Start date per option `withdrawalrequest-deadlinestart`:
+`order_created` → order created date; `order_completed` (default) → completed
+date ?? paid date ?? created date; `delivery` → order meta
+`_cps_hc_gems_wd_delivery_date` passed through filter
+`cps_hc_gems_withdrawal_delivery_date`; `manual` → null (→ `unknown`).
+`deadline = start + days*86400` (days from option
+`withdrawalrequest-deadlinedays`, default 14, filter
+`cps_hc_gems_withdrawal_deadline_days`). No start date or unparseable →
+`unknown`.
 
-### 3.5 Confirmation email (DEV-237)
-- `CPS_HC_Gems_Withdrawal_Email extends WC_Email`, registered via
-  `woocommerce_email_classes`, recipient = consumer. No admin copy in the MVP (the
-  CPT log captures the request); an admin notification copy is a Pro idea (DEV-240).
-- Sent **immediately and synchronously** on successful confirmation, using the WC
-  mailer so it inherits the shop's email template/branding. Subject/heading
-  configurable.
+**Never blocks** (per brief; deliberately simpler than the reference's
+`expired_handling` option): expired/unknown submissions are accepted, flagged
+in the UI ("A 14 napos elállási határidő ellenőrzést igényel"), and land in
+`manual_review` instead of `auto_confirmed`. The email link (§3.7) is likewise
+always rendered while the module is on; the flag communicates, the merchant
+decides.
 
-### 3.6 Link in order confirmation email (DEV-238)
-- Hook `woocommerce_email_order_details` (or `woocommerce_email_after_order_table`)
-  for `customer_processing_order` / `customer_completed_order`.
-- Inject the clearly-labelled, tokenized withdrawal button, only while the 14-day
-  window is open.
+### 3.5 Identification & front-end flow (stateless, 3 steps)
+Entry points: the withdrawal page (option `withdrawalrequest-pageid`) rendering
+`[elallas_form]`; `[elallas_button]` (label from option, links to the page);
+My Account endpoint; order-page button; tokenized email link; `?order=ID`
+preselection.
 
-### 3.7 Admin (DEV-239)
-- CPT admin list under **WooCommerce → Elállási kérelmek**, registered via explicit
-  `add_submenu_page` (not `show_in_menu => 'woocommerce'`), positioned directly after
-  the first Orders entry (`wc-orders` or legacy `edit.php?post_type=shop_order`). Duplicate
-  submenu entries must be avoided when HPOS is enabled.
-- Custom columns: order (link), consumer, requested_at, scope (whole/partial), status.
-- Status transitions from the list/edit screen (accept/reject/refunded), writing
-  `_processed_at` / `_refund_status`.
-- Metabox on the order edit screen
-  (`woocommerce_admin_order_data_after_order_details`) listing linked withdrawals
-  and, for partial requests, the specific withdrawn items + quantities.
-- Order edit links must use `$order->get_edit_order_url()` (HPOS-safe).
+**Statelessness**: no session/transient. Every step re-POSTs the full state in
+hidden fields and the handler **re-validates everything** (order resolution,
+eligibility, remaining quantities) on each step. Nonce action
+`cps_hc_gems_withdrawal` on every POST; honeypot + signed-timestamp field;
+rate limiting per §4.
 
-### 3.8 Settings (`$cps_hc_gems_options`)
-`option_key` base `module-withdrawalrequest` plus: button label text, endpoint slug
-(default `elallas`), which order statuses receive the email link, email
-subject/heading. Window length is fixed at 14 days from delivery in the MVP
-(configurability + admin-notification toggle are Pro — DEV-240).
+- **Identify**: logged-in users get their email prefilled and a `<select>` of
+  their own eligible orders (max 20, newest first; ownership enforced — a
+  logged-in user can never act on another account's order), and may always type
+  an order number + email manually instead (covers guest orders placed with
+  another address). Guests: order number + billing email. Tokenized link
+  (`order` + `key`, validated via `token.php`) skips this step entirely.
+  `?order=ID` preselects the order in the picker / prefills the field.
+- **Step 1 — select**: the order's line items with a quantity input per item
+  (remaining withdrawable qty = ordered − already covered by non-terminal
+  cases; duplicate guard) plus a "whole order" shortcut. ≥1 unit required.
+- **Step 2 — confirm**: summary of the selection, the legal declaration text,
+  **three required consent checkboxes** (data accuracy, withdrawal intent,
+  data-processing consent), optional bank account / IBAN (encrypted at rest)
+  and optional free-text note. Single explicit confirm button.
+- **On confirm**: re-validate, build the snapshot rows, insert case
+  (`received`) + items + `case_created` event, then confirm → status per §3.3,
+  `case_confirmed` event, `confirmed_at = current_time('mysql', true)`, order
+  meta updated, `do_action( 'cps_hc_gems_withdrawal_confirmed', $case_id )`
+  (fires the emails), render `success.php` with case number + exact receipt
+  timestamp.
+- **Neutral errors**: any failure to identify (bad order#, bad email, rate
+  limit, ineligible status) renders the same `denied.php` with one generic
+  message. Never reveal which field was wrong.
 
-## 4. Security & Compliance
-- Token is HMAC-derived, not guessable; validated on every request; bound to order
-  and window.
-- All `$_POST`/`$_GET` reads sanitized; all output escaped (WPCS clean, `phpcs.xml`).
-- Nonce on the confirm POST in addition to the token (defense in depth).
-- Capability checks (`edit_shop_orders`) on all admin actions.
-- No PII beyond what the order already holds; IP stored only for the audit trail.
-- WPML: register strings; `wpml-config.xml` updated for new options.
+### 3.6 Emails (durable medium)
+Three `WC_Email` subclasses registered via `woocommerce_email_classes`
+(instantiated lazily inside the registration callback, current pattern kept),
+`template_base = CPS_HC_GEMS_DIR . '/templates/withdrawal/'` (theme-overridable
+via `wc_get_template_html`), placeholders `{case_number}`, `{order_number}`:
 
-## 5. Module type (decided)
-`type => 'free_hu'`. The MVP withdrawal feature is **free** (EU/HU legal-compliance,
-consistent with the free `legal-checkout` module). Pro features are tracked
-separately in DEV-240 and ship later.
+| Class | id | Recipient | Trigger |
+|---|---|---|---|
+| `CPS_HC_Gems_Withdrawal_Email` | `cps_hc_gems_withdrawal` | customer | `cps_hc_gems_withdrawal_confirmed` |
+| `CPS_HC_Gems_Withdrawal_Email_Admin` | `cps_hc_gems_withdrawal_admin` | admin (option, fallback default) | `cps_hc_gems_withdrawal_confirmed` |
+| `CPS_HC_Gems_Withdrawal_Email_Status` | `cps_hc_gems_withdrawal_status` | customer | `cps_hc_gems_withdrawal_status_changed` (+ optional admin message) |
 
-## 6. Out-of-scope / later iterations (Pro — DEV-240)
-- Configurable withdrawal window, admin notification copy, gateway-automated refunds
-  of the selected items, CSV export of the withdrawal register, reminder emails.
-- External-service integration is the parked DEV-232 track.
-- (Partial / per-item withdrawal is **in the MVP**, see §3.4 — only the automated
-  gateway refund of those items is deferred.)
+Customer confirmation is sent immediately and synchronously on confirm, contains
+the full withdrawal data + the exact receipt timestamp, and appends the
+merchant-editable extra text (option `withdrawalrequest-emailextra`). PDF
+attachment slot arrives in round 2.
 
-## 7. Acceptance (directive mapping)
-| Directive requirement | Covered by |
-|-----------------------|-----------|
-| Clearly labelled | §3.4 / §3.6 |
-| No login required | §3.3 token + §3.4 |
-| Two-step process | §3.4 |
-| Immediate automated confirmation | §3.5 |
-| Available for full 14-day period | §3.3 window |
-| Reachable from order confirmation email | §3.6 |
+### 3.7 Order-email link & order-page button
+- `email-link.php` (kept): tokenized button injected via
+  `woocommerce_email_after_order_table` into `customer_processing_order` /
+  `customer_completed_order` (per-email options). Change from current code: do
+  **not** suppress the button when the window has expired (never-block); the
+  link stays valid, the form flags the deadline.
+- Order-page button (`my-account.php`): a "Elállás a szerződéstől" button on the
+  My Account order view (`woocommerce_order_details_after_order_table`) linking
+  to the withdrawal page with `?order=ID` — reachable within two clicks.
+
+### 3.8 Admin
+- **Guard** (`guard.php`): included unconditionally from `lib/modules.php` when
+  `is_admin()` (NOT via the option-gated module loader — it must run while the
+  module is off). Behavior:
+  - Competing plugin active (filterable list
+    `cps_hc_gems_withdrawal_competing_plugins`, initially
+    `[ 'elallas-for-woo/elallas-for-woo.php' ]`) + module **off** → dismissible
+    `admin_notices` recommending the HuCommerce module and stating the other
+    plugin must be deactivated.
+  - Competing plugin active + module **on** → `modules/withdrawal-request.php`
+    loads guard only and returns (no module features run); non-dismissible
+    warning with a one-click **Deactivate** button
+    (`admin_post_cps_hc_gems_withdrawal_deactivate_competitor`, nonce,
+    `current_user_can( 'activate_plugins' )`, `deactivate_plugins()`).
+- **Cases list**: `add_submenu_page( 'woocommerce', …, 'cps-hc-gems-withdrawals',
+  … )`, cap `manage_woocommerce`, custom `WP_List_Table` over
+  `cps_hc_gems_wd_cases`. Columns: case number (→ detail), order (HPOS-safe
+  `$order->get_edit_order_url()`), customer, type, deadline badge, status,
+  submitted. Status filter views + search (case number / order number). Bulk
+  actions: `mark_review`, `mark_accepted`, `mark_rejected`, `mark_closed`,
+  `cancel`. (The old CPT admin-menu breakage does not apply: no CPT is
+  registered anymore, this is a plain submenu page.)
+- **Case detail** (`?page=cps-hc-gems-withdrawals&view=case&case_id=N`):
+  sections — summary (status, deadline, timestamps, identification method,
+  decrypted bank account shown on demand to `manage_woocommerce`), declaration
+  + consents, order snapshot (items, qty, totals, SKU), audit log (read-only),
+  admin decision (status select + optional message → event + status email),
+  documents (placeholder until round 2).
+- **CSV export**: `admin_post_cps_hc_gems_withdrawal_export_csv` (nonce, cap),
+  respects current list filters; columns `case_number, order_number, status,
+  withdrawal_type, deadline_status, submitted_at`.
+- **Order-edit panel**: `woocommerce_admin_order_data_after_order_details` —
+  lists the order's cases (link, status, submitted) built on `data.php`.
+
+### 3.9 Reference compatibility & migration posture
+Own table/option/hook names everywhere, but three things are kept
+**byte-compatible** with the reference so the round-2 importer is a plain row
+copy with working lookups afterwards:
+1. **Schema**: identical columns/types/defaults/enums (§3.2, §3.3).
+2. **Hash derivations**: `hash( $v ) = hash_hmac( 'sha256',
+   strtolower( trim( $v ) ), hash_hmac( 'sha256', 'elallas:hmac',
+   wp_salt( 'auth' ) ) )` for `customer_email_hash` and for IP/UA in `hash`
+   mode. Same site → same `wp_salt('auth')` → imported hashes keep matching.
+3. **Encryption**: AES-256-GCM, key `hash_hmac( 'sha256', 'elallas:cipher',
+   wp_salt( 'auth' ), true )`, payload `base64( iv(12) . tag(16) . ciphertext )`
+   — imported `bank_account_encrypted` / `customer_email_encrypted` blobs stay
+   decryptable.
+Public identifiers are shared by design (both plugins can never run
+simultaneously): shortcodes `[elallas_form]` / `[elallas_button]`, My Account
+endpoint slug `withdrawals` — existing pages/links keep working after a switch.
+Case-number format shared (§3.3); the importer must bump
+`cps_hc_gems_wd_case_counter` past imported sequences.
+
+## 4. Security & Privacy
+- **Nonces** on every state-changing request (front: `cps_hc_gems_withdrawal`;
+  admin: per-action nonces). Capabilities: `manage_woocommerce` for all admin
+  pages/actions; `activate_plugins` for the deactivate button.
+- **SQL**: every query through `$wpdb->prepare()`; table names from
+  `schema.php` helpers only. WPCS clean per `phpcs.xml`.
+- **Rate limiting** (transients): per-IP `10 attempts / 600 s` on identify;
+  per-order `20 / 3600 s` global — both on identify and confirm.
+- **Honeypot**: daily-rotating field name
+  (`cps_hc_gems_wd_hp_` + `substr( hash_hmac( 'sha256', gmdate( 'Y-m-d' ),
+  wp_salt( 'auth' ) ), 0, 12 )`) + signed timestamp field; reject fill-times
+  < 2 s or > 24 h or bad signature — silently render the neutral `denied` view.
+- **PII**: email stored as HMAC hash + optionally encrypted; IP/UA per mode
+  `full|hash|off`; bank account always encrypted; token in email link is
+  HMAC-derived, order-bound, `hash_equals()`-compared.
+- **Retention** (`privacy.php`): option `withdrawalrequest-retentiondays`
+  (0 = keep forever); daily cron `cps_hc_gems_withdrawal_retention` blanks
+  `customer_email_hash`, `customer_email_encrypted`, `ip_hash`,
+  `user_agent_hash`, `source_url`, `customer_note`, `bank_account_encrypted`
+  on cases older than the limit (cases/items/events survive) and logs an
+  `anonymized` event. Cron scheduled on module bootstrap, cleared when the
+  module option turns off.
+- Output escaping everywhere; templates receive pre-built data arrays.
+- Module disable/uninstall never drops the tables in MVP (data retention).
+
+## 5. Module registration
+Existing entry kept: `cps_hc_gems_get_modules_config()['withdrawal-request']`,
+`option_key` `module-withdrawalrequest`, `type => 'free_hu'`, directory
+`modules`, doc_slug `elallasi-kerelem`. The module card's Pro-notice is removed.
+
+## 6. Settings (`$cps_hc_gems_options`, prefix `withdrawalrequest-`)
+Existing keys kept: `module-withdrawalrequest` (0), `-emailprocessing` (1),
+`-emailcompleted` (1), `-buttonlabel` (''), `-emailsubject` (''),
+`-emailheading` (''), `-slug` (**default changes to `elallas`**).
+
+New keys (defaults in parentheses; checkboxes 0/1, selects validated against
+whitelists, texts `wp_filter_nohtml_kses`, textareas `wp_kses_post`):
+`-pageid` (0), `-confirmlabel` (''), `-displayaccount` (1),
+`-displayorderbutton` (1), `-deadlinedays` (14),
+`-deadlinestart` (`order_completed` | `order_created` | `delivery` | `manual`),
+`-eligiblestatuses` (`processing,completed`, comma-separated),
+`-storeip` (`hash` | `full` | `off`), `-storeua` (`hash` | `full` | `off`),
+`-encryptemail` (1), `-retentiondays` (0), `-emailcustomer` (1),
+`-emailadmin` (1), `-emailstatus` (1), `-emailadminrecipient` (''),
+`-emailextra` (''), `-legaldeclaration` (''), `-legalconfirmation` ('').
+Empty label/legal options fall back to built-in translatable defaults
+(default button label: "Elállás a szerződéstől"; confirm: "Elállás
+megerősítése"; declaration/confirmation texts defined in `frontend.php`).
+
+WPML: add the text keys (`buttonlabel`, `confirmlabel`, `emailsubject`,
+`emailheading`, `emailextra`, `legaldeclaration`, `legalconfirmation`) to
+`wpml-config.xml`; resolve `-pageid` through `apply_filters( 'wpml_object_id',
+…, 'page', true )` so WPML/Polylang/TranslatePress serve the translated page.
+
+## 7. Acceptance
+
+### 7.1 EU 2023/2673 directive mapping
+| Requirement | Covered by |
+|---|---|
+| Clearly labelled button/function | §3.5 entry points, §3.7, default labels §6 |
+| No login required | §3.5 guest path + tokenized link §3.7 |
+| Two-step process with explicit confirmation | §3.5 steps 1–2 + consents |
+| Immediate automated confirmation on durable medium | §3.6 customer email with receipt timestamp |
+| Available for the full withdrawal period | §3.4 never-block (link + form always available) |
+| Reachable from the order confirmation email | §3.7 email link |
+
+### 7.2 Brief (first-round bullets) → spec mapping
+| Brief bullet | Spec |
+|---|---|
+| Online page + button, shortcode, account endpoint, order button | §3.5, §3.7 (block/Elementor → round 2) |
+| Guest-friendly identification, `?order=ID`, own-orders picker, cross-account protection | §3.5 |
+| My Account self-service (case list; PDF link in round 2) | §3.8 endpoint via `my-account.php` |
+| Two-step flow, consents, IBAN encrypted, note | §3.5, §4 |
+| Durable-medium email + timestamp + extra text (PDF attach → round 2) | §3.6 |
+| Full/partial/per-item/per-quantity | §3.5 step 1, §3.3 `withdrawal_type` |
+| Deadline marking, never blocks | §3.4 |
+| Order snapshot | §3.2 `case_items` |
+| Append-only audit log | §3.2 `events` |
+| Admin case manager under WooCommerce | §3.8 |
+| CSV export (PDF → round 2) | §3.8 |
+| Neutral identification | §3.5, §4 |
+| Privacy controls (IP/UA, email hash/encrypt, bank account, retention) | §4 |
+| Multilingual | §6 WPML block |
+| HPOS-compatible | plugin-wide declaration + CRUD-only order access |
+| Competing-plugin detection + one-click deactivate + mutual exclusion | §3.8 guard |

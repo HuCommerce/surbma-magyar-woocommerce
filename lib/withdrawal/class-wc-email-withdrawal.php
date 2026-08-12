@@ -56,8 +56,8 @@ function cps_hc_gems_withdrawal_register_email( $emails ) {
 			public function __construct() {
 				$this->id             = 'cps_hc_gems_withdrawal';
 				$this->customer_email = true;
-				$this->title          = __( 'Elállási kérelem visszaigazolása', 'surbma-magyar-woocommerce' );
-				$this->description    = __( 'Visszaigazoló e-mail a vásárlónak, amint elállási kérelmet nyújt be.', 'surbma-magyar-woocommerce' );
+				$this->title          = __( 'Withdrawal request confirmation', 'surbma-magyar-woocommerce' );
+				$this->description    = __( 'Confirmation email sent to the customer when a withdrawal request is submitted.', 'surbma-magyar-woocommerce' );
 
 				$this->template_html  = 'email-confirmation-html.php';
 				$this->template_plain = 'email-confirmation-plain.php';
@@ -81,7 +81,7 @@ function cps_hc_gems_withdrawal_register_email( $emails ) {
 
 				$subject = isset( $cps_hc_gems_options['withdrawalrequest-emailsubject'] ) ? trim( $cps_hc_gems_options['withdrawalrequest-emailsubject'] ) : '';
 
-				return $subject ? $subject : __( 'Elállási kérelmét megkaptuk - #{order_number}', 'surbma-magyar-woocommerce' );
+				return $subject ? $subject : __( 'We received your withdrawal request - #{order_number}', 'surbma-magyar-woocommerce' );
 			}
 
 			/**
@@ -94,27 +94,36 @@ function cps_hc_gems_withdrawal_register_email( $emails ) {
 
 				$heading = isset( $cps_hc_gems_options['withdrawalrequest-emailheading'] ) ? trim( $cps_hc_gems_options['withdrawalrequest-emailheading'] ) : '';
 
-				return $heading ? $heading : __( 'Elállási kérelmét megkaptuk', 'surbma-magyar-woocommerce' );
+				return $heading ? $heading : __( 'We received your withdrawal request', 'surbma-magyar-woocommerce' );
 			}
 
 			/**
-			 * Trigger the email for a stored withdrawal request.
+			 * Trigger the email for a stored withdrawal case.
 			 *
-			 * @param int $withdrawal_id Withdrawal post ID.
+			 * Interim (task A1): the CPT data layer is gone; until the
+			 * custom-table data layer (task A3) and the email rewire (task C1)
+			 * land, the trigger bails out unless the case lookup exists.
+			 *
+			 * @param int $withdrawal_id Withdrawal case ID.
 			 * @return void
 			 */
 			public function trigger( $withdrawal_id ) {
+				if ( ! function_exists( 'cps_hc_gems_withdrawal_get_case' ) ) {
+					return;
+				}
+
 				$this->setup_locale();
 
-				$withdrawal_id = absint( $withdrawal_id );
-				$order_id      = $withdrawal_id ? absint( get_post_meta( $withdrawal_id, '_order_id', true ) ) : 0;
-				$order         = $order_id ? wc_get_order( $order_id ) : false;
+				$withdrawal_id   = absint( $withdrawal_id );
+				$withdrawal_case = $withdrawal_id ? cps_hc_gems_withdrawal_get_case( $withdrawal_id ) : null;
+				$order_id        = $withdrawal_case ? absint( $withdrawal_case->order_id ) : 0;
+				$order           = $order_id ? wc_get_order( $order_id ) : false;
 
-				if ( $order instanceof WC_Order ) {
+				if ( $order instanceof WC_Order && $withdrawal_case ) {
 					$this->object                         = $order;
 					$this->withdrawal_id                  = $withdrawal_id;
-					$this->withdrawal_scope               = (string) get_post_meta( $withdrawal_id, '_scope', true );
-					$this->withdrawal_lines               = $this->build_lines( $order, $withdrawal_id );
+					$this->withdrawal_scope               = (string) $withdrawal_case->withdrawal_type;
+					$this->withdrawal_lines               = $this->build_lines( $order, $withdrawal_id, $withdrawal_case );
 					$this->recipient                      = $order->get_billing_email();
 					$this->placeholders['{order_number}'] = $order->get_order_number();
 				}
@@ -129,24 +138,25 @@ function cps_hc_gems_withdrawal_register_email( $emails ) {
 			/**
 			 * Build a human-readable list of withdrawn items.
 			 *
-			 * @param WC_Order $order         Order object.
-			 * @param int      $withdrawal_id Withdrawal post ID.
+			 * @param WC_Order $order           Order object.
+			 * @param int      $withdrawal_id   Withdrawal case ID.
+			 * @param object   $withdrawal_case Case row.
 			 * @return string[]
 			 */
-			protected function build_lines( $order, $withdrawal_id ) {
-				if ( 'whole' === get_post_meta( $withdrawal_id, '_scope', true ) ) {
-					return array( __( 'Elállás a teljes rendeléstől.', 'surbma-magyar-woocommerce' ) );
+			protected function build_lines( $order, $withdrawal_id, $withdrawal_case ) {
+				if ( 'whole' === (string) $withdrawal_case->withdrawal_type ) {
+					return array( __( 'Withdrawal from the entire order.', 'surbma-magyar-woocommerce' ) );
+				}
+
+				if ( ! function_exists( 'cps_hc_gems_withdrawal_get_case_items' ) ) {
+					return array();
 				}
 
 				$lines = array();
-				$items = cps_hc_gems_withdrawal_get_items( $withdrawal_id );
 
-				foreach ( $items as $item_id => $qty ) {
-					$item = $order->get_item( $item_id );
-					$name = $item ? $item->get_name() : '';
-
+				foreach ( cps_hc_gems_withdrawal_get_case_items( $withdrawal_id ) as $item ) {
 					/* translators: 1: product name, 2: quantity. */
-					$lines[] = sprintf( __( '%1$s - %2$d db', 'surbma-magyar-woocommerce' ), $name, absint( $qty ) );
+					$lines[] = sprintf( __( '%1$s - %2$d pcs', 'surbma-magyar-woocommerce' ), $item->product_name, absint( $item->quantity ) );
 				}
 
 				return $lines;
@@ -190,7 +200,13 @@ function cps_hc_gems_withdrawal_register_email( $emails ) {
 
 	return $emails;
 }
-add_filter( 'woocommerce_email_classes', 'cps_hc_gems_withdrawal_register_email' );
+add_action(
+	'init',
+	static function () {
+		add_filter( 'woocommerce_email_classes', 'cps_hc_gems_withdrawal_register_email' );
+	},
+	20
+);
 
 // Fire the confirmation email immediately and synchronously on confirm.
 add_action( 'cps_hc_gems_withdrawal_send_confirmation', static function ( $withdrawal_id ) {

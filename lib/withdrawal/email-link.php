@@ -58,13 +58,13 @@ add_action( 'woocommerce_email_after_order_table', static function ( $order, $se
 	$label = cps_hc_gems_withdrawal_get_button_label();
 
 	if ( $plain_text ) {
-		echo "\n" . esc_html__( 'Elállási jog', 'surbma-magyar-woocommerce' ) . ":\n";
+		echo "\n" . esc_html__( 'Right of withdrawal', 'surbma-magyar-woocommerce' ) . ":\n";
 		echo esc_html( $label ) . ': ' . esc_url_raw( $url ) . "\n";
 		return;
 	}
 
 	echo '<div style="margin: 24px 0;">';
-	echo '<p style="margin: 0 0 12px;">' . esc_html__( 'A jogszabály szerint Önnek joga van elállni a vásárlástól. Az elálláshoz kattintson az alábbi gombra:', 'surbma-magyar-woocommerce' ) . '</p>';
+	echo '<p style="margin: 0 0 12px;">' . esc_html__( 'By law, you have the right to withdraw from your purchase. Click the button below to start your withdrawal:', 'surbma-magyar-woocommerce' ) . '</p>';
 	echo '<a href="' . esc_url( $url ) . '" style="display: inline-block; padding: 12px 20px; background: #1a1a1a; color: #ffffff; text-decoration: none; border-radius: 4px;">' . esc_html( $label ) . '</a>';
 	echo '</div>';
 }, 20, 4 );

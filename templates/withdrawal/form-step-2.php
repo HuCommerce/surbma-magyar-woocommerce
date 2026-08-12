@@ -27,19 +27,19 @@ $cps_hc_wd_allowed_hidden = array(
 	<?php echo wp_kses( $identity, $cps_hc_wd_allowed_hidden ); ?>
 	<input type="hidden" name="wd_reason" value="<?php echo esc_attr( $reason ); ?>" />
 
-	<h2 class="cps-hc-withdrawal__subtitle"><?php esc_html_e( 'Kérelem megerősítése', 'surbma-magyar-woocommerce' ); ?></h2>
+	<h2 class="cps-hc-withdrawal__subtitle"><?php esc_html_e( 'Confirm request', 'surbma-magyar-woocommerce' ); ?></h2>
 
 	<p class="cps-hc-withdrawal__intro">
 		<?php
 		/* translators: %s: order number. */
-		echo esc_html( sprintf( __( 'Az alábbi elállási kérelmet készül benyújtani a #%s rendeléshez:', 'surbma-magyar-woocommerce' ), $order->get_order_number() ) );
+		echo esc_html( sprintf( __( 'You are about to submit the following withdrawal request for order #%s:', 'surbma-magyar-woocommerce' ), $order->get_order_number() ) );
 		?>
 	</p>
 
 	<?php if ( 'whole' === $selection['scope'] ) : ?>
 		<input type="hidden" name="wd_whole" value="1" />
 		<p class="cps-hc-withdrawal__summary cps-hc-withdrawal__summary--whole">
-			<strong><?php esc_html_e( 'Elállás a teljes rendeléstől.', 'surbma-magyar-woocommerce' ); ?></strong>
+			<strong><?php esc_html_e( 'Withdrawal from the entire order.', 'surbma-magyar-woocommerce' ); ?></strong>
 		</p>
 	<?php else : ?>
 		<ul class="cps-hc-withdrawal__summary cps-hc-withdrawal__summary--items">
@@ -50,7 +50,7 @@ $cps_hc_wd_allowed_hidden = array(
 				<li>
 					<?php
 					/* translators: 1: product name, 2: quantity. */
-					echo esc_html( sprintf( __( '%1$s - %2$d db', 'surbma-magyar-woocommerce' ), $cps_hc_wd_name, $cps_hc_wd_qty ) );
+					echo esc_html( sprintf( __( '%1$s - %2$d pcs', 'surbma-magyar-woocommerce' ), $cps_hc_wd_name, $cps_hc_wd_qty ) );
 					?>
 				</li>
 			<?php endforeach; ?>
@@ -59,14 +59,14 @@ $cps_hc_wd_allowed_hidden = array(
 
 	<?php if ( '' !== $reason ) : ?>
 		<p class="cps-hc-withdrawal__summary-reason">
-			<strong><?php esc_html_e( 'Indoklás:', 'surbma-magyar-woocommerce' ); ?></strong>
+			<strong><?php esc_html_e( 'Reason:', 'surbma-magyar-woocommerce' ); ?></strong>
 			<?php echo esc_html( $reason ); ?>
 		</p>
 	<?php endif; ?>
 
-	<p class="cps-hc-withdrawal__legal"><?php esc_html_e( 'A megerősítés gombra kattintva véglegesen benyújtja elállási kérelmét, és azonnal visszaigazoló e-mailt küldünk.', 'surbma-magyar-woocommerce' ); ?></p>
+	<p class="cps-hc-withdrawal__legal"><?php esc_html_e( 'By clicking confirm, you will permanently submit your withdrawal request and we will send a confirmation email immediately.', 'surbma-magyar-woocommerce' ); ?></p>
 
 	<p class="form-row">
-		<button type="submit" class="button cps-hc-withdrawal__submit cps-hc-withdrawal__submit--confirm"><?php esc_html_e( 'Elállási kérelem megerősítése', 'surbma-magyar-woocommerce' ); ?></button>
+		<button type="submit" class="button cps-hc-withdrawal__submit cps-hc-withdrawal__submit--confirm"><?php esc_html_e( 'Confirm withdrawal request', 'surbma-magyar-woocommerce' ); ?></button>
 	</p>
 </form>

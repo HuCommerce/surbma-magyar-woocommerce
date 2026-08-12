@@ -27,14 +27,14 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 <p>
 	<?php
 	/* translators: %s: customer first name. */
-	echo esc_html( sprintf( __( 'Kedves %s!', 'surbma-magyar-woocommerce' ), $order->get_billing_first_name() ) );
+	echo esc_html( sprintf( __( 'Hi %s!', 'surbma-magyar-woocommerce' ), $order->get_billing_first_name() ) );
 	?>
 </p>
 
 <p>
 	<?php
 	/* translators: %s: order number. */
-	echo esc_html( sprintf( __( 'Megkaptuk a #%s rendeléséhez benyújtott elállási kérelmét. Az alábbi tételeket rögzítettük:', 'surbma-magyar-woocommerce' ), $order->get_order_number() ) );
+	echo esc_html( sprintf( __( 'We received your withdrawal request for order #%s. We recorded the following items:', 'surbma-magyar-woocommerce' ), $order->get_order_number() ) );
 	?>
 </p>
 
@@ -44,7 +44,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email );
 	<?php endforeach; ?>
 </ul>
 
-<p><?php esc_html_e( 'Kérelmét feldolgozzuk, és a visszatérítésről hamarosan tájékoztatjuk.', 'surbma-magyar-woocommerce' ); ?></p>
+<p><?php esc_html_e( 'We will process your request and notify you about the refund soon.', 'surbma-magyar-woocommerce' ); ?></p>
 
 <?php
 /**

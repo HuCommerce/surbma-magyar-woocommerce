@@ -162,7 +162,7 @@ function cps_hc_gems_get_defaults() {
 		'smtppassword'                               => '',
 
 		// Withdrawal request
-		'withdrawalrequest-slug'                     => 'elallas',
+		'withdrawalrequest-slug'                     => 'cps-hc-gems-withdraw',
 		'withdrawalrequest-buttonlabel'              => '',
 		'withdrawalrequest-emailsubject'             => '',
 		'withdrawalrequest-emailheading'             => '',

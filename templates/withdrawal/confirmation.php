@@ -4,7 +4,7 @@
  * Withdrawal request: post-submit thank-you.
  *
  * @var WC_Order $order
- * @var int      $post_id   Stored withdrawal post ID.
+ * @var int      $case_id   Stored withdrawal case ID.
  * @var array    $selection Parsed selection.
  */
 
@@ -13,19 +13,19 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <div class="cps-hc-withdrawal__done">
 	<div class="cps-hc-withdrawal__notice woocommerce-message">
-		<?php esc_html_e( 'Elállási kérelmét rögzítettük. A visszaigazolást e-mailben elküldtük.', 'surbma-magyar-woocommerce' ); ?>
+		<?php esc_html_e( 'Your withdrawal request has been recorded. We sent a confirmation email.', 'surbma-magyar-woocommerce' ); ?>
 	</div>
 
 	<p>
 		<?php
 		/* translators: %s: order number. */
-		echo esc_html( sprintf( __( 'Rendelés: #%s', 'surbma-magyar-woocommerce' ), $order->get_order_number() ) );
+		echo esc_html( sprintf( __( 'Order: #%s', 'surbma-magyar-woocommerce' ), $order->get_order_number() ) );
 		?>
 	</p>
 
 	<?php if ( 'whole' === $selection['scope'] ) : ?>
-		<p><?php esc_html_e( 'Elállás a teljes rendeléstől.', 'surbma-magyar-woocommerce' ); ?></p>
+		<p><?php esc_html_e( 'Withdrawal from the entire order.', 'surbma-magyar-woocommerce' ); ?></p>
 	<?php else : ?>
-		<p><?php esc_html_e( 'Részleges elállás a kiválasztott termékekre.', 'surbma-magyar-woocommerce' ); ?></p>
+		<p><?php esc_html_e( 'Partial withdrawal for the selected products.', 'surbma-magyar-woocommerce' ); ?></p>
 	<?php endif; ?>
 </div>

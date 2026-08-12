@@ -188,7 +188,7 @@ function cps_hc_gems_fields_validate( $input ) {
 	$input['smtphost'] = wp_filter_nohtml_kses( $input['smtphost'] );
 	$input['smtpuser'] = wp_filter_nohtml_kses( $input['smtpuser'] );
 	$input['smtppassword'] = wp_filter_nohtml_kses( $input['smtppassword'] );
-	$input['withdrawalrequest-slug'] = isset( $input['withdrawalrequest-slug'] ) ? sanitize_title( $input['withdrawalrequest-slug'] ) : 'elallas';
+	$input['withdrawalrequest-slug'] = isset( $input['withdrawalrequest-slug'] ) ? sanitize_title( $input['withdrawalrequest-slug'] ) : 'cps-hc-gems-withdraw';
 	$input['withdrawalrequest-buttonlabel'] = isset( $input['withdrawalrequest-buttonlabel'] ) ? wp_filter_nohtml_kses( $input['withdrawalrequest-buttonlabel'] ) : '';
 	$input['withdrawalrequest-emailsubject'] = isset( $input['withdrawalrequest-emailsubject'] ) ? wp_filter_nohtml_kses( $input['withdrawalrequest-emailsubject'] ) : '';
 	$input['withdrawalrequest-emailheading'] = isset( $input['withdrawalrequest-emailheading'] ) ? wp_filter_nohtml_kses( $input['withdrawalrequest-emailheading'] ) : '';

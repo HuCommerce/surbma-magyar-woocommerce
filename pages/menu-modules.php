@@ -640,15 +640,15 @@ function cps_hc_gems_render_menu_modules() {
 
 				<h5 class="uk-heading-divider uk-text-bold"><?php esc_html_e( 'Module settings', 'surbma-magyar-woocommerce' ); ?></h5>
 				<ul class="cps-form-fields uk-list uk-list-divider">
-					<?php cps_hc_gems_form_field_text( __( 'Withdrawal button label', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-buttonlabel', __( 'Elállás a szerződéstől', 'surbma-magyar-woocommerce' ), __( 'Label of the withdrawal button shown in order emails.', 'surbma-magyar-woocommerce' ) ); ?>
-					<?php cps_hc_gems_form_field_text( __( 'Endpoint slug', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-slug', 'elallas', __( 'The URL slug of the public withdrawal page (e.g. /elallas/). Save permalinks if links do not resolve.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Withdrawal button label', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-buttonlabel', __( 'Withdraw from contract', 'surbma-magyar-woocommerce' ), __( 'Label of the withdrawal button shown in order emails.', 'surbma-magyar-woocommerce' ) ); ?>
+					<?php cps_hc_gems_form_field_text( __( 'Endpoint slug', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-slug', 'cps-hc-gems-withdraw', __( 'The URL slug of the public withdrawal page (e.g. /cps-hc-gems-withdraw/). Save permalinks if links do not resolve.', 'surbma-magyar-woocommerce' ) ); ?>
 					<?php cps_hc_gems_form_field_checkbox( __( 'Add link to Processing order email', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-emailprocessing', __( 'Inject the withdrawal button into the customer Processing order email.', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
 					<?php cps_hc_gems_form_field_checkbox( __( 'Add link to Completed order email', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-emailcompleted', __( 'Inject the withdrawal button into the customer Completed order email.', 'surbma-magyar-woocommerce' ), false, false, 1 ); ?>
 					<?php cps_hc_gems_form_field_text( __( 'Confirmation email subject', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-emailsubject', '', __( 'If empty, a default subject is used.', 'surbma-magyar-woocommerce' ) ); ?>
 					<?php cps_hc_gems_form_field_text( __( 'Confirmation email heading', 'surbma-magyar-woocommerce' ), 'withdrawalrequest-emailheading', '', __( 'If empty, a default heading is used.', 'surbma-magyar-woocommerce' ) ); ?>
 					<li>
 						<div class="uk-alert-primary cps-alert" uk-alert>
-							<p><?php esc_html_e( 'A 14 napos elállási határidő a kézbesítéstől (a rendelés teljesítésének dátumától) számít. A részleges, tételenkénti elállás támogatott. A visszatérítés állapotát az admin felületen kézzel kell beállítani.', 'surbma-magyar-woocommerce' ); ?></p>
+							<p><?php esc_html_e( 'The 14-day withdrawal window starts from delivery (the order completion date). Partial, per-item withdrawal is supported. Set the refund status manually in the admin.', 'surbma-magyar-woocommerce' ); ?></p>
 						</div>
 					</li>
 				</ul>
