@@ -47,6 +47,7 @@ function cps_hc_gems_page_modules_nav() {
 			<?php cps_hc_gems_module_nav_item( __( 'Hide shipping methods', 'surbma-magyar-woocommerce' ), 'module-hideshippingmethods' ); ?>
 			<?php cps_hc_gems_module_nav_item( __( 'SMTP service', 'surbma-magyar-woocommerce' ), 'module-smtp' ); ?>
 			<?php cps_hc_gems_module_nav_item( __( 'Catalog mode', 'surbma-magyar-woocommerce' ), 'module-catalogmode' ); ?>
+			<?php cps_hc_gems_module_nav_item( __( 'Withdrawal request (EU 2023/2673)', 'surbma-magyar-woocommerce' ), 'module-withdrawalrequest' ); ?>
 		</ul>
 	</li>
 	<?php } ?>
