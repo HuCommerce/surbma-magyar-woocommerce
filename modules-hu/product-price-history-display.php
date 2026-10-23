@@ -19,14 +19,15 @@ if ( ! file_exists( $wp_load ) ) {
 
 require_once $wp_load;
 
-// if ( ! current_user_can( 'manage_options' ) ) die();
-
 $product_id = isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $product = wc_get_product( $product_id );
 
-// Only show published products to users, who can't edit the product
-if ( $product && 'publish' !== get_post_status( $product_id ) && ! current_user_can( 'edit_post', $product_id ) ) {
-	$product = false;
+// Only show published products to users, who can't edit the product. For variations the parent product must be published too.
+if ( $product && ! current_user_can( 'edit_post', $product_id ) ) {
+	$cps_hc_gems_visibility_id = $product->is_type( 'variation' ) ? $product->get_parent_id() : $product_id;
+	if ( 'publish' !== get_post_status( $product_id ) || 'publish' !== get_post_status( $cps_hc_gems_visibility_id ) || post_password_required( $cps_hc_gems_visibility_id ) ) {
+		$product = false;
+	}
 }
 
 // Stop if we don't process a product
