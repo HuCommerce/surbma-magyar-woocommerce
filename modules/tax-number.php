@@ -31,6 +31,62 @@ add_filter( 'woocommerce_billing_fields', static function( $fields ) {
 	return $fields;
 } );
 
+/**
+ * Get Checkout Company field setting with safe fallback.
+ *
+ * @return string
+ */
+function cps_hc_gems_get_checkout_company_field_setting() {
+	$company_field_setting = get_option( 'woocommerce_checkout_company_field' );
+
+	if ( false === $company_field_setting ) {
+		$company_field_setting = 'optional';
+	}
+
+	return is_string( $company_field_setting ) ? $company_field_setting : 'optional';
+}
+
+/**
+ * Check if Tax number module is enabled.
+ *
+ * @return bool
+ */
+function cps_hc_gems_is_tax_number_module_enabled() {
+	global $cps_hc_gems_options;
+
+	if ( ! is_array( $cps_hc_gems_options ) ) {
+		return false;
+	}
+
+	return isset( $cps_hc_gems_options['taxnumber'] ) && 1 == $cps_hc_gems_options['taxnumber'];
+}
+
+add_action( 'woocommerce_init', static function() {
+	if ( ! function_exists( 'WC' ) || ! WC() || ! isset( WC()->version ) || version_compare( WC()->version, '8.6.0', '<' ) ) {
+		return;
+	}
+
+	if ( ! function_exists( 'woocommerce_register_additional_checkout_field' ) || ! cps_hc_gems_is_tax_number_module_enabled() ) {
+		return;
+	}
+
+	$company_field_setting = cps_hc_gems_get_checkout_company_field_setting();
+	if ( 'hidden' === $company_field_setting ) {
+		return;
+	}
+
+	$field_config = array(
+		'id'            => 'cps-hc-gems/billing-tax-number',
+		'label'         => __( 'Tax number', 'surbma-magyar-woocommerce' ),
+		'optionalLabel' => __( 'Tax number', 'surbma-magyar-woocommerce' ),
+		'location'      => 'address',
+		'type'          => 'text',
+		'required'      => false,
+	);
+
+	woocommerce_register_additional_checkout_field( $field_config );
+}, 20 );
+
 // Adding placeholder to Tax number field conditionally
 add_filter( 'woocommerce_checkout_fields' , static function( $fields ) {
 	// Get the settings array

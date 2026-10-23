@@ -26,11 +26,30 @@ add_action( 'init', static function() {
 // Include files
 include_once CPS_HC_GEMS_DIR . '/lib/modules.php';
 include_once CPS_HC_GEMS_DIR . '/lib/helpers.php';
+include_once CPS_HC_GEMS_DIR . '/lib/blocks.php';
+include_once CPS_HC_GEMS_DIR . '/lib/class-blocks-integration.php';
 if ( is_admin() ) {
 	include_once CPS_HC_GEMS_DIR . '/lib/admin.php';
 	include_once CPS_HC_GEMS_DIR . '/lib/settings.php';
 	include_once CPS_HC_GEMS_DIR . '/lib/pages.php';
 }
+
+// Register Cart & Checkout Blocks integration (WooCommerce 8.6+).
+add_action( 'woocommerce_blocks_checkout_block_registration', static function( $integration_registry ) {
+	if ( ! class_exists( 'WooCommerce' ) || ! class_exists( '\Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface' ) ) {
+		return;
+	}
+
+	if ( ! function_exists( 'WC' ) || ! WC() || ! isset( WC()->version ) || version_compare( WC()->version, '8.6.0', '<' ) ) {
+		return;
+	}
+
+	if ( ! is_object( $integration_registry ) || ! method_exists( $integration_registry, 'register' ) ) {
+		return;
+	}
+
+	$integration_registry->register( new CPS_HC_Gems_Blocks_Integration() );
+}, 10, 1 );
 
 // Create a check for WooCommerce version. Used for deprecated functions for older WooCommerce versions
 function cps_hc_gems_woocommerce_version_check( $version ) {
