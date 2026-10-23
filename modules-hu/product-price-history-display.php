@@ -4,14 +4,30 @@
  * Display the public Product price history
  */
 
-$wp_root = dirname( dirname( __FILE__ ) );
+// Locate wp-load.php. In a normal install the plugin lives in wp-content/plugins/, so it is 5 levels up from this file.
+// If the plugin folder is a symlink (local development), __FILE__ is the real path, so fall back to the requested script path.
+$wp_load = dirname( __FILE__, 5 ) . '/wp-load.php';
+if ( ! file_exists( $wp_load ) && ! empty( $_SERVER['SCRIPT_FILENAME'] ) ) {
+	$wp_load = dirname( $_SERVER['SCRIPT_FILENAME'], 5 ) . '/wp-load.php'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+}
+if ( ! file_exists( $wp_load ) && ! empty( $_SERVER['DOCUMENT_ROOT'] ) ) {
+	$wp_load = rtrim( $_SERVER['DOCUMENT_ROOT'], '/' ) . '/wp-load.php'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+}
+if ( ! file_exists( $wp_load ) ) {
+	exit;
+}
 
-require_once( $wp_root . "../../../../wp-load.php" );
+require_once $wp_load;
 
 // if ( ! current_user_can( 'manage_options' ) ) die();
 
 $product_id = isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $product = wc_get_product( $product_id );
+
+// Only show published products to users, who can't edit the product
+if ( $product && 'publish' !== get_post_status( $product_id ) && ! current_user_can( 'edit_post', $product_id ) ) {
+	$product = false;
+}
 
 // Stop if we don't process a product
 if ( $product ) {
@@ -23,22 +39,22 @@ if ( $product ) {
 	$current_time = current_datetime();
 	$current_time = strval( gmdate( 'Y-m-d H:i:s', $current_time->getTimestamp() + $current_time->getOffset() ) );
 
-	$cps_hc_gems_params_delete = array_merge( $_GET, array( 'hc-product_price_history' => 'delete' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	$cps_hc_gems_delete_query_string = http_build_query( $cps_hc_gems_params_delete );
+	$cps_hc_gems_delete_nonce_action = 'cps_hc_gems_delete_product_price_history_' . $product_id;
 
-	// Remove query parameter from url
-	$cps_hc_gems_manual_request = isset( $_GET['hc-product_price_history'] ) ? wp_kses( wp_unslash( $_GET['hc-product_price_history'] ), 'strip' ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	// Delete the price history only on a POST request with a valid nonce
+	$cps_hc_gems_manual_request = isset( $_POST['hc-product_price_history'] ) ? sanitize_key( wp_unslash( $_POST['hc-product_price_history'] ) ) : false;
 	if ( $cps_hc_gems_manual_request ) {
-		if ( current_user_can( 'manage_options' ) && 'delete' == $cps_hc_gems_manual_request ) {
+		$cps_hc_gems_nonce = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
+		if ( 'delete' === $cps_hc_gems_manual_request && current_user_can( 'manage_options' ) && wp_verify_nonce( $cps_hc_gems_nonce, $cps_hc_gems_delete_nonce_action ) ) {
 			delete_post_meta( $product_id, '_hc_product_price_history' );
 		}
 
-		$url = esc_url_raw( remove_query_arg( 'hc-product_price_history' ) );
-		wp_redirect( $url );
+		wp_safe_redirect( add_query_arg( 'product_id', $product_id, CPS_HC_GEMS_URL . '/modules-hu/product-price-history-display.php' ) );
+		exit;
 	}
 
-	// If there is no data, create the first price item
-	if ( ! get_post_meta( $product_id, '_hc_product_price_history' ) ) {
+	// If there is no data, create the first price item. Only users, who can edit the product, can save data here.
+	if ( ! get_post_meta( $product_id, '_hc_product_price_history' ) && current_user_can( 'edit_post', $product_id ) ) {
 		$product_price_history = array(
 			array( $current_time, $product_regular_price, $product_price )
 		);
@@ -46,6 +62,7 @@ if ( $product ) {
 	}
 
 	$product_price_history = get_post_meta( $product_id, '_hc_product_price_history', true );
+	$product_price_history = is_array( $product_price_history ) ? $product_price_history : array();
 	array_multisort( $product_price_history, SORT_DESC );
 
 	// Create special array for Google Chart
@@ -84,7 +101,7 @@ if ( $product ) {
 		<meta name="robots" content="noindex">
 		<link rel="stylesheet" href="<?php echo esc_url( CPS_HC_GEMS_URL . '/cps-sdk/vendors/uikit/css/uikit.min.css' ); ?>"><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- Standalone HTML page, no wp_head enqueue. ?>
 		<script src="<?php echo esc_url( CPS_HC_GEMS_URL . '/cps-sdk/vendors/uikit/js/uikit.min.js' ); ?>"></script><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Standalone HTML page, no wp_head enqueue. ?>
-<?php if ( get_post_meta( $product_id, '_hc_product_price_history', true ) ) { ?>
+<?php if ( $product && get_post_meta( $product_id, '_hc_product_price_history', true ) ) { ?>
 		<script src="<?php echo esc_url( CPS_HC_GEMS_URL . '/assets/vendor/chartjs/chart.umd.min.js' ); ?>"></script><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Standalone HTML page, no wp_head enqueue. ?>
 		<script type="text/javascript">
 			(function() {
@@ -297,7 +314,11 @@ if ( $product ) {
 			<div class="uk-section uk-section-secondary">
 				<div class="uk-container uk-text-center">
 					<h3 class="uk-heading-line uk-text-center"><span>Termék ár történet adatok törlése</span></h3>
-					<a href="<?php echo esc_attr( CPS_HC_GEMS_URL ); ?>/modules-hu/product-price-history-display.php?<?php echo esc_attr( $cps_hc_gems_delete_query_string ); ?>" class="uk-button uk-button-danger" onclick="return confirm('Biztosan törlöd az összes ár történet adatot ennél a terméknél?')">Adatok törlése</a>
+					<form method="post" action="<?php echo esc_url( add_query_arg( 'product_id', $product_id, CPS_HC_GEMS_URL . '/modules-hu/product-price-history-display.php' ) ); ?>" onsubmit="return confirm('Biztosan törlöd az összes ár történet adatot ennél a terméknél?')">
+						<?php wp_nonce_field( $cps_hc_gems_delete_nonce_action ); ?>
+						<input type="hidden" name="hc-product_price_history" value="delete">
+						<button type="submit" class="uk-button uk-button-danger">Adatok törlése</button>
+					</form>
 				</div>
 			</div>
 			<?php } ?>

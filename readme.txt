@@ -3,7 +3,7 @@ Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
 Tested up to: 7.0
-Stable tag: 2026.2.3
+Stable tag: 2026.2.4
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -164,6 +164,17 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 - Adatvédelem: A Help Scout adatkezelésével kapcsolatos részletekért lásd a Help Scout adatvédelmi irányelveit és dokumentációját.
 
 == Changelog ==
+
+#### 2026.2.4
+
+*Kiadás dátuma: 2026-10-23*
+
+**TERMÉK ÁR TÖRTÉNET MODUL**
+
+- Biztonsági javítás: A termék ár történet adatainak törlése csak POST kéréssel és érvényes nonce ellenőrzéssel lehetséges (CSRF javítás). Köszönjük Abdullah Kareem bejelentését (WPScan).
+- Biztonsági javítás: Az átirányítás után leáll a futás, nem jön létre automatikusan új ár bejegyzés.
+- Javítás: Az ár történet oldal csak publikus termékeknél jelenik meg a látogatóknak, és csak a termék szerkesztésére jogosult felhasználó hozhat létre ár történet adatot.
+- Javítás: Az ár történet oldal akkor is betölti a WordPress-t, ha a bővítmény mappája symlinkkel van telepítve.
 
 #### 2026.2.3
 
