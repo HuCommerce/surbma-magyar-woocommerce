@@ -4,9 +4,20 @@
  * Display the public Product price history
  */
 
-$wp_root = dirname( dirname( __FILE__ ) );
+// Locate wp-load.php. In a normal install the plugin lives in wp-content/plugins/, so it is 5 levels up from this file.
+// If the plugin folder is a symlink (local development), __FILE__ is the real path, so fall back to the requested script path.
+$wp_load = dirname( __FILE__, 5 ) . '/wp-load.php';
+if ( ! file_exists( $wp_load ) && ! empty( $_SERVER['SCRIPT_FILENAME'] ) ) {
+	$wp_load = dirname( $_SERVER['SCRIPT_FILENAME'], 5 ) . '/wp-load.php'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+}
+if ( ! file_exists( $wp_load ) && ! empty( $_SERVER['DOCUMENT_ROOT'] ) ) {
+	$wp_load = rtrim( $_SERVER['DOCUMENT_ROOT'], '/' ) . '/wp-load.php'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+}
+if ( ! file_exists( $wp_load ) ) {
+	exit;
+}
 
-require_once( $wp_root . "../../../../wp-load.php" );
+require_once $wp_load;
 
 // if ( ! current_user_can( 'manage_options' ) ) die();
 

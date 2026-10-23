@@ -174,6 +174,7 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 - Biztonsági javítás: A termék ár történet adatainak törlése csak POST kéréssel és érvényes nonce ellenőrzéssel lehetséges (CSRF javítás). Köszönjük Abdullah Kareem bejelentését (WPScan).
 - Biztonsági javítás: Az átirányítás után leáll a futás, nem jön létre automatikusan új ár bejegyzés.
 - Javítás: Az ár történet oldal csak publikus termékeknél jelenik meg a látogatóknak, és csak a termék szerkesztésére jogosult felhasználó hozhat létre ár történet adatot.
+- Javítás: Az ár történet oldal akkor is betölti a WordPress-t, ha a bővítmény mappája symlinkkel van telepítve.
 
 #### 2026.2.3
 
