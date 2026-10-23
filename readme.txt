@@ -167,7 +167,7 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 
 #### 2026.2.4
 
-*Kiadás dátuma: 2026-10-XX*
+*Kiadás dátuma: 2026-10-23*
 
 **TERMÉK ÁR TÖRTÉNET MODUL**
 
