@@ -88,15 +88,10 @@ function cps_hc_gems_form_field_checkbox( $field_label, $field_option, $field_in
 		),
 	);
 
-	$li_attrs = '';
-	if ( ! empty( $field_li_attrs ) && is_array( $field_li_attrs ) ) {
-		foreach ( $field_li_attrs as $attr_name => $attr_value ) {
-			$li_attrs .= ' ' . esc_attr( $attr_name ) . '="' . esc_attr( (string) $attr_value ) . '"';
-		}
-	}
+	$li_attrs = ! empty( $field_li_attrs ) && is_array( $field_li_attrs ) ? $field_li_attrs : array();
 
 	?>
-	<li class="cps-form-checkbox cps-form-horizontal<?php echo esc_html( $disabled ); ?>"<?php echo $li_attrs; ?>>
+	<li class="cps-form-checkbox cps-form-horizontal<?php echo esc_html( $disabled ); ?>"<?php foreach ( $li_attrs as $attr_name => $attr_value ) { echo ' ' . esc_attr( $attr_name ) . '="' . esc_attr( (string) $attr_value ) . '"'; } ?>>
 		<div class="uk-form-label"><span><?php echo esc_html( $field_label ); ?><?php echo wp_kses( $info, $allowed_html ); ?><?php echo wp_kses_post( $new ); ?></span></div>
 		<div class="uk-form-controls">
 			<div class="switch-wrap">
