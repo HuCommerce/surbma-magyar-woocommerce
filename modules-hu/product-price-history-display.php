@@ -90,7 +90,7 @@ if ( $product ) {
 		<meta name="robots" content="noindex">
 		<link rel="stylesheet" href="<?php echo esc_url( CPS_HC_GEMS_URL . '/cps-sdk/vendors/uikit/css/uikit.min.css' ); ?>"><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- Standalone HTML page, no wp_head enqueue. ?>
 		<script src="<?php echo esc_url( CPS_HC_GEMS_URL . '/cps-sdk/vendors/uikit/js/uikit.min.js' ); ?>"></script><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Standalone HTML page, no wp_head enqueue. ?>
-<?php if ( get_post_meta( $product_id, '_hc_product_price_history', true ) ) { ?>
+<?php if ( $product && get_post_meta( $product_id, '_hc_product_price_history', true ) ) { ?>
 		<script src="<?php echo esc_url( CPS_HC_GEMS_URL . '/assets/vendor/chartjs/chart.umd.min.js' ); ?>"></script><?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Standalone HTML page, no wp_head enqueue. ?>
 		<script type="text/javascript">
 			(function() {
