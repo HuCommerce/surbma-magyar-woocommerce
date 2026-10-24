@@ -375,7 +375,7 @@ function cps_hc_gems_render_menu_modules() {
 				$themes_count = count( $translation_domains['themes'] );
 				?>
 				<div class="uk-card uk-card-default uk-card-body uk-margin-small-bottom">
-					<h5 class="uk-text-bold"><?php esc_html_e( 'Plugins' ); ?> (<?php echo (int) $plugins_count; ?>)</h5>
+					<h5 class="uk-text-bold"><?php esc_html_e( 'Plugins', 'surbma-magyar-woocommerce' ); ?> (<?php echo (int) $plugins_count; ?>)</h5>
 					<div class="uk-overflow-auto cps-hc-gems-translations-scroll" style="max-height: 294px;">
 						<ul class="cps-form-fields uk-list uk-list-divider uk-margin-right cps-hc-gems-translations-list" data-type="plugins">
 							<?php foreach ( $translation_domains['plugins'] as $domain ) : ?>
@@ -388,7 +388,7 @@ function cps_hc_gems_render_menu_modules() {
 					</div>
 				</div>
 				<div class="uk-card uk-card-default uk-card-body uk-margin-small-bottom">
-					<h5 class="uk-text-bold"><?php esc_html_e( 'Themes' ); ?> (<?php echo (int) $themes_count; ?>)</h5>
+					<h5 class="uk-text-bold"><?php esc_html_e( 'Themes', 'surbma-magyar-woocommerce' ); ?> (<?php echo (int) $themes_count; ?>)</h5>
 					<div class="uk-overflow-auto cps-hc-gems-translations-scroll" style="max-height: 294px;">
 						<ul class="cps-form-fields uk-list uk-list-divider uk-margin-right cps-hc-gems-translations-list" data-type="themes">
 							<?php foreach ( $translation_domains['themes'] as $domain ) : ?>
