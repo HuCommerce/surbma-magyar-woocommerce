@@ -176,6 +176,12 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 - Biztonsági javítás: Az ár történet oldal a látogatóknak csak publikus termékeknél jelenik meg (vázlat, privát, ütemezett, jelszóval védett termék és nem publikus termék variációja esetén nem), és csak a termék szerkesztésére jogosult felhasználó hozhat létre ár történet adatot. Köszönjük Enrico Marcolini (Dottor Marc) bejelentését (WPScan).
 - Javítás: Az ár történet oldal akkor is betölti a WordPress-t, ha a bővítmény mappája symlinkkel van telepítve.
 
+**EGYÉB**
+
+- Javítás: A WordPress Plugin Check által jelzett hibák javítása (hiányzó text domain, escape-elés).
+- Kompatibilitás ellenőrzése a WordPress 7.1 verzióval.
+- Kompatibilitás ellenőrzése a WooCommerce 11.2 verzióval.
+
 #### 2026.2.3
 
 *Kiadás dátuma: 2026-04-26*

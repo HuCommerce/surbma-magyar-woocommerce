@@ -17,7 +17,7 @@
  * Domain Path: /languages
  * 
  * WC requires at least: 4.6
- * WC tested up to: 10.7
+ * WC tested up to: 11.2
  * 
  * License: GPL-3.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
