@@ -2,7 +2,7 @@
 Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
-Tested up to: 7.0
+Tested up to: 7.1
 Stable tag: 2026.2.4
 Requires PHP: 7.4
 License: GPL-3.0-or-later
