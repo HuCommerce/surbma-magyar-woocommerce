@@ -2,7 +2,7 @@
 Contributors: Surbma, CherryPickStudios, xnagyg
 Tags: woocommerce, magyar, magyarország, webáruház, hungarian
 Requires at least: 5.3
-Tested up to: 7.0
+Tested up to: 7.1
 Stable tag: 2026.2.4
 Requires PHP: 7.4
 License: GPL-3.0-or-later
@@ -175,6 +175,12 @@ A HuCommerce bővítmény a következő külső szolgáltatást használja a tá
 - Biztonsági javítás: Az átirányítás után leáll a futás, nem jön létre automatikusan új ár bejegyzés.
 - Biztonsági javítás: Az ár történet oldal a látogatóknak csak publikus termékeknél jelenik meg (vázlat, privát, ütemezett, jelszóval védett termék és nem publikus termék variációja esetén nem), és csak a termék szerkesztésére jogosult felhasználó hozhat létre ár történet adatot. Köszönjük Enrico Marcolini (Dottor Marc) bejelentését (WPScan).
 - Javítás: Az ár történet oldal akkor is betölti a WordPress-t, ha a bővítmény mappája symlinkkel van telepítve.
+
+**EGYÉB**
+
+- Javítás: A WordPress Plugin Check által jelzett hibák javítása (hiányzó text domain, escape-elés).
+- Kompatibilitás ellenőrzése a WordPress 7.1 verzióval.
+- Kompatibilitás ellenőrzése a WooCommerce 11.2 verzióval.
 
 #### 2026.2.3
 
