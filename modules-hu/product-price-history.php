@@ -420,11 +420,16 @@ if ( 1 == $module_productpricehistoryValue ) :
 				if ( get_post_meta( $product_id, '_hc_product_price_history' ) ) {
 					$product_price_history = get_post_meta( $product_id, '_hc_product_price_history', true );
 
-					for( $i = 1; $i < count( $product_price_history ) ; $i++ ) {
-						if ( strtotime( $product_price_history[$i][0] ) < strtotime( '-30 day', strtotime( $product_price_history[0][0] ) ) ) {
+					$window_start = strtotime( '-30 day', strtotime( $product_price_history[0][0] ) );
+					$history_count = count( $product_price_history );
+					for ( $i = 1; $i < $history_count; $i++ ) {
+						if ( intval( $product_price_history[$i][2] ) > 0 ) {
+							$lowest_price_array[] = $product_price_history[$i][2];
+						}
+						// This entry was the active price at the start of the 30-day window: include it, then stop.
+						if ( strtotime( $product_price_history[$i][0] ) <= $window_start ) {
 							break;
 						}
-						$lowest_price_array[] = $product_price_history[$i][2];
 					}
 
 					// Check if last saved price is more, then 30 days old. In this case, empty $lowest_price_array to disable the lowest price display.
