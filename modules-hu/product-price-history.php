@@ -168,6 +168,9 @@ $module_productpricehistoryValue = $cps_hc_gems_options['module-productpricehist
 
 if ( 1 == $module_productpricehistoryValue ) :
 
+	// Read only REST endpoint for the price history
+	require_once __DIR__ . '/product-price-history-rest.php';
+
 	// Add custom fields in the General tab of the Product data metabox
 	add_action( 'woocommerce_product_options_general_product_data', static function() {
 		// Get the $product_object if we are editing an existing Product
