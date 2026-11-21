@@ -1,5 +1,29 @@
 jQuery(document).ready(function($) {
 	if (typeof surbma_hc_data != 'undefined') {
+		let checkoutUpdateTimer;
+		const $checkoutForm = $('form.checkout');
+
+		// Share one pending update between billing and shipping autofill changes.
+		$('body').off('update_checkout.cps_hc_gems_autofill').on('update_checkout.cps_hc_gems_autofill', function() {
+			clearTimeout(checkoutUpdateTimer);
+			checkoutUpdateTimer = null;
+		});
+
+		// Keep a pending autofill update behind any further address typing.
+		$checkoutForm.on('input.cps_hc_gems_autofill keydown.cps_hc_gems_autofill',
+			'.address-field input.input-text, .update_totals_on_change input.input-text', function() {
+				if (checkoutUpdateTimer) triggerUpdateCheckout();
+			}
+		);
+
+		function triggerUpdateCheckout() {
+			clearTimeout(checkoutUpdateTimer);
+			checkoutUpdateTimer = setTimeout(function() {
+				checkoutUpdateTimer = null;
+				$checkoutForm.trigger('update');
+			}, 1000);
+		}
+
 		function handlePostcodeCity(type) {
 			const $postcodeField = $(`.woocommerce-page #${type}_postcode`);
 			const $cityField = $(`.woocommerce-page #${type}_city`);
@@ -9,25 +33,11 @@ jQuery(document).ready(function($) {
 			let cityFieldTouched = false;
 			let processingClick = false; // Flag to prevent multiple processing
 
-			// Disable WooCommerce's event handlers for postcode fields only
-			window.setTimeout(function() {
-				// Completely unbind all events from postcode field that might interfere
-				$postcodeField.off();
-				
-				// Re-bind necessary handlers manually
-				$postcodeField.on('blur input change focusout keyup', postcodeHandler);
-				
-				// Remove WooCommerce's queue_update_checkout handler from all relevant fields
-				$('form.checkout').off('input keydown change', '.address-field input.input-text, .update_totals_on_change input.input-text');
-				
-				// Re-bind handler for all other fields (excluding postcode)
-				$('form.checkout').on('input keydown change', 
-					'.address-field input.input-text:not(#billing_postcode, #shipping_postcode), .update_totals_on_change input.input-text:not(#billing_postcode, #shipping_postcode)', 
-					function() {
-						$('body').trigger('update_checkout');
-					}
-				);
-			}, 100); // Increased timeout to ensure WooCommerce has set up its handlers
+			// Keep WooCommerce's native address handlers and typing delay intact.
+			$postcodeField.off('.cps_hc_gems_autofill').on(
+				'blur.cps_hc_gems_autofill input.cps_hc_gems_autofill change.cps_hc_gems_autofill focusout.cps_hc_gems_autofill keyup.cps_hc_gems_autofill',
+				postcodeHandler
+			);
 
 			// Add position relative to the city field's parent element
 			$cityField.parent().css('position', 'relative');
@@ -71,12 +81,12 @@ jQuery(document).ready(function($) {
 				.appendTo('head');
 
 			// If city is manually added, don't change it
-			$cityField.on('keyup change', function() {
+			$cityField.on('keyup.cps_hc_gems_autofill change.cps_hc_gems_autofill', function() {
 				cityFieldTouched = true;
 			});
 
 			// Close tooltip when clicking outside or focusing on another field
-			$(document).on('click focusin', function(e) {
+			$(document).on('click.cps_hc_gems_autofill focusin.cps_hc_gems_autofill', function(e) {
 				if (!$(e.target).closest('.city-tooltip').length && !$(e.target).is($cityField)) {
 					$tooltip.hide();
 				}
@@ -88,6 +98,7 @@ jQuery(document).ready(function($) {
 				
 				const postcode = $postcodeField.val();
 				const cities = surbma_hc_data[postcode];
+				const previousCity = $cityField.val();
 				
 				if (postcode.length === 4 && cities && ($cityField.val() === '' || !cityFieldTouched)) {
 					if (cities.length === 1) {
@@ -108,8 +119,8 @@ jQuery(document).ready(function($) {
 					// Handle validation classes
 					updateCityValidation();
 					
-					// Only trigger update_checkout if the city field has a value
-					if ($cityField.val() !== '') {
+					// Repeated postcode events must not refresh an unchanged city.
+					if ($cityField.val() !== previousCity) {
 						triggerUpdateCheckout();
 					}
 				} else {
@@ -143,6 +154,7 @@ jQuery(document).ready(function($) {
 							
 							processingClick = true;
 							
+							const previousCity = $cityField.val();
 							// Set the city value immediately
 							$cityField.val(city);
 							cityFieldTouched = true;
@@ -156,24 +168,11 @@ jQuery(document).ready(function($) {
 							// Update validation
 							updateCityValidation();
 							
-							// Force trigger events in a specific sequence with timeouts
-							setTimeout(function() {
+							if (city !== previousCity) {
+								triggerUpdateCheckout();
 								$cityField.trigger('change');
-								
-								setTimeout(function() {
-									// Force blur from postcode field
-									$postcodeField.blur();
-									
-									// Move focus elsewhere (to a safe element)
-									$('body').focus();
-									
-									// Trigger update checkout
-									triggerUpdateCheckout();
-									
-									// Reset processing flag
-									processingClick = false;
-								}, 50);
-							}, 50);
+							}
+							processingClick = false;
 						}
 					}).appendTo($tooltip);
 				});
@@ -195,15 +194,8 @@ jQuery(document).ready(function($) {
 				}
 			}
 			
-			// Function to trigger update checkout with delay
-			function triggerUpdateCheckout() {
-				setTimeout(function() {
-					$('body').trigger('update_checkout');
-				}, 200);
-			}
-
 			// Show tooltip when city field is active and there are multiple options
-			$cityField.on('click focus', function() {
+			$cityField.on('click.cps_hc_gems_autofill focus.cps_hc_gems_autofill', function() {
 				const postcode = $postcodeField.val();
 				const cities = surbma_hc_data[postcode];
 				
