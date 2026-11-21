@@ -59,6 +59,9 @@ function cps_hc_gems_get_defaults() {
 		'module-smtp'                        => 0,
 		'module-catalogmode'                 => 0,
 		'module-translations'                => 0,
+		'module-withdrawalrequest'           => 0,
+		'withdrawalrequest-emailprocessing'  => 1,
+		'withdrawalrequest-emailcompleted'   => 1,
 
 		// Checkout options
 		'taxnumberplaceholder'               => 0,
@@ -157,6 +160,12 @@ function cps_hc_gems_get_defaults() {
 		'smtphost'                                   => '',
 		'smtpuser'                                   => '',
 		'smtppassword'                               => '',
+
+		// Withdrawal request
+		'withdrawalrequest-slug'                     => 'cps-hc-gems-withdraw',
+		'withdrawalrequest-buttonlabel'              => '',
+		'withdrawalrequest-emailsubject'             => '',
+		'withdrawalrequest-emailheading'             => '',
 
 		// Product price additions
 		'productpricehistory-statisticslinktext'     => '',

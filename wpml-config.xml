@@ -38,6 +38,9 @@
 			<key name="productpriceadditions-product-suffix" />
 			<key name="productpriceadditions-archive-prefix" />
 			<key name="productpriceadditions-archive-suffix" />
+			<key name="withdrawalrequest-buttonlabel" />
+			<key name="withdrawalrequest-emailsubject" />
+			<key name="withdrawalrequest-emailheading" />
 		</key>
 	</admin-texts>
 </wpml-config>
